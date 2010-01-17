@@ -85,7 +85,7 @@
 			<tablechildren rowspan="3" width="70%">
 
 				<panel
-					title="NEW !!!    O n l y   Preview. Sources are not updated yet!!!  Refactoring is in progress..."
+					title="NEW !!!  Zksample2 project sources are available now !!!"
 					border="normal" sclass="newsPanelTitle">
 					<panelchildren>
 						<image src="/images/icons/new_icons_10.gif" />

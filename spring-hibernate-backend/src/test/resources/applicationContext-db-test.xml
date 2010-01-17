@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<tx:advice id="useCaseTxAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRES_NEW" />
+		</tx:attributes>
+	</tx:advice>
+	<tx:advice id="daoTxAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="serviceMethods"
+			expression="execution(* de.forsthaus.backend.service.*.*(..))" />
+		<aop:pointcut id="daoMethods"
+			expression="execution(* de.forsthaus.backend.dao.*.*(..))" />
+
+		<aop:advisor advice-ref="useCaseTxAdvice" pointcut-ref="serviceMethods" />
+		<aop:advisor advice-ref="daoTxAdvice" pointcut-ref="daoMethods" />
+	</aop:config>
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="jdbc.properties" />
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	
+	<!-- /////////    BEAN FOR GENERATING THE PRIMARY KEYS    //////// -->
+	<!--  for DEMO Database H2 we use a special implementation !!!     -->
+	<!-- H2:         " ~.backend.dao.impl.NextIdViewH2DAOImpl"         -->
+	<!-- PostgreSQL: " ~.backend.dao.impl.NextIdViewPostgresDaoImpl    -->
+	<bean id="nextidviewDAO" class="de.forsthaus.backend.dao.impl.NextIdViewPostgresDaoImpl"
+		parent="basisDAO" />	
+</beans>

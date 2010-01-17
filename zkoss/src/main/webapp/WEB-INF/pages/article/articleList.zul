@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window id="window_ArticlesList" apply="${articleListCtrl}"
+		border="none" width="100%">
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+		</style>
+
+		<panel id="panelArticleList"
+			title="${c:l('panelArticleList.title')}" border="none" />
+
+		<toolbar>
+			<button id="btnHelp" image="/images/icons/light_16x16.gif"
+				tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+			<button id="button_ArticleList_NewArticle"
+				image="/images/icons/btn_new2_16x16.gif"
+				tooltiptext="${c:l('button_ArticleList_NewArticle.tooltiptext')}" />
+			<button id="button_ArticleList_PrintList"
+				image="/images/icons/btn_print2_16x16.gif"
+				tooltiptext="${c:l('button_ArticleList_PrintList.tooltiptext')}" />
+		</toolbar>
+
+		<hbox style="padding: 3px">
+			<space />
+			<checkbox id="checkbox_ArticleList_ShowAll"
+				label="${c:l('checkbox_ArticleList_ShowAll.label')}" />
+			<separator bar="true" orient="vertical" />
+
+			<label id="label_ArticleList_ArticleID"
+				value="${c:l('label_ArticleList_ArticleID.value')}" />
+			<textbox id="tb_Article_ArticleID" width="120px" />
+			<button id="button_ArticleList_SearchArticleID"
+				image="/images/icons/search.gif"
+				label="${c:l('button_ArticleList_SearchArticleID.label')}"
+				tooltiptext="${c:l('button_ArticleList_SearchArticleID.tooltiptext')}" />
+			<separator bar="true" orient="vertical" />
+
+			<label id="label_ArticleList_Name"
+				value="${c:l('label_ArticleList_Name.value')}" />
+			<textbox id="tb_Article_Name" width="120px" />
+			<button id="button_ArticleList_SearchName"
+				image="/images/icons/search.gif"
+				label="${c:l('button_ArticleList_SearchName.label')}"
+				tooltiptext="${c:l('button_ArticleList_SearchName.tooltiptext')}" />
+			<separator bar="true" orient="vertical" />
+		</hbox>
+
+		<borderlayout id="borderLayout_articleList">
+
+			<north border="none" height="26px">
+				<paging id="paging_ArticleList" pageSize="20" />
+			</north>
+
+
+			<center border="normal">
+
+				<listbox id="listBoxArticle" vflex="true"
+					tooltiptext="${c:l('listbox.tooltiptext')}" width="100%"
+					height="100%" multiple="false">
+					<listhead sizable="true">
+						<listheader id="listheader_ArticleList_No"
+							image="/images/icons/variable_tab.gif"
+							label="${c:l('listheader_ArticleList_No.label')}" sort="auto"
+							width="20%" />
+						<listheader
+							id="listheader_ArticleList_ShortDescr"
+							image="/images/icons/sequence.gif"
+							label="${c:l('listheader_ArticleList_ShortDescr.label')}"
+							sort="auto" width="60%" />
+						<listheader
+							id="listheader_ArticleList_SinglePrice"
+							image="/images/icons/builder.gif"
+							label="${c:l('listheader_ArticleList_SinglePrice.label')}"
+							sort="none" align="left" width="20%" />
+					</listhead>
+				</listbox>
+
+			</center>
+
+			<south border="none">
+				<panel id="articleLongDescriptionPanel" border="none"
+					width="100%">
+					<panelchildren>
+						<separator />
+						<hbox>
+							<label
+								id="label_ArticleList_LongDescription"
+								value="${c:l('label_ArticleList_LongDescription.value')}" />
+							<space></space>
+							<textbox id="longBoxArt_LangBeschreibung"
+								width="500px" multiline="true" rows="3" />
+						</hbox>
+					</panelchildren>
+				</panel>
+			</south>
+
+		</borderlayout>
+
+
+	</window>
+</zk>
+
+

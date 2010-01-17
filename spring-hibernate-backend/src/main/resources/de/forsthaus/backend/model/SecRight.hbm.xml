@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	<!-- Generated 31.01.2009 22:31:49 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+	<class name="de.forsthaus.backend.model.SecRight" table="sec_right">
+
+		<id name="id" type="long">
+			<column name="rig_id" />
+			<generator class="assigned" />
+		</id>
+
+		<version name="version" column="VERSION" type="integer" />
+
+		<property name="rigType" type="java.lang.Integer">
+			<column name="rig_type" />
+		</property>
+		<property name="rigName" type="string">
+			<column name="rig_name" length="50" not-null="true" unique="true" />
+		</property>
+		<set name="secGrouprights" inverse="true">
+			<key>
+				<column name="rig_id" />
+			</key>
+			<one-to-many class="de.forsthaus.backend.model.SecGroupright" />
+		</set>
+	</class>
+
+	<query name="allRightFromUserSqlQuery">
+		SELECT distinct r FROM SecRight r
+		JOIN
+		r.secGrouprights AS gr
+		JOIN gr.secGroup.secRolegroups AS rg
+		JOIN
+		rg.secRole.secUserroles AS ur
+		JOIN ur.secUser AS u
+		WHERE u.id = ?
+	</query>
+</hibernate-mapping>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	<!-- Generated 01.12.2008 17:20:23 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+	<class name="de.forsthaus.backend.model.Orderposition" table="auftragposition">
+
+		<id name="id" type="long">
+			<column name="aup_id" />
+			<generator class="assigned" />
+		</id>
+
+		<version name="version" column="VERSION" type="integer" />
+
+		<many-to-one name="order" class="de.forsthaus.backend.model.Order"
+			fetch="join">
+			<column name="aup_auf_id" not-null="true" />
+		</many-to-one>
+
+		<many-to-one name="article" class="de.forsthaus.backend.model.Article"
+			fetch="join">
+			<column name="art_id" />
+		</many-to-one>
+
+		<property name="aupPosition" type="java.lang.Integer">
+			<column name="aup_position" />
+		</property>
+		<property name="aupMenge" type="big_decimal">
+			<column name="aup_menge" precision="12" />
+		</property>
+		<property name="aupEinzelwert" type="big_decimal">
+			<column name="aup_einzelwert" precision="12" />
+		</property>
+		<property name="aupGesamtwert" type="big_decimal">
+			<column name="aup_gesamtwert" precision="12" />
+		</property>
+	</class>
+</hibernate-mapping>

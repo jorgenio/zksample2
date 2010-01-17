@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	<!-- Generated 31.01.2009 22:31:49 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+	<class name="de.forsthaus.backend.model.SecUser" table="sec_user">
+
+		<id name="id" type="long">
+			<column name="usr_id" />
+			<generator class="assigned" />
+		</id>
+
+		<version name="version" column="VERSION" type="integer" />
+
+
+		<property name="usrLoginname" type="string">
+			<column name="usr_loginname" length="50" not-null="true"
+				unique="true" />
+		</property>
+		<property name="usrPassword" type="string">
+			<column name="usr_password" length="50" not-null="true" />
+		</property>
+		<property name="usrLastname" type="string">
+			<column name="usr_lastname" length="50" />
+		</property>
+		<property name="usrFirstname" type="string">
+			<column name="usr_firstname" length="50" />
+		</property>
+		<property name="usrEmail" type="string">
+			<column name="usr_email" length="200" />
+		</property>
+		<property name="usrLocale" type="string">
+			<column name="usr_locale" length="200" />
+		</property>
+		<property name="usrEnabled" type="boolean">
+			<column name="usr_enabled" not-null="true" />
+		</property>
+		<property name="usrAccountnonexpired" type="boolean">
+			<column name="usr_accountnonexpired" not-null="true" />
+		</property>
+		<property name="usrCredentialsnonexpired" type="boolean">
+			<column name="usr_credentialsnonexpired" not-null="true" />
+		</property>
+		<property name="usrAccountnonlocked" type="boolean">
+			<column name="usr_accountnonlocked" not-null="true" />
+		</property>
+		<property name="usrToken" type="string">
+			<column name="usr_token" length="20" />
+		</property>
+		<set name="secUserroles" inverse="true">
+			<key>
+				<column name="usr_id" />
+			</key>
+			<one-to-many class="de.forsthaus.backend.model.SecUserrole" />
+		</set>
+	</class>
+</hibernate-mapping>

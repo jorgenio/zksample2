@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="de.forsthaus.backend.model.SysCountryCode" table="sys_countrycode">
+
+		<id name="id" type="long">
+			<column name="ccd_id" />
+			<generator class="assigned" />
+		</id>
+
+		<version name="version" column="VERSION" type="integer" />
+
+		<property name="ccdName" type="string">
+			<column name="ccd_name" length="48" />
+		</property>
+		<property name="ccdCode2" type="string">
+			<column name="ccd_code2" length="2" />
+		</property>
+
+		<set name="ip2Countries" inverse="true" table="log_ip2country"
+			fetch="select">
+			<key>
+				<column name="ccd_id" />
+			</key>
+			<one-to-many class="de.forsthaus.backend.model.Ip2Country" />
+		</set>
+		<!--
+			<set name="ip2Countrys" inverse="true"> <key> <column name="i2c_id"
+			/> </key> <one-to-many class="de.forsthaus.backend.model.Ip2Country"
+			/> </set>
+		-->
+
+	</class>
+</hibernate-mapping>

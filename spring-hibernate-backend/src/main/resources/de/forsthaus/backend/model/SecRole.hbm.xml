@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	<!-- Generated 02.02.2009 14:17:38 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+	<class name="de.forsthaus.backend.model.SecRole" table="sec_role">
+
+		<id name="id" type="long">
+			<column name="rol_id" />
+			<generator class="assigned" />
+		</id>
+
+		<version name="version" column="VERSION" type="integer" />
+
+		<property name="rolShortdescription" type="string">
+			<column name="rol_shortdescription" length="30" not-null="true"
+				unique="true" />
+		</property>
+		<property name="rolLongdescription" type="string">
+			<column name="rol_longdescription" length="1000" />
+		</property>
+		<set name="secUserroles" inverse="true">
+			<key>
+				<column name="rol_id" />
+			</key>
+			<one-to-many class="de.forsthaus.backend.model.SecUserrole" />
+		</set>
+		<set name="secRolegroups" inverse="true">
+			<key>
+				<column name="rol_id" />
+			</key>
+			<one-to-many class="de.forsthaus.backend.model.SecRolegroup" />
+		</set>
+	</class>
+</hibernate-mapping>

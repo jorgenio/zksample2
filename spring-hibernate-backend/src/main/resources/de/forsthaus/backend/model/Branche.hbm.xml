@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	<!-- Generated 18.10.2008 19:00:08 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+
+	<class name="de.forsthaus.backend.model.Branche" table="branche">
+
+		<id name="id" type="long">
+			<column name="bra_id" />
+			<generator class="assigned" />
+		</id>
+
+		<version name="version" column="VERSION" type="integer" />
+
+		<property name="braNr" type="string">
+			<column name="bra_nr" length="20" />
+		</property>
+		<property name="braBezeichnung" type="string">
+			<column name="bra_bezeichnung" length="30" not-null="true"
+				unique="true" />
+		</property>
+		<set name="customers" inverse="true">
+			<key>
+				<column name="kun_bra_id" />
+			</key>
+			<one-to-many class="de.forsthaus.backend.model.Customer" />
+		</set>
+	</class>
+</hibernate-mapping>

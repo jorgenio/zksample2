@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- ====================================================== -->
+	<!--         Define schemas for transactions                -->
+	<!-- ====================================================== -->
+	<tx:advice id="serviceTxAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	<tx:advice id="daoTxAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	<tx:advice id="guiServiceTxAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRES_NEW" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- ====================================================== -->
+	<!--         Define Aspect pointcuts and advisors           -->
+	<!--               for the transaction scopes.              -->
+	<!-- ====================================================== -->
+	<aop:config>
+		<aop:pointcut id="guiServiceMethods"
+			expression="execution(* de.forsthaus.gui.service.*.*(..))" />
+		<aop:pointcut id="serviceMethods"
+			expression="execution(* de.forsthaus.backend.service.*.*(..))" />
+		<aop:pointcut id="daoMethods"
+			expression="execution(* de.forsthaus.backend.dao.*.*(..))" />
+
+		<aop:advisor advice-ref="guiServiceTxAdvice" pointcut-ref="guiServiceMethods" />
+		<aop:advisor advice-ref="serviceTxAdvice" pointcut-ref="serviceMethods" />
+		<aop:advisor advice-ref="daoTxAdvice" pointcut-ref="daoMethods" />
+	</aop:config>
+
+	<!-- ====================================================== -->
+	<!--             Define the transaction manager             -->
+	<!-- ====================================================== -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- ====================================================== -->
+	<!--        Define the property placeholder configurer      -->
+	<!-- ====================================================== -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:jdbc.properties" />
+	</bean>
+
+</beans>

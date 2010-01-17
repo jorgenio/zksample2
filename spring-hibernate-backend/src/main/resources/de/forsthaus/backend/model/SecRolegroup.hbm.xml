@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	<!-- Generated 02.02.2009 14:17:38 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+	<class name="de.forsthaus.backend.model.SecRolegroup" table="sec_rolegroup">
+
+		<id name="id" type="long">
+			<column name="rlg_id" />
+			<generator class="assigned" />
+		</id>
+
+		<version name="version" column="VERSION" type="integer" />
+
+		<many-to-one name="secRole" class="de.forsthaus.backend.model.SecRole"
+			fetch="select">
+			<column name="rol_id" />
+		</many-to-one>
+		<many-to-one name="secGroup" class="de.forsthaus.backend.model.SecGroup"
+			fetch="select">
+			<column name="grp_id" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

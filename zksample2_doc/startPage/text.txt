@@ -1,0 +1,9 @@
+A bigger sample application for the ZKoss framework. Uses other frameworks like Spring, Spring-Security, Hibernate, JasperReports, Generic-Hibernate-DAO. Works with a H2 Database who is started and demo-data filled by applications deploy on a tomcat.
+
+
+<meta name="keywords" content="Zk Sample, ZKoss, ZK, RIA, Ajax, Framework, Ajax framework, Java, JSF, Open Source, Web Development, Web" />
+<meta name="date" content="2010-01-06T12:00:00+01:00" />
+
+<meta name="keywords" lang="de" content="Zk Beispiel, ZKoss, RIA, ZK, Ajax, Framework, Ajax framekwork, Java, JSF, Open Source, Web Entwicklung" />
+<meta name="keywords" lang="en-us" content="Zk Sample, ZKoss, ZK, RIA, Ajax, Framework, Ajax framework, Java, JSF, Open Source, Web Development, Web" />
+<meta name="keywords" lang="en" content="Zk Sample, ZKoss, ZK, RIA, Ajax, Framework, Ajax framework, Java, JSF, Open Source, Web Development, Web" />

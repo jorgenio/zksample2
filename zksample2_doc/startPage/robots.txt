@@ -1,0 +1,3 @@
+# robots.txt for http://vs171030.vserver.de/
+User-agent: *
+Disallow:

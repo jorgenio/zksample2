@@ -14,6 +14,7 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 17.01.2009 / Today we checked in this Zksample2 application on SourceForge.net. See thread under http://zkoss.org/forum/listComment/10986 " + lf;
 		s = s + "- 12.01.2009 / We work hardly on the last pages of the documentation. The countdown for checkin is running. " + lf;
 		s = s + "- 04.01.2010 / We fix the 'too many open files' on server. Bad boys attack it! Re-using the webservice for getting the geo-data "
 				+ lf;
@@ -75,7 +76,7 @@
 				value="Stored users are  (username/password):&#13;&#13;admin / admin (full access)&#13;user1 / user1 (full access to the office data)&#13;user2 / user2 (restricted access to the office data. Only view mode.)&#13;headoffice / headoffice (full access to the main data.">
 			</textbox>
 			<textbox rows="6" multiline="true" width="100%"
-				value="Sources are available as Eclipse Projects under  http://zkoss.org/forum/listComment/9279  ">
+				value="Sources are available as Eclipse Projects under  http://zkoss.org/forum/listComment/10986  ">
 			</textbox>
 		</box>
 

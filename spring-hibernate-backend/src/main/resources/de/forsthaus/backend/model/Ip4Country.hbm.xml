@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="de.forsthaus.backend.model.Ip4Country" table="sys_ip4country">
+
+		<id name="id" type="long">
+			<column name="i4co_id" />
+			<generator class="assigned" />
+		</id>
+
+		<version name="version" column="VERSION" type="integer" />
+
+		<property name="i4coIp" type="long">
+			<column name="i4co_ip" />
+		</property>
+		<property name="i4coCcdId" type="long">
+			<column name="i4co_ccd_id" />
+		</property>
+	</class>
+</hibernate-mapping>

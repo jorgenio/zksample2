@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window id="secRoleListWindow" apply="${secRoleListCtrl}"
+		border="none" width="100%">
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+		</style>
+
+		<panel id="panel_SecRoleList"
+			title="${c:l('panel_SecRoleList.title')}" border="none" />
+
+		<toolbar>
+			<button id="btnHelp" image="/images/icons/light_16x16.gif"
+				tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+			<button id="button_SecRoleList_NewSecRole"
+				image="/images/icons/btn_new2_16x16.gif"
+				tooltiptext="${c:l('button_SecRoleList_NewSecRole.tooltiptext')}" />
+			<button id="button_SecRoleList_PrintSecRole"
+				image="/images/icons/btn_print2_16x16.gif"
+				tooltiptext="${c:l('button_SecRoleList_PrintSecRole.tooltiptext')}" />
+		</toolbar>
+
+		<hbox style="padding: 3px">
+			<space />
+			<checkbox id="checkbox_SecRoleList_ShowAll"
+				label="${c:l('checkbox_SecRoleList_ShowAll.label')}" />
+			<separator bar="true" orient="vertical" />
+
+			<label id="label_SecRoleList_rolShortdescription"
+				value="${c:l('label_SecRoleList_rolShortdescription.value')}" />
+			<textbox id="tb_SecRole_RoleName" width="120px" />
+			<button id="button_SecRoleList_rolShortdescription"
+				image="/images/icons/search.gif"
+				label="${c:l('button_SecRoleList_rolShortdescription.label')}"
+				tooltiptext="${c:l('button_SecRoleList_rolShortdescription.tooltiptext')}" />
+			<separator bar="true" orient="vertical" />
+		</hbox>
+
+		<borderlayout id="borderLayout_secRolesList">
+
+			<north border="none" height="26px">
+				<paging id="paging_SecRoleList" pageSize="20" />
+			</north>
+
+			<center border="none">
+
+				<listbox id="listBoxSecRoles" vflex="true"
+					tooltiptext="${c:l('listbox.tooltiptext')}" width="99.5%"
+					height="100%" multiple="false">
+					<listhead sizable="true">
+						<listheader
+							id="listheader_SecRoleList_rolShortdescription"
+							image="/images/icons/create_doc.gif"
+							label="${c:l('listheader_SecRoleList_rolShortdescription.label')}"
+							sort="auto" width="30%" />
+						<listheader
+							id="listheader_SecRoleList_rolLongdescription"
+							image="/images/icons/sequence.gif"
+							label="${c:l('listheader_SecRoleList_rolLongdescription.label')}"
+							sort="none" width="70%" />
+					</listhead>
+				</listbox>
+
+			</center>
+
+			<south border="none">
+				<separator />
+			</south>
+
+		</borderlayout>
+
+	</window>
+</zk>

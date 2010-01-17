@@ -1,0 +1,87 @@
+<?page id="indexPage" title="Forsthaus SaaS" cacheable="false" 
+	language="xul/html" zscriptLanguage="Java"?>
+<?meta content="text/html; charset=UTF-8" 	pageEncoding="UTF-8"?>
+
+<?meta name="description" content="A bigger sample application for the ZKoss framework. Uses other frameworks like Spring, Spring-Security, Hibernate, JasperReports, Generic-Hibernate-DAO. Works with a H2 Database who is started and demo-data filled by applications deploy on a tomcat." ?>
+
+<?meta name="keywords" content="Zk Sample, ZKoss, ZK, RIA, Ajax, Framework, Ajax framework, Java, JSF, Open Source, Web Development, Web" ?>
+<?meta name="keywords" lang="de" content="Zk Beispiel, ZKoss, RIA, ZK, Ajax, Framework, Ajax framekwork, Java, JSF, Open Source, Web Entwicklung" ?>
+<?meta name="keywords" lang="en-us" content="Zk Sample, ZKoss, ZK, RIA, Ajax, Framework, Ajax framework, Java, JSF, Open Source, Web Development, Web" ?>
+<?meta name="keywords" lang="en" content="Zk Sample, ZKoss, ZK, RIA, Ajax, Framework, Ajax framework, Java, JSF, Open Source, Web Development, Web" ?>
+
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+
+	<window id="startWindow" border="none" width="100%" height="100%"
+		use="de.forsthaus.webui.InitApplicationCtrl">
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ } .z-loading { top: 50%
+			!important; left: 45% !important; align: center;
+			vertical-align: middle; }
+		</style>
+
+		<borderlayout width="100%" height="100%">
+			<north id="bl_north" border="none"
+				style="background-color: #EBEBEB" flex="true">
+
+				<div width="500px" height="190px"
+					style="background-color: #EBEBEB; padding-top: 10px; padding-left: 10px">
+					<div width="500px" align="left"
+						style="background-color: #EBEBEB; padding: 10px">
+
+						<label width="350px" style="font-size: 16px"
+							value="ZKoss sample application." />
+						<separator />
+						<separator />
+
+						<hbox>
+							<button id="btn_zkoss" style="border: 0px"
+								image="/images/zkpowered_60x60.png" href="http://www.zkoss.org"
+								tooltiptext="Go to the zkoss framework site" />
+
+
+						</hbox>
+					</div>
+
+					<div width="140px"
+						style="background-color: #EBEBEB">
+						<separator bar="true" />
+					</div>
+
+					<div width="200px"
+						style="background-color: #EBEBEB; padding: 10px">
+						<button id="btn_ii" label="click me !"
+							image="/images/icons/monitorView.gif" href="/pages/index.zul"
+							tooltiptext="Go to the sample application" width="120px" />
+
+						<label value="admin/admin" />
+
+					</div>
+
+				</div>
+
+			</north>
+
+			<center id="bl_center" border="none"
+				style="background-color: #EBEBEB" flex="true" />
+
+			<south id="bl_south" border="none"
+				style="background-color: #EBEBEB" height="32px" />
+
+		</borderlayout>
+
+	</window>
+</zk>
+
+<!-- 
+	style="background-image:url(${c:encodeURL('/images/sample.jpg')}) "
+	style="background-image:url(${c:encodeURL('/images/sample.jpg')  }); border: 'none'; background-repeat:no-repeat; "
+-->

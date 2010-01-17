@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window id="secGroupRightWindow" border="none"
+		apply="${secGrouprightCtrl}" width="100%" height="300px">
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+		</style>
+
+
+		<panel id="panel_SecGroupRight"
+			title="${c:l('panel_SecGroupRight.title')}" border="none" />
+
+
+		<borderlayout id="borderlayoutSecGroupRight" height="100%">
+
+			<north border="none" margins="0,0,0,0">
+				<grid>
+					<columns sizable="true" height="20px">
+						<!-- Help Button -->
+						<column width="40px" align="left">
+							<hbox>
+								<button id="btnHelp"
+									image="/images/icons/light_16x16.gif"
+									tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+							</hbox>
+						</column>
+
+						<!-- Addtionally Buttons -->
+						<column align="center">
+							<hbox>
+
+							</hbox>
+						</column>
+
+						<!-- CRUD Buttons -->
+						<column align="right">
+							<hbox spacing="5px" style="padding:1px"
+								align="end">
+								<button id="btnSave" height="20"
+									image="/images/icons/btn_save2_16x16.gif"
+									tooltiptext="${c:l('btnSave.tooltiptext')}" />
+								<button id="btnClose" height="20"
+									image="/images/icons/btn_exitdoor2_16x16.gif"
+									tooltiptext="${c:l('btnClose.tooltiptext')}" />
+							</hbox>
+
+						</column>
+					</columns>
+				</grid>
+			</north>
+
+			<center border="none">
+
+
+				<columnlayout>
+					<columnchildren width="30%" height="100%"
+						style="padding: 2px; border:0px">
+						<panel id="panel_SecGroupRight_Groups"
+							title="${c:l('panel_SecGroupRight_Groups.title')}"
+							style="margin-bottom:5px" border="none">
+							<panelchildren>
+
+								<borderlayout
+									id="borderLayout_Groups">
+									<center autoscroll="true"
+										border="none">
+										<div>
+
+											<paging
+												id="paging_ListBoxSecGroup" pageSize="30" />
+											<listbox
+												id="listBoxSecGroup" width="99.5%" height="100%"
+												multiple="false">
+												<listhead
+													sizable="true">
+													<listheader
+														id="listheader_SecGroupRight_grpShortdescription"
+														image="/images/icons/create_doc.gif" sort="auto"
+														width="100%"
+														label="${c:l('listheader_SecGroupRight_grpShortdescription.label')}" />
+												</listhead>
+											</listbox>
+										</div>
+									</center>
+								</borderlayout>
+
+							</panelchildren>
+						</panel>
+					</columnchildren>
+
+
+
+					<columnchildren width="70%" height="100%"
+						style="padding: 2px">
+
+
+						<panel id="panel_SecGroupRight_GrantedRights"
+							style="margin-bottom:5px" border="none">
+							<panelchildren>
+
+								<tabbox
+									id="tabbox_SecGroupRight_Details" width="100%" height="100%">
+									<tabs>
+										<tab
+											id="tab_SecGroupRight_AllRights"
+											label="${c:l('tab_SecGroupRight_AllRights.label')}" />
+										<tab
+											id="tab_SecGroupRight_Details"
+											label="${c:l('tab_SecGroupRight_Details.label')}" />
+									</tabs>
+
+									<tabpanels>
+
+										<!-- Tab All -->
+										<tabpanel style="border: 0px">
+
+											<hbox>
+												<space />
+												<space />
+
+												<checkbox
+													id="checkbox_SecGroupRight_All" height="25px"
+													label="${c:l('checkbox_SecGroupRight_All.label')}" />
+												<checkbox
+													id="checkbox_SecGroupRight_Pages"
+													label="${c:l('checkbox_SecGroupRight_Pages.label')}" />
+												<checkbox
+													id="checkbox_SecGroupRight_Tabs"
+													label="${c:l('checkbox_SecGroupRight_Tabs.label')}" />
+												<checkbox
+													id="checkbox_SecGroupRight_MenuCat"
+													label="${c:l('checkbox_SecGroupRight_MenuCat.label')}" />
+												<checkbox
+													id="checkbox_SecGroupRight_MenuItems"
+													label="${c:l('checkbox_SecGroupRight_MenuItems.label')}" />
+												<checkbox
+													id="checkbox_SecGroupRight_Methods"
+													label="${c:l('checkbox_SecGroupRight_Methods.label')}" />
+												<checkbox
+													id="checkbox_SecGroupRight_Domain"
+													label="${c:l('checkbox_SecGroupRight_Domain.label')}" />
+												<checkbox
+													id="checkbox_SecGroupRight_Components"
+													label="${c:l('checkbox_SecGroupRight_Components.label')}" />
+											</hbox>
+
+
+											<borderlayout
+												id="borderLayout_Rights">
+												<center
+													autoscroll="true" border="none">
+													<div>
+														<paging
+															id="paging_ListBoxSecGroupRight" pageSize="15" />
+														<listbox
+															id="listBoxSecGroupRight" width="99.5%" height="100%"
+															multiple="false">
+															<listhead
+																sizable="true">
+																<listheader
+																	id="listheader_SecGroupRight_GrantedRight"
+																	image="/images/icons/exdDialogAction1.gif" sort="none"
+																	width="20%"
+																	label="${c:l('listheader_SecGroupRight_GrantedRight.label')}" />
+																<listheader
+																	id="listheader_SecGroupRight_RightName"
+																	image="/images/icons/create_doc.gif" sort="auto"
+																	width="60%"
+																	label="${c:l('listheader_SecGroupRight_RightName.label')}" />
+																<listheader
+																	id="listheader_SecGroupRight_Type"
+																	image="/images/icons/exdDataPerspective.gif"
+																	sort="auto" width="20%"
+																	label="${c:l('listheader_SecGroupRight_Type.label')}" />
+															</listhead>
+														</listbox>
+													</div>
+												</center>
+											</borderlayout>
+
+										</tabpanel>
+
+										<!-- Tab Details -->
+										<tabpanel style="border: 0px">
+											<toolbar>
+												<button
+													id="button_GroupRight_NewGroupRight"
+													image="/images/icons/page_detail.gif"
+													label="${c:l('button_GroupRight_NewGroupRight.label')}"
+													tooltiptext="${c:l('button_GroupRight_NewGroupRight.tooltiptext')}" />
+												<space />
+												<space />
+											</toolbar>
+											<borderlayout
+												id="borderLayout_Rights_TabDetails">
+												<center
+													autoscroll="true" border="none">
+													<div>
+														<paging
+															id="paging_ListBoxSecGroupRight_Details" pageSize="15" />
+														<listbox
+															id="listBoxSecGroupRight_Details" width="99.5%"
+															height="100%" multiple="false">
+															<listhead
+																sizable="true">
+																<listheader
+																	id="listheader_SecGroupRight_Details_GrantedRight"
+																	image="/images/icons/exdDialogAction1.gif" sort="none"
+																	width="20%"
+																	label="${c:l('listheader_SecGroupRight_GrantedRight.label')}" />
+																<listheader
+																	id="listheader_SecGroupRight_Details_RightName"
+																	image="/images/icons/create_doc.gif" sort="auto"
+																	width="60%"
+																	label="${c:l('listheader_SecGroupRight_RightName.label')}" />
+																<listheader
+																	id="listheader_SecGroupRight_Details_Type"
+																	image="/images/icons/exdDataPerspective.gif"
+																	sort="auto" width="20%"
+																	label="${c:l('listheader_SecGroupRight_Type.label')}" />
+															</listhead>
+														</listbox>
+													</div>
+												</center>
+											</borderlayout>
+
+										</tabpanel>
+
+
+									</tabpanels>
+								</tabbox>
+
+							</panelchildren>
+						</panel>
+
+
+					</columnchildren>
+
+				</columnlayout>
+
+
+
+
+
+			</center>
+
+			<east border="none"></east>
+			<west border="none"></west>
+			<south border="none"></south>
+
+		</borderlayout>
+
+	</window>
+</zk>
+
+

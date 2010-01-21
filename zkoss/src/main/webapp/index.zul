@@ -46,13 +46,6 @@
 							<button id="btn_zkoss" style="border: 0px"
 								image="/images/zkpowered_60x60.png" href="http://www.zkoss.org"
 								tooltiptext="Go to the zkoss framework site" />
-							<separator />
-							<h:a
-								href="http://sourceforge.net/donate/index.php?group_id=297404" target="_blank">
-								<h:img
-									src="http://images.sourceforge.net/images/project-support.jpg"
-									width="88" height="32" border="0" alt="Support This Project" />
-							</h:a>
 						</hbox>
 					</div>
 

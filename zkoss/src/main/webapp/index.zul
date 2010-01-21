@@ -4,10 +4,10 @@
 
 <?meta name="description" content="A bigger sample application for the ZKoss framework. Uses other frameworks like Spring, Spring-Security, Hibernate, JasperReports, Generic-Hibernate-DAO. Works with a H2 Database who is started and demo-data filled by applications deploy on a tomcat." ?>
 
-<?meta name="keywords" content="Zk Sample, ZKoss, ZK, RIA, Ajax, Framework, Ajax framework, Java, JSF, Open Source, Web Development, Web" ?>
-<?meta name="keywords" lang="de" content="Zk Beispiel, ZKoss, RIA, ZK, Ajax, Framework, Ajax framekwork, Java, JSF, Open Source, Web Entwicklung" ?>
-<?meta name="keywords" lang="en-us" content="Zk Sample, ZKoss, ZK, RIA, Ajax, Framework, Ajax framework, Java, JSF, Open Source, Web Development, Web" ?>
-<?meta name="keywords" lang="en" content="Zk Sample, ZKoss, ZK, RIA, Ajax, Framework, Ajax framework, Java, JSF, Open Source, Web Development, Web" ?>
+<?meta name="keywords" content="Zk Sample, zksample2, ZKoss, ZK, RIA, Ajax, Framework, Ajax framework, Java, JSF, Open Source, Web Development, Web, forsthaus" ?>
+<?meta name="keywords" lang="de" content="Zk Beispiel, zksample2, ZKoss, RIA, ZK, Ajax, Framework, Ajax framekwork, Java, JSF, Open Source, Web Entwicklung, forsthaus" ?>
+<?meta name="keywords" lang="en-us" content="Zk Sample, zksample2, ZKoss, ZK, RIA, Ajax, Framework, Ajax framework, Java, JSF, Open Source, Web Development, Web, forsthaus" ?>
+<?meta name="keywords" lang="en" content="Zk Sample, zksample2, ZKoss, ZK, RIA, Ajax, Framework, Ajax framework, Java, JSF, Open Source, Web Development, Web, forsthaus" ?>
 
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
@@ -48,7 +48,7 @@
 								tooltiptext="Go to the zkoss framework site" />
 							<separator />
 							<h:a
-								href="http://sourceforge.net/donate/index.php?group_id=297404">
+								href="http://sourceforge.net/donate/index.php?group_id=297404" target="_blank">
 								<h:img
 									src="http://images.sourceforge.net/images/project-support.jpg"
 									width="88" height="32" border="0" alt="Support This Project" />

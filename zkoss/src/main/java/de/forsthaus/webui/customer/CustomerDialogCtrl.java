@@ -87,7 +87,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
 public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -546886879998950467L;
-	private transient final static Logger logger = Logger.getLogger(CustomerDialogCtrl.class);
+	private transient final static Logger logger = Logger
+			.getLogger(CustomerDialogCtrl.class);
 
 	// private PagedListWrapper<Branche> plwBranche;
 
@@ -186,7 +187,9 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		/* set components visible dependent of the users rights */
 		doCheckRights();
 		/* create the Button Controller. Disable not used buttons during working */
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(),
+				btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave,
+				btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -218,7 +221,8 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		// +++++++++ DropDown ListBox +++++++++++++++++++ //
-		kunBranche.setModel(new ListModelList(getBrancheService().getAlleBranche()));
+		kunBranche.setModel(new ListModelList(getBrancheService()
+				.getAlleBranche()));
 
 		kunBranche.setItemRenderer(new CustomerBrancheListModelItemRenderer());
 
@@ -260,26 +264,43 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		UserWorkspace workspace = getUserWorkspace();
 
-		window_customerDialog.setVisible(workspace.isAllowed("window_customerDialog"));
+		window_customerDialog.setVisible(workspace
+				.isAllowed("window_customerDialog"));
 
-		tabCustomerDialogAddress.setVisible(workspace.isAllowed("tab_CustomerDialog_Address"));
-		tabPanelCustomerAddress.setVisible(workspace.isAllowed("tab_CustomerDialog_Address"));
+		tabCustomerDialogAddress.setVisible(workspace
+				.isAllowed("tab_CustomerDialog_Address"));
+		tabPanelCustomerAddress.setVisible(workspace
+				.isAllowed("tab_CustomerDialog_Address"));
 
-		tabCustomerDialogChart.setVisible(workspace.isAllowed("tab_CustomerDialog_Chart"));
-		tabPanelCustomerDialogChart.setVisible(workspace.isAllowed("tab_CustomerDialog_Chart"));
+		tabCustomerDialogChart.setVisible(workspace
+				.isAllowed("tab_CustomerDialog_Chart"));
+		tabPanelCustomerDialogChart.setVisible(workspace
+				.isAllowed("tab_CustomerDialog_Chart"));
 
-		tabCustomerDialogOrders.setVisible(workspace.isAllowed("tab_CustomerDialog_Orders"));
-		tabPanelCustomerOrders.setVisible(workspace.isAllowed("tab_CustomerDialog_Orders"));
+		tabCustomerDialogOrders.setVisible(workspace
+				.isAllowed("tab_CustomerDialog_Orders"));
+		tabPanelCustomerOrders.setVisible(workspace
+				.isAllowed("tab_CustomerDialog_Orders"));
 
-		tabCustomerDialogMemos.setVisible(workspace.isAllowed("tab_CustomerDialog_Memos"));
-		tabPanelCustomerMemos.setVisible(workspace.isAllowed("tab_CustomerDialog_Memos"));
+		tabCustomerDialogMemos.setVisible(workspace
+				.isAllowed("tab_CustomerDialog_Memos"));
+		tabPanelCustomerMemos.setVisible(workspace
+				.isAllowed("tab_CustomerDialog_Memos"));
 
-		btnHelp.setVisible(workspace.isAllowed("button_CustomerDialog_btnHelp"));
+		btnHelp
+				.setVisible(workspace
+						.isAllowed("button_CustomerDialog_btnHelp"));
 		btnNew.setVisible(workspace.isAllowed("button_CustomerDialog_btnNew"));
-		btnEdit.setVisible(workspace.isAllowed("button_CustomerDialog_btnEdit"));
-		btnDelete.setVisible(workspace.isAllowed("button_CustomerDialog_btnDelete"));
-		btnSave.setVisible(workspace.isAllowed("button_CustomerDialog_btnSave"));
-		btnClose.setVisible(workspace.isAllowed("button_CustomerDialog_btnClose"));
+		btnEdit
+				.setVisible(workspace
+						.isAllowed("button_CustomerDialog_btnEdit"));
+		btnDelete.setVisible(workspace
+				.isAllowed("button_CustomerDialog_btnDelete"));
+		btnSave
+				.setVisible(workspace
+						.isAllowed("button_CustomerDialog_btnSave"));
+		btnClose.setVisible(workspace
+				.isAllowed("button_CustomerDialog_btnClose"));
 
 	}
 
@@ -306,7 +327,8 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		map.put("rowSizeOrders", new Integer(10));
 		map.put("rowSizeOrderPositions", new Integer(10));
 
-		Tabpanel orderTab = (Tabpanel) Path.getComponent("/window_customerDialog/tabPanelCustomerOrders");
+		Tabpanel orderTab = (Tabpanel) Path
+				.getComponent("/window_customerDialog/tabPanelCustomerOrders");
 		orderTab.getChildren().clear();
 
 		Panel panel = new Panel();
@@ -316,7 +338,8 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		orderTab.appendChild(panel);
 
 		// call the zul-file and put it on the tab.
-		Executions.createComponents("/WEB-INF/pages/order/orderList.zul", pChildren, map);
+		Executions.createComponents("/WEB-INF/pages/order/orderList.zul",
+				pChildren, map);
 	}
 
 	/**
@@ -342,7 +365,8 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		map.put("rowSizeOrders", new Integer(10));
 		map.put("rowSizeOrderPositions", new Integer(10));
 
-		Tabpanel chartTab = (Tabpanel) Path.getComponent("/window_customerDialog/tabPanelCustomerDialogChart");
+		Tabpanel chartTab = (Tabpanel) Path
+				.getComponent("/window_customerDialog/tabPanelCustomerDialogChart");
 		chartTab.getChildren().clear();
 
 		Panel panel = new Panel();
@@ -352,7 +376,8 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		chartTab.appendChild(panel);
 
 		// call the zul-file and put it on the tab.
-		Executions.createComponents("/WEB-INF/pages/customer/customerChart.zul", pChildren, map);
+		Executions.createComponents(
+				"/WEB-INF/pages/customer/customerChart.zul", pChildren, map);
 
 	}
 
@@ -418,7 +443,8 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+				"INFORMATION", true);
 	}
 
 	/**
@@ -493,12 +519,14 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
+			String msg = Labels
+					.getLabel("message_Data_Modified_Save_Data_YesNo");
 			String title = Labels.getLabel("message_Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
-					new EventListener() {
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
+					| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION,
+					true, new EventListener() {
 						public void onEvent(Event evt) {
 							switch (((Integer) evt.getData()).intValue()) {
 							case MultiLineMessageBox.YES:
@@ -528,7 +556,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	public void doWriteBeanToComponents(Customer aCustomer) {
 
 		kunNr.setValue(aCustomer.getKunNr());
-		kunMatchcode.setValue(aCustomer.getKunMatchcode());
+		kunMatchcode.setValue(aCustomer.getKunMatchcode().toUpperCase());
 		kunName1.setValue(aCustomer.getKunName1());
 		kunName2.setValue(aCustomer.getKunName2());
 		kunOrt.setValue(aCustomer.getKunOrt());
@@ -544,7 +572,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	public void doWriteComponentsToBean(Customer aCustomer) {
 
 		aCustomer.setKunNr(kunNr.getValue());
-		aCustomer.setKunMatchcode(kunMatchcode.getValue());
+		aCustomer.setKunMatchcode(kunMatchcode.getValue().toUpperCase());
 		aCustomer.setKunName1(kunName1.getValue());
 		aCustomer.setKunName2(kunName2.getValue());
 		aCustomer.setKunOrt(kunOrt.getValue());
@@ -705,40 +733,47 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final Customer aCustomer = getCustomer();
 
 		// Show a confirm box
-		String msg = Labels.getLabel("message.question.are_you_sure_to_delete_this_record") + "\n\n --> " + aCustomer.getKunName1() + " "
+		String msg = Labels
+				.getLabel("message.question.are_you_sure_to_delete_this_record")
+				+ "\n\n --> "
+				+ aCustomer.getKunName1()
+				+ " "
 				+ aCustomer.getKunName2() + " ," + aCustomer.getKunOrt();
 		String title = Labels.getLabel("message_Deleting_Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, Messagebox.QUESTION, true, new EventListener() {
-			public void onEvent(Event evt) {
-				switch (((Integer) evt.getData()).intValue()) {
-				case MultiLineMessageBox.YES:
-					deleteCustomer();
-				case MultiLineMessageBox.NO:
-					break; // 
+		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
+				| MultiLineMessageBox.NO, Messagebox.QUESTION, true,
+				new EventListener() {
+					public void onEvent(Event evt) {
+						switch (((Integer) evt.getData()).intValue()) {
+						case MultiLineMessageBox.YES:
+							deleteCustomer();
+						case MultiLineMessageBox.NO:
+							break; // 
+						}
+					}
+
+					private void deleteCustomer() {
+
+						// delete from database
+						getCustomerService().delete(aCustomer);
+
+						// now synchronize the customers listBox
+						ListModelList lml = (ListModelList) lbCustomer
+								.getListModel();
+
+						// Check if the customer object is new or updated
+						// -1 means that the obj is not in the list, so it's
+						// new..
+						if (lml.indexOf(aCustomer) == -1) {
+						} else {
+							lml.remove(lml.indexOf(aCustomer));
+						}
+
+						window_customerDialog.onClose(); // close the dialog
+					}
 				}
-			}
-
-			private void deleteCustomer() {
-
-				// delete from database
-				getCustomerService().delete(aCustomer);
-
-				// now synchronize the customers listBox
-				ListModelList lml = (ListModelList) lbCustomer.getListModel();
-
-				// Check if the customer object is new or updated
-				// -1 means that the obj is not in the list, so it's
-				// new..
-				if (lml.indexOf(aCustomer) == -1) {
-				} else {
-					lml.remove(lml.indexOf(aCustomer));
-				}
-
-				window_customerDialog.onClose(); // close the dialog
-			}
-		}
 
 		) == MultiLineMessageBox.YES) {
 		}
@@ -865,12 +900,17 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// save it to database
 		try {
 			getCustomerService().saveOrUpdate(aCustomer);
+			// fill the components with the data
+			// if something is changed during the save process
+			doWriteBeanToComponents(aCustomer);
+
 		} catch (DataAccessException e) {
 			String message = e.getMessage();
 			// String message = e.getCause().getMessage();
 			String title = Labels.getLabel("message_Error");
 			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+					"ERROR", true);
 
 			// Reset to init values
 			doResetInitValues();

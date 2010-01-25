@@ -25,7 +25,7 @@ div.top {
 	position:absolute; 
 	top:0px; 
 	left:0px; 
-	right:0px;" 	
+	right:0px;
 }
 
 div.content {
@@ -45,7 +45,7 @@ div.content {
 div.ru {
 	position:absolute; 
 	bottom:0px; 
-	right:10px;"
+	right:10px;
  }
 
 div.lu {
@@ -62,5 +62,4 @@ div.lu * td {
 div.lu * th {
 	white-space: nowrap;
 	text-align:left;
-#	background-color:#ffccff;
 }

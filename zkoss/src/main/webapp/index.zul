@@ -45,7 +45,7 @@
 						<hbox>
 							<button id="btn_zkoss" style="border: 0px"
 								image="/images/zkpowered_60x60.png" href="http://www.zkoss.org"
-								tooltiptext="Go to the zkoss framework site" />
+								target="_blank" tooltiptext="Go to the zkoss framework site" />
 						</hbox>
 					</div>
 

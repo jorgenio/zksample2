@@ -76,7 +76,7 @@
 										<div>
 
 											<paging
-												id="paging_ListBoxSecGroup" pageSize="30" />
+												id="paging_ListBoxSecGroup" />
 											<listbox
 												id="listBoxSecGroup" width="99.5%" height="100%"
 												multiple="false">

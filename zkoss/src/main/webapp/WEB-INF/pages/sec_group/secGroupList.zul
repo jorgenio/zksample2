@@ -48,7 +48,7 @@
 		<borderlayout id="borderLayout_secGroupsList">
 
 			<north border="none" height="26px">
-				<paging id="paging_SecGroupList" pageSize="20" />
+				<paging id="paging_SecGroupList" />
 			</north>
 
 			<center border="none">

@@ -57,7 +57,7 @@
 		<borderlayout id="borderLayout_articleList">
 
 			<north border="none" height="26px">
-				<paging id="paging_ArticleList" pageSize="20" />
+				<paging id="paging_ArticleList" />
 			</north>
 
 

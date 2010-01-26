@@ -67,7 +67,7 @@
 		<borderlayout id="borderLayout_officeList">
 
 			<north border="none" height="26px">
-				<paging id="paging_OfficeList" pageSize="20" />
+				<paging id="paging_OfficeList" />
 			</north>
 
 			<center border="normal">

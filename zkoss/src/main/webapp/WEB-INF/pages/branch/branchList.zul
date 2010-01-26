@@ -75,7 +75,7 @@
 		<borderlayout id="borderLayout_branchList">
 
 			<north border="none" height="26px">
-				<paging id="paging_BranchList" pageSize="20" />
+				<paging id="paging_BranchList"/>
 			</north>
 
 			<center border="normal">

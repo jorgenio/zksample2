@@ -151,7 +151,7 @@
 
 																		<div>
 																			<paging
-																				id="paging_ListBoxArticleSearch" pageSize="20" />
+																				id="paging_ListBoxArticleSearch" />
 																			<listbox
 																				id="listBoxArticleSearch" width="100%" height="100%"
 																				multiple="false">

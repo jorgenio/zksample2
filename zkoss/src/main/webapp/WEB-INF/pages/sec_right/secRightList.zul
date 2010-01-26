@@ -58,7 +58,7 @@
 		<borderlayout id="borderLayout_secRightsList">
 
 			<north border="none" height="26px">
-				<paging id="paging_SecRightList" pageSize="20" />
+				<paging id="paging_SecRightList" />
 			</north>
 
 			<center border="none">

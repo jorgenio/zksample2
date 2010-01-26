@@ -67,7 +67,7 @@
 		<borderlayout id="borderLayout_secUserList">
 
 			<north border="none" height="26px">
-				<paging id="paging_UserList" pageSize="20" />
+				<paging id="paging_UserList" />
 			</north>
 
 			<center border="normal">

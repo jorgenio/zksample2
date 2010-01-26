@@ -151,7 +151,7 @@
 			<separator bar="true" orient="vertical" />
 		</hbox>
 
-		<paging id="paging_OrderList" pageSize="20" />
+		<paging id="paging_OrderList" />
 		<listbox id="listBoxOrder"
 			tooltiptext="${c:l('listbox.tooltiptext')}" width="99.5%"
 			multiple="false">
@@ -176,8 +176,7 @@
 					height="250px">
 
 					<north border="none" height="26px">
-						<paging id="paging_OrderArticleList"
-							pageSize="20" />
+						<paging id="paging_OrderArticleList" />
 					</north>
 
 					<center border="normal">

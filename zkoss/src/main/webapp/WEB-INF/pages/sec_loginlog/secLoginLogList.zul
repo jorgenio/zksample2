@@ -156,7 +156,7 @@
 		<borderlayout id="borderLayout_SecUserlogList">
 
 			<north border="none" height="26px">
-				<paging id="paging_SecUserLogList" pageSize="20" />
+				<paging id="paging_SecUserLogList" />
 			</north>
 
 			<center border="normal">

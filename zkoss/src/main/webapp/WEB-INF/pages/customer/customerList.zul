@@ -36,7 +36,7 @@
 		<borderlayout id="borderLayout_customerList">
 
 			<north border="none" height="26px">
-				<paging id="pagingCustomerList" pageSize="20" />
+				<paging id="pagingCustomerList" />
 			</north>
 
 			<center border="normal">

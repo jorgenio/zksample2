@@ -87,7 +87,7 @@
 														<div>
 
 															<paging
-																id="paging_ListBoxSecUser" pageSize="15" />
+																id="paging_ListBoxSecUser" />
 															<listbox
 																id="listBoxSecUser" width="99.5%" height="100%"
 																multiple="false">
@@ -125,7 +125,7 @@
 														<div>
 
 															<paging
-																id="paging_ListBoxSecRoles" pageSize="15" />
+																id="paging_ListBoxSecRoles" />
 															<listbox
 																id="listBoxSecRoles" width="99.5%" height="100%"
 																multiple="false">

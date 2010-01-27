@@ -5,6 +5,9 @@ package de.forsthaus.test.backend.service.LoginService;
 
 import java.util.List;
 
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import de.forsthaus.backend.bean.DummyBean;
 import de.forsthaus.backend.dao.SecLoginlogDAO;
 import de.forsthaus.testutils.BasisHibernateTest;
@@ -15,11 +18,13 @@ import de.forsthaus.testutils.BasisHibernateTest;
  */
 public class TestLoginService extends BasisHibernateTest {
 
+	@Autowired
 	private SecLoginlogDAO secLoginlogDAO;
 
+	@Test
 	public void testABC() {
 
-		List<DummyBean> transfer2Bean =secLoginlogDAO.getTotalCountByCountries();
+		List<DummyBean> transfer2Bean = secLoginlogDAO.getTotalCountByCountries();
 
 		System.err.println(transfer2Bean);
 

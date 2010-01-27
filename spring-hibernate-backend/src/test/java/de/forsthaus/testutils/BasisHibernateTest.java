@@ -4,13 +4,19 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.TransactionException;
 import org.hibernate.stat.Statistics;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
-import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.transaction.AfterTransaction;
+import org.springframework.test.context.transaction.BeforeTransaction;
 
-abstract public class BasisHibernateTest extends AbstractTransactionalDataSourceSpringContextTests {
+@ContextConfiguration(locations = { "classpath:applicationContext-hibernate.xml", "classpath:applicationContext-db-test.xml" })
+abstract public class BasisHibernateTest extends AbstractTransactionalJUnit4SpringContextTests {
 
 	final protected Log LOG = LogFactory.getLog(getClass());
 
+	@Autowired
 	private HibernateTemplate hibernateTemplate;
 
 	public HibernateTemplate getHibernateTemplate() {
@@ -21,21 +27,14 @@ abstract public class BasisHibernateTest extends AbstractTransactionalDataSource
 		this.hibernateTemplate = hibernateTemplate;
 	}
 
-	@Override
-	protected String[] getConfigLocations() {
-		return new String[] { "applicationContext-hibernate.xml", "applicationContext-db-test.xml" };
-	}
-
-	@Override
-	protected void startNewTransaction() throws TransactionException {
+	@BeforeTransaction
+	public void startNewTransaction() throws TransactionException {
 		getHibernateTemplate().getSessionFactory().getStatistics().setStatisticsEnabled(true);
 		getHibernateTemplate().getSessionFactory().getStatistics().clear();
-		super.startNewTransaction();
 	}
 
-	@Override
-	protected void endTransaction() {
-		super.endTransaction();
+	@AfterTransaction
+	public void endTransaction() {
 		printStatistic(getHibernateTemplate().getSessionFactory().getStatistics());
 	}
 

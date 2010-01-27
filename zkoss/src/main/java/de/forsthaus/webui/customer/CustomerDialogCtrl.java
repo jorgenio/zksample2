@@ -181,9 +181,9 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 			logger.debug("--> " + event.toString());
 		}
 
-		/* autowire comps the vars */
-		// doOnCreateCommon(window_customerDialog, event);
 
+		//window_customerDialog.setContentStyle("padding-left: 0px; padding-right: 0px; padding-top: 0px; padding-bottom: 0px;");
+		
 		/* set components visible dependent of the users rights */
 		doCheckRights();
 		/* create the Button Controller. Disable not used buttons during working */

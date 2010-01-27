@@ -19,10 +19,11 @@
 package de.forsthaus.policy.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.security.GrantedAuthority;
-import org.springframework.security.userdetails.User;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 
 import de.daibutsu.token.Md5Token;
 import de.forsthaus.backend.model.SecUser;
@@ -59,7 +60,7 @@ public class UserImpl extends User implements Serializable, de.forsthaus.policy.
 	 * @param authorities
 	 * @throws IllegalArgumentException
 	 */
-	public UserImpl(SecUser user, GrantedAuthority[] grantedAuthorities) throws IllegalArgumentException {
+	public UserImpl(SecUser user, Collection<GrantedAuthority> grantedAuthorities) throws IllegalArgumentException {
 
 		super(user.getUsrLoginname(), user.getUsrPassword(), user.isUsrEnabled(), user.isUsrAccountnonexpired(), user.isUsrCredentialsnonexpired(),
 				user.isUsrAccountnonlocked(), grantedAuthorities);

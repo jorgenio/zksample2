@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-	<!-- Spring namespace-based configuration -->
+<!-- Spring namespace-based configuration -->
 
 <beans:beans xmlns="http://www.springframework.org/schema/security"
-	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:zksp="http://www.zkoss.org/2008/zkspring"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
-                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.1.xsd
-						http://www.springframework.org/schema/aop   
-						http://www.springframework.org/schema/aop/spring-aop-2.0.xsd                        
-                        http://www.zkoss.org/2008/zkspring http://www.zkoss.org/2008/zkspring/zkspring.xsd">
-
-
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	       http://www.springframework.org/schema/aop   
+		   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd                        
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
 	<!-- ====================================================== -->
 	<!--      For catching the @Secured annotation methods      -->
@@ -62,7 +61,7 @@
 		<!--                 Per user one session !!                -->
 		<!--               In DEMO mode we set it to 5              -->
 		<!-- ====================================================== -->
-		<concurrent-session-control max-sessions="5" />
+		<!--		<concurrent-session-control max-sessions="5" />-->
 	</http>
 
 	<!-- ====================================================== -->
@@ -73,13 +72,15 @@
 	<!--     So we have our users stored in a DB we use         -->
 	<!--     our own user-service class and point to her.       -->
 	<!-- ====================================================== -->
-	<authentication-provider user-service-ref="myUserDetailsService">
-		<!--  The password encoder is additonally for     -->
-		<!--   simulating  a one-time-password mechansim  -->
-		<password-encoder ref="passwordEncoder">
-			<salt-source user-property="token" />
-		</password-encoder>
-	</authentication-provider>
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="myUserDetailsService">
+			<!--  The password encoder is additonally for     -->
+			<!--   simulating  a one-time-password mechansim  -->
+			<password-encoder ref="passwordEncoder">
+				<salt-source user-property="token" />
+			</password-encoder>
+		</authentication-provider>
+	</authentication-manager>
 
 	<!-- ====================================================== -->
 	<!--           The Implementation of the Interface          -->
@@ -101,17 +102,17 @@
 	<!--         Here, only for showing in the console          -->
 	<!--               that we can catches the events.          -->
 	<!-- ====================================================== -->
-	<zksp:zk-event login-template-close-delay="5">
-		<zksp:intercept-event path="//**/btn_*" event="onClick"
-			access="IS_AUTHENTICATED_REMEMBERED" />
-		<zksp:intercept-event path="/**" event="onClick"
-			access="IS_AUTHENTICATED_ANONYMOUSLY" />
-
-		<zksp:intercept-event path="//**/window_BranchesList/listBoxBranch"
-			event="onClick" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<zksp:intercept-event path="//**/window_BranchesList/listBoxBranch"
-			event="onDoubleClick" access="IS_AUTHENTICATED_REMEMBERED" />
-	</zksp:zk-event>
+<!--	<zksp:zk-event login-template-close-delay="5">-->
+<!--		<zksp:intercept-event path="//**/btn_*" event="onClick"-->
+<!--			access="IS_AUTHENTICATED_REMEMBERED" />-->
+<!--		<zksp:intercept-event path="/**" event="onClick"-->
+<!--			access="IS_AUTHENTICATED_ANONYMOUSLY" />-->
+<!---->
+<!--		<zksp:intercept-event path="//**/window_BranchesList/listBoxBranch"-->
+<!--			event="onClick" access="IS_AUTHENTICATED_ANONYMOUSLY" />-->
+<!--		<zksp:intercept-event path="//**/window_BranchesList/listBoxBranch"-->
+<!--			event="onDoubleClick" access="IS_AUTHENTICATED_REMEMBERED" />-->
+<!--	</zksp:zk-event>-->
 
 
 	<!-- ====================================================== -->
@@ -129,7 +130,7 @@
 	<aop:config>
 		<aop:aspect id="LoginLoggingAspect" ref="LoginLoggingPolicyService">
 			<aop:pointcut id="authPointcut"
-				expression="execution(public org.springframework.security.Authentication org.springframework.security.providers.AuthenticationProvider.authenticate(org.springframework.security.Authentication))" />
+				expression="execution(public org.springframework.security.core.Authentication org.springframework.security.authentication.AuthenticationProvider.authenticate(org.springframework.security.core.Authentication))" />
 			<aop:around pointcut-ref="authPointcut" method="loginLogging" />
 		</aop:aspect>
 	</aop:config>

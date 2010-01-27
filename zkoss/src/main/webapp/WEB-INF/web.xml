@@ -40,7 +40,6 @@
 			org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 
-
 	<!-- ====================================================== -->
 	<!--              SPRING-SECURITY Entry Point               -->
 	<!-- ====================================================== -->
@@ -52,6 +51,7 @@
 	<!--           For not declared points in the               -->
 	<!--        SpringSecurityContext.xml Spring takes          -->
 	<!--                   default values.                      -->
+
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -65,7 +65,7 @@
 
 	<listener>
 		<listener-class>
-			org.springframework.security.ui.session.HttpSessionEventPublisher</listener-class>
+			org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
 	</listener>
 	<!-- END Spring-Security  -->
 

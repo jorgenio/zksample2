@@ -22,7 +22,7 @@ import java.io.Serializable;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.dao.DataAccessException;
-import org.springframework.security.providers.encoding.PasswordEncoder;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 import de.daibutsu.token.Md5Token;
 

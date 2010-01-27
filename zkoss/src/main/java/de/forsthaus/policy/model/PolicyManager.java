@@ -20,16 +20,15 @@ package de.forsthaus.policy.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataRetrievalFailureException;
-import org.springframework.security.GrantedAuthority;
-import org.springframework.security.GrantedAuthorityImpl;
-import org.springframework.security.userdetails.UserDetails;
-import org.springframework.security.userdetails.UserDetailsService;
-import org.springframework.security.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import de.forsthaus.backend.model.SecRight;
 import de.forsthaus.backend.model.SecUser;
@@ -54,7 +53,7 @@ public class PolicyManager implements UserDetailsService, Serializable {
 	public UserDetails loadUserByUsername(String userId) {
 
 		SecUser user = null;
-		GrantedAuthority[] grantedAuthorities = null;
+		Collection<GrantedAuthority> grantedAuthorities = null;
 
 		try {
 			user = getUserByLoginname(userId);
@@ -80,8 +79,8 @@ public class PolicyManager implements UserDetailsService, Serializable {
 		UserDetails userDetails = new UserImpl(user, grantedAuthorities);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Rechte für '" + user.getUsrLoginname() + "' (ID: " + user.getId() + ") ermittelt. (" + Arrays.toString(grantedAuthorities)
-					+ ") [" + this + "]");
+			logger.debug("Rechte für '" + user.getUsrLoginname() + "' (ID: " + user.getId() + ") ermittelt. (" + grantedAuthorities + ") ["
+					+ this + "]");
 
 			// for (GrantedAuthority grantedAuthority : grantedAuthorities) {
 			// logger.debug(grantedAuthority.getAuthority());
@@ -114,7 +113,7 @@ public class PolicyManager implements UserDetailsService, Serializable {
 	 * @param user
 	 * @return
 	 */
-	private GrantedAuthority[] getGrantedAuthority(SecUser user) {
+	private Collection<GrantedAuthority> getGrantedAuthority(SecUser user) {
 
 		// get the list of rights for a specified user.
 		Collection<SecRight> rights = getUserService().getRightsByUser(user);
@@ -126,8 +125,7 @@ public class PolicyManager implements UserDetailsService, Serializable {
 		for (SecRight right : rights) {
 			rechteGrantedAuthorities.add(new GrantedAuthorityImpl(right.getRigName()));
 		}
-		GrantedAuthority[] grantedAuthorities = rechteGrantedAuthorities.toArray(new GrantedAuthority[rechteGrantedAuthorities.size()]);
-		return grantedAuthorities;
+		return rechteGrantedAuthorities;
 	}
 
 	public UserService getUserService() {

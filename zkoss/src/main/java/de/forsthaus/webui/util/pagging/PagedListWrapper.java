@@ -82,7 +82,8 @@ public class PagedListWrapper<E> extends ListModelList implements Serializable {
 		super();
 	}
 
-	public void init(HibernateSearchObject<E> hibernateSearchObject1, Listbox listBox, Paging paging1) {
+	public void init(HibernateSearchObject<E> hibernateSearchObject1,
+			Listbox listBox, Paging paging1) {
 		setPaging(paging1);
 		setListeners(listBox);
 
@@ -96,7 +97,8 @@ public class PagedListWrapper<E> extends ListModelList implements Serializable {
 		// clear old data
 		clear();
 
-		SearchResult<E> searchResult = getPagedListService().getSRBySearchObject(getSearchObject());
+		SearchResult<E> searchResult = getPagedListService()
+				.getSRBySearchObject(getSearchObject());
 		getPaging().setTotalSize(searchResult.getTotalCount());
 		addAll(searchResult.getResult());
 	}
@@ -152,7 +154,8 @@ public class PagedListWrapper<E> extends ListModelList implements Serializable {
 			if (object instanceof Listheader) {
 				Listheader lheader = (Listheader) object;
 
-				if (lheader.getSortAscending() != null || lheader.getSortDescending() != null) {
+				if (lheader.getSortAscending() != null
+						|| lheader.getSortDescending() != null) {
 
 					if (logger.isDebugEnabled()) {
 						logger.debug("--> : " + lheader.getId());
@@ -197,7 +200,8 @@ public class PagedListWrapper<E> extends ListModelList implements Serializable {
 	 * Calls the methode for refreshing the data with the new ordering. and the
 	 * remembered rowStart and pageSize. <br>
 	 */
-	public final class OnSortEventListener implements EventListener, Serializable {
+	public final class OnSortEventListener implements EventListener,
+			Serializable {
 		private static final long serialVersionUID = 1L;
 
 		@Override
@@ -209,17 +213,21 @@ public class PagedListWrapper<E> extends ListModelList implements Serializable {
 				final Comparator<?> cmpr = lh.getSortDescending();
 				if (cmpr instanceof FieldComparator) {
 					String orderBy = ((FieldComparator) cmpr).getOrderBy();
-					orderBy = StringUtils.substringBefore(orderBy, "DESC").trim();
+					orderBy = StringUtils.substringBefore(orderBy, "DESC")
+							.trim();
 
 					// update SearchObject with orderBy
 					getSearchObject().clearSorts();
 					getSearchObject().addSort(orderBy, true);
 				}
-			} else if ("descending".equals(sortDirection) || "natural".equals(sortDirection) || Strings.isBlank(sortDirection)) {
+			} else if ("descending".equals(sortDirection)
+					|| "natural".equals(sortDirection)
+					|| Strings.isBlank(sortDirection)) {
 				final Comparator<?> cmpr = lh.getSortAscending();
 				if (cmpr instanceof FieldComparator) {
 					String orderBy = ((FieldComparator) cmpr).getOrderBy();
-					orderBy = StringUtils.substringBefore(orderBy, "ASC").trim();
+					orderBy = StringUtils.substringBefore(orderBy, "ASC")
+							.trim();
 
 					// update SearchObject with orderBy
 					getSearchObject().clearSorts();
@@ -229,7 +237,8 @@ public class PagedListWrapper<E> extends ListModelList implements Serializable {
 
 			if (logger.isDebugEnabled()) {
 				logger.debug("--> : " + lh.getId() + "/" + sortDirection);
-				logger.debug("--> added  getSorts() : " + getSearchObject().getSorts().toString());
+				logger.debug("--> added  getSorts() : "
+						+ getSearchObject().getSorts().toString());
 			}
 
 			if (isSupportPagging()) {

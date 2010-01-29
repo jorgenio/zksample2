@@ -55,7 +55,8 @@ import de.forsthaus.webui.util.GFCBaseCtrl;
 public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -3407055074703929527L;
-	private transient final static Logger logger = Logger.getLogger(IndexCtrl.class);
+	private transient final static Logger logger = Logger
+			.getLogger(IndexCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -98,7 +99,12 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 		doDemoMode();
 
 		statusBarZKVersion.setLabel("ZK version: " + doGetZkVersion());
-		statusBarAppVersion.setLabel("Zksample2 v1.0 / build: " + FDDateFormat.getDateFormater().format(new Date()));
+		Date date = new Date();
+		date.setDate(29);
+		date.setMonth(0);
+		date.setYear(110);
+		statusBarAppVersion.setLabel("Zksample2 v1.1.3 / build: "
+				+ FDDateFormat.getDateFormater().format(date));
 		statusBarColUser.setLabel(doGetLoggedInUser());
 
 	}
@@ -130,8 +136,10 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private String doGetZkVersion() {
 
-		String version = Executions.getCurrent().getDesktop().getWebApp().getVersion();
-		String build = Executions.getCurrent().getDesktop().getWebApp().getBuild();
+		String version = Executions.getCurrent().getDesktop().getWebApp()
+				.getVersion();
+		String build = Executions.getCurrent().getDesktop().getWebApp()
+				.getBuild();
 		return version + " / build : " + build;
 	}
 
@@ -140,7 +148,8 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public String doGetLoggedInUser() {
 
-		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		String userName = SecurityContextHolder.getContext()
+				.getAuthentication().getName();
 		return userName;
 	}
 
@@ -174,7 +183,8 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	private void createMainTreeMenu() {
 
 		// get an instance of the borderlayout defined in the index.zul-file
-		Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
+		Borderlayout bl = (Borderlayout) Path
+				.getComponent("/outerIndexWindow/borderlayoutMain");
 
 		// get an instance of the searched west layout area
 		West west = bl.getWest();
@@ -184,7 +194,8 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 		// create the components from the mainmenu.zul-file and put
 		// it in the west layout area
-		Executions.createComponents("/WEB-INF/pages/mainTreeMenu.zul", west, null);
+		Executions.createComponents("/WEB-INF/pages/mainTreeMenu.zul", west,
+				null);
 	}
 
 	/**
@@ -194,7 +205,8 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void showWelcomePage() throws InterruptedException {
 		// get an instance of the borderlayout defined in the zul-file
-		Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
+		Borderlayout bl = (Borderlayout) Path
+				.getComponent("/outerIndexWindow/borderlayoutMain");
 		// get an instance of the searched CENTER layout area
 		Center center = bl.getCenter();
 		// clear the center child comps
@@ -219,7 +231,8 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 		if (isTreeMenu() == true) {
 			this.currentDesktopHeight.setValue(Integer.valueOf(desktopHeight));
 		} else {
-			this.currentDesktopHeight.setValue(Integer.valueOf(desktopHeight - 40));
+			this.currentDesktopHeight.setValue(Integer
+					.valueOf(desktopHeight - 40));
 		}
 	}
 

@@ -10,11 +10,15 @@
 	<window id="window_customerDialog"
 		title="${c:l('window_customerDialog.title')}" border="none"
 		apply="${customerDialogCtrl}" closable="true" width="800px"
-		height="590px" sizable="true">
+		height="600px" sizable="true">
 
 		<style>
 			body { padding: 0 0; /* 0 padding on top and bottom and 0
 			padding on right and left */ }
+			<!-- cut the vertical borders in the rows -->
+			tr.z-row td.z-row-inner { border-right: 0px #CCC; }
+			<!-- cut the vertical borders in the rows -->
+			.z-groupbox-hl .z-groupbox-header { font-weight: bold; }
 		</style>
 
 		<borderlayout id="borderlayoutCustomer">
@@ -84,158 +88,173 @@
 									<columnchildren width="50%"
 										style="padding: 5px">
 										<panel
-											id="panel_CustomerDialog_Address"
-											title="${c:l('panel_CustomerDialog_Address.title')}"
-											style="margin-bottom:10px" border="normal"
-											collapsible="true">
+											id="panel_CustomerDialog_Address" border="none">
 											<panelchildren>
-												<grid fixedLayout="true"
-													style="border:0px">
-													<columns>
-														<column
-															width="150px" />
-														<column
-															width="100%" />
-													</columns>
-													<rows>
-														<row>
-															<label
-																id="label_CustomerDialog_kunNr"
-																value="${c:l('label_CustomerDialog_kunNr.value')}" />
-															<textbox
-																id="kunNr" width="150px" />
-														</row>
-														<row>
-															<separator
-																bar="true">
-															</separator>
-															<separator
-																bar="true">
-															</separator>
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_kunMatchcode"
-																value="${c:l('label_CustomerDialog_kunMatchcode.value')}" />
-															<textbox
-																id="kunMatchcode" width="150px" />
-														</row>
-														<row>
-															<separator
-																bar="true">
-															</separator>
-															<separator
-																bar="true">
-															</separator>
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_kunName1"
-																value="${c:l('label_CustomerDialog_kunName1.value')}" />
-															<textbox
-																id="kunName1" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_kunName2"
-																value="${c:l('label_CustomerDialog_kunName2.value')}" />
-															<textbox
-																id="kunName2" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_kunOrt"
-																value="${c:l('label_CustomerDialog_kunOrt.value')}" />
-															<textbox
-																id="kunOrt" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_kunBranche"
-																value="${c:l('label_CustomerDialog_kunBranche.value')}" />
-															<listbox
-																id="kunBranche" width="100%" mold="select" rows="1" />
-														</row>
-													</rows>
-												</grid>
+
+												<groupbox
+													id="gb_address" mold="3d">
+													<caption
+														image="/images/icons/view.gif"
+														label="${c:l('panel_CustomerDialog_Address.title')}" />
+
+													<grid
+														fixedLayout="true" style="border:0px">
+														<columns>
+															<column
+																width="150px" />
+															<column />
+														</columns>
+														<rows>
+															<row>
+																<label
+																	id="label_CustomerDialog_kunNr"
+																	value="${c:l('label_CustomerDialog_kunNr.value')}" />
+																<textbox
+																	id="kunNr" width="150px" />
+															</row>
+															<row>
+																<separator
+																	bar="true">
+																</separator>
+																<separator
+																	bar="true">
+																</separator>
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_kunMatchcode"
+																	value="${c:l('label_CustomerDialog_kunMatchcode.value')}" />
+																<textbox
+																	id="kunMatchcode" width="150px" />
+															</row>
+															<row>
+																<separator
+																	bar="true">
+																</separator>
+																<separator
+																	bar="true">
+																</separator>
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_kunName1"
+																	value="${c:l('label_CustomerDialog_kunName1.value')}" />
+																<textbox
+																	id="kunName1" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_kunName2"
+																	value="${c:l('label_CustomerDialog_kunName2.value')}" />
+																<textbox
+																	id="kunName2" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_kunOrt"
+																	value="${c:l('label_CustomerDialog_kunOrt.value')}" />
+																<textbox
+																	id="kunOrt" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_kunBranche"
+																	value="${c:l('label_CustomerDialog_kunBranche.value')}" />
+																<listbox
+																	id="kunBranche" width="100%" mold="select" rows="1" />
+															</row>
+														</rows>
+													</grid>
+												</groupbox>
 											</panelchildren>
 										</panel>
 										<panel
-											id="panel_CustomerDialog_Addition"
-											title="${c:l('panel_CustomerDialog_Addition.title')}"
-											style="margin-bottom:10px" border="normal">
+											id="panel_CustomerDialog_Addition" border="none">
 											<panelchildren>
-												<grid fixedLayout="true"
-													style="border:0px">
-													<columns>
-														<column
-															width="150px" />
-														<column
-															width="100%" />
-													</columns>
-													<rows>
-														<row>
-															<label
-																id="label_CustomerDialog_kunMahnsperre"
-																value="${c:l('label_CustomerDialog_kunMahnsperre.value')}" />
-															<checkbox
-																id="kunMahnsperre" />
-														</row>
-													</rows>
-												</grid>
+
+												<groupbox
+													id="gb_Addition" mold="3d">
+													<caption
+														image="/images/icons/table.gif"
+														label="${c:l('panel_CustomerDialog_Addition.title')}" />
+
+													<grid
+														fixedLayout="true" style="border:0px">
+														<columns>
+															<column
+																width="150px" />
+															<column />
+														</columns>
+														<rows>
+															<row>
+																<label
+																	id="label_CustomerDialog_kunMahnsperre"
+																	value="${c:l('label_CustomerDialog_kunMahnsperre.value')}" />
+																<checkbox
+																	id="kunMahnsperre" />
+															</row>
+														</rows>
+													</grid>
+												</groupbox>
 											</panelchildren>
 										</panel>
 										<panel
-											id="panel_CustomerDialog_Phone"
-											title="${c:l('panel_CustomerDialog_Phone.title')}"
-											border="normal">
+											id="panel_CustomerDialog_Phone" border="none">
 											<panelchildren>
-												<grid fixedLayout="true"
-													style="border:0px">
-													<columns>
-														<column
-															width="150px" />
-														<column
-															width="100%" />
-													</columns>
-													<rows>
-														<row>
-															<label
-																id="label_CustomerDialog_kunPhone1"
-																value="${c:l('label_CustomerDialog_kunPhone1.value')}" />
-															<textbox
-																value="not used in example" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_kunPhone2"
-																value="${c:l('label_CustomerDialog_kunPhone2.value')}" />
-															<textbox
-																value="not used in example" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_kunMobile"
-																value="${c:l('label_CustomerDialog_kunMobile.value')}" />
-															<textbox
-																value="not used in example" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_kunFax1"
-																value="${c:l('label_CustomerDialog_kunFax1.value')}" />
-															<textbox
-																value="not used in example" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_kunFax2"
-																value="${c:l('label_CustomerDialog_kunFax2.value')}" />
-															<textbox
-																value="not used in example" width="99%" />
-														</row>
-													</rows>
-												</grid>
+
+												<groupbox id="gb_Phone"
+													mold="3d">
+													<caption 
+														image="/images/icons/telephone_16x16.png"
+														label="${c:l('panel_CustomerDialog_Phone.title')}" />
+
+													<grid
+														fixedLayout="true" style="border:0px">
+														<columns>
+															<column
+																width="150px" />
+															<column
+																width="100%" />
+														</columns>
+														<rows>
+															<row>
+																<label
+																	id="label_CustomerDialog_kunPhone1"
+																	value="${c:l('label_CustomerDialog_kunPhone1.value')}" />
+																<textbox
+																	value="not used in example" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_kunPhone2"
+																	value="${c:l('label_CustomerDialog_kunPhone2.value')}" />
+																<textbox
+																	value="not used in example" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_kunMobile"
+																	value="${c:l('label_CustomerDialog_kunMobile.value')}" />
+																<textbox
+																	value="not used in example" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_kunFax1"
+																	value="${c:l('label_CustomerDialog_kunFax1.value')}" />
+																<textbox
+																	value="not used in example" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_kunFax2"
+																	value="${c:l('label_CustomerDialog_kunFax2.value')}" />
+																<textbox
+																	value="not used in example" width="99%" />
+															</row>
+														</rows>
+													</grid>
+												</groupbox>
 											</panelchildren>
 										</panel>
 									</columnchildren>
@@ -243,118 +262,129 @@
 									<columnchildren width="50%"
 										style="padding: 5px">
 										<panel
-											id="panel_CustomerDialog_PayConditions"
-											title="${c:l('panel_CustomerDialog_PayConditions.title')}"
-											style="margin-bottom:10px" border="normal"
-											collapsible="true">
+											id="panel_CustomerDialog_PayConditions" border="none">
 											<panelchildren>
-												<grid fixedLayout="true"
-													style="border:0px">
-													<columns>
-														<column
-															width="150px" />
-														<column
-															width="100%" />
-													</columns>
-													<rows>
-														<row>
-															<label
-																id="label_CustomerDialog_kunPayCondition"
-																value="${c:l('label_CustomerDialog_kunPayCondition.value')}" />
-															<listbox
-																mold="select" rows="1" width="100%" />
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_kunBonitaet"
-																value="${c:l('label_CustomerDialog_kunBonitaet.value')}" />
-															<intbox
-																id="intbox_CustomerDialog_kunBonitaet" width="40px" />
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_AmountLastYear"
-																value="${c:l('label_CustomerDialog_AmountLastYear.value')}" />
-															<textbox
-																value="not used in example" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_AmountCurrentYear"
-																value="${c:l('label_CustomerDialog_AmountCurrentYear.value')}" />
-															<textbox
-																value="not used in example" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_AmountCurrentMonth"
-																value="${c:l('label_CustomerDialog_AmountCurrentMonth.value')}" />
-															<textbox
-																value="not used in example" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_AmountLastInvoice"
-																value="${c:l('label_CustomerDialog_AmountLastInvoice.value')}" />
-															<textbox
-																value="not used in example" width="99%" />
-														</row>
-													</rows>
-												</grid>
+
+												<groupbox
+													id="gb_PayConditions" mold="3d">
+													<caption
+														image="/images/icons/money_16x16.png"
+														label="${c:l('panel_CustomerDialog_PayConditions.title')}" />
+
+													<grid
+														fixedLayout="true" style="border:0px">
+														<columns>
+															<column
+																width="150px" />
+															<column
+																width="100%" />
+														</columns>
+														<rows>
+															<row>
+																<label
+																	id="label_CustomerDialog_kunPayCondition"
+																	value="${c:l('label_CustomerDialog_kunPayCondition.value')}" />
+																<listbox
+																	mold="select" rows="1" width="100%" />
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_kunBonitaet"
+																	value="${c:l('label_CustomerDialog_kunBonitaet.value')}" />
+																<intbox
+																	id="intbox_CustomerDialog_kunBonitaet" width="40px" />
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_AmountLastYear"
+																	value="${c:l('label_CustomerDialog_AmountLastYear.value')}" />
+																<textbox
+																	value="not used in example" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_AmountCurrentYear"
+																	value="${c:l('label_CustomerDialog_AmountCurrentYear.value')}" />
+																<textbox
+																	value="not used in example" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_AmountCurrentMonth"
+																	value="${c:l('label_CustomerDialog_AmountCurrentMonth.value')}" />
+																<textbox
+																	value="not used in example" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_AmountLastInvoice"
+																	value="${c:l('label_CustomerDialog_AmountLastInvoice.value')}" />
+																<textbox
+																	value="not used in example" width="99%" />
+															</row>
+														</rows>
+													</grid>
+												</groupbox>
 											</panelchildren>
 										</panel>
 
 										<panel
-											id="panel_CustomerDialog_Addition2"
-											title="${c:l('panel_CustomerDialog_Addition2.title')}"
-											border="normal">
+											id="panel_CustomerDialog_Addition2" border="none">
 											<panelchildren>
-												<grid fixedLayout="true"
-													style="border:0px">
-													<columns>
-														<column
-															width="150px" />
-														<column
-															width="100%" />
-													</columns>
-													<rows>
-														<row>
-															<label
-																id="label_CustomerDialog_Addition1"
-																value="${c:l('label_CustomerDialog_Addition1.value')}" />
-															<textbox
-																value="not used in example" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_Addition2"
-																value="${c:l('label_CustomerDialog_Addition2.value')}" />
-															<textbox
-																value="not used in example" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_Addition3"
-																value="${c:l('label_CustomerDialog_Addition3.value')}" />
-															<textbox
-																value="not used in example" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_Addition4"
-																value="${c:l('label_CustomerDialog_Addition4.value')}" />
-															<textbox
-																value="not used in example" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_CustomerDialog_Addition5"
-																value="${c:l('label_CustomerDialog_Addition5.value')}" />
-															<textbox
-																value="not used in example" width="99%" />
-														</row>
-													</rows>
-												</grid>
+
+												<groupbox
+													id="gb_Addition2" mold="3d">
+													<caption
+														image="/images/icons/text_signature_16x16.png"
+														label="${c:l('panel_CustomerDialog_Addition2.title')}" />
+
+													<grid
+														fixedLayout="true" style="border:0px">
+														<columns>
+															<column
+																width="150px" />
+															<column
+																width="100%" />
+														</columns>
+														<rows>
+															<row>
+																<label
+																	id="label_CustomerDialog_Addition1"
+																	value="${c:l('label_CustomerDialog_Addition1.value')}" />
+																<textbox
+																	value="not used in example" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_Addition2"
+																	value="${c:l('label_CustomerDialog_Addition2.value')}" />
+																<textbox
+																	value="not used in example" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_Addition3"
+																	value="${c:l('label_CustomerDialog_Addition3.value')}" />
+																<textbox
+																	value="not used in example" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_Addition4"
+																	value="${c:l('label_CustomerDialog_Addition4.value')}" />
+																<textbox
+																	value="not used in example" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_CustomerDialog_Addition5"
+																	value="${c:l('label_CustomerDialog_Addition5.value')}" />
+																<textbox
+																	value="not used in example" width="99%" />
+															</row>
+														</rows>
+													</grid>
+												</groupbox>
 											</panelchildren>
 										</panel>
 									</columnchildren>
@@ -390,3 +420,6 @@
 	</window>
 </zk>
 
+<!-- 
+	Panel style="margin-bottom:5px"
+-->

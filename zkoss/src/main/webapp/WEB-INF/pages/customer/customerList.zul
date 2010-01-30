@@ -13,13 +13,18 @@
 		<style>
 			body { padding: 0 0; /* 0 padding on top and bottom and 0
 			padding on right and left */ }
+
+			<!-- Toolbar background color -->
+			<!-- .z-toolbar { background: #FFFFFF }  -->
+			<!-- Paging background color -->
+			<!-- .z-paging { background: #FFFFFF }  -->
 		</style>
 
 		<panel id="panel_CustomerList"
 			title="${c:l('panel_CustomerList.title')}" border="none" />
 
 		<toolbar>
-			<button id="btnHelp" image="/images/icons/light_16x16.gif"
+			<button id="btnHelp" image="/images/icons/light_16x16.gif" 
 				tooltiptext="${c:l('btnHelp.tooltiptext')}" />
 			<button id="button_CustomerList_NewCustomer"
 				image="/images/icons/btn_new2_16x16.gif"

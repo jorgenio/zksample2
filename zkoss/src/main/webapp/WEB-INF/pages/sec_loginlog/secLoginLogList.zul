@@ -27,7 +27,7 @@
 				</column>
 
 				<!-- Addtionally Buttons -->
-				<column align="center">
+				<column align="right">
 					<hbox>
 						<button
 							id="button_SecLoginlogList_DeleteLocalIPs"

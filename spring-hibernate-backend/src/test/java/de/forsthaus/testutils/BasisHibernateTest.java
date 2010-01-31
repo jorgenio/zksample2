@@ -29,13 +29,17 @@ abstract public class BasisHibernateTest extends AbstractTransactionalJUnit4Spri
 
 	@BeforeTransaction
 	public void startNewTransaction() throws TransactionException {
-		getHibernateTemplate().getSessionFactory().getStatistics().setStatisticsEnabled(true);
-		getHibernateTemplate().getSessionFactory().getStatistics().clear();
+		if (LOG.isDebugEnabled()) {
+			getHibernateTemplate().getSessionFactory().getStatistics().setStatisticsEnabled(true);
+			getHibernateTemplate().getSessionFactory().getStatistics().clear();
+		}
 	}
 
 	@AfterTransaction
 	public void endTransaction() {
-		printStatistic(getHibernateTemplate().getSessionFactory().getStatistics());
+		if (LOG.isDebugEnabled()) {
+			printStatistic(getHibernateTemplate().getSessionFactory().getStatistics());
+		}
 	}
 
 	private void printStatistic(Statistics stats) {
@@ -43,53 +47,53 @@ abstract public class BasisHibernateTest extends AbstractTransactionalJUnit4Spri
 		// the number of times Hibernate asked for a connection, and
 		// NOT the number of connections (which is determined by your
 		// pooling mechanism).
-		System.out.println("ConnectCount " + stats.getConnectCount());
+		LOG.debug("ConnectCount " + stats.getConnectCount());
 		// Number of flushes done on the session (either by client code or
 		// by hibernate).
-		System.out.println("FlushCount " + stats.getFlushCount());
+		LOG.debug("FlushCount " + stats.getFlushCount());
 		// The number of completed transactions (failed and successful).
-		System.out.println("TransactionCount " + stats.getTransactionCount());
+		LOG.debug("TransactionCount " + stats.getTransactionCount());
 		// The number of transactions completed without failure
-		System.out.println("SuccessfulTransactionCount " + stats.getSuccessfulTransactionCount());
+		LOG.debug("SuccessfulTransactionCount " + stats.getSuccessfulTransactionCount());
 		// The number of sessions your code has opened.
-		System.out.println("SessionOpenCount " + stats.getSessionOpenCount());
+		LOG.debug("SessionOpenCount " + stats.getSessionOpenCount());
 		// The number of sessions your code has closed.
-		System.out.println("SessionCloseCount " + stats.getSessionCloseCount());
+		LOG.debug("SessionCloseCount " + stats.getSessionCloseCount());
 		// All of the queries that have executed.
 		String[] queries = stats.getQueries();
-		System.out.println("Queries " + queries.length);
+		LOG.debug("Queries " + queries.length);
 		for (int i = 0; i < queries.length; i++) {
-			System.out.println(i + " - " + queries[i]);
+			LOG.debug(i + " - " + queries[i]);
 		}
 		// Total number of queries executed.
-		System.out.println("QueryExecutionCount " + stats.getQueryExecutionCount());
+		LOG.debug("QueryExecutionCount " + stats.getQueryExecutionCount());
 		// Time of the slowest query executed.
-		System.out.println("QueryExecutionMaxTime " + stats.getQueryExecutionMaxTime());
+		LOG.debug("QueryExecutionMaxTime " + stats.getQueryExecutionMaxTime());
 
 		// There are also a lot of values related to the retrieval of your
 		// objects and collections of objects (directly or via association):
 
 		// the number of collections fetched from the DB.
-		System.out.println("CollectionFetchCount " + stats.getCollectionFetchCount());
+		LOG.debug("CollectionFetchCount " + stats.getCollectionFetchCount());
 		// The number of collections loaded from the DB.
-		System.out.println("CollectionLoadCount " + stats.getCollectionLoadCount());
+		LOG.debug("CollectionLoadCount " + stats.getCollectionLoadCount());
 		// The number of collections that were rebuilt
-		System.out.println("CollectionRecreateCount " + stats.getCollectionRecreateCount());
+		LOG.debug("CollectionRecreateCount " + stats.getCollectionRecreateCount());
 		// The number of collections that were 'deleted' batch.
-		System.out.println("CollectionRemoveCount " + stats.getCollectionRemoveCount());
+		LOG.debug("CollectionRemoveCount " + stats.getCollectionRemoveCount());
 		// The number of collections that were updated batch.
-		System.out.println("CollectionUpdateCount " + stats.getCollectionUpdateCount());
+		LOG.debug("CollectionUpdateCount " + stats.getCollectionUpdateCount());
 
 		// The number of your objects deleted.
-		System.out.println("EntityDeleteCount " + stats.getEntityDeleteCount());
+		LOG.debug("EntityDeleteCount " + stats.getEntityDeleteCount());
 		// The number of your objects fetched.
-		System.out.println("EntityFetchCount " + stats.getEntityFetchCount());
+		LOG.debug("EntityFetchCount " + stats.getEntityFetchCount());
 		// The number of your objects actually loaded (fully populated).
-		System.out.println("EntityLoadCount " + stats.getEntityLoadCount());
+		LOG.debug("EntityLoadCount " + stats.getEntityLoadCount());
 		// The number of your objects inserted.
-		System.out.println("EntityInsertCount " + stats.getEntityInsertCount());
+		LOG.debug("EntityInsertCount " + stats.getEntityInsertCount());
 		// The number of your object updated.
-		System.out.println("EntityUpdateCount " + stats.getEntityUpdateCount());
+		LOG.debug("EntityUpdateCount " + stats.getEntityUpdateCount());
 
 		// In addition to all of this, there is information about cache
 		// performance (stolen from Hibernate documentation):
@@ -98,7 +102,7 @@ abstract public class BasisHibernateTest extends AbstractTransactionalJUnit4Spri
 		double queryCacheMissCount = stats.getQueryCacheMissCount();
 		double queryCacheHitRatio = queryCacheHitCount / (queryCacheHitCount + queryCacheMissCount);
 
-		System.out.println(queryCacheHitRatio);
+		LOG.debug(queryCacheHitRatio);
 
 	}
 }

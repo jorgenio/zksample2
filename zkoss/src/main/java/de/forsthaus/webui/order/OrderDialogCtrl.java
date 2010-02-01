@@ -83,7 +83,8 @@ import de.forsthaus.webui.util.pagging.PagedListWrapper;
 public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -8352659530536077973L;
-	private transient static final Logger logger = Logger.getLogger(OrderDialogCtrl.class);
+	private transient static final Logger logger = Logger
+			.getLogger(OrderDialogCtrl.class);
 
 	private transient PagedListWrapper<Orderposition> plwOrderpositions;
 	private transient PagedListWrapper<Customer> plwCustomers;
@@ -191,7 +192,9 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doCheckRights();
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(),
+				btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave,
+				btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -225,16 +228,28 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		listheader_OrderPosList2_Orderpos_No.setSortAscending(new FieldComparator("aupId", true));
-		listheader_OrderPosList2_Orderpos_No.setSortDescending(new FieldComparator("aupId", false));
-		listheader_OrderPosList2_Shorttext.setSortAscending(new FieldComparator("article.artKurzbezeichnung", true));
-		listheader_OrderPosList2_Shorttext.setSortDescending(new FieldComparator("article.artKurzbezeichnung", false));
-		listheader_OrderPosList2_Count.setSortAscending(new FieldComparator("aupMenge", true));
-		listheader_OrderPosList2_Count.setSortDescending(new FieldComparator("aupMenge", false));
-		listheader_OrderPosList2_SinglePrice.setSortAscending(new FieldComparator("aupEinzelwert", true));
-		listheader_OrderPosList2_SinglePrice.setSortDescending(new FieldComparator("aupEinzelwert", false));
-		listheader_OrderPosList2_WholePrice.setSortAscending(new FieldComparator("aupGesamtwert", true));
-		listheader_OrderPosList2_WholePrice.setSortDescending(new FieldComparator("aupGesamtwert", false));
+		listheader_OrderPosList2_Orderpos_No
+				.setSortAscending(new FieldComparator("aupId", true));
+		listheader_OrderPosList2_Orderpos_No
+				.setSortDescending(new FieldComparator("aupId", false));
+		listheader_OrderPosList2_Shorttext
+				.setSortAscending(new FieldComparator(
+						"article.artKurzbezeichnung", true));
+		listheader_OrderPosList2_Shorttext
+				.setSortDescending(new FieldComparator(
+						"article.artKurzbezeichnung", false));
+		listheader_OrderPosList2_Count.setSortAscending(new FieldComparator(
+				"aupMenge", true));
+		listheader_OrderPosList2_Count.setSortDescending(new FieldComparator(
+				"aupMenge", false));
+		listheader_OrderPosList2_SinglePrice
+				.setSortAscending(new FieldComparator("aupEinzelwert", true));
+		listheader_OrderPosList2_SinglePrice
+				.setSortDescending(new FieldComparator("aupEinzelwert", false));
+		listheader_OrderPosList2_WholePrice
+				.setSortAscending(new FieldComparator("aupGesamtwert", true));
+		listheader_OrderPosList2_WholePrice
+				.setSortDescending(new FieldComparator("aupGesamtwert", false));
 
 		paging_ListBoxOrderOrderPositions.setPageSize(pageSizeOrderPosition);
 		paging_ListBoxOrderOrderPositions.setDetailed(true);
@@ -242,19 +257,23 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// Set the ListModel for the orderPositions.
 		if (getOrder() != null) {
 			if (!getOrder().isNew()) {
-				HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(Orderposition.class,
-						pageSizeOrderPosition);
-				soOrderPosition.addFilter(new Filter("order", getOrder(), Filter.OP_EQUAL));
+				HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(
+						Orderposition.class, pageSizeOrderPosition);
+				soOrderPosition.addFilter(new Filter("order", getOrder(),
+						Filter.OP_EQUAL));
 				// deeper loading of the relation to prevent the lazy
 				// loading problem.
 				soOrderPosition.addFetch("article");
 
 				// Set the ListModel.
-				getPlwOrderpositions().init(soOrderPosition, listBoxOrderOrderPositions, paging_ListBoxOrderOrderPositions);
+				getPlwOrderpositions().init(soOrderPosition,
+						listBoxOrderOrderPositions,
+						paging_ListBoxOrderOrderPositions);
 
 			}
 		}
-		listBoxOrderOrderPositions.setItemRenderer(new OrderpositionListModelItemRenderer());
+		listBoxOrderOrderPositions
+				.setItemRenderer(new OrderpositionListModelItemRenderer());
 
 		// set Field Properties
 		doSetFieldProperties();
@@ -285,12 +304,15 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		btnHelp.setVisible(workspace.isAllowed("button_OrderDialog_btnHelp"));
 		btnNew.setVisible(workspace.isAllowed("button_OrderDialog_btnNew"));
 		btnEdit.setVisible(workspace.isAllowed("button_OrderDialog_btnEdit"));
-		btnDelete.setVisible(workspace.isAllowed("button_OrderDialog_btnDelete"));
+		btnDelete.setVisible(workspace
+				.isAllowed("button_OrderDialog_btnDelete"));
 		btnSave.setVisible(workspace.isAllowed("button_OrderDialog_btnSave"));
 		btnClose.setVisible(workspace.isAllowed("button_OrderDialog_btnClose"));
 
-		button_OrderDialog_PrintOrder.setVisible(workspace.isAllowed("button_OrderDialog_PrintOrder"));
-		button_OrderDialog_NewOrderPosition.setVisible(workspace.isAllowed("button_OrderDialog_NewOrderPosition"));
+		button_OrderDialog_PrintOrder.setVisible(workspace
+				.isAllowed("button_OrderDialog_PrintOrder"));
+		button_OrderDialog_NewOrderPosition.setVisible(workspace
+				.isAllowed("button_OrderDialog_NewOrderPosition"));
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -370,7 +392,8 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+				"INFORMATION", true);
 	}
 
 	/**
@@ -438,8 +461,11 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		// Get the real path for the report
-		String repSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reports/order/Test_Report.jasper");
-		String subDir = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reports/order") + "/";
+		String repSrc = Sessions.getCurrent().getWebApp().getRealPath(
+				"/WEB-INF/reports/order/Test_Report.jasper");
+		String subDir = Sessions.getCurrent().getWebApp().getRealPath(
+				"/WEB-INF/reports/order")
+				+ "/";
 
 		// preparing parameters. The Subreports resolved by path and the
 		// ReportName in the reports self.
@@ -463,15 +489,18 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 			reportName = "/de/forsthaus/webui/reports/order/Test_Report.jrxml";
 			bol = new JRreportCompiler().compileReport(reportName);
-			System.out.println("Report: " + reportName + " = compiled : " + bol);
+			System.out
+					.println("Report: " + reportName + " = compiled : " + bol);
 
 			reportName = "/de/forsthaus/webui/reports/order/Test_Report_subreportAuftrag.jrxml";
 			bol = new JRreportCompiler().compileReport(reportName);
-			System.out.println("Report: " + reportName + " = compiled : " + bol);
+			System.out
+					.println("Report: " + reportName + " = compiled : " + bol);
 
 			reportName = "/de/forsthaus/webui/reports/order/Test_Report_subreportAuftrag_subreportAuftragposition.jrxml";
 			bol = new JRreportCompiler().compileReport(reportName);
-			System.out.println("Report: " + reportName + " = compiled : " + bol);
+			System.out
+					.println("Report: " + reportName + " = compiled : " + bol);
 
 			// JRDataSource ds = new
 			// TestReport().getBeanCollectionByAuftrag(getOrder());
@@ -488,7 +517,8 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 
 	 * @param event
 	 */
-	public void onClick$button_OrderDialog_NewOrderPosition(Event event) throws InterruptedException {
+	public void onClick$button_OrderDialog_NewOrderPosition(Event event)
+			throws InterruptedException {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
@@ -517,16 +547,19 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// call the zul-file with the parameters packed in a map
 		try {
-			Executions.createComponents("/WEB-INF/pages/order/orderPositionDialog.zul", null, map);
+			Executions.createComponents(
+					"/WEB-INF/pages/order/orderPositionDialog.zul", null, map);
 		} catch (Exception e) {
-			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
+			logger.error("onOpenWindow:: error opening window / "
+					+ e.getMessage());
 
 			// Show a error box
 			String msg = e.getMessage();
 			String title = Labels.getLabel("message_Error");
 
 			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
+			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK,
+					"ERROR", true);
 
 		}
 	}
@@ -551,12 +584,14 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
+			String msg = Labels
+					.getLabel("message_Data_Modified_Save_Data_YesNo");
 			String title = Labels.getLabel("message_Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
-					new EventListener() {
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
+					| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION,
+					true, new EventListener() {
 						public void onEvent(Event evt) {
 							switch (((Integer) evt.getData()).intValue()) {
 							case MultiLineMessageBox.YES:
@@ -611,8 +646,11 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 			// fill the components with the data
 			if (anOrder.getCustomer() != null) {
 				kunNr.setValue(anOrder.getCustomer().getKunNr());
-				kunName1.setValue(anOrder.getCustomer().getKunName1() + " " + anOrder.getCustomer().getKunName2() + ", "
-						+ anOrder.getCustomer().getKunOrt());
+				String substr = (anOrder.getCustomer().getKunName1() + " "
+						+ anOrder.getCustomer().getKunName2() + ", " + anOrder
+						.getCustomer().getKunOrt());
+				substr = StringUtils.substring(substr, 0, 49);
+				kunName1.setValue(substr);
 
 			}
 			aufNr.setValue(anOrder.getAufNr());
@@ -717,11 +755,13 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final Order order = getOrder();
 
 		// Show a confirm box
-		String msg = Labels.getLabel("message.question.are_you_sure_to_delete_this_record");
+		String msg = Labels
+				.getLabel("message.question.are_you_sure_to_delete_this_record");
 		String title = Labels.getLabel("message_Deleting_Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
+		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
+				| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
 				new EventListener() {
 					public void onEvent(Event evt) {
 						switch (((Integer) evt.getData()).intValue()) {
@@ -738,7 +778,8 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 						getOrderService().delete(order);
 
 						// now synchronize the listBox in the parent zul-file
-						ListModelList lml = (ListModelList) listBoxOrder.getListModel();
+						ListModelList lml = (ListModelList) listBoxOrder
+								.getListModel();
 
 						// Check if the branch object is new or updated
 						// -1 means that the obj is not in the list, so it's
@@ -821,7 +862,8 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		aufBezeichnung.setValue("");
 
 		// clear the listbox
-		ListModelList lml = (ListModelList) listBoxOrderOrderPositions.getModel();
+		ListModelList lml = (ListModelList) listBoxOrderOrderPositions
+				.getModel();
 		lml.clear();
 
 		// doSetValidation();
@@ -861,7 +903,8 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 			// String message = e.getCause().getMessage();
 			String title = Labels.getLabel("message_Error");
 			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+					"ERROR", true);
 
 			// Reset to init values
 			doResetInitValues();
@@ -900,7 +943,8 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 
 	 * @param event
 	 */
-	public void onDoubleClickedOrderPositionItem(Event event) throws InterruptedException {
+	public void onDoubleClickedOrderPositionItem(Event event)
+			throws InterruptedException {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
@@ -911,7 +955,8 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		if (item != null) {
 			// CAST AND STORE THE SELECTED OBJECT
-			Orderposition anOrderposition = (Orderposition) item.getAttribute("data");
+			Orderposition anOrderposition = (Orderposition) item
+					.getAttribute("data");
 
 			/*
 			 * We can call our Dialog zul-file with parameters. So we can call
@@ -934,16 +979,20 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 			// call the zul-file with the parameters packed in a map
 			try {
-				Executions.createComponents("/WEB-INF/pages/order/orderPositionDialog.zul", null, map);
+				Executions.createComponents(
+						"/WEB-INF/pages/order/orderPositionDialog.zul", null,
+						map);
 			} catch (Exception e) {
-				logger.error("onOpenWindow:: error opening window / " + e.getMessage());
+				logger.error("onOpenWindow:: error opening window / "
+						+ e.getMessage());
 
 				// Show a error box
 				String msg = e.getMessage();
 				String title = Labels.getLabel("message_Error");
 
 				MultiLineMessageBox.doSetTemplate();
-				MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
+				MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK,
+						"ERROR", true);
 
 			}
 		}
@@ -984,7 +1033,8 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		Customer aCustomer = getCustomerService().getNewCustomer();
 		aCustomer.setOffice(getUserWorkspace().getOffice()); // init
 		// customer.setBranche(Workspace.getBranche()); // init
-		aCustomer.setBranche(getBrancheService().getBrancheById(new Integer(1033).longValue())); // init
+		aCustomer.setBranche(getBrancheService().getBrancheById(
+				new Integer(1033).longValue())); // init
 		aCustomer.setKunMahnsperre(false); // init
 
 		/*
@@ -1002,7 +1052,8 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		 */
 
 		// call the zul-file with the parameters packed in a map
-		Executions.createComponents("/WEB-INF/pages/customer/customerDialog.zul", null, map);
+		Executions.createComponents(
+				"/WEB-INF/pages/customer/customerDialog.zul", null, map);
 	}
 
 	/**
@@ -1018,24 +1069,29 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doSearch();
 	}
 
-	public void onOpen$bandbox_OrderDialog_CustomerSearch(Event event) throws Exception {
+	public void onOpen$bandbox_OrderDialog_CustomerSearch(Event event)
+			throws Exception {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<Customer> soCustomer = new HibernateSearchObject<Customer>(Customer.class);
+		HibernateSearchObject<Customer> soCustomer = new HibernateSearchObject<Customer>(
+				Customer.class);
 		soCustomer.addSort("kunName1", false);
 
 		// set the paging params
-		paging_OrderDialog_CustomerSearchList.setPageSize(pageSizeSearchCustomer);
+		paging_OrderDialog_CustomerSearchList
+				.setPageSize(pageSizeSearchCustomer);
 		paging_OrderDialog_CustomerSearchList.setDetailed(true);
 
 		// Set the ListModel.
-		getPlwCustomers().init(soCustomer, listBoxCustomerSearch, paging_OrderDialog_CustomerSearchList);
+		getPlwCustomers().init(soCustomer, listBoxCustomerSearch,
+				paging_OrderDialog_CustomerSearchList);
 		// set the itemRenderer
-		listBoxCustomerSearch.setItemRenderer(new OrderSearchCustomerListModelItemRenderer());
+		listBoxCustomerSearch
+				.setItemRenderer(new OrderSearchCustomerListModelItemRenderer());
 	}
 
 	/**
@@ -1048,30 +1104,41 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private void doSearch() {
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<Customer> soCustomer = new HibernateSearchObject<Customer>(Customer.class);
+		HibernateSearchObject<Customer> soCustomer = new HibernateSearchObject<Customer>(
+				Customer.class);
 
 		if (StringUtils.isNotEmpty(tb_Orders_SearchCustNo.getValue())) {
-			soCustomer.addFilter(new Filter("kunNr", tb_Orders_SearchCustNo.getValue(), Filter.OP_EQUAL));
+			soCustomer.addFilter(new Filter("kunNr", tb_Orders_SearchCustNo
+					.getValue(), Filter.OP_EQUAL));
 		}
 		if (StringUtils.isNotEmpty(tb_Orders_CustSearchMatchcode.getValue())) {
-			soCustomer.addFilter(new Filter("kunMatchcode", "%" + tb_Orders_CustSearchMatchcode.getValue() + "%", Filter.OP_ILIKE));
+			soCustomer.addFilter(new Filter("kunMatchcode", "%"
+					+ tb_Orders_CustSearchMatchcode.getValue() + "%",
+					Filter.OP_ILIKE));
 		}
 		if (StringUtils.isNotEmpty(tb_Orders_SearchCustName1.getValue())) {
-			soCustomer.addFilter(new Filter("kunName1", "%" + tb_Orders_SearchCustName1.getValue() + "%", Filter.OP_ILIKE));
+			soCustomer.addFilter(new Filter("kunName1", "%"
+					+ tb_Orders_SearchCustName1.getValue() + "%",
+					Filter.OP_ILIKE));
 		}
 		if (StringUtils.isNotEmpty(tb_Orders_SearchCustCity.getValue())) {
-			soCustomer.addFilter(new Filter("kunOrt", "%" + tb_Orders_SearchCustCity.getValue() + "%", Filter.OP_ILIKE));
+			soCustomer.addFilter(new Filter("kunOrt", "%"
+					+ tb_Orders_SearchCustCity.getValue() + "%",
+					Filter.OP_ILIKE));
 		}
 		soCustomer.addSort("kunName1", false);
 
 		// set the paging params
-		paging_OrderDialog_CustomerSearchList.setPageSize(pageSizeSearchCustomer);
+		paging_OrderDialog_CustomerSearchList
+				.setPageSize(pageSizeSearchCustomer);
 		paging_OrderDialog_CustomerSearchList.setDetailed(true);
 
 		// Set the ListModel.
-		getPlwCustomers().init(soCustomer, listBoxCustomerSearch, paging_OrderDialog_CustomerSearchList);
+		getPlwCustomers().init(soCustomer, listBoxCustomerSearch,
+				paging_OrderDialog_CustomerSearchList);
 		// set the itemRenderer
-		listBoxCustomerSearch.setItemRenderer(new OrderSearchCustomerListModelItemRenderer());
+		listBoxCustomerSearch
+				.setItemRenderer(new OrderSearchCustomerListModelItemRenderer());
 
 	}
 
@@ -1095,8 +1162,11 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 			setCustomer(aCustomer);
 
 			kunNr.setValue(getCustomer().getKunNr());
-			bandbox_OrderDialog_CustomerSearch.setValue(getCustomer().getKunNr());
-			kunName1.setValue(getCustomer().getKunName1() + " " + getCustomer().getKunName2() + ", " + getCustomer().getKunOrt());
+			bandbox_OrderDialog_CustomerSearch.setValue(getCustomer()
+					.getKunNr());
+			kunName1.setValue(getCustomer().getKunName1() + " "
+					+ getCustomer().getKunName2() + ", "
+					+ getCustomer().getKunOrt());
 		}
 
 		// close the bandbox
@@ -1164,7 +1234,8 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		this.listBoxOrderOrderPositions = listBoxOrderOrderPositions;
 	}
 
-	public void setPlwOrderpositions(PagedListWrapper<Orderposition> plwOrderpositions) {
+	public void setPlwOrderpositions(
+			PagedListWrapper<Orderposition> plwOrderpositions) {
 		this.plwOrderpositions = plwOrderpositions;
 	}
 

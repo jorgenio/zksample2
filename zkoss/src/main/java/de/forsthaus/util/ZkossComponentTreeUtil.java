@@ -33,6 +33,7 @@ import org.zkoss.zk.ui.Component;
  * 
  */
 public class ZkossComponentTreeUtil {
+
 	static public CharSequence getZulTree(Component component) {
 		return new ZkossComponentTreeUtil().getZulTreeImpl(component);
 	}
@@ -46,16 +47,20 @@ public class ZkossComponentTreeUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	private StringBuilder getZulTreeImpl(Component component, StringBuilder result, int tiefe) {
-		++tiefe;
-		result.append(StringUtils.leftPad("", tiefe << 2) + "-> " + component + "\n");
+	private StringBuilder getZulTreeImpl(Component component,
+			StringBuilder result, int depth) {
+		++depth;
+		result.append(StringUtils.leftPad("", depth << 2) + "-> " + component
+				+ "\n");
 		if (component.getChildren() != null) {
-			for (Iterator iterator = component.getChildren().iterator(); iterator.hasNext();) {
-				getZulTreeImpl((Component) iterator.next(), result, tiefe);
+			for (Iterator iterator = component.getChildren().iterator(); iterator
+					.hasNext();) {
+				getZulTreeImpl((Component) iterator.next(), result, depth);
 			}
 		}
 
-		result.append(StringUtils.leftPad("", tiefe << 2) + "<- " + component + "\n");
+		result.append(StringUtils.leftPad("", depth << 2) + "<- " + component
+				+ "\n");
 		return result;
 	}
 }

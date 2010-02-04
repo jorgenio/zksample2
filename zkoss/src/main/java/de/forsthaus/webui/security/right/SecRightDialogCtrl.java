@@ -60,7 +60,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
 public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -546886879998950467L;
-	private transient static final Logger logger = Logger.getLogger(SecRightDialogCtrl.class);
+	private transient static final Logger logger = Logger
+			.getLogger(SecRightDialogCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -91,6 +92,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	protected transient Button btnEdit; // autowired
 	protected transient Button btnDelete; // autowired
 	protected transient Button btnSave; // autowired
+	protected transient Button btnCancel; // autowired
 	protected transient Button btnClose; // autowired
 
 	// ServiceDAOs / Domain Classes
@@ -121,7 +123,9 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(),
+				btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave,
+				btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -149,7 +153,8 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// if available, select the object
 		ListModelList lml = (ListModelList) rigType.getModel();
-		SecTyp typ = getSecurityService().getTypById(right.getRigType().intValue());
+		SecTyp typ = getSecurityService().getTypById(
+				right.getRigType().intValue());
 
 		if (right.isNew()) {
 			rigType.setSelectedIndex(-1);
@@ -227,7 +232,8 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+				"INFORMATION", true);
 	}
 
 	/**
@@ -257,6 +263,20 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		doDelete();
+	}
+
+	/**
+	 * when the "cancel" button is clicked. <br>
+	 * 
+	 * @param event
+	 */
+	public void onClick$btnCancel(Event event) {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		doCancel();
 	}
 
 	/**
@@ -299,12 +319,14 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
+			String msg = Labels
+					.getLabel("message_Data_Modified_Save_Data_YesNo");
 			String title = Labels.getLabel("message_Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
-					new EventListener() {
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
+					| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION,
+					true, new EventListener() {
 						public void onEvent(Event evt) {
 							switch (((Integer) evt.getData()).intValue()) {
 							case MultiLineMessageBox.YES:
@@ -324,6 +346,16 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		secRightDialogWindow.onClose();
+	}
+
+	/**
+	 * Cancel the actual operation. <br>
+	 * <br>
+	 * Resets to the original status.<br>
+	 * 
+	 */
+	private void doCancel() {
+		doResetInitValues();
 	}
 
 	/**
@@ -478,11 +510,14 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final SecRight aRight = getRight();
 
 		// Show a confirm box
-		String msg = Labels.getLabel("message.question.are_you_sure_to_delete_this_record") + "\n\n --> " + aRight.getRigName();
+		String msg = Labels
+				.getLabel("message.question.are_you_sure_to_delete_this_record")
+				+ "\n\n --> " + aRight.getRigName();
 		String title = Labels.getLabel("message_Deleting_Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
+		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
+				| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
 				new EventListener() {
 					public void onEvent(Event evt) {
 						switch (((Integer) evt.getData()).intValue()) {
@@ -499,7 +534,8 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 						getSecurityService().delete(aRight);
 
 						// now synchronize the listBox
-						ListModelList lml = (ListModelList) listBoxSecRights.getListModel();
+						ListModelList lml = (ListModelList) listBoxSecRights
+								.getListModel();
 
 						// Check if the object is new or updated
 						// -1 means that the obj is not in the list, so it's
@@ -617,7 +653,8 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 			// String message = e.getCause().getMessage();
 			String title = Labels.getLabel("message_Error");
 			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+					"ERROR", true);
 
 			// Reset to init values
 			doResetInitValues();

@@ -77,10 +77,12 @@ import de.forsthaus.webui.util.pagging.PagedListWrapper;
  * @author sgerth
  * 
  */
-public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable {
+public class OrderPositionDialogCtrl extends GFCBaseCtrl implements
+		Serializable {
 
 	private static final long serialVersionUID = -8352659530536077973L;
-	private transient static final Logger logger = Logger.getLogger(OrderPositionDialogCtrl.class);
+	private transient static final Logger logger = Logger
+			.getLogger(OrderPositionDialogCtrl.class);
 
 	private transient PagedListWrapper<Orderposition> plwOrderpositions;
 	private transient PagedListWrapper<Article> plwArticles;
@@ -145,6 +147,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	protected transient Button btnEdit; // autowire
 	protected transient Button btnDelete; // autowire
 	protected transient Button btnSave; // autowire
+	protected transient Button btnCancel; // autowire
 	protected transient Button btnClose; // autowire
 
 	protected transient Button btnHelp; // autowire
@@ -175,7 +178,8 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 * @throws Exception
 	 */
-	public void onCreate$orderPositionDialogWindow(Event event) throws Exception {
+	public void onCreate$orderPositionDialogWindow(Event event)
+			throws Exception {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
@@ -185,7 +189,9 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 		doCheckRights();
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_RightPrefix, btnNew, btnEdit, btnDelete, btnSave, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(),
+				btnCtroller_RightPrefix, btnNew, btnEdit, btnDelete, btnSave,
+				btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -214,7 +220,8 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 		// to it and can synchronize the shown data when we do insert, edit or
 		// delete orderPositions here.
 		if (args.containsKey("listBoxOrderOrderPositions")) {
-			listBoxOrderOrderPositions = (Listbox) args.get("listBoxOrderOrderPositions");
+			listBoxOrderOrderPositions = (Listbox) args
+					.get("listBoxOrderOrderPositions");
 		} else {
 			listBoxOrderOrderPositions = null;
 		}
@@ -236,13 +243,20 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 		paging_ListBoxArticleSearch.setDetailed(true);
 
 		/* Sorting Comparator for search bandbox article list */
-		listheader_ArticleSearch_artNr.setSortAscending(new FieldComparator("artNr", true));
-		listheader_ArticleSearch_artNr.setSortDescending(new FieldComparator("artNr", true));
+		listheader_ArticleSearch_artNr.setSortAscending(new FieldComparator(
+				"artNr", true));
+		listheader_ArticleSearch_artNr.setSortDescending(new FieldComparator(
+				"artNr", true));
 
-		listheader_ArticleSearch_artKurzbezeichnung.setSortAscending(new FieldComparator("article.artKurzbezeichnung", true));
-		listheader_ArticleSearch_artKurzbezeichnung.setSortDescending(new FieldComparator("article.artKurzbezeichnung", true));
+		listheader_ArticleSearch_artKurzbezeichnung
+				.setSortAscending(new FieldComparator(
+						"article.artKurzbezeichnung", true));
+		listheader_ArticleSearch_artKurzbezeichnung
+				.setSortDescending(new FieldComparator(
+						"article.artKurzbezeichnung", true));
 
-		listBoxArticleSearch.setItemRenderer(new SearchArticleListModelItemRenderer());
+		listBoxArticleSearch
+				.setItemRenderer(new SearchArticleListModelItemRenderer());
 
 		doShowDialog(getOrderposition());
 
@@ -255,16 +269,24 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 
 		UserWorkspace workspace = getUserWorkspace();
 
-		orderPositionDialogWindow.setVisible(workspace.isAllowed("orderPositionDialogWindow"));
+		orderPositionDialogWindow.setVisible(workspace
+				.isAllowed("orderPositionDialogWindow"));
 
-		btnHelp.setVisible(workspace.isAllowed("button_OrderPositionDialog_btnHelp"));
-		btnNew.setVisible(workspace.isAllowed("button_OrderPositionDialog_btnNew"));
-		btnEdit.setVisible(workspace.isAllowed("button_OrderPositionDialog_btnEdit"));
-		btnDelete.setVisible(workspace.isAllowed("button_OrderPositionDialog_btnDelete"));
-		btnSave.setVisible(workspace.isAllowed("button_OrderPositionDialog_btnSave"));
-		btnClose.setVisible(workspace.isAllowed("button_OrderPositionDialog_btnClose"));
+		btnHelp.setVisible(workspace
+				.isAllowed("button_OrderPositionDialog_btnHelp"));
+		btnNew.setVisible(workspace
+				.isAllowed("button_OrderPositionDialog_btnNew"));
+		btnEdit.setVisible(workspace
+				.isAllowed("button_OrderPositionDialog_btnEdit"));
+		btnDelete.setVisible(workspace
+				.isAllowed("button_OrderPositionDialog_btnDelete"));
+		btnSave.setVisible(workspace
+				.isAllowed("button_OrderPositionDialog_btnSave"));
+		btnClose.setVisible(workspace
+				.isAllowed("button_OrderPositionDialog_btnClose"));
 
-		button_OrderPositionDialog_PrintOrderPositions.setVisible(workspace.isAllowed("button_OrderPositionDialog_PrintOrderPositions"));
+		button_OrderPositionDialog_PrintOrderPositions.setVisible(workspace
+				.isAllowed("button_OrderPositionDialog_PrintOrderPositions"));
 
 	}
 
@@ -347,6 +369,20 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	}
 
 	/**
+	 * when the "cancel" button is clicked. <br>
+	 * 
+	 * @param event
+	 */
+	public void onClick$btnCancel(Event event) {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		doCancel();
+	}
+
+	/**
 	 * when the "close" button is clicked. <br>
 	 * 
 	 * @param event
@@ -383,12 +419,14 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
+			String msg = Labels
+					.getLabel("message_Data_Modified_Save_Data_YesNo");
 			String title = Labels.getLabel("message_Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
-					new EventListener() {
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
+					| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION,
+					true, new EventListener() {
 						public void onEvent(Event evt) {
 							switch (((Integer) evt.getData()).intValue()) {
 							case MultiLineMessageBox.YES:
@@ -411,6 +449,16 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	}
 
 	/**
+	 * Cancel the actual operation. <br>
+	 * <br>
+	 * Resets to the original status.<br>
+	 * 
+	 */
+	private void doCancel() {
+		doResetInitValues();
+	}
+
+	/**
 	 * Writes the bean data to the components.<br>
 	 * 
 	 * @param anOrderposition
@@ -419,7 +467,8 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	public void doWriteBeanToComponents(Orderposition anOrderposition) {
 
 		artNr.setValue(anOrderposition.getArticle().getArtNr());
-		artKurzbezeichnung.setValue(anOrderposition.getArticle().getArtKurzbezeichnung());
+		artKurzbezeichnung.setValue(anOrderposition.getArticle()
+				.getArtKurzbezeichnung());
 		aupMenge.setValue(anOrderposition.getAupMenge());
 		aupEinzelwert.setValue(anOrderposition.getAupEinzelwert());
 		aupGesamtwert.setValue(anOrderposition.getAupGesamtwert());
@@ -453,7 +502,8 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param anOrderposition
 	 * @throws InterruptedException
 	 */
-	public void doShowDialog(Orderposition anOrderposition) throws InterruptedException {
+	public void doShowDialog(Orderposition anOrderposition)
+			throws InterruptedException {
 
 		// if aBranche == null then we opened the Dialog without
 		// args for a given entity, so we get a new Obj().
@@ -526,8 +576,10 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 */
 	private void doCalculate() {
 
-		if ((!(aupMenge.getValue() == null)) && (!(aupEinzelwert.getValue() == null))) {
-			if ((!aupMenge.getValue().equals(new BigDecimal(0))) && (!aupEinzelwert.getValue().equals(new BigDecimal(0)))) {
+		if ((!(aupMenge.getValue() == null))
+				&& (!(aupEinzelwert.getValue() == null))) {
+			if ((!aupMenge.getValue().equals(new BigDecimal(0)))
+					&& (!aupEinzelwert.getValue().equals(new BigDecimal(0)))) {
 
 				BigDecimal count = aupMenge.getValue();
 				BigDecimal singlePrice = aupEinzelwert.getValue();
@@ -607,11 +659,14 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	private void doDelete() throws InterruptedException {
 
 		// Show a confirm box
-		String msg = "Are you sure to delete this order position ?" + "\n\n --> " + orderposition.getArticle().getArtKurzbezeichnung();
+		String msg = "Are you sure to delete this order position ?"
+				+ "\n\n --> "
+				+ orderposition.getArticle().getArtKurzbezeichnung();
 		String title = Labels.getLabel("message_Deleting_Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
+		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
+				| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
 				new EventListener() {
 					public void onEvent(Event evt) {
 						switch (((Integer) evt.getData()).intValue()) {
@@ -628,7 +683,8 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 						getOrderService().delete(orderposition);
 
 						// now synchronize the listBox in the parent zul-file
-						ListModelList lml = (ListModelList) listBoxOrderOrderPositions.getListModel();
+						ListModelList lml = (ListModelList) listBoxOrderOrderPositions
+								.getListModel();
 						// Check if the branch object is new or updated
 						// -1 means that the obj is not in the list, so it's
 						// new.
@@ -642,9 +698,11 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 						// +++ //
 						// Listbox listBoxOrderArticle = (Listbox) orderListCtrl
 						// .getFellow("listBoxOrderArticle");
-						Listbox listBoxOrderArticle = orderListCtrl.getListBoxOrderArticle();
+						Listbox listBoxOrderArticle = orderListCtrl
+								.getListBoxOrderArticle();
 						// now synchronize the orderposition listBox
-						ListModelList lml3 = (ListModelList) listBoxOrderArticle.getListModel();
+						ListModelList lml3 = (ListModelList) listBoxOrderArticle
+								.getListModel();
 						// Check if the branch object is new or updated
 						// -1 means that the obj is not in the list, so it's
 						// new.
@@ -769,7 +827,8 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 			// String message = e.getCause().getMessage();
 			String title = Labels.getLabel("message_Error");
 			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+					"ERROR", true);
 
 			// Reset to init values
 			doResetInitValues();
@@ -781,23 +840,29 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 
 		/** Synchronize the listbox in the OrderDialog */
 
-		HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(Orderposition.class, orderDialogCtrl
-				.getPageSizeOrderPosition());
-		soOrderPosition.addFilter(new Filter("order", getOrder(), Filter.OP_EQUAL));
+		HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(
+				Orderposition.class, orderDialogCtrl.getPageSizeOrderPosition());
+		soOrderPosition.addFilter(new Filter("order", getOrder(),
+				Filter.OP_EQUAL));
 		// deeper loading of a relation to prevent the lazy
 		// loading problem.
 		soOrderPosition.addFetch("article");
 
 		// Set the ListModel.
-		getPlwOrderpositions().init(soOrderPosition, orderDialogCtrl.listBoxOrderOrderPositions, orderDialogCtrl.paging_ListBoxOrderOrderPositions);
+		getPlwOrderpositions().init(soOrderPosition,
+				orderDialogCtrl.listBoxOrderOrderPositions,
+				orderDialogCtrl.paging_ListBoxOrderOrderPositions);
 
 		/** Synchronize the OrderList */
 		// Listbox listBoxOrderArticle = orderListCtrl.getListBoxOrderArticle();
 		// listBoxOrderArticle.setModel(orderDialogCtrl.listBoxOrderOrderPositions.getModel());
-		orderListCtrl.getListBoxOrderArticle().setModel(orderDialogCtrl.listBoxOrderOrderPositions.getModel());
+		orderListCtrl.getListBoxOrderArticle().setModel(
+				orderDialogCtrl.listBoxOrderOrderPositions.getModel());
 
 		// synchronize the TotalCount from the paging component
-		orderListCtrl.paging_OrderArticleList.setTotalSize(orderDialogCtrl.paging_ListBoxOrderOrderPositions.getTotalSize());
+		orderListCtrl.paging_OrderArticleList
+				.setTotalSize(orderDialogCtrl.paging_ListBoxOrderOrderPositions
+						.getTotalSize());
 
 		doReadOnly();
 		btnCtrl.setBtnStatus_Save();
@@ -841,7 +906,8 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 		Customer aCustomer = getCustomerService().getNewCustomer();
 		aCustomer.setOffice(getUserWorkspace().getOffice()); // init
 		// customer.setBranche(Workspace.getBranche()); // init
-		aCustomer.setBranche(getBrancheService().getBrancheById(new Integer(1033).longValue())); // init
+		aCustomer.setBranche(getBrancheService().getBrancheById(
+				new Integer(1033).longValue())); // init
 		aCustomer.setKunMahnsperre(false); // init
 
 		/*
@@ -859,7 +925,8 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 		 */
 
 		// call the zul-file with the parameters packed in a map
-		Executions.createComponents("/WEB-INF/pages/customer/customerDialog.zul", null, map);
+		Executions.createComponents(
+				"/WEB-INF/pages/customer/customerDialog.zul", null, map);
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -894,7 +961,8 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 		doSearchArticle();
 	}
 
-	public void onOpen$bandbox_OrderPositionDialog_ArticleSearch(Event event) throws Exception {
+	public void onOpen$bandbox_OrderPositionDialog_ArticleSearch(Event event)
+			throws Exception {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
@@ -902,11 +970,13 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 
 		// ++ create the searchObject and init sorting ++//
 		// only in sample app init with all orders
-		HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, getPageSizeArticleSearch());
+		HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(
+				Article.class, getPageSizeArticleSearch());
 		soArticle.addSort("artNr", false);
 
 		// Set the ListModel.
-		getPlwArticles().init(soArticle, listBoxArticleSearch, paging_ListBoxArticleSearch);
+		getPlwArticles().init(soArticle, listBoxArticleSearch,
+				paging_ListBoxArticleSearch);
 
 	}
 
@@ -923,19 +993,27 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 
 		// ++ create the searchObject and init sorting ++//
 		// only in sample app init with all orders
-		HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, getPageSizeArticleSearch());
+		HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(
+				Article.class, getPageSizeArticleSearch());
 		soArticle.addSort("artNr", false);
 
-		if (StringUtils.isNotEmpty(tb_OrderPosition_SearchArticlelNo.getValue())) {
-			soArticle.addFilter(new Filter("artNr", "%" + tb_OrderPosition_SearchArticlelNo.getValue() + "%", Filter.OP_ILIKE));
+		if (StringUtils
+				.isNotEmpty(tb_OrderPosition_SearchArticlelNo.getValue())) {
+			soArticle.addFilter(new Filter("artNr", "%"
+					+ tb_OrderPosition_SearchArticlelNo.getValue() + "%",
+					Filter.OP_ILIKE));
 		}
 
-		if (StringUtils.isNotEmpty(tb_OrderPosition_SearchArticleDesc.getValue())) {
-			soArticle.addFilter(new Filter("artKurzbezeichnung", "%" + tb_OrderPosition_SearchArticleDesc.getValue() + "%", Filter.OP_ILIKE));
+		if (StringUtils.isNotEmpty(tb_OrderPosition_SearchArticleDesc
+				.getValue())) {
+			soArticle.addFilter(new Filter("artKurzbezeichnung", "%"
+					+ tb_OrderPosition_SearchArticleDesc.getValue() + "%",
+					Filter.OP_ILIKE));
 		}
 
 		// Set the ListModel.
-		getPlwArticles().init(soArticle, listBoxArticleSearch, paging_ListBoxArticleSearch);
+		getPlwArticles().init(soArticle, listBoxArticleSearch,
+				paging_ListBoxArticleSearch);
 
 	}
 
@@ -1019,7 +1097,8 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+				"INFORMATION", true);
 	}
 
 	/**
@@ -1027,7 +1106,8 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * 
 	 * @param event
 	 */
-	public void onClick$button_OrderPositionDialog_PrintOrderPositions(Event event) throws InterruptedException {
+	public void onClick$button_OrderPositionDialog_PrintOrderPositions(
+			Event event) throws InterruptedException {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
@@ -1036,7 +1116,8 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+				"INFORMATION", true);
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -1115,7 +1196,8 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 		return pageSizeArticleSearch;
 	}
 
-	public void setPlwOrderpositions(PagedListWrapper<Orderposition> plwOrderpositions) {
+	public void setPlwOrderpositions(
+			PagedListWrapper<Orderposition> plwOrderpositions) {
 		this.plwOrderpositions = plwOrderpositions;
 	}
 

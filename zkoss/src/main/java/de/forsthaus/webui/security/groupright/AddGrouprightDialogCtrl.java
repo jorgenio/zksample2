@@ -65,10 +65,12 @@ import de.forsthaus.webui.util.pagging.PagedListWrapper;
  * @author bbruhns
  * @author sgerth
  */
-public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable {
+public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements
+		Serializable {
 
 	private static final long serialVersionUID = 2146221197789582858L;
-	private transient static final Logger logger = Logger.getLogger(AddGrouprightDialogCtrl.class);
+	private transient static final Logger logger = Logger
+			.getLogger(AddGrouprightDialogCtrl.class);
 
 	private transient PagedListWrapper<SecRight> plwSecRights;
 	/*
@@ -107,6 +109,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	protected transient Button btnEdit; // autowire
 	protected transient Button btnDelete; // autowire
 	protected transient Button btnSave; // autowire
+	protected transient Button btnCancel; // autowire
 	protected transient Button btnClose; // autowire
 
 	// row count for listbox
@@ -133,14 +136,17 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 * @throws Exception
 	 */
-	public void onCreate$addGrouprightDialogWindow(Event event) throws Exception {
+	public void onCreate$addGrouprightDialogWindow(Event event)
+			throws Exception {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(),
+				btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave,
+				btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -159,13 +165,18 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		listheader_bbox_AddGroupRightDialog_RightName.setSortAscending(new FieldComparator("rigName", true));
-		listheader_bbox_AddGroupRightDialog_RightName.setSortDescending(new FieldComparator("rigName", false));
-		listheader_bbox_AddGroupRightDialog_RightType.setSortAscending(new FieldComparator("rigType", true));
-		listheader_bbox_AddGroupRightDialog_RightType.setSortDescending(new FieldComparator("rigType", false));
+		listheader_bbox_AddGroupRightDialog_RightName
+				.setSortAscending(new FieldComparator("rigName", true));
+		listheader_bbox_AddGroupRightDialog_RightName
+				.setSortDescending(new FieldComparator("rigName", false));
+		listheader_bbox_AddGroupRightDialog_RightType
+				.setSortAscending(new FieldComparator("rigType", true));
+		listheader_bbox_AddGroupRightDialog_RightType
+				.setSortDescending(new FieldComparator("rigType", false));
 
 		// temporary, cause the security is not implemented for this controller
 		btnEdit.setVisible(false);
+		btnCancel.setVisible(false);
 		btnDelete.setVisible(false);
 
 		doShowDialog(getGroup());
@@ -181,7 +192,8 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	public void doShowDialog(SecGroup aGroup) throws InterruptedException {
 
 		try {
-			textbox_AddGroupRightDialog_GroupName.setValue(aGroup.getGrpShortdescription());
+			textbox_AddGroupRightDialog_GroupName.setValue(aGroup
+					.getGrpShortdescription());
 			textbox_AddGroupRightDialog_RightName.setValue("");
 
 			btnCtrl.setInitNew();
@@ -262,7 +274,8 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+				"INFORMATION", true);
 	}
 
 	/**
@@ -322,7 +335,8 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 		groupRight.setSecRight(getRight());
 
 		/* check if already in table */
-		SecGroupright gr = getSecurityService().getGroupRightByGroupAndRight(getGroup(), getRight());
+		SecGroupright gr = getSecurityService().getGroupRightByGroupAndRight(
+				getGroup(), getRight());
 
 		if (gr == null) {
 
@@ -334,7 +348,8 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 				// String message = e.getCause().getMessage();
 				String title = Labels.getLabel("message_Error");
 				MultiLineMessageBox.doSetTemplate();
-				MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+				MultiLineMessageBox.show(message, title,
+						MultiLineMessageBox.OK, "ERROR", true);
 
 				btnCtrl.setBtnStatus_Save();
 			}
@@ -360,7 +375,8 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * 
 	 * @param event
 	 */
-	public void onOpen$bpop_AddGroupRightDialog_SearchRight(Event event) throws InterruptedException {
+	public void onOpen$bpop_AddGroupRightDialog_SearchRight(Event event)
+			throws InterruptedException {
 
 		checkbox_bbox_AddGroupRightDialog_All.setChecked(true);
 	}
@@ -370,7 +386,8 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * 
 	 * @param event
 	 */
-	public void onClick$button_bbox_AddGroupRightDialog_Search(Event event) throws InterruptedException {
+	public void onClick$button_bbox_AddGroupRightDialog_Search(Event event)
+			throws InterruptedException {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
@@ -384,7 +401,8 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * 
 	 * @param event
 	 */
-	public void onClick$button_bbox_AddGroupRightDialog_Close(Event event) throws InterruptedException {
+	public void onClick$button_bbox_AddGroupRightDialog_Close(Event event)
+			throws InterruptedException {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
@@ -493,7 +511,8 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	private void filterTypeForShowingRights() {
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, countRowsSecRight);
+		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(
+				SecRight.class, countRowsSecRight);
 		soSecRight.addSort("rigName", false);
 
 		Filter f = Filter.or();
@@ -534,20 +553,26 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 			soSecRight.addFilter(f);
 
 			// Set the ListModel.
-			getPlwSecRights().init(soSecRight, listBoxSingleRightSearch, paging_ListBoxSingleRightSearch);
-		} else if (!textbox_bboxAddGroupRightDialog_rightName.getValue().isEmpty()) {
+			getPlwSecRights().init(soSecRight, listBoxSingleRightSearch,
+					paging_ListBoxSingleRightSearch);
+		} else if (!textbox_bboxAddGroupRightDialog_rightName.getValue()
+				.isEmpty()) {
 			soSecRight.addFilter(f);
 
 			Filter f1 = Filter.and();
 
-			f1.add(Filter.ilike("rigName", "%" + textbox_bboxAddGroupRightDialog_rightName.getValue() + "%"));
+			f1.add(Filter.ilike("rigName", "%"
+					+ textbox_bboxAddGroupRightDialog_rightName.getValue()
+					+ "%"));
 			soSecRight.addFilter(f1);
 
 			// Set the ListModel.
-			getPlwSecRights().init(soSecRight, listBoxSingleRightSearch, paging_ListBoxSingleRightSearch);
+			getPlwSecRights().init(soSecRight, listBoxSingleRightSearch,
+					paging_ListBoxSingleRightSearch);
 		}
 
-		listBoxSingleRightSearch.setItemRenderer(new SecRightListModelItemRenderer());
+		listBoxSingleRightSearch
+				.setItemRenderer(new SecRightListModelItemRenderer());
 	}
 
 	/**

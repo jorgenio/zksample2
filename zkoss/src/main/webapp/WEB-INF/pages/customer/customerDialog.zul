@@ -55,6 +55,8 @@
 									tooltiptext="${c:l('btnDelete.tooltiptext')}" />
 								<button id="btnSave" height="20"
 									tooltiptext="${c:l('btnSave.tooltiptext')}" />
+								<button id="btnCancel" height="20"
+									tooltiptext="${c:l('btnCancel.tooltiptext')}" />
 								<button id="btnClose" height="20"
 									tooltiptext="${c:l('btnClose.tooltiptext')}" />
 							</hbox>
@@ -204,7 +206,7 @@
 
 												<groupbox id="gb_Phone"
 													mold="3d">
-													<caption 
+													<caption
 														image="/images/icons/telephone_16x16.png"
 														label="${c:l('panel_CustomerDialog_Phone.title')}" />
 

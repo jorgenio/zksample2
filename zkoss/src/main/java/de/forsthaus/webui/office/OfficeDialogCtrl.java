@@ -58,7 +58,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
 public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -8352659530536077973L;
-	private transient static final Logger logger = Logger.getLogger(OfficeDialogCtrl.class);
+	private transient static final Logger logger = Logger
+			.getLogger(OfficeDialogCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -96,6 +97,7 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 	protected transient Button btnEdit; // autowired
 	protected transient Button btnDelete; // autowired
 	protected transient Button btnSave; // autowired
+	protected transient Button btnCancel; // autowired
 	protected transient Button btnClose; // autowired
 
 	protected transient Button btnHelp; // autowire
@@ -132,7 +134,9 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doCheckRights();
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(),
+				btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave,
+				btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -167,16 +171,20 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		UserWorkspace workspace = getUserWorkspace();
 
-		window_OfficeDialog.setVisible(workspace.isAllowed("window_OfficeDialog"));
+		window_OfficeDialog.setVisible(workspace
+				.isAllowed("window_OfficeDialog"));
 
-		button_OfficeDialog_PrintOffice.setVisible(workspace.isAllowed("button_OfficeDialog_PrintOffice"));
+		button_OfficeDialog_PrintOffice.setVisible(workspace
+				.isAllowed("button_OfficeDialog_PrintOffice"));
 
 		btnHelp.setVisible(workspace.isAllowed("button_OfficeDialog_btnHelp"));
 		btnNew.setVisible(workspace.isAllowed("button_OfficeDialog_btnNew"));
 		btnEdit.setVisible(workspace.isAllowed("button_OfficeDialog_btnEdit"));
-		btnDelete.setVisible(workspace.isAllowed("button_OfficeDialog_btnDelete"));
+		btnDelete.setVisible(workspace
+				.isAllowed("button_OfficeDialog_btnDelete"));
 		btnSave.setVisible(workspace.isAllowed("button_OfficeDialog_btnSave"));
-		btnClose.setVisible(workspace.isAllowed("button_OfficeDialog_btnClose"));
+		btnClose
+				.setVisible(workspace.isAllowed("button_OfficeDialog_btnClose"));
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -242,7 +250,8 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+				"INFORMATION", true);
 	}
 
 	/**
@@ -275,6 +284,20 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	/**
+	 * when the "cancel" button is clicked. <br>
+	 * 
+	 * @param event
+	 */
+	public void onClick$btnCancel(Event event) {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		doCancel();
+	}
+
+	/**
 	 * when the "close" button is clicked. <br>
 	 * 
 	 * @param event
@@ -298,7 +321,8 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 
 	 * @param event
 	 */
-	public void onClick$button_OfficeDialog_PrintOffice(Event event) throws InterruptedException {
+	public void onClick$button_OfficeDialog_PrintOffice(Event event)
+			throws InterruptedException {
 
 		/**
 		 * FOR DEMO MODE we do not delete a office, becuse dependend of it's
@@ -313,7 +337,8 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+				"INFORMATION", true);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -336,12 +361,14 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
+			String msg = Labels
+					.getLabel("message_Data_Modified_Save_Data_YesNo");
 			String title = Labels.getLabel("message_Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
-					new EventListener() {
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
+					| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION,
+					true, new EventListener() {
 						public void onEvent(Event evt) {
 							switch (((Integer) evt.getData()).intValue()) {
 							case MultiLineMessageBox.YES:
@@ -361,6 +388,16 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		window_OfficeDialog.onClose();
+	}
+
+	/**
+	 * Cancel the actual operation. <br>
+	 * <br>
+	 * Resets to the original status.<br>
+	 * 
+	 */
+	private void doCancel() {
+		doResetInitValues();
 	}
 
 	/**
@@ -540,52 +577,62 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final Office office = getOffice();
 
 		// Show a confirm box
-		String msg = Labels.getLabel("message.question.are_you_sure_to_delete_this_record") + "\n\n --> " + office.getFilBezeichnung() + " ,"
+		String msg = Labels
+				.getLabel("message.question.are_you_sure_to_delete_this_record")
+				+ "\n\n --> "
+				+ office.getFilBezeichnung()
+				+ " ,"
 				+ office.getFilOrt();
 		String title = Labels.getLabel("message_Deleting_Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, Messagebox.QUESTION, true, new EventListener() {
-			public void onEvent(Event evt) {
-				switch (((Integer) evt.getData()).intValue()) {
-				case MultiLineMessageBox.YES:
-					deleteOffice();
-				case MultiLineMessageBox.NO:
-					break; // 
+		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
+				| MultiLineMessageBox.NO, Messagebox.QUESTION, true,
+				new EventListener() {
+					public void onEvent(Event evt) {
+						switch (((Integer) evt.getData()).intValue()) {
+						case MultiLineMessageBox.YES:
+							deleteOffice();
+						case MultiLineMessageBox.NO:
+							break; // 
+						}
+					}
+
+					private void deleteOffice() {
+
+						// Do not delete the office because all related tables
+						// like customers-->orders ... are cleared cascade !!!!
+						String message = Labels.getLabel("message_NotAllowed");
+						String title = Labels.getLabel("message_Information");
+						MultiLineMessageBox.doSetTemplate();
+						try {
+							MultiLineMessageBox
+									.show(message, title,
+											MultiLineMessageBox.OK,
+											"INFORMATION", true);
+							return;
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+
+						// delete from database
+						// getFilialeService().delete(office);
+
+						// now synchronize the listBox in the parent zul-file
+						ListModelList lml = (ListModelList) lbOffice
+								.getListModel();
+
+						// Check if the branch object is new or updated
+						// -1 means that the obj is not in the list, so it's
+						// new.
+						if (lml.indexOf(office) == -1) {
+						} else {
+							lml.remove(lml.indexOf(office));
+						}
+
+						window_OfficeDialog.onClose(); // close the dialog
+					}
 				}
-			}
-
-			private void deleteOffice() {
-
-				// Do not delete the office because all related tables
-				// like customers-->orders ... are cleared cascade !!!!
-				String message = Labels.getLabel("message_NotAllowed");
-				String title = Labels.getLabel("message_Information");
-				MultiLineMessageBox.doSetTemplate();
-				try {
-					MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
-					return;
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-
-				// delete from database
-				// getFilialeService().delete(office);
-
-				// now synchronize the listBox in the parent zul-file
-				ListModelList lml = (ListModelList) lbOffice.getListModel();
-
-				// Check if the branch object is new or updated
-				// -1 means that the obj is not in the list, so it's
-				// new.
-				if (lml.indexOf(office) == -1) {
-				} else {
-					lml.remove(lml.indexOf(office));
-				}
-
-				window_OfficeDialog.onClose(); // close the dialog
-			}
-		}
 
 		) == MultiLineMessageBox.YES) {
 		}
@@ -683,7 +730,8 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 			// String message = e.getCause().getMessage();
 			String title = Labels.getLabel("message_Error");
 			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+					"ERROR", true);
 
 			// Reset to init values
 			doResetInitValues();

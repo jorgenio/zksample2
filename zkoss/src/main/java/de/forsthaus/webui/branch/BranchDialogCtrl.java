@@ -57,7 +57,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
 public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -546886879998950467L;
-	private transient final static Logger logger = Logger.getLogger(BranchDialogCtrl.class);
+	private transient final static Logger logger = Logger
+			.getLogger(BranchDialogCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -87,6 +88,7 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	protected transient Button btnEdit; // autowire
 	protected transient Button btnDelete; // autowire
 	protected transient Button btnSave; // autowire
+	protected transient Button btnCancel; // autowire
 	protected transient Button btnClose; // autowire
 
 	protected transient Button btnHelp; // autowire
@@ -123,7 +125,9 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doCheckRights();
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(),
+				btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave,
+				btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -166,14 +170,17 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		UserWorkspace workspace = getUserWorkspace();
 
-		window_BranchesDialog.setVisible(workspace.isAllowed("window_BranchesDialog"));
+		window_BranchesDialog.setVisible(workspace
+				.isAllowed("window_BranchesDialog"));
 
 		btnHelp.setVisible(workspace.isAllowed("button_BranchDialog_btnHelp"));
 		btnNew.setVisible(workspace.isAllowed("button_BranchDialog_btnNew"));
 		btnEdit.setVisible(workspace.isAllowed("button_BranchDialog_btnEdit"));
-		btnDelete.setVisible(workspace.isAllowed("button_BranchDialog_btnDelete"));
+		btnDelete.setVisible(workspace
+				.isAllowed("button_BranchDialog_btnDelete"));
 		btnSave.setVisible(workspace.isAllowed("button_BranchDialog_btnSave"));
-		btnClose.setVisible(workspace.isAllowed("button_BranchDialog_btnClose"));
+		btnClose
+				.setVisible(workspace.isAllowed("button_BranchDialog_btnClose"));
 
 	}
 
@@ -239,7 +246,8 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+				"INFORMATION", true);
 	}
 
 	/**
@@ -269,6 +277,20 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		doDelete();
+	}
+
+	/**
+	 * when the "cancel" button is clicked. <br>
+	 * 
+	 * @param event
+	 */
+	public void onClick$btnCancel(Event event) {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		doCancel();
 	}
 
 	/**
@@ -311,12 +333,14 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
+			String msg = Labels
+					.getLabel("message_Data_Modified_Save_Data_YesNo");
 			String title = Labels.getLabel("message_Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
-					new EventListener() {
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
+					| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION,
+					true, new EventListener() {
 						public void onEvent(Event evt) {
 							switch (((Integer) evt.getData()).intValue()) {
 							case MultiLineMessageBox.YES:
@@ -337,6 +361,16 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		window_BranchesDialog.onClose();
+	}
+
+	/**
+	 * Cancel the actual operation. <br>
+	 * <br>
+	 * Resets to the original status.<br>
+	 * 
+	 */
+	private void doCancel() {
+		doResetInitValues();
 	}
 
 	/**
@@ -482,53 +516,62 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final Branche aBranche = getBranche();
 
 		// Show a confirm box
-		String msg = Labels.getLabel("message.question.are_you_sure_to_delete_this_record") + "\n\n --> " + aBranche.getBraBezeichnung();
+		String msg = Labels
+				.getLabel("message.question.are_you_sure_to_delete_this_record")
+				+ "\n\n --> " + aBranche.getBraBezeichnung();
 		String title = Labels.getLabel("message_Deleting_Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, true, new EventListener() {
-			public void onEvent(Event evt) {
-				switch (((Integer) evt.getData()).intValue()) {
-				case MultiLineMessageBox.YES:
-					deleteBranch();
-					break; // 
-				case MultiLineMessageBox.NO:
-					break; // 
-				}
-			}
-
-			private void deleteBranch() {
-
-				if (aBranche.getBraNr().equalsIgnoreCase("000")) {
-					try {
-						// Show a error box
-						String msg1 = Labels.getLabel("message_Cannot_Delete_Default_Branch");
-						String title1 = Labels.getLabel("message_Deleting_Record");
-
-						MultiLineMessageBox.doSetTemplate();
-						MultiLineMessageBox.show(msg1, title1, MultiLineMessageBox.OK, "ERROR", true);
-						return;
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+		if (MultiLineMessageBox.show(msg, title,
+				Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, true,
+				new EventListener() {
+					public void onEvent(Event evt) {
+						switch (((Integer) evt.getData()).intValue()) {
+						case MultiLineMessageBox.YES:
+							deleteBranch();
+							break; // 
+						case MultiLineMessageBox.NO:
+							break; // 
+						}
 					}
+
+					private void deleteBranch() {
+
+						if (aBranche.getBraNr().equalsIgnoreCase("000")) {
+							try {
+								// Show a error box
+								String msg1 = Labels
+										.getLabel("message_Cannot_Delete_Default_Branch");
+								String title1 = Labels
+										.getLabel("message_Deleting_Record");
+
+								MultiLineMessageBox.doSetTemplate();
+								MultiLineMessageBox.show(msg1, title1,
+										MultiLineMessageBox.OK, "ERROR", true);
+								return;
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+
+						// delete from database
+						getBrancheService().delete(aBranche);
+
+						// now synchronize the branches listBox
+						ListModelList lml = (ListModelList) lbBranch
+								.getListModel();
+
+						// Check if the branch object is new or updated
+						// -1 means that the object is not in the list, so it's
+						// new.
+						if (lml.indexOf(aBranche) == -1) {
+						} else {
+							lml.remove(lml.indexOf(aBranche));
+						}
+
+						window_BranchesDialog.onClose(); // close the dialog
+					} // deleteBranch()
 				}
-
-				// delete from database
-				getBrancheService().delete(aBranche);
-
-				// now synchronize the branches listBox
-				ListModelList lml = (ListModelList) lbBranch.getListModel();
-
-				// Check if the branch object is new or updated
-				// -1 means that the object is not in the list, so it's new.
-				if (lml.indexOf(aBranche) == -1) {
-				} else {
-					lml.remove(lml.indexOf(aBranche));
-				}
-
-				window_BranchesDialog.onClose(); // close the dialog
-			} // deleteBranch()
-		}
 
 		) == MultiLineMessageBox.YES) {
 		}
@@ -612,11 +655,13 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 			try {
 				// Show a error box
-				String msg = Labels.getLabel("message.information.cannot_made_changes_on_system_object");
+				String msg = Labels
+						.getLabel("message.information.cannot_made_changes_on_system_object");
 				String title = Labels.getLabel("window.title.information");
 
 				MultiLineMessageBox.doSetTemplate();
-				MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "INFORMATION", true);
+				MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK,
+						"INFORMATION", true);
 
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -630,7 +675,8 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 				String message = e.getMessage();
 				String title = Labels.getLabel("message_Error");
 				MultiLineMessageBox.doSetTemplate();
-				MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+				MultiLineMessageBox.show(message, title,
+						MultiLineMessageBox.OK, "ERROR", true);
 
 				// Reset to init values
 				doResetInitValues();

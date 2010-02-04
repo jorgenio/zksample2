@@ -147,6 +147,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	protected transient Button btnEdit; // autowire
 	protected transient Button btnDelete; // autowire
 	protected transient Button btnSave; // autowire
+	protected transient Button btnCancel; // autowire
 	protected transient Button btnClose; // autowire
 
 	protected transient Button btnHelp; // autowire
@@ -181,15 +182,14 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 			logger.debug("--> " + event.toString());
 		}
 
+		// window_customerDialog.setContentStyle("padding-left: 0px; padding-right: 0px; padding-top: 0px; padding-bottom: 0px;");
 
-		//window_customerDialog.setContentStyle("padding-left: 0px; padding-right: 0px; padding-top: 0px; padding-bottom: 0px;");
-		
 		/* set components visible dependent of the users rights */
 		doCheckRights();
 		/* create the Button Controller. Disable not used buttons during working */
 		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(),
 				btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave,
-				btnClose);
+				btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -477,6 +477,20 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	/**
+	 * when the "cancel" button is clicked. <br>
+	 * 
+	 * @param event
+	 */
+	public void onClick$btnCancel(Event event) {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		doCancel();
+	}
+
+	/**
 	 * when the "close" button is clicked. <br>
 	 * 
 	 * @param event
@@ -545,6 +559,16 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 			}
 		}
 		window_customerDialog.onClose();
+	}
+
+	/**
+	 * Cancel the actual operation. <br>
+	 * <br>
+	 * Resets to the original status.<br>
+	 * 
+	 */
+	private void doCancel() {
+		doResetInitValues();
 	}
 
 	/**

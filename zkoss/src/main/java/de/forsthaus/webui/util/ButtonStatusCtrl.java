@@ -44,7 +44,7 @@ import de.forsthaus.UserWorkspace;
  *          means that the right have following name:
  *          "button_CustomerDialog_btnNew" <br>
  *          12/02/2009 sge Changed Buttons from Text to Images with Tooltext.<br>
- * 
+ *          02/04/2010 sge added a Cancel Button.<br>
  * @author bbruhns
  * @author sgerth
  */
@@ -53,10 +53,11 @@ public class ButtonStatusCtrl implements Serializable {
 	private static final long serialVersionUID = -4907914938602465474L;
 
 	private static enum ButtonEnum {
-		New, Edit, Delete, Save, Close;
+		New, Edit, Delete, Save, Cancel, Close;
 	}
 
-	private final Map<ButtonEnum, Button> buttons = new HashMap<ButtonEnum, Button>(5);
+	private final Map<ButtonEnum, Button> buttons = new HashMap<ButtonEnum, Button>(
+			5);
 
 	final private UserWorkspace workspace;
 
@@ -84,8 +85,9 @@ public class ButtonStatusCtrl implements Serializable {
 	 * @param btnClose
 	 *            (Close Button)
 	 */
-	public ButtonStatusCtrl(UserWorkspace userWorkspace, String rightPrefix, Button btnNew, Button btnEdit, Button btnDelete, Button btnSave,
-			Button btnClose) {
+	public ButtonStatusCtrl(UserWorkspace userWorkspace, String rightPrefix,
+			Button btnNew, Button btnEdit, Button btnDelete, Button btnSave,
+			Button btnCancel, Button btnClose) {
 		super();
 		this.workspace = userWorkspace;
 
@@ -95,6 +97,7 @@ public class ButtonStatusCtrl implements Serializable {
 		buttons.put(ButtonEnum.Edit, btnEdit);
 		buttons.put(ButtonEnum.Delete, btnDelete);
 		buttons.put(ButtonEnum.Save, btnSave);
+		buttons.put(ButtonEnum.Cancel, btnCancel);
 		buttons.put(ButtonEnum.Close, btnClose);
 
 		setBtnImages();
@@ -110,6 +113,7 @@ public class ButtonStatusCtrl implements Serializable {
 		setImage(ButtonEnum.Edit, imagePath + "btn_edit2_16x16.gif");
 		setImage(ButtonEnum.Delete, imagePath + "btn_delete2_16x16.gif");
 		setImage(ButtonEnum.Save, imagePath + "btn_save2_16x16.gif");
+		setImage(ButtonEnum.Cancel, imagePath + "btn_cancel2_16x16.gif");
 		setImage(ButtonEnum.Close, imagePath + "btn_exitdoor2_16x16.gif");
 	}
 
@@ -122,12 +126,14 @@ public class ButtonStatusCtrl implements Serializable {
 			setDisabled(ButtonEnum.Edit, true);
 			setDisabled(ButtonEnum.Delete, true);
 			setDisabled(ButtonEnum.Save, false);
+			setDisabled(ButtonEnum.Cancel, false);
 			setDisabled(ButtonEnum.Close, false);
 		} else {
 			setVisible(ButtonEnum.New, false);
 			setVisible(ButtonEnum.Edit, false);
 			setVisible(ButtonEnum.Delete, false);
 			setVisible(ButtonEnum.Save, true);
+			setVisible(ButtonEnum.Cancel, true);
 			setVisible(ButtonEnum.Close, true);
 		}
 	}
@@ -141,12 +147,14 @@ public class ButtonStatusCtrl implements Serializable {
 			setDisabled(ButtonEnum.Edit, true);
 			setDisabled(ButtonEnum.Delete, true);
 			setDisabled(ButtonEnum.Save, false);
+			setDisabled(ButtonEnum.Cancel, false);
 			setDisabled(ButtonEnum.Close, false);
 		} else {
 			setVisible(ButtonEnum.New, false);
 			setVisible(ButtonEnum.Edit, false);
 			setVisible(ButtonEnum.Delete, false);
 			setVisible(ButtonEnum.Save, true);
+			setVisible(ButtonEnum.Cancel, true);
 			setVisible(ButtonEnum.Close, true);
 		}
 	}
@@ -176,12 +184,14 @@ public class ButtonStatusCtrl implements Serializable {
 			setDisabled(ButtonEnum.Edit, false);
 			setDisabled(ButtonEnum.Delete, false);
 			setDisabled(ButtonEnum.Save, true);
+			setDisabled(ButtonEnum.Cancel, false);
 			setDisabled(ButtonEnum.Close, false);
 		} else {
 			setVisible(ButtonEnum.New, true);
 			setVisible(ButtonEnum.Edit, true);
 			setVisible(ButtonEnum.Delete, true);
 			setVisible(ButtonEnum.Save, false);
+			setVisible(ButtonEnum.Cancel, true);
 			setVisible(ButtonEnum.Close, true);
 		}
 	}
@@ -197,12 +207,14 @@ public class ButtonStatusCtrl implements Serializable {
 			setDisabled(ButtonEnum.Edit, true);
 			setDisabled(ButtonEnum.Delete, true);
 			setDisabled(ButtonEnum.Save, false);
+			setDisabled(ButtonEnum.Cancel, false);
 			setDisabled(ButtonEnum.Close, false);
 		} else {
 			setVisible(ButtonEnum.New, false);
 			setVisible(ButtonEnum.Edit, false);
 			setVisible(ButtonEnum.Delete, false);
 			setVisible(ButtonEnum.Save, true);
+			setVisible(ButtonEnum.Cancel, true);
 			setVisible(ButtonEnum.Close, true);
 		}
 	}

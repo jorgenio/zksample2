@@ -267,6 +267,9 @@
 						<button id="btnSave" height="20"
 							label="${c:l('btnSave.label')}"
 							tooltiptext="${c:l('btnSave.tooltiptext')}" />
+						<button id="btnCancel" height="20"
+							label="${c:l('btnCancel.label')}"
+							tooltiptext="${c:l('btnCancel.tooltiptext')}" />
 						<button id="btnClose" height="20"
 							label="${c:l('btnClose.label')}"
 							tooltiptext="${c:l('btnClose.tooltiptext')}" />

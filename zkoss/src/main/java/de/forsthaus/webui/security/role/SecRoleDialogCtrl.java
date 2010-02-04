@@ -57,7 +57,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
 public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -546886879998950467L;
-	private transient static final Logger logger = Logger.getLogger(SecRoleDialogCtrl.class);
+	private transient static final Logger logger = Logger
+			.getLogger(SecRoleDialogCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -88,6 +89,7 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	protected transient Button btnEdit; // autowired
 	protected transient Button btnDelete; // autowired
 	protected transient Button btnSave; // autowiredd
+	protected transient Button btnCancel; // autowired
 	protected transient Button btnClose; // autowired
 
 	// ServiceDAOs / Domain Classes
@@ -118,7 +120,9 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(),
+				btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave,
+				btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -209,7 +213,8 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+				"INFORMATION", true);
 	}
 
 	/**
@@ -239,6 +244,20 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		doDelete();
+	}
+
+	/**
+	 * when the "cancel" button is clicked. <br>
+	 * 
+	 * @param event
+	 */
+	public void onClick$btnCancel(Event event) {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		doCancel();
 	}
 
 	/**
@@ -282,12 +301,14 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
+			String msg = Labels
+					.getLabel("message_Data_Modified_Save_Data_YesNo");
 			String title = Labels.getLabel("message_Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
-					new EventListener() {
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
+					| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION,
+					true, new EventListener() {
 						public void onEvent(Event evt) {
 							switch (((Integer) evt.getData()).intValue()) {
 							case MultiLineMessageBox.YES:
@@ -307,6 +328,16 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		secRoleDialogWindow.onClose();
+	}
+
+	/**
+	 * Cancel the actual operation. <br>
+	 * <br>
+	 * Resets to the original status.<br>
+	 * 
+	 */
+	private void doCancel() {
+		doResetInitValues();
 	}
 
 	/**
@@ -496,11 +527,14 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final SecRole aRole = getRole();
 
 		// Show a confirm box
-		String msg = Labels.getLabel("message.question.are_you_sure_to_delete_this_record") + "\n\n --> " + aRole.getRolShortdescription();
+		String msg = Labels
+				.getLabel("message.question.are_you_sure_to_delete_this_record")
+				+ "\n\n --> " + aRole.getRolShortdescription();
 		String title = Labels.getLabel("message_Deleting_Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
+		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
+				| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
 				new EventListener() {
 					public void onEvent(Event evt) {
 						switch (((Integer) evt.getData()).intValue()) {
@@ -517,7 +551,8 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 						getSecurityService().delete(aRole);
 
 						// now synchronize the listBox
-						ListModelList lml = (ListModelList) listBoxSecRoles.getListModel();
+						ListModelList lml = (ListModelList) listBoxSecRoles
+								.getListModel();
 
 						// Check if the object is new or updated
 						// -1 means that the obj is not in the list, so it's
@@ -581,7 +616,8 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 			String message = e.getMessage();
 			String title = Labels.getLabel("message_Error");
 			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+					"ERROR", true);
 
 			// Reset to init values
 			doResetInitValues();

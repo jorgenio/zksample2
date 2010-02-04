@@ -57,7 +57,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
 public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -546886879998950467L;
-	private transient final static Logger logger = Logger.getLogger(GuestBookDialogCtrl.class);
+	private transient final static Logger logger = Logger
+			.getLogger(GuestBookDialogCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -89,6 +90,7 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 	protected transient Button btnEdit; // autowire
 	protected transient Button btnDelete; // autowire
 	protected transient Button btnSave; // autowire
+	protected transient Button btnCancel; // autowire
 	protected transient Button btnClose; // autowire
 
 	protected transient Button btnHelp; // autowire
@@ -127,7 +129,9 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doCheckRights();
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(),
+				btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave,
+				btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -243,7 +247,8 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+				"INFORMATION", true);
 	}
 
 	/**
@@ -273,6 +278,20 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		doDelete();
+	}
+
+	/**
+	 * when the "cancel" button is clicked. <br>
+	 * 
+	 * @param event
+	 */
+	public void onClick$btnCancel(Event event) {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		doCancel();
 	}
 
 	/**
@@ -316,11 +335,13 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
+			String msg = Labels
+					.getLabel("message_Data_Modified_Save_Data_YesNo");
 			String title = Labels.getLabel("message_Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, Messagebox.QUESTION, true,
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
+					| MultiLineMessageBox.NO, Messagebox.QUESTION, true,
 					new EventListener() {
 						public void onEvent(Event evt) {
 							switch (((Integer) evt.getData()).intValue()) {
@@ -341,6 +362,16 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		window_GuestBookDialog.onClose();
+	}
+
+	/**
+	 * Cancel the actual operation. <br>
+	 * <br>
+	 * Resets to the original status.<br>
+	 * 
+	 */
+	private void doCancel() {
+		doResetInitValues();
 	}
 
 	/**
@@ -496,40 +527,47 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final GuestBook guestBook = getGuestBook();
 
 		// Show a confirm box
-		String msg = Labels.getLabel("message.question.are_you_sure_to_delete_this_record") + "\n\n --> " + guestBook.getGubDate() + "/"
+		String msg = Labels
+				.getLabel("message.question.are_you_sure_to_delete_this_record")
+				+ "\n\n --> "
+				+ guestBook.getGubDate()
+				+ "/"
 				+ guestBook.getGubSubject();
 		String title = Labels.getLabel("message_Deleting_Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, Messagebox.QUESTION, new EventListener() {
-			public void onEvent(Event evt) {
-				switch (((Integer) evt.getData()).intValue()) {
-				case MultiLineMessageBox.YES:
-					deleteBranch();
-				case MultiLineMessageBox.NO:
-					break; // 
+		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
+				| MultiLineMessageBox.NO, Messagebox.QUESTION,
+				new EventListener() {
+					public void onEvent(Event evt) {
+						switch (((Integer) evt.getData()).intValue()) {
+						case MultiLineMessageBox.YES:
+							deleteBranch();
+						case MultiLineMessageBox.NO:
+							break; // 
+						}
+					}
+
+					private void deleteBranch() {
+
+						// delete from database
+						getguestBookService().delete(guestBook);
+
+						// now synchronize the branches listBox
+						ListModelList lml = (ListModelList) listbox_GuestBookList
+								.getListModel();
+
+						// Check if the branch object is new or updated
+						// -1 means that the obj is not in the list, so it's
+						// new.
+						if (lml.indexOf(guestBook) == -1) {
+						} else {
+							lml.remove(lml.indexOf(guestBook));
+						}
+
+						window_GuestBookDialog.onClose(); // close the dialog
+					} // deleteBranch()
 				}
-			}
-
-			private void deleteBranch() {
-
-				// delete from database
-				getguestBookService().delete(guestBook);
-
-				// now synchronize the branches listBox
-				ListModelList lml = (ListModelList) listbox_GuestBookList.getListModel();
-
-				// Check if the branch object is new or updated
-				// -1 means that the obj is not in the list, so it's
-				// new.
-				if (lml.indexOf(guestBook) == -1) {
-				} else {
-					lml.remove(lml.indexOf(guestBook));
-				}
-
-				window_GuestBookDialog.onClose(); // close the dialog
-			} // deleteBranch()
-		}
 
 		) == MultiLineMessageBox.YES) {
 		}
@@ -625,7 +663,8 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 			// String message = e.getCause().getMessage();
 			String title = Labels.getLabel("message_Error");
 			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
+					"ERROR", true);
 
 			// Reset to init values
 			doResetInitValues();
@@ -636,7 +675,8 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		// now synchronize the branches listBox
-		ListModelList lml = (ListModelList) listbox_GuestBookList.getListModel();
+		ListModelList lml = (ListModelList) listbox_GuestBookList
+				.getListModel();
 
 		// Check if the branch object is new or updated
 		// -1 means that the obj is not in the list, so its new.

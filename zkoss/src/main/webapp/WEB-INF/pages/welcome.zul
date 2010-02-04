@@ -14,6 +14,7 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 04.02.2009 / Implementation of the missing Cancel Button in all dialogs. " + lf;
 		s = s + "- 29.01.2009 / Changed the style of the address tab in customers dialog. Changed to comboboxes with icons. " + lf;
 		s = s + "- 17.01.2009 / Today we checked in this Zksample2 application on SourceForge.net. See thread under http://zkoss.org/forum/listComment/10986 " + lf;
 		s = s + "- 12.01.2009 / We work hardly on the last pages of the documentation. The countdown for checkin is running. " + lf;

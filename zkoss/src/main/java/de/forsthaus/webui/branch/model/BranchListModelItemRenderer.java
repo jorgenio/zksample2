@@ -34,7 +34,8 @@ import de.forsthaus.backend.model.Branche;
  * @author sgerth
  * 
  */
-public class BranchListModelItemRenderer implements ListitemRenderer, Serializable {
+public class BranchListModelItemRenderer implements ListitemRenderer,
+		Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -44,8 +45,6 @@ public class BranchListModelItemRenderer implements ListitemRenderer, Serializab
 		Branche branche = (Branche) data;
 
 		Listcell lc = new Listcell(branche.getBraBezeichnung());
-		lc.setParent(item);
-		lc = new Listcell(branche.getBraNr());
 		lc.setParent(item);
 
 		item.setAttribute("data", data);

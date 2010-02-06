@@ -65,17 +65,13 @@
 			<label id="lbl_Branch_No"
 				value="${c:l('lbl_Branch_No.value')}" />
 			<textbox id="tb_Branch_No" width="120px" />
-			<button id="button_BranchList_Search_BranchNo"
-				image="/images/icons/search.gif"
-				label="${c:l('button_BranchList_Search_BranchNo.label')}"
-				tooltiptext="${c:l('button_BranchList_Search_BranchNo.tooltiptext')}" />
 			<separator bar="true" orient="vertical" />
 		</hbox>
 
 		<borderlayout id="borderLayout_branchList">
 
 			<north border="none" height="26px">
-				<paging id="paging_BranchList"/>
+				<paging id="paging_BranchList" />
 			</north>
 
 			<center border="normal">
@@ -86,11 +82,7 @@
 						<listheader id="listheader_Branch_Description"
 							image="/images/icons/sequence.gif"
 							label="${c:l('listheader_Branch_Description.label')}" sort="auto"
-							width="25%" />
-						<listheader id="listheader_Branch_No"
-							image="/images/icons/builder.gif"
-							label="${c:l('listheader_Branch_No.label')}" sort="auto"
-							width="20%" />
+							width="50%" />
 					</listhead>
 				</listbox>
 			</center>

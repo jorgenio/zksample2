@@ -1,4 +1,4 @@
-﻿/* Testtabellen, Batchlauf ab 8.2er Version
+/* Testtabellen, Batchlauf ab 8.2er Version
  1. Pruefen und gegebenenfalls installieren der Language 'plpgsql'
  2. Erstellen der Sequence fuer den Primaerkey Zaehler
  3. Erstellen der Procedure fuer das Holen/Setzen des Primaerkeys
@@ -1167,7 +1167,6 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15501, 0, 'button_BranchList_NewBranch', 0),
 (15502, 0, 'button_BranchList_PrintBranches', 0),
 (15503, 0, 'button_BranchList_Search_BranchName', 0),
-(15504, 0, 'button_BranchList_Search_BranchNo', 0),
 /* branchDialogWindow BUTTONS */
 (15510, 6, 'button_BranchDialog_btnHelp', 0),
 (15511, 6, 'button_BranchDialog_btnNew', 0),
@@ -1506,8 +1505,6 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14504, 13020, 15502, 0),
 /* Right: button_BranchList_Search_BranchName */
 (14505, 13020, 15503, 0),
-/* Right: button_BranchList_Search_BranchNo */
-(14506, 13020, 15504, 0),
 /* Right: page_BranchesDialog */
 (14507, 13020, 15107, 0),
 /* Right: button_BranchDialog_btnHelp */

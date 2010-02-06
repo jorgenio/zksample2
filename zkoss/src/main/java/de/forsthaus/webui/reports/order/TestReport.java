@@ -156,7 +156,6 @@ public class TestReport implements Serializable {
 
 		branche = new Branche();
 		branche.setId(200);
-		branche.setBraNr("200");
 		branche.setBraBezeichnung("Elektroinstallationen");
 		customer.setBranche(branche);
 
@@ -252,7 +251,6 @@ public class TestReport implements Serializable {
 
 		branche = new Branche();
 		branche.setId(200);
-		branche.setBraNr("200");
 		branche.setBraBezeichnung("Eleketroinstallationen");
 		customer.setBranche(branche);
 

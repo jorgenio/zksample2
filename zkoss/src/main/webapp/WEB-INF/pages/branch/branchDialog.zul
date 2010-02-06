@@ -27,7 +27,7 @@
 	<window id="window_BranchesDialog"
 		title="${c:l('window_BranchesDialog.title')}" border="none"
 		apply="${branchDialogCtrl}" closable="true" width="450px"
-		height="250px">
+		height="150px">
 
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<!-- Set the HTML BODY style for ONLY this zul file.     -->
@@ -95,16 +95,6 @@
 									<column width="100%" />
 								</columns>
 								<rows>
-									<row>
-										<label id="label_Branch_BraNr"
-											value="${c:l('label_Branch_BraNr.value')}" />
-										<textbox id="braNr"
-											width="100px" />
-									</row>
-									<row>
-										<separator bar="true"></separator>
-										<separator bar="true"></separator>
-									</row>
 									<row>
 										<label
 											id="label_Branch_BraBezeichnung"

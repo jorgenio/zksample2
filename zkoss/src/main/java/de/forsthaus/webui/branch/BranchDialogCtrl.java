@@ -21,6 +21,7 @@ package de.forsthaus.webui.branch;
 import java.io.Serializable;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.zkoss.util.resource.Labels;
@@ -68,7 +69,6 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
 	protected transient Window window_BranchesDialog; // autowired
-	protected transient Textbox braNr; // autowired
 	protected transient Textbox braBezeichnung; // autowired
 
 	// not wired vars
@@ -76,7 +76,6 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	// old value vars for edit mode. that we can check if something
 	// on the values are edited since the last init.
-	private transient String oldVar_braNr;
 	private transient String oldVar_braBezeichnung;
 
 	private transient boolean validationOn;
@@ -159,7 +158,6 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * Set the properties of the fields, like maxLength.<br>
 	 */
 	private void doSetFieldProperties() {
-		braNr.setMaxlength(3);
 		braBezeichnung.setMaxlength(30);
 	}
 
@@ -381,7 +379,6 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doWriteBeanToComponents(Branche aBranche) {
 
-		braNr.setValue(aBranche.getBraNr());
 		braBezeichnung.setValue(aBranche.getBraBezeichnung());
 
 	}
@@ -393,7 +390,6 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doWriteComponentsToBean(Branche aBranche) {
 
-		aBranche.setBraNr(braNr.getValue());
 		aBranche.setBraBezeichnung(braBezeichnung.getValue());
 
 	}
@@ -449,7 +445,6 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * Stores the init values in mem vars. <br>
 	 */
 	private void doStoreInitValues() {
-		oldVar_braNr = braNr.getValue();
 		oldVar_braBezeichnung = braBezeichnung.getValue();
 	}
 
@@ -457,7 +452,6 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * Resets the init values from mem vars. <br>
 	 */
 	private void doResetInitValues() {
-		braNr.setValue(oldVar_braNr);
 		braBezeichnung.setValue(oldVar_braBezeichnung);
 	}
 
@@ -470,9 +464,6 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private boolean isDataChanged() {
 		boolean changed = false;
 
-		if (oldVar_braNr != braNr.getValue()) {
-			changed = true;
-		}
 		if (oldVar_braBezeichnung != braBezeichnung.getValue()) {
 			changed = true;
 		}
@@ -487,7 +478,6 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		setValidationOn(true);
 
-		braNr.setConstraint("NO EMPTY");
 		braBezeichnung.setConstraint("NO EMPTY");
 	}
 
@@ -498,7 +488,6 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		setValidationOn(false);
 
-		braNr.setConstraint("");
 		braBezeichnung.setConstraint("");
 	}
 
@@ -537,7 +526,7 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 					private void deleteBranch() {
 
-						if (aBranche.getBraNr().equalsIgnoreCase("000")) {
+						if (StringUtils.isBlank(aBranche.getBraBezeichnung())) {
 							try {
 								// Show a error box
 								String msg1 = Labels
@@ -602,7 +591,6 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doEdit() {
 
-		braNr.setReadonly(false);
 		braBezeichnung.setReadonly(false);
 
 		btnCtrl.setBtnStatus_Edit();
@@ -616,7 +604,6 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doReadOnly() {
 
-		braNr.setReadonly(true);
 		braBezeichnung.setReadonly(true);
 	}
 
@@ -628,7 +615,6 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// remove validation, if there are a save before
 		doRemoveValidation();
 
-		braNr.setValue("");
 		braBezeichnung.setValue("");
 	}
 
@@ -651,7 +637,7 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doWriteComponentsToBean(aBranche);
 
 		/* check that if it's not the default branch */
-		if (aBranche.getBraNr().equalsIgnoreCase("000")) {
+		if (StringUtils.isEmpty(aBranche.getBraBezeichnung())) {
 
 			try {
 				// Show a error box

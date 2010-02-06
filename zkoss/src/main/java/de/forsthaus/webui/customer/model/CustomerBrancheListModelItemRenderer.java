@@ -34,19 +34,17 @@ import de.forsthaus.backend.model.Branche;
  * @author sgerth
  * 
  */
-public class CustomerBrancheListModelItemRenderer implements ListitemRenderer, Serializable {
+public class CustomerBrancheListModelItemRenderer implements ListitemRenderer,
+		Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient final static Logger logger = Logger.getLogger(CustomerBrancheListModelItemRenderer.class);
+	private transient final static Logger logger = Logger
+			.getLogger(CustomerBrancheListModelItemRenderer.class);
 
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
 		Branche branche = (Branche) data;
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + branche.getBraNr() + "|" + branche.getBraBezeichnung());
-		}
 
 		Listcell lc = new Listcell(branche.getBraBezeichnung());
 		lc.setParent(item);

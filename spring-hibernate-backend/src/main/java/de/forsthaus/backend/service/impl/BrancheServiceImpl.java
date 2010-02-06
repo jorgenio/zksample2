@@ -79,11 +79,6 @@ public class BrancheServiceImpl implements BrancheService {
 	}
 
 	@Override
-	public List<Branche> getBrancheLikeNo(String value) {
-		return getBrancheDAO().getBrancheLikeNo(value);
-	}
-
-	@Override
 	public int getCountAllBranch() {
 		return getBrancheDAO().getCountAllBranch();
 	}

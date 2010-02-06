@@ -13,9 +13,6 @@
 
 		<version name="version" column="VERSION" type="integer" />
 
-		<property name="braNr" type="string">
-			<column name="bra_nr" length="20" />
-		</property>
 		<property name="braBezeichnung" type="string">
 			<column name="bra_bezeichnung" length="30" not-null="true"
 				unique="true" />

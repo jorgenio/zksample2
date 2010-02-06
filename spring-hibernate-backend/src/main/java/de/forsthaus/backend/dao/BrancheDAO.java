@@ -32,8 +32,6 @@ public interface BrancheDAO {
 
 	public Branche getBrancheByID(long bra_id);
 
-	public Branche getBrancheByBraNr(String bra_nr);
-
 	public Branche getBrancheByName(String braBezeichnung);
 
 	public void saveOrUpdate(Branche branche);
@@ -43,8 +41,6 @@ public interface BrancheDAO {
 	public void save(Branche branche);
 
 	public List<Branche> getBrancheLikeName(String value);
-
-	public List<Branche> getBrancheLikeNo(String value);
 
 	public int getBrancheSize();
 

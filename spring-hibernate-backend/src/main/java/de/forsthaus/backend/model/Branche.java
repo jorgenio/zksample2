@@ -34,7 +34,6 @@ public class Branche implements java.io.Serializable, Entity {
 	private long id = Long.MIN_VALUE;
 
 	private int version;
-	private String braNr;
 	private String braBezeichnung;
 	private Set<Customer> customers = new HashSet<Customer>(0);
 
@@ -50,9 +49,8 @@ public class Branche implements java.io.Serializable, Entity {
 		this.braBezeichnung = braBezeichnung;
 	}
 
-	public Branche(long id, String braNr, String braBezeichnung, Set<Customer> customers) {
+	public Branche(long id, String braBezeichnung, Set<Customer> customers) {
 		this.setId(id);
-		this.braNr = braNr;
 		this.braBezeichnung = braBezeichnung;
 		this.customers = customers;
 	}
@@ -71,14 +69,6 @@ public class Branche implements java.io.Serializable, Entity {
 
 	public void setVersion(int version) {
 		this.version = version;
-	}
-
-	public String getBraNr() {
-		return this.braNr;
-	}
-
-	public void setBraNr(String braNr) {
-		this.braNr = braNr;
 	}
 
 	public String getBraBezeichnung() {

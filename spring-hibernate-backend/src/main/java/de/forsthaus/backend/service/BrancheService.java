@@ -36,7 +36,5 @@ public interface BrancheService {
 
 	void delete(Branche branche);
 
-	public List<Branche> getBrancheLikeNo(String value);
-
 	public List<Branche> getBrancheLikeName(String value);
 }

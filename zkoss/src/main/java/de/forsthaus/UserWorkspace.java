@@ -19,15 +19,16 @@
 package de.forsthaus;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.DisposableBean;
-import org.springframework.security.Authentication;
-import org.springframework.security.GrantedAuthority;
-import org.springframework.security.context.SecurityContextHolder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.spring.SpringUtil;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Window;
@@ -114,8 +115,8 @@ public class UserWorkspace implements Serializable, DisposableBean {
 
 		if (grantedAuthoritySet == null) {
 
-			GrantedAuthority[] list = getAuthentication().getAuthorities();
-			grantedAuthoritySet = new HashSet<String>(list.length);
+			Collection<GrantedAuthority> list = getAuthentication().getAuthorities();
+			grantedAuthoritySet = new HashSet<String>(list.size());
 
 			for (GrantedAuthority grantedAuthority : list) {
 				grantedAuthoritySet.add(grantedAuthority.getAuthority());

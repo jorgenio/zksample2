@@ -21,8 +21,8 @@ package de.forsthaus.policy;
 import java.io.Serializable;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.springframework.security.Authentication;
-import org.springframework.security.ui.WebAuthenticationDetails;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 
 import de.forsthaus.gui.service.GuiLoginLoggingPolicService;
 

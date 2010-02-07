@@ -25,7 +25,7 @@
 				+ "- 17.01.2010 / Today we checked in this Zksample2 application on SourceForge.net. "
 				+ lf;
 		s = s
-				+ "                       See thread under http://zkoss.org/forum/listComment/10986 "
+				+ "                      See thread under http://zkoss.org/forum/listComment/10986 "
 				+ lf;
 		s = s
 				+ "- 12.01.2010 / We work hardly on the last pages of the documentation. The countdown for checkin is running. "
@@ -145,27 +145,35 @@
 			font-weight: bold; }
 		</style>
 
-		<panel title="W e l c o m e  to the ZKoss sample application. "
-			border="none" />
+		<panel title=" " border="none">
+			<panelchildren>
+				<groupbox mold="3d">
+					<caption style="color: #000000;"
+						image="/images/zkpowered_40x40.png"
+						label="Welcome to the ZKsample2 application." />
 
-		<box width="100%" orient="horizontal">
-			<textbox rows="6" multiline="true" width="100%"
-				value="Stored users are  (username/password):&#13;&#13;admin / admin (full access)&#13;user1 / user1 (full access to the office data)&#13;user2 / user2 (restricted access to the office data. Only view mode.)&#13;headoffice / headoffice (full access to the main data.">
-			</textbox>
-			<textbox rows="6" multiline="true" width="100%"
-				value="Sources are available as Eclipse Projects under  http://zkoss.org/forum/listComment/10986  ">
-			</textbox>
-		</box>
+					<box width="100%" orient="horizontal">
+						<textbox rows="6" multiline="true" width="100%"
+							value="Stored users are  (username/password):&#13;&#13;admin / admin (full access)&#13;user1 / user1 (full access to the office data)&#13;user2 / user2 (restricted access to the office data. Only view mode.)&#13;headoffice / headoffice (full access to the main data.">
+						</textbox>
+						<textbox rows="6" multiline="true" width="100%"
+							value="Sources are available as Eclipse Projects under  http://zkoss.org/forum/listComment/10986  ">
+						</textbox>
+					</box>
+
+				</groupbox>
+			</panelchildren>
+		</panel>
 
 		<tablelayout columns="2" width="100%">
 
 			<tablechildren rowspan="3" width="70%">
 
-				<panel border="normal" sclass="newsPanelTitle">
+				<panel border="none">
 					<panelchildren>
 
-						<groupbox id="gb_News" mold="3d">
-							<caption
+						<groupbox mold="3d">
+							<caption style="color: #000000;"
 								image="/images/icons/new_icons_10.gif"
 								label="NEW !!!  Updated to the Spring3 framework !!!" />
 
@@ -182,194 +190,216 @@
 
 
 			<tablechildren>
-				<panel title="Hibernate (Backend)" border="normal"
-					collapsible="true">
+				<panel border="none">
 					<panelchildren>
-						<textbox width="100%"
-							value="As ORM (Object relational mapper) we use the 
+						<groupbox mold="3d">
+							<caption style="color: #000000;" image=""
+								label="Hibernate (Backend)" />
+
+							<textbox width="100%"
+								value="As ORM (Object relational mapper) we use the 
 							Hibernate Framework. Used version = 3.1.3"
-							rows="3" multiline="true">
-						</textbox>
-					</panelchildren>
-				</panel>
-			</tablechildren>
-			<tablechildren>
-				<panel title="Hibernate-Generic-DAO" border="normal"
-					collapsible="true">
-					<panelchildren>
-						<textbox width="100%"
-							value="Hibernate-Generic-DAO. We used the search object from this framework. version = 0.3.4"
-							rows="2" multiline="true">
-						</textbox>
+								rows="3" multiline="true">
+							</textbox>
+						</groupbox>
 					</panelchildren>
 				</panel>
 			</tablechildren>
 
 			<tablechildren>
-				<panel title="Spring Integration (Backend) + (Frontend)"
-					border="normal" collapsible="true">
+				<panel border="none">
 					<panelchildren>
-						<textbox width="100%"
-							value="Integration of the spring-framework with spring 
+						<groupbox mold="3d">
+							<caption style="color: #000000;" image=""
+								label="Hibernate-Generic-DAO" />
+
+							<textbox width="100%"
+								value="Hibernate-Generic-DAO. We used the search object from this framework. version = 0.3.4"
+								rows="2" multiline="true">
+							</textbox>
+						</groupbox>
+					</panelchildren>
+				</panel>
+			</tablechildren>
+
+			<tablechildren>
+				<panel border="none">
+					<panelchildren>
+						<groupbox mold="3d">
+							<caption style="color: #000000;" image=""
+								label="Spring Integration (Backend) + (Frontend)" />
+
+							<textbox width="100%"
+								value="Integration of the spring-framework with spring 
 							managed beans in the backend. Used version = 3.0.0"
-							rows="3" multiline="true">
-						</textbox>
+								rows="3" multiline="true">
+							</textbox>
+						</groupbox>
 					</panelchildren>
 				</panel>
 			</tablechildren>
 
 
 			<tablechildren rowspan="2" width="30%">
-				<panel title="what's in it here and the sample data">
+				<panel border="none">
 					<panelchildren>
-						<tabbox>
-							<tabs>
-								<tab label="Base" />
-								<tab label="Chat" />
-								<tab label="Customers" />
-								<tab label="Orders" />
-								<tab label="Articles" />
-								<tab label="Branches" />
-								<tab label="Offices" />
-								<tab label="Administration" />
-								<tab label="Users" />
-								<tab label="User Roles" />
-								<tab label="Roles" />
-								<tab label="Role-Groups" />
-								<tab label="Groups" />
-								<tab label="Group-Rights" />
-								<tab label="Rights" />
-								<tab label="Login log" />
-							</tabs>
-							<tabpanels>
+						<groupbox mold="3d">
+							<caption style="color: #000000;" image=""
+								label="what's in it here and the sample data" />
 
-								<!-- Tab base -->
-								<tabpanel>
-									<textbox height="100%" width="100%"
-										multiline="true" rows="12" readonly="true"
-										value="- CRUD operations on all modules with spring managed services and DAO classes that works with hibernate. &#13;- Uses ButtonControllers for showing next possible CRUD operations&#13;- checks by onClose if there are unsaved modified data.&#13;- single and mixed searching for data.&#13;- sortable lists.&#13;- internationalization (english/german) language.&#13;- Reporting with the JasperReports. The order report are created with iReport and uses a JRBeanDataSource.&#13;- Full customizable Role based security management wich is extended for groups.&#13;   All is stored in database tables. It's build on top of the spring-security framework.&#13;- Most dialogs you can reach with doubleClick on an item in the lists.&#13;" />
-								</tabpanel>
+							<tabbox>
+								<tabs>
+									<tab label="Base" />
+									<tab label="Chat" />
+									<tab label="Customers" />
+									<tab label="Orders" />
+									<tab label="Articles" />
+									<tab label="Branches" />
+									<tab label="Offices" />
+									<tab label="Administration" />
+									<tab label="Users" />
+									<tab label="User Roles" />
+									<tab label="Roles" />
+									<tab label="Role-Groups" />
+									<tab label="Groups" />
+									<tab label="Group-Rights" />
+									<tab label="Rights" />
+									<tab label="Login log" />
+								</tabs>
+								<tabpanels>
 
-								<!-- Tab chat -->
-								<tabpanel>
-									<textbox height="100%" width="100%"
-										multiline="true" rows="10" readonly="true"
-										value="- A implementation of the ZKoss chat demo. Modifications only for the date/time format in the chat window. " />
-								</tabpanel>
+									<!-- Tab base -->
+									<tabpanel>
+										<textbox height="100%"
+											width="100%" multiline="true" rows="12" readonly="true"
+											value="- CRUD operations on all modules with spring managed services and DAO classes that works with hibernate. &#13;- Uses ButtonControllers for showing next possible CRUD operations&#13;- checks by onClose if there are unsaved modified data.&#13;- single and mixed searching for data.&#13;- sortable lists.&#13;- internationalization (english/german) language.&#13;- Reporting with the JasperReports. The order report are created with iReport and uses a JRBeanDataSource.&#13;- Full customizable Role based security management wich is extended for groups.&#13;   All is stored in database tables. It's build on top of the spring-security framework.&#13;- Most dialogs you can reach with doubleClick on an item in the lists.&#13;" />
+									</tabpanel>
 
-								<!-- Tab customers -->
-								<tabpanel>
-									<textbox height="100%" width="100%"
-										multiline="true" rows="10" readonly="true"
-										value="- Customer No. 20 + 21 have	predefiened data for orders and order positions. &#13;- Printing orders with JasperReports. A main Report with two subreports &#13;" />
-								</tabpanel>
+									<!-- Tab chat -->
+									<tabpanel>
+										<textbox height="100%"
+											width="100%" multiline="true" rows="10" readonly="true"
+											value="- A implementation of the ZKoss chat demo. Modifications only for the date/time format in the chat window. " />
+									</tabpanel>
 
-								<!-- Tab orders -->
-								<tabpanel>
-									<textbox height="100%" width="100%"
-										multiline="true" rows="10" readonly="true"
-										value="- Orders and order-positions data are available for customer No. 20 + 21.&#13;&#13; - All orders are shown in the sample at init. &#13; - In a normal application you must limited the count of shown records by initialisation.&#13;" />
-								</tabpanel>
+									<!-- Tab customers -->
+									<tabpanel>
+										<textbox height="100%"
+											width="100%" multiline="true" rows="10" readonly="true"
+											value="- Customer No. 20 + 21 have	predefiened data for orders and order positions. &#13;- Printing orders with JasperReports. A main Report with two subreports &#13;" />
+									</tabpanel>
 
-								<!-- Tab articles -->
-								<tabpanel>
-									<textbox height="100%" width="100%"
-										multiline="true" rows="10" readonly="true"
-										value="- Predefined articles. Under the list is an additionally textbox for the	long article description.&#13;" />
-								</tabpanel>
+									<!-- Tab orders -->
+									<tabpanel>
+										<textbox height="100%"
+											width="100%" multiline="true" rows="10" readonly="true"
+											value="- Orders and order-positions data are available for customer No. 20 + 21.&#13;&#13; - All orders are shown in the sample at init. &#13; - In a normal application you must limited the count of shown records by initialisation.&#13;" />
+									</tabpanel>
 
-								<!-- Tab branches -->
-								<tabpanel>
-									<textbox height="100%" width="100%"
-										multiline="true" rows="10" readonly="true"
-										value="- Predefined branches. Branch '000' is a system branch for predefined to a new customer and cannot be deleted.&#13; " />
-								</tabpanel>
+									<!-- Tab articles -->
+									<tabpanel>
+										<textbox height="100%"
+											width="100%" multiline="true" rows="10" readonly="true"
+											value="- Predefined articles. Under the list is an additionally textbox for the	long article description.&#13;" />
+									</tabpanel>
 
-								<!-- Tab offices -->
-								<tabpanel>
-									<textbox height="100%" width="100%"
-										multiline="true" rows="10" readonly="true"
-										value="- Offices. Not used in this sample application. " />
-								</tabpanel>
+									<!-- Tab branches -->
+									<tabpanel>
+										<textbox height="100%"
+											width="100%" multiline="true" rows="10" readonly="true"
+											value="- Predefined branches. Branch '000' is a system branch for predefined to a new customer and cannot be deleted.&#13; " />
+									</tabpanel>
 
-								<!-- Tab Administration -->
-								<tabpanel>
-									<textbox height="100%" width="100%"
-										multiline="true" rows="10" readonly="true"
-										value=" - The Administration menu point includes the whole security administration, the users and Login log list.&#13; - The security is build on top of the spring-security framework and extended for groups and group-rights. &#13; - In the most simple examples roles are defined for ADMIN_ROLE, USER_ROLE or GUEST_ROLE.&#13;&#13;   This is to small for us. &#13;   Because what is a user ??? A user in a bigger business firm can works in a department of &#13;   booking, invoicing, inventory, production, sales, promotion ...&#13;   And these categories can have sub categories.&#13;   Secondly we go away from the xml configuration for assigning the roles to a page or event. &#13;   We do it in database tables and can extend the security for a group and group-right. &#13;   Further we need not a new tomcat start to consider changes in the scurity of pages or events.&#13;&#13; - At last: A right in spring-security is only a STRING &#13; While we secure the application in the CODE and manage these in tables WE and OUR CUSTOMERS would have the abbility to customize the access/right &#13; While we do not secure with a ROLE-String either we secure with a RIGHT-String. &#13; we can assign a group of right-strings to a logically closed GROUP. &#13; So RIGHTS, GROUPS and GROUP-RIGHTS are defined by the developer who knows what compoents are working together.&#13; All others like ROLES and ROLE-GROUPS can be modified/extended by the customer if needed/allowed.&#13; " />
-								</tabpanel>
+									<!-- Tab offices -->
+									<tabpanel>
+										<textbox height="100%"
+											width="100%" multiline="true" rows="10" readonly="true"
+											value="- Offices. Not used in this sample application. " />
+									</tabpanel>
 
-								<!-- Tab users -->
-								<tabpanel>
-									<textbox height="100%" width="100%"
-										multiline="true" rows="10" readonly="true"
-										value=" - All users have the right to edit her own peronal data like the name, password.&#13; - User Roles are assigned in the administration area [User Roles].&#13; " />
-								</tabpanel>
+									<!-- Tab Administration -->
+									<tabpanel>
+										<textbox height="100%"
+											width="100%" multiline="true" rows="10" readonly="true"
+											value=" - The Administration menu point includes the whole security administration, the users and Login log list.&#13; - The security is build on top of the spring-security framework and extended for groups and group-rights. &#13; - In the most simple examples roles are defined for ADMIN_ROLE, USER_ROLE or GUEST_ROLE.&#13;&#13;   This is to small for us. &#13;   Because what is a user ??? A user in a bigger business firm can works in a department of &#13;   booking, invoicing, inventory, production, sales, promotion ...&#13;   And these categories can have sub categories.&#13;   Secondly we go away from the xml configuration for assigning the roles to a page or event. &#13;   We do it in database tables and can extend the security for a group and group-right. &#13;   Further we need not a new tomcat start to consider changes in the scurity of pages or events.&#13;&#13; - At last: A right in spring-security is only a STRING &#13; While we secure the application in the CODE and manage these in tables WE and OUR CUSTOMERS would have the abbility to customize the access/right &#13; While we do not secure with a ROLE-String either we secure with a RIGHT-String. &#13; we can assign a group of right-strings to a logically closed GROUP. &#13; So RIGHTS, GROUPS and GROUP-RIGHTS are defined by the developer who knows what compoents are working together.&#13; All others like ROLES and ROLE-GROUPS can be modified/extended by the customer if needed/allowed.&#13; " />
+									</tabpanel>
 
-								<!-- Tab User Roles -->
-								<tabpanel>
-									<textbox height="100%" width="100%"
-										multiline="true" rows="10" readonly="true"
-										value=" - Here will assigned Roles to the Users. It's possible to assign several Roles to a user.&#13;" />
-								</tabpanel>
+									<!-- Tab users -->
+									<tabpanel>
+										<textbox height="100%"
+											width="100%" multiline="true" rows="10" readonly="true"
+											value=" - All users have the right to edit her own peronal data like the name, password.&#13; - User Roles are assigned in the administration area [User Roles].&#13; " />
+									</tabpanel>
 
-								<!-- Tab Roles -->
-								<tabpanel>
-									<textbox height="100%" width="100%"
-										multiline="true" rows="10" readonly="true"
-										value=" - Predefined Roles.&#13; " />
-								</tabpanel>
+									<!-- Tab User Roles -->
+									<tabpanel>
+										<textbox height="100%"
+											width="100%" multiline="true" rows="10" readonly="true"
+											value=" - Here will assigned Roles to the Users. It's possible to assign several Roles to a user.&#13;" />
+									</tabpanel>
 
-								<!-- Tab Role-Groups -->
-								<tabpanel>
-									<textbox height="100%" width="100%"
-										multiline="true" rows="10" readonly="true"
-										value=" - Predefined Role Groups.&#13; " />
-								</tabpanel>
+									<!-- Tab Roles -->
+									<tabpanel>
+										<textbox height="100%"
+											width="100%" multiline="true" rows="10" readonly="true"
+											value=" - Predefined Roles.&#13; " />
+									</tabpanel>
 
-								<!-- Tab Groups -->
-								<tabpanel>
-									<textbox height="100%" width="100%"
-										multiline="true" rows="10" readonly="true"
-										value=" - Predefined Groups.&#13; " />
-								</tabpanel>
+									<!-- Tab Role-Groups -->
+									<tabpanel>
+										<textbox height="100%"
+											width="100%" multiline="true" rows="10" readonly="true"
+											value=" - Predefined Role Groups.&#13; " />
+									</tabpanel>
 
-								<!-- Tab Group-Rights -->
-								<tabpanel>
-									<textbox height="100%" width="100%"
-										multiline="true" rows="10" readonly="true"
-										value=" - Predefined Group-Rights.&#13; " />
-								</tabpanel>
+									<!-- Tab Groups -->
+									<tabpanel>
+										<textbox height="100%"
+											width="100%" multiline="true" rows="10" readonly="true"
+											value=" - Predefined Groups.&#13; " />
+									</tabpanel>
 
-								<!-- Tab Rights -->
-								<tabpanel>
-									<textbox height="100%" width="100%"
-										multiline="true" rows="10" readonly="true"
-										value=" - Predefined Rights.&#13; " />
-								</tabpanel>
+									<!-- Tab Group-Rights -->
+									<tabpanel>
+										<textbox height="100%"
+											width="100%" multiline="true" rows="10" readonly="true"
+											value=" - Predefined Group-Rights.&#13; " />
+									</tabpanel>
 
-								<!-- Tab Login Log -->
-								<tabpanel>
-									<textbox height="100%" width="100%"
-										multiline="true" rows="10" readonly="true"
-										value=" - Login Log list.&#13; " />
-								</tabpanel>
+									<!-- Tab Rights -->
+									<tabpanel>
+										<textbox height="100%"
+											width="100%" multiline="true" rows="10" readonly="true"
+											value=" - Predefined Rights.&#13; " />
+									</tabpanel>
 
-							</tabpanels>
-						</tabbox>
+									<!-- Tab Login Log -->
+									<tabpanel>
+										<textbox height="100%"
+											width="100%" multiline="true" rows="10" readonly="true"
+											value=" - Login Log list.&#13; " />
+									</tabpanel>
+
+								</tabpanels>
+							</tabbox>
+						</groupbox>
 					</panelchildren>
 				</panel>
 			</tablechildren>
 
 
 			<tablechildren>
-				<panel title="Spring-Security" border="normal"
-					collapsible="true">
+				<panel border="none">
 					<panelchildren>
-						<textbox width="100%"
-							value="Integration of spring-security. Used version = 3.0.1  We extended it the for a group and group-rights. All stored in the database."
-							rows="3" multiline="true">
-						</textbox>
+						<groupbox mold="3d">
+							<caption style="color: #000000;" image=""
+								label="Spring-Security" />
+
+							<textbox width="100%"
+								value="Integration of spring-security. Used version = 3.0.1  We extended it the for a group and group-rights. All stored in the database."
+								rows="3" multiline="true">
+							</textbox>
+						</groupbox>
 					</panelchildren>
 				</panel>
 			</tablechildren>
@@ -377,13 +407,17 @@
 
 
 			<tablechildren>
-				<panel title="Jasper Reports" border="normal"
-					collapsible="true">
+				<panel border="none">
 					<panelchildren>
-						<textbox width="100%"
-							value="JasperReports used version = 3.0 . All reports are created with iReport and uses JRBeanDataSources."
-							rows="3" multiline="true">
-						</textbox>
+						<groupbox mold="3d">
+							<caption style="color: #000000;" image=""
+								label="Jasper Reports" />
+
+							<textbox width="100%"
+								value="JasperReports used version = 3.0 . All reports are created with iReport and uses JRBeanDataSources."
+								rows="3" multiline="true">
+							</textbox>
+						</groupbox>
 					</panelchildren>
 				</panel>
 			</tablechildren>

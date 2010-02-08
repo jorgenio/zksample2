@@ -138,10 +138,8 @@
 			body { padding: 0 0; /* 0 padding on top and bottom and 0
 			padding on right and left */ }
 
-			.newsPanelTitle .z-panel-header { color: #FF0000; font:
-			bold; }
 			<!-- Title in bold letters -->
-			.z-groupbox-hl .z-groupbox-header { color: #FF0000;
+			.z-groupbox-hl .z-groupbox-header { color: #000000;
 			font-weight: bold; }
 		</style>
 

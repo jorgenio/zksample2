@@ -18,7 +18,8 @@
 			<!-- cut the vertical borders in the rows -->
 			tr.z-row td.z-row-inner { border-right: 0px #CCC; }
 			<!-- Title in bold letters -->
-			.z-groupbox-hl .z-groupbox-header { font-weight: bold; }
+			.z-groupbox-hl .z-groupbox-header { color: #000000;
+			font-weight: bold; }
 		</style>
 
 		<borderlayout id="borderlayoutCustomer">

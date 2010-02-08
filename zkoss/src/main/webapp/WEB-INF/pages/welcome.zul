@@ -396,7 +396,7 @@
 								label="Spring-Security" />
 
 							<textbox width="100%"
-								value="Integration of spring-security. Used version = 3.0.1  We extended it the for a group and group-rights. All stored in the database."
+								value="Integration of spring-security. Used version = 3.0.1  We extended it for a group and group-rights. All is stored in the database."
 								rows="3" multiline="true">
 							</textbox>
 						</groupbox>

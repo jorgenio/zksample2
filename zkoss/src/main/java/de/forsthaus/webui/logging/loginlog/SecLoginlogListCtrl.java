@@ -544,6 +544,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 
 	/**
 	 * when the "search/filter" button is clicked. It searches over a period. <br>
+	 * Checks if EndDate not before StartDate.<br>
 	 * 
 	 * @param event
 	 */

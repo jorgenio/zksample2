@@ -1,0 +1,46 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+
+	<window id="test14" border="none" width="100%" height="100%">
+
+
+		<grid fixedLayout="true">
+			<auxhead>
+				<auxheader label="H1'07" colspan="6" rowspan="2" />
+				<auxheader label="H2'07" colspan="6" />
+			</auxhead>
+
+			<columns>
+				<column label="Jul" />
+				<column label="Aug" />
+				<column label="Sep" />
+				<column label="Oct" />
+				<column label="Nov" />
+				<column label="Dec" />
+			</columns>
+
+			<rows>
+				<row>
+					<label value="1,000" />
+					<label value="1,100" />
+					<label value="1,200" />
+					<label value="1,300" />
+					<label value="1,400" />
+					<label value="1,500" />
+					<label value="1,600" />
+					<label value="1,700" />
+					<label value="1,800" />
+					<label value="1,900" />
+					<label value="2,000" />
+					<label value="2,100" />
+				</row>
+			</rows>
+		</grid>
+
+	</window>
+</zk>

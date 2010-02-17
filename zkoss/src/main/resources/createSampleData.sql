@@ -707,7 +707,7 @@ alter table sec_userrole
 
 /******************** Filiale Daten ********************/
 INSERT INTO FILIALE (FIL_ID, FIL_NR, FIL_BEZEICHNUNG,FIL_NAME1,FIL_NAME2,FIL_ORT,VERSION)
-values (1,'0001','Filiale München','Härmann Gmbh','Personaldienstleistungen','München',0);
+values (1,'0001','Filiale Berlin','H�rmann Gmbh','Personaldienstleistungen','Berlin',0);
 
 /******************** Security: USERS ********************/  
 INSERT INTO SEC_USER (USR_ID, USR_LOGINNAME, USR_PASSWORD, USR_LASTNAME, USR_FIRSTNAME, USR_EMAIL, USR_LOCALE, USR_ENABLED, USR_ACCOUNTNONEXPIRED, USR_CREDENTIALSNONEXPIRED, USR_ACCOUNTNONLOCKED, USR_TOKEN,  VERSION) values 

@@ -28,6 +28,17 @@ public interface IpToCountryService {
 
 	public IpToCountry getIpToCountry(InetAddress address);
 
+	/**
+	 * Import a csv file from the web .<br>
+	 * 1. We get a .csv file from an Url as an ZipInputstream. ( We need this
+	 * for periodically update a table from the web). <br>
+	 * 2. All csv fields for every line of this InputStream we mapped as a Bean
+	 * (used the SuperCSV lib) and store it to a list<Bean> <br>
+	 * 3. We iterate through this list and make a hibernate saveOrUpdate(aBean)
+	 * for all entries.
+	 * 
+	 * @return count of imported records
+	 */
 	public int importIP2CountryCSV();
 
 }

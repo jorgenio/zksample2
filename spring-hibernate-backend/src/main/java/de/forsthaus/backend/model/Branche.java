@@ -34,7 +34,7 @@ public class Branche implements java.io.Serializable, Entity {
 	private long id = Long.MIN_VALUE;
 
 	private int version;
-	private String braBezeichnung;
+	private String braBezeichnung = "";
 	private Set<Customer> customers = new HashSet<Customer>(0);
 
 	public boolean isNew() {

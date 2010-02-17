@@ -19,6 +19,7 @@
 package de.forsthaus.webui.branch;
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -51,14 +52,15 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
  *          10/12/2009: sge changings in the saving routine.<br>
  *          11/07/2009: bbr changed to extending from GFCBaseCtrl<br>
  *          (GenericForwardComposer) for spring-managed creation.<br>
+ *          02/16/2010: sge changed to work with Databinding.<br>
  * 
  * @author bbruhns
  * @author sgerth
  */
-public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
+public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -546886879998950467L;
-	private transient final static Logger logger = Logger.getLogger(BranchDialogCtrl.class);
+	private transient final static Logger logger = Logger.getLogger(BranchDialogWithDataBindingCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -67,17 +69,9 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window window_BranchesDialog; // autowired
-	protected transient Textbox braBezeichnung; // autowired
-
+	protected transient Window window_BranchesDialogWithDataBinding; // autowired
 	// not wired vars
 	transient Listbox lbBranch; // overhanded per param
-
-	// old value vars for edit mode. that we can check if something
-	// on the values are edited since the last init.
-	private transient String oldVar_braBezeichnung;
-
-	private transient boolean validationOn;
 
 	// Button controller for the CRUD buttons
 	private transient final String btnCtroller_ClassPrefix = "button_BranchDialog_";
@@ -93,12 +87,14 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	// ServiceDAOs / Domain classes
 	private Branche branche; // overhanded per param
+	private Branche origBranche; // holds the origin bean for reset
+
 	private transient BrancheService brancheService;
 
 	/**
 	 * default constructor.<br>
 	 */
-	public BranchDialogCtrl() {
+	public BranchDialogWithDataBindingCtrl() {
 		super();
 
 		if (logger.isDebugEnabled()) {
@@ -113,17 +109,15 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 * @throws Exception
 	 */
-	public void onCreate$window_BranchesDialog(Event event) throws Exception {
+	public void onCreate$window_BranchesDialogWithDataBinding(Event event) throws Exception {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
-
-		/* set components visible dependent of the users rights */
-		doCheckRights();
-
 		// create the Button Controller. Disable not used buttons during working
 		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+
+		doCreateDataBinding(window_BranchesDialogWithDataBinding);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -131,8 +125,11 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (args.containsKey("branche")) {
 			Branche branche = (Branche) args.get("branche");
 			setBranche(branche);
+			// remember the original object
+			doStoreInitValues();
 		} else {
 			setBranche(null);
+			setOrigBranche(null);
 		}
 
 		// we get the listBox Object for the branch list. So we have access
@@ -144,35 +141,7 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 			lbBranch = null;
 		}
 
-		// set Field Properties
-		doSetFieldProperties();
-
 		doShowDialog(getBranche());
-
-	}
-
-	/**
-	 * Set the properties of the fields, like maxLength.<br>
-	 */
-	private void doSetFieldProperties() {
-		braBezeichnung.setMaxlength(30);
-	}
-
-	/**
-	 * SetVisible for components by checking if there's a right for it.
-	 */
-	private void doCheckRights() {
-
-		UserWorkspace workspace = getUserWorkspace();
-
-		window_BranchesDialog.setVisible(workspace.isAllowed("window_BranchesDialog"));
-
-		btnHelp.setVisible(workspace.isAllowed("button_BranchDialog_btnHelp"));
-		btnNew.setVisible(workspace.isAllowed("button_BranchDialog_btnNew"));
-		btnEdit.setVisible(workspace.isAllowed("button_BranchDialog_btnEdit"));
-		btnDelete.setVisible(workspace.isAllowed("button_BranchDialog_btnDelete"));
-		btnSave.setVisible(workspace.isAllowed("button_BranchDialog_btnSave"));
-		btnClose.setVisible(workspace.isAllowed("button_BranchDialog_btnClose"));
 
 	}
 
@@ -186,7 +155,7 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 * @throws Exception
 	 */
-	public void onClose$window_BranchesDialog(Event event) throws Exception {
+	public void onClose$window_BranchesDialogWithDataBinding(Event event) throws Exception {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
@@ -299,7 +268,7 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 			doClose();
 		} catch (Exception e) {
 			// close anyway
-			window_BranchesDialog.onClose();
+			window_BranchesDialogWithDataBinding.onClose();
 			// Messagebox.show(e.toString());
 		}
 	}
@@ -318,7 +287,7 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private void doClose() throws Exception {
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("--> DataIsChanged :" + isDataChanged());
+			// logger.debug("--> DataIsChanged :" + isDataChanged());
 		}
 
 		if (isDataChanged()) {
@@ -348,7 +317,7 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 			}
 		}
 
-		window_BranchesDialog.onClose();
+		window_BranchesDialogWithDataBinding.onClose();
 	}
 
 	/**
@@ -358,31 +327,13 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 
 	 */
 	private void doCancel() {
-		doResetInitValues();
+
+		doResetToInitValues();
+		// Bean_To_UI
+		binder.loadAll();
+
+		btnCtrl.setInitEdit();
 		doReadOnly();
-	}
-
-	/**
-	 * Writes the bean data to the components.<br>
-	 * 
-	 * @param aBranche
-	 *            Branche
-	 */
-	public void doWriteBeanToComponents(Branche aBranche) {
-
-		braBezeichnung.setValue(aBranche.getBraBezeichnung());
-
-	}
-
-	/**
-	 * Writes the components values to the bean.<br>
-	 * 
-	 * @param aBranche
-	 */
-	public void doWriteComponentsToBean(Branche aBranche) {
-
-		aBranche.setBraBezeichnung(braBezeichnung.getValue());
-
 	}
 
 	/**
@@ -403,6 +354,7 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 			// We don't create a new DomainObject() in the frontend.
 			// We GET it from the backend.
 			aBranche = getBrancheService().getNewBranche();
+			setBranche(aBranche);
 		}
 
 		// set Readonly mode accordingly if the object is new or not.
@@ -410,19 +362,21 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 			btnCtrl.setInitNew();
 			doEdit();
 		} else {
-			btnCtrl.setInitEdit();
 			doReadOnly();
+			btnCtrl.setInitEdit();
 		}
 
 		try {
-			// fill the components with the data
-			doWriteBeanToComponents(aBranche);
+			// Bean_To_UI
+			binder.loadAll();
+			doStoreInitValues();
 
 			// stores the inital data for comparing if they are changed
 			// during users action.
-			doStoreInitValues();
+			// doStoreInitValues();
 
-			window_BranchesDialog.doModal(); // open the dialog in modal mode
+			window_BranchesDialogWithDataBinding.doModal(); // open the dialog
+			// in modal mode
 		} catch (Exception e) {
 			Messagebox.show(e.toString());
 		}
@@ -432,54 +386,86 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	// ++++++++++++++++++++++++++++++ helpers ++++++++++++++++++++++++++
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-	/**
-	 * Stores the init values in mem vars. <br>
-	 */
-	private void doStoreInitValues() {
-		oldVar_braBezeichnung = braBezeichnung.getValue();
-	}
-
-	/**
-	 * Resets the init values from mem vars. <br>
-	 */
-	private void doResetInitValues() {
-		braBezeichnung.setValue(oldVar_braBezeichnung);
-	}
-
-	/**
-	 * Checks, if data are changed since the last call of <br>
-	 * doStoreInitData() . <br>
-	 * 
-	 * @return true, if data are changed, otherwise false
-	 */
 	private boolean isDataChanged() {
 		boolean changed = false;
 
-		if (oldVar_braBezeichnung != braBezeichnung.getValue()) {
+		// UI_To_Bean
+		binder.saveAll();
+
+		Branche act = getBranche();
+		Branche org = getOrigBranche();
+
+		if (act.getBraBezeichnung() != org.getBraBezeichnung()) {
 			changed = true;
+
 		}
 
 		return changed;
 	}
 
-	/**
-	 * Sets the Validation by setting the accordingly constraints to the fields.
-	 */
-	private void doSetValidation() {
+	public void doStoreInitValues() {
+		try {
+			setOrigBranche((Branche) org.apache.commons.beanutils.BeanUtils.cloneBean(getBranche()));
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		setValidationOn(true);
+	}
 
-		braBezeichnung.setConstraint("NO EMPTY");
+	public void doResetToInitValues() {
+
+		try {
+			setBranche((Branche) org.apache.commons.beanutils.BeanUtils.cloneBean(getOrigBranche()));
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
-	 * Disables the Validation by setting empty constraints.
+	 * Set the components for edit mode. <br>
 	 */
-	private void doRemoveValidation() {
+	private void doEdit() {
+		Window w = window_BranchesDialogWithDataBinding;
 
-		setValidationOn(false);
+		Textbox t = (Textbox) w.getFellowIfAny("braBezeichnung");
+		t.setReadonly(false);
 
-		braBezeichnung.setConstraint("");
+		btnCtrl.setBtnStatus_Edit();
+
+		// remember the old vars
+		doStoreInitValues();
+	}
+
+	/**
+	 * Set the components to ReadOnly. <br>
+	 */
+	public void doReadOnly() {
+
+		Window w = window_BranchesDialogWithDataBinding;
+
+		Textbox t = (Textbox) w.getFellowIfAny("braBezeichnung");
+		t.setReadonly(true);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -532,17 +518,15 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 				// now synchronize the branches listBox
 				ListModelList lml = (ListModelList) lbBranch.getListModel();
-
 				// Check if the branch object is new or updated
-				// -1 means that the object is not in the list, so it's
-				// new.
+				// -1 means that the object is not in the list, so it's new.
 				if (lml.indexOf(aBranche) == -1) {
 				} else {
 					lml.remove(lml.indexOf(aBranche));
 				}
 
 				// close the dialog
-				window_BranchesDialog.onClose();
+				window_BranchesDialogWithDataBinding.onClose();
 			} // deleteBranch()
 		}
 
@@ -560,46 +544,16 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// We don't create a new DomainObject() in the frontend.
 		// We GET it from the backend.
 		setBranche(getBrancheService().getNewBranche());
+		// remember the init values
+		doStoreInitValues();
+		// Bean_To_UI
+		binder.loadAll();
 
-		doClear(); // clear all commponents
+		// doClear(); // clear all commponents
 		doEdit(); // edit mode
 
 		btnCtrl.setBtnStatus_New();
 
-		// remember the old vars
-		doStoreInitValues();
-	}
-
-	/**
-	 * Set the components for edit mode. <br>
-	 */
-	private void doEdit() {
-
-		braBezeichnung.setReadonly(false);
-
-		btnCtrl.setBtnStatus_Edit();
-
-		// remember the old vars
-		doStoreInitValues();
-	}
-
-	/**
-	 * Set the components to ReadOnly. <br>
-	 */
-	public void doReadOnly() {
-
-		braBezeichnung.setReadonly(true);
-	}
-
-	/**
-	 * Clears the components values. <br>
-	 */
-	public void doClear() {
-
-		// remove validation, if there are a save before
-		doRemoveValidation();
-
-		braBezeichnung.setValue("");
 	}
 
 	/**
@@ -612,13 +566,13 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// force validation, if on, than execute by component.getValue()
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		if (!isValidationOn()) {
-			doSetValidation();
-		}
+		// if (!isValidationOn()) {
+		// doSetValidation();
+		// }
 
 		Branche aBranche = getBranche();
-		// fill the objects with the components data
-		doWriteComponentsToBean(aBranche);
+		// UI_to_Bean
+		binder.saveAll();
 
 		/* check that if it's not the default branch */
 		if (StringUtils.isEmpty(aBranche.getBraBezeichnung())) {
@@ -639,6 +593,8 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 			try {
 				// save it to database
 				getBrancheService().saveOrUpdate(aBranche);
+				doStoreInitValues();
+
 			} catch (DataAccessException e) {
 				String message = e.getMessage();
 				String title = Labels.getLabel("message_Error");
@@ -646,10 +602,9 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 				MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 
 				// Reset to init values
-				doResetInitValues();
+				doResetToInitValues();
 
 				doReadOnly();
-				btnCtrl.setBtnStatus_Save();
 				return;
 			}
 
@@ -667,22 +622,12 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		doReadOnly();
-		btnCtrl.setBtnStatus_Save();
 		// init the old values vars new
-		doStoreInitValues();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 	// ++++++++++++++++++ getter / setter +++++++++++++++++++//
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
-
-	public void setValidationOn(boolean validationOn) {
-		this.validationOn = validationOn;
-	}
-
-	public boolean isValidationOn() {
-		return validationOn;
-	}
 
 	public BrancheService getBrancheService() {
 		return brancheService;
@@ -698,6 +643,14 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	public void setBranche(Branche branche) {
 		this.branche = branche;
+	}
+
+	public void setOrigBranche(Branche origBranche) {
+		this.origBranche = origBranche;
+	}
+
+	public Branche getOrigBranche() {
+		return origBranche;
 	}
 
 }

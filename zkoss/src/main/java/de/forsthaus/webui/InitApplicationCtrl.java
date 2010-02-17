@@ -38,6 +38,7 @@ import org.zkoss.zkex.zul.South;
 import org.zkoss.zkmax.zul.Tablechildren;
 import org.zkoss.zkmax.zul.Tablelayout;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Caption;
 import org.zkoss.zul.Chart;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
@@ -45,6 +46,8 @@ import org.zkoss.zul.DialModel;
 import org.zkoss.zul.DialModelScale;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Grid;
+import org.zkoss.zul.Groupbox;
+import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Panel;
 import org.zkoss.zul.Panelchildren;
@@ -191,27 +194,33 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		tableLayout = new Tablelayout();
 		tableLayout.setColumns(3);
-		tableLayout.setWidth("950px");
 		tableLayout.setParent(divCt);
 
 		tableChildrenRecords = new Tablechildren();
 		tableChildrenRecords.setRowspan(1);
-		tableChildrenRecords.setWidth("20%");
+		tableChildrenRecords.setWidth("300px");
+		tableChildrenRecords.setStyle("padding-left: 8px;");
 		tableChildrenRecords.setParent(tableLayout);
 
 		tableChildrenStatistic = new Tablechildren();
 		tableChildrenStatistic.setRowspan(1);
-		tableChildrenStatistic.setWidth("50%");
+		tableChildrenStatistic.setWidth("400px");
+		tableChildrenStatistic.setStyle("padding-left: 8px;");
 		tableChildrenStatistic.setParent(tableLayout);
 
 		tableChildrenButtons = new Tablechildren();
 		tableChildrenButtons.setRowspan(1);
-		tableChildrenButtons.setWidth("30%");
+		tableChildrenButtons.setWidth("240px");
+		tableChildrenButtons.setStyle("padding-left: 8px;");
 		tableChildrenButtons.setParent(tableLayout);
+
 		Panel pb = new Panel();
-		pb.setHeight("100%");
+		// pb.setHeight("100%");
+		pb.setWidth("240px");
 		pb.setBorder("none");
+		pb.setStyle("align:left; color:red");
 		pb.setParent(tableChildrenButtons);
+
 		panelChildren_Buttons = new Panelchildren();
 		panelChildren_Buttons.setParent(pb);
 
@@ -240,31 +249,41 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	private void countDemoData() {
 
 		Panel panel = new Panel();
-		panel.setTitle("Demo-Data stored in Postgres 8.2.6 DB");
-		// panel.setWidth("100%");
+		// panel.setTitle("Demo-Data stored in Postgres 8.2.6 DB");
 		panel.setWidth("300px");
-		panel.setHeight("100%");
 		panel.setBorder("none");
-		panel.setStyle("align:left; color:red");
+		panel.setStyle("align:left; color:red; background-color: #EBEBEB");
 		panel.setParent(tableChildrenRecords);
 
 		Panelchildren panelchildren = new Panelchildren();
 		panelchildren.setParent(panel);
 
+		Groupbox gb = new Groupbox();
+		gb.setMold("3d");
+		gb.setStyle("background-color: #EBEBEB");
+		gb.setParent(panelchildren);
+
+		Caption caption = new Caption();
+		caption.setParent(gb);
+		caption.setImage("/images/icons/database.gif");
+		caption.setLabel("Demo-Data stored in Postgres 8.2.6 DB");
+		caption.setStyle("color: #000000;font-weight:bold; text-align:left ");
+
 		Grid grid = new Grid();
 		grid.setWidth("100%");
-		grid.setParent(panelchildren);
+		// grid.setParent(panelchildren);
+		grid.setParent(gb);
 
 		Columns columns = new Columns();
 		columns.setSizable(true);
 		columns.setParent(grid);
 
 		Column column1 = new Column();
-		column1.setWidth("180px");
+		column1.setWidth("70%");
 		column1.setLabel("Table");
 		column1.setParent(columns);
 		Column column2 = new Column();
-		column2.setWidth("120px");
+		column2.setWidth("30%");
 		column2.setLabel("records");
 		column2.setParent(columns);
 
@@ -344,30 +363,40 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		Statistic stat = de.forsthaus.statistic.Statistic.getStatistic();
 
 		Panel panel = new Panel();
-		panel.setTitle("Application Statistic");
-		panel.setWidth("100%");
-		panel.setHeight("100%");
+		panel.setWidth("400px");
 		panel.setBorder("none");
-		panel.setStyle("align:left; color:red");
+		panel.setStyle("align:left; color:red; background-color: #EBEBEB");
 		panel.setParent(tableChildrenStatistic);
 
 		Panelchildren panelchildren = new Panelchildren();
 		panelchildren.setParent(panel);
 
+		Groupbox gb = new Groupbox();
+		gb.setMold("3d");
+		gb.setStyle("background-color: #EBEBEB");
+		gb.setParent(panelchildren);
+
+		Caption caption = new Caption();
+		caption.setParent(gb);
+		caption.setImage("/images/icons/monitorView.gif");
+		caption.setLabel("Application Statistic");
+		caption.setStyle("color: #000000;font-weight:bold; text-align:left ");
+
 		Grid grid = new Grid();
 		grid.setWidth("100%");
-		grid.setParent(panelchildren);
+		// grid.setParent(panelchildren);
+		grid.setParent(gb);
 
 		Columns columns = new Columns();
 		columns.setSizable(true);
 		columns.setParent(grid);
 
 		Column column1 = new Column();
-		column1.setWidth("300px");
+		column1.setWidth("60%");
 		column1.setLabel("Subject");
 		column1.setParent(columns);
 		Column column2 = new Column();
-		column2.setWidth("200px");
+		column2.setWidth("40%");
 		column2.setLabel("value");
 		column2.setParent(columns);
 
@@ -401,20 +430,30 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	private void createButtons() {
 
 		Panel panel = new Panel();
-		panel.setTitle("Demo Customers");
-		panel.setWidth("230px");
-		// panel.setHeight("200px");
+		// panel.setTitle("Demo Customers");
+		panel.setWidth("240px");
 		panel.setBorder("none");
-		panel.setStyle("align:left; color:red");
-		// panel.setParent(tableChildrenButtons);
+		panel.setStyle("align:left; color:red; background-color: #EBEBEB");
 		panel.setParent(panelChildren_Buttons);
 
 		Panelchildren panelchildren = new Panelchildren();
 		panelchildren.setParent(panel);
 
+		Groupbox gb = new Groupbox();
+		gb.setMold("3d");
+		gb.setStyle("background-color: #EBEBEB");
+		gb.setParent(panelchildren);
+
+		Caption caption = new Caption();
+		caption.setParent(gb);
+		caption.setImage("/images/icons/advice_16x16.gif");
+		caption.setLabel("Demo Customers");
+		caption.setStyle("color: #000000;font-weight:bold; text-align:left ");
+
 		Grid grid = new Grid();
-		grid.setWidth("228px");
-		grid.setParent(panelchildren);
+		grid.setWidth("100%");
+		grid.setParent(gb);
+		// grid.setParent(panelchildren);
 
 		Columns columns = new Columns();
 		columns.setSizable(true);
@@ -454,8 +493,8 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		btn.addEventListener("onClick", new OnClick1000Eventlistener());
 
 		/* Separator */
-		createNewSeparator(div_Buttons, "horizontal", false, "5");
-		createNewSeparator(div_Buttons, "horizontal", false, "5");
+		createNewSeparator(div_Buttons, "horizontal", false, "5", "#FFFFFF");
+		createNewSeparator(div_Buttons, "horizontal", false, "5", "#FFFFFF");
 
 		/* 10.000 Button */
 		Div divBtn2 = new Div();
@@ -470,11 +509,11 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		btn2.addEventListener("onClick", new OnClick10000Eventlistener());
 
-		createNewSeparator(div_Buttons, "horizontal", false, "5");
+		createNewSeparator(div_Buttons, "horizontal", false, "5", "#FFFFFF");
 
 		Vbox_Buttons.setParent(row);
 
-		createNewSeparator(panelChildren_Buttons, "horizontal", false, "5");
+		createNewSeparator(panelChildren_Buttons, "horizontal", false, "5", "#EBEBEB");
 
 	}
 
@@ -485,23 +524,32 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	private void showUsersOnlineChart() {
 
 		Panel panel = new Panel();
-		panel.setTitle("Users online");
-		panel.setWidth("230px");
-		panel.setHeight("250px");
+		// panel.setTitle("Users online");
+		panel.setWidth("240px");
+		panel.setHeight("260px");
 		panel.setBorder("none");
-		// panel.setParent(tableChildrenButtons);
+		panel.setStyle("background-color: #EBEBEB;");
 		panel.setParent(panelChildren_Buttons);
-
-		// panel.setParent(div_Buttons);
-		// panel.setParent(Vbox_Buttons);
 
 		Panelchildren panelchildren = new Panelchildren();
 		panelchildren.setParent(panel);
 
+		Groupbox gb = new Groupbox();
+		gb.setMold("3d");
+		gb.setClosable(false);
+		gb.setContentStyle("background-color: #EBEBEB;");
+		gb.setParent(panelchildren);
+
+		Caption caption = new Caption();
+		caption.setParent(gb);
+		caption.setImage("/images/icons/console_view.gif");
+		caption.setLabel("Users online");
+		caption.setStyle("color: #000000;font-weight:bold; text-align:left ");
+
 		Div div = new Div();
 		div.setWidth("100%");
 		div.setHeight("100%");
-		div.setParent(panelchildren);
+		div.setParent(gb);
 
 		// Chart Dial
 		Random random = new Random();
@@ -535,14 +583,16 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	 * @param orientation
 	 * @param isBarVisible
 	 * @param spacing
-	 * @return Separator
+	 * @param bkgrColor
+	 * @return
 	 */
-	private Separator createNewSeparator(Component parent, String orientation, boolean isBarVisible, String spacing) {
+	private Separator createNewSeparator(Component parent, String orientation, boolean isBarVisible, String spacing, String bkgrColor) {
 
 		Separator sep = new Separator();
 
 		sep.setOrient(orientation);
 		sep.setBar(isBarVisible);
+		sep.setStyle("background-color:" + bkgrColor);
 
 		if (StringUtils.isEmpty(spacing)) {
 			sep.setSpacing(0 + "px");

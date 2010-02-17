@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
+import org.zkoss.zk.ui.ComponentNotFoundException;
 import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
@@ -13,6 +14,8 @@ import org.zkoss.zkex.zul.Center;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabs;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
@@ -96,6 +99,8 @@ public class ChatWindow extends GFCBaseCtrl implements Serializable {
 		((Div) chatWindow.getFellow("divTextbox")).setWidth(String.valueOf(i) + "px");
 		((Textbox) chatWindow.getFellow("msg")).setWidth(String.valueOf(i - 150) + "px");
 
+		//Exit Button, Now close the tab
+		chatWindow.getFellow("exit").setVisible(false);
 	}
 
 	/**
@@ -120,11 +125,40 @@ public class ChatWindow extends GFCBaseCtrl implements Serializable {
 		// disable server push
 		desktop.enableServerPush(false);
 
-		// new
+		// new because we have two options to show the chat
+		// first as single page in CENTER or as additional Tab in CENTER
+		/* get an instance of the borderlayout defined in the zul-file */
 		Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
+		/* get an instance of the searched CENTER layout area */
 		Center center = bl.getCenter();
-		center.getChildren().clear();
-		Executions.createComponents("/WEB-INF/pages/chat/chat.zul", center, null);
+		// get the tabs component
+		Tabs tabs = (Tabs) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter");
+
+		/**
+		 * Check if the tab is already opened than select them and<br>
+		 * go out of here. If not than create them.<br>
+		 */
+
+		Tab checkTab = null;
+		try {
+			// checkTab = (Tab) tabs.getFellow(tabName);
+			// chatWindow.getChildren().clear();
+			// chatWindow.onClose();
+			// checkTab = (Tab) tabs.getFellow("tab_Chat");
+			// checkTab.getChildren().clear();
+			// checkTab.detach();
+			checkTab.onClose();
+		} catch (ComponentNotFoundException ex) {
+			// Ignore if can not get tab.
+		}
+
+		// old; only one page in the CENTER area
+		// Borderlayout bl = (Boderlayout)
+		// Path.getComponent("/outerIndexWindow/borderlayoutMain");
+		// Center center = bl.getCenter();
+		// center.getChildren().clear();
+		// Executions.createComponents("/WEB-INF/pages/chat/chat.zul", center,
+		// null);
 
 	}
 

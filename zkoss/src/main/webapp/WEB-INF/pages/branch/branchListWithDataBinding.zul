@@ -22,8 +22,8 @@
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<!-- Window component as container for other components. -->
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<window id="window_BranchesList" apply="${branchListCtrl}"
-		border="none" width="100%">
+	<window id="window_BranchesListWithDataBinding"
+		apply="${branchListWithDataBindingCtrl}" border="none" width="100%">
 
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<!-- Set the HTML BODY style for ONLY this zul file.     -->
@@ -62,7 +62,7 @@
 				tooltiptext="${c:l('button_BranchList_Search_BranchName.tooltiptext')}" />
 		</hbox>
 
-		<borderlayout id="borderLayout_branchList">
+		<borderlayout id="borderLayout_branchListWithDataBinding">
 
 			<north border="none" height="26px">
 				<paging id="paging_BranchList" />

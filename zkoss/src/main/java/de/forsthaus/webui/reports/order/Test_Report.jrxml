@@ -43,7 +43,7 @@
 		<fieldDescription><![CDATA[office]]></fieldDescription>
 	</field>
 	<background>
-		<band />
+		<band/>
 	</background>
 	<title>
 		<band height="79">
@@ -63,7 +63,7 @@
 		<band height="61"/>
 	</columnHeader>
 	<detail>
-		<band height="125" >
+		<band height="125">
 			<textField isBlankWhenNull="false">
 				<reportElement key="textField" x="0" y="0" width="100" height="20"/>
 				<textElement/>

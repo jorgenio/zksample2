@@ -5,6 +5,9 @@
 
 	<window id="mainMenuWindow" border="none"
 		use="de.forsthaus.common.menu.MainMenuCtrl">
+		<groupbox id="groupbox_menu" mold="3d">
+			<caption style="color: #000000;" label="Menu" />
+		</groupbox>
 	</window>
 
 

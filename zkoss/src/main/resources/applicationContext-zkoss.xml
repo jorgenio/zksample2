@@ -48,11 +48,21 @@
 		parent="basisListCtrl" scope="prototype">
 		<property name="brancheService" ref="brancheService" />
 	</bean>
-
 	<bean id="branchDialogCtrl" class="de.forsthaus.webui.branch.BranchDialogCtrl"
 		parent="basisCtrl" scope="prototype">
 		<property name="brancheService" ref="brancheService" />
 	</bean>
+		<!-- Branches (DataBinding) -->
+	<bean id="branchListWithDataBindingCtrl" class="de.forsthaus.webui.branch.BranchListWithDataBindingCtrl"
+		parent="basisListCtrl" scope="prototype">
+		<property name="brancheService" ref="brancheService" />
+	</bean>
+	<bean id="branchDialogWithDataBindingCtrl"
+		class="de.forsthaus.webui.branch.BranchDialogWithDataBindingCtrl"
+		parent="basisCtrl" scope="prototype">
+		<property name="brancheService" ref="brancheService" />
+	</bean>
+
 
 	<!-- Customers -->
 	<bean id="customerListCtrl" class="de.forsthaus.webui.customer.CustomerListCtrl"

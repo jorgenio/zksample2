@@ -32,7 +32,7 @@
 			<separator />
 			<div id="divTextbox" align="left">
 				<hbox>
-					<button id="exit" label="exit" forward="onExit" />
+					<button id="exit" label="exit" forward="onExit"  />
 					<textbox id="msg" style="align:left" />
 				</hbox>
 			</div>

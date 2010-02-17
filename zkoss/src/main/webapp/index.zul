@@ -57,7 +57,7 @@
 					<div width="200px"
 						style="background-color: #EBEBEB; padding: 10px">
 						<button id="btn_ii" label="click me !"
-							image="/images/icons/monitorView.gif" href="/pages/index.zul"
+							image="/images/icons/properties.gif" href="/pages/index.zul"
 							tooltiptext="Go to the sample application" width="120px" />
 
 						<label value="admin/admin" />

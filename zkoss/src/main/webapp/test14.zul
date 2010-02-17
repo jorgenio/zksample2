@@ -1,0 +1,18 @@
+<zk>
+	<style>
+		.z-window-embedded-header { color:white; font-size:50px}
+	</style>
+
+	<window id="winCbos" title="CBOS" style="text-align:center;"
+		width="100%" border="normal">
+
+		<panel style="background-color: #EBEBEB" >
+			<panelchildren>
+				lkhjkhhhuih
+
+
+			</panelchildren>
+		</panel>
+	</window>
+
+</zk>

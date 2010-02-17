@@ -43,7 +43,7 @@ public class WorkingThreadLoginList extends Thread {
 	private final Listbox _listBox;
 	private final LoginLoggingService _service;
 
-	private int refreshTime = 2000;
+	private int refreshTime = 4000; // 4 seconds
 	private boolean _ceased;
 
 	private int i = 0;

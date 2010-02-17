@@ -33,6 +33,7 @@ import org.zkoss.zkex.zul.Center;
 import org.zkoss.zkex.zul.West;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Column;
+import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Menubar;
 

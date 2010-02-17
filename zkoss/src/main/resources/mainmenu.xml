@@ -20,6 +20,8 @@
 			rightName="menuItem_MainData_ArticleItems" />
 		<menuItem id="menu_Item_Branches" zulNavigation="/WEB-INF/pages/branch/branchList.zul"
 			rightName="menuItem_MainData_Branch" />
+		<menuItem id="menu_Item_BranchesDataBinding" zulNavigation="/WEB-INF/pages/branch/branchListWithDataBinding.zul"
+			rightName="menuItem_MainData_Branch" />
 		<menuItem id="menu_Item_Offices" zulNavigation="/WEB-INF/pages/office/officeList.zul"
 			rightName="menuItem_MainData_Office" />
 	</menu>

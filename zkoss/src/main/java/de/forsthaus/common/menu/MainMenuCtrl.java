@@ -106,10 +106,8 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		div.setWidth("100%");
 		div.setHeight("100%");
 		div.setStyle("padding:5px");
-		div.setParent(getMainMenuWindow());
+		div.setParent(getMainMenuWindow().getFellowIfAny("groupbox_menu"));
 
-		div.appendChild(createSeparator(false));
-		div.appendChild(createSeparator(false));
 		div.appendChild(createSeparator(false));
 
 		Hbox hbox = new Hbox();

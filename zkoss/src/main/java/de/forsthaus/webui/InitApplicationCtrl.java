@@ -490,8 +490,8 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		btn.addEventListener("onClick", new OnClick1000Eventlistener());
 
 		/* Separator */
-		createNewSeparator(div_Buttons, "horizontal", false, "5", "#FFFFFF");
-		createNewSeparator(div_Buttons, "horizontal", false, "5", "#FFFFFF");
+		createNewSeparator(div_Buttons, "horizontal", false, "5", "");
+		createNewSeparator(div_Buttons, "horizontal", false, "5", "");
 
 		/* 10.000 Button */
 		Div divBtn2 = new Div();
@@ -506,7 +506,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		btn2.addEventListener("onClick", new OnClick10000Eventlistener());
 
-		createNewSeparator(div_Buttons, "horizontal", false, "5", "#FFFFFF");
+		createNewSeparator(div_Buttons, "horizontal", false, "5", "");
 
 		Vbox_Buttons.setParent(row);
 
@@ -588,7 +588,10 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		sep.setOrient(orientation);
 		sep.setBar(isBarVisible);
-		sep.setStyle("background-color:" + bkgrColor);
+
+		if (!StringUtils.trim(bkgrColor).isEmpty()) {
+			sep.setStyle("background-color:" + bkgrColor);
+		}
 
 		if (StringUtils.isEmpty(spacing)) {
 			sep.setSpacing(0 + "px");

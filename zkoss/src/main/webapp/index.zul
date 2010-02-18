@@ -25,7 +25,7 @@
 			body { padding: 0 0; /* 0 padding on top and bottom and 0
 			padding on right and left */ } .z-loading { top: 50%
 			!important; left: 45% !important; align: center;
-			vertical-align: middle; } .z-groupbox-hl .z-groupbox-hr
+			vertical-align: middle; } .z-groupbox-hl, .z-groupbox-hr,
 			.z-groupbox-hm { background-color: #000000 }
 		</style>
 

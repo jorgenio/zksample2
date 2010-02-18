@@ -139,7 +139,7 @@
 			padding on right and left */ }
 
 			<!-- Title in bold letters -->
-			.z-groupbox-hl .z-groupbox-header { color: #000000;
+			.z-groupbox-hl, .z-groupbox-header { color: #000000;
 			font-weight: bold; }
 		</style>
 

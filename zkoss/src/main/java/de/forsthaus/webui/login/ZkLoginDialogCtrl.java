@@ -28,6 +28,7 @@ import java.util.Date;
 import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -57,7 +58,9 @@ public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 	 */
 	protected Window loginwin; // autowired
 	protected Label lbl_ServerTime; // autowired
-	protected Textbox u; // autowired
+	protected Textbox txtbox_Username; // autowired
+	protected Textbox txtbox_Password; // autowired
+	protected Button btnReset;
 
 	/**
 	 * default constructor. <br>
@@ -78,10 +81,15 @@ public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 
 		doOnCreateCommon(loginwin); // do the autowire
 
-		u.focus(); // set the focus on UserName
+		txtbox_Username.focus(); // set the focus on UserName
 
 		loginwin.doModal();
 
+	}
+
+	public void onClick$btnReset(Event event) {
+		txtbox_Username.setValue("");
+		txtbox_Password.setValue("");
 	}
 
 	/**

@@ -249,14 +249,15 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	private void countDemoData() {
 
 		Panel panel = new Panel();
-		// panel.setTitle("Demo-Data stored in Postgres 8.2.6 DB");
+		panel.setTitle("");
 		panel.setWidth("300px");
 		panel.setBorder("none");
-		panel.setStyle("align:left; color:red; background-color: #EBEBEB");
+		panel.setStyle("align:left; color:red; ");
 		panel.setParent(tableChildrenRecords);
 
 		Panelchildren panelchildren = new Panelchildren();
 		panelchildren.setParent(panel);
+		panelchildren.setStyle("background-color: #EBEBEB;");
 
 		Groupbox gb = new Groupbox();
 		gb.setMold("3d");
@@ -364,11 +365,12 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		Panel panel = new Panel();
 		panel.setWidth("400px");
 		panel.setBorder("none");
-		panel.setStyle("align:left; color:red; background-color: #EBEBEB");
+		panel.setStyle("align:left; color:red;");
 		panel.setParent(tableChildrenStatistic);
 
 		Panelchildren panelchildren = new Panelchildren();
 		panelchildren.setParent(panel);
+		panelchildren.setStyle("background-color: #EBEBEB;");
 
 		Groupbox gb = new Groupbox();
 		gb.setMold("3d");
@@ -431,11 +433,12 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		// panel.setTitle("Demo Customers");
 		panel.setWidth("240px");
 		panel.setBorder("none");
-		panel.setStyle("align:left; color:red; background-color: #EBEBEB");
+		panel.setStyle("align:left; color:red;");
 		panel.setParent(panelChildren_Buttons);
 
 		Panelchildren panelchildren = new Panelchildren();
 		panelchildren.setParent(panel);
+		panelchildren.setStyle("background-color: #EBEBEB;");
 
 		Groupbox gb = new Groupbox();
 		gb.setMold("3d");
@@ -525,15 +528,14 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		panel.setWidth("240px");
 		panel.setHeight("260px");
 		panel.setBorder("none");
-		panel.setStyle("background-color: #EBEBEB;");
 		panel.setParent(panelChildren_Buttons);
 
 		Panelchildren panelchildren = new Panelchildren();
 		panelchildren.setParent(panel);
+		panelchildren.setStyle("background-color: #EBEBEB;");
 
 		Groupbox gb = new Groupbox();
 		gb.setMold("3d");
-		gb.setClosable(false);
 		gb.setParent(panelchildren);
 
 		Caption caption = new Caption();

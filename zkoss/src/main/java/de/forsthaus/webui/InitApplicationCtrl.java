@@ -260,7 +260,6 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		Groupbox gb = new Groupbox();
 		gb.setMold("3d");
-		gb.setStyle("background-color: #EBEBEB");
 		gb.setParent(panelchildren);
 
 		Caption caption = new Caption();
@@ -373,7 +372,6 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		Groupbox gb = new Groupbox();
 		gb.setMold("3d");
-		gb.setStyle("background-color: #EBEBEB");
 		gb.setParent(panelchildren);
 
 		Caption caption = new Caption();
@@ -441,7 +439,6 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		Groupbox gb = new Groupbox();
 		gb.setMold("3d");
-		gb.setStyle("background-color: #EBEBEB");
 		gb.setParent(panelchildren);
 
 		Caption caption = new Caption();
@@ -486,7 +483,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		Button btn = new Button();
 		btn.setLabel("insert 1000");
-		btn.setImage("/images/icons/database.gif");
+		btn.setImage("/images/icons/import_16x16.gif");
 		btn.setTooltiptext("Insert 1.000 randomly created customer records");
 		btn.setParent(divBtn1);
 
@@ -503,7 +500,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		Button btn2 = new Button();
 		btn2.setLabel("insert 10.000");
-		btn2.setImage("/images/icons/database.gif");
+		btn2.setImage("/images/icons/import_16x16.gif");
 		btn2.setTooltiptext("Insert 10.000 randomly created customer records");
 		btn2.setParent(divBtn2);
 
@@ -537,7 +534,6 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		Groupbox gb = new Groupbox();
 		gb.setMold("3d");
 		gb.setClosable(false);
-		gb.setContentStyle("background-color: #EBEBEB;");
 		gb.setParent(panelchildren);
 
 		Caption caption = new Caption();

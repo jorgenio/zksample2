@@ -62,8 +62,8 @@
 			</north>
 
 
-			<west border="none" margins="0,0,0,0" size="200px"
-				flex="true" minsize="10" splittable="true" autoscroll="false">
+			<west border="none" margins="0,0,0,0" size="200px" 
+				flex="true" minsize="100" splittable="true" autoscroll="false">
 				<div id="divWest">WEST</div>
 			</west>
 

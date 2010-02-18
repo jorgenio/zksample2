@@ -25,7 +25,8 @@
 			body { padding: 0 0; /* 0 padding on top and bottom and 0
 			padding on right and left */ } .z-loading { top: 50%
 			!important; left: 45% !important; align: center;
-			vertical-align: middle; }
+			vertical-align: middle; } .z-groupbox-hl .z-groupbox-hr
+			.z-groupbox-hm { background-color: #000000 }
 		</style>
 
 		<borderlayout width="100%" height="100%">
@@ -58,10 +59,9 @@
 						style="background-color: #EBEBEB; padding: 10px">
 						<button id="btn_ii" label="click me !"
 							image="/images/icons/properties.gif" href="/pages/index.zul"
-							tooltiptext="Go to the sample application" width="120px" />
+							tooltiptext="Go to the sample application" width="100px" />
 
 						<label value="admin/admin" />
-
 					</div>
 
 				</div>

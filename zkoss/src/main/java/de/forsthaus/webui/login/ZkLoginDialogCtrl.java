@@ -89,8 +89,11 @@ public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 	}
 
 	public void onClick$btnReset(Event event) {
+
 		txtbox_Username.setValue("");
 		txtbox_Password.setValue("");
+		txtbox_Username.focus(); // set the focus on UserName
+
 	}
 
 	/**

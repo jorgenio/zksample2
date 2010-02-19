@@ -26,7 +26,7 @@
 		</panel>
 	</window>
 
-	<window title="" width="350px" border="none">
+	<window title="" width="350px" border="none" mode="modal">
 		<panel title="" border="none">
 			<panelchildren style="background-color: #FFFFFF">
 

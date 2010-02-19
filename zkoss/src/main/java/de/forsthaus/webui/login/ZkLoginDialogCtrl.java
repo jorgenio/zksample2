@@ -83,6 +83,7 @@ public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 
 		txtbox_Username.focus(); // set the focus on UserName
 
+		loginwin.setShadow(false);
 		loginwin.doModal();
 
 	}

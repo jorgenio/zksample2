@@ -199,19 +199,19 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		tableChildrenRecords = new Tablechildren();
 		tableChildrenRecords.setRowspan(1);
 		tableChildrenRecords.setWidth("300px");
-		tableChildrenRecords.setStyle("padding-left: 8px;");
+		tableChildrenRecords.setStyle("padding-left: 5px;");
 		tableChildrenRecords.setParent(tableLayout);
 
 		tableChildrenStatistic = new Tablechildren();
 		tableChildrenStatistic.setRowspan(1);
 		tableChildrenStatistic.setWidth("400px");
-		tableChildrenStatistic.setStyle("padding-left: 8px;");
+		tableChildrenStatistic.setStyle("padding-left: 5px;");
 		tableChildrenStatistic.setParent(tableLayout);
 
 		tableChildrenButtons = new Tablechildren();
 		tableChildrenButtons.setRowspan(1);
 		tableChildrenButtons.setWidth("240px");
-		tableChildrenButtons.setStyle("padding-left: 8px;");
+		tableChildrenButtons.setStyle("padding-left: 5px;");
 		tableChildrenButtons.setParent(tableLayout);
 
 		Panel pb = new Panel();

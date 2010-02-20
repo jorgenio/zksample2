@@ -80,7 +80,7 @@
 												id="label_ZKLoginDialog_user"
 												value="${c:l('label_ZKLoginDialog_user.value')}" />
 											<textbox
-												id="txtbox_Username" name="j_username" width="99%" />
+												id="txtbox_Username" name="j_username" width="98%" />
 										</row>
 										<row>
 											<label
@@ -88,7 +88,7 @@
 												value="${c:l('label_ZKLoginDialog_pwd.value')}" />
 											<textbox
 												id="txtbox_Password" type="password" name="j_password"
-												width="99%" />
+												width="98%" />
 										</row>
 
 										<row spans="2">

@@ -52,7 +52,7 @@
 		parent="basisCtrl" scope="prototype">
 		<property name="brancheService" ref="brancheService" />
 	</bean>
-		<!-- Branches (DataBinding) -->
+	<!-- Branches (DataBinding) -->
 	<bean id="branchListWithDataBindingCtrl" class="de.forsthaus.webui.branch.BranchListWithDataBindingCtrl"
 		parent="basisListCtrl" scope="prototype">
 		<property name="brancheService" ref="brancheService" />

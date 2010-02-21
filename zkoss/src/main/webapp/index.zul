@@ -23,10 +23,15 @@
 
 		<style>
 			body { padding: 0 0; /* 0 padding on top and bottom and 0
-			padding on right and left */ } .z-loading { top: 50%
-			!important; left: 45% !important; align: center;
-			vertical-align: middle; } .z-groupbox-hl, .z-groupbox-hr,
-			.z-groupbox-hm { background-color: #000000 }
+			padding on right and left */
+			<!-- background image -->
+			background-image:
+			url(http://www.xtreme-soft.org/templates/business_blue/images/Grey_T_R.jpg);
+			background-repeat:repeat-x; }
+
+			.z-loading { top: 50% !important; left: 45% !important;
+			align: center; vertical-align: middle; } .z-groupbox-hl,
+			.z-groupbox-hr, .z-groupbox-hm { background-color: #000000 }
 		</style>
 
 		<borderlayout width="100%" height="100%">

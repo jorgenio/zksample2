@@ -65,11 +65,12 @@ abstract public class GFCBaseCtrl extends GenericForwardComposer implements Seri
 	}
 
 	public void doCreateDataBinding(Window w) throws Exception {
-		w.setVariable("controller", this, false);  // make models visible for the databinder
+		w.setVariable("controller", this, false); // make models visible for the
+													// databinder
 		binder = new AnnotateDataBinder(w);
 		binder.loadAll();
 	}
-	
+
 	public void doOnCreateCommon(Window w) throws Exception {
 		binder = new AnnotateDataBinder(w);
 		binder.loadAll();
@@ -111,8 +112,7 @@ abstract public class GFCBaseCtrl extends GenericForwardComposer implements Seri
 				Secured secured = (Secured) annotation;
 				for (String rightName : secured.value()) {
 					if (!userWorkspace.isAllowed(rightName)) {
-						throw new SecurityException("Aufruf nicht erlaubt! Fehlendes Recht: \n\n" + "benötigter RechteName: " + rightName + "\n\n"
-								+ "In Methode: " + mtd);
+						throw new SecurityException("Aufruf nicht erlaubt! Fehlendes Recht: \n\n" + "benötigter RechteName: " + rightName + "\n\n" + "In Methode: " + mtd);
 					}
 				}
 				return;

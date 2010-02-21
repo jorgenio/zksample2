@@ -9,13 +9,19 @@
 
 	<style>
 		body { padding: 0 0; /* 0 padding on top and bottom and 0
-		padding on right and left */ }
+		padding on right and left */
+		<!-- background image -->
+		background-image:
+		url(http://www.xtreme-soft.org/templates/business_blue/images/Grey_T_R.jpg);
+		background-repeat:repeat-x; }
+
 		<!-- cut the vertical borders in the rows -->
 		tr.z-row td.z-row-inner { border-right: 0px #CCC; }
 
 		<!-- nicer looking -->
 		.z-window-modal-cnt-noborder {background: none}
 		.z-window-modal-cl-noborder {background: none}
+
 
 	</style>
 

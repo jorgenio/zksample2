@@ -17,7 +17,13 @@
 <zk xmlns="http://www.zkoss.org/2005/zul"
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:a="http://www.zkoss.org/2005/zk/annotation"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<!-- DataBinding Initiator.                              -->
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./window_BranchesListWithDataBinding" ?>
 
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<!-- Window component as container for other components. -->
@@ -70,6 +76,8 @@
 
 			<center border="normal">
 				<listbox id="listBoxBranch" vflex="true"
+					model="@{controller.branches}"
+					selectedItem="@{controller.selectedBranche}"
 					tooltiptext="${c:l('listbox.tooltiptext')}" width="99.5%"
 					height="100%" multiple="false">
 					<listhead sizable="true">
@@ -78,6 +86,10 @@
 							label="${c:l('listheader_Branch_Description.label')}" sort="auto"
 							width="50%" />
 					</listhead>
+					<listitem self="@{each='branche'}"
+						forward="onDoubleClick=onDoubleClicked() ">
+						<listcell label="@{branche.braBezeichnung}" />
+					</listitem>
 				</listbox>
 			</center>
 

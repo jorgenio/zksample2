@@ -20,6 +20,7 @@ package de.forsthaus.webui.branch;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.zkoss.util.resource.Labels;
@@ -31,6 +32,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.FieldComparator;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
@@ -96,6 +98,10 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 
 	private transient BrancheService brancheService;
 
+	private transient List<Branche> branches;
+	private transient Branche selectedBranche;
+	private transient Branche branche;
+
 	/**
 	 * default constructor.<br>
 	 */
@@ -116,6 +122,8 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 		/* set components visible dependent of the users rights */
 		doCheckRights();
 
+		doCreateDataBinding(window_BranchesListWithDataBinding);
+
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
 		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
@@ -131,23 +139,17 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 		// init, show all branches
 		checkbox_Branch_ShowAll.setChecked(true);
 
-		// set the paging params
-		paging_BranchList.setPageSize(countRows);
-		paging_BranchList.setDetailed(true);
+		// set the initial Data List
+		setBranches(getBrancheService().getAlleBranche());
 
-		// not used listheaders must be declared like ->
-		// lh.setSortAscending(""); lh.setSortDescending("")
-		listheader_Branch_Description.setSortAscending(new FieldComparator("braBezeichnung", true));
-		listheader_Branch_Description.setSortDescending(new FieldComparator("braBezeichnung", false));
+		// Bean_To_UI
+		binder.loadAll();
 
-		// ++ create the searchObject and init sorting ++ //
-		HibernateSearchObject<Branche> searchObjBranch = new HibernateSearchObject<Branche>(Branche.class, countRows);
-		searchObjBranch.addSort("braBezeichnung", false);
-		// Set the ListModel
-		getPagedListWrapper().init(searchObjBranch, listBoxBranch, paging_BranchList);
-		// set the itemRenderer
-		listBoxBranch.setItemRenderer(new BranchListModelItemRenderer());
+	}
 
+	public List getInitList() {
+		setBranches(getBrancheService().getAlleBranche());
+		return getBrancheService().getAlleBranche();
 	}
 
 	/**
@@ -188,8 +190,7 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 	/**
 	 * Call the Branch dialog with the selected entry. <br>
 	 * <br>
-	 * This methode is forwarded from the listboxes item renderer. <br>
-	 * see: de.forsthaus.webui.branch.model.BranchListModelItemRenderer.java <br>
+	 * This methode is forwarded and definedin the zul-file. <br>
 	 * 
 	 * @param event
 	 * @throws Exception
@@ -197,11 +198,9 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 	public void onDoubleClicked(Event event) throws Exception {
 
 		// get the selected object
-		Listitem item = listBoxBranch.getSelectedItem();
+		Branche aBranche = getSelectedBranche();
 
-		if (item != null) {
-			// CAST TO THE SELECTED OBJECT
-			Branche aBranche = (Branche) item.getAttribute("data");
+		if (aBranche != null) {
 
 			if (logger.isDebugEnabled()) {
 				logger.debug("--> " + aBranche.getBraBezeichnung());
@@ -334,5 +333,29 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 
 	public BrancheService getBrancheService() {
 		return brancheService;
+	}
+
+	public void setBranche(Branche branche) {
+		this.branche = branche;
+	}
+
+	public Branche getBranche() {
+		return branche;
+	}
+
+	public void setBranches(List<Branche> branches) {
+		this.branches = branches;
+	}
+
+	public List<Branche> getBranches() {
+		return branches;
+	}
+
+	public void setSelectedBranche(Branche selectedBranche) {
+		this.selectedBranche = selectedBranche;
+	}
+
+	public Branche getSelectedBranche() {
+		return selectedBranche;
 	}
 }

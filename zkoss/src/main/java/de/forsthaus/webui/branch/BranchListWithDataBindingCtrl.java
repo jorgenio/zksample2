@@ -189,8 +189,9 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 
 	/**
 	 * Call the Branch dialog with the selected entry. <br>
+	 * The selected item is casted to the object by the databinder.<br>
 	 * <br>
-	 * This methode is forwarded and definedin the zul-file. <br>
+	 * This methode is forwarded and defined in the zul-file. <br>
 	 * 
 	 * @param event
 	 * @throws Exception
@@ -211,7 +212,7 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 	}
 
 	/**
-	 * Call the Article dialog with a new empty entry. <br>
+	 * Call the Branch dialog with a new empty entry. <br>
 	 */
 	public void onClick$button_BranchList_NewBranch(Event event) throws Exception {
 
@@ -280,7 +281,7 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 		// empty the text search boxes
 		tb_Branch_Name.setValue(""); // clear
 
-		getPagedListWrapper().clearFilters();
+		// getPagedListWrapper().clearFilters();
 	}
 
 	/**
@@ -319,7 +320,7 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 			searchObjBranch.addFilter(new Filter("braBezeichnung", "%" + tb_Branch_Name.getValue() + "%", Filter.OP_ILIKE));
 			searchObjBranch.addSort("braBezeichnung", false);
 
-			getPagedListWrapper().setSearchObject(searchObjBranch);
+			// getPagedListWrapper().setSearchObject(searchObjBranch);
 		}
 	}
 

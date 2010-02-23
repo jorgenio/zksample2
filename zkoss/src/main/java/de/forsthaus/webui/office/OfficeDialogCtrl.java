@@ -34,8 +34,10 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import de.forsthaus.UserWorkspace;
+import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.service.OfficeService;
+import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
@@ -58,8 +60,7 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
 public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -8352659530536077973L;
-	private transient static final Logger logger = Logger
-			.getLogger(OfficeDialogCtrl.class);
+	private transient static final Logger logger = Logger.getLogger(OfficeDialogCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -77,7 +78,7 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 	protected transient Textbox filOrt; // autowired
 
 	// not wired vars
-	private transient Listbox lbOffice; // overhanded per param
+	private transient OfficeListCtrl officeListCtrl; // overhanded per param
 	private transient Office office; // overhanded per param
 
 	// old value vars for edit mode. that we can check if something
@@ -134,9 +135,7 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doCheckRights();
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(),
-				btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave,
-				btnCancel, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -148,13 +147,15 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 			setOffice(null);
 		}
 
-		// we get the listBox Object for the offices list. So we have access
-		// to it and can synchronize the shown data when we do insert, edit or
-		// delete offices here.
-		if (args.containsKey("lbOffice")) {
-			lbOffice = (Listbox) args.get("lbOffice");
+		/*
+		 * we get the officeListController Object for the office list. So we
+		 * have access to it and can synchronize the shown data when we do
+		 * insert, edit or delete offices here.
+		 */
+		if (args.containsKey("officeListCtrl")) {
+			setOfficeListCtrl((OfficeListCtrl) args.get("officeListCtrl"));
 		} else {
-			lbOffice = null;
+			setOfficeListCtrl(null);
 		}
 
 		// set Field Properties
@@ -171,20 +172,16 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		UserWorkspace workspace = getUserWorkspace();
 
-		window_OfficeDialog.setVisible(workspace
-				.isAllowed("window_OfficeDialog"));
+		window_OfficeDialog.setVisible(workspace.isAllowed("window_OfficeDialog"));
 
-		button_OfficeDialog_PrintOffice.setVisible(workspace
-				.isAllowed("button_OfficeDialog_PrintOffice"));
+		button_OfficeDialog_PrintOffice.setVisible(workspace.isAllowed("button_OfficeDialog_PrintOffice"));
 
 		btnHelp.setVisible(workspace.isAllowed("button_OfficeDialog_btnHelp"));
 		btnNew.setVisible(workspace.isAllowed("button_OfficeDialog_btnNew"));
 		btnEdit.setVisible(workspace.isAllowed("button_OfficeDialog_btnEdit"));
-		btnDelete.setVisible(workspace
-				.isAllowed("button_OfficeDialog_btnDelete"));
+		btnDelete.setVisible(workspace.isAllowed("button_OfficeDialog_btnDelete"));
 		btnSave.setVisible(workspace.isAllowed("button_OfficeDialog_btnSave"));
-		btnClose
-				.setVisible(workspace.isAllowed("button_OfficeDialog_btnClose"));
+		btnClose.setVisible(workspace.isAllowed("button_OfficeDialog_btnClose"));
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -250,8 +247,7 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
-				"INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 	}
 
 	/**
@@ -321,8 +317,7 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 
 	 * @param event
 	 */
-	public void onClick$button_OfficeDialog_PrintOffice(Event event)
-			throws InterruptedException {
+	public void onClick$button_OfficeDialog_PrintOffice(Event event) throws InterruptedException {
 
 		/**
 		 * FOR DEMO MODE we do not delete a office, becuse dependend of it's
@@ -337,8 +332,7 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
-				"INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -361,27 +355,24 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			String msg = Labels
-					.getLabel("message_Data_Modified_Save_Data_YesNo");
+			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
 			String title = Labels.getLabel("message_Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
-					| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION,
-					true, new EventListener() {
-						public void onEvent(Event evt) {
-							switch (((Integer) evt.getData()).intValue()) {
-							case MultiLineMessageBox.YES:
-								try {
-									doSave();
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
-							case Messagebox.NO:
-								break; // 
-							}
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
+				public void onEvent(Event evt) {
+					switch (((Integer) evt.getData()).intValue()) {
+					case MultiLineMessageBox.YES:
+						try {
+							doSave();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
 						}
+					case Messagebox.NO:
+						break; // 
 					}
+				}
+			}
 
 			) == MultiLineMessageBox.YES) {
 			}
@@ -455,6 +446,8 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (anOffice.isNew()) {
 			btnCtrl.setInitNew();
 			doEdit();
+			// set the focus
+			filNr.focus();
 		} else {
 			btnCtrl.setInitEdit();
 			doReadOnly();
@@ -577,62 +570,57 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final Office office = getOffice();
 
 		// Show a confirm box
-		String msg = Labels
-				.getLabel("message.question.are_you_sure_to_delete_this_record")
-				+ "\n\n --> "
-				+ office.getFilBezeichnung()
-				+ " ,"
-				+ office.getFilOrt();
+		String msg = Labels.getLabel("message.question.are_you_sure_to_delete_this_record") + "\n\n --> " + office.getFilBezeichnung() + " ," + office.getFilOrt();
 		String title = Labels.getLabel("message_Deleting_Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
-				| MultiLineMessageBox.NO, Messagebox.QUESTION, true,
-				new EventListener() {
-					public void onEvent(Event evt) {
-						switch (((Integer) evt.getData()).intValue()) {
-						case MultiLineMessageBox.YES:
-							deleteOffice();
-						case MultiLineMessageBox.NO:
-							break; // 
-						}
-					}
-
-					private void deleteOffice() {
-
-						// Do not delete the office because all related tables
-						// like customers-->orders ... are cleared cascade !!!!
-						String message = Labels.getLabel("message_NotAllowed");
-						String title = Labels.getLabel("message_Information");
-						MultiLineMessageBox.doSetTemplate();
-						try {
-							MultiLineMessageBox
-									.show(message, title,
-											MultiLineMessageBox.OK,
-											"INFORMATION", true);
-							return;
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-
-						// delete from database
-						// getFilialeService().delete(office);
-
-						// now synchronize the listBox in the parent zul-file
-						ListModelList lml = (ListModelList) lbOffice
-								.getListModel();
-
-						// Check if the branch object is new or updated
-						// -1 means that the obj is not in the list, so it's
-						// new.
-						if (lml.indexOf(office) == -1) {
-						} else {
-							lml.remove(lml.indexOf(office));
-						}
-
-						window_OfficeDialog.onClose(); // close the dialog
-					}
+		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, Messagebox.QUESTION, true, new EventListener() {
+			public void onEvent(Event evt) {
+				switch (((Integer) evt.getData()).intValue()) {
+				case MultiLineMessageBox.YES:
+					deleteOffice();
+				case MultiLineMessageBox.NO:
+					break; // 
 				}
+			}
+
+			private void deleteOffice() {
+
+				// Do not delete the office because all related tables
+				// like customers-->orders ... are cleared cascade !!!!
+				String message = Labels.getLabel("message_NotAllowed");
+				String title = Labels.getLabel("message_Information");
+				MultiLineMessageBox.doSetTemplate();
+				try {
+					MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+					return;
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+				// delete from database
+				// getFilialeService().delete(office);
+
+				// ++ create the searchObject and init sorting ++ //
+				HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getOfficeListCtrl().getCountRows());
+				soOffice.addSort("filName1", false);
+				// Set the ListModel
+				getOfficeListCtrl().getPagedListWrapper().setSearchObject(soOffice);
+
+				// now synchronize the branches listBox
+				ListModelList lml = (ListModelList) getOfficeListCtrl().listBoxOffice.getListModel();
+
+				// Check if the branch object is new or updated
+				// -1 means that the obj is not in the list, so it's
+				// new.
+				if (lml.indexOf(office) == -1) {
+				} else {
+					lml.remove(lml.indexOf(office));
+				}
+
+				window_OfficeDialog.onClose(); // close the dialog
+			}
+		}
 
 		) == MultiLineMessageBox.YES) {
 		}
@@ -657,6 +645,9 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// remember the old vars
 		doStoreInitValues();
+
+		// set the focus
+		filNr.focus();
 	}
 
 	/**
@@ -730,8 +721,7 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 			// String message = e.getCause().getMessage();
 			String title = Labels.getLabel("message_Error");
 			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
-					"ERROR", true);
+			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 
 			// Reset to init values
 			doResetInitValues();
@@ -741,8 +731,14 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 			return;
 		}
 
-		// now synchronize the offices listBox
-		ListModelList lml = (ListModelList) lbOffice.getListModel();
+		// ++ create the searchObject and init sorting ++ //
+		HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getOfficeListCtrl().getCountRows());
+		soOffice.addSort("filName1", false);
+		// Set the ListModel
+		getOfficeListCtrl().getPagedListWrapper().setSearchObject(soOffice);
+
+		// now synchronize the branches listBox
+		ListModelList lml = (ListModelList) getOfficeListCtrl().listBoxOffice.getListModel();
 
 		// Check if the object is new or updated
 		// -1 means that the object is not in the list, so its new.
@@ -785,6 +781,14 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	public OfficeService getOfficeService() {
 		return officeService;
+	}
+
+	public void setOfficeListCtrl(OfficeListCtrl officeListCtrl) {
+		this.officeListCtrl = officeListCtrl;
+	}
+
+	public OfficeListCtrl getOfficeListCtrl() {
+		return officeListCtrl;
 	}
 
 }

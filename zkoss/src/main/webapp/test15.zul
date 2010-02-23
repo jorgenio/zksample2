@@ -1,0 +1,43 @@
+<zk>
+<hbox>
+<zscript>
+org.zkoss.zk.ui.AbstractComponent;
+
+void moveFromSourcetoTarget(AbstractComponent comp, AbstractComponent dragged) {
+if (dragged.getParent().getId().equals("source_list")) {
+AbstractComponent clone = dragged.clone();
+dragged.setId("orig_" + dragged.getId());
+dragged.getParent().insertBefore(clone, dragged);
+}
+dragged.setParent(comp);
+}
+</zscript>
+<listbox id="source_list" width="200px" rows="5">
+<listhead>
+<listheader label="Source Data" sort="auto"/>
+</listhead>
+<listitem draggable="A" id="field_1" label="field_1"/>
+<listitem draggable="A" id="field_2" label="field_2"/>
+<listitem draggable="A" id="field_3" label="field_3"/>
+<listitem draggable="A" id="field_4" label="field_4"/>
+<listitem draggable="A" id="field_5" label="field_5"/>
+<listitem draggable="A" id="field_6" label="field_6"/>
+<listitem draggable="A" id="field_7" label="field_7"/>
+<listitem draggable="A" id="field_8" label="field_8"/>
+<listitem draggable="A" id="field_9" label="field_9"/>	
+</listbox>
+
+<listbox droppable="A" id="working_list" width="200px" rows="5" onDrop="moveFromSourcetoTarget(self, event.dragged)">
+<listhead>
+<listheader label="Working Data" sort="auto"/>
+</listhead>
+</listbox>
+
+<listbox droppable="A" id="trash_list" width="200px" rows="1" onDrop="moveFromSourcetoTarget(self, event.dragged)">
+<listhead>
+<listheader label="Trash" sort="auto"/>
+</listhead>
+</listbox>	
+
+</hbox>
+</zk>

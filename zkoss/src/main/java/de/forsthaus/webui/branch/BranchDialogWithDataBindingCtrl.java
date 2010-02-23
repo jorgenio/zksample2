@@ -70,8 +70,12 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
 	protected transient Window window_BranchesDialogWithDataBinding; // autowired
+	protected transient Textbox braBezeichnung; // autowired
+
 	// not wired vars
-	transient Listbox lbBranch; // overhanded per param
+	transient BranchListWithDataBindingCtrl branchListWithDataBindingCtrl; // overhanded
+	// per
+	// param
 
 	// Button controller for the CRUD buttons
 	private transient final String btnCtroller_ClassPrefix = "button_BranchDialog_";
@@ -132,13 +136,15 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 			setOrigBranche(null);
 		}
 
-		// we get the listBox Object for the branch list. So we have access
-		// to it and can synchronize the shown data when we do insert, edit or
-		// delete branches here.
-		if (args.containsKey("lbBranch")) {
-			lbBranch = (Listbox) args.get("lbBranch");
+		/*
+		 * we get the branchListController Object for the branch list. So we
+		 * have access to it and can synchronize the shown data when we do
+		 * insert, edit or delete branches here.
+		 */
+		if (args.containsKey("branchListWithDataBindingCtrl")) {
+			branchListWithDataBindingCtrl = (BranchListWithDataBindingCtrl) args.get("branchListWithDataBindingCtrl");
 		} else {
-			lbBranch = null;
+			branchListWithDataBindingCtrl = null;
 		}
 
 		doShowDialog(getBranche());
@@ -369,11 +375,13 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 		try {
 			// Bean_To_UI
 			binder.loadAll();
-			doStoreInitValues();
 
 			// stores the inital data for comparing if they are changed
 			// during users action.
-			// doStoreInitValues();
+			doStoreInitValues();
+
+			// set Focus
+			braBezeichnung.focus();
 
 			window_BranchesDialogWithDataBinding.doModal(); // open the dialog
 			// in modal mode
@@ -517,7 +525,7 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 				getBrancheService().delete(aBranche);
 
 				// now synchronize the branches listBox
-				ListModelList lml = (ListModelList) lbBranch.getListModel();
+				ListModelList lml = (ListModelList) getBranchListWithDataBindingCtrl().listBoxBranch.getListModel();
 				// Check if the branch object is new or updated
 				// -1 means that the object is not in the list, so it's new.
 				if (lml.indexOf(aBranche) == -1) {
@@ -608,8 +616,15 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 				return;
 			}
 
+			// Set the ListModel
+			// set the initial Data List
+			getBranchListWithDataBindingCtrl().setBranches(getBrancheService().getAlleBranche());
+
+			// Bean_To_UI
+			getBranchListWithDataBindingCtrl().getBinder().loadAll();
+
 			// now synchronize the branches listBox
-			ListModelList lml = (ListModelList) lbBranch.getListModel();
+			ListModelList lml = (ListModelList) getBranchListWithDataBindingCtrl().listBoxBranch.getListModel();
 
 			// Check if the branch object is new or updated
 			// -1 means that the object is not in the list, so it's new.
@@ -622,6 +637,7 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 		}
 
 		doReadOnly();
+		btnCtrl.setInitEdit();
 		// init the old values vars new
 	}
 
@@ -651,6 +667,14 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 
 	public Branche getOrigBranche() {
 		return origBranche;
+	}
+
+	public BranchListWithDataBindingCtrl getBranchListWithDataBindingCtrl() {
+		return branchListWithDataBindingCtrl;
+	}
+
+	public void setBranchListWithDataBindingCtrl(BranchListWithDataBindingCtrl branchListWithDataBindingCtrl) {
+		this.branchListWithDataBindingCtrl = branchListWithDataBindingCtrl;
 	}
 
 }

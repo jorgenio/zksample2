@@ -134,12 +134,12 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		int maxListBoxHeight = (height - 145);
-		countRows = Math.round(maxListBoxHeight / 23);
+		setCountRows(Math.round(maxListBoxHeight / 23));
 
 		borderLayout_customerList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		// set the paging params
-		pagingCustomerList.setPageSize(countRows);
+		pagingCustomerList.setPageSize(getCountRows());
 		pagingCustomerList.setDetailed(true);
 
 		// not used listheaders must be declared like ->
@@ -156,7 +156,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		listheader_CustCity.setSortDescending(new FieldComparator("kunOrt", false));
 
 		// ++ create the searchObject and init sorting ++//
-		searchObj = new HibernateSearchObject<Customer>(Customer.class, countRows);
+		searchObj = new HibernateSearchObject<Customer>(Customer.class, getCountRows());
 		searchObj.addSort("kunName1", false);
 		setSearchObj(searchObj);
 
@@ -247,13 +247,12 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("customer", aCustomer);
 		/*
-		 * we can additionally handed over the listBox, so we have in the dialog
-		 * access to the listbox Listmodel. This is fine for syncronizing the
-		 * data in the customerListbox from the dialog when we do a delete, edit
-		 * or insert a customer.
+		 * we can additionally handed over the listBox or the controller self,
+		 * so we have in the dialog access to the listbox Listmodel. This is
+		 * fine for synchronizing the data in the customerListbox from the
+		 * dialog when we do a delete, edit or insert a customer.
 		 */
-		map.put("lbCustomer", listBoxCustomer);
-		map.put("customerCtrl", this);
+		map.put("customerListCtrl", this);
 
 		// call the zul-file with the parameters packed in a map
 		try {
@@ -366,4 +365,13 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	public void setSearchObj(HibernateSearchObject<Customer> searchObj) {
 		this.searchObj = searchObj;
 	}
+
+	public int getCountRows() {
+		return countRows;
+	}
+
+	public void setCountRows(int countRows) {
+		this.countRows = countRows;
+	}
+
 }

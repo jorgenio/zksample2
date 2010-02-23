@@ -133,8 +133,7 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 
 		int maxListBoxHeight = (height - 155);
-		countRows = Math.round(maxListBoxHeight / 14);
-		// listBoxOffice.setPageSize(countRows);
+		setCountRows(Math.round(maxListBoxHeight / 14));
 
 		borderLayout_officeList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
@@ -153,11 +152,11 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 		listheader_OfficeList_City.setSortDescending(new FieldComparator("filOrt", false));
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, countRows);
+		HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getCountRows());
 		soOffice.addSort("filName1", false);
 
 		// set the paging params
-		paging_OfficeList.setPageSize(countRows);
+		paging_OfficeList.setPageSize(getCountRows());
 		paging_OfficeList.setDetailed(true);
 
 		// Set the ListModel.
@@ -244,12 +243,12 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("office", anOffice);
 		/*
-		 * we can additionally handed over the listBox, so we have in the dialog
-		 * access to the listbox Listmodel. This is fine for synchronizing the
-		 * data in the customerListbox from the dialog when we do a delete, edit
-		 * or insert a customer.
+		 * we can additionally handed over the listBox or the controller self,
+		 * so we have in the dialog access to the listbox Listmodel. This is
+		 * fine for synchronizing the data in the customerListbox from the
+		 * dialog when we do a delete, edit or insert a customer.
 		 */
-		map.put("lbOffice", listBoxOffice);
+		map.put("officeListCtrl", this);
 
 		// call the zul-file with the parameters packed in a map
 		try {
@@ -301,7 +300,7 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 		tb_Office_City.setValue(""); // clear
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, countRows);
+		HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getCountRows());
 		soOffice.addSort("filName1", false);
 
 		// Set the ListModel.
@@ -342,7 +341,7 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 			tb_Office_City.setValue(""); // clear
 
 			// ++ create the searchObject and init sorting ++//
-			HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, countRows);
+			HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getCountRows());
 			soOffice.addFilter(new Filter("filNr", "%" + tb_Office_No.getValue() + "%", Filter.OP_ILIKE));
 			soOffice.addSort("filNr", false);
 
@@ -368,7 +367,7 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 			tb_Office_No.setValue(""); // clear
 
 			// ++ create the searchObject and init sorting ++//
-			HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, countRows);
+			HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getCountRows());
 			soOffice.addFilter(new Filter("filName1", "%" + tb_Office_Name.getValue() + "%", Filter.OP_ILIKE));
 			soOffice.addSort("filName1", false);
 
@@ -394,7 +393,7 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 			tb_Office_No.setValue(""); // clear
 
 			// ++ create the searchObject and init sorting ++//
-			HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, countRows);
+			HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getCountRows());
 			soOffice.addFilter(new Filter("filOrt", "%" + tb_Office_City.getValue() + "%", Filter.OP_ILIKE));
 			soOffice.addSort("filOrt", false);
 
@@ -414,6 +413,14 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 
 	public OfficeService getOfficeService() {
 		return officeService;
+	}
+
+	public int getCountRows() {
+		return countRows;
+	}
+
+	public void setCountRows(int countRows) {
+		this.countRows = countRows;
 	}
 
 }

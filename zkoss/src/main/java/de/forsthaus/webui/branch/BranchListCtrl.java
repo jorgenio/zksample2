@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 import org.apache.log4j.Logger;
+import org.h2.command.ddl.SetComment;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
@@ -62,12 +63,10 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
  * @author bbruhns
  * @author sgerth
  */
-public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements
-		Serializable {
+public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializable {
 
 	private static final long serialVersionUID = 2038742641853727975L;
-	private transient final static Logger logger = Logger
-			.getLogger(BranchListCtrl.class);
+	private transient final static Logger logger = Logger.getLogger(BranchListCtrl.class);
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * All the components that are defined here and have a corresponding
@@ -123,37 +122,30 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements
 		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
 		 * filled by onClientInfo() in the indexCtroller
 		 */
-		int height = ((Intbox) Path
-				.getComponent("/outerIndexWindow/currentDesktopHeight"))
-				.getValue().intValue();
+		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 
 		int maxListBoxHeight = (height - 160);
-		countRows = Math.round(maxListBoxHeight / 17);
+		setCountRows(Math.round(maxListBoxHeight / 17));
 
-		borderLayout_branchList.setHeight(String.valueOf(maxListBoxHeight)
-				+ "px");
+		borderLayout_branchList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		// init, show all branches
 		checkbox_Branch_ShowAll.setChecked(true);
 
 		// set the paging params
-		paging_BranchList.setPageSize(countRows);
+		paging_BranchList.setPageSize(getCountRows());
 		paging_BranchList.setDetailed(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		listheader_Branch_Description.setSortAscending(new FieldComparator(
-				"braBezeichnung", true));
-		listheader_Branch_Description.setSortDescending(new FieldComparator(
-				"braBezeichnung", false));
+		listheader_Branch_Description.setSortAscending(new FieldComparator("braBezeichnung", true));
+		listheader_Branch_Description.setSortDescending(new FieldComparator("braBezeichnung", false));
 
 		// ++ create the searchObject and init sorting ++ //
-		HibernateSearchObject<Branche> searchObjBranch = new HibernateSearchObject<Branche>(
-				Branche.class, countRows);
+		HibernateSearchObject<Branche> searchObjBranch = new HibernateSearchObject<Branche>(Branche.class, getCountRows());
 		searchObjBranch.addSort("braBezeichnung", false);
 		// Set the ListModel
-		getPagedListWrapper().init(searchObjBranch, listBoxBranch,
-				paging_BranchList);
+		getPagedListWrapper().init(searchObjBranch, listBoxBranch, paging_BranchList);
 		// set the itemRenderer
 		listBoxBranch.setItemRenderer(new BranchListModelItemRenderer());
 
@@ -166,15 +158,11 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements
 
 		UserWorkspace workspace = getUserWorkspace();
 
-		window_BranchesList.setVisible(workspace
-				.isAllowed("window_BranchesList"));
+		window_BranchesList.setVisible(workspace.isAllowed("window_BranchesList"));
 		btnHelp.setVisible(workspace.isAllowed("button_BranchList_btnHelp"));
-		button_BranchList_NewBranch.setVisible(workspace
-				.isAllowed("button_BranchList_NewBranch"));
-		button_BranchList_PrintBranches.setVisible(workspace
-				.isAllowed("button_BranchList_PrintBranches"));
-		button_BranchList_Search_BranchName.setVisible(workspace
-				.isAllowed("button_BranchList_Search_BranchName"));
+		button_BranchList_NewBranch.setVisible(workspace.isAllowed("button_BranchList_NewBranch"));
+		button_BranchList_PrintBranches.setVisible(workspace.isAllowed("button_BranchList_PrintBranches"));
+		button_BranchList_Search_BranchName.setVisible(workspace.isAllowed("button_BranchList_Search_BranchName"));
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -195,8 +183,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
-				"INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 	}
 
 	/**
@@ -228,8 +215,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements
 	/**
 	 * Call the Article dialog with a new empty entry. <br>
 	 */
-	public void onClick$button_BranchList_NewBranch(Event event)
-			throws Exception {
+	public void onClick$button_BranchList_NewBranch(Event event) throws Exception {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
@@ -260,28 +246,25 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("branche", aBranche);
 		/*
-		 * we can additionally handed over the listBox, so we have in the dialog
-		 * access to the listbox Listmodel. This is fine for synchronizing the
-		 * data in the customerListbox from the dialog when we do a delete, edit
-		 * or insert a customer.
+		 * we can additionally handed over the listBox or the controller self,
+		 * so we have in the dialog access to the listbox Listmodel. This is
+		 * fine for synchronizing the data in the customerListbox from the
+		 * dialog when we do a delete, edit or insert a customer.
 		 */
-		map.put("lbBranch", listBoxBranch);
+		map.put("branchListCtrl", this);
 
 		// call the zul-file with the parameters packed in a map
 		try {
-			Executions.createComponents(
-					"/WEB-INF/pages/branch/branchDialog.zul", null, map);
+			Executions.createComponents("/WEB-INF/pages/branch/branchDialog.zul", null, map);
 		} catch (Exception e) {
-			logger.error("onOpenWindow:: error opening window / "
-					+ e.getMessage());
+			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
 			// Show a error box
 			String msg = e.getMessage();
 			String title = Labels.getLabel("message_Error");
 
 			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK,
-					"ERROR", true);
+			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
 		}
 	}
 
@@ -308,8 +291,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements
 	 * @param event
 	 * @throws InterruptedException
 	 */
-	public void onClick$button_BranchList_PrintBranches(Event event)
-			throws InterruptedException {
+	public void onClick$button_BranchList_PrintBranches(Event event) throws InterruptedException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
@@ -317,16 +299,14 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
-				"INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 
 	}
 
 	/**
 	 * Filter the branch list with 'like branch name'. <br>
 	 */
-	public void onClick$button_BranchList_Search_BranchName(Event event)
-			throws Exception {
+	public void onClick$button_BranchList_Search_BranchName(Event event) throws Exception {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
@@ -337,10 +317,8 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements
 			checkbox_Branch_ShowAll.setChecked(false); // unCheck
 
 			// ++ create the searchObject and init sorting ++//
-			HibernateSearchObject<Branche> searchObjBranch = new HibernateSearchObject<Branche>(
-					Branche.class, countRows);
-			searchObjBranch.addFilter(new Filter("braBezeichnung", "%"
-					+ tb_Branch_Name.getValue() + "%", Filter.OP_ILIKE));
+			HibernateSearchObject<Branche> searchObjBranch = new HibernateSearchObject<Branche>(Branche.class, getCountRows());
+			searchObjBranch.addFilter(new Filter("braBezeichnung", "%" + tb_Branch_Name.getValue() + "%", Filter.OP_ILIKE));
 			searchObjBranch.addSort("braBezeichnung", false);
 
 			getPagedListWrapper().setSearchObject(searchObjBranch);
@@ -358,4 +336,13 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements
 	public BrancheService getBrancheService() {
 		return brancheService;
 	}
+
+	public int getCountRows() {
+		return countRows;
+	}
+
+	public void setCountRows(int countRows) {
+		this.countRows = countRows;
+	}
+
 }

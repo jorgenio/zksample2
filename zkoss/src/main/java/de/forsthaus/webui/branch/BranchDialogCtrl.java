@@ -37,6 +37,7 @@ import org.zkoss.zul.Window;
 import de.forsthaus.UserWorkspace;
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.service.BrancheService;
+import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
@@ -71,11 +72,12 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	protected transient Textbox braBezeichnung; // autowired
 
 	// not wired vars
-	transient Listbox lbBranch; // overhanded per param
+	// private transient Listbox lbBranch; // overhanded per param
 
 	// old value vars for edit mode. that we can check if something
 	// on the values are edited since the last init.
 	private transient String oldVar_braBezeichnung;
+	transient BranchListCtrl branchListCtrl; // overhanded per param
 
 	private transient boolean validationOn;
 
@@ -135,13 +137,15 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 			setBranche(null);
 		}
 
-		// we get the listBox Object for the branch list. So we have access
-		// to it and can synchronize the shown data when we do insert, edit or
-		// delete branches here.
-		if (args.containsKey("lbBranch")) {
-			lbBranch = (Listbox) args.get("lbBranch");
+		/*
+		 * we get the branchListController Object for the branch list. So we
+		 * have access to it and can synchronize the shown data when we do
+		 * insert, edit or delete branches here.
+		 */
+		if (args.containsKey("branchListCtrl")) {
+			setBranchListCtrl((BranchListCtrl) args.get("branchListCtrl"));
 		} else {
-			lbBranch = null;
+			setBranchListCtrl(null);
 		}
 
 		// set Field Properties
@@ -409,6 +413,8 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (aBranche.isNew()) {
 			btnCtrl.setInitNew();
 			doEdit();
+			// setFocus
+			braBezeichnung.focus();
 		} else {
 			btnCtrl.setInitEdit();
 			doReadOnly();
@@ -530,8 +536,14 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 				// delete from database
 				getBrancheService().delete(aBranche);
 
+				// ++ create the searchObject and init sorting ++ //
+				HibernateSearchObject<Branche> searchObjBranch = new HibernateSearchObject<Branche>(Branche.class, branchListCtrl.getCountRows());
+				searchObjBranch.addSort("braBezeichnung", false);
+				// Set the ListModel
+				getBranchListCtrl().getPagedListWrapper().setSearchObject(searchObjBranch);
+
 				// now synchronize the branches listBox
-				ListModelList lml = (ListModelList) lbBranch.getListModel();
+				ListModelList lml = (ListModelList) getBranchListCtrl().listBoxBranch.getListModel();
 
 				// Check if the branch object is new or updated
 				// -1 means that the object is not in the list, so it's
@@ -568,6 +580,10 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// remember the old vars
 		doStoreInitValues();
+
+		// setFocus
+		braBezeichnung.focus();
+
 	}
 
 	/**
@@ -653,8 +669,14 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 				return;
 			}
 
+			// ++ create the searchObject and init sorting ++ //
+			HibernateSearchObject<Branche> soBranche = new HibernateSearchObject<Branche>(Branche.class, branchListCtrl.getCountRows());
+			soBranche.addSort("braBezeichnung", false);
+			// Set the ListModel
+			getBranchListCtrl().getPagedListWrapper().setSearchObject(soBranche);
+
 			// now synchronize the branches listBox
-			ListModelList lml = (ListModelList) lbBranch.getListModel();
+			ListModelList lml = (ListModelList) getBranchListCtrl().listBoxBranch.getListModel();
 
 			// Check if the branch object is new or updated
 			// -1 means that the object is not in the list, so it's new.
@@ -698,6 +720,14 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	public void setBranche(Branche branche) {
 		this.branche = branche;
+	}
+
+	public BranchListCtrl getBranchListCtrl() {
+		return branchListCtrl;
+	}
+
+	public void setBranchListCtrl(BranchListCtrl branchListCtrl) {
+		this.branchListCtrl = branchListCtrl;
 	}
 
 }

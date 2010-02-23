@@ -51,7 +51,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
- * This is the controller class for the /WEB-INF/pages/article/articleList.zul file.<br>
+ * This is the controller class for the /WEB-INF/pages/article/articleList.zul
+ * file.<br>
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
  * 
  * @changes 05/15/2009: sge Migrating the list models for paging. <br>
@@ -130,17 +131,14 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		int maxListBoxHeight = (height - 210);
-		countRows = Math.round(maxListBoxHeight / 14);
-		// listBoxArticle.setPageSize(countRows);
+		setCountRows(Math.round(maxListBoxHeight / 14));
 
 		borderLayout_articleList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		// init, show all articles
 		checkbox_ArticleList_ShowAll.setChecked(true);
 
-		// set the paging params
-		int pageSize = countRows;
-		paging_ArticleList.setPageSize(pageSize);
+		paging_ArticleList.setPageSize(getCountRows());
 		paging_ArticleList.setDetailed(true);
 
 		// not used listheaders must be declared like ->
@@ -153,7 +151,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		listheader_ArticleList_SinglePrice.setSortDescending(new FieldComparator("artPreis", false));
 
 		// ++ create the searchObject and init sorting ++ //
-		HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, pageSize);
+		HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, getCountRows());
 		soArticle.addSort("artNr", false);
 
 		// Set the ListModel for the articles.
@@ -286,12 +284,12 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("article", anArticle);
 		/*
-		 * we can additionally handed over the listBox, so we have in the dialog
-		 * access to the listbox Listmodel. This is fine for synchronizing the
-		 * data in the articleListbox from the dialog when we do a delete, edit
-		 * or insert an article.
+		 * we can additionally handed over the listBox or the controller self,
+		 * so we have in the dialog access to the listbox Listmodel. This is
+		 * fine for synchronizing the data in the customerListbox from the
+		 * dialog when we do a delete, edit or insert a customer.
 		 */
-		map.put("lbArticle", listBoxArticle);
+		map.put("articleListCtrl", this);
 
 		// call the zul-file with the parameters packed in a map
 		try {
@@ -343,7 +341,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		tb_Article_Name.setValue(""); // clear
 
 		// ++ create the searchObject and init sorting ++ //
-		HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, countRows);
+		HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, getCountRows());
 		soArticle.addSort("artNr", false);
 
 		// Set the ListModel for the articles.
@@ -384,7 +382,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 			tb_Article_Name.setValue(""); // clear
 
 			// ++ create the searchObject and init sorting ++ //
-			HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, countRows);
+			HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, getCountRows());
 			soArticle.addFilter(new Filter("artNr", "%" + tb_Article_ArticleID.getValue() + "%", Filter.OP_ILIKE));
 			soArticle.addSort("artNr", false);
 
@@ -409,7 +407,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 			tb_Article_ArticleID.setValue(""); // clear
 
 			// ++ create the searchObject and init sorting ++ //
-			HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, countRows);
+			HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, getCountRows());
 			soArticle.addFilter(new Filter("artKurzbezeichnung", "%" + tb_Article_Name.getValue() + "%", Filter.OP_ILIKE));
 			soArticle.addSort("artKurzbezeichnung", false);
 
@@ -430,4 +428,13 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	public ArticleService getArticleService() {
 		return articleService;
 	}
+
+	public int getCountRows() {
+		return countRows;
+	}
+
+	public void setCountRows(int countRows) {
+		this.countRows = countRows;
+	}
+
 }

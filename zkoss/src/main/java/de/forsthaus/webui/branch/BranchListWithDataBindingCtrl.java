@@ -28,6 +28,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zkex.zul.Borderlayout;
+import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.FieldComparator;
@@ -102,6 +103,8 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 	private transient Branche selectedBranche;
 	private transient Branche branche;
 
+	private AnnotateDataBinder binder;
+
 	/**
 	 * default constructor.<br>
 	 */
@@ -123,6 +126,7 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 		doCheckRights();
 
 		doCreateDataBinding(window_BranchesListWithDataBinding);
+		setBinder(binder);
 
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
@@ -132,7 +136,7 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 
 		int maxListBoxHeight = (height - 160);
-		countRows = Math.round(maxListBoxHeight / 17);
+		setCountRows(Math.round(maxListBoxHeight / 17));
 
 		borderLayout_branchListWithDataBinding.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
@@ -245,12 +249,12 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("branche", aBranche);
 		/*
-		 * we can additionally handed over the listBox, so we have in the dialog
-		 * access to the listbox Listmodel. This is fine for synchronizing the
-		 * data in the customerListbox from the dialog when we do a delete, edit
-		 * or insert a customer.
+		 * we can additionally handed over the listBox or the controller self,
+		 * so we have in the dialog access to the listbox Listmodel. This is
+		 * fine for synchronizing the data in the customerListbox from the
+		 * dialog when we do a delete, edit or insert a customer.
 		 */
-		map.put("lbBranch", listBoxBranch);
+		map.put("branchListWithDataBindingCtrl", this);
 
 		// call the zul-file with the parameters packed in a map
 		try {
@@ -316,7 +320,7 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 			checkbox_Branch_ShowAll.setChecked(false); // unCheck
 
 			// ++ create the searchObject and init sorting ++//
-			HibernateSearchObject<Branche> searchObjBranch = new HibernateSearchObject<Branche>(Branche.class, countRows);
+			HibernateSearchObject<Branche> searchObjBranch = new HibernateSearchObject<Branche>(Branche.class, getCountRows());
 			searchObjBranch.addFilter(new Filter("braBezeichnung", "%" + tb_Branch_Name.getValue() + "%", Filter.OP_ILIKE));
 			searchObjBranch.addSort("braBezeichnung", false);
 
@@ -359,4 +363,21 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 	public Branche getSelectedBranche() {
 		return selectedBranche;
 	}
+
+	public int getCountRows() {
+		return countRows;
+	}
+
+	public void setCountRows(int countRows) {
+		this.countRows = countRows;
+	}
+
+	public AnnotateDataBinder getBinder() {
+		return binder;
+	}
+
+	public void setBinder(AnnotateDataBinder binder) {
+		this.binder = binder;
+	}
+
 }

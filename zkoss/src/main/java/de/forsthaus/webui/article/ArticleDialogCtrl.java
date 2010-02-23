@@ -30,7 +30,6 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.ListModelList;
-import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.SimpleConstraint;
 import org.zkoss.zul.Textbox;
@@ -39,6 +38,7 @@ import org.zkoss.zul.Window;
 import de.forsthaus.UserWorkspace;
 import de.forsthaus.backend.model.Article;
 import de.forsthaus.backend.service.ArticleService;
+import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
@@ -60,8 +60,7 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
 public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -546886879998950467L;
-	private transient static final Logger logger = Logger
-			.getLogger(ArticleDialogCtrl.class);
+	private transient static final Logger logger = Logger.getLogger(ArticleDialogCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -71,13 +70,14 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
 	protected transient Window window_ArticlesDialog; // autowired
+	protected transient ArticleListCtrl articleListCtrl; // overhanded per param
+
 	protected transient Textbox artNr; // autowired
 	protected transient Textbox artKurzbezeichnung; // autowired
 	protected transient Textbox artLangbezeichnung; // autowired
 	protected transient Decimalbox artPreis; // autowired
 
 	// not wired vars
-	private transient Listbox lbArticle; // overhanded per param
 	private transient Article article; // overhanded per param
 
 	// old value vars for edit mode. that we can check if something
@@ -136,9 +136,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doCheckRights();
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(),
-				btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave,
-				btnCancel, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -153,10 +151,10 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// we get the listBox Object for the articles list. So we have access
 		// to it and can synchronize the shown data when we do insert, edit or
 		// delete articles here.
-		if (args.containsKey("lbArticle")) {
-			lbArticle = (Listbox) args.get("lbArticle");
+		if (args.containsKey("articleListCtrl")) {
+			articleListCtrl = (ArticleListCtrl) args.get("articleListCtrl");
 		} else {
-			lbArticle = null;
+			articleListCtrl = null;
 		}
 
 		// set Field Properties
@@ -173,23 +171,14 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		UserWorkspace workspace = getUserWorkspace();
 
-		window_ArticlesDialog.setVisible(workspace
-				.isAllowed("window_ArticlesDialog"));
+		window_ArticlesDialog.setVisible(workspace.isAllowed("window_ArticlesDialog"));
 
-		btnHelp
-				.setVisible(workspace
-						.isAllowed("button_ArticlesDialog_btnHelp"));
+		btnHelp.setVisible(workspace.isAllowed("button_ArticlesDialog_btnHelp"));
 		btnNew.setVisible(workspace.isAllowed("button_ArticlesDialog_btnNew"));
-		btnEdit
-				.setVisible(workspace
-						.isAllowed("button_ArticlesDialog_btnEdit"));
-		btnDelete.setVisible(workspace
-				.isAllowed("button_ArticlesDialog_btnDelete"));
-		btnSave
-				.setVisible(workspace
-						.isAllowed("button_ArticlesDialog_btnSave"));
-		btnClose.setVisible(workspace
-				.isAllowed("button_ArticlesDialog_btnClose"));
+		btnEdit.setVisible(workspace.isAllowed("button_ArticlesDialog_btnEdit"));
+		btnDelete.setVisible(workspace.isAllowed("button_ArticlesDialog_btnDelete"));
+		btnSave.setVisible(workspace.isAllowed("button_ArticlesDialog_btnSave"));
+		btnClose.setVisible(workspace.isAllowed("button_ArticlesDialog_btnClose"));
 
 	}
 
@@ -256,8 +245,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
-				"INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 	}
 
 	/**
@@ -343,27 +331,24 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			String message = Labels
-					.getLabel("message_Data_Modified_Save_Data_YesNo");
+			String message = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
 			String title = Labels.getLabel("message_Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(message, title,
-					MultiLineMessageBox.YES | MultiLineMessageBox.NO,
-					MultiLineMessageBox.QUESTION, true, new EventListener() {
-						public void onEvent(Event evt) {
-							switch (((Integer) evt.getData()).intValue()) {
-							case MultiLineMessageBox.YES:
-								try {
-									doSave();
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
-							case MultiLineMessageBox.NO:
-								break; // 
-							}
+			if (MultiLineMessageBox.show(message, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
+				public void onEvent(Event evt) {
+					switch (((Integer) evt.getData()).intValue()) {
+					case MultiLineMessageBox.YES:
+						try {
+							doSave();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
 						}
+					case MultiLineMessageBox.NO:
+						break; // 
 					}
+				}
+			}
 
 			) == MultiLineMessageBox.YES) {
 			}
@@ -434,6 +419,8 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (anArticle.isNew()) {
 			btnCtrl.setInitNew();
 			doEdit();
+			// set Focus
+			artNr.focus();
 		} else {
 			btnCtrl.setInitEdit();
 			doReadOnly();
@@ -548,44 +535,45 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final Article anArticle = getArticle();
 
 		// Show a confirm box
-		String message = Labels
-				.getLabel("message.question.are_you_sure_to_delete_this_record")
-				+ "\n\n --> " + anArticle.getArtKurzbezeichnung();
+		String message = Labels.getLabel("message.question.are_you_sure_to_delete_this_record") + "\n\n --> " + anArticle.getArtKurzbezeichnung();
 		String title = Labels.getLabel("message_Deleting_Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(message, title, MultiLineMessageBox.YES
-				| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
-				new EventListener() {
-					public void onEvent(Event evt) {
-						switch (((Integer) evt.getData()).intValue()) {
-						case MultiLineMessageBox.YES:
-							deleteArticle();
-						case MultiLineMessageBox.NO:
-							break; // 
-						}
-					}
-
-					private void deleteArticle() {
-
-						// delete from database
-						getArticleService().delete(anArticle);
-
-						// now synchronize the branches listBox
-						ListModelList lml = (ListModelList) lbArticle
-								.getListModel();
-
-						// Check if the branch object is new or updated
-						// -1 means that the obj is not in the list, so it's
-						// new.
-						if (lml.indexOf(anArticle) == -1) {
-						} else {
-							lml.remove(lml.indexOf(anArticle));
-						}
-
-						window_ArticlesDialog.onClose(); // close the dialog
-					}
+		if (MultiLineMessageBox.show(message, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
+			public void onEvent(Event evt) {
+				switch (((Integer) evt.getData()).intValue()) {
+				case MultiLineMessageBox.YES:
+					deleteArticle();
+				case MultiLineMessageBox.NO:
+					break; // 
 				}
+			}
+
+			private void deleteArticle() {
+
+				// delete from database
+				getArticleService().delete(anArticle);
+
+				// ++ create the searchObject and init sorting ++ //
+				HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, getArticleListCtrl().getCountRows());
+				soArticle.addSort("artNr", false);
+				// Set the ListModel for the articles.
+				getArticleListCtrl().getPagedListWrapper().setSearchObject(soArticle);
+
+				// now synchronize the articles listBox
+				ListModelList lml = (ListModelList) getArticleListCtrl().listBoxArticle.getListModel();
+
+				// Check if the branch object is new or updated
+				// -1 means that the obj is not in the list, so it's
+				// new.
+				if (lml.indexOf(anArticle) == -1) {
+				} else {
+					lml.remove(lml.indexOf(anArticle));
+				}
+
+				window_ArticlesDialog.onClose(); // close the dialog
+			}
+		}
 
 		) == MultiLineMessageBox.YES) {
 		}
@@ -608,6 +596,9 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		btnCtrl.setBtnStatus_New();
 
 		doStoreInitValues();
+
+		// set Focus
+		artNr.focus();
 	}
 
 	/**
@@ -677,8 +668,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 			String message = e.getMessage();
 			String title = Labels.getLabel("message_Error");
 			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
-					"ERROR", true);
+			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 
 			// Reset to init values
 			doResetInitValues();
@@ -688,8 +678,14 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 			return;
 		}
 
-		// now synchronize the listBox
-		ListModelList lml = (ListModelList) lbArticle.getListModel();
+		// ++ create the searchObject and init sorting ++ //
+		HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, getArticleListCtrl().getCountRows());
+		soArticle.addSort("artNr", false);
+		// Set the ListModel for the articles.
+		getArticleListCtrl().getPagedListWrapper().setSearchObject(soArticle);
+
+		// now synchronize the articles listBox
+		ListModelList lml = (ListModelList) getArticleListCtrl().listBoxArticle.getListModel();
 
 		// Check if the branch object is new or updated
 		// -1 means that the obj is not in the list, so its new.
@@ -731,6 +727,14 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	public void setArticle(Article article) {
 		this.article = article;
+	}
+
+	public ArticleListCtrl getArticleListCtrl() {
+		return articleListCtrl;
+	}
+
+	public void setArticleListCtrl(ArticleListCtrl articleListCtrl) {
+		this.articleListCtrl = articleListCtrl;
 	}
 
 }

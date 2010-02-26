@@ -36,13 +36,16 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.FieldComparator;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listhead;
 import org.zkoss.zul.Listheader;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Paging;
 import org.zkoss.zul.Panelchildren;
@@ -135,6 +138,7 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	private transient final FieldComparator fcKunName2_Desc = new FieldComparator("kunName2", false);
 	private transient final FieldComparator fcKunOrt_Asc = new FieldComparator("kunOrt", true);
 	private transient final FieldComparator fcKunOrt_Desc = new FieldComparator("kunOrt", false);
+	protected transient Button btnEditCustomerListbox;
 
 	private transient CustomerService customerService;
 	private transient BrancheService brancheService;
@@ -210,8 +214,7 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 		logger.info(event.getName());
 
 		try {
-			if (Messagebox.CANCEL == Messagebox.show("Question is pressed. Are you sure?", "Question", Messagebox.OK | Messagebox.CANCEL,
-					Messagebox.QUESTION)) {
+			if (Messagebox.CANCEL == Messagebox.show("Question is pressed. Are you sure?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION)) {
 				System.out.println("Messagebox.CANCEL selected!");
 				return;
 			}
@@ -447,6 +450,34 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 		//
 		// Order anOrder = getOrderService().getOrderById(40);
 		// getReportService().printAuftragsPositionen(anOrder, repParams);
+	}
+
+	public void onClick$btnEditCustomerListbox(Event event) {
+		List<Listitem> lstArr = listBoxCustomer.getItems();
+		logger.debug("Count items :" + listBoxCustomer.getItemCount());
+		// for (Listitem lstItem : lstArr)
+		for (Object item : listBoxCustomer.getItems()) {
+			logger.debug("item :" + item);
+			if (item instanceof Listitem) {
+				Listitem lstItem = (Listitem) item;
+				for (Object cell : ((Listitem) lstItem).getChildren()) {
+					logger.debug("cell :" + cell);
+					// CHILDREN COUNT is ALWAYS 1
+					if (cell instanceof Listcell) {
+						Listcell listcell = (Listcell) cell;
+
+						logger.debug("cell :" + listcell.getLabel());
+						for (Object innercell : listcell.getChildren()) {
+							// NEVER GET HERE
+							if (innercell instanceof Checkbox) {
+								logger.debug("InnerCell = Checkbox");
+								((Checkbox) innercell).setDisabled(false);
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	public void setOfficeService(OfficeService officeService) {

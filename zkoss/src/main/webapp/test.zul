@@ -4,7 +4,8 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 
-<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml"
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
@@ -14,8 +15,7 @@
 
 			<style>
 				body { padding: 0 0; /* 0 padding on top and bottom and
-				0
-				padding on right and left */ }
+				0 padding on right and left */ }
 			</style>
 
 			<zscript><![CDATA[
@@ -26,7 +26,8 @@
 
 
 			<vbox>
-				<label value="Angemeldet als:  ${execution.userPrincipal.name}">
+				<label
+					value="Angemeldet als:  ${execution.userPrincipal.name}">
 				</label>
 				<label
 					value="letzter loginfehler: ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}">
@@ -34,33 +35,46 @@
 
 				<hbox>
 					<button label="zur Anwendung" href="index.zul" />
-					<button label="PolicyManager.test()" onClick="userDetailsService.test()" />
+					<button label="PolicyManager.test()"
+						onClick="userDetailsService.test()" />
 
-					<button id="hhh" label="Logout" href="/j_spring_logout" />
+					<button id="hhh" label="Logout"
+						href="/j_spring_logout" />
 
-					<button id="btn_123" label="login" href="/pages/index.zul" />
+					<button id="btn_123" label="login"
+						href="/pages/index.zul" />
 
 					<button id="test" label="test" />
-					<button id="btn_javaListbox" label="java Listbox creation" />
+					<button id="btn_javaListbox"
+						label="java Listbox creation" />
 
-					<button id="BtnSerializeFC" label="Serialize FieldComparator" />
-					<button id="BtnSerializeTB" label="Serialize Textbox" />
+					<button id="BtnSerializeFC"
+						label="Serialize FieldComparator" />
+					<button id="BtnSerializeTB"
+						label="Serialize Textbox" />
 
-					<button id="btn_Test2" label="Test 2 = Messagebox check" />
-					<toolbarbutton label="link" href="http://www.forsthaus.de/blog" />
+					<button id="btn_Test2"
+						label="Test 2 = Messagebox check" />
+					<toolbarbutton label="link"
+						href="http://www.forsthaus.de/blog" />
 				</hbox>
 
 				<hbox>
 					<button id="btn_ChangeTheme" label="change Theme" />
-					<button id="btn_CountLoginsPerHour" label="Count logins/hour" />
-					<button id="btn_fillIp2CountryOnceForAppUpdate" label="1. Update log from IpToCountry table" />
-					<button id="btn_updateIp2CountryFromLookUpHost" label="2. Update IpToCountry log from HostLookUp" />
-					<button id="btn_Ip2CountryImport" label="3. Import Ip2Country CSV" />
+					<button id="btn_CountLoginsPerHour"
+						label="Count logins/hour" />
+					<button id="btn_fillIp2CountryOnceForAppUpdate"
+						label="1. Update log from IpToCountry table" />
+					<button id="btn_updateIp2CountryFromLookUpHost"
+						label="2. Update IpToCountry log from HostLookUp" />
+					<button id="btn_Ip2CountryImport"
+						label="3. Import Ip2Country CSV" />
 					<button id="btn_createWindow" label="CreateWindow" />
 				</hbox>
 
 				<hbox>
-					<button id="btn_CompileReport" label="compile Report" />
+					<button id="btn_CompileReport"
+						label="compile Report" />
 				</hbox>
 
 				<div id="div_DateBox">
@@ -68,39 +82,50 @@
 					<button id="Btn_ResetDatebox" label="Reset Datebox" />
 				</div>
 
-				<label id="label_ee" value="${c:l('label_CustomerDialog_kunOrt.value')}" />
+				<label id="label_ee"
+					value="${c:l('label_CustomerDialog_kunOrt.value')}" />
 
 
 
 				<hbox>
 
-					<button id="button_insertCustomers" label="insert 10000 Customers" />
+					<button id="button_insertCustomers"
+						label="insert 10000 Customers" />
 					<label id="label_InsertCustomer" value="0" />
 				</hbox>
 
 
-				<button id="button_deleteCustomers" label="delete new Customers" />
+				<button id="button_deleteCustomers"
+					label="delete new Customers" />
 
 			</vbox>
 			<separator bar="true" width="200px" />
 
-			<window title="My First Window" border="normal" width="200px">
+			<window title="My First Window" border="normal"
+				width="200px">
 				<vbox id="main">
 					<datebox id="day" />
 				</vbox>
-				<button label="today" onClick="day.setValue(new Date())" />
+				<button label="today"
+					onClick="day.setValue(new Date())" />
 				<button label="new today"
 					onClick="Datebox db=new Datebox(); db.setValue(new Date()); db.setParent(main)" />
 			</window>
 
+			<groupbox use="de.forsthaus.webui.util.test.WPanel" />
+
 			<vbox id="testtabelle">
 				<paging id="pagingBranch" pageSize="5" />
 				<listbox id="listBoxBranch" vflex="true"
-					tooltiptext="${c:l('listbox.tooltiptext')}" width="350px" multiple="false">
+					tooltiptext="${c:l('listbox.tooltiptext')}" width="350px"
+					multiple="false">
 					<listhead sizable="true">
-						<listheader id="listheader_Branch_Description" image="/images/icons/sequence.gif"
-							label="${c:l('listheader_Branch_Description.label')}" width="25%" />
-						<listheader id="listheader_Branch_No" image="/images/icons/builder.gif"
+						<listheader id="listheader_Branch_Description"
+							image="/images/icons/sequence.gif"
+							label="${c:l('listheader_Branch_Description.label')}"
+							width="25%" />
+						<listheader id="listheader_Branch_No"
+							image="/images/icons/builder.gif"
 							label="${c:l('listheader_Branch_No.label')}" width="20%" />
 					</listhead>
 				</listbox>
@@ -108,23 +133,31 @@
 
 			<vbox>
 				<paging id="pagingKunde" pageSize="5" />
-				<listbox id="listBoxCustomer" tooltiptext="${c:l('listbox.tooltiptext')}"
-					multiple="false">
+				<listbox id="listBoxCustomer"
+					tooltiptext="${c:l('listbox.tooltiptext')}" multiple="false">
 					<listhead sizable="true">
-						<listheader id="listheader_CustNo" image="/images/icons/builder.gif"
+						<listheader id="listheader_CustNo"
+							image="/images/icons/builder.gif"
 							label="${c:l('listheader_CustNo.label')}" width="5%" />
-						<listheader id="listheader_CustMatchcode" image="/images/icons/create_doc.gif"
+						<listheader id="listheader_CustMatchcode"
+							image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_CustMatchcode.label')}" width="15%" />
-						<listheader id="listheader_CustName1" image="/images/icons/create_doc.gif"
+						<listheader id="listheader_CustName1"
+							image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_CustName1.label')}" width="20%" />
-						<listheader id="listheader_CustName2" image="/images/icons/create_doc.gif"
+						<listheader id="listheader_CustName2"
+							image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_CustName2.label')}" width="20%" />
-						<listheader id="listheader_CustCity" image="/images/icons/home_blue16x16.gif"
+						<listheader id="listheader_CustCity"
+							image="/images/icons/home_blue16x16.gif"
 							label="${c:l('listheader_CustCity.label')}" width="20%" />
-						<listheader image="/images/icons/edittsk_tsk1.gif"
-							label="Mahnsperre" width="10%" />
+						<listheader
+							image="/images/icons/edittsk_tsk1.gif" label="Mahnsperre"
+							width="10%" />
 					</listhead>
 				</listbox>
+				<button id="btnEditCustomerListbox"
+					label="Edit customer listbox" />
 			</vbox>
 
 
@@ -133,7 +166,7 @@
 	</div>
 </zk>
 
-	<!-- 
+<!-- 
 	sort="auto(braBezeichnung)"
 	sort="auto(braNr)"
 -->

@@ -533,6 +533,8 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doCancel() {
 		doResetInitValues();
+		doReadOnly();
+		btnCtrl.setInitEdit();
 	}
 
 	/**

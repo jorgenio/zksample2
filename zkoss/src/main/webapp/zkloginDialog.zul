@@ -12,7 +12,7 @@
 		padding on right and left */
 		<!-- background image -->
 		background-image:
-		url(http://www.xtreme-soft.org/templates/business_blue/images/Grey_T_R.jpg);
+		url(${c:encodeURL('/images/templates/test/Grey_T_R.jpg')});
 		background-repeat:repeat-x; }
 
 		<!-- cut the vertical borders in the rows -->

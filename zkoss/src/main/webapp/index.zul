@@ -26,7 +26,7 @@
 			padding on right and left */
 			<!-- background image -->
 			background-image:
-			url(http://www.xtreme-soft.org/templates/business_blue/images/Grey_T_R.jpg);
+			url('/images/templates/test/Grey_T_R.jpg');
 			background-repeat:repeat-x; }
 
 			.z-loading { top: 50% !important; left: 45% !important;

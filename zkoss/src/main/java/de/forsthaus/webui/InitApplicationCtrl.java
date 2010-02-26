@@ -47,7 +47,6 @@ import org.zkoss.zul.DialModelScale;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Groupbox;
-import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Panel;
 import org.zkoss.zul.Panelchildren;
@@ -238,9 +237,8 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		Label footerLabel = new Label();
 		footerLabel.setValue(" Help to prevent the global warming by writing cool software.");
-		footerLabel.setStyle("align:center; padding-top:0px; font-family:Verdana; black: white; font-size: 0.6em");
+		footerLabel.setStyle("align:center; padding-top:0px; font-family:Verdana;  font-size: 0.6em; ");
 		footerLabel.setParent(divFooter);
-
 	}
 
 	/**

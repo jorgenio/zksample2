@@ -74,7 +74,7 @@
 								action="j_spring_security_check" method="POST">
 
 								<grid fixedLayout="true"
-									style="border:0px">
+									sclass="GridLayoutNoBorder" style="border:0px">
 									<columns>
 										<column width="40%" />
 										<column width="60%" />
@@ -118,3 +118,12 @@
 
 	</window>
 </zk>
+
+
+<!-- Make Plain Grid -->
+<!-- 
+	.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
+	.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+	background: white; border-top: none; border-left: none;
+	border-right: none; border-bottom: none; }
+-->

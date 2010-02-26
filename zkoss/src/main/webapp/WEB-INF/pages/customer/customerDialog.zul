@@ -15,8 +15,16 @@
 		<style>
 			body { padding: 0 0; /* 0 padding on top and bottom and 0
 			padding on right and left */ }
+
 			<!-- cut the vertical borders in the rows -->
 			tr.z-row td.z-row-inner { border-right: 0px #CCC; }
+
+			<!-- Make Plain Grid -->
+			.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
+			.z-cell,div.z-grid { border: none; overflow: hidden; zoom:
+			1; background: white; border-top: none; border-left: none;
+			border-right: none; border-bottom: none; }
+
 			<!-- Title in bold letters -->
 			.z-groupbox-hl .z-groupbox-header { color: #000000;
 			font-weight: bold; }
@@ -101,7 +109,8 @@
 														label="${c:l('panel_CustomerDialog_Address.title')}" />
 
 													<grid
-														fixedLayout="true" style="border:0px">
+														sclass="GridLayoutNoBorder" fixedLayout="true"
+														style="border:0px">
 														<columns>
 															<column
 																width="150px" />
@@ -182,7 +191,8 @@
 														label="${c:l('panel_CustomerDialog_Addition.title')}" />
 
 													<grid
-														fixedLayout="true" style="border:0px">
+														sclass="GridLayoutNoBorder" fixedLayout="true"
+														style="border:0px">
 														<columns>
 															<column
 																width="150px" />
@@ -212,7 +222,8 @@
 														label="${c:l('panel_CustomerDialog_Phone.title')}" />
 
 													<grid
-														fixedLayout="true" style="border:0px">
+														sclass="GridLayoutNoBorder" fixedLayout="true"
+														style="border:0px">
 														<columns>
 															<column
 																width="150px" />
@@ -275,7 +286,8 @@
 														label="${c:l('panel_CustomerDialog_PayConditions.title')}" />
 
 													<grid
-														fixedLayout="true" style="border:0px">
+														sclass="GridLayoutNoBorder" fixedLayout="true"
+														style="border:0px">
 														<columns>
 															<column
 																width="150px" />
@@ -342,7 +354,8 @@
 														label="${c:l('panel_CustomerDialog_Addition2.title')}" />
 
 													<grid
-														fixedLayout="true" style="border:0px">
+														sclass="GridLayoutNoBorder" fixedLayout="true"
+														style="border:0px">
 														<columns>
 															<column
 																width="150px" />

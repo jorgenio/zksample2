@@ -14,122 +14,52 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 02.03.2010 / Several design changes. Bugfixes. " + lf;
 		s = s + "- 06.02.2010 / Updated to the Spring3 framework. " + lf;
-		s = s
-				+ "- 04.02.2010 / Implementation of the missing Cancel Button in all dialogs. "
-				+ lf;
-		s = s
-				+ "- 29.01.2010 / Changed the style of the address tab in customers dialog. Changed to comboboxes with icons. "
-				+ lf;
-		s = s
-				+ "- 17.01.2010 / Today we checked in this Zksample2 application on SourceForge.net. "
-				+ lf;
-		s = s
-				+ "                      See thread under http://zkoss.org/forum/listComment/10986 "
-				+ lf;
-		s = s
-				+ "- 12.01.2010 / We work hardly on the last pages of the documentation. The countdown for checkin is running. "
-				+ lf;
-		s = s
-				+ "- 04.01.2010 / We fix the 'too many open files' on server. Bad boys attack it! Re-using the webservice for getting the geo-data "
-				+ lf;
-		s = s
-				+ "- 27.12.2009 / Changed the complete update mechanism for the ip geo data, because problems on the linux server with "
-				+ lf;
-		s = s
-				+ "                      'too many open files', when calling the Locator Web Service in a loop. Now we imported the geo "
-				+ lf;
-		s = s
-				+ "                      data from a cvs into a table and can use it from there early by the login process. "
-				+ lf;
-		s = s
-				+ "- 22.12.2009 / Finished the basic Login Statistic. Hard work!!! Björn writes a mapper that maps the HQL aggregate fields "
-				+ lf;
-		s = s
-				+ "                      to domain bean properties. Many thanks. "
-				+ lf;
-		s = s
-				+ "- 19.12.2009 / Splitted the LoginLog module to 3 zul's + 3 controllers. Added some statistics "
-				+ lf;
-		s = s
-				+ "- 15.12.2009 / Clearing code from old 3.5.x stuff. doOnCreateCommon() not used anymore. "
-				+ lf;
-		s = s + "- 13.12.2009 / Tree Menu entries are now openend in Tabs.  "
-				+ lf;
-		s = s
-				+ "- 08.12.2009 / Replaced the last digits from the Users IP with 'xxx' in the gui loginLog list because privacy. "
-				+ lf;
-		s = s
-				+ "- 07.12.2009 / Moved in all dialog windows the CRUD buttons as imageButtons to the toolbar. "
-				+ lf;
-		s = s
-				+ "- 03.12.2009 / Refactoring all Domain/DAO/Service Classes to english names."
-				+ lf;
-		s = s
-				+ "- 22.11.2009 / Second Ip2Country locator from a webService implemented."
-				+ lf;
+		s = s + "- 04.02.2010 / Implementation of the missing Cancel Button in all dialogs. " + lf;
+		s = s + "- 29.01.2010 / Changed the style of the address tab in customers dialog. Changed to comboboxes with icons. " + lf;
+		s = s + "- 17.01.2010 / Today we checked in this Zksample2 application on SourceForge.net. " + lf;
+		s = s + "                      See thread under http://zkoss.org/forum/listComment/10986 " + lf;
+		s = s + "- 12.01.2010 / We work hardly on the last pages of the documentation. The countdown for checkin is running. " + lf;
+		s = s + "- 04.01.2010 / We fix the 'too many open files' on server. Bad boys attack it! Re-using the webservice for getting the geo-data " + lf;
+		s = s + "- 27.12.2009 / Changed the complete update mechanism for the ip geo data, because problems on the linux server with " + lf;
+		s = s + "                      'too many open files', when calling the Locator Web Service in a loop. Now we imported the geo " + lf;
+		s = s + "                      data from a cvs into a table and can use it from there early by the login process. " + lf;
+		s = s + "- 22.12.2009 / Finished the basic Login Statistic. Hard work!!! Björn writes a mapper that maps the HQL aggregate fields " + lf;
+		s = s + "                      to domain bean properties. Many thanks. " + lf;
+		s = s + "- 19.12.2009 / Splitted the LoginLog module to 3 zul's + 3 controllers. Added some statistics " + lf;
+		s = s + "- 15.12.2009 / Clearing code from old 3.5.x stuff. doOnCreateCommon() not used anymore. " + lf;
+		s = s + "- 13.12.2009 / Tree Menu entries are now openend in Tabs.  " + lf;
+		s = s + "- 08.12.2009 / Replaced the last digits from the Users IP with 'xxx' in the gui loginLog list because privacy. " + lf;
+		s = s + "- 07.12.2009 / Moved in all dialog windows the CRUD buttons as imageButtons to the toolbar. " + lf;
+		s = s + "- 03.12.2009 / Refactoring all Domain/DAO/Service Classes to english names." + lf;
+		s = s + "- 22.11.2009 / Second Ip2Country locator from a webService implemented." + lf;
 		s = s + "- 20.11.2009 / Ip2Country locator new in the Login log." + lf;
-		s = s + "- 14.11.2009 / Refactoring to a spring-managed frontend. "
-				+ lf;
-		s = s
-				+ "                      Spring-Security can now work with the Annotation @Secured() for securing methods."
-				+ lf;
-		s = s
-				+ "                      Added a simulation of a one-time password tokenizer. (Thanks to Björn for codes !)"
-				+ lf;
-		s = s
-				+ "                      Added ListFooters in ORDERS module. Clearing some code. Bugfixes. "
-				+ lf;
-		s = s
-				+ "- 23.10.2009 / --------- LAST checkin of the project code in Subversion on code.google -------"
-				+ lf;
-		s = s + "- 23.10.2009 / updating to ZK version 3.6.3 FL 2009-10-23 "
-				+ lf;
-		s = s + "- 21.10.2009 / updating to ZK version 3.6.3 FL 2009-10-16 "
-				+ lf;
-		s = s
-				+ "- 12.10.2009 / allow changing between treeMenu and PullDownMenu (Thanks to Björn for codes !). Bugfixes/Modifications "
-				+ lf;
-		s = s
-				+ "- 29.09.2009 / Added a timer in the main borderlayout south area for date/time."
-				+ lf;
+		s = s + "- 14.11.2009 / Refactoring to a spring-managed frontend. " + lf;
+		s = s + "                      Spring-Security can now work with the Annotation @Secured() for securing methods." + lf;
+		s = s + "                      Added a simulation of a one-time password tokenizer. (Thanks to Björn for codes !)" + lf;
+		s = s + "                      Added ListFooters in ORDERS module. Clearing some code. Bugfixes. " + lf;
+		s = s + "- 23.10.2009 / --------- LAST checkin of the project code in Subversion on code.google -------" + lf;
+		s = s + "- 23.10.2009 / updating to ZK version 3.6.3 FL 2009-10-23 " + lf;
+		s = s + "- 21.10.2009 / updating to ZK version 3.6.3 FL 2009-10-16 " + lf;
+		s = s + "- 12.10.2009 / allow changing between treeMenu and PullDownMenu (Thanks to Björn for codes !). Bugfixes/Modifications " + lf;
+		s = s + "- 29.09.2009 / Added a timer in the main borderlayout south area for date/time." + lf;
 		s = s + "- 17.09.2009 / Added several new chart typs and icons. " + lf;
-		s = s
-				+ "- 10.09.2009 / Added a pie chart to the customer dialog. See tab 'Chart'. Data created for custoNo '20' and '21' "
-				+ lf;
-		s = s + "- 25.08.2009 / Update to ZKoss version 3.6.3. FL-2009-08-20 "
-				+ lf;
-		s = s
-				+ "- 04.08.2009 / Update to ZKoss version 3.6.3. (compiled from source). "
-				+ lf;
-		s = s
-				+ "- 02.08.2009 / Listheaders now fixed by scrolling through a list. "
-				+ lf;
-		s = s
-				+ "- 30.06.2009 / Added a guestbook. Please leave your comments here. "
-				+ lf;
+		s = s + "- 10.09.2009 / Added a pie chart to the customer dialog. See tab 'Chart'. Data created for custoNo '20' and '21' " + lf;
+		s = s + "- 25.08.2009 / Update to ZKoss version 3.6.3. FL-2009-08-20 " + lf;
+		s = s + "- 04.08.2009 / Update to ZKoss version 3.6.3. (compiled from source). " + lf;
+		s = s + "- 02.08.2009 / Listheaders now fixed by scrolling through a list. " + lf;
+		s = s + "- 30.06.2009 / Added a guestbook. Please leave your comments here. " + lf;
 		s = s + "- 29.06.2009 / Updated to ZKoss version 3.6.2. " + lf;
-		s = s
-				+ "-                    new gray theme 'plomo.jar' from here: (thanks to jlcasas) "
-				+ lf;
-		s = s
-				+ "                     http://www.zkoss.org/forum/index.zul#path%3DlistComment%3BdiscussionId%3D6927%3BcategoryId%3D15%3B "
-				+ lf;
+		s = s + "-                    new gray theme 'plomo.jar' from here: (thanks to jlcasas) " + lf;
+		s = s + "                     http://www.zkoss.org/forum/index.zul#path%3DlistComment%3BdiscussionId%3D6927%3BcategoryId%3D15%3B " + lf;
 		s = s + "- 11.06.2009 / Updated to ZKoss version 3.6.2. " + lf;
 		s = s + "- 15.05.2009 / Updated to ZKoss version 3.6.1.  " + lf;
-		s = s
-				+ "- New !!! All listboxes are now working with paging and sorting described in our smalltalk. "
-				+ lf;
-		s = s
-				+ "                      ([Performance] Paging and Sorting with a Filter Object) "
-				+ lf;
-		s = s
-				+ "                      Link: http://docs.zkoss.org/wiki/Paging_Sorting_with_a_filter_object "
-				+ lf;
+		s = s + "- New !!! All listboxes are now working with paging and sorting described in our smalltalk. " + lf;
+		s = s + "                      ([Performance] Paging and Sorting with a Filter Object) " + lf;
+		s = s + "                      Link: http://docs.zkoss.org/wiki/Paging_Sorting_with_a_filter_object " + lf;
 		s = s + " " + lf;
-		s = s
-				+ "- Only pure Java with small zul-files. Minimal use of ZScript."
-				+ lf;
+		s = s + "- Only pure Java with small zul-files. Minimal use of ZScript." + lf;
 
 	}
 ]]></zscript>
@@ -155,6 +85,7 @@
 							value="Stored users are  (username/password):&#13;&#13;admin / admin (full access)&#13;user1 / user1 (full access to the office data)&#13;user2 / user2 (restricted access to the office data. Only view mode.)&#13;headoffice / headoffice (full access to the main data.">
 						</textbox>
 						<textbox rows="6" multiline="true" width="100%"
+							style="font-family: verdana; font-weight: bold"
 							value="Sources are available as Eclipse Projects under  http://zkoss.org/forum/listComment/10986  ">
 						</textbox>
 					</box>

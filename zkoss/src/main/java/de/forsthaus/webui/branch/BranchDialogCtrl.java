@@ -148,18 +148,8 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 			setBranchListCtrl(null);
 		}
 
-		// set Field Properties
-		doSetFieldProperties();
-
 		doShowDialog(getBranche());
 
-	}
-
-	/**
-	 * Set the properties of the fields, like maxLength.<br>
-	 */
-	private void doSetFieldProperties() {
-		braBezeichnung.setMaxlength(30);
 	}
 
 	/**

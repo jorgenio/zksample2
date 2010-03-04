@@ -100,7 +100,7 @@
 											id="label_Branch_BraBezeichnung"
 											value="${c:l('label_Branch_BraBezeichnung.value')}" />
 										<textbox id="braBezeichnung"
-											width="100%" />
+											maxlength="30" width="100%" />
 									</row>
 								</rows>
 							</grid>

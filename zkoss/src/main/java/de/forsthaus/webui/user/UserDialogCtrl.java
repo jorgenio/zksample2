@@ -69,8 +69,7 @@ import de.forsthaus.webui.util.NoEmptyAndEqualStringsConstraint;
 public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -546886879998950467L;
-	private transient static final Logger logger = Logger
-			.getLogger(UserDialogCtrl.class);
+	private transient static final Logger logger = Logger.getLogger(UserDialogCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -173,9 +172,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doCheckRights();
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(),
-				btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave,
-				btnCancel, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -199,15 +196,12 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// Set the ListModel and the itemRenderer. The ZKoss ListmodelList do in
 		// most times satisfy your needs
 		/* Tab Details */
-		listBoxDetails_UserRoles.setModel(new ListModelList(getUserService()
-				.getRolesByUser(user)));
-		listBoxDetails_UserRoles
-				.setItemRenderer(new UserRolesListModelItemRenderer());
+		listBoxDetails_UserRoles.setModel(new ListModelList(getUserService().getRolesByUser(user)));
+		listBoxDetails_UserRoles.setItemRenderer(new UserRolesListModelItemRenderer());
 
 		// +++++++++ DropDown ListBox
 		// set listModel and itemRenderer for the dropdown listbox
-		lbox_usrLocale.setModel(new ListModelList(getUserService()
-				.getAllLanguages()));
+		lbox_usrLocale.setModel(new ListModelList(getUserService().getAllLanguages()));
 		lbox_usrLocale.setItemRenderer(new LanguageListModelItemRenderer());
 
 		// if available, select the object
@@ -217,14 +211,10 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 			lbox_usrLocale.setSelectedIndex(-1);
 		} else {
 			if (!StringUtils.isEmpty(user.getUsrLocale())) {
-				Language lang = getUserService().getLanguageByLocale(
-						user.getUsrLocale());
+				Language lang = getUserService().getLanguageByLocale(user.getUsrLocale());
 				lbox_usrLocale.setSelectedIndex(lml.indexOf(lang));
 			}
 		}
-
-		// set Field Properties
-		doSetFieldProperties();
 
 		doShowDialog(getUser());
 	}
@@ -238,23 +228,18 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		userDialogWindow.setVisible(workspace.isAllowed("userDialogWindow"));
 
-		tab_UserDialog_Details.setVisible(workspace
-				.isAllowed("tab_UserDialog_Details"));
-		tabpanel_UserDialog_Details.setVisible(workspace
-				.isAllowed("tab_UserDialog_Details"));
+		tab_UserDialog_Details.setVisible(workspace.isAllowed("tab_UserDialog_Details"));
+		tabpanel_UserDialog_Details.setVisible(workspace.isAllowed("tab_UserDialog_Details"));
 
 		btnHelp.setVisible(workspace.isAllowed("button_UserDialog_btnHelp"));
 		btnNew.setVisible(workspace.isAllowed("button_UserDialog_btnNew"));
 		btnEdit.setVisible(workspace.isAllowed("button_UserDialog_btnEdit"));
-		btnDelete
-				.setVisible(workspace.isAllowed("button_UserDialog_btnDelete"));
+		btnDelete.setVisible(workspace.isAllowed("button_UserDialog_btnDelete"));
 		btnSave.setVisible(workspace.isAllowed("button_UserDialog_btnSave"));
 		btnClose.setVisible(workspace.isAllowed("button_UserDialog_btnClose"));
 
-		panel_UserDialog_Status.setVisible(workspace
-				.isAllowed("panel_UserDialog_Status"));
-		panel_UserDialog_SecurityToken.setVisible(workspace
-				.isAllowed("panel_UserDialog_SecurityToken"));
+		panel_UserDialog_Status.setVisible(workspace.isAllowed("panel_UserDialog_Status"));
+		panel_UserDialog_SecurityToken.setVisible(workspace.isAllowed("panel_UserDialog_SecurityToken"));
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -320,8 +305,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
-				"INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 	}
 
 	/**
@@ -408,27 +392,24 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			String msg = Labels
-					.getLabel("message_Data_Modified_Save_Data_YesNo");
+			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
 			String title = Labels.getLabel("message_Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
-					| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION,
-					true, new EventListener() {
-						public void onEvent(Event evt) {
-							switch (((Integer) evt.getData()).intValue()) {
-							case MultiLineMessageBox.YES:
-								try {
-									doSave();
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
-							case MultiLineMessageBox.NO:
-								break; // 
-							}
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
+				public void onEvent(Event evt) {
+					switch (((Integer) evt.getData()).intValue()) {
+					case MultiLineMessageBox.YES:
+						try {
+							doSave();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
 						}
+					case MultiLineMessageBox.NO:
+						break; // 
 					}
+				}
+			}
 
 			) == MultiLineMessageBox.YES) {
 			}
@@ -444,6 +425,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doCancel() {
 		doResetInitValues();
+		btnCtrl.setInitEdit();
 	}
 
 	/**
@@ -463,8 +445,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		usrEnabled.setChecked(anUser.isUsrEnabled());
 		usrAccountnonexpired.setChecked(anUser.isUsrAccountnonexpired());
 		usrAccountnonlocked.setChecked(anUser.isUsrAccountnonlocked());
-		usrCredentialsnonexpired
-				.setChecked(anUser.isUsrCredentialsnonexpired());
+		usrCredentialsnonexpired.setChecked(anUser.isUsrCredentialsnonexpired());
 
 		usrToken.setValue(anUser.getUsrToken());
 
@@ -559,19 +540,6 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	/**
-	 * Set the properties of the fields, like maxLength.<br>
-	 */
-	private void doSetFieldProperties() {
-		usrLoginname.setMaxlength(50);
-		usrPassword.setMaxlength(50);
-		usrPasswordRetype.setMaxlength(50);
-		usrFirstname.setMaxlength(50);
-		usrLastname.setMaxlength(50);
-		usrEmail.setMaxlength(200);
-		usrToken.setMaxlength(20);
-	}
-
-	/**
 	 * Stores the init values in mem vars. <br>
 	 */
 	private void doStoreInitValues() {
@@ -643,8 +611,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (oldVar_usrAccountnonexpired != usrAccountnonexpired.isChecked()) {
 			changed = true;
 		}
-		if (oldVar_usrCredentialsnonexpired != usrCredentialsnonexpired
-				.isChecked()) {
+		if (oldVar_usrCredentialsnonexpired != usrCredentialsnonexpired.isChecked()) {
 			changed = true;
 		}
 		if (oldVar_usrAccountnonlocked != usrAccountnonlocked.isChecked()) {
@@ -666,8 +633,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		usrLoginname.setConstraint("NO EMPTY");
 		usrPassword.setConstraint("NO EMPTY");
-		usrPasswordRetype.setConstraint(new NoEmptyAndEqualStringsConstraint(
-				usrPassword));
+		usrPasswordRetype.setConstraint(new NoEmptyAndEqualStringsConstraint(usrPassword));
 		usrFirstname.setConstraint("NO EMPTY");
 		usrLastname.setConstraint("NO EMPTY");
 
@@ -775,47 +741,40 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final SecUser anUser = getUser();
 
 		// Show a confirm box
-		String msg = Labels
-				.getLabel("message.question.are_you_sure_to_delete_this_record")
-				+ "\n\n --> "
-				+ anUser.getUsrLoginname()
-				+ " | "
-				+ anUser.getUsrFirstname() + " ," + anUser.getUsrLastname();
+		String msg = Labels.getLabel("message.question.are_you_sure_to_delete_this_record") + "\n\n --> " + anUser.getUsrLoginname() + " | " + anUser.getUsrFirstname() + " ,"
+				+ anUser.getUsrLastname();
 		String title = Labels.getLabel("message_Deleting_Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
-				| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
-				new EventListener() {
-					public void onEvent(Event evt) {
-						switch (((Integer) evt.getData()).intValue()) {
-						case MultiLineMessageBox.YES:
-							deleteUser();
-						case MultiLineMessageBox.NO:
-							break; // 
-						}
-					}
-
-					private void deleteUser() {
-
-						// delete from database
-						getUserService().delete(anUser);
-
-						// now synchronize the listBox
-						ListModelList lml = (ListModelList) listBoxUser
-								.getListModel();
-
-						// Check if the object is new or updated
-						// -1 means that the obj is not in the list, so it's
-						// new..
-						if (lml.indexOf(anUser) == -1) {
-						} else {
-							lml.remove(lml.indexOf(anUser));
-						}
-
-						userDialogWindow.onClose(); // close the dialog
-					}
+		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
+			public void onEvent(Event evt) {
+				switch (((Integer) evt.getData()).intValue()) {
+				case MultiLineMessageBox.YES:
+					deleteUser();
+				case MultiLineMessageBox.NO:
+					break; // 
 				}
+			}
+
+			private void deleteUser() {
+
+				// delete from database
+				getUserService().delete(anUser);
+
+				// now synchronize the listBox
+				ListModelList lml = (ListModelList) listBoxUser.getListModel();
+
+				// Check if the object is new or updated
+				// -1 means that the obj is not in the list, so it's
+				// new..
+				if (lml.indexOf(anUser) == -1) {
+				} else {
+					lml.remove(lml.indexOf(anUser));
+				}
+
+				userDialogWindow.onClose(); // close the dialog
+			}
+		}
 
 		) == MultiLineMessageBox.YES) {
 		}
@@ -887,8 +846,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 			// String message = e.getCause().getMessage();
 			String title = Labels.getLabel("message_Error");
 			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
-					"ERROR", true);
+			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 
 			// Reset to init values
 			doResetInitValues();

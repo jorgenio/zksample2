@@ -19,12 +19,14 @@
 package de.forsthaus.webui;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Random;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.h2.util.MathUtils;
 import org.zkoss.spring.SpringUtil;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.Hr;
@@ -197,13 +199,13 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		tableChildrenRecords = new Tablechildren();
 		tableChildrenRecords.setRowspan(1);
-		tableChildrenRecords.setWidth("300px");
+		tableChildrenRecords.setWidth("260px");
 		tableChildrenRecords.setStyle("padding-left: 5px;");
 		tableChildrenRecords.setParent(tableLayout);
 
 		tableChildrenStatistic = new Tablechildren();
 		tableChildrenStatistic.setRowspan(1);
-		tableChildrenStatistic.setWidth("400px");
+		tableChildrenStatistic.setWidth("450px");
 		tableChildrenStatistic.setStyle("padding-left: 5px;");
 		tableChildrenStatistic.setParent(tableLayout);
 
@@ -248,7 +250,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		Panel panel = new Panel();
 		panel.setTitle("");
-		panel.setWidth("300px");
+		panel.setWidth("260px");
 		panel.setBorder("none");
 		panel.setStyle("align:left; color:red; ");
 		panel.setParent(tableChildrenRecords);
@@ -264,7 +266,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		Caption caption = new Caption();
 		caption.setParent(gb);
 		caption.setImage("/images/icons/database.gif");
-		caption.setLabel("Demo-Data stored in Postgres 8.2.6 DB");
+		caption.setLabel("Demo-Data in Postgres 8.2.6 DB");
 		caption.setStyle("color: #000000;font-weight:bold; text-align:left ");
 
 		Grid grid = new Grid();
@@ -361,7 +363,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		Statistic stat = de.forsthaus.statistic.Statistic.getStatistic();
 
 		Panel panel = new Panel();
-		panel.setWidth("400px");
+		panel.setWidth("450px");
 		panel.setBorder("none");
 		panel.setStyle("align:left; color:red;");
 		panel.setParent(tableChildrenStatistic);
@@ -390,11 +392,11 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		columns.setParent(grid);
 
 		Column column1 = new Column();
-		column1.setWidth("60%");
+		column1.setWidth("55%");
 		column1.setLabel("Subject");
 		column1.setParent(columns);
 		Column column2 = new Column();
-		column2.setWidth("40%");
+		column2.setWidth("45%");
 		column2.setLabel("value");
 		column2.setParent(columns);
 
@@ -403,22 +405,32 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		addNewRow(rows, "Application Start-Time", String.valueOf(new Date(stat.getStartTime())));
 
-		double d = stat.getRuningHours();
-		String formattedHours = NumberFormat.getInstance().format(d);
-		addNewRow(rows, "Application runing hours", String.valueOf(formattedHours));
+		addNewRow(rows, "Application runing hours", getRoundedDouble(stat.getRuningHours()));
 
 		addNewRow(rows, "Count of active Desktops", String.valueOf(stat.getActiveDesktopCount()));
 		addNewRow(rows, "Count of active Sessions", String.valueOf(stat.getActiveSessionCount()));
 		addNewRow(rows, "Count of active Updates", String.valueOf(stat.getActiveUpdateCount()));
 
-		addNewRow(rows, "Average Count of active Desktops/hour", String.valueOf(stat.getAverageDesktopCount()));
-		addNewRow(rows, "Average Count of active Sessions/hour", String.valueOf(stat.getAverageSessionCount()));
-		addNewRow(rows, "Average Count of active Updates/hour", String.valueOf(stat.getAverageUpdateCount()));
+		addNewRow(rows, "Average Count of active Desktops/hour", getRoundedDouble(stat.getAverageDesktopCount())); // String.valueOf(stat.getAverageDesktopCount()));
+		addNewRow(rows, "Average Count of active Sessions/hour", getRoundedDouble(stat.getAverageSessionCount()));
+		addNewRow(rows, "Average Count of active Updates/hour", getRoundedDouble(stat.getAverageUpdateCount()));
 
 		addNewRow(rows, "Count of total Desktops since start", String.valueOf(stat.getTotalDesktopCount()));
 		addNewRow(rows, "Count of total Sessions since start", String.valueOf(stat.getTotalSessionCount()));
 		addNewRow(rows, "Count of total Updates since start", String.valueOf(stat.getTotalUpdateCount()));
 
+	}
+
+	/**
+	 * Round a double value to a string.
+	 * 
+	 * @param d
+	 * @return
+	 */
+	private String getRoundedDouble(double d) {
+		String result = "";
+		result = java.text.NumberFormat.getInstance().format(d);
+		return result;
 	}
 
 	/**

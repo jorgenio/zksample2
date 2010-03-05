@@ -433,7 +433,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		DecimalFormat df = new DecimalFormat("0.00");
 		result = df.format(d);
-		// result = java.text.NumberFormat.getNumberInstance().format(d);
+
 		return result;
 	}
 

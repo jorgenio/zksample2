@@ -20,6 +20,7 @@ package de.forsthaus.webui;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Random;
@@ -422,14 +423,17 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	}
 
 	/**
-	 * Round a double value to a string.
+	 * Round a double value to a string with two digits.
 	 * 
 	 * @param d
 	 * @return
 	 */
 	private String getRoundedDouble(double d) {
 		String result = "";
-		result = java.text.NumberFormat.getInstance().format(d);
+
+		DecimalFormat df = new DecimalFormat("0.00");
+		result = df.format(d);
+		// result = java.text.NumberFormat.getNumberInstance().format(d);
 		return result;
 	}
 

@@ -117,8 +117,7 @@
 			<vbox id="testtabelle">
 				<paging id="pagingBranch" pageSize="5" />
 				<listbox id="listBoxBranch" vflex="true"
-					tooltiptext="${c:l('listbox.tooltiptext')}" width="350px"
-					multiple="false">
+					tooltiptext="${c:l('listbox.tooltiptext')}" width="350px">
 					<listhead sizable="true">
 						<listheader id="listheader_Branch_Description"
 							image="/images/icons/sequence.gif"
@@ -133,8 +132,8 @@
 
 			<vbox>
 				<paging id="pagingKunde" pageSize="5" />
-				<listbox id="listBoxCustomer"
-					tooltiptext="${c:l('listbox.tooltiptext')}" multiple="false">
+				<listbox id="listBoxCustomer" multiple="true"
+					checkmark="true" tooltiptext="${c:l('listbox.tooltiptext')}">
 					<listhead sizable="true">
 						<listheader id="listheader_CustNo"
 							image="/images/icons/builder.gif"

@@ -480,6 +480,29 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 		}
 	}
 
+	public void onSelect$listBoxCustomer(Event event) throws Exception {
+
+		logger.info(event.getTarget().getClass().getName());
+
+		Listitem li = listBoxCustomer.getSelectedItem();
+
+		// li.setCheckable(false);
+		li.setStyle("background-color:#f3d973");
+
+	}
+
+	public void onCheckmark$listBoxCustomer(Event event) throws Exception {
+
+		logger.info(event.getTarget().getClass().getName());
+
+		Listitem li = listBoxCustomer.getSelectedItem();
+
+		// li.setCheckable(false);
+		li.setStyle("color: black; background-color:#f3d973");
+		listBoxCustomer.invalidate();
+
+	}
+
 	public void setOfficeService(OfficeService officeService) {
 		this.officeService = officeService;
 	}

@@ -372,6 +372,7 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doCancel() {
 		doResetInitValues();
+		btnCtrl.setInitEdit();
 	}
 
 	/**

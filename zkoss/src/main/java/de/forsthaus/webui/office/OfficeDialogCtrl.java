@@ -387,6 +387,7 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doCancel() {
 		doResetInitValues();
+		btnCtrl.setInitEdit();
 	}
 
 	/**

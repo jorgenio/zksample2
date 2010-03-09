@@ -336,6 +336,7 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doCancel() {
 		doResetInitValues();
+		btnCtrl.setInitEdit();
 	}
 
 	/**

@@ -26,6 +26,7 @@ import org.springframework.dao.DataAccessException;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
@@ -159,12 +160,14 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 		 * filled by onClientInfo() in the indexCtroller
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-
-		secRolegroupWindow.setHeight((height - topHeader) + "px");
-
 		int maxListBoxHeight = (height - topHeader - btnTopArea - winTitle);
-		countRowsSecRole = Math.round(maxListBoxHeight / 20);
-		countRowsSecRolegroup = Math.round(maxListBoxHeight / 28);
+		setCountRowsSecRole(Math.round(maxListBoxHeight / 30));
+		setCountRowsSecRolegroup(Math.round(maxListBoxHeight / 36));
+		System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
+		System.out.println("==========> : " + getCountRowsSecRole());
+		System.out.println("==========> : " + getCountRowsSecRolegroup());
+
+		// secRolegroupWindow.setHeight((height - topHeader) + "px");
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
@@ -177,10 +180,10 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 		listheader_SecRoleGroup_GroupName.setSortDescending(new FieldComparator("grpShortdescription", false));
 
 		/* set the PageSize */
-		paging_ListBoxSecRole.setPageSize(countRowsSecRole);
+		paging_ListBoxSecRole.setPageSize(getCountRowsSecRole());
 		paging_ListBoxSecRole.setDetailed(true);
 
-		paging_ListBoxSecRolegroup.setPageSize(countRowsSecRolegroup);
+		paging_ListBoxSecRolegroup.setPageSize(getCountRowsSecRolegroup());
 		paging_ListBoxSecRolegroup.setDetailed(true);
 
 		// main borderlayout height = window.height - (Panels Top)
@@ -193,7 +196,7 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 
 		/* Tab Details */
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, countRowsSecRole);
+		HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRowsSecRole());
 		soSecRole.addSort("rolShortdescription", false);
 
 		// Set the ListModel.
@@ -207,7 +210,7 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 		listBoxSecRole.setSelectedIndex(0);
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecGroup> soSecRolegroup = new HibernateSearchObject<SecGroup>(SecGroup.class, countRowsSecRolegroup);
+		HibernateSearchObject<SecGroup> soSecRolegroup = new HibernateSearchObject<SecGroup>(SecGroup.class, getCountRowsSecRolegroup());
 		soSecRolegroup.addSort("grpShortdescription", false);
 
 		// Set the ListModel.
@@ -255,29 +258,26 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	}
 
 	/**
-	 * when the "close" button is clicked. <br>
+	 * when the "refresh" button is clicked. <br>
+	 * <br>
+	 * Refreshes the view by calling the onCreate event manually.
 	 * 
 	 * @param event
+	 * @throws InterruptedException
 	 */
-	public void onClick$btnClose(Event event) throws InterruptedException {
+	public void onClick$btnRefresh(Event event) throws InterruptedException {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
 
-		doClose();
+		Events.postEvent("onCreate", secRolegroupWindow, event);
+		secRolegroupWindow.invalidate();
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// ++++++++++++++++++++++++ GUI operations +++++++++++++++++++++++++
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-	/**
-	 * closes the dialog window
-	 */
-	private void doClose() {
-		secRolegroupWindow.onClose();
-	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// +++++++++++++++++++++++++ crud operations +++++++++++++++++++++++
@@ -365,7 +365,7 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 		setSelectedRole(aRole);
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecGroup> soSecRolegroup = new HibernateSearchObject<SecGroup>(SecGroup.class, countRowsSecRolegroup);
+		HibernateSearchObject<SecGroup> soSecRolegroup = new HibernateSearchObject<SecGroup>(SecGroup.class, getCountRowsSecRolegroup());
 		soSecRolegroup.addSort("grpShortdescription", false);
 
 		// Set the ListModel.
@@ -375,6 +375,22 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
+	public int getCountRowsSecRole() {
+		return countRowsSecRole;
+	}
+
+	public void setCountRowsSecRole(int countRowsSecRole) {
+		this.countRowsSecRole = countRowsSecRole;
+	}
+
+	public int getCountRowsSecRolegroup() {
+		return countRowsSecRolegroup;
+	}
+
+	public void setCountRowsSecRolegroup(int countRowsSecRolegroup) {
+		this.countRowsSecRolegroup = countRowsSecRolegroup;
+	}
 
 	public void setSelectedRole(SecRole role) {
 		this.selectedRole = role;

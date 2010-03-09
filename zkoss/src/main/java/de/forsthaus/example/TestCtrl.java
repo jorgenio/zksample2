@@ -25,6 +25,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.access.annotation.Secured;
@@ -484,10 +485,12 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 
 		logger.info(event.getTarget().getClass().getName());
 
-		Listitem li = listBoxCustomer.getSelectedItem();
+		Set<Listitem> li = listBoxCustomer.getSelectedItems();
 
-		// li.setCheckable(false);
-		li.setStyle("background-color:#f3d973");
+		for (Listitem listitem : li) {
+			// li.setCheckable(false);
+			listitem.setStyle("background-color:#f3d973");
+		}
 
 	}
 

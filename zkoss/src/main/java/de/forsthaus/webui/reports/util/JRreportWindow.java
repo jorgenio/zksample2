@@ -94,6 +94,11 @@ public class JRreportWindow extends Window implements Serializable {
 		}
 	}
 
+	/**
+	 * Creates the report in a modal window.
+	 * 
+	 * @throws FileNotFoundException
+	 */
 	private void createReport() throws FileNotFoundException {
 
 		if ((Boolean) modal == null) {
@@ -175,6 +180,7 @@ public class JRreportWindow extends Window implements Serializable {
 
 		window.removeEventListener("onClose", new OnCloseReportEventListener());
 
+		// TODO check this
 		report.detach();
 		window.getChildren().clear();
 		window.onClose();

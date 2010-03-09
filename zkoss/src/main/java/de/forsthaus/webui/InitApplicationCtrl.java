@@ -19,15 +19,12 @@
 package de.forsthaus.webui;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Random;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.h2.util.MathUtils;
 import org.zkoss.spring.SpringUtil;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.Hr;

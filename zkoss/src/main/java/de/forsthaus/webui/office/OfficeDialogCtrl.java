@@ -28,13 +28,11 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.ListModelList;
-import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import de.forsthaus.UserWorkspace;
-import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.service.OfficeService;
 import de.forsthaus.backend.util.HibernateSearchObject;

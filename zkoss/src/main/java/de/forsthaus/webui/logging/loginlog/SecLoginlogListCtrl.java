@@ -31,6 +31,7 @@ import org.zkoss.zk.ui.AbstractComponent;
 import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zul.Bandbox;
 import org.zkoss.zul.Bandpopup;
@@ -66,6 +67,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
  *          07/24/2009: sge changings for clustering.<br>
  *          11/07/2009: bbr changed to extending from GFCBaseCtrl<br>
  *          (GenericForwardComposer) for spring-managed creation.<br>
+ *          03/09/2009: sge changed for allow repainting after resizing.<br>
+ *          with the refresh button.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -116,7 +119,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	private transient WorkingThreadLoginList serverPush;
 
 	// row count for listbox
-	private transient int maxRows;
+	private transient int countRows;
 
 	// ServiceDAOs / Domain Classes
 	private transient LoginLoggingService loginLoggingService;
@@ -149,9 +152,10 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		 * filled by onClientInfo() in the indexCtroller
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-
-		int maxListBoxHeight = (height - 158);
-		maxRows = Math.round(maxListBoxHeight / 17);
+		int maxListBoxHeight = (height - 180);
+		setCountRows(Math.round(maxListBoxHeight / 20));
+		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
+		// System.out.println("==========> : " + getCountRows());
 
 		borderLayout_SecUserlogList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
@@ -168,7 +172,6 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		listheader_SecLoginlogList_lglStatusid.setSortDescending(new FieldComparator("lglStatusid", false));
 		listheader_SecLoginlogList_lglIp.setSortAscending(new FieldComparator("lglIp", true));
 		listheader_SecLoginlogList_lglIp.setSortDescending(new FieldComparator("lglIp", false));
-
 		listheader_SecLoginlogList_CountryCode2.setSortAscending(new FieldComparator("ip2Country.sysCountryCode.ccdCode2", true));
 		listheader_SecLoginlogList_CountryCode2.setSortDescending(new FieldComparator("ip2Country.sysCountryCode.ccdCode2", false));
 		listheader_SecLoginlogList_lglSessionid.setSortAscending(new FieldComparator("lglSessionid", true));
@@ -182,7 +185,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		soSecLoginlog.addSort("lglLogtime", true);
 
 		// set the paging params
-		paging_SecUserLogList.setPageSize(getMaxRows());
+		paging_SecUserLogList.setPageSize(getCountRows());
 		paging_SecUserLogList.setDetailed(true);
 
 		// Set the ListModel
@@ -217,7 +220,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		checkbox_SecLoginlogList_ShowOnlyFailed.setChecked(false);
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getMaxRows());
+		HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
 		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -245,7 +248,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		checkbox_SecLoginlogList_ShowOnlyFailed.setChecked(false);
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getMaxRows());
+		HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
 		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -275,7 +278,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		checkbox_SecLoginlogList_ShowOnlySuccess.setChecked(false);
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getMaxRows());
+		HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
 		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -323,7 +326,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 			checkbox_SecLoginlogList_ShowAll.setChecked(false); // clear
 
 			// ++ create the searchObject and init sorting ++//
-			HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getMaxRows());
+			HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 			// deeper loading of the relations to prevent the lazy
 			// loading problem.
 			soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -397,6 +400,24 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	}
 
 	/**
+	 * when the "refresh" button is clicked. <br>
+	 * <br>
+	 * Refreshes the view by calling the onCreate event manually.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnRefresh(Event event) throws InterruptedException {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		Events.postEvent("onCreate", secLoginlogListWindow, event);
+		secLoginlogListWindow.invalidate();
+	}
+
+	/**
 	 * When the "clear local IPs" button is clicked. <br>
 	 * Deletes local IP's (127.0.0.1) or '0:0:0:0:0:0' <br>
 	 * from the list from.
@@ -418,7 +439,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getMaxRows());
+		HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
 		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -488,7 +509,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 
 			// ++ create the searchObject and init sorting ++//
-			HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getMaxRows());
+			HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 			// deeper loading of the relations to prevent the lazy
 			// loading problem.
 			soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -578,7 +599,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 				dateTo = calTo.getTime();
 
 				// ++ create the searchObject and init sorting ++//
-				HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getMaxRows());
+				HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 				// deeper loading of the relations to prevent the lazy
 				// loading problem.
 				soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -616,12 +637,12 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		return guiLoginLoggingService;
 	}
 
-	public int getMaxRows() {
-		return maxRows;
+	public int getCountRows() {
+		return countRows;
 	}
 
-	public void setMaxRows(int maxRows) {
-		this.maxRows = maxRows;
+	public void setCountRows(int countRows) {
+		this.countRows = countRows;
 	}
 
 }

@@ -71,8 +71,7 @@ import de.forsthaus.webui.util.WindowBaseCtrl;
 public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -909795057747345551L;
-	private transient static final Logger logger = Logger
-			.getLogger(MainMenuCtrl.class);
+	private transient static final Logger logger = Logger.getLogger(MainMenuCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -116,8 +115,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		hbox.appendChild(toolbarbutton);
 		toolbarbutton.setId("btnMainMenuExpandAll");
 		toolbarbutton.setImage("/images/icons/folder_open_16x16.gif");
-		toolbarbutton.setTooltiptext(Labels
-				.getLabel("btnFolderExpand.tooltiptext"));
+		toolbarbutton.setTooltiptext(Labels.getLabel("btnFolderExpand.tooltiptext"));
 		toolbarbutton.addEventListener("onClick", new EventListener() {
 			@Override
 			public void onEvent(Event event) throws Exception {
@@ -130,8 +128,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		toolbarbutton.setId("btnMainMenuCollapseAll");
 
 		toolbarbutton.setImage("/images/icons/folder_closed2_16x16.gif");
-		toolbarbutton.setTooltiptext(Labels
-				.getLabel("btnFolderCollapse.tooltiptext"));
+		toolbarbutton.setTooltiptext(Labels.getLabel("btnFolderCollapse.tooltiptext"));
 		toolbarbutton.addEventListener("onClick", new EventListener() {
 			@Override
 			public void onEvent(Event event) throws Exception {
@@ -145,8 +142,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 
 		toolbarbutton.setImage("/images/icons/menu_16x16.gif");
 		// toolbarbutton.setImage("/images/icons/combobox_16x16.gif");
-		toolbarbutton.setTooltiptext(Labels
-				.getLabel("btnMainMenuChange.tooltiptext"));
+		toolbarbutton.setTooltiptext(Labels.getLabel("btnMainMenuChange.tooltiptext"));
 		toolbarbutton.addEventListener("onClick", new EventListener() {
 			@Override
 			public void onEvent(Event event) throws Exception {
@@ -232,8 +228,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 	 *            The tab name.
 	 * @throws InterruptedException
 	 */
-	private void showPage(String zulFilePathName, String tabName)
-			throws InterruptedException {
+	private void showPage(String zulFilePathName, String tabName) throws InterruptedException {
 
 		try {
 			// TODO get the parameter for working with tabs from the application
@@ -243,13 +238,11 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 			if (workWithTabs == 1) {
 
 				/* get an instance of the borderlayout defined in the zul-file */
-				Borderlayout bl = (Borderlayout) Path
-						.getComponent("/outerIndexWindow/borderlayoutMain");
+				Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
 				/* get an instance of the searched CENTER layout area */
 				Center center = bl.getCenter();
 				// get the tabs component
-				Tabs tabs = (Tabs) center.getFellow("divCenter").getFellow(
-						"tabBoxIndexCenter").getFellow("tabsIndexCenter");
+				Tabs tabs = (Tabs) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter");
 
 				/**
 				 * Check if the tab is already opened than select them and<br>
@@ -274,10 +267,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 
 					tab.setParent(tabs);
 
-					Tabpanels tabpanels = (Tabpanels) center.getFellow(
-							"divCenter").getFellow("tabBoxIndexCenter")
-							.getFellow("tabsIndexCenter").getFellow(
-									"tabpanelsBoxIndexCenter");
+					Tabpanels tabpanels = (Tabpanels) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter").getFellow("tabpanelsBoxIndexCenter");
 					Tabpanel tabpanel = new Tabpanel();
 					tabpanel.setHeight("100%");
 					tabpanel.setStyle("padding: 0px;");
@@ -286,14 +276,12 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 					/*
 					 * create the page and put it in the tabs area
 					 */
-					Executions
-							.createComponents(zulFilePathName, tabpanel, null);
+					Executions.createComponents(zulFilePathName, tabpanel, null);
 					tab.setSelected(true);
 				}
 			} else {
 				/* get an instance of the borderlayout defined in the zul-file */
-				Borderlayout bl = (Borderlayout) Path
-						.getComponent("/outerIndexWindow/borderlayoutMain");
+				Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
 				/* get an instance of the searched CENTER layout area */
 				Center center = bl.getCenter();
 				/* clear the center child comps */
@@ -339,15 +327,13 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 	public void onClick$btnMainMenuChange(Event event) throws Exception {
 
 		// correct the desktop height
-		Checkbox cb = ((Checkbox) Path
-				.getComponent("/outerIndexWindow/CBtreeMenu"));
+		Checkbox cb = ((Checkbox) Path.getComponent("/outerIndexWindow/CBtreeMenu"));
 		cb.setChecked(false);
 
 		// UserWorkspace.getInstance().setTreeMenu(false);
 
 		// get an instance of the borderlayout defined in the index.zul-file
-		Borderlayout bl = (Borderlayout) Path
-				.getComponent("/outerIndexWindow/borderlayoutMain");
+		Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
 		// get an instance of the searched west layout area
 		West west = bl.getWest();
 		west.setVisible(false);
@@ -365,15 +351,14 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 
 		Menuitem changeToTreeMenu = new Menuitem();
 		changeToTreeMenu.setLabel(Labels.getLabel("menu_Item_backToTree"));
-		changeToTreeMenu.setImage("/images/icons/refresh2.gif");
+		changeToTreeMenu.setImage("/images/icons/refresh2_yellow_16x16.gif");
 		changeToTreeMenu.setParent(menuBar);
 		changeToTreeMenu.addEventListener("onClick", new EventListener() {
 			@Override
 			public void onEvent(Event event) throws Exception {
 				// get an instance of the borderlayout defined in the
 				// index.zul-file
-				Borderlayout bl = (Borderlayout) Path
-						.getComponent("/outerIndexWindow/borderlayoutMain");
+				Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
 				// get an instance of the searched west layout area
 				West west = bl.getWest();
 				west.setVisible(true);
@@ -388,8 +373,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 				north.setFlex(false); // that's important !!!!
 
 				// correct the desktop height
-				Checkbox cb = ((Checkbox) Path
-						.getComponent("/outerIndexWindow/CBtreeMenu"));
+				Checkbox cb = ((Checkbox) Path.getComponent("/outerIndexWindow/CBtreeMenu"));
 				cb.setChecked(true);
 
 				// UserWorkspace.getInstance().setTreeMenu(true);

@@ -26,6 +26,7 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.FieldComparator;
@@ -57,6 +58,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
  *          10/12/2009: sge changings in the saving routine.<br>
  *          11/07/2009: bbr changed to extending from GFCBaseCtrl<br>
  *          (GenericForwardComposer) for spring-managed creation.<br>
+ *          03/09/2009: sge changed for allow repainting after resizing.<br>
+ *          with the refresh button.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -115,9 +118,10 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 		 * filled by onClientInfo() in the indexCtroller
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-
 		int maxListBoxHeight = (height - 158);
-		countRows = Math.round(maxListBoxHeight / 18);
+		setCountRows(Math.round(maxListBoxHeight / 18));
+		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
+		// System.out.println("==========> : " + getCountRows());
 
 		borderLayout_secGroupsList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
@@ -132,11 +136,11 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 		listheader_SecGroupList_grpLongdescription.setSortDescending("");
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class, countRows);
+		HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class, getCountRows());
 		soSecGroup.addSort("grpShortdescription", false);
 
 		// set the paging params
-		paging_SecGroupList.setPageSize(countRows);
+		paging_SecGroupList.setPageSize(getCountRows());
 		paging_SecGroupList.setDetailed(true);
 
 		// Set the ListModel.
@@ -253,6 +257,24 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	}
 
 	/**
+	 * when the "refresh" button is clicked. <br>
+	 * <br>
+	 * Refreshes the view by calling the onCreate event manually.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnRefresh(Event event) throws InterruptedException {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		Events.postEvent("onCreate", secGroupListWindow, event);
+		secGroupListWindow.invalidate();
+	}
+
+	/**
 	 * when the checkBox 'Show All' for filtering is checked. <br>
 	 * 
 	 * @param event
@@ -321,6 +343,14 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 	// ++++++++++++++++++ getter / setter +++++++++++++++++++//
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
+	public int getCountRows() {
+		return countRows;
+	}
+
+	public void setCountRows(int countRows) {
+		this.countRows = countRows;
+	}
 
 	public SecurityService getSecurityService() {
 		return securityService;

@@ -14,6 +14,8 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 09.03.2010 / Added on all listpages a refresh button (next help button ) for resizing the listbox and recalculate their pagesize" + lf;
+		s = s + "                      for adjusting if the browser size is changed." + lf;
 		s = s + "- 02.03.2010 / Several design changes. Bugfixes. " + lf;
 		s = s + "- 06.02.2010 / Updated to the Spring3 framework. " + lf;
 		s = s + "- 04.02.2010 / Implementation of the missing Cancel Button in all dialogs. " + lf;

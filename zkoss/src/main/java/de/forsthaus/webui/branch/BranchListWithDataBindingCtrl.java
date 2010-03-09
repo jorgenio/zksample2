@@ -27,16 +27,14 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
-import org.zkoss.zul.FieldComparator;
 import org.zkoss.zul.Intbox;
-import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listheader;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Paging;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -47,7 +45,6 @@ import de.forsthaus.UserWorkspace;
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.service.BrancheService;
 import de.forsthaus.backend.util.HibernateSearchObject;
-import de.forsthaus.webui.branch.model.BranchListModelItemRenderer;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 
@@ -61,6 +58,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
  *          10/12/2009: sge changings in the saving routine.<br>
  *          11/07/2009: bbr changed to extending from GFCBaseCtrl<br>
  *          (GenericForwardComposer) for spring-managed creation.<br>
+ *          03/09/2009: sge changed for allow repainting after resizing.<br>
+ *          with the refresh button.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -136,7 +135,9 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 
 		int maxListBoxHeight = (height - 160);
-		setCountRows(Math.round(maxListBoxHeight / 17));
+		setCountRows(Math.round(maxListBoxHeight / 20));
+		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
+		// System.out.println("==========> : " + getCountRows());
 
 		borderLayout_branchListWithDataBinding.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
@@ -304,6 +305,24 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 
+	}
+
+	/**
+	 * when the "refresh" button is clicked. <br>
+	 * <br>
+	 * Refreshes the view by calling the onCreate event manually.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnRefresh(Event event) throws InterruptedException {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		Events.postEvent("onCreate", window_BranchesListWithDataBinding, event);
+		window_BranchesListWithDataBinding.invalidate();
 	}
 
 	/**

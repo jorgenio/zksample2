@@ -27,6 +27,7 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
@@ -84,6 +85,8 @@ import de.forsthaus.webui.util.pagging.PagedListWrapper;
  *          10/12/2009: sge changings in the saving routine.<br>
  *          11/07/2009: bbr changed to extending from GFCBaseCtrl<br>
  *          (GenericForwardComposer) for spring-managed creation.<br>
+ *          03/09/2009: sge changed for allow repainting after resizing.<br>
+ *          with the refresh button.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -152,6 +155,10 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	private transient int countRowsRight;
 	private transient int countRowsRightDetails;
 
+	public void setCountRowsRightDetails(int countRowsRightDetails) {
+		this.countRowsRightDetails = countRowsRightDetails;
+	}
+
 	// ServiceDAOs / Domain Classes
 	private transient SecurityService securityService;
 
@@ -188,25 +195,23 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 		 * filled by onClientInfo() in the indexCtroller
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-
-		secGroupRightWindow.setHeight((height - topHeader) + "px");
-
 		int maxListBoxHeight = (height - topHeader - btnTopArea - winTitle);
-		countRowsGroup = Math.round(maxListBoxHeight / 20);
-		countRowsRight = Math.round(maxListBoxHeight / 27);
-		countRowsRightDetails = Math.round(maxListBoxHeight / 29);
-		// countRowsGroup = 20;
-		// countRowsRight = 20;
-		// countRowsRightDetails = 15;
+		setCountRowsGroup(Math.round(maxListBoxHeight / 21));
+		setCountRowsRight(Math.round(maxListBoxHeight / 31));
+		setCountRowsRightDetails(Math.round(maxListBoxHeight / 33));
+//		System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
+//		System.out.println("==========> : " + getCountRowsGroup());
+//		System.out.println("==========> : " + getCountRowsRight());
+//		System.out.println("==========> : " + getCountRowsRightDetails());
 
 		/* set the PageSize */
-		paging_ListBoxSecGroup.setPageSize(countRowsGroup);
+		paging_ListBoxSecGroup.setPageSize(getCountRowsGroup());
 		paging_ListBoxSecGroup.setDetailed(true);
 
-		paging_ListBoxSecGroupRight.setPageSize(countRowsRight);
+		paging_ListBoxSecGroupRight.setPageSize(getCountRowsRight());
 		paging_ListBoxSecGroupRight.setDetailed(true);
 
-		paging_ListBoxSecGroupRight_Details.setPageSize(countRowsRightDetails);
+		paging_ListBoxSecGroupRight_Details.setPageSize(getCountRowsRightDetails());
 		paging_ListBoxSecGroupRight_Details.setDetailed(true);
 
 		// main borderlayout height = window.height - (Panels Top)
@@ -221,7 +226,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 
 		/* Tab All */
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class, countRowsGroup);
+		HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class, getCountRowsGroup());
 		soSecGroup.addSort("grpShortdescription", false);
 		// Set the ListModel.
 		getPlwSecGroups().init(soSecGroup, listBoxSecGroup, paging_ListBoxSecGroup);
@@ -269,7 +274,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	private void filterTypeForShowingRights() {
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, countRowsRight);
+		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRowsRight());
 		soSecRight.addSort("rigName", false);
 
 		if (checkbox_SecGroupRight_All.isChecked()) {
@@ -454,29 +459,26 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	}
 
 	/**
-	 * when the "close" button is clicked. <br>
+	 * when the "refresh" button is clicked. <br>
+	 * <br>
+	 * Refreshes the view by calling the onCreate event manually.
 	 * 
 	 * @param event
+	 * @throws InterruptedException
 	 */
-	public void onClick$btnClose(Event event) throws InterruptedException {
+	public void onClick$btnRefresh(Event event) throws InterruptedException {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
 
-		doClose();
+		Events.postEvent("onCreate", secGroupRightWindow, event);
+		secGroupRightWindow.invalidate();
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// ++++++++++++++++++++++++ GUI operations +++++++++++++++++++++++++
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-	/**
-	 * closes the dialog window
-	 */
-	private void doClose() {
-		secGroupRightWindow.onClose();
-	}
 
 	/**
 	 * if user select the tab for showing only rights for the group. <br>
@@ -490,7 +492,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 		}
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecRight> soSecRightDetails = new HibernateSearchObject<SecRight>(SecRight.class, countRowsRightDetails);
+		HibernateSearchObject<SecRight> soSecRightDetails = new HibernateSearchObject<SecRight>(SecRight.class, getCountRowsRightDetails());
 		soSecRightDetails.addSort("rigName", false);
 		soSecRightDetails.addFetch("secGrouprights");
 		soSecRightDetails.addFilter(new Filter("secGrouprights.secGroup", getSelectedGroup(), Filter.OP_EQUAL));
@@ -607,7 +609,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 		} else if (tab_SecGroupRight_Details.isSelected()) {
 
 			// ++ create the searchObject and init sorting ++//
-			HibernateSearchObject<SecRight> soSecRightDetails = new HibernateSearchObject<SecRight>(SecRight.class, countRowsRightDetails);
+			HibernateSearchObject<SecRight> soSecRightDetails = new HibernateSearchObject<SecRight>(SecRight.class, getCountRowsRightDetails());
 			soSecRightDetails.addSort("rigName", false);
 			soSecRightDetails.addFetch("secGrouprights");
 			soSecRightDetails.addFilter(new Filter("secGrouprights.secGroup", getSelectedGroup(), Filter.OP_EQUAL));
@@ -669,6 +671,26 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
+	public int getCountRowsRightDetails() {
+		return countRowsRightDetails;
+	}
+
+	public int getCountRowsRight() {
+		return countRowsRight;
+	}
+
+	public void setCountRowsRight(int countRowsRight) {
+		this.countRowsRight = countRowsRight;
+	}
+
+	public int getCountRowsGroup() {
+		return countRowsGroup;
+	}
+
+	public void setCountRowsGroup(int countRowsGroup) {
+		this.countRowsGroup = countRowsGroup;
+	}
 
 	public void setSelectedGroup(SecGroup group) {
 		this.selectedGroup = group;

@@ -21,6 +21,10 @@
 		<toolbar>
 			<button id="btnHelp" image="/images/icons/light_16x16.gif"
 				tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+			<button id="btnRefresh"
+				image="/images/icons/refresh2_yellow_16x16.gif"
+				tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
+			<separator orient="vertical" />
 			<button id="button_UserList_NewUser"
 				image="/images/icons/btn_new2_16x16.gif"
 				tooltiptext="${c:l('button_UserList_NewUser.tooltiptext')}" />
@@ -70,10 +74,10 @@
 				<paging id="paging_UserList" />
 			</north>
 
-			<center border="normal">
+			<center border="none">
 
-				<listbox id="listBoxUser" vflex="true" width="99.5%"
-					tooltiptext="${c:l('listbox.tooltiptext')}" height="100%"
+				<listbox id="listBoxUser" vflex="true" width="100%"
+					height="100%" tooltiptext="${c:l('listbox.tooltiptext')}"
 					multiple="false">
 					<listhead sizable="true">
 						<listheader
@@ -117,16 +121,11 @@
 				</listbox>
 
 			</center>
-
-			<south border="none">
-				<separator />
-			</south>
+			<south border="none" />
 
 		</borderlayout>
-
-		<!-- value="Account &#10;&#13; none&#10;&#13; expired" width="85%" -->
-
 
 	</window>
 </zk>
 
+<!-- value="Account &#10;&#13; none&#10;&#13; expired" width="85%" -->

@@ -26,6 +26,7 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.FieldComparator;
@@ -60,6 +61,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
  *          10/12/2009: sge changings in the saving routine.<br>
  *          11/07/2009: bbr changed to extending from GFCBaseCtrl<br>
  *          (GenericForwardComposer) for spring-managed creation.<br>
+ *          03/09/2009: sge changed for allow repainting after resizing.<br>
+ *          with the refresh button.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -119,9 +122,10 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 		 * filled by onClientInfo() in the indexCtroller
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-
 		int maxListBoxHeight = (height - 158);
-		countRows = Math.round(maxListBoxHeight / 18);
+		setCountRows(Math.round(maxListBoxHeight / 18));
+		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
+		// System.out.println("==========> : " + getCountRows());
 
 		borderLayout_secRightsList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
@@ -145,11 +149,11 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 		lml.add(0, SecTyp.EMPTY_SECTYP);
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, countRows);
+		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRows());
 		soSecRight.addSort("rigName", false);
 
 		// set the paging params
-		paging_SecRightList.setPageSize(countRows);
+		paging_SecRightList.setPageSize(getCountRows());
 		paging_SecRightList.setDetailed(true);
 
 		// Set the ListModel.
@@ -265,6 +269,24 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	}
 
 	/**
+	 * when the "refresh" button is clicked. <br>
+	 * <br>
+	 * Refreshes the view by calling the onCreate event manually.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnRefresh(Event event) throws InterruptedException {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		Events.postEvent("onCreate", secRightListWindow, event);
+		secRightListWindow.invalidate();
+	}
+
+	/**
 	 * when the checkBox 'Show All' for filtering is checked. <br>
 	 * 
 	 * @param event
@@ -280,7 +302,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 		lb_secRight_RightType.clearSelection(); // clear
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, countRows);
+		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRows());
 		soSecRight.addSort("rigName", false);
 
 		// Set the ListModel.
@@ -318,7 +340,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 		}
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, countRows);
+		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRows());
 		soSecRight.addSort("rigName", false);
 
 		// if not empty
@@ -363,7 +385,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 		}
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, countRows);
+		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRows());
 		soSecRight.addSort("rigName", false);
 
 		// get the selected item
@@ -398,6 +420,14 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// +++++++++++++++++++++++ Getter / Setter +++++++++++++++++++++++++
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+	public int getCountRows() {
+		return countRows;
+	}
+
+	public void setCountRows(int countRows) {
+		this.countRows = countRows;
+	}
 
 	public SecurityService getSecurityService() {
 		return securityService;

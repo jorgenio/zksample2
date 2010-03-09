@@ -8,7 +8,7 @@
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
 	<window id="secUserroleWindow" apply="${secUserroleCtrl}"
-		border="none" width="100%">
+		border="none" width="100%" height="100%">
 
 		<style>
 			body { padding: 0 0; /* 0 padding on top and bottom and 0
@@ -24,11 +24,15 @@
 				<grid>
 					<columns sizable="true" height="20px">
 						<!-- Help Button -->
-						<column width="40px" align="left">
+						<column width="80px" align="left">
 							<hbox>
 								<button id="btnHelp"
 									image="/images/icons/light_16x16.gif"
 									tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+								<button id="btnRefresh"
+									image="/images/icons/refresh2_yellow_16x16.gif"
+									tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
+								<separator orient="vertical" />
 							</hbox>
 						</column>
 
@@ -46,9 +50,6 @@
 								<button id="btnSave" height="20"
 									image="/images/icons/btn_save2_16x16.gif"
 									tooltiptext="${c:l('btnSave.tooltiptext')}" />
-								<button id="btnClose" height="20"
-									image="/images/icons/btn_exitdoor2_16x16.gif"
-									tooltiptext="${c:l('btnClose.tooltiptext')}" />
 							</hbox>
 
 						</column>
@@ -89,8 +90,8 @@
 															<paging
 																id="paging_ListBoxSecUser" />
 															<listbox
-																id="listBoxSecUser" width="99.5%" height="100%"
-																multiple="false">
+																id="listBoxSecUser" vflex="true" width="100%"
+																height="100%" multiple="false">
 																<listhead
 																	sizable="true">
 																	<listheader
@@ -127,8 +128,8 @@
 															<paging
 																id="paging_ListBoxSecRoles" />
 															<listbox
-																id="listBoxSecRoles" width="99.5%" height="100%"
-																multiple="false">
+																vflex="true" id="listBoxSecRoles" width="100%"
+																height="100%" multiple="false">
 																<listhead
 																	sizable="true">
 																	<listheader

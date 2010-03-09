@@ -26,6 +26,7 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.FieldComparator;
@@ -114,9 +115,10 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 		 * filled by onClientInfo() in the indexCtroller
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-
 		int maxListBoxHeight = (height - 158);
-		countRows = Math.round(maxListBoxHeight / 18);
+		setCountRows(Math.round(maxListBoxHeight / 22));
+		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
+		// System.out.println("==========> : " + getCountRows());
 
 		borderLayout_secRolesList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
@@ -131,11 +133,11 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 		listheader_SecRoleList_rolLongdescription.setSortDescending("");
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, countRows);
+		HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRows());
 		soSecRole.addSort("rolShortdescription", false);
 
 		// set the paging params
-		paging_SecRoleList.setPageSize(countRows);
+		paging_SecRoleList.setPageSize(getCountRows());
 		paging_SecRoleList.setDetailed(true);
 
 		// Set the ListModel.
@@ -250,6 +252,24 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	}
 
 	/**
+	 * when the "refresh" button is clicked. <br>
+	 * <br>
+	 * Refreshes the view by calling the onCreate event manually.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnRefresh(Event event) throws InterruptedException {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		Events.postEvent("onCreate", secRoleListWindow, event);
+		secRoleListWindow.invalidate();
+	}
+
+	/**
 	 * when the checkBox 'Show All' for filtering is checked. <br>
 	 * 
 	 * @param event
@@ -264,7 +284,7 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 		tb_SecRole_RoleName.setValue(""); // clear
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, countRows);
+		HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRows());
 		soSecRole.addSort("rolShortdescription", false);
 
 		// Set the ListModel.
@@ -304,7 +324,7 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 			checkbox_SecRoleList_ShowAll.setChecked(false); // unCheck
 
 			// ++ create the searchObject and init sorting ++//
-			HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, countRows);
+			HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRows());
 			soSecRole.addSort("rolShortdescription", false);
 
 			soSecRole.addFilter(new Filter("rolShortdescription", "%" + tb_SecRole_RoleName.getValue() + "%", Filter.OP_ILIKE));
@@ -318,6 +338,14 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 	// ++++++++++++++++++ getter / setter +++++++++++++++++++//
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
+	public int getCountRows() {
+		return countRows;
+	}
+
+	public void setCountRows(int countRows) {
+		this.countRows = countRows;
+	}
 
 	public SecurityService getSecurityService() {
 		return securityService;

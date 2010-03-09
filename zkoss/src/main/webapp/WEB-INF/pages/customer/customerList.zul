@@ -24,8 +24,12 @@
 			title="${c:l('panel_CustomerList.title')}" border="none" />
 
 		<toolbar>
-			<button id="btnHelp" image="/images/icons/light_16x16.gif" 
+			<button id="btnHelp" image="/images/icons/light_16x16.gif"
 				tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+			<button id="btnRefresh"
+				image="/images/icons/refresh2_yellow_16x16.gif"
+				tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
+			<separator orient="vertical" />
 			<button id="button_CustomerList_NewCustomer"
 				image="/images/icons/btn_new2_16x16.gif"
 				tooltiptext="${c:l('button_CustomerList_NewCustomer.tooltiptext')}" />
@@ -44,10 +48,10 @@
 				<paging id="pagingCustomerList" />
 			</north>
 
-			<center border="normal">
+			<center border="none">
 
 				<listbox id="listBoxCustomer" vflex="true"
-					tooltiptext="${c:l('listbox.tooltiptext')}" width="99.5%"
+					tooltiptext="${c:l('listbox.tooltiptext')}" width="100%"
 					height="100%" multiple="false">
 					<listhead sizable="true">
 						<listheader id="listheader_CustNo"
@@ -76,10 +80,7 @@
 				</listbox>
 
 			</center>
-
-			<south border="none">
-				<separator />
-			</south>
+			<south border="none" />
 
 		</borderlayout>
 

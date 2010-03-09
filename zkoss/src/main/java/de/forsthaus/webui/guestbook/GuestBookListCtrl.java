@@ -27,6 +27,7 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zul.FieldComparator;
 import org.zkoss.zul.Intbox;
@@ -56,6 +57,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
  *          10/12/2009: sge changings in the saving routine.<br>
  *          11/07/2009: bbr changed to extending from GFCBaseCtrl<br>
  *          (GenericForwardComposer) for spring-managed creation.<br>
+ *          03/09/2009: sge changed for allow repainting after resizing.<br>
+ *          with the refresh button.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -113,8 +116,9 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		int maxListBoxHeight = (height - 175);
-		countRows = Math.round(maxListBoxHeight / 23);
-		// countRows = 15;
+		setCountRows(Math.round(maxListBoxHeight / 23));
+		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
+		// System.out.println("==========> : " + getCountRows());
 
 		borderLayout_GuestBookList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
@@ -128,11 +132,11 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 		listheader_GuestBook_gubSubject.setSortDescending(new FieldComparator("gubSubject", false));
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<GuestBook> soGuestBook = new HibernateSearchObject<GuestBook>(GuestBook.class, countRows);
+		HibernateSearchObject<GuestBook> soGuestBook = new HibernateSearchObject<GuestBook>(GuestBook.class, getCountRows());
 		soGuestBook.addSort("gubDate", true);
 
 		// set the paging params
-		paging_GuestBookList.setPageSize(countRows);
+		paging_GuestBookList.setPageSize(getCountRows());
 		paging_GuestBookList.setDetailed(true);
 
 		// Set the ListModel for the articles.
@@ -192,6 +196,24 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+	}
+
+	/**
+	 * when the "refresh" button is clicked. <br>
+	 * <br>
+	 * Refreshes the view by calling the onCreate event manually.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnRefresh(Event event) throws InterruptedException {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		Events.postEvent("onCreate", window_GuestBookList, event);
+		window_GuestBookList.invalidate();
 	}
 
 	/**
@@ -307,6 +329,14 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 	// ++++++++++++++++++ getter / setter +++++++++++++++++++//
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
+	public int getCountRows() {
+		return countRows;
+	}
+
+	public void setCountRows(int countRows) {
+		this.countRows = countRows;
+	}
+
 	public void setGuestBook(GuestBook guestBook) {
 		this.guestBook = guestBook;
 	}
@@ -323,12 +353,4 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 		return guestBookService;
 	}
 
-	// public void setSearchObjGuestBook(HibernateSearchObject<GuestBook>
-	// searchObjGuestBook) {
-	// this.searchObjGuestBook = searchObjGuestBook;
-	// }
-	//
-	// public HibernateSearchObject<GuestBook> getSearchObjGuestBook() {
-	// return searchObjGuestBook;
-	// }
 }

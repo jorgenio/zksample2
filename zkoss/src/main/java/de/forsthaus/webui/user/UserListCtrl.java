@@ -28,6 +28,7 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
@@ -62,6 +63,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
  *          10/12/2009: sge changings in the saving routine.<br>
  *          11/07/2009: bbr changed to extending from GFCBaseCtrl<br>
  *          (GenericForwardComposer) for spring-managed creation.<br>
+ *          * 03/09/2009: sge changed for allow repainting after resizing.<br>
+ *          with the refresh button.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -136,9 +139,10 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 		 * filled by onClientInfo() in the indexCtroller
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-
-		int maxListBoxHeight = (height - 152);
-		countRows = Math.round(maxListBoxHeight / 14);
+		int maxListBoxHeight = (height - 165);
+		setCountRows(Math.round(maxListBoxHeight / 40));
+		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
+		// System.out.println("==========> : " + getCountRows());
 
 		borderLayout_secUserList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
@@ -160,11 +164,11 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 		listheader_UserList_usrAccountnonlocked.setSortDescending(new FieldComparator("usrAccountnonlocked", false));
 
 		// set the paging params
-		paging_UserList.setPageSize(countRows);
+		paging_UserList.setPageSize(getCountRows());
 		paging_UserList.setDetailed(true);
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, countRows);
+		HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
 		soUser.addSort("usrLoginname", false);
 
 		/* New check the rights. If UserOnly mode than show only the users data */
@@ -321,6 +325,24 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	}
 
 	/**
+	 * when the "refresh" button is clicked. <br>
+	 * <br>
+	 * Refreshes the view by calling the onCreate event manually.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnRefresh(Event event) throws InterruptedException {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		Events.postEvent("onCreate", userListWindow, event);
+		userListWindow.invalidate();
+	}
+
+	/**
 	 * when the "print" button is clicked.
 	 * 
 	 * @param event
@@ -353,7 +375,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 			tb_SecUser_Lastname.setValue("");
 			tb_SecUser_Email.setValue("");
 
-			HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, countRows);
+			HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
 			soUser.addFilter(new Filter("usrLoginname", "%" + tb_SecUser_Loginname.getValue() + "%", Filter.OP_ILIKE));
 			soUser.addSort("usrLoginname", false);
 
@@ -395,7 +417,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 			tb_SecUser_Loginname.setValue("");
 			tb_SecUser_Email.setValue("");
 
-			HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, countRows);
+			HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
 			soUser.addFilter(new Filter("usrLastname", "%" + tb_SecUser_Lastname.getValue() + "%", Filter.OP_ILIKE));
 			soUser.addSort("usrLoginname", false);
 
@@ -438,7 +460,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 			tb_SecUser_Loginname.setValue("");
 			tb_SecUser_Lastname.setValue("");
 
-			HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, countRows);
+			HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
 			soUser.addFilter(new Filter("usrEmail", "%" + tb_SecUser_Email.getValue() + "%", Filter.OP_ILIKE));
 			soUser.addSort("usrLoginname", false);
 
@@ -482,7 +504,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 		tb_SecUser_Lastname.setValue("");
 		tb_SecUser_Email.setValue("");
 
-		HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, countRows);
+		HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
 		soUser.addSort("usrLoginname", false);
 
 		/* New check the rights. If UserOnly mode than show only the users data */
@@ -509,6 +531,14 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 	// ++++++++++++++++++ getter / setter +++++++++++++++++++//
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
+	public int getCountRows() {
+		return countRows;
+	}
+
+	public void setCountRows(int countRows) {
+		this.countRows = countRows;
+	}
 
 	public UserService getUserService() {
 		return userService;

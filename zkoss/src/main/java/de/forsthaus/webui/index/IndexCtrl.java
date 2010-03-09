@@ -33,7 +33,6 @@ import org.zkoss.zkex.zul.Center;
 import org.zkoss.zkex.zul.West;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Column;
-import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Menubar;
 
@@ -100,7 +99,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 		statusBarZKVersion.setLabel("ZK version: " + doGetZkVersion());
 		Date date = new Date();
-		date.setDate(02);
+		date.setDate(9);
 		date.setMonth(2);
 		date.setYear(110);
 		statusBarAppVersion.setLabel("Zksample2 v2.0.2 / build: " + FDDateFormat.getDateFormater().format(date));

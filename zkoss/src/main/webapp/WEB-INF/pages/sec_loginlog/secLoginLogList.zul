@@ -18,6 +18,10 @@
 						<button id="btnHelp"
 							image="/images/icons/light_16x16.gif"
 							tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+						<button id="btnRefresh"
+							image="/images/icons/refresh2_yellow_16x16.gif"
+							tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
+						<separator orient="vertical" />
 						<button
 							id="button_SecLoginlogList_PrintLoginList"
 							image="/images/icons/btn_print2_16x16.gif"
@@ -159,7 +163,7 @@
 				<paging id="paging_SecUserLogList" />
 			</north>
 
-			<center border="normal">
+			<center border="none">
 
 				<listbox id="listBoxSecUserlog" vflex="true"
 					width="100%" multiple="false">
@@ -196,13 +200,10 @@
 
 			</center>
 
-			<south border="none">
-				<separator />
-			</south>
+			<south border="none" />
 
 		</borderlayout>
 	</window>
 
 </zk>
-<!-- 					url(${c:encodeURL('~./zul/img/button/bandbtn.gif')})
--->
+<!-- url(${c:encodeURL('~./zul/img/button/bandbtn.gif')}) -->

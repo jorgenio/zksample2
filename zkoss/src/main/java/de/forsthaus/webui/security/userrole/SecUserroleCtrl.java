@@ -26,6 +26,7 @@ import org.springframework.dao.DataAccessException;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
@@ -78,6 +79,8 @@ import de.forsthaus.webui.util.pagging.PagedListWrapper;
  *          10/12/2009: sge changings in the saving routine.<br>
  *          11/07/2009: bbr changed to extending from GFCBaseCtrl<br>
  *          (GenericForwardComposer) for spring-managed creation.<br>
+ *          03/09/2009: sge changed for allow repainting after resizing.<br>
+ *          with the refresh button.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -162,12 +165,14 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 		 * filled by onClientInfo() in the indexCtroller
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-
-		secUserroleWindow.setHeight((height - topHeader) + "px");
-
 		int maxListBoxHeight = (height - topHeader - btnTopArea - winTitle);
-		countRowsSecUser = Math.round(maxListBoxHeight / 20);
-		countRowsSecRole = Math.round(maxListBoxHeight / 28);
+		setCountRowsSecUser(Math.round(maxListBoxHeight / 30));
+		setCountRowsSecRole(Math.round(maxListBoxHeight / 35));
+//		System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
+//		System.out.println("==========> : " + getCountRowsSecUser());
+//		System.out.println("==========> : " + getCountRowsSecRole());
+
+		// secUserroleWindow.setHeight((height - topHeader) + "px");
 
 		// main borderlayout height = window.height - (Panels Top)
 		borderlayoutSecUserrole.setHeight(String.valueOf(maxListBoxHeight) + "px");
@@ -184,17 +189,17 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 		listheader_SecUserRole_RoleName.setSortDescending(new FieldComparator("rolShortdescription", false));
 
 		/* set the PageSize */
-		paging_ListBoxSecUser.setPageSize(countRowsSecUser);
+		paging_ListBoxSecUser.setPageSize(getCountRowsSecUser());
 		paging_ListBoxSecUser.setDetailed(true);
 
-		paging_ListBoxSecRoles.setPageSize(countRowsSecRole);
+		paging_ListBoxSecRoles.setPageSize(getCountRowsSecRole());
 		paging_ListBoxSecRoles.setDetailed(true);
 
 		listBoxSecUser.setHeight(String.valueOf(maxListBoxHeight - 150) + "px");
 		listBoxSecRoles.setHeight(String.valueOf(maxListBoxHeight - 150) + "px");
 		/* Tab Details */
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecUser> soSecUser = new HibernateSearchObject<SecUser>(SecUser.class, countRowsSecUser);
+		HibernateSearchObject<SecUser> soSecUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRowsSecUser());
 		soSecUser.addSort("usrLoginname", false);
 
 		// Set the ListModel.
@@ -208,7 +213,7 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 		listBoxSecUser.setSelectedIndex(0);
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, countRowsSecRole);
+		HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRowsSecRole());
 		soSecRole.addSort("rolShortdescription", false);
 
 		// Set the ListModel.
@@ -260,30 +265,26 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 	}
 
 	/**
-	 * when the "close" button is clicked. <br>
+	 * when the "refresh" button is clicked. <br>
+	 * <br>
+	 * Refreshes the view by calling the onCreate event manually.
 	 * 
 	 * @param event
 	 * @throws InterruptedException
 	 */
-	public void onClick$btnClose(Event event) throws InterruptedException {
+	public void onClick$btnRefresh(Event event) throws InterruptedException {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
 
-		doClose();
+		Events.postEvent("onCreate", secUserroleWindow, event);
+		secUserroleWindow.invalidate();
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// ++++++++++++++++++++++++ GUI operations +++++++++++++++++++++++++
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-	/**
-	 * closes the dialog window
-	 */
-	private void doClose() {
-		secUserroleWindow.onClose();
-	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// +++++++++++++++++++++++++ crud operations +++++++++++++++++++++++
@@ -378,7 +379,7 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 		setSelectedUser(anUser);
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, countRowsSecRole);
+		HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRowsSecRole());
 		soSecRole.addSort("rolShortdescription", false);
 
 		// Set the ListModel.
@@ -389,6 +390,21 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	public int getCountRowsSecUser() {
+		return countRowsSecUser;
+	}
+
+	public void setCountRowsSecUser(int countRowsSecUser) {
+		this.countRowsSecUser = countRowsSecUser;
+	}
+
+	public int getCountRowsSecRole() {
+		return countRowsSecRole;
+	}
+
+	public void setCountRowsSecRole(int countRowsSecRole) {
+		this.countRowsSecRole = countRowsSecRole;
+	}
 
 	public SecurityService getSecurityService() {
 		return securityService;

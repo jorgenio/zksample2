@@ -26,6 +26,7 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
@@ -59,6 +60,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
  *          07/24/2009: sge changings for clustering.<br>
  *          11/07/2009: bbr changed to extending from GFCBaseCtrl<br>
  *          (GenericForwardComposer) for spring-managed creation.<br>
+ *          03/09/2009: sge changed for allow repainting after resizing.<br>
+ *          with the refresh button.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -132,6 +135,8 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		int maxListBoxHeight = (height - 210);
 		setCountRows(Math.round(maxListBoxHeight / 14));
+		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
+		// System.out.println("==========> : " + getCountRows());
 
 		borderLayout_articleList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
@@ -365,6 +370,24 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+	}
+
+	/**
+	 * when the "refresh" button is clicked. <br>
+	 * <br>
+	 * Refreshes the view by calling the onCreate event manually.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnRefresh(Event event) throws InterruptedException {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		Events.postEvent("onCreate", window_ArticlesList, event);
+		window_ArticlesList.invalidate();
 	}
 
 	/**

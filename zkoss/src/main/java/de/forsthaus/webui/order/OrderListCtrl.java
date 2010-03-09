@@ -67,6 +67,8 @@ import de.forsthaus.webui.util.pagging.PagedListWrapper;
  *          10/12/2009: sge changings in the saving routine.<br>
  *          11/07/2009: bbr changed to extending from GFCBaseCtrl<br>
  *          (GenericForwardComposer) for spring-managed creation.<br>
+ *          03/09/2009: sge changed for allow repainting after resizing.<br>
+ *          with the refresh button.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -192,8 +194,11 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 			setPageSizeOrderPositions(15);
 		}
 
-		// customer = getCustomer();
+		paintComponents();
 
+	}
+
+	private void paintComponents() {
 		// set the bandbox to readonly
 		bandbox_OrderList_CustomerSearch.setReadonly(true);
 
@@ -259,8 +264,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 			Order anOrder = (Order) lml.get(rowIndex);
 			if (anOrder != null) {
 				// get the related order positions
-				HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(Orderposition.class,
-						getPageSizeOrderPositions());
+				HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(Orderposition.class, getPageSizeOrderPositions());
 				soOrderPosition.addFilter(new Filter("order", anOrder, Filter.OP_EQUAL));
 				// deeper loading of the relation to prevent the lazy
 				// loading problem.
@@ -278,7 +282,6 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 
 			}
 		}
-
 	}
 
 	/**
@@ -315,8 +318,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 				// Set the ListModel and the itemRenderer for the order
 				// articles.g
 
-				HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(Orderposition.class,
-						getPageSizeOrderPositions());
+				HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(Orderposition.class, getPageSizeOrderPositions());
 				soOrderPosition.addFilter(new Filter("order", order, Filter.OP_EQUAL));
 				// deeper loading of the relation to prevent the lazy loading
 				// problem.
@@ -460,6 +462,24 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 	}
 
+	/**
+	 * when the "refresh" button is clicked. <br>
+	 * <br>
+	 * Refreshes the view by calling the onCreate event manually.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnRefresh(Event event) throws InterruptedException {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		paintComponents();
+		orderListWindow.invalidate();
+	}
+
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 	// ++++++++++++++ bandbox search Customer +++++++++++++++//
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -544,8 +564,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (StringUtils.isNotEmpty(tb_Orders_CustSearchMatchcode.getValue())) {
-			searchObjCustomer.addFilter(new Filter("kunMatchcode", "%" + tb_Orders_CustSearchMatchcode.getValue().toUpperCase() + "%",
-					Filter.OP_ILIKE));
+			searchObjCustomer.addFilter(new Filter("kunMatchcode", "%" + tb_Orders_CustSearchMatchcode.getValue().toUpperCase() + "%", Filter.OP_ILIKE));
 		}
 
 		if (StringUtils.isNotEmpty(tb_Orders_SearchCustName1.getValue())) {
@@ -607,8 +626,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 				Order anOrder = (Order) lml.get(0);
 
 				if (anOrder != null) {
-					HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(Orderposition.class,
-							getPageSizeOrderPositions());
+					HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(Orderposition.class, getPageSizeOrderPositions());
 					soOrderPosition.addFilter(new Filter("order", anOrder, Filter.OP_EQUAL));
 					// deeper loading of the relation to prevent the lazy
 					// loading problem.
@@ -619,8 +637,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 			} else {
 				// get a new Order for searching that the resultList is cleared
 				Order anOrder = getOrderService().getNewOrder();
-				HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(Orderposition.class,
-						getPageSizeOrderPositions());
+				HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(Orderposition.class, getPageSizeOrderPositions());
 				soOrderPosition.addFilter(new Filter("order", anOrder, Filter.OP_EQUAL));
 				// deeper loading of the relation to prevent the lazy
 				// loading problem.

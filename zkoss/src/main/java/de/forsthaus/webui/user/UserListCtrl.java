@@ -140,7 +140,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		int maxListBoxHeight = (height - 165);
-		setCountRows(Math.round(maxListBoxHeight / 26));
+		setCountRows(Math.round(maxListBoxHeight / 25));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());
 

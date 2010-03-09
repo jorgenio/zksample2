@@ -153,7 +153,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		int maxListBoxHeight = (height - 180);
-		setCountRows(Math.round(maxListBoxHeight / 18));
+		setCountRows(Math.round(maxListBoxHeight / 17));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());
 

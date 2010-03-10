@@ -23,8 +23,7 @@
 	<!-- Window component as container for other components. -->
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<window id="window_BranchesList" apply="${branchListCtrl}"
-		border="none" width="100%" sizable="true"
-		onSize='info.setValue(window_BranchesList.getWidth()+","+window_BranchesList.getHeight());'>
+		border="none" width="100%" sizable="true">
 
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<!-- Set the HTML BODY style for ONLY this zul file.     -->
@@ -52,14 +51,11 @@
 				tooltiptext="${c:l('button_BranchList_PrintBranches.tooltiptext')}" />
 		</toolbar>
 
-
-
 		<hbox style="padding: 3px">
 			<space />
 			<checkbox id="checkbox_Branch_ShowAll"
 				label="${c:l('checkbox_Branch_ShowAll.label')}" />
 			<separator bar="true" orient="vertical" />
-
 			<label id="lbl_Branch_Description"
 				value="${c:l('lbl_Branch_Description.value')}" />
 			<textbox id="tb_Branch_Name" width="120px" />
@@ -67,7 +63,6 @@
 				image="/images/icons/search.gif"
 				label="${c:l('button_BranchList_Search_BranchName.label')}"
 				tooltiptext="${c:l('button_BranchList_Search_BranchName.tooltiptext')}" />
-			<label id="info" value="test" />
 		</hbox>
 
 		<borderlayout id="borderLayout_branchList">

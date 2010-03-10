@@ -26,6 +26,7 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zul.Button;
@@ -110,11 +111,48 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 		}
 	}
 
+	public void onSizeWin() {
+		// int heightFin = Integer.valueOf(finestraAg.getHeight().replace("px",
+		// "")).intValue();
+		// int pageSize = Math.max((heightFin - 220) / 10, 10);
+		// box.setPageSize(pageSize);
+		// box.setRows(pageSize);
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> ");
+		}
+	}
+
+	public void doResize() {
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> ");
+		}
+	}
+
 	public void onCreate$window_BranchesList(Event event) throws Exception {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
+
+		window_BranchesList.addEventListener("onOK", new EventListener() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+				if (logger.isDebugEnabled()) {
+					logger.debug("--> onOK is called ");
+				}
+			}
+		});
+
+//		window_BranchesList.addEventListener("onSize", new EventListener() {
+//
+//			@Override
+//			public void onEvent(Event event) throws Exception {
+//				if (logger.isDebugEnabled()) {
+//					logger.debug("--> onSize is called ");
+//				}
+//			}
+//		});
 
 		/* set components visible dependent of the users rights */
 		doCheckRights();

@@ -150,7 +150,25 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 			}
 		});
 
+		toolbarbutton = new Toolbarbutton();
+		hbox.appendChild(toolbarbutton);
+		toolbarbutton.setId("btnMainMenuDocumentation");
+
+		toolbarbutton.setImage("/images/icons/icon-pdf_16x16.png");
+		toolbarbutton.setTooltiptext(Labels.getLabel("btnMainMenuDocumentation.tooltiptext"));
+		toolbarbutton.addEventListener("onClick", new EventListener() {
+			@Override
+			public void onEvent(Event event) throws Exception {
+				// Executions.getCurrent().sendRedirect("the_url_generated_of_report","_blank");
+				Executions.getCurrent().sendRedirect("http://sunet.dl.sourceforge.net/project/zksample2/Documentation/zksample2-doc.pdf", "_blank");
+			}
+		});
+
 		Separator separator = createSeparator(false);
+		separator.setWidth("97%");
+		separator.setBar(false);
+		div.appendChild(separator);
+		separator = createSeparator(false);
 		separator.setWidth("97%");
 		separator.setBar(true);
 		div.appendChild(separator);

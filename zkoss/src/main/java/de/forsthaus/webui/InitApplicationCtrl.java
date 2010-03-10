@@ -197,7 +197,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		tableChildrenRecords = new Tablechildren();
 		tableChildrenRecords.setRowspan(1);
-		tableChildrenRecords.setWidth("260px");
+		tableChildrenRecords.setWidth("250px");
 		tableChildrenRecords.setStyle("padding-left: 5px;");
 		tableChildrenRecords.setParent(tableLayout);
 
@@ -248,7 +248,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		Panel panel = new Panel();
 		panel.setTitle("");
-		panel.setWidth("260px");
+		panel.setWidth("250px");
 		panel.setBorder("none");
 		panel.setStyle("align:left; color:red; ");
 		panel.setParent(tableChildrenRecords);
@@ -264,7 +264,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		Caption caption = new Caption();
 		caption.setParent(gb);
 		caption.setImage("/images/icons/database.gif");
-		caption.setLabel("Demo-Data in Postgres 8.2.6 DB");
+		caption.setLabel("Demo-Data in PostgreSQL v8.2.6");
 		caption.setStyle("color: #000000;font-weight:bold; text-align:left ");
 
 		Grid grid = new Grid();
@@ -277,11 +277,11 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		columns.setParent(grid);
 
 		Column column1 = new Column();
-		column1.setWidth("70%");
+		column1.setWidth("65%");
 		column1.setLabel("Table");
 		column1.setParent(columns);
 		Column column2 = new Column();
-		column2.setWidth("30%");
+		column2.setWidth("35%");
 		column2.setLabel("records");
 		column2.setParent(columns);
 

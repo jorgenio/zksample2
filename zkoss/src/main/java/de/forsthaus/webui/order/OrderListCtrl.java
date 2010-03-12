@@ -276,7 +276,8 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 				/** +++ get the SUM of the orderpositions for the ListFooter +++ */
 				String s = String.valueOf(getOrderService().getOrderSum(anOrder));
 				if (s != "null") {
-					listfooter_OrderPosList_WholePrice.setLabel(String.valueOf(getOrderService().getOrderSum(anOrder)));
+					listfooter_OrderPosList_WholePrice.setLabel(s);
+					// listfooter_OrderPosList_WholePrice.setLabel(String.valueOf(getOrderService().getOrderSum(anOrder)));
 				} else
 					listfooter_OrderPosList_WholePrice.setLabel("0.00");
 

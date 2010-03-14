@@ -19,16 +19,12 @@
 package de.forsthaus.example;
 
 import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import org.zkoss.zk.ui.Sessions;
 
 /**
  * Engine for creating random data from text files.<br>
@@ -41,55 +37,55 @@ public final class RandomDataEngine implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	final transient private static Random RANDOM;
-	final transient private static String[] BLOB;
-	final transient private static String[] EMAIL;
-	final transient private static String[] HOMEPAGE;
-	final transient private static String[] MANFIRSTNAME;
-	final transient private static String[] LASTNAME;
-	final transient private static String[] CITY;
-	final transient private static String[] ZIP;
-	final transient private static String[] STREET;
-	final transient private static String[] PHONENUMBER;
-	final transient private static String[] FEMALEFIRSTNAME;
+	final private Random RANDOM;
+	final private String[] BLOB;
+	final private String[] EMAIL;
+	final private String[] HOMEPAGE;
+	final private String[] MANFIRSTNAME;
+	final private String[] LASTNAME;
+	final private String[] CITY;
+	final private String[] ZIP;
+	final private String[] STREET;
+	final private String[] PHONENUMBER;
+	final private String[] FEMALEFIRSTNAME;
 
-	public static String getRandomBlob() {
+	public String getRandomBlob() {
 		return BLOB[RANDOM.nextInt(BLOB.length)];
 	}
 
-	public static String getRandomEmail() {
+	public String getRandomEmail() {
 		return EMAIL[RANDOM.nextInt(EMAIL.length)];
 	}
 
-	public static String getRandomHomepage() {
+	public String getRandomHomepage() {
 		return HOMEPAGE[RANDOM.nextInt(HOMEPAGE.length)];
 	}
 
-	public static String getRandomManFirstname() {
+	public String getRandomManFirstname() {
 		return MANFIRSTNAME[RANDOM.nextInt(MANFIRSTNAME.length)];
 	}
 
-	public static String getRandomLastname() {
+	public String getRandomLastname() {
 		return LASTNAME[RANDOM.nextInt(LASTNAME.length)];
 	}
 
-	public static String getRandomCity() {
+	public String getRandomCity() {
 		return CITY[RANDOM.nextInt(CITY.length)];
 	}
 
-	public static String getRandomZip() {
+	public String getRandomZip() {
 		return ZIP[RANDOM.nextInt(ZIP.length)];
 	}
 
-	public static String getRandomStreet() {
+	public String getRandomStreet() {
 		return STREET[RANDOM.nextInt(STREET.length)];
 	}
 
-	public static String getRandomPhoneNumber() {
+	public String getRandomPhoneNumber() {
 		return PHONENUMBER[RANDOM.nextInt(PHONENUMBER.length)];
 	}
 
-	public static String getRandomFemaleFirstname() {
+	public String getRandomFemaleFirstname() {
 		return FEMALEFIRSTNAME[RANDOM.nextInt(FEMALEFIRSTNAME.length)];
 	}
 
@@ -99,20 +95,6 @@ public final class RandomDataEngine implements Serializable {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	static {
-		RANDOM = new Random((long) Math.random());
-		BLOB = createStringArray("blob.txt");
-		EMAIL = createStringArray("email.txt");
-		HOMEPAGE = createStringArray("homepage.txt");
-		MANFIRSTNAME = createStringArray("manfirstname.txt");
-		LASTNAME = createStringArray("lastname.txt");
-		CITY = createStringArray("city.txt");
-		ZIP = createStringArray("zip.txt");
-		STREET = createStringArray("street.txt");
-		PHONENUMBER = createStringArray("phonenumber.txt");
-		FEMALEFIRSTNAME = createStringArray("femalefirstname.txt");
 	}
 
 	final static class LineReader {
@@ -227,14 +209,13 @@ public final class RandomDataEngine implements Serializable {
 		}
 	}
 
-	private static class MyReader {
+	private final static class MyReader {
 		final String[] result;
 
 		MyReader(String name) throws IOException {
 			super();
-			String path = Sessions.getCurrent().getWebApp().getRealPath("/res") + "/";
-			File file = new File(path + name);
-			LineReader lr = new LineReader(new BufferedInputStream(new FileInputStream(file)));
+			InputStream inputStream = new BufferedInputStream(RandomDataEngine.class.getResourceAsStream("/example/" + name));
+			LineReader lr = new LineReader(inputStream);
 
 			int limit;
 
@@ -245,10 +226,22 @@ public final class RandomDataEngine implements Serializable {
 				r.add(value);
 			}
 
-			result = (String[]) r.toArray(new String[r.size()]);
+			result = r.toArray(new String[r.size()]);
+			inputStream.close();
 		}
 	}
 
-	private RandomDataEngine() {
+	public RandomDataEngine() {
+		RANDOM = new Random(((long) Math.random()) + System.currentTimeMillis());
+		BLOB = createStringArray("blob.txt");
+		EMAIL = createStringArray("email.txt");
+		HOMEPAGE = createStringArray("homepage.txt");
+		MANFIRSTNAME = createStringArray("manfirstname.txt");
+		LASTNAME = createStringArray("lastname.txt");
+		CITY = createStringArray("city.txt");
+		ZIP = createStringArray("zip.txt");
+		STREET = createStringArray("street.txt");
+		PHONENUMBER = createStringArray("phonenumber.txt");
+		FEMALEFIRSTNAME = createStringArray("femalefirstname.txt");
 	}
 }

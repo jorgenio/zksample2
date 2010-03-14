@@ -356,13 +356,15 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 
 		int countRecords = 10000;
 
+		RandomDataEngine randomDataEngine = new RandomDataEngine(); 
+
 		for (int j = 0; j < countRecords; j++) {
 			Customer customer = getCustomerService().getNewCustomer();
 
-			customer.setKunName1(RandomDataEngine.getRandomManFirstname());
-			customer.setKunName2(RandomDataEngine.getRandomLastname());
+			customer.setKunName1(randomDataEngine.getRandomManFirstname());
+			customer.setKunName2(randomDataEngine.getRandomLastname());
 			customer.setKunMatchcode(customer.getKunName2().toUpperCase());
-			customer.setKunOrt(RandomDataEngine.getRandomCity());
+			customer.setKunOrt(randomDataEngine.getRandomCity());
 			customer.setBranche(branche);
 			customer.setOffice(office);
 			customer.setKunMahnsperre(Boolean.FALSE);
@@ -461,7 +463,7 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 			logger.debug("item :" + item);
 			if (item instanceof Listitem) {
 				Listitem lstItem = (Listitem) item;
-				for (Object cell : ((Listitem) lstItem).getChildren()) {
+				for (Object cell : (lstItem).getChildren()) {
 					logger.debug("cell :" + cell);
 					// CHILDREN COUNT is ALWAYS 1
 					if (cell instanceof Listcell) {

@@ -702,13 +702,15 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		int countRecords = newRecords;
 
+		RandomDataEngine randomDataEngine = new RandomDataEngine(); 
+		
 		for (int j = 0; j < countRecords; j++) {
 			Customer customer = getCustomerService().getNewCustomer();
 
-			customer.setKunName1(RandomDataEngine.getRandomManFirstname());
-			customer.setKunName2(RandomDataEngine.getRandomLastname());
+			customer.setKunName1(randomDataEngine.getRandomManFirstname());
+			customer.setKunName2(randomDataEngine.getRandomLastname());
 			customer.setKunMatchcode(customer.getKunName2().toUpperCase());
-			customer.setKunOrt(RandomDataEngine.getRandomCity());
+			customer.setKunOrt(randomDataEngine.getRandomCity());
 			customer.setBranche(branche);
 			customer.setKunMahnsperre(false);
 

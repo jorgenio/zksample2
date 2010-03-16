@@ -32,9 +32,11 @@ import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
+import org.zkoss.zul.FieldComparator;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listheader;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Paging;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -45,6 +47,7 @@ import de.forsthaus.UserWorkspace;
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.service.BrancheService;
 import de.forsthaus.backend.util.HibernateSearchObject;
+import de.forsthaus.webui.branch.model.BranchListModelItemRenderer;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 
@@ -124,9 +127,6 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 		/* set components visible dependent of the users rights */
 		doCheckRights();
 
-		doCreateDataBinding(window_BranchesListWithDataBinding);
-		setBinder(binder);
-
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
 		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
@@ -144,17 +144,23 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 		// init, show all branches
 		checkbox_Branch_ShowAll.setChecked(true);
 
-		// set the initial Data List
-		setBranches(getBrancheService().getAlleBranche());
+		// set the paging params
+		paging_BranchList.setPageSize(getCountRows());
+		paging_BranchList.setDetailed(true);
 
-		// Bean_To_UI
-		binder.loadAll();
+		// not used listheaders must be declared like ->
+		// lh.setSortAscending(""); lh.setSortDescending("")
+		listheader_Branch_Description.setSortAscending(new FieldComparator("braBezeichnung", true));
+		listheader_Branch_Description.setSortDescending(new FieldComparator("braBezeichnung", false));
 
-	}
+		// ++ create the searchObject and init sorting ++ //
+		HibernateSearchObject<Branche> searchObjBranch = new HibernateSearchObject<Branche>(Branche.class, getCountRows());
+		searchObjBranch.addSort("braBezeichnung", false);
+		// Set the ListModel
+		getPagedListWrapper().init(searchObjBranch, listBoxBranch, paging_BranchList);
+		// set the itemRenderer
+		listBoxBranch.setItemRenderer(new BranchListModelItemRenderer());
 
-	public List getInitList() {
-		setBranches(getBrancheService().getAlleBranche());
-		return getBrancheService().getAlleBranche();
 	}
 
 	/**
@@ -204,9 +210,11 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 	public void onDoubleClicked(Event event) throws Exception {
 
 		// get the selected object
-		Branche aBranche = getSelectedBranche();
+		Listitem item = listBoxBranch.getSelectedItem();
 
-		if (aBranche != null) {
+		if (item != null) {
+			// CAST TO THE SELECTED OBJECT
+			Branche aBranche = (Branche) item.getAttribute("data");
 
 			if (logger.isDebugEnabled()) {
 				logger.debug("--> " + aBranche.getBraBezeichnung());
@@ -373,14 +381,6 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 
 	public List<Branche> getBranches() {
 		return branches;
-	}
-
-	public void setSelectedBranche(Branche selectedBranche) {
-		this.selectedBranche = selectedBranche;
-	}
-
-	public Branche getSelectedBranche() {
-		return selectedBranche;
 	}
 
 	public int getCountRows() {

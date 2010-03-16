@@ -78,11 +78,9 @@
 				<paging id="paging_BranchList" />
 			</north>
 
-			<center border="normal">
+			<center border="none">
 				<listbox id="listBoxBranch" vflex="true"
-					model="@{controller.branches}"
-					selectedItem="@{controller.selectedBranche}"
-					tooltiptext="${c:l('listbox.tooltiptext')}" width="99.5%"
+					tooltiptext="${c:l('listbox.tooltiptext')}" width="100%"
 					height="100%" multiple="false">
 					<listhead sizable="true">
 						<listheader id="listheader_Branch_Description"
@@ -90,10 +88,6 @@
 							label="${c:l('listheader_Branch_Description.label')}" sort="auto"
 							width="50%" />
 					</listhead>
-					<listitem self="@{each='branche'}"
-						forward="onDoubleClick=onDoubleClicked() ">
-						<listcell label="@{branche.braBezeichnung}" />
-					</listitem>
 				</listbox>
 			</center>
 

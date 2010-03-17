@@ -11,7 +11,7 @@
 			North part
 		</north>
 		<center border="0">
-			<listbox vflex="true">
+			<listbox vflex="true" width="200px">
 				<listhead sizable="true">
 					<listheader label="listheader" />
 				</listhead>
@@ -35,7 +35,8 @@
 				<listitem label="item18" />
 				<listitem label="item19" />
 				<listitem label="item20" />
-				<listitem label="item21" />
+				<listitem
+					label="item21lkjkld kljk dklds vkjdsv kdsjvkdslvdjskvdlskvj sd" />
 				<listitem label="item22" />
 				<listitem label="item23" />
 				<listitem label="item24" />

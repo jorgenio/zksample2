@@ -62,13 +62,13 @@
 			</north>
 
 
-			<west border="none" margins="0,0,0,0" size="200px" 
+			<west border="none" margins="0,0,0,0" size="200px"
 				flex="true" minsize="100" splittable="true" autoscroll="false">
 				<div id="divWest">WEST</div>
 			</west>
 
 			<center id="center" border="none" margins="0,0,0,0"
-				flex="true">
+				flex="true" autoscroll="true">
 				<div id="divCenter">
 					<tabbox id="tabBoxIndexCenter" width="100%">
 						<tabs id="tabsIndexCenter"></tabs>

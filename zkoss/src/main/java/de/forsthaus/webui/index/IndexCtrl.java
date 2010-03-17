@@ -99,7 +99,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 		statusBarZKVersion.setLabel("ZK version: " + doGetZkVersion());
 		Date date = new Date();
-		date.setDate(10);
+		date.setDate(17);
 		date.setMonth(2);
 		date.setYear(110);
 		statusBarAppVersion.setLabel("Zksample2 v2.0.2 / build: " + FDDateFormat.getDateFormater().format(date));

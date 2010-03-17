@@ -48,6 +48,7 @@ public class NoEmptyAndEqualStringsConstraint implements Constraint, java.io.Ser
 		if (comp instanceof Textbox) {
 
 			final String enteredValue = (String) value;
+
 			if (compareComponent instanceof Textbox) {
 				if (enteredValue.isEmpty()) {
 					throw new WrongValueException(comp, Labels.getLabel("message.error.CannotBeEmpty"));

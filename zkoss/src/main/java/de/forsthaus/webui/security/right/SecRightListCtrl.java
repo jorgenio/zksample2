@@ -122,8 +122,8 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 		 * filled by onClientInfo() in the indexCtroller
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		int maxListBoxHeight = (height - 158);
-		setCountRows(Math.round(maxListBoxHeight / 16));
+		int maxListBoxHeight = (height - 170);
+		setCountRows(Math.round(maxListBoxHeight / 17));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());
 

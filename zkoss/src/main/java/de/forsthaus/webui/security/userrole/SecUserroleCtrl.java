@@ -156,8 +156,8 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 
 		/* ++++ calculate the heights +++++ */
 		int topHeader = 30;
-		int btnTopArea = 30;
-		int winTitle = 25;
+		int btnTopArea = 45;
+		int winTitle = 30;
 
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
@@ -168,9 +168,9 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 		int maxListBoxHeight = (height - topHeader - btnTopArea - winTitle);
 		setCountRowsSecUser(Math.round(maxListBoxHeight / 30));
 		setCountRowsSecRole(Math.round(maxListBoxHeight / 35));
-//		System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
-//		System.out.println("==========> : " + getCountRowsSecUser());
-//		System.out.println("==========> : " + getCountRowsSecRole());
+		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
+		// System.out.println("==========> : " + getCountRowsSecUser());
+		// System.out.println("==========> : " + getCountRowsSecRole());
 
 		// secUserroleWindow.setHeight((height - topHeader) + "px");
 

@@ -134,7 +134,7 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 		 * filled by onClientInfo() in the indexCtroller
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		int maxListBoxHeight = (height - 155);
+		int maxListBoxHeight = (height - 165);
 		setCountRows(Math.round(maxListBoxHeight / 14));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());

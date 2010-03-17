@@ -186,8 +186,8 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 
 		/* ++++ calculate the heights +++++ */
 		int topHeader = 30;
-		int btnTopArea = 30;
-		int winTitle = 25;
+		int btnTopArea = 45;
+		int winTitle = 30;
 
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
@@ -199,10 +199,10 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 		setCountRowsGroup(Math.round(maxListBoxHeight / 21));
 		setCountRowsRight(Math.round(maxListBoxHeight / 31));
 		setCountRowsRightDetails(Math.round(maxListBoxHeight / 33));
-//		System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
-//		System.out.println("==========> : " + getCountRowsGroup());
-//		System.out.println("==========> : " + getCountRowsRight());
-//		System.out.println("==========> : " + getCountRowsRightDetails());
+		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
+		// System.out.println("==========> : " + getCountRowsGroup());
+		// System.out.println("==========> : " + getCountRowsRight());
+		// System.out.println("==========> : " + getCountRowsRightDetails());
 
 		/* set the PageSize */
 		paging_ListBoxSecGroup.setPageSize(getCountRowsGroup());

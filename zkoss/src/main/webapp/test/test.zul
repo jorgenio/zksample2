@@ -101,17 +101,30 @@
 			</vbox>
 			<separator bar="true" width="200px" />
 
-			<window title="My First Window" border="normal"
-				width="200px">
-				<vbox id="main">
-					<datebox id="day" />
-				</vbox>
-				<button label="today"
-					onClick="day.setValue(new Date())" />
-				<button label="new today"
-					onClick="Datebox db=new Datebox(); db.setValue(new Date()); db.setParent(main)" />
-			</window>
+			<hbox>
+				<window title="My First Window" border="normal"
+					width="200px">
+					<vbox id="main">
+						<datebox id="day" />
+					</vbox>
+					<button label="today"
+						onClick="day.setValue(new Date())" />
+					<button label="new today"
+						onClick="Datebox db=new Datebox(); db.setValue(new Date()); db.setParent(main)" />
+				</window>
 
+				<panel>
+					<panelchildren>
+						<div>
+							<textbox id="userNameTest" />
+							<textbox id="passwordTest" type="password" />
+							<button id="btnLoginTest" label="OK" />
+						</div>
+					</panelchildren>
+				</panel>
+
+
+			</hbox>
 			<groupbox use="de.forsthaus.webui.util.test.WPanel" />
 
 			<vbox id="testtabelle">

@@ -35,6 +35,7 @@ import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Button;
@@ -357,7 +358,7 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 
 		int countRecords = 10000;
 
-		RandomDataEngine randomDataEngine = new RandomDataEngine(); 
+		RandomDataEngine randomDataEngine = new RandomDataEngine();
 
 		for (int j = 0; j < countRecords; j++) {
 			Customer customer = getCustomerService().getNewCustomer();

@@ -33,6 +33,7 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.spring.SpringUtil;
@@ -507,6 +508,37 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 		listBoxCustomer.invalidate();
 
 	}
+
+	// ++++++++++ START: Test for the WrongValueException
+	// +++ Forum thread: http://zkoss.org/forum/listComment/11663
+	private Textbox userNameTest;
+	private Textbox passwordTest;
+
+	public void onClick$btnLoginTest(Event event) {
+
+		if (userNameTest.getValue().equalsIgnoreCase("test") && passwordTest.getValue().equalsIgnoreCase("test")) {
+
+		} else {
+			throw new WrongValueException(userNameTest, "false userName or password. Please retry.");
+		}
+	}
+
+	public void onFocus$userNameTest(Event event) {
+		System.out.println("onFocus: Textbox userName");
+		Clients.closeErrorBox(userNameTest);
+	}
+
+	public void onFocus$passwordTest(Event event) {
+		System.out.println("onFocus: Textbox passWord");
+
+		Clients.closeErrorBox(userNameTest);
+		// Component[] comps = { userNameTest, passwordTest };
+		// Clients.closeErrorBox(comps);
+	}
+
+	// ++++++++++ END: Test for the WrongValueException
+
+	// +++++++++++++++++ Getters/Setters+++++++++++++++++++++++
 
 	public void setOfficeService(OfficeService officeService) {
 		this.officeService = officeService;

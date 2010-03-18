@@ -11,7 +11,7 @@
 	<window id="customerSearchWindow"
 		title="${c:l('customerSearchWindow.title')}" border="none"
 		apply="${customerSearchCtrl}" closable="true" width="400px"
-		height="280px" sizable="true">
+		height="284px" sizable="true">
 
 		<style>
 			body { padding: 0 0; /* 0 padding on top and bottom and 0
@@ -97,19 +97,21 @@
 				</panel>
 			</center>
 
-			<south border="none" margins="1,0,0,0" size="26px"
+			<south border="none" margins="1,0,0,0" size="30px"
 				splittable="false">
-				<div id="divSouthCustomer" align="right">
+				<div id="divSouthCustomer" align="left" width="100%">
 					<grid>
 						<rows>
 							<row valign="middle">
-								<hbox align="end">
+								<hbox align="start">
 									<button id="btnSearch" height="20"
 										label="${c:l('btnSearch.label')}"
 										tooltiptext="${c:l('btnSearch.tooltiptext')}" />
 									<button id="btnClose" height="20"
 										label="${c:l('btnClose.label')}"
 										tooltiptext="${c:l('btnClose.tooltiptext')}" />
+									<label
+										id="labelCustomerSearchResult" />
 								</hbox>
 							</row>
 						</rows>

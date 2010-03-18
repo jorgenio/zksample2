@@ -24,7 +24,9 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
@@ -55,6 +57,7 @@ import de.forsthaus.webui.util.searching.SearchOperators;
  * @changes 07/24/2009:sge changings for clustering.<br>
  *          11/07/2009:bbr changed to extending from GFCBaseCtrl<br>
  *          (GenericForwardComposer) for spring-managed creation.<br>
+ *          03/18/2010:sge added a result counter next buttons.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -63,8 +66,7 @@ import de.forsthaus.webui.util.searching.SearchOperators;
 public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -6320398861070378344L;
-	private transient final static Logger logger = Logger
-			.getLogger(CustomerSearchCtrl.class);
+	private transient final static Logger logger = Logger.getLogger(CustomerSearchCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -86,6 +88,7 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 	protected transient Textbox kunOrt; // autowired
 	protected transient Listbox sortOperator_kunBranch; // autowired
 	protected transient Listbox kunBranche; // autowired
+	protected transient Label labelCustomerSearchResult; // autowired
 
 	// not auto wired vars
 	private transient CustomerListCtrl customerCtrl; // overhanded per param
@@ -129,42 +132,28 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 		// TODO chnagwed to ListPagedWrapper
 		// +++++++++++++++++++++++ DropDown ListBox ++++++++++++++++++++++ //
 		// set listModel and itemRenderer for the Branch dropdown listbox
-		kunBranche.setModel(new ListModelList(getBrancheService()
-				.getAlleBranche()));
+		kunBranche.setModel(new ListModelList(getBrancheService().getAlleBranche()));
 		kunBranche.setItemRenderer(new CustomerBrancheListModelItemRenderer());
 
 		// +++++++++++++++++++++++ DropDown ListBox ++++++++++++++++++++++ //
 		// set listModel and itemRenderer for the search operator type listboxes
-		sortOperator_kunNr.setModel(new ListModelList(new SearchOperators()
-				.getAllOperators(), true));
-		sortOperator_kunNr
-				.setItemRenderer(new SearchOperatorListModelItemRenderer());
-		sortOperator_kunMatchcode.setModel(new ListModelList(
-				new SearchOperators().getAllOperators()));
-		sortOperator_kunMatchcode
-				.setItemRenderer(new SearchOperatorListModelItemRenderer());
-		sortOperator_kunName1.setModel(new ListModelList(new SearchOperators()
-				.getAllOperators()));
-		sortOperator_kunName1
-				.setItemRenderer(new SearchOperatorListModelItemRenderer());
-		sortOperator_kunName2.setModel(new ListModelList(new SearchOperators()
-				.getAllOperators()));
-		sortOperator_kunName2
-				.setItemRenderer(new SearchOperatorListModelItemRenderer());
-		sortOperator_kunOrt.setModel(new ListModelList(new SearchOperators()
-				.getAllOperators()));
-		sortOperator_kunOrt
-				.setItemRenderer(new SearchOperatorListModelItemRenderer());
-		sortOperator_kunBranch.setModel(new ListModelList(new SearchOperators()
-				.getAllOperators()));
-		sortOperator_kunBranch
-				.setItemRenderer(new SearchOperatorListModelItemRenderer());
+		sortOperator_kunNr.setModel(new ListModelList(new SearchOperators().getAllOperators(), true));
+		sortOperator_kunNr.setItemRenderer(new SearchOperatorListModelItemRenderer());
+		sortOperator_kunMatchcode.setModel(new ListModelList(new SearchOperators().getAllOperators()));
+		sortOperator_kunMatchcode.setItemRenderer(new SearchOperatorListModelItemRenderer());
+		sortOperator_kunName1.setModel(new ListModelList(new SearchOperators().getAllOperators()));
+		sortOperator_kunName1.setItemRenderer(new SearchOperatorListModelItemRenderer());
+		sortOperator_kunName2.setModel(new ListModelList(new SearchOperators().getAllOperators()));
+		sortOperator_kunName2.setItemRenderer(new SearchOperatorListModelItemRenderer());
+		sortOperator_kunOrt.setModel(new ListModelList(new SearchOperators().getAllOperators()));
+		sortOperator_kunOrt.setItemRenderer(new SearchOperatorListModelItemRenderer());
+		sortOperator_kunBranch.setModel(new ListModelList(new SearchOperators().getAllOperators()));
+		sortOperator_kunBranch.setItemRenderer(new SearchOperatorListModelItemRenderer());
 
 		// ++++ Restore the search mask input definition ++++ //
 		// if exists a searchObject than show formerly inputs of filter values
 		if (args.containsKey("searchObject")) {
-			final HibernateSearchObject<Customer> searchObj = (HibernateSearchObject<Customer>) args
-					.get("searchObject");
+			final HibernateSearchObject<Customer> searchObj = (HibernateSearchObject<Customer>) args.get("searchObject");
 
 			// get the filters from the searchObject
 			List<Filter> ft = searchObj.getFilters();
@@ -225,8 +214,7 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 			listbox.setSelectedIndex(6);
 		} else if (filter.getOperator() == Filter.OP_ILIKE) {
 			// Delete used '%' signs if the operator is like or iLike
-			String str = StringUtils.replaceChars(filter.getValue().toString(),
-					"%", "");
+			String str = StringUtils.replaceChars(filter.getValue().toString(), "%", "");
 			filter.setValue(str);
 			listbox.setSelectedIndex(7);
 		}
@@ -301,8 +289,7 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void doSearch() {
 
-		HibernateSearchObject<Customer> so = new HibernateSearchObject(
-				Customer.class);
+		HibernateSearchObject<Customer> so = new HibernateSearchObject(Customer.class);
 
 		if (StringUtils.isNotEmpty(kunNr.getValue())) {
 
@@ -310,19 +297,14 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 			Listitem item = sortOperator_kunNr.getSelectedItem();
 
 			if (item != null) {
-				int searchOpId = ((SearchOperators) item.getAttribute("data"))
-						.getSearchOperatorId();
+				int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
 
 				if (searchOpId == Filter.OP_ILIKE) {
-					so
-							.addFilter(new Filter("kunNr", "%"
-									+ kunNr.getValue().toUpperCase() + "%",
-									searchOpId));
+					so.addFilter(new Filter("kunNr", "%" + kunNr.getValue().toUpperCase() + "%", searchOpId));
 				} else if (searchOpId == -1) {
 					// do nothing
 				} else {
-					so.addFilter(new Filter("kunNr", kunNr.getValue(),
-							searchOpId));
+					so.addFilter(new Filter("kunNr", kunNr.getValue(), searchOpId));
 				}
 			}
 		}
@@ -333,18 +315,14 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 			Listitem item = sortOperator_kunMatchcode.getSelectedItem();
 
 			if (item != null) {
-				int searchOpId = ((SearchOperators) item.getAttribute("data"))
-						.getSearchOperatorId();
+				int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
 
 				if (searchOpId == Filter.OP_ILIKE) {
-					so.addFilter(new Filter("kunMatchcode", "%"
-							+ kunMatchcode.getValue().toUpperCase() + "%",
-							searchOpId));
+					so.addFilter(new Filter("kunMatchcode", "%" + kunMatchcode.getValue().toUpperCase() + "%", searchOpId));
 				} else if (searchOpId == -1) {
 					// do nothing
 				} else {
-					so.addFilter(new Filter("kunMatchcode", kunMatchcode
-							.getValue(), searchOpId));
+					so.addFilter(new Filter("kunMatchcode", kunMatchcode.getValue(), searchOpId));
 				}
 			}
 		}
@@ -355,18 +333,14 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 			Listitem item = sortOperator_kunName1.getSelectedItem();
 
 			if (item != null) {
-				int searchOpId = ((SearchOperators) item.getAttribute("data"))
-						.getSearchOperatorId();
+				int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
 
 				if (searchOpId == Filter.OP_ILIKE) {
-					so.addFilter(new Filter("kunName1", "%"
-							+ kunName1.getValue().toUpperCase() + "%",
-							searchOpId));
+					so.addFilter(new Filter("kunName1", "%" + kunName1.getValue().toUpperCase() + "%", searchOpId));
 				} else if (searchOpId == -1) {
 					// do nothing
 				} else {
-					so.addFilter(new Filter("kunName1", kunName1.getValue(),
-							searchOpId));
+					so.addFilter(new Filter("kunName1", kunName1.getValue(), searchOpId));
 				}
 			}
 		}
@@ -377,18 +351,14 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 			Listitem item = sortOperator_kunName2.getSelectedItem();
 
 			if (item != null) {
-				int searchOpId = ((SearchOperators) item.getAttribute("data"))
-						.getSearchOperatorId();
+				int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
 
 				if (searchOpId == Filter.OP_ILIKE) {
-					so.addFilter(new Filter("kunName2", "%"
-							+ kunName2.getValue().toUpperCase() + "%",
-							searchOpId));
+					so.addFilter(new Filter("kunName2", "%" + kunName2.getValue().toUpperCase() + "%", searchOpId));
 				} else if (searchOpId == -1) {
 					// do nothing
 				} else {
-					so.addFilter(new Filter("kunName2", kunName2.getValue(),
-							searchOpId));
+					so.addFilter(new Filter("kunName2", kunName2.getValue(), searchOpId));
 				}
 			}
 		}
@@ -399,19 +369,14 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 			Listitem item = sortOperator_kunOrt.getSelectedItem();
 
 			if (item != null) {
-				int searchOpId = ((SearchOperators) item.getAttribute("data"))
-						.getSearchOperatorId();
+				int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
 
 				if (searchOpId == Filter.OP_ILIKE) {
-					so
-							.addFilter(new Filter("kunOrt", "%"
-									+ kunOrt.getValue().toUpperCase() + "%",
-									searchOpId));
+					so.addFilter(new Filter("kunOrt", "%" + kunOrt.getValue().toUpperCase() + "%", searchOpId));
 				} else if (searchOpId == -1) {
 					// do nothing
 				} else {
-					so.addFilter(new Filter("kunOrt", kunOrt.getValue(),
-							searchOpId));
+					so.addFilter(new Filter("kunOrt", kunOrt.getValue(), searchOpId));
 				}
 			}
 		}
@@ -428,19 +393,14 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 				Listitem item = sortOperator_kunBranch.getSelectedItem();
 
 				if (item != null) {
-					int searchOpId = ((SearchOperators) item
-							.getAttribute("data")).getSearchOperatorId();
+					int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
 
 					if (searchOpId == Filter.OP_ILIKE) {
-						so
-								.addFilter(new Filter("branche", branche,
-										searchOpId));
+						so.addFilter(new Filter("branche", branche, searchOpId));
 					} else if (searchOpId == -1) {
 						// do nothing
 					} else {
-						so
-								.addFilter(new Filter("branche", branche,
-										searchOpId));
+						so.addFilter(new Filter("branche", branche, searchOpId));
 					}
 				}
 			}
@@ -449,8 +409,7 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 		if (logger.isDebugEnabled()) {
 			List<Filter> lf = so.getFilters();
 			for (Filter filter : lf) {
-				logger.debug(filter.getProperty().toString() + " / "
-						+ filter.getValue().toString());
+				logger.debug(filter.getProperty().toString() + " / " + filter.getValue().toString());
 
 				if (Filter.OP_ILIKE == filter.getOperator()) {
 					logger.debug(filter.getOperator());
@@ -467,8 +426,9 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 
 		// set the model to the listbox with the initial resultset get by the
 		// DAO method.
-		((PagedListWrapper<Customer>) listBox.getModel()).init(so, listBox,
-				paging);
+		((PagedListWrapper<Customer>) listBox.getModel()).init(so, listBox, paging);
+
+		labelCustomerSearchResult.setValue(Labels.getLabel("labelCustomerSearchResult.value") + " " + String.valueOf(paging.getTotalSize()));
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

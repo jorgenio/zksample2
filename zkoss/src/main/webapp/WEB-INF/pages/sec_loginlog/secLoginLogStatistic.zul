@@ -56,8 +56,8 @@
 			</columns>
 		</grid>
 
-		<panel width="100%" height="100%"
-			id="panelSecLoginLogStatistikCenter">
+		<panel id="panelSecLoginLogStatistikCenter" width="100%"
+			height="100%" border="none">
 			<panelchildren
 				id="panelchildrenSecLoginLogStatistikCenter">
 				<box id="boxSecLoginLogStatistikCenter" align="start"

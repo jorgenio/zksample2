@@ -121,20 +121,18 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		 * filled by onClientInfo() in the indexCtroller
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		maxPanelHeight = (height - 195);
-		maxlistBoxHeight = maxPanelHeight - 35;
+		maxPanelHeight = (height - 170);
+		maxlistBoxHeight = maxPanelHeight - 25;
 
 		panelSecLoginLogStatistikCenter.setHeight(String.valueOf(maxPanelHeight) + "px");
-
-		boxSecLoginLogStatistikCenter.appendChild(doGetTotalCountByCountries());
 
 		Calendar aDate = Calendar.getInstance();
 		aDate.setTime(new Date());
 		int currentYear = aDate.get(Calendar.YEAR);
 		int currentMonth = aDate.get(Calendar.MONTH);
 
+		boxSecLoginLogStatistikCenter.appendChild(doGetTotalCountByCountries());
 		boxSecLoginLogStatistikCenter.appendChild(doGetMonthlyCountByCountries(currentMonth, currentYear));
-
 		boxSecLoginLogStatistikCenter.appendChild(doGetDailyCountByCountries(new Date()));
 	}
 

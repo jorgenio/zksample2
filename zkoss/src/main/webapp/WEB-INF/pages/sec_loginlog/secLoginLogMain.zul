@@ -31,18 +31,14 @@
 
 				<!-- TabPanel L I S T -->
 				<tabpanel id="tabPanelLoginList" height="100%"
-					style="border: 0px; padding: 0px" />
+					style="border: none; padding: 0px" />
 
 				<!-- TabPanel S T A T I S T I C -->
 				<tabpanel id="tabPanelLoginStatistic" height="100%"
-					style="border: 0px; padding: 0px" />
+					style="border: none; padding: 0px" />
 
 			</tabpanels>
-
 		</tabbox>
-
-
-
 
 
 	</window>

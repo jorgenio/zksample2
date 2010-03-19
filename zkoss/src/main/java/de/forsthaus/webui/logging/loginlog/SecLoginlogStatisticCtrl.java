@@ -245,7 +245,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		panel.setTitle(Labels.getLabel("panelTotalCount.Title"));
 		panel.setBorder("none");
 		panel.setHeight("100%");
-		panel.setWidth("290px");
+		panel.setWidth("292px");
 		panel.setParent(div);
 		Panelchildren panelchildren = new Panelchildren();
 		panelchildren.setParent(panel);
@@ -268,12 +268,12 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		listhead.setSizable(true);
 		listhead.setParent(lbTotalCount);
 		Listheader lh1 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.Countries.Label"));
-		lh1.setWidth("55px");
+		lh1.setWidth("53px");
 		lh1.setSortAscending(new FieldComparator("country", true));
 		lh1.setSortDescending(new FieldComparator("country", false));
 		lh1.setParent(listhead);
 		Listheader lh2 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.CountryName.Label"));
-		lh2.setWidth("190px");
+		lh2.setWidth("185px");
 		lh2.setSortAscending(new FieldComparator("countryName", true));
 		lh2.setSortDescending(new FieldComparator("countryName", false));
 		lh2.setParent(listhead);
@@ -352,7 +352,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		panel.setTitle(Labels.getLabel("panelMonthlyCount.Title") + " " + (aMonth + 1) + "/" + aYear);
 		panel.setBorder("none");
 		panel.setHeight("100%");
-		panel.setWidth("290px");
+		panel.setWidth("292px");
 		panel.setParent(div);
 		Panelchildren panelchildren = new Panelchildren();
 		panelchildren.setParent(panel);
@@ -376,12 +376,12 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		listhead.setSizable(true);
 		listhead.setParent(lbMonthlyCount);
 		Listheader lh1 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.Countries.Label"));
-		lh1.setWidth("55px");
+		lh1.setWidth("52px");
 		lh1.setSortAscending(new FieldComparator("country", true));
 		lh1.setSortDescending(new FieldComparator("country", false));
 		lh1.setParent(listhead);
 		Listheader lh2 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.CountryName.Label"));
-		lh2.setWidth("190px");
+		lh2.setWidth("185px");
 		lh2.setSortAscending(new FieldComparator("countryName", true));
 		lh2.setSortDescending(new FieldComparator("countryName", false));
 		lh2.setParent(listhead);
@@ -462,7 +462,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		panel.setTitle(Labels.getLabel("panelDailyCount.Title") + ": " + getDateTime(aDate));
 		panel.setBorder("none");
 		panel.setHeight("100%");
-		panel.setWidth("290px");
+		panel.setWidth("292px");
 		panel.setParent(div);
 
 		Panelchildren panelchildren = new Panelchildren();
@@ -487,12 +487,12 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		listhead.setSizable(true);
 		listhead.setParent(lbDailyCount);
 		Listheader lh1 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.Countries.Label"));
-		lh1.setWidth("55px");
+		lh1.setWidth("52px");
 		lh1.setSortAscending(new FieldComparator("country", true));
 		lh1.setSortDescending(new FieldComparator("country", false));
 		lh1.setParent(listhead);
 		Listheader lh2 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.CountryName.Label"));
-		lh2.setWidth("190px");
+		lh2.setWidth("185px");
 		lh2.setSortAscending(new FieldComparator("countryName", true));
 		lh2.setSortDescending(new FieldComparator("countryName", false));
 		lh2.setParent(listhead);

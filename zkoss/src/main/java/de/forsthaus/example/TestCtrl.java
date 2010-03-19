@@ -516,8 +516,18 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	private Textbox passwordTest;
 
 	public void onClick$btnLoginTest(Event event) {
+		System.out.println(event.getName());
+
+		userNameTest.getValue();
+		passwordTest.getValue();
+		Clients.closeErrorBox(userNameTest);
 
 		if (userNameTest.getValue().equalsIgnoreCase("test") && passwordTest.getValue().equalsIgnoreCase("test")) {
+
+			System.out.println("&&");
+			userNameTest.getValue();
+			userNameTest.invalidate();
+			userNameTest.focus();
 
 		} else {
 			throw new WrongValueException(userNameTest, "false userName or password. Please retry.");

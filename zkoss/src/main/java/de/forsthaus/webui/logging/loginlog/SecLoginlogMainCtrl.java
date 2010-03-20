@@ -60,6 +60,7 @@ public class SecLoginlogMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
 	protected transient Window secLoginlogMainWindow; // autowired
+	protected transient Panel panel_SecLoginlogList; // autowired
 
 	protected Tab tabLoginList; // autowired
 	protected Tabpanel tabPanelLoginList; // autowired
@@ -87,6 +88,16 @@ public class SecLoginlogMainCtrl extends GFCBaseCtrl implements Serializable {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
+		}
+
+		int panelHeight = 25;
+		// TODO put the logic for working with panel in the ApplicationWorkspace
+		boolean withPanel = false;
+		if (withPanel == false) {
+			panel_SecLoginlogList.setVisible(false);
+		} else {
+			panel_SecLoginlogList.setVisible(true);
+			panelHeight = 0;
 		}
 
 		/**

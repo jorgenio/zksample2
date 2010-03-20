@@ -79,6 +79,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
 	protected transient Window window_customerList; // autowired
+	protected transient Panel panel_CustomerList; // autowired
 	// listbox customerList
 	protected transient Borderlayout borderLayout_customerList; // autowired
 	protected transient Paging pagingCustomerList; // autowired
@@ -135,7 +136,20 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
 		 * filled by onClientInfo() in the indexCtroller
 		 */
+
+		int panelHeight = 25;
+		// TODO put the logic for working with panel in the ApplicationWorkspace
+		boolean withPanel = false;
+		if (withPanel == false) {
+			panel_CustomerList.setVisible(false);
+		} else {
+			panel_CustomerList.setVisible(true);
+			panelHeight = 0;
+		}
+
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		height = height + panelHeight;
+
 		int maxListBoxHeight = (height - 135);
 		setCountRows(Math.round(maxListBoxHeight / 24));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);

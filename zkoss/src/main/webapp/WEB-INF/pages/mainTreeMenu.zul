@@ -5,7 +5,6 @@
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
 	<window id="mainMenuWindow" border="none"
-		style="background-color: #D6DCDE; padding: 5px"
 		use="de.forsthaus.common.menu.MainMenuCtrl">
 
 		<style>.z-groupbox-body { background-color : white}</style>

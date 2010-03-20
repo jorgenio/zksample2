@@ -79,7 +79,7 @@
 											<paging
 												id="paging_ListBoxSecGroup" />
 											<listbox vflex="true"
-												id="listBoxSecGroup" width="99.9%" height="100%"
+												id="listBoxSecGroup" width="99.5%" height="100%"
 												multiple="false">
 												<listhead
 													sizable="true">

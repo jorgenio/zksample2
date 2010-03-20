@@ -35,6 +35,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Paging;
+import org.zkoss.zul.Panel;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -75,6 +76,7 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
 	protected transient Window secRoleListWindow; // autowired
+	protected transient Panel panel_SecRoleList; // autowired
 
 	// filter components
 	protected transient Checkbox checkbox_SecRoleList_ShowAll; // autowired
@@ -114,7 +116,19 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
 		 * filled by onClientInfo() in the indexCtroller
 		 */
+
+		int panelHeight = 25;
+		// TODO put the logic for working with panel in the ApplicationWorkspace
+		boolean withPanel = false;
+		if (withPanel == false) {
+			panel_SecRoleList.setVisible(false);
+		} else {
+			panel_SecRoleList.setVisible(true);
+			panelHeight = 0;
+		}
+
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		height = height + panelHeight;
 		int maxListBoxHeight = (height - 165);
 		setCountRows(Math.round(maxListBoxHeight / 22));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);

@@ -38,6 +38,7 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Paging;
+import org.zkoss.zul.Panel;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Window;
 
@@ -109,6 +110,8 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
 	protected transient Window secGroupRightWindow; // autowired
+	protected transient Panel panel_SecGroupRight; // autowired
+
 	protected transient Borderlayout borderlayoutSecGroupRight; // autowired
 
 	// listBox secGroup
@@ -194,7 +197,19 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
 		 * filled by onClientInfo() in the indexCtroller
 		 */
+
+		int panelHeight = 25;
+		// TODO put the logic for working with panel in the ApplicationWorkspace
+		boolean withPanel = false;
+		if (withPanel == false) {
+			panel_SecGroupRight.setVisible(false);
+		} else {
+			panel_SecGroupRight.setVisible(true);
+			panelHeight = 0;
+		}
+
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		height = height + panelHeight;
 		int maxListBoxHeight = (height - topHeader - btnTopArea - winTitle);
 		setCountRowsGroup(Math.round(maxListBoxHeight / 21));
 		setCountRowsRight(Math.round(maxListBoxHeight / 31));

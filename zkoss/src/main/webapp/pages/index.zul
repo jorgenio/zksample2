@@ -37,8 +37,10 @@
 						<h:div id="divNo" style="padding:5px"
 							align="left">
 							<image src="/images/zkpowered_16x16.png" />
-							<label value=" ZKoss Sample2 application"
-								style="font-size:12px; font-weight:normal" />
+							<separator bar="false" orient="vertical" />
+							<separator bar="false" orient="vertical" />
+							<label value=" ZkSample2 "
+								style="font-size:12px; font-weight:normal;" />
 						</h:div>
 
 						<!-- 
@@ -50,7 +52,8 @@
 							</label>
 							</h:div>
 						-->
-						<h:div id="divNorthEast" align="right">
+						<h:div id="divNorthEast" align="right"
+							style="padding: 3px;">
 							<button id="btnLogout"
 								image="/images/icons/btn_exitdoor2_16x16.gif"
 								label="${c:l('btnLogout.label')}"
@@ -70,7 +73,8 @@
 
 
 			<west border="none" margins="0,0,0,0" size="230px"
-				flex="true" minsize="100" splittable="true" autoscroll="false">
+				style="background-color: #D6DCDE; padding: 5px" flex="true"
+				minsize="100" splittable="true" autoscroll="false">
 				<div id="divWest">WEST</div>
 			</west>
 

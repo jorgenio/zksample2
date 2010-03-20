@@ -36,6 +36,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Paging;
+import org.zkoss.zul.Panel;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -79,6 +80,7 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
 	protected transient Window window_OfficeList; // autowired
+	protected transient Panel panelOfficeList; // autowired
 
 	protected transient Borderlayout borderLayout_officeList; // autowired
 	protected transient Paging paging_OfficeList; // autowired
@@ -133,7 +135,19 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
 		 * filled by onClientInfo() in the indexCtroller
 		 */
+
+		int panelHeight = 25;
+		// TODO put the logic for working with panel in the ApplicationWorkspace
+		boolean withPanel = false;
+		if (withPanel == false) {
+			panelOfficeList.setVisible(false);
+		} else {
+			panelOfficeList.setVisible(true);
+			panelHeight = 0;
+		}
+
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		height = height + panelHeight;
 		int maxListBoxHeight = (height - 165);
 		setCountRows(Math.round(maxListBoxHeight / 14));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);

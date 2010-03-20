@@ -37,6 +37,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Paging;
+import org.zkoss.zul.Panel;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -79,6 +80,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
 	protected transient Window window_ArticlesList; // autowired
+	protected transient Panel panelArticleList; // autowired
 
 	// search/filter components
 	protected transient Checkbox checkbox_ArticleList_ShowAll; // autowired
@@ -132,7 +134,19 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
 		 * filled by onClientInfo() in the indexCtroller
 		 */
+
+		int panelHeight = 25;
+		// TODO put the logic for working with panel in the ApplicationWorkspace
+		boolean withPanel = false;
+		if (withPanel == false) {
+			panelArticleList.setVisible(false);
+		} else {
+			panelArticleList.setVisible(true);
+			panelHeight = 0;
+		}
+
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		height = height + panelHeight;
 		int maxListBoxHeight = (height - 210);
 		setCountRows(Math.round(maxListBoxHeight / 14));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);

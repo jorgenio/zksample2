@@ -22,100 +22,100 @@
 		.z-window-modal-cnt-noborder {background: none}
 		.z-window-modal-cl-noborder {background: none}
 
-
+		.z-groupbox-body { background-color : white}
 	</style>
 
 	<window id="loginwin" border="none" width="350px"
+		style="background-color: #EDEDED;"
 		use="de.forsthaus.webui.login.ZkLoginDialogCtrl">
 
-		<panel border="none" style="background-color: #EBEBEB;">
+		<!-- 
+			<panel border="none">
 			<panelchildren>
+		-->
+		<groupbox mold="3d" closable="false">
+			<caption label="Login to Zksample2"
+				image="/images/earth2.gif" style="font-weight: bold;">
 
-				<groupbox mold="3d" closable="false">
-					<caption label="Login to Zksample2"
-						image="/images/earth2.gif" style="font-weight: bold;">
+				<button id="button_ZKLoginDialog_Close"
+					image="/images/icons/stop.gif"
+					tooltiptext="${c:l('button_ZKLoginDialog_Close.tooltiptext')}" />
+			</caption>
 
-						<button id="button_ZKLoginDialog_Close"
-							image="/images/icons/stop.gif"
-							tooltiptext="${c:l('button_ZKLoginDialog_Close.tooltiptext')}" />
-					</caption>
+			<groupbox if="${not empty param.login_error}">
+				<label style="color:red"
+					value="Login failed. Please try again." />
+				<h:br />
+				<label style="color:red"
+					value="Reason: ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}" />
+				<h:br />
+			</groupbox>
 
-					<groupbox if="${not empty param.login_error}">
-						<label style="color:red"
-							value="Login failed. Please try again." />
-						<h:br />
-						<label style="color:red"
-							value="Reason: ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}" />
-						<h:br />
-					</groupbox>
+			<groupbox>
+				<caption label="Login" />
 
-					<groupbox>
-						<caption label="Login" />
-
-						<div align="right" style="padding: 5px">
-							<hbox width="100%">
-								<div align="left">
-									<label id="lbl_ServerTime" />
-								</div>
-								<div align="right">
-									<button
-										id="button_ZKLoginDialog_ServerTime"
-										image="/images/icons/date.gif"
-										tooltiptext="${c:l('button_ZKLoginDialog_ServerTime.tooltiptext')}" />
-								</div>
-							</hbox>
-							<separator bar="true" />
+				<div align="right" style="padding: 5px">
+					<hbox width="100%">
+						<div align="left">
+							<label id="lbl_ServerTime" />
 						</div>
-
-						<div>
-							<!-- ### Spring Security action-url = j_spring_security_check  ### -->
-							<!--          http://www.zkoss.org/smalltalks/zkspringsec1/        -->
-							<h:form id="f" name="f"
-								action="j_spring_security_check" method="POST">
-
-								<grid fixedLayout="true"
-									sclass="GridLayoutNoBorder" style="border:0px">
-									<columns>
-										<column width="40%" />
-										<column width="60%" />
-									</columns>
-									<rows>
-
-										<row>
-											<label
-												id="label_ZKLoginDialog_user"
-												value="${c:l('label_ZKLoginDialog_user.value')}" />
-											<textbox
-												id="txtbox_Username" name="j_username" width="98%" />
-										</row>
-										<row>
-											<label
-												id="label_ZKLoginDialog_pwd"
-												value="${c:l('label_ZKLoginDialog_pwd.value')}" />
-											<textbox
-												id="txtbox_Password" type="password" name="j_password"
-												width="98%" />
-										</row>
-
-										<row spans="2">
-											<hbox>
-												<h:input type="submit"
-													value="Login" />
-												<button id="btnReset"
-													height="22px" label="Reset" />
-											</hbox>
-										</row>
-									</rows>
-								</grid>
-							</h:form>
+						<div align="right">
+							<button id="button_ZKLoginDialog_ServerTime"
+								image="/images/icons/date.gif"
+								tooltiptext="${c:l('button_ZKLoginDialog_ServerTime.tooltiptext')}" />
 						</div>
+					</hbox>
+					<separator bar="true" />
+				</div>
 
-					</groupbox>
+				<div>
+					<!-- ### Spring Security action-url = j_spring_security_check  ### -->
+					<!--          http://www.zkoss.org/smalltalks/zkspringsec1/        -->
+					<h:form id="f" name="f"
+						action="j_spring_security_check" method="POST">
 
-				</groupbox>
+						<grid fixedLayout="true"
+							sclass="GridLayoutNoBorder" style="border:0px">
+							<columns>
+								<column width="40%" />
+								<column width="60%" />
+							</columns>
+							<rows>
+
+								<row>
+									<label id="label_ZKLoginDialog_user"
+										value="${c:l('label_ZKLoginDialog_user.value')}" />
+									<textbox id="txtbox_Username"
+										name="j_username" width="98%" />
+								</row>
+								<row>
+									<label id="label_ZKLoginDialog_pwd"
+										value="${c:l('label_ZKLoginDialog_pwd.value')}" />
+									<textbox id="txtbox_Password"
+										type="password" name="j_password" width="98%" />
+								</row>
+
+								<row spans="2">
+									<hbox>
+										<h:input type="submit"
+											value="Login" />
+										<button id="btnReset"
+											height="22px" label="Reset" />
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+					</h:form>
+				</div>
+
+			</groupbox>
+
+		</groupbox>
+
+		<!-- 
 			</panelchildren>
-		</panel>
-
+			</panel>
+		-->
 	</window>
 </zk>
 

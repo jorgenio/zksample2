@@ -90,7 +90,7 @@
 															<paging
 																id="paging_ListBoxSecUser" />
 															<listbox
-																id="listBoxSecUser" vflex="true" width="100%"
+																id="listBoxSecUser" vflex="true" width="99.5%"
 																height="100%" multiple="false">
 																<listhead
 																	sizable="true">
@@ -128,7 +128,7 @@
 															<paging
 																id="paging_ListBoxSecRoles" />
 															<listbox
-																vflex="true" id="listBoxSecRoles" width="100%"
+																vflex="true" id="listBoxSecRoles" width="99.5%"
 																height="100%" multiple="false">
 																<listhead
 																	sizable="true">

@@ -68,7 +68,7 @@
 			<center border="none">
 
 				<listbox id="listBoxSecRights" vflex="true"
-					tooltiptext="${c:l('listbox.tooltiptext')}" width="100%"
+					tooltiptext="${c:l('listbox.tooltiptext')}" width="99.9%"
 					height="100%" multiple="false">
 					<listhead sizable="true">
 						<listheader id="listheader_SecRightList_rigName"

@@ -1,12 +1,21 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <zk xmlns="http://www.zkoss.org/2005/zul"
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
 	<window id="mainMenuWindow" border="none"
+		style="background-color: #D6DCDE; padding: 5px"
 		use="de.forsthaus.common.menu.MainMenuCtrl">
-		<groupbox id="groupbox_menu" mold="3d">
-			<caption style="color: #000000;" label="Menu" />
+
+		<style>
+			.z-groupbox-body { background-color : white}
+
+
+		</style>
+		<groupbox id="groupbox_menu" mold="3d" style="">
+			<caption style="color: #000000; font-weight: bold;"
+				label="${c:l('menuTitle')}" />
 		</groupbox>
 	</window>
 

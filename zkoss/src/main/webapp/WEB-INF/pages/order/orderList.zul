@@ -107,7 +107,7 @@
 												<paging
 													id="paging_OrderList_CustomerSearchList" pageSize="20" />
 												<listbox
-													id="listBoxCustomerSearch" width="100%" height="100%"
+													id="listBoxCustomerSearch" width="99.9%" height="100%"
 													multiple="false">
 													<listhead
 														sizable="true">
@@ -157,7 +157,7 @@
 
 		<paging id="paging_OrderList" />
 		<listbox id="listBoxOrder"
-			tooltiptext="${c:l('listbox.tooltiptext')}" width="100%"
+			tooltiptext="${c:l('listbox.tooltiptext')}" width="99.9%"
 			multiple="false">
 			<listhead sizable="true">
 				<listheader id="listheader_OrderList_OrderNo"
@@ -223,7 +223,7 @@
 									style="text-align: right" />
 								<listfooter
 									id="listfooter_OrderPosList_WholePrice" width="20%"
-									label="test5" style="text-align: right" />
+									height="20px" label="test5" style="text-align: right" />
 
 							</listfoot>
 						</listbox>

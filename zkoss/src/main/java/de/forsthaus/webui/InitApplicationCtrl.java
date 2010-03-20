@@ -702,8 +702,8 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		int countRecords = newRecords;
 
-		RandomDataEngine randomDataEngine = new RandomDataEngine(); 
-		
+		RandomDataEngine randomDataEngine = new RandomDataEngine();
+
 		for (int j = 0; j < countRecords; j++) {
 			Customer customer = getCustomerService().getNewCustomer();
 

@@ -76,6 +76,8 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 	private transient OfficeService officeService;
 
+	private static int centerAreaHeightOffset = 50;
+
 	public IndexCtrl() {
 		super();
 
@@ -99,7 +101,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 		statusBarZKVersion.setLabel("ZK version: " + doGetZkVersion());
 		Date date = new Date();
-		date.setDate(17);
+		date.setDate(20);
 		date.setMonth(2);
 		date.setYear(110);
 		statusBarAppVersion.setLabel("Zksample2 v2.0.2 / build: " + FDDateFormat.getDateFormater().format(date));
@@ -122,7 +124,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 			logger.debug("Current desktop width  :" + event.getDesktopWidth());
 		}
 
-		setCurrentDesktopHeight(event.getDesktopHeight());
+		setCurrentDesktopHeight(event.getDesktopHeight() - centerAreaHeightOffset);
 		setCurrentDesktopWidth(event.getDesktopWidth());
 
 	}
@@ -223,7 +225,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 		if (isTreeMenu() == true) {
 			this.currentDesktopHeight.setValue(Integer.valueOf(desktopHeight));
 		} else {
-			this.currentDesktopHeight.setValue(Integer.valueOf(desktopHeight - 40));
+			this.currentDesktopHeight.setValue(Integer.valueOf(desktopHeight - 30));
 		}
 	}
 

@@ -17,6 +17,9 @@
 			padding on right and left */ } .z-loading { top: 50%
 			!important; left: 45% !important; align: center;
 			vertical-align: middle; }
+			<!-- groupbox inner content area, NO padding -->
+			.myGroupBoxContentArea .z-groupbox-cnt{ background-color:
+			white; padding: 0px }
 		</style>
 
 		<!-- hidden fields for storing the current desktop height and width -->
@@ -29,20 +32,24 @@
 			<north id="borderlayoutMainNorth" border="none"
 				splittable="false">
 
-				<div id="div1" style="background-color:#4944F9">
+				<div id="div1" style="background-color:#D6DCDE;">
 					<hbox width="100%">
-						<h:div id="divNo" align="left">
-							<image src="/images/zkoss3.gif" />
+						<h:div id="divNo" style="padding:5px"
+							align="left">
+							<image src="/images/zkpowered_16x16.png" />
+							<label value=" ZKoss Sample2 application"
+								style="font-size:12px; font-weight:normal" />
 						</h:div>
 
-						<h:div id="divNorth" align="left"
+						<!-- 
+							<h:div id="divNorth" align="left"
 							style="padding:5px">
 							<label
-								style="color:white; font-size:12px; font-weight:bold"
-								value="ZKoss Sample Application ( ZK + Spring + Spring-Security + Hibernate + Hibernate-Generic-DAO + JasperReports )">
+							style="color:black; font-size:12px; font-weight:bold"
+							value="ZKoss Sample Application ( ZK + Spring + Spring-Security + Hibernate + Hibernate-Generic-DAO + JasperReports )">
 							</label>
-						</h:div>
-
+							</h:div>
+						-->
 						<h:div id="divNorthEast" align="right">
 							<button id="btnLogout"
 								image="/images/icons/btn_exitdoor2_16x16.gif"
@@ -52,7 +59,7 @@
 						</h:div>
 					</hbox>
 					<separator bar="true"
-						style="background-color:silver" />
+						style="background-color:#D6DCDE;" />
 
 					<div id="divDropDownMenu" width="100%">
 						<menubar id="mainMenuBar" height="25px"></menubar>
@@ -62,19 +69,30 @@
 			</north>
 
 
-			<west border="none" margins="0,0,0,0" size="200px"
+			<west border="none" margins="0,0,0,0" size="230px"
 				flex="true" minsize="100" splittable="true" autoscroll="false">
 				<div id="divWest">WEST</div>
 			</west>
 
+			<!-- MODULE CONTENT AREA -->
 			<center id="center" border="none" margins="0,0,0,0"
-				flex="true" autoscroll="true">
+				flex="true" autoscroll="true"
+				style="background-color: #D6DCDE; padding: 5px">
 				<div id="divCenter">
-					<tabbox id="tabBoxIndexCenter" width="100%">
-						<tabs id="tabsIndexCenter"></tabs>
-						<tabpanels id="tabpanelsBoxIndexCenter">
-						</tabpanels>
-					</tabbox>
+
+					<groupbox id="groupbox_menu" mold="3d"
+						sclass="myGroupBoxContentArea">
+						<caption
+							style="color: #000000; font-weight: bold;"
+							label="${c:l('workplace')}" />
+						<tabbox id="tabBoxIndexCenter" width="100%"
+							style="padding: 0px">
+							<tabs id="tabsIndexCenter"></tabs>
+							<tabpanels id="tabpanelsBoxIndexCenter">
+							</tabpanels>
+						</tabbox>
+					</groupbox>
+
 				</div>
 			</center>
 
@@ -121,3 +139,5 @@
 
 </zk>
 
+<!-- old Top Background-color style="background-color:#4944F9" -->
+<!-- 	<image src="/images/zkoss3.gif" /> -->

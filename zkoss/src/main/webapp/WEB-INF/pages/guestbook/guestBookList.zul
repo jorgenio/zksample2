@@ -40,7 +40,7 @@
 			<center border="normal">
 
 				<listbox id="listbox_GuestBookList" vflex="true"
-					tooltiptext="${c:l('listbox.tooltiptext')}" width="99.5%"
+					tooltiptext="${c:l('listbox.tooltiptext')}" width="99.9%"
 					height="100%" multiple="false">
 					<listhead sizable="true">
 						<listheader id="listheader_GuestBook_gubDate"

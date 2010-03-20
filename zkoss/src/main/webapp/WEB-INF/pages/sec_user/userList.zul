@@ -76,7 +76,7 @@
 
 			<center border="none">
 
-				<listbox id="listBoxUser" vflex="true" width="100%"
+				<listbox id="listBoxUser" vflex="true" width="99.9%"
 					height="100%" tooltiptext="${c:l('listbox.tooltiptext')}"
 					multiple="false">
 					<listhead sizable="true">

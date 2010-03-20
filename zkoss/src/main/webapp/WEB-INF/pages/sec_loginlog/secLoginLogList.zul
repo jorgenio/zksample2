@@ -166,7 +166,7 @@
 			<center border="none">
 
 				<listbox id="listBoxSecUserlog" vflex="true"
-					width="100%" multiple="false">
+					width="99.9%" multiple="false">
 					<listhead sizable="true">
 						<listheader
 							id="listheader_SecLoginlogList_lglLogtime"

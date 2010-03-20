@@ -128,7 +128,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 
 		int maxListBoxHeight = (height - 165);
-		setCountRows(Math.round(maxListBoxHeight / 16));
+		setCountRows((int) Math.round(maxListBoxHeight / 16.5));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());
 

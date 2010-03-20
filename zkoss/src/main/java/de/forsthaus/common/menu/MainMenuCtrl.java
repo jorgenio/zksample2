@@ -82,6 +82,9 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 	 */
 	private transient Window mainMenuWindow; // autowire
 
+	private static String bgColor = "D6DCDE";
+	private static String bgColorInner = "white";
+
 	public void onCreate$mainMenuWindow(Event event) throws Exception {
 
 		if (logger.isDebugEnabled()) {
@@ -104,12 +107,13 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		Div div = new Div();
 		div.setWidth("100%");
 		div.setHeight("100%");
-		div.setStyle("padding:5px");
+		div.setStyle("padding:5px;" + "backgound-color: " + bgColorInner);
 		div.setParent(getMainMenuWindow().getFellowIfAny("groupbox_menu"));
 
 		div.appendChild(createSeparator(false));
 
 		Hbox hbox = new Hbox();
+		hbox.setStyle("backgound-color: " + bgColorInner);
 		div.appendChild(hbox);
 		Toolbarbutton toolbarbutton = new Toolbarbutton();
 		hbox.appendChild(toolbarbutton);
@@ -166,6 +170,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 
 		Separator separator = createSeparator(false);
 		separator.setWidth("97%");
+		separator.setStyle("background-color: " + bgColorInner);
 		separator.setBar(false);
 		div.appendChild(separator);
 		separator = createSeparator(false);
@@ -222,6 +227,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 	private static Separator createSeparator(boolean withBar) {
 
 		Separator sep = new Separator();
+		sep.setStyle("backgound-color: " + bgColorInner);
 		sep.setBar(withBar);
 
 		return sep;

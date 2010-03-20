@@ -79,7 +79,7 @@
 											<paging
 												id="paging_ListBoxSecGroup" />
 											<listbox vflex="true"
-												id="listBoxSecGroup" width="100%" height="100%"
+												id="listBoxSecGroup" width="99.9%" height="100%"
 												multiple="false">
 												<listhead
 													sizable="true">
@@ -163,7 +163,7 @@
 														<paging
 															id="paging_ListBoxSecGroupRight" pageSize="15" />
 														<listbox
-															vflex="true" id="listBoxSecGroupRight" width="100%"
+															vflex="true" id="listBoxSecGroupRight" width="99.5%"
 															height="100%" multiple="false">
 															<listhead
 																sizable="true">
@@ -210,7 +210,7 @@
 															id="paging_ListBoxSecGroupRight_Details" pageSize="15" />
 														<listbox
 															vflex="true" id="listBoxSecGroupRight_Details"
-															width="100%" height="100%" multiple="false">
+															width="99.5%" height="100%" multiple="false">
 															<listhead
 																sizable="true">
 																<listheader

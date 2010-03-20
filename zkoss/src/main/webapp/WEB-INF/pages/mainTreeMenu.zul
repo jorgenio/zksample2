@@ -8,11 +8,8 @@
 		style="background-color: #D6DCDE; padding: 5px"
 		use="de.forsthaus.common.menu.MainMenuCtrl">
 
-		<style>
-			.z-groupbox-body { background-color : white}
+		<style>.z-groupbox-body { background-color : white}</style>
 
-
-		</style>
 		<groupbox id="groupbox_menu" mold="3d" style="">
 			<caption style="color: #000000; font-weight: bold;"
 				label="${c:l('menuTitle')}" />

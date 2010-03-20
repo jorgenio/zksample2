@@ -121,7 +121,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		 * filled by onClientInfo() in the indexCtroller
 		 */
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		maxPanelHeight = (height - 135);
+		maxPanelHeight = (height - 140);
 		maxlistBoxHeight = maxPanelHeight - 25;
 
 		panelSecLoginLogStatistikCenter.setHeight(String.valueOf(maxPanelHeight) + "px");

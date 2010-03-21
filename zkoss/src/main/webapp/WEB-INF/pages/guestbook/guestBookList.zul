@@ -60,19 +60,24 @@
 
 			<south border="none">
 
-				<hbox width="100%">
-					<separator />
+				<grid fixedLayout="true" style="border:0px">
+					<columns>
+						<column width="20%" />
+						<column width="80%" />
+					</columns>
+					<rows>
+						<row>
+							<label id="label_GuestBook_gubText"
+								value="${c:l('label_GuestBook_gubText.value')}" />
+							<textbox id="textbox_GuestBook_gubText"
+								multiline="true" rows="9" width="99%" />
+						</row>
+					</rows>
+				</grid>
 
-					<label id="label_GuestBook_gubText"
-						value="${c:l('label_GuestBook_gubText.value')}" />
-					<textbox id="textbox_GuestBook_gubText"
-						multiline="true" rows="9" width="99%" />
-				</hbox>
 			</south>
 
-
 		</borderlayout>
-
 
 	</window>
 </zk>

@@ -91,20 +91,23 @@
 			</center>
 
 			<south border="none">
-				<panel id="articleLongDescriptionPanel" border="none"
-					width="100%">
-					<panelchildren>
-						<separator />
-						<hbox>
+
+				<grid fixedLayout="true" style="border:0px">
+					<columns>
+						<column width="20%" />
+						<column width="80%" />
+					</columns>
+					<rows>
+						<row>
 							<label
 								id="label_ArticleList_LongDescription"
 								value="${c:l('label_ArticleList_LongDescription.value')}" />
-							<space></space>
 							<textbox id="longBoxArt_LangBeschreibung"
-								width="500px" multiline="true" rows="3" />
-						</hbox>
-					</panelchildren>
-				</panel>
+								width="99%" multiline="true" rows="3" />
+						</row>
+					</rows>
+				</grid>
+
 			</south>
 
 		</borderlayout>

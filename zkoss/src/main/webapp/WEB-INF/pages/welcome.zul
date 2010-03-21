@@ -260,7 +260,7 @@
 										<textbox height="100%"
 											width="98%" multiline="true" rows="10" readonly="true"
 											style="font-family: verdana; border: none; background-color: white;"
-											value="- CRUD operations on all modules with spring managed services and DAO classes that works with hibernate. &#13;- Uses ButtonControllers for showing next possible CRUD operations&#13;- checks by onClose if there are unsaved modified data.&#13;- single and mixed searching for data.&#13;- sortable lists.&#13;- internationalization (english/german) language.&#13;- Reporting with the JasperReports. The order report are created with iReport and uses a JRBeanDataSource.&#13;- Full customizable Role based security management wich is extended for groups.&#13;   All is stored in database tables. It's build on top of the spring-security framework.&#13;- Most dialogs you can reach with doubleClick on an item in the lists.&#13;" />
+											value="- CRUD operations on all modules with spring managed services and DAO classes which are working with hibernate. &#13;- Uses ButtonControllers for showing next possible CRUD operations.&#13;- checks by onClose if there are unsaved modified data.&#13;- single and mixed searching for data.&#13;- sortable lists.&#13;- internationalization (english/german) language.&#13;- Reporting with the JasperReports. The order report are created with iReport and uses a JRBeanDataSource.&#13;- Full customizable Role based security management wich is extended for groups.&#13;   All is stored in database tables. It's build on top of the spring-security framework.&#13;- Most dialogs you can reach with doubleClick on an item in the lists.&#13;" />
 									</tabpanel>
 
 									<!-- Tab chat -->

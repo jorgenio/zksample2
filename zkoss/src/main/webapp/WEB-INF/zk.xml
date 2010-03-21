@@ -89,6 +89,7 @@
 	<!-- ====================================================== -->
 	<!--          Path to the character set and sizes           -->
 	<!--                Zkoss configuration file                -->
+	<!--         Custom components are declared here            -->
 	<!-- ====================================================== -->
 	<language-config>
 		<addon-uri>/WEB-INF/lang-addon.xml

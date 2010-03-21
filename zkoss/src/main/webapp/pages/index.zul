@@ -112,19 +112,19 @@
 						height="20px" width="100%">
 						<columns sizable="false">
 							<column label="User:" width="10%"
-								style="background-color: #DEDEDE;" />
+								style="background-color: #D6DCDE;" />
 							<column id="statusBarColUser" label=""
-								width="20%" style="background-color: #DEDEDE;" />
+								width="20%" style="background-color: #D6DCDE;" />
 							<column label="Office-No.:" width="10%"
-								style="background-color: #DEDEDE;" />
+								style="background-color: #D6DCDE;" />
 							<column id="statusBarColOfficeNo" label=""
-								width="10%" style="background-color: #DEDEDE;" />
+								width="10%" style="background-color: #D6DCDE;" />
 							<column id="statusBarZKVersion" width="20%"
-								style="background-color: #DEDEDE;" />
+								style="background-color: #D6DCDE;" />
 							<column id="statusBarAppVersion"
-								style="color: #FF0000; background-color: #DEDEDE;" width="20%" />
+								style="color: #FF0000; background-color: #D6DCDE;" width="20%" />
 							<column id="colDate" width="20%"
-								style="background-color: #DEDEDE;" align="right" />
+								style="background-color: #D6DCDE;" align="right" />
 						</columns>
 					</grid>
 				</div>

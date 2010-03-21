@@ -111,17 +111,20 @@
 					<grid id="statusBarGrid" fixedLayout="true"
 						height="20px" width="100%">
 						<columns sizable="false">
-							<column label="User:" width="10%" />
+							<column label="User:" width="10%"
+								style="background-color: #DEDEDE;" />
 							<column id="statusBarColUser" label=""
-								width="20%" />
-							<column label="Office-No.:" width="10%" />
+								width="20%" style="background-color: #DEDEDE;" />
+							<column label="Office-No.:" width="10%"
+								style="background-color: #DEDEDE;" />
 							<column id="statusBarColOfficeNo" label=""
-								width="10%" />
-							<column id="statusBarZKVersion" width="20%" />
+								width="10%" style="background-color: #DEDEDE;" />
+							<column id="statusBarZKVersion" width="20%"
+								style="background-color: #DEDEDE;" />
 							<column id="statusBarAppVersion"
-								style="color: #FF0000; " width="20%" />
+								style="color: #FF0000; background-color: #DEDEDE;" width="20%" />
 							<column id="colDate" width="20%"
-								align="right" />
+								style="background-color: #DEDEDE;" align="right" />
 						</columns>
 					</grid>
 				</div>

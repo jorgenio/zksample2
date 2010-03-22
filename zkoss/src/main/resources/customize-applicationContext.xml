@@ -28,15 +28,16 @@
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
-	<util:properties id="hibernateProperties" >
-		<prop key="hibernate.dialect">${hibernate.dialect}</prop>
-		<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-		<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
-	</util:properties>	
 	<bean class="de.forsthaus.h2.My_H2_SampleDataFiller">
 		<property name="dataSource" ref="dataSource">
 		</property>
 	</bean>
+	<util:properties id="hibernateProperties">
+		<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+		<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+		<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+	</util:properties>
+
 
 
 	<!-- ====================================================== -->

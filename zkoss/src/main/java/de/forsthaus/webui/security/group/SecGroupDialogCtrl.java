@@ -57,8 +57,7 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
 public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -546886879998950467L;
-	private transient static final Logger logger = Logger
-			.getLogger(SecGroupDialogCtrl.class);
+	private transient static final Logger logger = Logger.getLogger(SecGroupDialogCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -67,9 +66,9 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window secGroupDialogWindow; // autowired
-	protected transient Textbox grpShortdescription; // autowired
-	protected transient Textbox grpLongdescription; // autowired
+	protected Window secGroupDialogWindow; // autowired
+	protected Textbox grpShortdescription; // autowired
+	protected Textbox grpLongdescription; // autowired
 
 	// overhanded vars per params
 	private transient Listbox listBoxSecGroups; // overhanded
@@ -85,12 +84,12 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	// Button controller for the CRUD buttons
 	private transient final String btnCtroller_ClassPrefix = "button_SecGroupDialog_";
 	private transient ButtonStatusCtrl btnCtrl;
-	protected transient Button btnNew; // autowire
-	protected transient Button btnEdit; // autowire
-	protected transient Button btnDelete; // autowire
-	protected transient Button btnSave; // autowire
-	protected transient Button btnCancel; // autowire
-	protected transient Button btnClose; // autowire
+	protected Button btnNew; // autowire
+	protected Button btnEdit; // autowire
+	protected Button btnDelete; // autowire
+	protected Button btnSave; // autowire
+	protected Button btnCancel; // autowire
+	protected Button btnClose; // autowire
 
 	// ServiceDAOs / Domain Classes
 	private transient SecurityService securityService;
@@ -120,9 +119,7 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(),
-				btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave,
-				btnCancel, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -213,8 +210,7 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
-				"INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 	}
 
 	/**
@@ -300,27 +296,24 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			String msg = Labels
-					.getLabel("message_Data_Modified_Save_Data_YesNo");
+			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
 			String title = Labels.getLabel("message_Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
-					| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION,
-					true, new EventListener() {
-						public void onEvent(Event evt) {
-							switch (((Integer) evt.getData()).intValue()) {
-							case MultiLineMessageBox.YES:
-								try {
-									doSave();
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
-							case MultiLineMessageBox.NO:
-								break; // 
-							}
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
+				public void onEvent(Event evt) {
+					switch (((Integer) evt.getData()).intValue()) {
+					case MultiLineMessageBox.YES:
+						try {
+							doSave();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
 						}
+					case MultiLineMessageBox.NO:
+						break; // 
 					}
+				}
+			}
 
 			) == MultiLineMessageBox.YES) {
 			}
@@ -489,44 +482,39 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final SecGroup aGroup = getGroup();
 
 		// Show a confirm box
-		String msg = Labels
-				.getLabel("message.question.are_you_sure_to_delete_this_record")
-				+ "\n\n --> " + aGroup.getGrpShortdescription();
+		String msg = Labels.getLabel("message.question.are_you_sure_to_delete_this_record") + "\n\n --> " + aGroup.getGrpShortdescription();
 		String title = Labels.getLabel("message_Deleting_Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES
-				| MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true,
-				new EventListener() {
-					public void onEvent(Event evt) {
-						switch (((Integer) evt.getData()).intValue()) {
-						case MultiLineMessageBox.YES:
-							delete();
-						case MultiLineMessageBox.NO:
-							break; // 
-						}
-					}
-
-					private void delete() {
-
-						// delete from database
-						getSecurityService().delete(aGroup);
-
-						// now synchronize the listBox
-						ListModelList lml = (ListModelList) listBoxSecGroups
-								.getListModel();
-
-						// Check if the object is new or updated
-						// -1 means that the obj is not in the list, so it's
-						// new..
-						if (lml.indexOf(aGroup) == -1) {
-						} else {
-							lml.remove(lml.indexOf(aGroup));
-						}
-
-						secGroupDialogWindow.onClose(); // close the dialog
-					}
+		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
+			public void onEvent(Event evt) {
+				switch (((Integer) evt.getData()).intValue()) {
+				case MultiLineMessageBox.YES:
+					delete();
+				case MultiLineMessageBox.NO:
+					break; // 
 				}
+			}
+
+			private void delete() {
+
+				// delete from database
+				getSecurityService().delete(aGroup);
+
+				// now synchronize the listBox
+				ListModelList lml = (ListModelList) listBoxSecGroups.getListModel();
+
+				// Check if the object is new or updated
+				// -1 means that the obj is not in the list, so it's
+				// new..
+				if (lml.indexOf(aGroup) == -1) {
+				} else {
+					lml.remove(lml.indexOf(aGroup));
+				}
+
+				secGroupDialogWindow.onClose(); // close the dialog
+			}
+		}
 
 		) == MultiLineMessageBox.YES) {
 		}
@@ -613,8 +601,7 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 			String message = e.getMessage();
 			String title = Labels.getLabel("message_Error");
 			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
-					"ERROR", true);
+			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 
 			// Reset to init values
 			doResetInitValues();

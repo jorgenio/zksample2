@@ -60,12 +60,12 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 
 	private transient final static Logger logger = Logger.getLogger(GuiLoginLoggingServiceImpl.class);
 
-	private IpToCountryService ipToCountryService;
-	private Ip2CountryService ip2CountryService;
-	private Ip4CountryService ip4CountryService;
-	private LoginLoggingService loginLoggingService;
-	private SysCountryCodeService sysCountryCodeService;
-	private PagedListService pagedListService;
+	private transient IpToCountryService ipToCountryService;
+	private transient Ip2CountryService ip2CountryService;
+	private transient Ip4CountryService ip4CountryService;
+	private transient LoginLoggingService loginLoggingService;
+	private transient SysCountryCodeService sysCountryCodeService;
+	private transient PagedListService pagedListService;
 
 	/*
 	 * ++++++++++++++++++++++ Userlog +++++++++++++++++++++

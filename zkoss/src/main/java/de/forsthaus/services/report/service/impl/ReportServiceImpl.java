@@ -55,12 +55,12 @@ import de.forsthaus.services.report.service.ReportService;
  */
 public class ReportServiceImpl implements ReportService {
 
-	private OrderDAO orderDAO;
-	private OrderpositionDAO orderpositionDAO;
-	private BrancheDAO brancheDAO;
-	private CustomerDAO customerDAO;
-	private OfficeDAO officeDAO;
-	private OrderService orderService;
+	private transient OrderDAO orderDAO;
+	private transient OrderpositionDAO orderpositionDAO;
+	private transient BrancheDAO brancheDAO;
+	private transient CustomerDAO customerDAO;
+	private transient OfficeDAO officeDAO;
+	private transient OrderService orderService;
 
 	@Override
 	public JRDataSource getBeanCollectionByAuftrag(Order anOrder) {

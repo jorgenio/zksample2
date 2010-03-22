@@ -76,20 +76,20 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window window_GuestBookList; // autowire
-	protected transient Panel panel_GuestBookList; // autowired
-	protected transient Borderlayout borderLayout_GuestBookList; // autowire
+	protected Window window_GuestBookList; // autowire
+	protected Panel panel_GuestBookList; // autowired
+	protected Borderlayout borderLayout_GuestBookList; // autowire
 
 	// listBox
-	protected transient Paging paging_GuestBookList; // autowired
-	protected transient Listbox listbox_GuestBookList; // autowired
-	protected transient Listheader listheader_GuestBook_gubDate; // autowired
-	protected transient Listheader listheader_GuestBook_gubUsrName; // autowired
-	protected transient Listheader listheader_GuestBook_gubSubject; // autowired
-	protected transient Textbox textbox_GuestBook_gubText; // autowired
+	protected Paging paging_GuestBookList; // autowired
+	protected Listbox listbox_GuestBookList; // autowired
+	protected Listheader listheader_GuestBook_gubDate; // autowired
+	protected Listheader listheader_GuestBook_gubUsrName; // autowired
+	protected Listheader listheader_GuestBook_gubSubject; // autowired
+	protected Textbox textbox_GuestBook_gubText; // autowired
 
 	// row count for listbox
-	private transient int countRows;
+	private int countRows;
 
 	private GuestBook guestBook;
 	private transient GuestBookService guestBookService;

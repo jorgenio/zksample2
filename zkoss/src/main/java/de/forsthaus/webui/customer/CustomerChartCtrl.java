@@ -83,25 +83,25 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window customerChartWindow; // autowire
-	protected transient Div div_chartArea;
+	protected Window customerChartWindow; // autowire
+	protected Div div_chartArea;
 
 	// Toolbar Buttons
-	protected transient Button button_CustomerChart_PieChart; // autowire
-	protected transient Button button_CustomerChart_PieChart3D; // autowire
-	protected transient Button button_CustomerChart_RingChart; // autowire
-	protected transient Button button_CustomerChart_BarChart; // autowire
-	protected transient Button button_CustomerChart_BarChart3D; // autowire
-	protected transient Button button_CustomerChart_StackedBar; // autowire
-	protected transient Button button_CustomerChart_StackedBar3D; // autowire
-	protected transient Button button_CustomerChart_LineBar; // autowire
-	protected transient Button button_CustomerChart_LineBar3D; // autowire
+	protected Button button_CustomerChart_PieChart; // autowire
+	protected Button button_CustomerChart_PieChart3D; // autowire
+	protected Button button_CustomerChart_RingChart; // autowire
+	protected Button button_CustomerChart_BarChart; // autowire
+	protected Button button_CustomerChart_BarChart3D; // autowire
+	protected Button button_CustomerChart_StackedBar; // autowire
+	protected Button button_CustomerChart_StackedBar3D; // autowire
+	protected Button button_CustomerChart_LineBar; // autowire
+	protected Button button_CustomerChart_LineBar3D; // autowire
 
 	// Button controller for the CRUD buttons
-	protected transient Button btnHelp; // autowire
+	protected Button btnHelp; // autowire
 
-	protected transient int chartWidth = 785;
-	protected transient int chartHeight = 400;
+	protected int chartWidth = 785;
+	protected int chartHeight = 400;
 
 	// ServiceDAOs / Domain Classes
 	private transient Customer customer;

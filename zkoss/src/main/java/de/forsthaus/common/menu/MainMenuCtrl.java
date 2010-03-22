@@ -80,7 +80,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 	 * 'extends BaseCtrl' class wich extends Window and implements AfterCompose.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	private transient Window mainMenuWindow; // autowire
+	private Window mainMenuWindow; // autowire
 
 	private static String bgColor = "D6DCDE";
 	private static String bgColorInner = "white";

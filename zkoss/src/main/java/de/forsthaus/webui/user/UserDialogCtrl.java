@@ -78,31 +78,31 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window userDialogWindow; // autowired
-	protected transient Tab tab_UserDialog_Details; // autowired
+	protected Window userDialogWindow; // autowired
+	protected Tab tab_UserDialog_Details; // autowired
 
 	// panel account details
-	protected transient Textbox usrLoginname; // autowired
-	protected transient Textbox usrPassword; // autowired
-	protected transient Textbox usrPasswordRetype; // autowired
-	protected transient Textbox usrFirstname; // autowired
-	protected transient Textbox usrLastname; // autowired
-	protected transient Textbox usrEmail; // autowired
-	protected transient Listbox lbox_usrLocale; // autowired
+	protected Textbox usrLoginname; // autowired
+	protected Textbox usrPassword; // autowired
+	protected Textbox usrPasswordRetype; // autowired
+	protected Textbox usrFirstname; // autowired
+	protected Textbox usrLastname; // autowired
+	protected Textbox usrEmail; // autowired
+	protected Listbox lbox_usrLocale; // autowired
 
 	// panel status
-	protected transient Checkbox usrEnabled; // autowired
-	protected transient Checkbox usrAccountnonexpired; // autowired
-	protected transient Checkbox usrCredentialsnonexpired; // autowired
-	protected transient Checkbox usrAccountnonlocked; // autowired
+	protected Checkbox usrEnabled; // autowired
+	protected Checkbox usrAccountnonexpired; // autowired
+	protected Checkbox usrCredentialsnonexpired; // autowired
+	protected Checkbox usrAccountnonlocked; // autowired
 
 	// panel security token, SORRY logic it's internally
-	protected transient Textbox usrToken; // autowired
+	protected Textbox usrToken; // autowired
 
 	// panel granted roles
-	protected transient Listbox listBoxDetails_UserRoles; // autowired
-	protected transient Listheader listheader_UserDialog_UserRoleId; // autowired
-	protected transient Listheader listheader_UserDialog_UserRoleShortDescription; // autowired
+	protected Listbox listBoxDetails_UserRoles; // autowired
+	protected Listheader listheader_UserDialog_UserRoleId; // autowired
+	protected Listheader listheader_UserDialog_UserRoleShortDescription; // autowired
 
 	// overhanded vars per params
 	private transient Listbox listBoxUser; // overhanded
@@ -128,18 +128,18 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	// Button controller for the CRUD buttons
 	private transient final String btnCtroller_ClassPrefix = "button_UserDialog_";
 	private transient ButtonStatusCtrl btnCtrl;
-	protected transient Button btnNew; // autowired
-	protected transient Button btnEdit; // autowired
-	protected transient Button btnDelete; // autowired
-	protected transient Button btnSave; // autowired
-	protected transient Button btnCancel;// autowired
-	protected transient Button btnClose; // autowired
+	protected Button btnNew; // autowired
+	protected Button btnEdit; // autowired
+	protected Button btnDelete; // autowired
+	protected Button btnSave; // autowired
+	protected Button btnCancel;// autowired
+	protected Button btnClose; // autowired
 
 	// checkRights
-	protected transient Button btnHelp; // autowired
-	protected transient Panel panel_UserDialog_Status; // autowired
-	protected transient Panel panel_UserDialog_SecurityToken; // autowired
-	protected transient Tabpanel tabpanel_UserDialog_Details; // autowired
+	protected Button btnHelp; // autowired
+	protected Panel panel_UserDialog_Status; // autowired
+	protected Panel panel_UserDialog_SecurityToken; // autowired
+	protected Tabpanel tabpanel_UserDialog_Details; // autowired
 
 	// ServiceDAOs
 	private transient UserService userService;

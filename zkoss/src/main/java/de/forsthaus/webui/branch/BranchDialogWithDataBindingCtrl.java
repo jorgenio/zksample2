@@ -67,25 +67,25 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window window_BranchesDialogWithDataBinding; // autowired
-	protected transient Textbox braBezeichnung; // autowired
+	protected Window window_BranchesDialogWithDataBinding; // autowired
+	protected Textbox braBezeichnung; // autowired
 
 	// not wired vars
-	transient BranchListWithDataBindingCtrl branchListWithDataBindingCtrl; // overhanded
+	private transient BranchListWithDataBindingCtrl branchListWithDataBindingCtrl; // overhanded
 	// per
 	// param
 
 	// Button controller for the CRUD buttons
-	private transient final String btnCtroller_ClassPrefix = "button_BranchDialog_";
-	private transient ButtonStatusCtrl btnCtrl;
-	protected transient Button btnNew; // autowire
-	protected transient Button btnEdit; // autowire
-	protected transient Button btnDelete; // autowire
-	protected transient Button btnSave; // autowire
-	protected transient Button btnCancel; // autowire
-	protected transient Button btnClose; // autowire
+	private final String btnCtroller_ClassPrefix = "button_BranchDialog_";
+	private ButtonStatusCtrl btnCtrl;
+	protected Button btnNew; // autowire
+	protected Button btnEdit; // autowire
+	protected Button btnDelete; // autowire
+	protected Button btnSave; // autowire
+	protected Button btnCancel; // autowire
+	protected Button btnClose; // autowire
 
-	protected transient Button btnHelp; // autowire
+	protected Button btnHelp; // autowire
 
 	// ServiceDAOs / Domain classes
 	private Branche branche; // overhanded per param
@@ -119,7 +119,7 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 		// create the Button Controller. Disable not used buttons during working
 		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
-		doCreateDataBinding(window_BranchesDialogWithDataBinding);
+		doSetComposerName(window_BranchesDialogWithDataBinding);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);

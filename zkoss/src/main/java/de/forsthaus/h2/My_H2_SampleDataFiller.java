@@ -42,6 +42,7 @@ import org.springframework.beans.factory.InitializingBean;
  * @author sgerth
  */
 public class My_H2_SampleDataFiller implements InitializingBean {
+
 	private DataSource dataSource;
 
 	public void afterPropertiesSet() throws Exception {

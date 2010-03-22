@@ -33,8 +33,10 @@ import org.zkoss.zul.Messagebox;
 import de.forsthaus.common.menu.util.ILabelElement;
 
 class DefaultDropDownMenu extends Menu implements Serializable, ILabelElement, EventListener {
-	private String zulNavigation;
+
 	private static final long serialVersionUID = -3196075413623639125L;
+
+	private String zulNavigation;
 
 	@Override
 	public void onEvent(Event event) throws Exception {

@@ -36,6 +36,7 @@ public class UserCounterImpl implements UserCounter, Serializable {
 	private transient static final Logger logger = Logger.getLogger(UserCounterImpl.class);
 
 	public static class SessionListener {
+
 		private UserCounterImpl userCounter;
 		private final Log logger = LogFactory.getLog(getClass());
 

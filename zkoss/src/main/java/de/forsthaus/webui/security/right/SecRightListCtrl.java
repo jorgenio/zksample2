@@ -80,23 +80,23 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window secRightListWindow; // autowired
-	protected transient Panel panel_SecRightList; // autowired
+	protected Window secRightListWindow; // autowired
+	protected Panel panel_SecRightList; // autowired
 
 	// filter components
-	protected transient Checkbox checkbox_SecRightList_ShowAll; // autowired
-	protected transient Textbox tb_SecRightList_rigName; // aurowired
-	protected transient Listbox lb_secRight_RightType; // aurowired
+	protected Checkbox checkbox_SecRightList_ShowAll; // autowired
+	protected Textbox tb_SecRightList_rigName; // aurowired
+	protected Listbox lb_secRight_RightType; // aurowired
 
 	// listbox secRightList
-	protected transient Borderlayout borderLayout_secRightsList; // autowired
-	protected transient Paging paging_SecRightList; // aurowired
-	protected transient Listbox listBoxSecRights; // aurowired
-	protected transient Listheader listheader_SecRightList_rigName; // autowired
-	protected transient Listheader listheader_SecRightList_rigType; // autowired
+	protected Borderlayout borderLayout_secRightsList; // autowired
+	protected Paging paging_SecRightList; // aurowired
+	protected Listbox listBoxSecRights; // aurowired
+	protected Listheader listheader_SecRightList_rigName; // autowired
+	protected Listheader listheader_SecRightList_rigType; // autowired
 
 	// row count for listbox
-	private transient int countRows;
+	private int countRows;
 
 	// ServiceDAOs / Domain Classes
 	private transient SecurityService securityService;

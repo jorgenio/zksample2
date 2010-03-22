@@ -48,7 +48,7 @@ class DefaultTreecell extends Treecell implements EventListener, Serializable, I
 	private static final long serialVersionUID = 5221385297281381652L;
 	private transient static final Logger logger = Logger.getLogger(DefaultTreecell.class);
 
-	private transient String zulNavigation;
+	private String zulNavigation;
 
 	@Override
 	public void onEvent(Event event) throws Exception {

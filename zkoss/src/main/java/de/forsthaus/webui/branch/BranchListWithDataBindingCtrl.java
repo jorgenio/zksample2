@@ -79,27 +79,27 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window window_BranchesListWithDataBinding; // autowire
-	protected transient Panel panel_BranchList; // autowired
-	protected transient Borderlayout borderLayout_branchListWithDataBinding; // autowire
+	protected Window window_BranchesListWithDataBinding; // autowire
+	protected Panel panel_BranchList; // autowired
+	protected Borderlayout borderLayout_branchListWithDataBinding; // autowire
 
 	// filter components
-	protected transient Checkbox checkbox_Branch_ShowAll; // autowire
-	protected transient Textbox tb_Branch_Name; // aurowire
+	protected Checkbox checkbox_Branch_ShowAll; // autowire
+	protected Textbox tb_Branch_Name; // aurowire
 
 	// listBox
-	protected transient Paging paging_BranchList; // autowired
-	protected transient Listbox listBoxBranch; // autowired
-	protected transient Listheader listheader_Branch_Description; // autowired
+	protected Paging paging_BranchList; // autowired
+	protected Listbox listBoxBranch; // autowired
+	protected Listheader listheader_Branch_Description; // autowired
 
 	// checkRights
-	protected transient Button btnHelp;
-	protected transient Button button_BranchList_NewBranch;
-	protected transient Button button_BranchList_PrintBranches;
-	protected transient Button button_BranchList_Search_BranchName;
+	protected Button btnHelp;
+	protected Button button_BranchList_NewBranch;
+	protected Button button_BranchList_PrintBranches;
+	protected Button button_BranchList_Search_BranchName;
 
 	// row count for listbox
-	private transient int countRows;
+	private int countRows;
 
 	private transient BrancheService brancheService;
 
@@ -107,7 +107,7 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 	private transient Branche selectedBranche;
 	private transient Branche branche;
 
-	private AnnotateDataBinder binder;
+	private transient AnnotateDataBinder binder;
 
 	/**
 	 * default constructor.<br>

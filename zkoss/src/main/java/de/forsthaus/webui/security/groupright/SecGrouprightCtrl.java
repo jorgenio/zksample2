@@ -109,54 +109,54 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window secGroupRightWindow; // autowired
-	protected transient Panel panel_SecGroupRight; // autowired
+	protected Window secGroupRightWindow; // autowired
+	protected Panel panel_SecGroupRight; // autowired
 
-	protected transient Borderlayout borderlayoutSecGroupRight; // autowired
+	protected Borderlayout borderlayoutSecGroupRight; // autowired
 
 	// listBox secGroup
-	protected transient Borderlayout borderLayout_Groups; // autowired
-	protected transient Paging paging_ListBoxSecGroup;// autowired
-	protected transient Listbox listBoxSecGroup;// autowired
-	protected transient Listheader listheader_SecGroupRight_grpShortdescription; // autowired
+	protected Borderlayout borderLayout_Groups; // autowired
+	protected Paging paging_ListBoxSecGroup;// autowired
+	protected Listbox listBoxSecGroup;// autowired
+	protected Listheader listheader_SecGroupRight_grpShortdescription; // autowired
 
 	// area secGroupRights
-	protected transient Checkbox checkbox_SecGroupRight_All; // autowired
-	protected transient Checkbox checkbox_SecGroupRight_Pages; // autowired
-	protected transient Checkbox checkbox_SecGroupRight_Tabs; // autowired
-	protected transient Checkbox checkbox_SecGroupRight_MenuCat; // autowired
-	protected transient Checkbox checkbox_SecGroupRight_MenuItems; // autowired
-	protected transient Checkbox checkbox_SecGroupRight_Methods; // autowired
-	protected transient Checkbox checkbox_SecGroupRight_Domain; // autowired
-	protected transient Checkbox checkbox_SecGroupRight_Components; // autowired
+	protected Checkbox checkbox_SecGroupRight_All; // autowired
+	protected Checkbox checkbox_SecGroupRight_Pages; // autowired
+	protected Checkbox checkbox_SecGroupRight_Tabs; // autowired
+	protected Checkbox checkbox_SecGroupRight_MenuCat; // autowired
+	protected Checkbox checkbox_SecGroupRight_MenuItems; // autowired
+	protected Checkbox checkbox_SecGroupRight_Methods; // autowired
+	protected Checkbox checkbox_SecGroupRight_Domain; // autowired
+	protected Checkbox checkbox_SecGroupRight_Components; // autowired
 
 	// listBox secGroupRights
-	protected transient Tab tab_SecGroupRight_AllRights; // autowired
-	protected transient Borderlayout borderLayout_Rights;
-	protected transient Paging paging_ListBoxSecGroupRight; // autowired
-	protected transient Listbox listBoxSecGroupRight;// autowired
-	protected transient Listheader listheader_SecGroupRight_GrantedRight; // autowired
-	protected transient Listheader listheader_SecGroupRight_RightName; // autowired
-	protected transient Listheader listheader_SecGroupRight_Type; // autowired
+	protected Tab tab_SecGroupRight_AllRights; // autowired
+	protected Borderlayout borderLayout_Rights;
+	protected Paging paging_ListBoxSecGroupRight; // autowired
+	protected Listbox listBoxSecGroupRight;// autowired
+	protected Listheader listheader_SecGroupRight_GrantedRight; // autowired
+	protected Listheader listheader_SecGroupRight_RightName; // autowired
+	protected Listheader listheader_SecGroupRight_Type; // autowired
 
 	// listBox secGroupRights on Tab Details
-	protected transient Tab tab_SecGroupRight_Details; // autowired
-	protected transient Borderlayout borderLayout_Rights_TabDetails; // autowired
-	protected transient Button button_GroupRight_NewGroupRight;// autowired
-	protected transient Paging paging_ListBoxSecGroupRight_Details;// autowired
-	protected transient Listbox listBoxSecGroupRight_Details; // autowired
-	protected transient Listheader listheader_SecGroupRight_Details_GrantedRight; // autowired
-	protected transient Listheader listheader_SecGroupRight_Details_RightName; // autowired
-	protected transient Listheader listheader_SecGroupRight_Details_Type; // autowired
+	protected Tab tab_SecGroupRight_Details; // autowired
+	protected Borderlayout borderLayout_Rights_TabDetails; // autowired
+	protected Button button_GroupRight_NewGroupRight;// autowired
+	protected Paging paging_ListBoxSecGroupRight_Details;// autowired
+	protected Listbox listBoxSecGroupRight_Details; // autowired
+	protected Listheader listheader_SecGroupRight_Details_GrantedRight; // autowired
+	protected Listheader listheader_SecGroupRight_Details_RightName; // autowired
+	protected Listheader listheader_SecGroupRight_Details_Type; // autowired
 
 	// default CRUD buttons
-	protected transient Button btnSave;
-	protected transient Button btnClose;
+	protected Button btnSave;
+	protected Button btnClose;
 
 	// row count for listbox
-	private transient int countRowsGroup;
-	private transient int countRowsRight;
-	private transient int countRowsRightDetails;
+	private int countRowsGroup;
+	private int countRowsRight;
+	private int countRowsRightDetails;
 
 	public void setCountRowsRightDetails(int countRowsRightDetails) {
 		this.countRowsRightDetails = countRowsRightDetails;

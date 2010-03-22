@@ -88,49 +88,49 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window orderListWindow; // autowired
+	protected Window orderListWindow; // autowired
 	// Listbox orders
-	protected transient Paging paging_OrderList; // autowired
-	protected transient Listbox listBoxOrder; // autowired
-	protected transient Listheader listheader_OrderList_OrderNo; // autowired
-	protected transient Listheader listheader_OrderList_OderDescr; // autowired
+	protected Paging paging_OrderList; // autowired
+	protected Listbox listBoxOrder; // autowired
+	protected Listheader listheader_OrderList_OrderNo; // autowired
+	protected Listheader listheader_OrderList_OderDescr; // autowired
 	// Listbox orderPositions
-	protected transient Paging paging_OrderArticleList; // autowire
-	protected transient Listbox listBoxOrderArticle; // autowired
-	protected transient Listheader listheader_OrderPosList_Orderpos_No; // autowired
-	protected transient Listheader listheader_OrderPosList_Shorttext; // autowired
-	protected transient Listheader listheader_OrderPosList_Count; // autowired
-	protected transient Listheader listheader_OrderPosList_SinglePrice; // autowired
-	protected transient Listheader listheader_OrderPosList_WholePrice; // autowired
+	protected Paging paging_OrderArticleList; // autowire
+	protected Listbox listBoxOrderArticle; // autowired
+	protected Listheader listheader_OrderPosList_Orderpos_No; // autowired
+	protected Listheader listheader_OrderPosList_Shorttext; // autowired
+	protected Listheader listheader_OrderPosList_Count; // autowired
+	protected Listheader listheader_OrderPosList_SinglePrice; // autowired
+	protected Listheader listheader_OrderPosList_WholePrice; // autowired
 
-	protected transient Listfooter listfooter_OrderPosList_Count; // autowired
-	protected transient Listfooter listfooter_OrderPosList_WholePrice; // autowired
+	protected Listfooter listfooter_OrderPosList_Count; // autowired
+	protected Listfooter listfooter_OrderPosList_WholePrice; // autowired
 
-	protected transient Hbox hBoxCustomerSearch; // autowired
+	protected Hbox hBoxCustomerSearch; // autowired
 
 	// bandbox searchCustomer
-	protected transient Bandbox bandbox_OrderList_CustomerSearch;
-	protected transient Textbox tb_Orders_SearchCustNo; // autowired
-	protected transient Textbox tb_Orders_CustSearchMatchcode; // autowired
-	protected transient Textbox tb_Orders_SearchCustName1; // autowired
-	protected transient Textbox tb_Orders_SearchCustCity; // autowired
+	protected Bandbox bandbox_OrderList_CustomerSearch;
+	protected Textbox tb_Orders_SearchCustNo; // autowired
+	protected Textbox tb_Orders_CustSearchMatchcode; // autowired
+	protected Textbox tb_Orders_SearchCustName1; // autowired
+	protected Textbox tb_Orders_SearchCustCity; // autowired
 	// listbox searchCustomer
-	protected transient Paging paging_OrderList_CustomerSearchList; // autowired
-	protected transient Listbox listBoxCustomerSearch; // autowired
+	protected Paging paging_OrderList_CustomerSearchList; // autowired
+	protected Listbox listBoxCustomerSearch; // autowired
 	transient protected Listheader listheader_CustNo; // autowired
-	protected transient Listheader listheader_CustMatchcode; // autowired
-	protected transient Listheader listheader_CustName1; // autowired
-	protected transient Listheader listheader_CustCity; // autowired
+	protected Listheader listheader_CustMatchcode; // autowired
+	protected Listheader listheader_CustName1; // autowired
+	protected Listheader listheader_CustCity; // autowired
 
 	// checkRights
-	protected transient Button btnHelp; // autowired
-	protected transient Button button_OrderList_NewOrder; // autowired
+	protected Button btnHelp; // autowired
+	protected Button button_OrderList_NewOrder; // autowired
 
 	private transient HibernateSearchObject<Customer> searchObjCustomer;
 
 	private transient int pageSizeOrders;
-	private transient int pageSizeOrderPositions;
-	private transient final int pageSizeSearchCustomers = 20;
+	private int pageSizeOrderPositions;
+	private final int pageSizeSearchCustomers = 20;
 
 	// ServiceDAOs / Domain Classes
 	private Customer customer;

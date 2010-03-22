@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlElements;
  * 
  */
 public class MenuDomain extends MenuItemDomain {
+
 	@XmlElements( { @XmlElement(name = "menu", type = MenuDomain.class), @XmlElement(name = "menuItem", type = MenuItemDomain.class) })
 	public List<IMenuDomain> getItems() {
 		return this.items;

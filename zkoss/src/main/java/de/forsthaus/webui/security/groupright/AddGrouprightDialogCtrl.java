@@ -65,12 +65,10 @@ import de.forsthaus.webui.util.pagging.PagedListWrapper;
  * @author bbruhns
  * @author sgerth
  */
-public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements
-		Serializable {
+public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = 2146221197789582858L;
-	private transient static final Logger logger = Logger
-			.getLogger(AddGrouprightDialogCtrl.class);
+	private transient static final Logger logger = Logger.getLogger(AddGrouprightDialogCtrl.class);
 
 	private transient PagedListWrapper<SecRight> plwSecRights;
 	/*
@@ -80,40 +78,40 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window addGrouprightDialogWindow; // autowired
-	protected transient Textbox textbox_AddGroupRightDialog_GroupName; // autowired
-	protected transient Textbox textbox_AddGroupRightDialog_RightName; // autowired
+	protected Window addGrouprightDialogWindow; // autowired
+	protected Textbox textbox_AddGroupRightDialog_GroupName; // autowired
+	protected Textbox textbox_AddGroupRightDialog_RightName; // autowired
 
 	// Bandbox search/select right
-	protected transient Bandbox bandbox_AddGroupRightDialog_SearchRight; // autowired
-	protected transient Textbox textbox_bboxAddGroupRightDialog_rightName; // autowired
-	protected transient Checkbox checkbox_bbox_AddGroupRightDialog_All; // autowired
-	protected transient Checkbox checkbox_bbox_AddGroupRightDialog_Pages; // autowired
-	protected transient Checkbox checkbox_bbox_AddGroupRightDialog_Tabs; // autowired
-	protected transient Checkbox checkbox_bbox_AddGroupRightDialog_MenuCat; // autowired
-	protected transient Checkbox checkbox_bbox_AddGroupRightDialog_MenuItems; // autowired
-	protected transient Checkbox checkbox_bbox_AddGroupRightDialog_Methods; // autowired
-	protected transient Checkbox checkbox_bbox_AddGroupRightDialog_Domain; // autowired
-	protected transient Checkbox checkbox_bbox_AddGroupRightDialog_Components; // autowired
+	protected Bandbox bandbox_AddGroupRightDialog_SearchRight; // autowired
+	protected Textbox textbox_bboxAddGroupRightDialog_rightName; // autowired
+	protected Checkbox checkbox_bbox_AddGroupRightDialog_All; // autowired
+	protected Checkbox checkbox_bbox_AddGroupRightDialog_Pages; // autowired
+	protected Checkbox checkbox_bbox_AddGroupRightDialog_Tabs; // autowired
+	protected Checkbox checkbox_bbox_AddGroupRightDialog_MenuCat; // autowired
+	protected Checkbox checkbox_bbox_AddGroupRightDialog_MenuItems; // autowired
+	protected Checkbox checkbox_bbox_AddGroupRightDialog_Methods; // autowired
+	protected Checkbox checkbox_bbox_AddGroupRightDialog_Domain; // autowired
+	protected Checkbox checkbox_bbox_AddGroupRightDialog_Components; // autowired
 
 	// Listbox bandbox Search
-	protected transient Paging paging_ListBoxSingleRightSearch; // autowired
-	protected transient Listbox listBoxSingleRightSearch; // autowired
-	protected transient Listheader listheader_bbox_AddGroupRightDialog_RightName; // autowired
-	protected transient Listheader listheader_bbox_AddGroupRightDialog_RightType; // autowired
+	protected Paging paging_ListBoxSingleRightSearch; // autowired
+	protected Listbox listBoxSingleRightSearch; // autowired
+	protected Listheader listheader_bbox_AddGroupRightDialog_RightName; // autowired
+	protected Listheader listheader_bbox_AddGroupRightDialog_RightType; // autowired
 
 	// Button controller for the CRUD buttons
 	private transient final String btnCtroller_ClassPrefix = "button_AddGrouprightDialog_";
 	private transient ButtonStatusCtrl btnCtrl;
-	protected transient Button btnNew; // autowire
-	protected transient Button btnEdit; // autowire
-	protected transient Button btnDelete; // autowire
-	protected transient Button btnSave; // autowire
-	protected transient Button btnCancel; // autowire
-	protected transient Button btnClose; // autowire
+	protected Button btnNew; // autowire
+	protected Button btnEdit; // autowire
+	protected Button btnDelete; // autowire
+	protected Button btnSave; // autowire
+	protected Button btnCancel; // autowire
+	protected Button btnClose; // autowire
 
 	// row count for listbox
-	private transient int countRowsSecRight;
+	private int countRowsSecRight;
 
 	// ServiceDAOs / Domain classes
 	private transient SecGroup group;
@@ -136,17 +134,14 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements
 	 * @param event
 	 * @throws Exception
 	 */
-	public void onCreate$addGrouprightDialogWindow(Event event)
-			throws Exception {
+	public void onCreate$addGrouprightDialogWindow(Event event) throws Exception {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(),
-				btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave,
-				btnCancel, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -165,14 +160,10 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		listheader_bbox_AddGroupRightDialog_RightName
-				.setSortAscending(new FieldComparator("rigName", true));
-		listheader_bbox_AddGroupRightDialog_RightName
-				.setSortDescending(new FieldComparator("rigName", false));
-		listheader_bbox_AddGroupRightDialog_RightType
-				.setSortAscending(new FieldComparator("rigType", true));
-		listheader_bbox_AddGroupRightDialog_RightType
-				.setSortDescending(new FieldComparator("rigType", false));
+		listheader_bbox_AddGroupRightDialog_RightName.setSortAscending(new FieldComparator("rigName", true));
+		listheader_bbox_AddGroupRightDialog_RightName.setSortDescending(new FieldComparator("rigName", false));
+		listheader_bbox_AddGroupRightDialog_RightType.setSortAscending(new FieldComparator("rigType", true));
+		listheader_bbox_AddGroupRightDialog_RightType.setSortDescending(new FieldComparator("rigType", false));
 
 		// temporary, cause the security is not implemented for this controller
 		btnEdit.setVisible(false);
@@ -192,8 +183,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements
 	public void doShowDialog(SecGroup aGroup) throws InterruptedException {
 
 		try {
-			textbox_AddGroupRightDialog_GroupName.setValue(aGroup
-					.getGrpShortdescription());
+			textbox_AddGroupRightDialog_GroupName.setValue(aGroup.getGrpShortdescription());
 			textbox_AddGroupRightDialog_RightName.setValue("");
 
 			btnCtrl.setInitNew();
@@ -274,8 +264,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements
 		String message = Labels.getLabel("message_Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK,
-				"INFORMATION", true);
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 	}
 
 	/**
@@ -335,8 +324,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements
 		groupRight.setSecRight(getRight());
 
 		/* check if already in table */
-		SecGroupright gr = getSecurityService().getGroupRightByGroupAndRight(
-				getGroup(), getRight());
+		SecGroupright gr = getSecurityService().getGroupRightByGroupAndRight(getGroup(), getRight());
 
 		if (gr == null) {
 
@@ -348,8 +336,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements
 				// String message = e.getCause().getMessage();
 				String title = Labels.getLabel("message_Error");
 				MultiLineMessageBox.doSetTemplate();
-				MultiLineMessageBox.show(message, title,
-						MultiLineMessageBox.OK, "ERROR", true);
+				MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 
 				btnCtrl.setBtnStatus_Save();
 			}
@@ -375,8 +362,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements
 	 * 
 	 * @param event
 	 */
-	public void onOpen$bpop_AddGroupRightDialog_SearchRight(Event event)
-			throws InterruptedException {
+	public void onOpen$bpop_AddGroupRightDialog_SearchRight(Event event) throws InterruptedException {
 
 		checkbox_bbox_AddGroupRightDialog_All.setChecked(true);
 	}
@@ -386,8 +372,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements
 	 * 
 	 * @param event
 	 */
-	public void onClick$button_bbox_AddGroupRightDialog_Search(Event event)
-			throws InterruptedException {
+	public void onClick$button_bbox_AddGroupRightDialog_Search(Event event) throws InterruptedException {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
@@ -401,8 +386,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements
 	 * 
 	 * @param event
 	 */
-	public void onClick$button_bbox_AddGroupRightDialog_Close(Event event)
-			throws InterruptedException {
+	public void onClick$button_bbox_AddGroupRightDialog_Close(Event event) throws InterruptedException {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
@@ -511,8 +495,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements
 	private void filterTypeForShowingRights() {
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(
-				SecRight.class, countRowsSecRight);
+		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, countRowsSecRight);
 		soSecRight.addSort("rigName", false);
 
 		Filter f = Filter.or();
@@ -553,26 +536,20 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements
 			soSecRight.addFilter(f);
 
 			// Set the ListModel.
-			getPlwSecRights().init(soSecRight, listBoxSingleRightSearch,
-					paging_ListBoxSingleRightSearch);
-		} else if (!textbox_bboxAddGroupRightDialog_rightName.getValue()
-				.isEmpty()) {
+			getPlwSecRights().init(soSecRight, listBoxSingleRightSearch, paging_ListBoxSingleRightSearch);
+		} else if (!textbox_bboxAddGroupRightDialog_rightName.getValue().isEmpty()) {
 			soSecRight.addFilter(f);
 
 			Filter f1 = Filter.and();
 
-			f1.add(Filter.ilike("rigName", "%"
-					+ textbox_bboxAddGroupRightDialog_rightName.getValue()
-					+ "%"));
+			f1.add(Filter.ilike("rigName", "%" + textbox_bboxAddGroupRightDialog_rightName.getValue() + "%"));
 			soSecRight.addFilter(f1);
 
 			// Set the ListModel.
-			getPlwSecRights().init(soSecRight, listBoxSingleRightSearch,
-					paging_ListBoxSingleRightSearch);
+			getPlwSecRights().init(soSecRight, listBoxSingleRightSearch, paging_ListBoxSingleRightSearch);
 		}
 
-		listBoxSingleRightSearch
-				.setItemRenderer(new SecRightListModelItemRenderer());
+		listBoxSingleRightSearch.setItemRenderer(new SecRightListModelItemRenderer());
 	}
 
 	/**

@@ -32,6 +32,7 @@ import de.forsthaus.common.menu.util.ZkossMenuFactory;
  * 
  */
 public class ZkossTreeMenuFactory extends ZkossMenuFactory {
+
 	private static final long serialVersionUID = -1601202637698812546L;
 
 	public static void addMainMenu(Component component) {

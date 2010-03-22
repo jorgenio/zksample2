@@ -67,13 +67,13 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window window_OfficeDialog; // autowired
+	protected Window window_OfficeDialog; // autowired
 
-	protected transient Textbox filNr; // autowired
-	protected transient Textbox filBezeichnung; // autowired
-	protected transient Textbox filName1; // autowired
-	protected transient Textbox filName2; // autowired
-	protected transient Textbox filOrt; // autowired
+	protected Textbox filNr; // autowired
+	protected Textbox filBezeichnung; // autowired
+	protected Textbox filName1; // autowired
+	protected Textbox filName2; // autowired
+	protected Textbox filOrt; // autowired
 
 	// not wired vars
 	private transient OfficeListCtrl officeListCtrl; // overhanded per param
@@ -92,15 +92,15 @@ public class OfficeDialogCtrl extends GFCBaseCtrl implements Serializable {
 	// Button Controller
 	private transient final String btnCtroller_ClassPrefix = "button_OfficeDialog_";
 	private transient ButtonStatusCtrl btnCtrl;
-	protected transient Button btnNew; // autowired
-	protected transient Button btnEdit; // autowired
-	protected transient Button btnDelete; // autowired
-	protected transient Button btnSave; // autowired
-	protected transient Button btnCancel; // autowired
-	protected transient Button btnClose; // autowired
+	protected Button btnNew; // autowired
+	protected Button btnEdit; // autowired
+	protected Button btnDelete; // autowired
+	protected Button btnSave; // autowired
+	protected Button btnCancel; // autowired
+	protected Button btnClose; // autowired
 
-	protected transient Button btnHelp; // autowire
-	protected transient Button button_OfficeDialog_PrintOffice; // autowire
+	protected Button btnHelp; // autowire
+	protected Button button_OfficeDialog_PrintOffice; // autowire
 
 	// ServiceDAOs / Domain Classes
 	private transient OfficeService officeService;

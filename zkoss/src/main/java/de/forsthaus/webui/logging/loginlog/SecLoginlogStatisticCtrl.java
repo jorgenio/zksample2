@@ -77,20 +77,20 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window windowTabPanelLoginStatistic; // autowired
-	protected transient Panel panelSecLoginLogStatistikCenter; // autowired
-	protected transient Panelchildren panelchildrenSecLoginLogStatistikCenter; // autowired
-	protected transient Box boxSecLoginLogStatistikCenter; // autowired
+	protected Window windowTabPanelLoginStatistic; // autowired
+	protected Panel panelSecLoginLogStatistikCenter; // autowired
+	protected Panelchildren panelchildrenSecLoginLogStatistikCenter; // autowired
+	protected Box boxSecLoginLogStatistikCenter; // autowired
 
-	protected transient Listbox lbTotalCount;
+	protected Listbox lbTotalCount;
 	protected Listfooter lfTotalCount;
-	protected transient Listbox lbMonthlyCount;
+	protected Listbox lbMonthlyCount;
 	protected Listfooter lfMonthlyCount;
-	protected transient Listbox lbDailyCount;
+	protected Listbox lbDailyCount;
 	protected Listfooter lfDailyCount;
 
-	protected transient int maxPanelHeight;
-	protected transient int maxlistBoxHeight;
+	protected int maxPanelHeight;
+	protected int maxlistBoxHeight;
 	// ServiceDAOs / Domain Classes
 	private transient LoginLoggingService loginLoggingService;
 

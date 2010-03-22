@@ -102,20 +102,20 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window startWindow; // autowired
-	protected transient North bl_north; // autowire
-	protected transient South bl_south; // autowire
-	protected transient Center bl_center; // autowire
+	protected Window startWindow; // autowired
+	protected North bl_north; // autowire
+	protected South bl_south; // autowire
+	protected Center bl_center; // autowire
 
-	private transient Tablelayout tableLayout;
-	private transient Tablechildren tableChildrenRecords;
-	private transient Tablechildren tableChildrenStatistic;
-	private transient Tablechildren tableChildrenButtons;
-	private transient Div div_Buttons;
-	private transient Vbox Vbox_Buttons;
-	private transient Panelchildren panelChildren_Buttons;
+	private Tablelayout tableLayout;
+	private Tablechildren tableChildrenRecords;
+	private Tablechildren tableChildrenStatistic;
+	private Tablechildren tableChildrenButtons;
+	private Div div_Buttons;
+	private Vbox Vbox_Buttons;
+	private Panelchildren panelChildren_Buttons;
 
-	private transient Label label_RecordCountCustomer;
+	private Label label_RecordCountCustomer;
 
 	// ServiceDAOs / Domain Classes
 	private transient CustomerService customerService;

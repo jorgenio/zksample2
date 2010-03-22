@@ -31,8 +31,8 @@ import org.aspectj.lang.reflect.Pointcut;
 public class UserCounterSpringSessionListenerImpl implements Serializable {
 
 	private static final long serialVersionUID = 8979460663616009375L;
-	private UserCounterImpl userCounter;
 	private transient static final Logger logger = Logger.getLogger(UserCounterSpringSessionListenerImpl.class);
+	private UserCounterImpl userCounter;
 
 	public void startSession() {
 		System.err.println("-----------------------------------------------");

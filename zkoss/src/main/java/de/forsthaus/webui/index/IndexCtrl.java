@@ -64,19 +64,19 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Menubar mainMenuBar; // autowired
+	protected Menubar mainMenuBar; // autowired
 
-	protected transient Column statusBarZKVersion; // autowired
-	protected transient Column statusBarAppVersion; // autowired
-	protected transient Column statusBarColUser; // autowired
+	protected Column statusBarZKVersion; // autowired
+	protected Column statusBarAppVersion; // autowired
+	protected Column statusBarColUser; // autowired
 
-	protected transient Intbox currentDesktopHeight; // autowired
-	protected transient Intbox currentDesktopWidth; // autowired
-	protected transient Checkbox CBtreeMenu; // autowired
+	protected Intbox currentDesktopHeight; // autowired
+	protected Intbox currentDesktopWidth; // autowired
+	protected Checkbox CBtreeMenu; // autowired
 
 	private transient OfficeService officeService;
 
-	private static int centerAreaHeightOffset = 50;
+	private int centerAreaHeightOffset = 50;
 
 	public IndexCtrl() {
 		super();

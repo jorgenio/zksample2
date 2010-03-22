@@ -31,6 +31,7 @@ import de.forsthaus.common.menu.util.ZkossMenuFactory;
  * 
  */
 public class ZkossDropDownMenuFactory extends ZkossMenuFactory {
+
 	private static final long serialVersionUID = -6930474675371322560L;
 
 	public static void addDropDownMenu(Component component) {

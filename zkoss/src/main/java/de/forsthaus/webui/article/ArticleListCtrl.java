@@ -79,32 +79,32 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window window_ArticlesList; // autowired
-	protected transient Panel panelArticleList; // autowired
+	protected Window window_ArticlesList; // autowired
+	protected Panel panelArticleList; // autowired
 
 	// search/filter components
-	protected transient Checkbox checkbox_ArticleList_ShowAll; // autowired
-	protected transient Textbox tb_Article_ArticleID; // aurowired
-	protected transient Textbox tb_Article_Name; // aurowired
+	protected Checkbox checkbox_ArticleList_ShowAll; // autowired
+	protected Textbox tb_Article_ArticleID; // aurowired
+	protected Textbox tb_Article_Name; // aurowired
 
 	// listbox articles
-	protected transient Borderlayout borderLayout_articleList; // autowired
-	protected transient Paging paging_ArticleList; // autowired
-	protected transient Listbox listBoxArticle; // autowired
-	protected transient Listheader listheader_ArticleList_No; // autowired
-	protected transient Listheader listheader_ArticleList_ShortDescr; // autowired
-	protected transient Listheader listheader_ArticleList_SinglePrice; // autowired
+	protected Borderlayout borderLayout_articleList; // autowired
+	protected Paging paging_ArticleList; // autowired
+	protected Listbox listBoxArticle; // autowired
+	protected Listheader listheader_ArticleList_No; // autowired
+	protected Listheader listheader_ArticleList_ShortDescr; // autowired
+	protected Listheader listheader_ArticleList_SinglePrice; // autowired
 
 	// textbox long description
-	protected transient Textbox longBoxArt_LangBeschreibung; // autowired
+	protected Textbox longBoxArt_LangBeschreibung; // autowired
 
 	// checkRights
-	protected transient Button btnHelp;
-	protected transient Button button_ArticleList_NewArticle;
-	protected transient Button button_ArticleList_PrintList;
+	protected Button btnHelp;
+	protected Button button_ArticleList_NewArticle;
+	protected Button button_ArticleList_PrintList;
 
 	// count of rows in the listbox
-	private transient int countRows;
+	private int countRows;
 
 	// ServiceDAOs / Domain Classes
 	private transient ArticleService articleService;

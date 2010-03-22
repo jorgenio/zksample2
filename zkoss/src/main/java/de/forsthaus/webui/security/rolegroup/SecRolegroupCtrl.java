@@ -100,31 +100,31 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window secRolegroupWindow; // autowired
-	protected transient Panel panel_SecRoleGroup; // autowired
+	protected Window secRolegroupWindow; // autowired
+	protected Panel panel_SecRoleGroup; // autowired
 
 	// listbox SecRoles
-	protected transient Borderlayout borderLayout_Roles; // autowired
-	protected transient Paging paging_ListBoxSecRole; // autowired
-	protected transient Listbox listBoxSecRole; // autowired
-	protected transient Listheader listheader_SecRoleGroup_Rolename; // autowired
+	protected Borderlayout borderLayout_Roles; // autowired
+	protected Paging paging_ListBoxSecRole; // autowired
+	protected Listbox listBoxSecRole; // autowired
+	protected Listheader listheader_SecRoleGroup_Rolename; // autowired
 
 	// listbox granted groups
-	protected transient Borderlayout borderLayout_Groups; // autowired
-	protected transient Paging paging_ListBoxSecRolegroup; // autowired
-	protected transient Listbox listBoxSecRolegroup; // autowired
-	protected transient Listheader listheader_SecRoleGroup_GrantedRight; // autowired
-	protected transient Listheader listheader_SecRoleGroup_GroupName; // autowired
+	protected Borderlayout borderLayout_Groups; // autowired
+	protected Paging paging_ListBoxSecRolegroup; // autowired
+	protected Listbox listBoxSecRolegroup; // autowired
+	protected Listheader listheader_SecRoleGroup_GrantedRight; // autowired
+	protected Listheader listheader_SecRoleGroup_GroupName; // autowired
 
 	// CRUD Buttons
-	protected transient Button btnSave; // autowired
-	protected transient Button btnClose; // autowired
+	protected Button btnSave; // autowired
+	protected Button btnClose; // autowired
 
-	protected transient Borderlayout borderlayoutSecRolegroup; // autowired
+	protected Borderlayout borderlayoutSecRolegroup; // autowired
 
 	// row count for listbox
-	private transient int countRowsSecRole;
-	private transient int countRowsSecRolegroup;
+	private int countRowsSecRole;
+	private int countRowsSecRolegroup;
 
 	// ServiceDAOs / Domain Classes
 	private transient SecurityService securityService;

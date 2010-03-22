@@ -69,13 +69,13 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window window_ArticlesDialog; // autowired
-	protected transient ArticleListCtrl articleListCtrl; // overhanded per param
+	protected Window window_ArticlesDialog; // autowired
+	protected ArticleListCtrl articleListCtrl; // overhanded per param
 
-	protected transient Textbox artNr; // autowired
-	protected transient Textbox artKurzbezeichnung; // autowired
-	protected transient Textbox artLangbezeichnung; // autowired
-	protected transient Decimalbox artPreis; // autowired
+	protected Textbox artNr; // autowired
+	protected Textbox artKurzbezeichnung; // autowired
+	protected Textbox artLangbezeichnung; // autowired
+	protected Decimalbox artPreis; // autowired
 
 	// not wired vars
 	private transient Article article; // overhanded per param
@@ -93,14 +93,14 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private transient final String btnCtroller_ClassPrefix = "button_ArticlesDialog_";
 
 	private transient ButtonStatusCtrl btnCtrl;
-	protected transient Button btnNew; // autowired
-	protected transient Button btnEdit; // autowired
-	protected transient Button btnDelete; // autowired
-	protected transient Button btnSave; // autowired
-	protected transient Button btnCancel; // autowired
-	protected transient Button btnClose; // autowired
+	protected Button btnNew; // autowired
+	protected Button btnEdit; // autowired
+	protected Button btnDelete; // autowired
+	protected Button btnSave; // autowired
+	protected Button btnCancel; // autowired
+	protected Button btnClose; // autowired
 
-	protected transient Button btnHelp; // autowire
+	protected Button btnHelp; // autowire
 
 	// ServiceDAOs
 	private transient ArticleService articleService;

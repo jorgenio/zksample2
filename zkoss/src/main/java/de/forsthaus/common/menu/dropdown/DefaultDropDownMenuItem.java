@@ -43,7 +43,7 @@ class DefaultDropDownMenuItem extends Menuitem implements EventListener, Seriali
 	private static final long serialVersionUID = -2813840859147955432L;
 	private transient static final Logger logger = Logger.getLogger(DefaultDropDownMenuItem.class);
 
-	private transient String zulNavigation;
+	private String zulNavigation;
 
 	@Override
 	public void onEvent(Event event) throws Exception {
@@ -79,8 +79,7 @@ class DefaultDropDownMenuItem extends Menuitem implements EventListener, Seriali
 
 					tab.setParent(tabs);
 
-					Tabpanels tabpanels = (Tabpanels) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter")
-							.getFellow("tabpanelsBoxIndexCenter");
+					Tabpanels tabpanels = (Tabpanels) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter").getFellow("tabpanelsBoxIndexCenter");
 					Tabpanel tabpanel = new Tabpanel();
 					tabpanel.setHeight("100%");
 					tabpanel.setStyle("padding: 0px;");

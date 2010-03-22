@@ -77,22 +77,22 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window secGroupListWindow; // autowired
-	protected transient Panel panel_SecGroupList; // autowired
+	protected Window secGroupListWindow; // autowired
+	protected Panel panel_SecGroupList; // autowired
 
 	// filter components
-	protected transient Checkbox checkbox_SecGroupList_ShowAll; // autowired
-	protected transient Textbox tb_SecGroup_GroupName; // autowired
+	protected Checkbox checkbox_SecGroupList_ShowAll; // autowired
+	protected Textbox tb_SecGroup_GroupName; // autowired
 
 	// listbox secGroupList
-	protected transient Borderlayout borderLayout_secGroupsList; // autowired
-	protected transient Paging paging_SecGroupList; // aurowired
-	protected transient Listbox listBoxSecGroups; // aurowired
-	protected transient Listheader listheader_SecGroupList_grpShortdescription; // autowired
-	protected transient Listheader listheader_SecGroupList_grpLongdescription; // autowired
+	protected Borderlayout borderLayout_secGroupsList; // autowired
+	protected Paging paging_SecGroupList; // aurowired
+	protected Listbox listBoxSecGroups; // aurowired
+	protected Listheader listheader_SecGroupList_grpShortdescription; // autowired
+	protected Listheader listheader_SecGroupList_grpLongdescription; // autowired
 
 	// row count for listbox
-	private transient int countRows;
+	private int countRows;
 
 	// ServiceDAOs / Domain Classes
 	private transient SecurityService securityService;
@@ -119,7 +119,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
 		 * filled by onClientInfo() in the indexCtroller
 		 */
-		
+
 		int panelHeight = 25;
 		// TODO put the logic for working with panel in the ApplicationWorkspace
 		boolean withPanel = false;

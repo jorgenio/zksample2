@@ -64,11 +64,11 @@ abstract public class GFCBaseCtrl extends GenericForwardComposer implements Seri
 		return ce.getArg();
 	}
 
-	public void doCreateDataBinding(Window w) throws Exception {
+	public void doSetComposerName(Window w) throws Exception {
 		w.setVariable("controller", this, false); // make models visible for the
 													// databinder
-		binder = new AnnotateDataBinder(w);
-		binder.loadAll();
+//		binder = new AnnotateDataBinder(w);
+//		binder.loadAll();
 	}
 
 	public void doOnCreateCommon(Window w) throws Exception {

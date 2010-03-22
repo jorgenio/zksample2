@@ -97,51 +97,51 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
 
-	protected transient Window window_TestCtrl; // autowired
-	protected transient Button btn_Test2; // autowired
-	protected transient Button btn_ChangeTheme; // autowired
-	protected transient Button btn_CountLoginsPerHour; // autowired
-	protected transient Button btn_fillIp2CountryOnceForAppUpdate; // autowired
-	protected transient Button btn_updateIp2CountryFromLookUpHost; // autowired
-	protected transient Button btn_Ip2CountryImport; // autowired
-	protected transient Button btn_createWindow; // autowired
-	protected transient Button btn_CompileReport; // autowired
+	protected Window window_TestCtrl; // autowired
+	protected Button btn_Test2; // autowired
+	protected Button btn_ChangeTheme; // autowired
+	protected Button btn_CountLoginsPerHour; // autowired
+	protected Button btn_fillIp2CountryOnceForAppUpdate; // autowired
+	protected Button btn_updateIp2CountryFromLookUpHost; // autowired
+	protected Button btn_Ip2CountryImport; // autowired
+	protected Button btn_createWindow; // autowired
+	protected Button btn_CompileReport; // autowired
 
 	// listBox
-	protected transient Paging pagingBranch; // autowired
-	protected transient Listbox listBoxBranch; // autowired
-	protected transient Listheader listheader_Branch_Description; // autowired
-	protected transient Listheader listheader_Branch_No; // autowired
+	protected Paging pagingBranch; // autowired
+	protected Listbox listBoxBranch; // autowired
+	protected Listheader listheader_Branch_Description; // autowired
+	protected Listheader listheader_Branch_No; // autowired
 
 	private transient final FieldComparator fcBraNr_Asc = new FieldComparator("braNr", true);
 	private transient final FieldComparator fcBraNr_Desc = new FieldComparator("braNr", false);
 	private transient final FieldComparator fcBraBezeichnung_Asc = new FieldComparator("braBezeichnung", true);
 	private transient final FieldComparator fcBraBezeichnung_Desc = new FieldComparator("braBezeichnung", false);
 
-	protected transient Div div_DateBox;
-	protected transient Datebox DateBox_Sample;
-	protected transient Button Btn_ResetDatebox;
-	protected transient Button btn_javaListbox;
-	protected transient Panelchildren panelChildJavaListbox;
+	protected Div div_DateBox;
+	protected Datebox DateBox_Sample;
+	protected Button Btn_ResetDatebox;
+	protected Button btn_javaListbox;
+	protected Panelchildren panelChildJavaListbox;
 
-	protected transient Label label_InsertCustomer;
-	protected transient Listbox listBoxCustomer;
-	protected transient Paging pagingKunde;
-	protected transient Listheader listheader_CustNo;
-	protected transient Listheader listheader_CustName1;
-	protected transient Listheader listheader_CustMatchcode;
-	protected transient Listheader listheader_CustName2;
-	protected transient Listheader listheader_CustCity;
+	protected Label label_InsertCustomer;
+	protected Listbox listBoxCustomer;
+	protected Paging pagingKunde;
+	protected Listheader listheader_CustNo;
+	protected Listheader listheader_CustName1;
+	protected Listheader listheader_CustMatchcode;
+	protected Listheader listheader_CustName2;
+	protected Listheader listheader_CustCity;
 
-	private transient final FieldComparator fcKunMatchcode_Asc = new FieldComparator("kunMatchcode", true);
-	private transient final FieldComparator fcKunMatchcode_Desc = new FieldComparator("kunMatchcode", false);
-	private transient final FieldComparator fcKunName1_Asc = new FieldComparator("kunName1", true);
-	private transient final FieldComparator fcKunName1_Desc = new FieldComparator("kunName1", false);
-	private transient final FieldComparator fcKunName2_Asc = new FieldComparator("kunName2", true);
-	private transient final FieldComparator fcKunName2_Desc = new FieldComparator("kunName2", false);
-	private transient final FieldComparator fcKunOrt_Asc = new FieldComparator("kunOrt", true);
-	private transient final FieldComparator fcKunOrt_Desc = new FieldComparator("kunOrt", false);
-	protected transient Button btnEditCustomerListbox;
+	private final FieldComparator fcKunMatchcode_Asc = new FieldComparator("kunMatchcode", true);
+	private final FieldComparator fcKunMatchcode_Desc = new FieldComparator("kunMatchcode", false);
+	private final FieldComparator fcKunName1_Asc = new FieldComparator("kunName1", true);
+	private final FieldComparator fcKunName1_Desc = new FieldComparator("kunName1", false);
+	private final FieldComparator fcKunName2_Asc = new FieldComparator("kunName2", true);
+	private final FieldComparator fcKunName2_Desc = new FieldComparator("kunName2", false);
+	private final FieldComparator fcKunOrt_Asc = new FieldComparator("kunOrt", true);
+	private final FieldComparator fcKunOrt_Desc = new FieldComparator("kunOrt", false);
+	protected Button btnEditCustomerListbox;
 
 	private transient CustomerService customerService;
 	private transient BrancheService brancheService;
@@ -154,8 +154,8 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 
 	private transient OrderService orderService;
 
-	private PagedListWrapper<Customer> pagedListWrapperCustomer;
-	private PagedListWrapper<Branche> pagedListWrapperBranche;
+	private transient PagedListWrapper<Customer> pagedListWrapperCustomer;
+	private transient PagedListWrapper<Branche> pagedListWrapperBranche;
 
 	/**
 	 * Constructor.<br>

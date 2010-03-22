@@ -25,6 +25,7 @@ import org.zkoss.zk.ui.Component;
  * 
  */
 public class MenuFactoryDto {
+
 	public MenuFactoryDto(Component parent, ILabelElement node) {
 		super();
 		this.parent = parent;

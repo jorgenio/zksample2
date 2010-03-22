@@ -69,9 +69,9 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window secRightDialogWindow; // autowired
-	protected transient Textbox rigName; // autowired
-	protected transient Listbox rigType; // autowired
+	protected Window secRightDialogWindow; // autowired
+	protected Textbox rigName; // autowired
+	protected Listbox rigType; // autowired
 
 	// overhanded vars per params
 	private transient Listbox listBoxSecRights; // overhanded
@@ -87,12 +87,12 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	// Button controller for the CRUD buttons
 	private transient final String btnCtroller_ClassPrefix = "button_SecRightDialog_";
 	private transient ButtonStatusCtrl btnCtrl;
-	protected transient Button btnNew; // autowired
-	protected transient Button btnEdit; // autowired
-	protected transient Button btnDelete; // autowired
-	protected transient Button btnSave; // autowired
-	protected transient Button btnCancel; // autowired
-	protected transient Button btnClose; // autowired
+	protected Button btnNew; // autowired
+	protected Button btnEdit; // autowired
+	protected Button btnDelete; // autowired
+	protected Button btnSave; // autowired
+	protected Button btnCancel; // autowired
+	protected Button btnClose; // autowired
 
 	// ServiceDAOs / Domain Classes
 	private transient SecurityService securityService;

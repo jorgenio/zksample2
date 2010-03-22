@@ -82,35 +82,35 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window userListWindow; // autowired
-	protected transient Panel panel_UserList; // autowired
+	protected Window userListWindow; // autowired
+	protected Panel panel_UserList; // autowired
 
 	// filter components
-	protected transient Checkbox checkbox_UserList_ShowAll; // autowired
-	protected transient Textbox tb_SecUser_Loginname; // aurowired
-	protected transient Textbox tb_SecUser_Lastname; // aurowired
-	protected transient Textbox tb_SecUser_Email; // autowired
+	protected Checkbox checkbox_UserList_ShowAll; // autowired
+	protected Textbox tb_SecUser_Loginname; // aurowired
+	protected Textbox tb_SecUser_Lastname; // aurowired
+	protected Textbox tb_SecUser_Email; // autowired
 
 	// listbox userList
-	protected transient Borderlayout borderLayout_secUserList; // autowired
-	protected transient Paging paging_UserList; // autowired
-	protected transient Listbox listBoxUser; // aurowired
-	protected transient Listheader listheader_UserList_usrLoginname; // autowired
-	protected transient Listheader listheader_UserList_usrLastname; // autowired
-	protected transient Listheader listheader_UserList_usrEmail; // autowired
-	protected transient Listheader listheader_UserList_usrEnabled; // autowired
-	protected transient Listheader listheader_UserList_usrAccountnonexpired; // autowired
-	protected transient Listheader listheader_UserList_usrCredentialsnonexpired; // autowired
-	protected transient Listheader listheader_UserList_usrAccountnonlocked; // autowired
+	protected Borderlayout borderLayout_secUserList; // autowired
+	protected Paging paging_UserList; // autowired
+	protected Listbox listBoxUser; // aurowired
+	protected Listheader listheader_UserList_usrLoginname; // autowired
+	protected Listheader listheader_UserList_usrLastname; // autowired
+	protected Listheader listheader_UserList_usrEmail; // autowired
+	protected Listheader listheader_UserList_usrEnabled; // autowired
+	protected Listheader listheader_UserList_usrAccountnonexpired; // autowired
+	protected Listheader listheader_UserList_usrCredentialsnonexpired; // autowired
+	protected Listheader listheader_UserList_usrAccountnonlocked; // autowired
 
 	// checkRights
-	protected transient Button btnHelp; // autowired
-	protected transient Button button_UserList_NewUser; // autowired
-	protected transient Button button_UserList_PrintUserList; // autowired
-	protected transient Hbox hbox_UserList_SearchUsers; // autowired
+	protected Button btnHelp; // autowired
+	protected Button button_UserList_NewUser; // autowired
+	protected Button button_UserList_PrintUserList; // autowired
+	protected Hbox hbox_UserList_SearchUsers; // autowired
 
 	// row count for listbox
-	private transient int countRows;
+	private int countRows;
 
 	// ServiceDAOs / Domain Classes
 	private transient UserService userService;

@@ -75,20 +75,20 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window customerSearchWindow; // autowired
-	protected transient Listbox sortOperator_kunNr; // autowired
-	protected transient Textbox kunNr; // autowired
-	protected transient Listbox sortOperator_kunMatchcode; // autowired
-	protected transient Textbox kunMatchcode; // autowired
-	protected transient Listbox sortOperator_kunName1; // autowired
-	protected transient Textbox kunName1; // autowired
-	protected transient Listbox sortOperator_kunName2; // autowired
-	protected transient Textbox kunName2; // autowired
-	protected transient Listbox sortOperator_kunOrt; // autowired
-	protected transient Textbox kunOrt; // autowired
-	protected transient Listbox sortOperator_kunBranch; // autowired
-	protected transient Listbox kunBranche; // autowired
-	protected transient Label labelCustomerSearchResult; // autowired
+	protected Window customerSearchWindow; // autowired
+	protected Listbox sortOperator_kunNr; // autowired
+	protected Textbox kunNr; // autowired
+	protected Listbox sortOperator_kunMatchcode; // autowired
+	protected Textbox kunMatchcode; // autowired
+	protected Listbox sortOperator_kunName1; // autowired
+	protected Textbox kunName1; // autowired
+	protected Listbox sortOperator_kunName2; // autowired
+	protected Textbox kunName2; // autowired
+	protected Listbox sortOperator_kunOrt; // autowired
+	protected Textbox kunOrt; // autowired
+	protected Listbox sortOperator_kunBranch; // autowired
+	protected Listbox kunBranche; // autowired
+	protected Label labelCustomerSearchResult; // autowired
 
 	// not auto wired vars
 	private transient CustomerListCtrl customerCtrl; // overhanded per param

@@ -99,30 +99,30 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window window_customerDialog; // autowired
+	protected Window window_customerDialog; // autowired
 
 	// tab Address
-	protected transient Tab tabCustomerDialogAddress; // autowired
-	protected transient Tabpanel tabPanelCustomerAddress; // autowired
-	protected transient Textbox kunNr; // autowired
-	protected transient Textbox kunMatchcode; // autowired
-	protected transient Textbox kunName1; // autowired
-	protected transient Textbox kunName2; // autowired
-	protected transient Textbox kunOrt; // autowired
-	protected transient Listbox kunBranche; // autowired
-	protected transient Checkbox kunMahnsperre; // autowired
+	protected Tab tabCustomerDialogAddress; // autowired
+	protected Tabpanel tabPanelCustomerAddress; // autowired
+	protected Textbox kunNr; // autowired
+	protected Textbox kunMatchcode; // autowired
+	protected Textbox kunName1; // autowired
+	protected Textbox kunName2; // autowired
+	protected Textbox kunOrt; // autowired
+	protected Listbox kunBranche; // autowired
+	protected Checkbox kunMahnsperre; // autowired
 
 	// tab Chart
-	protected transient Tab tabCustomerDialogChart; // autowired
-	protected transient Tabpanel tabPanelCustomerDialogChart; // autowired
+	protected Tab tabCustomerDialogChart; // autowired
+	protected Tabpanel tabPanelCustomerDialogChart; // autowired
 
 	// tab Orders
-	protected transient Tab tabCustomerDialogOrders; // autowired
-	protected transient Tabpanel tabPanelCustomerOrders; // autowired
+	protected Tab tabCustomerDialogOrders; // autowired
+	protected Tabpanel tabPanelCustomerOrders; // autowired
 
 	// tab Memos
-	protected transient Tab tabCustomerDialogMemos; // autowired
-	protected transient Tabpanel tabPanelCustomerMemos; // autowired
+	protected Tab tabCustomerDialogMemos; // autowired
+	protected Tabpanel tabPanelCustomerMemos; // autowired
 
 	// not auto wired vars
 	private Customer customer; // overhanded per param
@@ -143,14 +143,14 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	// Button controller for the CRUD buttons
 	private transient final String btnCtroller_ClassPrefix = "button_CustomerDialog_";
 	private transient ButtonStatusCtrl btnCtrl;
-	protected transient Button btnNew; // autowire
-	protected transient Button btnEdit; // autowire
-	protected transient Button btnDelete; // autowire
-	protected transient Button btnSave; // autowire
-	protected transient Button btnCancel; // autowire
-	protected transient Button btnClose; // autowire
+	protected Button btnNew; // autowire
+	protected Button btnEdit; // autowire
+	protected Button btnDelete; // autowire
+	protected Button btnSave; // autowire
+	protected Button btnCancel; // autowire
+	protected Button btnClose; // autowire
 
-	protected transient Button btnHelp; // autowire
+	protected Button btnHelp; // autowire
 
 	// ServiceDAOs / Domain Classes
 	private transient BrancheService brancheService;

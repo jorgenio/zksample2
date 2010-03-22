@@ -95,34 +95,34 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window orderDialogWindow; // autowired
-	protected transient Textbox kunNr; // autowired
-	protected transient Textbox kunName1; // autowired
-	protected transient Textbox aufNr; // autowired
-	protected transient Textbox aufBezeichnung; // autowired
+	protected Window orderDialogWindow; // autowired
+	protected Textbox kunNr; // autowired
+	protected Textbox kunName1; // autowired
+	protected Textbox aufNr; // autowired
+	protected Textbox aufBezeichnung; // autowired
 
-	protected transient Paging paging_ListBoxOrderOrderPositions; // autowired
-	protected transient Listbox listBoxOrderOrderPositions; // autowired
+	protected Paging paging_ListBoxOrderOrderPositions; // autowired
+	protected Listbox listBoxOrderOrderPositions; // autowired
 
-	protected transient Listheader listheader_OrderPosList2_Orderpos_No; // autowired
-	protected transient Listheader listheader_OrderPosList2_Shorttext; // autowired
-	protected transient Listheader listheader_OrderPosList2_Count; // autowired
-	protected transient Listheader listheader_OrderPosList2_SinglePrice; // autowired
-	protected transient Listheader listheader_OrderPosList2_WholePrice; // autowired
+	protected Listheader listheader_OrderPosList2_Orderpos_No; // autowired
+	protected Listheader listheader_OrderPosList2_Shorttext; // autowired
+	protected Listheader listheader_OrderPosList2_Count; // autowired
+	protected Listheader listheader_OrderPosList2_SinglePrice; // autowired
+	protected Listheader listheader_OrderPosList2_WholePrice; // autowired
 
 	// search components
 	// bandbox for searchCustomer
-	protected transient Bandbox bandbox_OrderDialog_CustomerSearch; // autowired
-	protected transient Textbox tb_Orders_SearchCustNo; // autowired
-	protected transient Textbox tb_Orders_CustSearchMatchcode; // autowired
-	protected transient Textbox tb_Orders_SearchCustName1; // autowired
-	protected transient Textbox tb_Orders_SearchCustCity; // autowired
-	protected transient Paging paging_OrderDialog_CustomerSearchList; // autowired
-	protected transient Listbox listBoxCustomerSearch; // autowired
-	protected transient Listheader listheader_CustNo_2; // autowired
-	protected transient Listheader listheader_CustMatchcode_2; // autowired
-	protected transient Listheader listheader_CustName1_2; // autowired
-	protected transient Listheader listheader_CustCity_2; // autowired
+	protected Bandbox bandbox_OrderDialog_CustomerSearch; // autowired
+	protected Textbox tb_Orders_SearchCustNo; // autowired
+	protected Textbox tb_Orders_CustSearchMatchcode; // autowired
+	protected Textbox tb_Orders_SearchCustName1; // autowired
+	protected Textbox tb_Orders_SearchCustCity; // autowired
+	protected Paging paging_OrderDialog_CustomerSearchList; // autowired
+	protected Listbox listBoxCustomerSearch; // autowired
+	protected Listheader listheader_CustNo_2; // autowired
+	protected Listheader listheader_CustMatchcode_2; // autowired
+	protected Listheader listheader_CustName1_2; // autowired
+	protected Listheader listheader_CustCity_2; // autowired
 
 	// not wired vars
 	private transient Order order; // overhanded per param
@@ -141,19 +141,19 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	// Button controller for the CRUD buttons
 	private transient final String btnCtroller_ClassPrefix = "button_OrderDialog_";
 	private transient ButtonStatusCtrl btnCtrl;
-	protected transient Button btnNew; // autowire
-	protected transient Button btnEdit; // autowire
-	protected transient Button btnDelete; // autowire
-	protected transient Button btnSave; // autowire
-	protected transient Button btnCancel; // autowire
-	protected transient Button btnClose; // autowire
+	protected Button btnNew; // autowire
+	protected Button btnEdit; // autowire
+	protected Button btnDelete; // autowire
+	protected Button btnSave; // autowire
+	protected Button btnCancel; // autowire
+	protected Button btnClose; // autowire
 
-	protected transient Button btnHelp; // autowire
-	protected transient Button button_OrderDialog_PrintOrder; // autowire
-	protected transient Button button_OrderDialog_NewOrderPosition; // autowire
+	protected Button btnHelp; // autowire
+	protected Button button_OrderDialog_PrintOrder; // autowire
+	protected Button button_OrderDialog_NewOrderPosition; // autowire
 
-	private transient int pageSizeOrderPosition;
-	private transient int pageSizeSearchCustomer;
+	private int pageSizeOrderPosition;
+	private int pageSizeSearchCustomer;
 
 	// ServiceDAOs / Domain Classes
 	private transient Customer customer;

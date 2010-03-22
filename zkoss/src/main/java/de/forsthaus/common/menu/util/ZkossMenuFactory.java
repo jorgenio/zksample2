@@ -40,7 +40,6 @@ import de.forsthaus.common.menu.domain.MetaMenuFactory;
 abstract public class ZkossMenuFactory implements Serializable {
 
 	private static final long serialVersionUID = 142621423557135573L;
-
 	private final Log loger = LogFactory.getLog(getClass());
 
 	final private LinkedList<Component> stack;

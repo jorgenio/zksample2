@@ -59,8 +59,8 @@ public class SecLoginlogMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window secLoginlogMainWindow; // autowired
-	protected transient Panel panel_SecLoginlogList; // autowired
+	protected Window secLoginlogMainWindow; // autowired
+	protected Panel panel_SecLoginlogList; // autowired
 
 	protected Tab tabLoginList; // autowired
 	protected Tabpanel tabPanelLoginList; // autowired

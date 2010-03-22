@@ -79,33 +79,33 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window window_OfficeList; // autowired
-	protected transient Panel panelOfficeList; // autowired
+	protected Window window_OfficeList; // autowired
+	protected Panel panelOfficeList; // autowired
 
-	protected transient Borderlayout borderLayout_officeList; // autowired
-	protected transient Paging paging_OfficeList; // autowired
-	protected transient Listbox listBoxOffice; // autowired
-	protected transient Listheader listheader_OfficeList_No; // autowired
-	protected transient Listheader listheader_OfficeList_Name1; // autowired
-	protected transient Listheader listheader_OfficeList_Name2; // autowired
-	protected transient Listheader listheader_OfficeList_City; // autowired
+	protected Borderlayout borderLayout_officeList; // autowired
+	protected Paging paging_OfficeList; // autowired
+	protected Listbox listBoxOffice; // autowired
+	protected Listheader listheader_OfficeList_No; // autowired
+	protected Listheader listheader_OfficeList_Name1; // autowired
+	protected Listheader listheader_OfficeList_Name2; // autowired
+	protected Listheader listheader_OfficeList_City; // autowired
 
 	// filter components
-	protected transient Checkbox checkbox_OfficeList_ShowAll; // autowired
-	protected transient Textbox tb_Office_No; // aurowired
-	protected transient Textbox tb_Office_Name; // aurowired
-	protected transient Textbox tb_Office_City; // aurowired
+	protected Checkbox checkbox_OfficeList_ShowAll; // autowired
+	protected Textbox tb_Office_No; // aurowired
+	protected Textbox tb_Office_Name; // aurowired
+	protected Textbox tb_Office_City; // aurowired
 
 	// checkRights
-	protected transient Button btnHelp; // aurowired
-	protected transient Button button_OfficeList_NewOffice; // aurowired
-	protected transient Button button_OfficeList_PrintList; // aurowired
-	protected transient Button button_OfficeList_SearchNo; // aurowired
-	protected transient Button button_OfficeList_SearchName; // aurowired
-	protected transient Button button_OfficeList_SearchCity; // aurowired
+	protected Button btnHelp; // aurowired
+	protected Button button_OfficeList_NewOffice; // aurowired
+	protected Button button_OfficeList_PrintList; // aurowired
+	protected Button button_OfficeList_SearchNo; // aurowired
+	protected Button button_OfficeList_SearchName; // aurowired
+	protected Button button_OfficeList_SearchCity; // aurowired
 
 	// row count for listbox
-	private transient int countRows;
+	private int countRows;
 
 	// ServiceDAOs / Domain Classes
 	private transient OfficeService officeService;

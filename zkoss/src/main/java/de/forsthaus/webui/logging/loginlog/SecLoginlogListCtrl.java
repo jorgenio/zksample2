@@ -85,33 +85,33 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window secLoginlogListWindow; // autowired
+	protected Window secLoginlogListWindow; // autowired
 
 	// filter components
-	protected transient Checkbox checkbox_SecLoginlogList_ShowAll; // autowired
-	protected transient Checkbox checkbox_SecLoginlogList_ShowOnlySuccess; // autowired
-	protected transient Checkbox checkbox_SecLoginlogList_ShowOnlyFailed; // autowired
-	protected transient Checkbox checkbox_SecLoginlogList_ServerPush; // autowired
+	protected Checkbox checkbox_SecLoginlogList_ShowAll; // autowired
+	protected Checkbox checkbox_SecLoginlogList_ShowOnlySuccess; // autowired
+	protected Checkbox checkbox_SecLoginlogList_ShowOnlyFailed; // autowired
+	protected Checkbox checkbox_SecLoginlogList_ServerPush; // autowired
 
 	// bandbox for date period search
-	protected transient Bandbox bandbox_SecLoginlogList_PeriodSearch; // autowired
-	protected transient Bandpopup bpop_SecLoginlogList_PeriodSearch; // autowired
-	protected transient Datebox dbox_LoginLog_DateFrom; // autowired
-	protected transient Datebox dbox_LoginLog_DateTo; // autowired
+	protected Bandbox bandbox_SecLoginlogList_PeriodSearch; // autowired
+	protected Bandpopup bpop_SecLoginlogList_PeriodSearch; // autowired
+	protected Datebox dbox_LoginLog_DateFrom; // autowired
+	protected Datebox dbox_LoginLog_DateTo; // autowired
 
 	// search comps for LoginName
-	protected transient Textbox tb_SecUserlog_LoginName; // aurowired
+	protected Textbox tb_SecUserlog_LoginName; // aurowired
 
 	// listbox secLoginLogList
-	protected transient Borderlayout borderLayout_SecUserlogList; // autowired
-	protected transient Paging paging_SecUserLogList; // autowired
-	protected transient Listbox listBoxSecUserlog; // aurowired
-	protected transient Listheader listheader_SecLoginlogList_lglLogtime; // autowired
-	protected transient Listheader listheader_SecLoginlogList_lglLoginname; // autowired
-	protected transient Listheader listheader_SecLoginlogList_lglStatusid; // autowired
-	protected transient Listheader listheader_SecLoginlogList_lglIp; // autowired
-	protected transient Listheader listheader_SecLoginlogList_CountryCode2;
-	protected transient Listheader listheader_SecLoginlogList_lglSessionid; // autowired
+	protected Borderlayout borderLayout_SecUserlogList; // autowired
+	protected Paging paging_SecUserLogList; // autowired
+	protected Listbox listBoxSecUserlog; // aurowired
+	protected Listheader listheader_SecLoginlogList_lglLogtime; // autowired
+	protected Listheader listheader_SecLoginlogList_lglLoginname; // autowired
+	protected Listheader listheader_SecLoginlogList_lglStatusid; // autowired
+	protected Listheader listheader_SecLoginlogList_lglIp; // autowired
+	protected Listheader listheader_SecLoginlogList_CountryCode2;
+	protected Listheader listheader_SecLoginlogList_lglSessionid; // autowired
 
 	// Server push
 	private transient Desktop desktop;
@@ -119,7 +119,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	private transient WorkingThreadLoginList serverPush;
 
 	// row count for listbox
-	private transient int countRows;
+	private int countRows;
 
 	// ServiceDAOs / Domain Classes
 	private transient LoginLoggingService loginLoggingService;

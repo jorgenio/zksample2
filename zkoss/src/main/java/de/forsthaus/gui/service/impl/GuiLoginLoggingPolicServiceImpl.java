@@ -37,11 +37,12 @@ import de.forsthaus.gui.service.GuiLoginLoggingPolicService;
  * 
  */
 public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicService {
+
 	private final static Logger logger = Logger.getLogger(GuiLoginLoggingPolicServiceImpl.class);
-	private LoginLoggingService loginLoggingService;
-	private SysCountryCodeService sysCountryCodeService;
-	private Ip2CountryService ip2CountryService;
-	private IpToCountryService ipToCountryService;
+	private transient LoginLoggingService loginLoggingService;
+	private transient SysCountryCodeService sysCountryCodeService;
+	private transient Ip2CountryService ip2CountryService;
+	private transient IpToCountryService ipToCountryService;
 
 	@Override
 	public void logAuthFail(String userName, String clientAddress, String sessionId) {

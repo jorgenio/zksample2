@@ -104,31 +104,31 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window secUserroleWindow; // autowired
-	protected transient Panel panel_SecUserRole; // autowired
+	protected Window secUserroleWindow; // autowired
+	protected Panel panel_SecUserRole; // autowired
 
 	// area listBox SecUser
-	protected transient Borderlayout borderLayout_Users; // autowired
-	protected transient Paging paging_ListBoxSecUser; // autowired
-	protected transient Listbox listBoxSecUser; // autowired
-	protected transient Listheader listheader_SecUserRole_usrLoginname; // autowired
+	protected Borderlayout borderLayout_Users; // autowired
+	protected Paging paging_ListBoxSecUser; // autowired
+	protected Listbox listBoxSecUser; // autowired
+	protected Listheader listheader_SecUserRole_usrLoginname; // autowired
 
 	// area listBox SecUserRoles
-	protected transient Borderlayout borderLayout_Roles; // autowired
-	protected transient Paging paging_ListBoxSecRoles; // autowired
-	protected transient Listbox listBoxSecRoles; // autowired
-	protected transient Listheader listheader_SecUserRole_GrantedRight; // autowired
-	protected transient Listheader listheader_SecUserRole_RoleName; // autowired
+	protected Borderlayout borderLayout_Roles; // autowired
+	protected Paging paging_ListBoxSecRoles; // autowired
+	protected Listbox listBoxSecRoles; // autowired
+	protected Listheader listheader_SecUserRole_GrantedRight; // autowired
+	protected Listheader listheader_SecUserRole_RoleName; // autowired
 
 	// CRUD Buttons
-	protected transient Button btnSave; // autowired
-	protected transient Button btnClose; // autowired
+	protected Button btnSave; // autowired
+	protected Button btnClose; // autowired
 
 	// row count for listbox
-	private transient int countRowsSecUser;
-	private transient int countRowsSecRole;
+	private int countRowsSecUser;
+	private int countRowsSecRole;
 
-	protected transient Borderlayout borderlayoutSecUserrole; // autowired
+	protected Borderlayout borderlayoutSecUserrole; // autowired
 
 	// ServiceDAOs / Domain Classes
 	private transient SecurityService securityService;

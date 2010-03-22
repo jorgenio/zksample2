@@ -78,32 +78,32 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window window_customerList; // autowired
-	protected transient Panel panel_CustomerList; // autowired
+	protected Window window_customerList; // autowired
+	protected Panel panel_CustomerList; // autowired
 	// listbox customerList
-	protected transient Borderlayout borderLayout_customerList; // autowired
-	protected transient Paging pagingCustomerList; // autowired
-	protected transient Listbox listBoxCustomer; // autowired
-	protected transient Listheader listheader_CustNo; // autowired
-	protected transient Listheader listheader_CustMatchcode; // autowired
-	protected transient Listheader listheader_CustName1; // autowired
-	protected transient Listheader listheader_CustName2; // autowired
-	protected transient Listheader listheader_CustCity; // autowired
+	protected Borderlayout borderLayout_customerList; // autowired
+	protected Paging pagingCustomerList; // autowired
+	protected Listbox listBoxCustomer; // autowired
+	protected Listheader listheader_CustNo; // autowired
+	protected Listheader listheader_CustMatchcode; // autowired
+	protected Listheader listheader_CustName1; // autowired
+	protected Listheader listheader_CustName2; // autowired
+	protected Listheader listheader_CustCity; // autowired
 
-	protected transient Panel customerSeekPanel; // autowired
-	protected transient Panel customerListPanel; // autowired
+	protected Panel customerSeekPanel; // autowired
+	protected Panel customerListPanel; // autowired
 
 	// checkRights
-	protected transient Button btnHelp;
-	protected transient Button button_CustomerList_NewCustomer;
-	protected transient Button button_CustomerList_CustomerFindDialog;
-	protected transient Button button_CustomerList_PrintList;
+	protected Button btnHelp;
+	protected Button button_CustomerList_NewCustomer;
+	protected Button button_CustomerList_CustomerFindDialog;
+	protected Button button_CustomerList_PrintList;
 
 	// NEEDED for the ReUse in the SearchWindow
-	protected transient HibernateSearchObject<Customer> searchObj;
+	protected HibernateSearchObject<Customer> searchObj;
 
 	// row count for listbox
-	private transient int countRows;
+	private int countRows;
 
 	private transient CustomerService customerService;
 	private transient BrancheService brancheService;

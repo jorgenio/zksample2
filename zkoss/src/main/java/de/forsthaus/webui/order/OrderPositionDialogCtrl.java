@@ -92,34 +92,34 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window orderPositionDialogWindow; // autowired
+	protected Window orderPositionDialogWindow; // autowired
 
 	// input area
-	protected transient Textbox artNr; // autowired
-	protected transient Textbox artKurzbezeichnung; // autowired
-	protected transient Decimalbox aupMenge; // autowired
-	protected transient Decimalbox aupEinzelwert; // autowired
-	protected transient Decimalbox aupGesamtwert; // autowired
+	protected Textbox artNr; // autowired
+	protected Textbox artKurzbezeichnung; // autowired
+	protected Decimalbox aupMenge; // autowired
+	protected Decimalbox aupEinzelwert; // autowired
+	protected Decimalbox aupGesamtwert; // autowired
 
 	// bandbock searchArticle
-	protected transient Bandbox bandbox_OrderPositionDialog_ArticleSearch; // autowired
-	protected transient Textbox tb_OrderPosition_SearchArticlelNo; // autowired
-	protected transient Textbox tb_OrderPosition_SearchArticleDesc; // autowired
+	protected Bandbox bandbox_OrderPositionDialog_ArticleSearch; // autowired
+	protected Textbox tb_OrderPosition_SearchArticlelNo; // autowired
+	protected Textbox tb_OrderPosition_SearchArticleDesc; // autowired
 
 	// listbox articlesearch in bandbox
 	private transient int pageSizeArticleSearch;
-	protected transient Paging paging_ListBoxArticleSearch; // autowired
-	protected transient Listbox listBoxArticleSearch; // autowired
-	protected transient Listheader listheader_ArticleSearch_artNr; // autowired
-	protected transient Listheader listheader_ArticleSearch_artKurzbezeichnung; // autowired
-	protected transient Listheader listheader_ArticleSearch_aupEinzelwert; // autowired
+	protected Paging paging_ListBoxArticleSearch; // autowired
+	protected Listbox listBoxArticleSearch; // autowired
+	protected Listheader listheader_ArticleSearch_artNr; // autowired
+	protected Listheader listheader_ArticleSearch_artKurzbezeichnung; // autowired
+	protected Listheader listheader_ArticleSearch_aupEinzelwert; // autowired
 
 	// search bandbox customer
-	protected transient Bandbox bbox_Orders_CustomerSearch; // autowired
-	protected transient Textbox tb_Orders_SearchCustNo; // autowired
-	protected transient Textbox tb_Orders_CustSearchMatchcode; // autowired
-	protected transient Textbox tb_Orders_SearchCustName1; // autowired
-	protected transient Textbox tb_Orders_SearchCustCity; // autowired
+	protected Bandbox bbox_Orders_CustomerSearch; // autowired
+	protected Textbox tb_Orders_SearchCustNo; // autowired
+	protected Textbox tb_Orders_CustSearchMatchcode; // autowired
+	protected Textbox tb_Orders_SearchCustName1; // autowired
+	protected Textbox tb_Orders_SearchCustCity; // autowired
 
 	// overhanded vars from parent controller
 	private transient Listbox listBoxOrderOrderPositions; // overhanded
@@ -141,15 +141,15 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	// Button controller for the CRUD buttons
 	private transient final String btnCtroller_RightPrefix = "button_OrderPositionDialog_";
 	private transient ButtonStatusCtrl btnCtrl;
-	protected transient Button btnNew; // autowire
-	protected transient Button btnEdit; // autowire
-	protected transient Button btnDelete; // autowire
-	protected transient Button btnSave; // autowire
-	protected transient Button btnCancel; // autowire
-	protected transient Button btnClose; // autowire
+	protected Button btnNew; // autowire
+	protected Button btnEdit; // autowire
+	protected Button btnDelete; // autowire
+	protected Button btnSave; // autowire
+	protected Button btnCancel; // autowire
+	protected Button btnClose; // autowire
 
-	protected transient Button btnHelp; // autowire
-	protected transient Button button_OrderPositionDialog_PrintOrderPositions; // autowire
+	protected Button btnHelp; // autowire
+	protected Button button_OrderPositionDialog_PrintOrderPositions; // autowire
 
 	// ServiceDAOs / Domain Classes
 	private transient Customer customer;

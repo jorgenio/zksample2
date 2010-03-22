@@ -26,7 +26,6 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zul.Button;
@@ -78,27 +77,27 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window window_BranchesList; // autowire
-	protected transient Panel panel_BranchList; // autowired
-	protected transient Borderlayout borderLayout_branchList; // autowire
+	protected Window window_BranchesList; // autowire
+	protected Panel panel_BranchList; // autowired
+	protected Borderlayout borderLayout_branchList; // autowire
 
 	// filter components
-	protected transient Checkbox checkbox_Branch_ShowAll; // autowire
-	protected transient Textbox tb_Branch_Name; // aurowire
+	protected Checkbox checkbox_Branch_ShowAll; // autowire
+	protected Textbox tb_Branch_Name; // aurowire
 
 	// listBox
-	protected transient Paging paging_BranchList; // autowired
-	protected transient Listbox listBoxBranch; // autowired
-	protected transient Listheader listheader_Branch_Description; // autowired
+	protected Paging paging_BranchList; // autowired
+	protected Listbox listBoxBranch; // autowired
+	protected Listheader listheader_Branch_Description; // autowired
 
 	// checkRights
-	protected transient Button btnHelp;
-	protected transient Button button_BranchList_NewBranch;
-	protected transient Button button_BranchList_PrintBranches;
-	protected transient Button button_BranchList_Search_BranchName;
+	protected Button btnHelp;
+	protected Button button_BranchList_NewBranch;
+	protected Button button_BranchList_PrintBranches;
+	protected Button button_BranchList_Search_BranchName;
 
 	// row count for listbox
-	private transient int countRows;
+	private int countRows;
 
 	private transient BrancheService brancheService;
 

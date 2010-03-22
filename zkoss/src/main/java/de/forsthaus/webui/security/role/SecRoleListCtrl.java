@@ -75,22 +75,22 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window secRoleListWindow; // autowired
-	protected transient Panel panel_SecRoleList; // autowired
+	protected Window secRoleListWindow; // autowired
+	protected Panel panel_SecRoleList; // autowired
 
 	// filter components
-	protected transient Checkbox checkbox_SecRoleList_ShowAll; // autowired
-	protected transient Textbox tb_SecRole_RoleName; // autowired
+	protected Checkbox checkbox_SecRoleList_ShowAll; // autowired
+	protected Textbox tb_SecRole_RoleName; // autowired
 
 	// Listbox SecRole
-	protected transient Borderlayout borderLayout_secRolesList; // autowired
-	protected transient Listbox listBoxSecRoles; // aurowired
-	protected transient Paging paging_SecRoleList; // aurowired
-	protected transient Listheader listheader_SecRoleList_rolShortdescription; // aurowired
-	protected transient Listheader listheader_SecRoleList_rolLongdescription; // aurowired
+	protected Borderlayout borderLayout_secRolesList; // autowired
+	protected Listbox listBoxSecRoles; // aurowired
+	protected Paging paging_SecRoleList; // aurowired
+	protected Listheader listheader_SecRoleList_rolShortdescription; // aurowired
+	protected Listheader listheader_SecRoleList_rolLongdescription; // aurowired
 
 	// row count for listbox
-	private transient int countRows;
+	private int countRows;
 
 	private transient SecurityService securityService;
 

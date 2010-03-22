@@ -67,8 +67,8 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected transient Window window_BranchesDialog; // autowired
-	protected transient Textbox braBezeichnung; // autowired
+	protected Window window_BranchesDialog; // autowired
+	protected Textbox braBezeichnung; // autowired
 
 	// not wired vars
 	// private transient Listbox lbBranch; // overhanded per param
@@ -83,14 +83,14 @@ public class BranchDialogCtrl extends GFCBaseCtrl implements Serializable {
 	// Button controller for the CRUD buttons
 	private transient final String btnCtroller_ClassPrefix = "button_BranchDialog_";
 	private transient ButtonStatusCtrl btnCtrl;
-	protected transient Button btnNew; // autowire
-	protected transient Button btnEdit; // autowire
-	protected transient Button btnDelete; // autowire
-	protected transient Button btnSave; // autowire
-	protected transient Button btnCancel; // autowire
-	protected transient Button btnClose; // autowire
+	protected Button btnNew; // autowire
+	protected Button btnEdit; // autowire
+	protected Button btnDelete; // autowire
+	protected Button btnSave; // autowire
+	protected Button btnCancel; // autowire
+	protected Button btnClose; // autowire
 
-	protected transient Button btnHelp; // autowire
+	protected Button btnHelp; // autowire
 
 	// ServiceDAOs / Domain classes
 	private Branche branche; // overhanded per param

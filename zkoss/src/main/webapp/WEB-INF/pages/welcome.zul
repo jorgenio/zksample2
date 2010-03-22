@@ -136,7 +136,7 @@
 							<caption
 								style="color: #000000; font-weight:bold;"
 								image="/images/icons/daysort16x16.gif"
-								label="Need help by your zk project ?" />
+								label="Need help by your zk projects ?" />
 
 							<textbox rows="6" multiline="true"
 								width="98%" readonly="true"
@@ -186,8 +186,7 @@
 								label="Hibernate (Backend)" />
 
 							<textbox width="98%"
-								value="As ORM (Object relational mapper) we use the 
-							Hibernate Framework. Used version = 3.1.3"
+								value="As ORM (Object relational mapper) we use the Hibernate Framework. Used version = 3.1.3"
 								rows="3" multiline="true" readonly="true"
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
@@ -206,7 +205,7 @@
 								label="Hibernate-Generic-DAO" />
 
 							<textbox width="98%"
-								value="Hibernate-Generic-DAO. We used the search object from this framework. version = 0.3.4"
+								value="We used the search object from this framework and the hql code generator for our PagedListWrapper. Version = 0.3.4"
 								rows="3" multiline="true" readonly="true"
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
@@ -225,9 +224,8 @@
 								label="Spring Integration (Backend) + (Frontend)" />
 
 							<textbox width="98%"
-								value="Integration of the spring-framework with spring 
-							managed beans in the backend. Used version = 3.0.0"
-								rows="3" multiline="true" readonly="true"
+								value="Integration of the spring-framework with spring managed Services and DAOs in the backend and managed controllers/composers in the frontend. Used version = 3.0.0"
+								rows="4" multiline="true" readonly="true"
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
 						</groupbox>
@@ -412,7 +410,7 @@
 								image="/images/spring_source_x16.png" label="Spring-Security" />
 
 							<textbox width="98%"
-								value="Integration of spring-security. Used version = 3.0.1  We extended it for a group and group-rights. All is stored in the database."
+								value="Access management with spring-security.  We extended it for a group and group-rights. All security dependent entries are stored in the database. Userroles/Roles/RoleGroups are customizable on runtime.  Used version = 3.0.1"
 								rows="3" multiline="true" readonly="true"
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
@@ -430,7 +428,7 @@
 								image="/images/spring_source_x16.png" label="Spring-AOP" />
 
 							<textbox width="98%"
-								value="We  use spring-aop for the transaction management."
+								value="We use spring-aop for the database transaction management."
 								rows="2" multiline="true" readonly="true"
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>

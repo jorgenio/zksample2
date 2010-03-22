@@ -84,7 +84,8 @@
 				<panel title="" border="none">
 					<panelchildren>
 						<groupbox mold="3d">
-							<caption style="color: #000000;"
+							<caption
+								style="color: #000000; font-weight:bold;"
 								image="/images/zkpowered_16x16.png"
 								label="Welcome to the ZKsample2 application." />
 
@@ -109,9 +110,10 @@
 					<panelchildren>
 
 						<groupbox mold="3d">
-							<caption style="color: #000000;"
+							<caption
+								style="color: #000000; font-weight:bold;"
 								image="/images/icons/about1_16x16.gif"
-								label="Sources are available !" />
+								label="Sources available !" />
 
 
 							<textbox rows="6" multiline="true"
@@ -131,7 +133,8 @@
 					<panelchildren>
 
 						<groupbox mold="3d">
-							<caption style="color: #000000;"
+							<caption
+								style="color: #000000; font-weight:bold;"
 								image="/images/icons/daysort16x16.gif"
 								label="Need help by your zk project ?" />
 
@@ -156,13 +159,14 @@
 					<panelchildren>
 
 						<groupbox mold="3d">
-							<caption style="color: #000000;"
+							<caption
+								style="color: #000000; font-weight:bold;"
 								image="/images/icons/new_icons_10.gif"
 								label="NEW !!!  Updated to the Spring3 framework !!!" />
 
 
 							<textbox height="100%" width="99.5%"
-								multiline="true" rows="20" readonly="true"
+								multiline="true" rows="17" readonly="true"
 								style="font-family: verdana; border: none; background-color: white;"
 								value="${s}" />
 						</groupbox>
@@ -176,7 +180,9 @@
 				<panel border="none">
 					<panelchildren>
 						<groupbox mold="3d">
-							<caption style="color: #000000;" image=""
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/hibernate_icon_16x16.png"
 								label="Hibernate (Backend)" />
 
 							<textbox width="98%"
@@ -194,12 +200,14 @@
 				<panel border="none">
 					<panelchildren>
 						<groupbox mold="3d">
-							<caption style="color: #000000;" image=""
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/hibernate_icon_16x16.png"
 								label="Hibernate-Generic-DAO" />
 
 							<textbox width="98%"
 								value="Hibernate-Generic-DAO. We used the search object from this framework. version = 0.3.4"
-								rows="2" multiline="true" readonly="true"
+								rows="3" multiline="true" readonly="true"
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
 						</groupbox>
@@ -211,7 +219,9 @@
 				<panel border="none">
 					<panelchildren>
 						<groupbox mold="3d">
-							<caption style="color: #000000;" image=""
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/spring_source_x16.png"
 								label="Spring Integration (Backend) + (Frontend)" />
 
 							<textbox width="98%"
@@ -231,8 +241,10 @@
 				<panel border="none">
 					<panelchildren>
 						<groupbox mold="3d">
-							<caption style="color: #000000;" image=""
-								label="What's in it here and the sample data" />
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/icons/database_blue_16x16.gif"
+								label="What's in it and the sample data" />
 
 							<tabbox tabscroll="true">
 								<tabs>
@@ -258,7 +270,7 @@
 									<!-- Tab base -->
 									<tabpanel>
 										<textbox height="100%"
-											width="98%" multiline="true" rows="10" readonly="true"
+											width="98%" multiline="true" rows="12" readonly="true"
 											style="font-family: verdana; border: none; background-color: white;"
 											value="- CRUD operations on all modules with spring managed services and DAO classes which are working with hibernate. &#13;- Uses ButtonControllers for showing next possible CRUD operations.&#13;- checks by onClose if there are unsaved modified data.&#13;- single and mixed searching for data.&#13;- sortable lists.&#13;- internationalization (english/german) language.&#13;- Reporting with the JasperReports. The order report are created with iReport and uses a JRBeanDataSource.&#13;- Full customizable Role based security management wich is extended for groups.&#13;   All is stored in database tables. It's build on top of the spring-security framework.&#13;- Most dialogs you can reach with doubleClick on an item in the lists.&#13;" />
 									</tabpanel>
@@ -395,12 +407,13 @@
 				<panel border="none">
 					<panelchildren>
 						<groupbox mold="3d">
-							<caption style="color: #000000;" image=""
-								label="Spring-Security" />
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/spring_source_x16.png" label="Spring-Security" />
 
 							<textbox width="98%"
 								value="Integration of spring-security. Used version = 3.0.1  We extended it for a group and group-rights. All is stored in the database."
-								rows="2" multiline="true" readonly="true"
+								rows="3" multiline="true" readonly="true"
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
 						</groupbox>
@@ -412,12 +425,13 @@
 				<panel border="none">
 					<panelchildren>
 						<groupbox mold="3d">
-							<caption style="color: #000000;" image=""
-								label="Spring-AOP" />
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/spring_source_x16.png" label="Spring-AOP" />
 
 							<textbox width="98%"
 								value="We  use spring-aop for the transaction management."
-								rows="1" multiline="true" readonly="true"
+								rows="2" multiline="true" readonly="true"
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
 						</groupbox>
@@ -430,12 +444,13 @@
 				<panel border="none">
 					<panelchildren>
 						<groupbox mold="3d">
-							<caption style="color: #000000;" image=""
-								label="Jasper Reports" />
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/jasperReport_16x16.ico" label="Jasper Reports" />
 
 							<textbox width="98%"
 								value="JasperReports used version = 3.1.2 . All reports are created with iReport and uses JRBeanDataSources."
-								rows="2" multiline="true" readonly="true"
+								rows="3" multiline="true" readonly="true"
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
 						</groupbox>

@@ -263,7 +263,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		Caption caption = new Caption();
 		caption.setParent(gb);
-		caption.setImage("/images/icons/database.gif");
+		caption.setImage("/images/icons/database_blue_16x16.gif");
 		caption.setLabel("Demo-Data in PostgreSQL v8.2.6");
 		caption.setStyle("color: #000000;font-weight:bold; text-align:left ");
 

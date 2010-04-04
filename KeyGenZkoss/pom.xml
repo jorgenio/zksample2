@@ -5,12 +5,12 @@
 	<artifactId>KeyGenZkoss</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>${project.artifactId}->${project.version}</name>
-	<url>https://sourceforge.net/projects/zk-sample-gui/</url>
+	<url>http://sourceforge.net/projects/zksample2/</url>
 	<issueManagement>
-		<url>https://sourceforge.net/tracker/?group_id=296166</url>
+		<url>https://sourceforge.net/tracker/?group_id=297404</url>
 	</issueManagement>
 	<scm>
-		<url>https://svn.sourceforge.net/svnroot/zk-sample-gui</url>
+		<url>https://zksample2.svn.sourceforge.net/svnroot/zksample2</url>
 	</scm>
 	<organization>
 	</organization>

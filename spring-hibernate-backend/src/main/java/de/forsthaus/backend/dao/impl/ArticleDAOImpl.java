@@ -44,11 +44,6 @@ public class ArticleDAOImpl extends BasisNextidDaoImpl<Article> implements Artic
 	}
 
 	@Override
-	public void delete(Article entity) throws DataAccessException {
-		super.delete(entity);
-	}
-
-	@Override
 	public Article getArticleById(long art_id) {
 		return get(Article.class, Long.valueOf(art_id));
 	}
@@ -60,16 +55,6 @@ public class ArticleDAOImpl extends BasisNextidDaoImpl<Article> implements Artic
 		criteria.addOrder(Order.asc("artKurzbezeichnung"));
 
 		return getHibernateTemplate().findByCriteria(criteria);
-	}
-
-	@Override
-	public void save(Article entity) throws DataAccessException {
-		super.save(entity);
-	}
-
-	@Override
-	public void saveOrUpdate(Article article) {
-		super.saveOrUpdate(article);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -96,6 +81,21 @@ public class ArticleDAOImpl extends BasisNextidDaoImpl<Article> implements Artic
 	@Override
 	public int getCountAllArticle() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from Article"));
+	}
+
+	@Override
+	public void save(Article entity) throws DataAccessException {
+		super.save(entity);
+	}
+
+	@Override
+	public void saveOrUpdate(Article article) throws DataAccessException {
+		super.saveOrUpdate(article);
+	}
+
+	@Override
+	public void delete(Article entity) throws DataAccessException {
+		super.delete(entity);
 	}
 
 }

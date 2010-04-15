@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+
+	<bean id="serviceLogging" scope="request"
+		class="de.forsthaus.backend.util.db.logging.ServiceLogging"
+		p:sessionFactory-ref="sessionFactory">
+		<property name="loggingService">
+			<bean
+				class="de.forsthaus.backend.util.db.logging.service.impl.LoggingServiceImpl"
+				scope="request" p:hibernateTemplate-ref="hibernateTemplate" />
+		</property>
+	</bean>
+
+	<tx:advice id="loggingAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRES_NEW" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- ====================================================== -->
+	<!--         Define Aspect pointcuts and advisors           -->
+	<!--               for the transaction scopes.              -->
+	<!-- ====================================================== -->
+	<aop:config>
+		<aop:pointcut id="loggingMethods"
+			expression="execution(* de.forsthaus.backend.util.db.logging.service.*.*(..))" />
+		<aop:advisor advice-ref="loggingAdvice" pointcut-ref="loggingMethods" />
+	</aop:config>
+
+	<aop:config>
+		<aop:aspect ref="serviceLogging">
+			<aop:pointcut id="loggingPointcut"
+				expression="execution(* de.forsthaus.backend.dao.*.*(..))" />
+			<aop:pointcut id="loggingPointcut1"
+				expression="execution(* de.forsthaus.backend.service.*.*(..))" />
+			<aop:pointcut id="loggingPointcut2"
+				expression="execution(* de.forsthaus.gui.service.*.*(..))" />
+			<aop:around pointcut-ref="loggingPointcut" method="logging" />
+			<aop:around pointcut-ref="loggingPointcut1" method="logging" />
+			<aop:around pointcut-ref="loggingPointcut2" method="logging" />
+		</aop:aspect>
+	</aop:config>
+
+
+</beans>

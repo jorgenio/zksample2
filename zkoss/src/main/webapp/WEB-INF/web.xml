@@ -21,6 +21,7 @@
  			classpath:applicationContext-guiservices.xml
  			classpath:customize-applicationContext.xml,
  			classpath:springSecurityContext.xml
+			classpath:performence-db-logging.xml
 		</param-value>
 	</context-param>
 

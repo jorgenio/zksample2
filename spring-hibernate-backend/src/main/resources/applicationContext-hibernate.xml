@@ -53,6 +53,10 @@
 				</value>
 				<value>de/forsthaus/backend/model/SysCountryCode.hbm.xml
 				</value>
+				<value>de/forsthaus/backend/model/HibernateEntityStatistics.hbm.xml
+				</value>
+				<value>de/forsthaus/backend/model/HibernateStatistics.hbm.xml
+				</value>
 			</list>
 		</property>
 	</bean>

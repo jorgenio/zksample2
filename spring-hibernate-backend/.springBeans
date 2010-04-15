@@ -8,6 +8,7 @@
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
 		<config>src/main/resources/applicationContext-hibernate.xml</config>
+		<config>src/main/resources/performence-db-logging.xml</config>
 	</configs>
 	<configSets>
 	</configSets>

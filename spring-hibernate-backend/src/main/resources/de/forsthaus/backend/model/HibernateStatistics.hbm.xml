@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="de.forsthaus.backend.model.HibernateStatistics"
+		table="hibernate_statistics">
+
+		<id name="id" type="long" column="id">
+			<generator class="sequence">
+				<param name="sequence">hibernate_statistic_sequence</param>
+			</generator>
+		</id>
+
+		<property name="flushCount" column="flushcount" type="integer"
+			not-null="true" />
+		<property name="prepareStatementCount" column="preparestatementcount"
+			type="integer" not-null="true" />
+		<property name="entityLoadCount" column="entityloadcount"
+			type="integer" not-null="true" />
+		<property name="entityUpdateCount" column="entityupdatecount"
+			type="integer" not-null="true" />
+		<property name="entityInsertCount" column="entityinsertcount"
+			type="integer" not-null="true" />
+		<property name="entityDeleteCount" column="entitydeletecount"
+			type="integer" not-null="true" />
+		<property name="entityFetchCount" column="entityfetchcount"
+			type="integer" not-null="true" />
+		<property name="collectionLoadCount" column="collectionloadcount"
+			type="integer" not-null="true" />
+		<property name="collectionUpdateCount" column="collectionupdatecount"
+			type="integer" not-null="true" />
+		<property name="collectionRemoveCount" column="collectionremovecount"
+			type="integer" not-null="true" />
+		<property name="collectionRecreateCount" column="collectionrecreatecount"
+			type="integer" not-null="true" />
+		<property name="collectionFetchCount" column="collectionfetchcount"
+			type="integer" not-null="true" />
+		<property name="queryExecutionCount" column="queryexecutioncount"
+			type="integer" not-null="true" />
+		<property name="queryExecutionMaxTime" column="queryexecutionmaxtime"
+			type="integer" not-null="true" />
+		<property name="optimisticFailureCount" column="optimisticfailurecount"
+			type="integer" not-null="true" />
+
+		<property name="queryExecutionMaxTimeQueryString" column="queryexecutionmaxtimequerystring"
+			type="text" />
+
+		<property name="finishTime" column="finishtime" type="timestamp"
+			not-null="true" />
+
+		<property name="callMethod" column="callmethod" type="text"
+			not-null="true" />
+		<property name="javaFinishMs" column="javafinishms" type="long"
+			not-null="true" />
+
+		<set name="hibernateEntityStatisticsSet" fetch="join" order-by="id asc">
+			<key column="hibernateEntityStatisticsId" />
+			<one-to-many class="de.forsthaus.backend.model.HibernateEntityStatistics" />
+		</set>
+
+	</class>
+</hibernate-mapping>

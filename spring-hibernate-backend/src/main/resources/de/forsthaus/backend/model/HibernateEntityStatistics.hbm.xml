@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="de.forsthaus.backend.model.HibernateEntityStatistics"
+		table="hibernate_entity_statistics">
+
+		<id name="id" type="long" column="id">
+			<generator class="sequence">
+				<param name="sequence">hibernate_statistic_sequence</param>
+			</generator>
+		</id>
+		<property name="entityName" column="entityname" type="text"
+			not-null="true" />
+
+		<property name="loadCount" column="loadcount" type="integer"
+			not-null="true" />
+		<property name="updateCount" column="updatecount" type="integer"
+			not-null="true" />
+		<property name="insertCount" column="insertcount" type="integer"
+			not-null="true" />
+		<property name="deleteCount" column="deletecount" type="integer"
+			not-null="true" />
+		<property name="fetchCount" column="fetchcount" type="integer"
+			not-null="true" />
+		<property name="optimisticFailureCount" column="optimisticfailurecount"
+			type="integer" not-null="true" />
+
+		<many-to-one name="hibernateStatistics" column="hibernateentitystatisticsid"
+			class="de.forsthaus.backend.model.HibernateStatistics" />
+
+	</class>
+</hibernate-mapping>

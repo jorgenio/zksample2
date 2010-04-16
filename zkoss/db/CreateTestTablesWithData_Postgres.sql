@@ -34,7 +34,8 @@ DROP FUNCTION public.create_plpgsql_language ();
 DROP SEQUENCE IF EXISTS PRG_SEQUENZ cascade;
 CREATE SEQUENCE PRG_SEQUENZ; 
 GRANT USAGE, SELECT, UPDATE
- ON PRG_SEQUENZ TO toledogruppe WITH GRANT OPTION;
+ ON PRG_SEQUENZ TO toledo WITH GRANT OPTION;
+ ALTER TABLE PRG_SEQUENZ owner to toledo;
 
 /* Löschen der View für den Primaerkey */
 DROP VIEW IF EXISTS nextidView cascade;
@@ -43,7 +44,8 @@ DROP VIEW IF EXISTS nextidView cascade;
 
 CREATE VIEW nextidView as select nextval('PRG_SEQUENZ');
 GRANT DELETE, INSERT, REFERENCES, SELECT, UPDATE
- ON nextidView TO toledogruppe WITH GRANT OPTION;
+ ON nextidView TO toledo WITH GRANT OPTION;
+ALTER TABLE nextidView owner to toledo;
 
 
 

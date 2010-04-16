@@ -36,8 +36,7 @@ import de.forsthaus.backend.model.Branche;
  * @author bbruhns
  * @author sgerth
  */
-public class BrancheDAOImpl extends BasisNextidDaoImpl<Branche> implements
-		BrancheDAO {
+public class BrancheDAOImpl extends BasisNextidDaoImpl<Branche> implements BrancheDAO {
 
 	@Override
 	public Branche getNewBranche() {
@@ -53,22 +52,22 @@ public class BrancheDAOImpl extends BasisNextidDaoImpl<Branche> implements
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Branche getBrancheByID(long bra_id) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Branche.class);
 		criteria.add(Restrictions.eq("id", Long.valueOf(bra_id)));
 
-		return (Branche) DataAccessUtils.uniqueResult(getHibernateTemplate()
-				.findByCriteria(criteria));
+		return (Branche) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Branche getBrancheByName(String braBezeichnung) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Branche.class);
 		criteria.add(Restrictions.eq("braBezeichnung", braBezeichnung));
 
-		return (Branche) DataAccessUtils.uniqueResult(getHibernateTemplate()
-				.findByCriteria(criteria));
+		return (Branche) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -76,8 +75,7 @@ public class BrancheDAOImpl extends BasisNextidDaoImpl<Branche> implements
 	public List<Branche> getBrancheLikeName(String value) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Branche.class);
-		criteria.add(Restrictions.ilike("braBezeichnung", value,
-				MatchMode.ANYWHERE));
+		criteria.add(Restrictions.ilike("braBezeichnung", value, MatchMode.ANYWHERE));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
@@ -86,13 +84,11 @@ public class BrancheDAOImpl extends BasisNextidDaoImpl<Branche> implements
 	public int getBrancheSize() {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Branche.class);
 		criteria.setProjection(Projections.rowCount());
-		return DataAccessUtils.intResult(getHibernateTemplate().findByCriteria(
-				criteria));
+		return DataAccessUtils.intResult(getHibernateTemplate().findByCriteria(criteria));
 	}
 
 	@Override
 	public int getCountAllBranch() {
-		return DataAccessUtils.intResult(getHibernateTemplate().find(
-				"select count(*) from Branche"));
+		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from Branche"));
 	}
 }

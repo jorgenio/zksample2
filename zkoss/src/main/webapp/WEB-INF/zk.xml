@@ -101,6 +101,7 @@
 	<!-- ====================================================== -->
 	<session-config>
 		<max-desktops-per-session>15</max-desktops-per-session>
+		<timer-keep-alive>true</timer-keep-alive>
 	</session-config>
 
 </zk>

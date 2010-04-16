@@ -1,3 +1,4 @@
+/* Create the tables, sequences, views and data for the H2 Database */
 DROP SEQUENCE IF EXISTS PRG_SEQUENZ;
 CREATE SEQUENCE PRG_SEQUENZ  INCREMENT BY 1 START WITH 100000; 
 

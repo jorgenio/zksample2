@@ -72,6 +72,7 @@ public class OrderDAOImpl extends BasisNextidDaoImpl<Order> implements OrderDAO 
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Order getOrderByAufNr(String auf_nr) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Order.class);
@@ -85,7 +86,7 @@ public class OrderDAOImpl extends BasisNextidDaoImpl<Order> implements OrderDAO 
 	public List<Order> getOrdersByOffice(Office office) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Order.class);
 
-		// Raussuchen bei welchen Aufträgen der zugehörige Kunde bei der
+		// Raussuchen bei welchen Auftraegen der zugehoerige Kunde bei der
 		// angegebenen Filiale ist
 		criteria.createAlias("customer", "cu");
 		criteria.add(Restrictions.eq("cu.office", office));
@@ -109,12 +110,12 @@ public class OrderDAOImpl extends BasisNextidDaoImpl<Order> implements OrderDAO 
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Order> getAllOrders() {
 		return getHibernateTemplate().loadAll(Order.class);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Customer getCustomerForOrder(Order order) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
@@ -133,6 +134,7 @@ public class OrderDAOImpl extends BasisNextidDaoImpl<Order> implements OrderDAO 
 	 * 
 	 * @see de.forsthaus.backend.dao.OrderDAO#getOrderSum(de.forsthaus.backend.model.Order)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public BigDecimal getOrderSum(Order order) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Orderposition.class);

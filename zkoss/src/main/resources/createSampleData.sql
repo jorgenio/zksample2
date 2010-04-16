@@ -7,6 +7,72 @@ DROP VIEW IF EXISTS nextidView;
 /* CREATE VIEW nextidView as select 'PRG_SEQUENZ'.NEXTVAL AS NEXTVAL ;*/ 
 CREATE VIEW nextidView as select NEXT VALUE FOR PRG_SEQUENZ as nextval;
 
+
+/********** Hibernate DB Performance Logging ****************/
+/**** SEQUENCE FOR Hibernate DB performance logging****/
+DROP SEQUENCE IF EXISTS HIBERNATE_STATISTIC_SEQUENCE;
+CREATE SEQUENCE HIBERNATE_STATISTIC_SEQUENCE  INCREMENT BY 1 START WITH 100000; 
+ 
+DROP TABLE IF EXISTS hibernate_entity_statistics cascade;
+DROP TABLE IF EXISTS hibernate_statistics cascade;
+
+/*==============================================================*/
+/* Table: Hibernate_Statistics                                  */
+/*==============================================================*/
+CREATE TABLE hibernate_statistics
+(
+  id INT8 NOT NULL,
+  flushcount integer NOT NULL,
+  preparestatementcount integer NOT NULL,
+  entityloadcount integer NOT NULL,
+  entityupdatecount integer NOT NULL,
+  entityinsertcount integer NOT NULL,
+  entitydeletecount integer NOT NULL,
+  entityfetchcount integer NOT NULL,
+  collectionloadcount integer NOT NULL,
+  collectionupdatecount integer NOT NULL,
+  collectionremovecount integer NOT NULL,
+  collectionrecreatecount integer NOT NULL,
+  collectionfetchcount integer NOT NULL,
+  queryexecutioncount integer NOT NULL,
+  queryexecutionmaxtime integer NOT NULL,
+  optimisticfailurecount integer NOT NULL,
+  queryexecutionmaxtimequerystring text,
+  callmethod text NOT NULL,
+  javafinishms bigint NOT NULL,
+  finishtime TIMESTAMP NOT NULL,
+  CONSTRAINT hibernatestatistics_pkey PRIMARY KEY (id)
+)
+;
+
+/*==============================================================*/
+/* Table: Hibernate_                                               */
+/*==============================================================*/
+CREATE TABLE hibernate_entity_statistics
+(
+  id INT8 NOT NULL,
+  hibernateentitystatisticsid bigint NOT NULL,
+  entityname text NOT NULL,
+  loadcount integer NOT NULL,
+  updatecount integer NOT NULL,
+  insertcount integer NOT NULL,
+  deletecount integer NOT NULL,
+  fetchcount integer NOT NULL,
+  optimisticfailurecount integer NOT NULL,
+  CONSTRAINT hibernateentitystatistics_pkey PRIMARY KEY (id)
+)
+;
+
+CREATE INDEX fki_
+  ON hibernate_entity_statistics (
+  hibernateentitystatisticsid
+  );
+  
+/*************End Hibernate Statistics **********************/
+
+
+
+
 DROP TABLE IF EXISTS filiale cascade;
 DROP TABLE IF EXISTS kunde cascade;
 DROP TABLE IF EXISTS artikel cascade;

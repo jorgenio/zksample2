@@ -30,13 +30,8 @@ SELECT CASE WHEN
 
 DROP FUNCTION public.create_plpgsql_language ();
 
-/****************** SEQUENCES ********************/
-DROP SEQUENCE IF EXISTS PRG_SEQUENZ cascade;
-CREATE SEQUENCE PRG_SEQUENZ; 
-GRANT USAGE, SELECT, UPDATE
- ON PRG_SEQUENZ TO toledo WITH GRANT OPTION;
- ALTER TABLE PRG_SEQUENZ owner to toledo;
 
+/********** Hibernate DB Performance Logging ****************/
 /**** SEQUENCE FOR Hibernate DB performance logging****/
 DROP SEQUENCE IF EXISTS HIBERNATE_STATISTIC_SEQUENCE cascade;
 CREATE SEQUENCE HIBERNATE_STATISTIC_SEQUENCE; 
@@ -44,9 +39,15 @@ GRANT USAGE, SELECT, UPDATE
  ON HIBERNATE_STATISTIC_SEQUENCE TO toledo WITH GRANT OPTION;
  ALTER TABLE HIBERNATE_STATISTIC_SEQUENCE owner to toledo;
  
+
  
  
- 
+/****************** SEQUENCES ********************/
+DROP SEQUENCE IF EXISTS PRG_SEQUENZ cascade;
+CREATE SEQUENCE PRG_SEQUENZ; 
+GRANT USAGE, SELECT, UPDATE
+ ON PRG_SEQUENZ TO toledo WITH GRANT OPTION;
+ ALTER TABLE PRG_SEQUENZ owner to toledo;
 
 /* Loeschen der View fuer den Primaerkey */
 DROP VIEW IF EXISTS nextidView cascade;
@@ -88,6 +89,72 @@ DROP TABLE IF EXISTS sys_ip4country cascade;
  DROP TABLE IF EXISTS log_ip2country cascade;
  DROP TABLE IF EXISTS guestbook cascade;
  */
+DROP TABLE IF EXISTS hibernate_entity_statistics cascade;
+DROP TABLE IF EXISTS hibernate_statistics cascade;
+
+/*==============================================================*/
+/* Table: Hibernate_Statistics                                  */
+/*==============================================================*/
+CREATE TABLE hibernate_statistics
+(
+  id bigint NOT NULL,
+  flushcount integer NOT NULL,
+  preparestatementcount integer NOT NULL,
+  entityloadcount integer NOT NULL,
+  entityupdatecount integer NOT NULL,
+  entityinsertcount integer NOT NULL,
+  entitydeletecount integer NOT NULL,
+  entityfetchcount integer NOT NULL,
+  collectionloadcount integer NOT NULL,
+  collectionupdatecount integer NOT NULL,
+  collectionremovecount integer NOT NULL,
+  collectionrecreatecount integer NOT NULL,
+  collectionfetchcount integer NOT NULL,
+  queryexecutioncount integer NOT NULL,
+  queryexecutionmaxtime integer NOT NULL,
+  optimisticfailurecount integer NOT NULL,
+  queryexecutionmaxtimequerystring text,
+  callmethod text NOT NULL,
+  javafinishms bigint NOT NULL,
+  finishtime timestamp without time zone NOT NULL,
+  CONSTRAINT hibernatestatistics_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE hibernate_statistics OWNER TO toledo;
+COMMENT ON TABLE hibernate_statistics IS 'Enthält eine Hibernatestatistik';
+
+/*==============================================================*/
+/* Table: Hibernate_                                               */
+/*==============================================================*/
+CREATE TABLE hibernate_entity_statistics
+(
+  id bigint NOT NULL,
+  hibernateentitystatisticsid bigint NOT NULL,
+  entityname text NOT NULL,
+  loadcount integer NOT NULL,
+  updatecount integer NOT NULL,
+  insertcount integer NOT NULL,
+  deletecount integer NOT NULL,
+  fetchcount integer NOT NULL,
+  optimisticfailurecount integer NOT NULL,
+  CONSTRAINT hibernateentitystatistics_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE hibernate_entity_statistics OWNER TO toledo;
+
+-- Index: fki_
+
+-- DROP INDEX fki_;
+
+CREATE INDEX fki_
+  ON hibernate_entity_statistics
+  USING btree
+  (hibernateentitystatisticsid);
+
 
 
 

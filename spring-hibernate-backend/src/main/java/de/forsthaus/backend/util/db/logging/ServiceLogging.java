@@ -48,7 +48,7 @@ public class ServiceLogging implements InitializingBean {
 			if (startTimes.isEmpty()) {
 				methodName = StringUtils.substring(methodName, 10, -1);
 				
-				LOG.info("Ausführungszeit: " + finishTime + "ms " + methodName);
+				LOG.info("Execution time: " + finishTime + "ms " + methodName);
 				loggingService.saveStatistics(statistics, methodName, finishTime);
 				init();
 			}

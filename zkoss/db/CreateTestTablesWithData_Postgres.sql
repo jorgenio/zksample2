@@ -37,10 +37,21 @@ GRANT USAGE, SELECT, UPDATE
  ON PRG_SEQUENZ TO toledo WITH GRANT OPTION;
  ALTER TABLE PRG_SEQUENZ owner to toledo;
 
-/* Löschen der View für den Primaerkey */
+/**** SEQUENCE FOR Hibernate DB performance logging****/
+DROP SEQUENCE IF EXISTS HIBERNATE_STATISTIC_SEQUENCE cascade;
+CREATE SEQUENCE HIBERNATE_STATISTIC_SEQUENCE; 
+GRANT USAGE, SELECT, UPDATE
+ ON HIBERNATE_STATISTIC_SEQUENCE TO toledo WITH GRANT OPTION;
+ ALTER TABLE HIBERNATE_STATISTIC_SEQUENCE owner to toledo;
+ 
+ 
+ 
+ 
+
+/* Loeschen der View fuer den Primaerkey */
 DROP VIEW IF EXISTS nextidView cascade;
 
-/* View für das Holen des naechsten Primaerkeys */
+/* View fuer das Holen des naechsten Primaerkeys */
 
 CREATE VIEW nextidView as select nextval('PRG_SEQUENZ');
 GRANT DELETE, INSERT, REFERENCES, SELECT, UPDATE

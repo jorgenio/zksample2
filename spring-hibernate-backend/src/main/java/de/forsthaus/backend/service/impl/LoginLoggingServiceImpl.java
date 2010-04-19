@@ -160,7 +160,7 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 	@Override
 	public List<SecLoginlog> getAllLogsServerPushForSuccess() {
 		List<SecLoginlog> listSecLoginLog = getSecLoginlogDAO().getAllLogsForSuccess();
-		System.out.println("Anzahl records " + listSecLoginLog.size());
+
 		for (SecLoginlog secLoginlog : listSecLoginLog) {
 
 			// Fill with the related data for Ip2Country
@@ -180,7 +180,7 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 	@Override
 	public List<SecLoginlog> getAllLogsServerPushForFailed() {
 		List<SecLoginlog> listSecLoginLog = getSecLoginlogDAO().getAllLogsForFailed();
-		System.out.println("Anzahl records " + listSecLoginLog.size());
+
 		for (SecLoginlog secLoginlog : listSecLoginLog) {
 
 			// Fill with the related data for Ip2Country

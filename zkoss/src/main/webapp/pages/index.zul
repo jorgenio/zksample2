@@ -132,6 +132,16 @@
 			</south>
 		</borderlayout>
 
+
+	</window>
+
+</zk>
+
+<!-- old Top Background-color style="background-color:#4944F9" -->
+<!-- 	<image src="/images/zkoss3.gif" /> -->
+
+
+<!-- 
 		<label id="lbl2" width="33%" />
 		<timer id="timer2" delay="1000" repeats="true">
 			<attribute name="onTimer">
@@ -142,9 +152,5 @@
 </attribute>
 		</timer>
 
-	</window>
 
-</zk>
-
-<!-- old Top Background-color style="background-color:#4944F9" -->
-<!-- 	<image src="/images/zkoss3.gif" /> -->
+ -->

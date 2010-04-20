@@ -30,7 +30,7 @@ public interface IpToCountryDAO {
 	public IpToCountry getNewIpToCountry();
 
 	/**
-	 * Gibt die Anzahl aller Datensaetze der Tabelle "Kunden" zurueck
+	 * Gibt die Anzahl aller Datensaetze der Tabelle "IpToCountry" zurueck
 	 * 
 	 * @return int
 	 */

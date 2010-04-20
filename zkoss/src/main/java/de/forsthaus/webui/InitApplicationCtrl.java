@@ -21,6 +21,7 @@ package de.forsthaus.webui;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.Random;
 
 import org.apache.commons.lang.StringUtils;
@@ -60,6 +61,7 @@ import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.model.Customer;
 import de.forsthaus.backend.service.ArticleService;
 import de.forsthaus.backend.service.BrancheService;
+import de.forsthaus.backend.service.CommonService;
 import de.forsthaus.backend.service.CustomerService;
 import de.forsthaus.backend.service.GuestBookService;
 import de.forsthaus.backend.service.IpToCountryService;
@@ -130,6 +132,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	private transient UserService userService;
 	private transient LoginLoggingService loginLoggingService;
 	private transient SysCountryCodeService sysCountryCodeService;
+	private transient CommonService commonService;
 
 	private String orientation;
 
@@ -149,7 +152,6 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
-
 		doOnCreateCommon(startWindow); // do the autowire stuff
 
 		createMainGrid();
@@ -288,66 +290,68 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		Rows rows = new Rows();
 		rows.setParent(grid);
 
-		int recCount = 0;
+		/**
+		 * For performance boosting, we get now all the table recordCounts out
+		 * from ONE Service Call and get back the results in a map.
+		 */
+		Map<String, Object> map = getCommonService().getAllTablesRecordCounts();
 
-		recCount = getCustomerService().getCountAllCustomer();
-		Row row;
-		Label label_TableName;
-		// Label label_RecordCountCustomer;
-		row = new Row();
-		label_TableName = new Label("Customer");
-		label_TableName.setParent(row);
-		label_RecordCountCustomer = new Label(String.valueOf(recCount));
-		label_RecordCountCustomer.setParent(row);
-		row.setParent(rows);
+		if (map.containsKey("Customer")) {
+			addNewRow(rows, "Customer", map.get("Customer"));
+		}
 
-		recCount = getBrancheService().getCountAllBranch();
-		addNewRow(rows, "Branch", recCount);
+		if (map.containsKey("Branch")) {
+			addNewRow(rows, "Branch", map.get("Branch"));
+		}
 
-		recCount = getOfficeService().getCountAllOffices();
-		addNewRow(rows, "Offices", recCount);
+		if (map.containsKey("Offices")) {
+			addNewRow(rows, "Offices", map.get("Offices"));
+		}
 
-		recCount = getArticleService().getCountAllArticle();
-		addNewRow(rows, "Article", recCount);
+		if (map.containsKey("Article")) {
+			addNewRow(rows, "Article", map.get("Article"));
+		}
+		if (map.containsKey("Order")) {
+			addNewRow(rows, "Order", map.get("Order"));
+		}
+		if (map.containsKey("Orderposition")) {
+			addNewRow(rows, "Orderposition", map.get("Orderposition"));
+		}
+		if (map.containsKey("GuestBook")) {
+			addNewRow(rows, "GuestBook", map.get("GuestBook"));
+		}
+		if (map.containsKey("SecGroup")) {
+			addNewRow(rows, "SecGroup", map.get("SecGroup"));
+		}
+		if (map.containsKey("SecGroupright")) {
+			addNewRow(rows, "SecGroupright", map.get("SecGroupright"));
+		}
+		if (map.containsKey("SecRight")) {
+			addNewRow(rows, "SecRight", map.get("SecRight"));
+		}
+		if (map.containsKey("SecRole")) {
+			addNewRow(rows, "SecRole", map.get("SecRole"));
+		}
+		if (map.containsKey("SecRolegroup")) {
+			addNewRow(rows, "SecRolegroup", map.get("SecRolegroup"));
+		}
+		if (map.containsKey("SecUser")) {
+			addNewRow(rows, "SecUser", map.get("SecUser"));
+		}
+		if (map.containsKey("SecUserrole")) {
+			addNewRow(rows, "SecUserrole", map.get("SecUserrole"));
+		}
+		if (map.containsKey("SecLoginlog")) {
+			addNewRow(rows, "SecLoginlog", map.get("SecLoginlog"));
+		}
+		if (map.containsKey("SysCountryCode")) {
+			addNewRow(rows, "SysCountryCode", map.get("SysCountryCode"));
+		}
 
-		recCount = getOrderService().getCountAllOrder();
-		addNewRow(rows, "Order", recCount);
+		if (map.containsKey("IpToCountry")) {
+			addNewRow(rows, "IpToCountry", map.get("IpToCountry"));
+		}
 
-		recCount = getOrderService().getCountAllOrderposition();
-		addNewRow(rows, "Orderposition", recCount);
-
-		recCount = getGuestBookService().getCountAllGuestBook();
-		addNewRow(rows, "GuestBook", recCount);
-
-		recCount = getSecurityService().getCountAllSecGroup();
-		addNewRow(rows, "SecGroup", recCount);
-
-		recCount = getSecurityService().getCountAllSecGroupright();
-		addNewRow(rows, "SecGroupright", recCount);
-
-		recCount = getSecurityService().getCountAllSecRights();
-		addNewRow(rows, "SecRight", recCount);
-
-		recCount = getSecurityService().getCountAllSecRole();
-		addNewRow(rows, "SecRole", recCount);
-
-		recCount = getSecurityService().getCountAllSecRolegroup();
-		addNewRow(rows, "SecRolegroup", recCount);
-
-		recCount = getUserService().getCountAllSecUser();
-		addNewRow(rows, "SecUser", recCount);
-
-		recCount = getSecurityService().getCountAllSecUserrole();
-		addNewRow(rows, "SecUserrole", recCount);
-
-		recCount = getLoginLoggingService().getCountAllSecLoginlog();
-		addNewRow(rows, "SecLoginlog", recCount);
-
-		recCount = getSysCountryCodeService().getCountAllSysCountrycode();
-		addNewRow(rows, "SysCountryCode", recCount);
-
-		recCount = getIpToCountryService().getCountAllIpToCountry();
-		addNewRow(rows, "IpToCountry", recCount);
 	}
 
 	/**
@@ -417,6 +421,9 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		addNewRow(rows, "Count of total Sessions since start", String.valueOf(stat.getTotalSessionCount()));
 		addNewRow(rows, "Count of total Updates since start", String.valueOf(stat.getTotalUpdateCount()));
 
+		// Get the free Memory of the JAVA VM
+		double value = ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) * 100.0) / Runtime.getRuntime().maxMemory();
+		addNewRow(rows, "current free memory on the JAVA VM", getRoundedDouble(value) + " MB", "red");
 	}
 
 	/**
@@ -632,6 +639,37 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		label_TableName = new Label(tableName);
 		label_TableName.setParent(row);
 		label_RecordCount = new Label(String.valueOf(value));
+		label_RecordCount.setParent(row);
+		row.setParent(rowParent);
+	}
+
+	/**
+	 * Add a new row to the grid.<br>
+	 * 
+	 * @param rowParent
+	 * @param tableName
+	 * @param value
+	 * @param color
+	 */
+	private void addNewRow(Rows rowParent, String tableName, Object value, String color) {
+
+		Row row;
+		Label label_TableName;
+		Label label_RecordCount;
+		row = new Row();
+		label_TableName = new Label(tableName);
+
+		if (color.equalsIgnoreCase("red")) {
+			label_TableName.setStyle("color: " + color + ";");
+		}
+
+		label_TableName.setParent(row);
+		label_RecordCount = new Label(String.valueOf(value));
+
+		if (color.equalsIgnoreCase("red")) {
+			label_RecordCount.setStyle("color: " + color + ";");
+		}
+
 		label_RecordCount.setParent(row);
 		row.setParent(rowParent);
 	}
@@ -860,6 +898,18 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 	public void setSysCountryCodeService(SysCountryCodeService sysCountryCodeService) {
 		this.sysCountryCodeService = sysCountryCodeService;
+	}
+
+	public void setCommonService(CommonService commonService) {
+		this.commonService = commonService;
+	}
+
+	public CommonService getCommonService() {
+		if (commonService == null) {
+			commonService = (CommonService) SpringUtil.getBean("commonService");
+			setCommonService(commonService);
+		}
+		return commonService;
 	}
 
 }

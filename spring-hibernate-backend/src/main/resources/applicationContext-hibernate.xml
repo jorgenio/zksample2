@@ -239,5 +239,25 @@
 		<property name="sysCountryCodeDAO" ref="sysCountryCodeDAO" />
 	</bean>
 
+	<bean name="commonService" class="de.forsthaus.backend.service.impl.CommonServiceImpl">
+		<property name="customerDAO" ref="customerDAO" />
+		<property name="officeDAO" ref="officeDAO" />
+		<property name="brancheDAO" ref="brancheDAO" />
+		<property name="articleDAO" ref="articleDAO" />
+		<property name="orderDAO" ref="orderDAO" />
+		<property name="orderpositionDAO" ref="orderpositionDAO" />
+		<property name="guestBookDAO" ref="guestBookDAO" />
+		<property name="secGroupDAO" ref="secGroupDAO" />
+		<property name="secGrouprightDAO" ref="secGrouprightDAO" />
+		<property name="secRightDAO" ref="secRightDAO" />
+		<property name="secRoleDAO" ref="secRoleDAO" />
+		<property name="secRolegroupDAO" ref="secRolegroupDAO" />
+		<property name="userDAO" ref="userDAO" />
+		<property name="secUserroleDAO" ref="secUserroleDAO" />
+		<property name="secLoginlogDAO" ref="secLoginlogDAO" />
+		<property name="sysCountryCodeDAO" ref="sysCountryCodeDAO" />
+		<property name="ipToCountryDAO" ref="ipToCountryDAO" />
+	</bean>
+
 
 </beans>

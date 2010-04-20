@@ -14,8 +14,9 @@
 	{
 		lf = "\n";
 		s = "";
-		s = s + "- 21.04.2010 / Added an addtionally logging statistic for the speed of the hibernate DB stuff, which" + lf;
-		s = s + "                      is implemented by a Spring Aspect. The view will following in the  next days." + lf;
+		s = s + "- 21.04.2010 / Added a logging ( in console and tables! ) for the speed of all hibernate " + lf;
+		s = s + "                      DB transactions, which is implemented by a Spring Aspect. The view will following in" + lf;
+		s = s + "                      the  next days." + lf;
 		s = s + "- 20.04.2010 / Improved speed for the entry page by done all table recordCounts in one transaction." + lf;
 		s = s + "- 20.03.2010 / Changed the design for the menu and module content area. Hope it's nice." + lf;
 		s = s + "- 09.03.2010 / Added on all listpages a refresh button (next help button ) for resizing the listbox and" + lf;

@@ -28,15 +28,17 @@
 	</div>
 
 	<div style="width:100%, height:100%">
-		<vbox id="input" visible="false">
+		<hbox id="input" visible="false" width="100%">
 			<separator />
-			<div id="divTextbox" align="left">
-				<hbox>
-					<button id="exit" label="exit" forward="onExit" />
-					<textbox id="msg" style="align:left" width="400px" />
+			<div id="divTextbox" align="left" width="100%">
+				<hbox width="100%">
+					<!-- 
+						<button id="exit" label="exit" forward="onExit" />
+					-->
+					<textbox id="msg" style="align:left" width="98%" />
 				</hbox>
 			</div>
-		</vbox>
+		</hbox>
 	</div>
 
 	<div id="login" style="width: 200px">

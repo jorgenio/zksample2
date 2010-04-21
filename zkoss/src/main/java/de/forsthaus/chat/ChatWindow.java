@@ -8,6 +8,7 @@ import org.zkoss.zk.ui.ComponentNotFoundException;
 import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.sys.ComponentCtrl;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zkex.zul.Center;
@@ -56,6 +57,10 @@ public class ChatWindow extends GFCBaseCtrl implements Serializable {
 		}
 	}
 
+	public void onClose$ChatWindow(Event event) {
+		onExit();
+	}
+
 	public void onCreate() {
 		init();
 	}
@@ -94,13 +99,12 @@ public class ChatWindow extends GFCBaseCtrl implements Serializable {
 		// get the currentDesktopHeight from a hidden Intbox on the index.zul
 		// that are filled by onClientInfo() in the indexCtroller
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		int width = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopWidth")).getValue().intValue();
+		// int i = height - 240;
 
-		int i = height - 240;
-		((Div) chatWindow.getFellow("divTextbox")).setWidth(String.valueOf(i) + "px");
-		((Textbox) chatWindow.getFellow("msg")).setWidth(String.valueOf(i - 150) + "px");
+		// Exit Button, Now close the tab
+		// chatWindow.getFellow("exit").setVisible(false);
 
-		//Exit Button, Now close the tab
-		chatWindow.getFellow("exit").setVisible(false);
 	}
 
 	/**
@@ -108,6 +112,7 @@ public class ChatWindow extends GFCBaseCtrl implements Serializable {
 	 * 
 	 */
 	public void onExit() {
+		System.out.println("hfzufffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
 		// clean up
 		chatter.setDone();
 

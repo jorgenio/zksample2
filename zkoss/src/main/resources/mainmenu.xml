@@ -20,7 +20,8 @@
 			rightName="menuItem_MainData_ArticleItems" />
 		<menuItem id="menu_Item_Branches" zulNavigation="/WEB-INF/pages/branch/branchList.zul"
 			rightName="menuItem_MainData_Branch" />
-		<menuItem id="menu_Item_BranchesDataBinding" zulNavigation="/WEB-INF/pages/branch/branchListWithDataBinding.zul"
+		<menuItem id="menu_Item_BranchesDataBinding"
+			zulNavigation="/WEB-INF/pages/branch/branchListWithDataBinding.zul"
 			rightName="menuItem_MainData_Branch" />
 		<menuItem id="menu_Item_Offices" zulNavigation="/WEB-INF/pages/office/officeList.zul"
 			rightName="menuItem_MainData_Office" />
@@ -48,6 +49,10 @@
 		<menuItem id="menu_Item_LoginsLog"
 			zulNavigation="/WEB-INF/pages/sec_loginlog/secLoginLogMain.zul"
 			rightName="menuItem_Administration_LoginsLog" />
+		<menuItem id="menu_Item_HibernateStatistics" zulNavigation="/WEB-INF/pages/debug/HibernateStatistics.zul"
+			/>
+<!--			rightName="menuItem_Administration_HibernateStatistics" -->
 	</menu>
+
 
 </ns2:XMLRootMenu>

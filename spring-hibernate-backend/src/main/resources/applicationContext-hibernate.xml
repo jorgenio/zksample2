@@ -149,6 +149,11 @@
 	<bean id="sysCountryCodeDAO" class="de.forsthaus.backend.dao.impl.SysCountryCodeDAOImpl"
 		parent="basisNextidDao" />
 
+	<bean id="hibernateStatisticsDao" class="de.forsthaus.backend.dao.impl.HibernateStatisticsDaoImpl"
+		parent="basisDAO" />
+		
+	<bean id="hibernateEntityStatisticsDao" class="de.forsthaus.backend.dao.impl.HibernateEntityStatisticsDaoImpl"
+		parent="basisDAO" />
 
 	<!-- ====================================================== -->
 	<!--                      SERVICE beans                     -->
@@ -239,6 +244,9 @@
 		<property name="sysCountryCodeDAO" ref="sysCountryCodeDAO" />
 	</bean>
 
+	<bean name="hibernateStatisticsService" class="de.forsthaus.backend.service.impl.HibernateStatisticsServiceImpl">
+	 </bean>
+
 	<bean name="commonService" class="de.forsthaus.backend.service.impl.CommonServiceImpl">
 		<property name="customerDAO" ref="customerDAO" />
 		<property name="officeDAO" ref="officeDAO" />
@@ -258,6 +266,5 @@
 		<property name="sysCountryCodeDAO" ref="sysCountryCodeDAO" />
 		<property name="ipToCountryDAO" ref="ipToCountryDAO" />
 	</bean>
-
 
 </beans>

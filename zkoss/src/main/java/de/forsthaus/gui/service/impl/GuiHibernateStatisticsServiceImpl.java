@@ -16,19 +16,13 @@
  * You should have received a copy of the GNU General Public License
  * along with Zksample2.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
-package de.forsthaus.backend.util.db.logging.service;
+package de.forsthaus.gui.service.impl;
 
-import org.hibernate.stat.Statistics;
+import de.forsthaus.gui.service.GuiHibernateStatisticsService;
 
 /**
  * @author bbruhns
  *
  */
-public interface LoggingService {
-
-	/**
-	 * @param statistics
-	 */
-	void saveStatistics(Statistics statistics, String callMethod, long javaFinishMs);
-
+public class GuiHibernateStatisticsServiceImpl implements GuiHibernateStatisticsService{
 }

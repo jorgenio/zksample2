@@ -236,6 +236,11 @@
 		<property name="orderService" ref="orderService" />
 	</bean>
 
+	<bean id="hibernateStatisticsCtrl" class="de.forsthaus.webui.debug.HibernateStatisticsCtrl"
+		parent="basisCtrl" scope="prototype">
+		<property name="guiHibernateStatisticsService" ref="guiHibernateStatisticsService" />
+		<property name="gridPagedListWrapper" ref="pagedGridWrapper" />
+	</bean>
 
 	<bean id="userWorkspace" class="de.forsthaus.UserWorkspace" scope="session" />
 
@@ -249,8 +254,11 @@
 		p:pagedListWrapper-ref="pagedListWrapper">
 	</bean>
 
-
 	<bean name="pagedListWrapper" class="de.forsthaus.webui.util.pagging.PagedListWrapper"
+		p:pagedListService-ref="pagedListService" scope="prototype">
+	</bean>
+
+	<bean name="pagedGridWrapper" class="de.forsthaus.webui.util.pagging.PagedGridWrapper"
 		p:pagedListService-ref="pagedListService" scope="prototype">
 	</bean>
 

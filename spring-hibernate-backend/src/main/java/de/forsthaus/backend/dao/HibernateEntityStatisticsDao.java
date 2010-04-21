@@ -16,19 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with Zksample2.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
-package de.forsthaus.backend.util.db.logging.service;
-
-import org.hibernate.stat.Statistics;
+package de.forsthaus.backend.dao;
 
 /**
  * @author bbruhns
  *
  */
-public interface LoggingService {
-
-	/**
-	 * @param statistics
-	 */
-	void saveStatistics(Statistics statistics, String callMethod, long javaFinishMs);
+public interface HibernateEntityStatisticsDao {
 
 }

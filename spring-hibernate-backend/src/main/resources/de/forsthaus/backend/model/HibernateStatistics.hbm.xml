@@ -53,7 +53,7 @@
 		<property name="javaFinishMs" column="javafinishms" type="long"
 			not-null="true" />
 
-		<set name="hibernateEntityStatisticsSet" fetch="join" order-by="id asc">
+		<set name="hibernateEntityStatisticsSet" fetch="select" lazy="true" order-by="id asc">
 			<key column="hibernateEntityStatisticsId" />
 			<one-to-many class="de.forsthaus.backend.model.HibernateEntityStatistics" />
 		</set>

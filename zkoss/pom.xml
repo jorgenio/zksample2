@@ -50,11 +50,6 @@
 			<version>1.0.2</version>
 		</dependency>
 		<dependency>
-			<groupId>org.zkoss.zkforge.el</groupId>
-			<artifactId>zcommons-el</artifactId>
-			<version>1.0.2</version>
-		</dependency>
-		<dependency>
 			<groupId>org.zkoss.zk</groupId>
 			<artifactId>zk</artifactId>
 			<version>${zkoss.version}</version>
@@ -165,7 +160,7 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${springsecurity.version}</version>
 			<type>jar</type>
-		</dependency>		
+		</dependency>
 	</dependencies>
 	<url>http://sourceforge.net/projects/zksample2/</url>
 	<issueManagement>

@@ -438,7 +438,7 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 
 	public void onClick$btn_CompileReport(Event event) {
 
-		getReportService().compileReport("/de/forsthaus/webui/reports/AuftragDetailsPojo_Report.jrxml");
+		getReportService().compileReport("/de/forsthaus/webui/reports/order/Test_Report_subreportAuftrag.jrxml");
 
 		// // Get the real path for the report
 		// String repSrc =
@@ -455,6 +455,21 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 		//
 		// Order anOrder = getOrderService().getOrderById(40);
 		// getReportService().printAuftragsPositionen(anOrder, repParams);
+
+		// Textbox tb1 = new Textbox();
+		// tb1.setValue("Hallo1");
+		// Datebox dtb = new Datebox();
+		// dtb.setValue(new Date());
+		// Executions.sendRedirect("/WEB-INF/pages/branch/branchList.zul?var1="
+		// + tb1.getValue());
+		// Executions.sendRedirect("http://www.zkoss.org?var1=" +
+		// tb1.getValue());
+		// Executions.sendRedirect("http://www.zkoss.org?var1=" + tb1.getValue()
+		// + "&var2=" + dtb.getValue());
+		// Executions.getCurrent().sendRedirect("/WEB-INF/pages/branch/branchList.zul?var1="
+		// + tb1.getValue());
+		//	System.out.println("Onnnnnnnnnnnnnnklji jfivjofj ovijfdiovfdvfd");
+
 	}
 
 	public void onClick$btnEditCustomerListbox(Event event) {

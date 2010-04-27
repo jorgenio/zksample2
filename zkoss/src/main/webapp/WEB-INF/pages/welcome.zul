@@ -89,27 +89,23 @@
 			<tablechildren rowspan="1" width="35%">
 				<panel title="" border="none">
 					<panelchildren>
+
 						<groupbox mold="3d">
 							<caption
 								style="color: #000000; font-weight:bold;"
 								image="/images/zkpowered_16x16.png"
 								label="Welcome to the ZKsample2 application." />
 
-							<box width="100%" orient="horizontal">
-								<textbox rows="6" multiline="true"
-									readonly="true"
-									style="font-family: verdana; border: none; background-color: white;"
-									width="98%"
-									value="Stored users are  (username/password):&#13;&#13;admin / admin (full access)&#13;user1 / user1 (full access to the office data)&#13;user2 / user2 (restricted access to the office data. Only view mode.)&#13;headoffice / headoffice (full access to the main data.">
-								</textbox>
-							</box>
-
+							<textbox rows="6" multiline="true"
+								width="98%" readonly="true"
+								style="font-family: verdana; border: none; background-color: white;"
+								value="Stored users are  (username/password):&#13;&#13;admin / admin (full access)&#13;user1 / user1 (full access to the office data)&#13;user2 / user2 (restricted access to the office data. Only view mode.)&#13;headoffice / headoffice (full access to the main data.">
+							</textbox>
 						</groupbox>
+
 					</panelchildren>
 				</panel>
 			</tablechildren>
-
-
 
 			<tablechildren rowspan="1" width="35%">
 				<panel border="none">
@@ -120,7 +116,6 @@
 								style="color: #000000; font-weight:bold;"
 								image="/images/icons/about1_16x16.gif"
 								label="Sources available !" />
-
 
 							<textbox rows="6" multiline="true"
 								width="98%" readonly="true"

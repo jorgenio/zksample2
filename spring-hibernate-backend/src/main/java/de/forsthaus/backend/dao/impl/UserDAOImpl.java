@@ -41,7 +41,6 @@ public class UserDAOImpl extends BasisNextidDaoImpl<SecUser> implements UserDAO 
 		return new SecUser();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<SecUser> getAlleUser() {
 		return getHibernateTemplate().loadAll(SecUser.class);
@@ -51,6 +50,7 @@ public class UserDAOImpl extends BasisNextidDaoImpl<SecUser> implements UserDAO 
 		return get(SecUser.class, usr_id);
 	}
 
+	@SuppressWarnings("unchecked")
 	public SecUser getUserByFiluserNr(String usr_nr) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecUser.class);
 		criteria.add(Restrictions.eq("usrNr", usr_nr));
@@ -58,12 +58,14 @@ public class UserDAOImpl extends BasisNextidDaoImpl<SecUser> implements UserDAO 
 		return (SecUser) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria));
 	}
 
+	@SuppressWarnings("unchecked")
 	public SecUser getUserByLoginname(final String userName) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecUser.class);
 		criteria.add(Restrictions.eq("usrLoginname", userName));
 		return (SecUser) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria));
 	}
 
+	@SuppressWarnings("unchecked")
 	public SecUser getUserByNameAndPassword(final String userName, final String userPassword) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecUser.class);
 		criteria.add(Restrictions.eq("usrLoginname", userName));

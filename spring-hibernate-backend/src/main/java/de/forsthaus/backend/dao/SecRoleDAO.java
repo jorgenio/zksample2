@@ -25,20 +25,70 @@ import de.forsthaus.backend.model.SecUser;
 
 public interface SecRoleDAO {
 
+	/**
+	 * EN: Get a new Security Role object.<br>
+	 * DE: Gibt ein neues Security Role Objekt zurueck.<br>
+	 * 
+	 * @return SecRole
+	 */
 	public SecRole getNewSecRole();
 
-	public int getCountAllSecRole();
-
-	public void saveOrUpdate(SecRole secRole);
-
-	public void delete(SecRole secRole);
-
+	/**
+	 * EN: Get a list af all Security Roles.<br>
+	 * DE: Gibt eine Liste aller Security Rollen zurueck.<br>
+	 * 
+	 * @return List of SecRole
+	 */
 	public List<SecRole> getAllRoles();
 
+	/**
+	 * EN: Get the count of all Security Roles.<br>
+	 * DE: Gibt die Anzahl aller Security Rollen zurueck.<br>
+	 * 
+	 * @return int
+	 */
+	public int getCountAllSecRole();
+
+	/**
+	 * EN: Get a Security Role by its ID.<br>
+	 * DE: Gibt eine Security Role anhand ihrer ID zurueck.<br>
+	 * 
+	 * @param role_Id
+	 *            / the persistence identifier / der PrimaerKey
+	 * @return SecRole
+	 */
 	public SecRole getRoleById(Long role_Id);
 
-	public List<SecRole> getRolesByUser(SecUser user);
+	/**
+	 * EN: Get a list af all Security Roles by a User.<br>
+	 * DE: Gibt eine Liste aller Security Rollen fuer einen User zurueck.<br>
+	 * 
+	 * @param aUser
+	 * @return List of SecRole
+	 */
+	public List<SecRole> getRolesByUser(SecUser aUser);
 
-	public List<SecRole> getRolesLikeRoleName(String value);
+	/**
+	 * EN: Get a list af all Security Roles (SQL) like a %RoleName%.<br>
+	 * DE: Gibt eine Liste aller Security Rollen mittels (SQL) 'like
+	 * '%RollenName%' zurueck.<br>
+	 * 
+	 * @param aRoleName
+	 *            a role name / ein Rollen Name
+	 * @return List of SecRole
+	 */
+	public List<SecRole> getRolesLikeRoleName(String aRoleName);
+
+	/**
+	 * EN: Saves or updates a Security Role in the DB.<br>
+	 * DE: Speichert oder aktualisiert eine Security Role in der DB.<br>
+	 */
+	public void saveOrUpdate(SecRole secRole);
+
+	/**
+	 * EN: Deletes a Security Role in the DB.<br>
+	 * DE: Loescht eine Security Role in der DB.<br>
+	 */
+	public void delete(SecRole secRole);
 
 }

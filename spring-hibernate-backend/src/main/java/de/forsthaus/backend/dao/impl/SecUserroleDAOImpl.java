@@ -31,7 +31,8 @@ import de.forsthaus.backend.model.SecUser;
 import de.forsthaus.backend.model.SecUserrole;
 
 /**
- * DAO methods implementation for the <b>SecUserrole model</b> class.<br>
+ * EN: DAO methods implementation for the <b>SecUserrole model</b> class.<br>
+ * DE: DAO Methoden Implementierung fuer die Security UserRolle Tabelle.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -43,27 +44,27 @@ public class SecUserroleDAOImpl extends BasisNextidDaoImpl<SecUserrole> implemen
 		return new SecUserrole();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<SecUserrole> getAllUserRoles() {
 		return getHibernateTemplate().loadAll(SecUserrole.class);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public SecUserrole getUserroleByUserAndRole(SecUser user, SecRole role) {
+	public SecUserrole getUserroleByUserAndRole(SecUser aUser, SecRole aRole) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecUserrole.class);
-		criteria.add(Restrictions.eq("secRole", role));
-		criteria.add(Restrictions.eq("secUser", user));
+		criteria.add(Restrictions.eq("secRole", aRole));
+		criteria.add(Restrictions.eq("secUser", aUser));
 
 		return (SecUserrole) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria));
 	}
 
 	@Override
-	public boolean isUserInRole(SecUser user, SecRole role) {
+	public boolean isUserInRole(SecUser aUser, SecRole aRole) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecUserrole.class);
-		criteria.add(Restrictions.eq("secUser", user));
-		criteria.add(Restrictions.eq("secRole", role));
+		criteria.add(Restrictions.eq("secUser", aUser));
+		criteria.add(Restrictions.eq("secRole", aRole));
 		criteria.setProjection(Projections.rowCount());
 
 		int count = DataAccessUtils.intResult(getHibernateTemplate().findByCriteria(criteria));

@@ -45,38 +45,38 @@ public class SecRolegroupDAOImpl extends BasisNextidDaoImpl<SecRolegroup> implem
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SecGroup> getGroupsByRole(SecRole role) {
+	public List<SecGroup> getGroupsByRole(SecRole aRole) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecGroup.class);
 
 		// Aliases are working only on properties
 		criteria.createAlias("secRolegroups", "rg");
-		criteria.add(Restrictions.eq("rg.secRole", role));
+		criteria.add(Restrictions.eq("rg.secRole", aRole));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<SecRolegroup> getAllRolegroups() {
 		return getHibernateTemplate().loadAll(SecRolegroup.class);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public SecRolegroup getRolegroupByRoleAndGroup(SecRole role, SecGroup group) {
+	public SecRolegroup getRolegroupByRoleAndGroup(SecRole aRole, SecGroup aGroup) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecRolegroup.class);
-		criteria.add(Restrictions.eq("secRole", role));
-		criteria.add(Restrictions.eq("secGroup", group));
+		criteria.add(Restrictions.eq("secRole", aRole));
+		criteria.add(Restrictions.eq("secGroup", aGroup));
 
 		return (SecRolegroup) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria));
 
 	}
 
 	@Override
-	public boolean isGroupInRole(SecGroup group, SecRole role) {
+	public boolean isGroupInRole(SecGroup aGroup, SecRole aRole) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecRolegroup.class);
-		criteria.add(Restrictions.eq("secGroup", group));
-		criteria.add(Restrictions.eq("secRole", role));
+		criteria.add(Restrictions.eq("secGroup", aGroup));
+		criteria.add(Restrictions.eq("secRole", aRole));
 		criteria.setProjection(Projections.rowCount());
 
 		int count = DataAccessUtils.intResult(getHibernateTemplate().findByCriteria(criteria));

@@ -42,7 +42,6 @@ public class SecRoleDAOImpl extends BasisNextidDaoImpl<SecRole> implements SecRo
 		return new SecRole();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<SecRole> getAllRoles() {
 		return getHibernateTemplate().loadAll(SecRole.class);
@@ -50,12 +49,12 @@ public class SecRoleDAOImpl extends BasisNextidDaoImpl<SecRole> implements SecRo
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SecRole> getRolesByUser(SecUser user) {
+	public List<SecRole> getRolesByUser(SecUser aUser) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecRole.class);
 
 		// Aliases are working only on properties
 		criteria.createAlias("secUserroles", "rol");
-		criteria.add(Restrictions.eq("rol.secUser", user));
+		criteria.add(Restrictions.eq("rol.secUser", aUser));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
@@ -67,10 +66,10 @@ public class SecRoleDAOImpl extends BasisNextidDaoImpl<SecRole> implements SecRo
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SecRole> getRolesLikeRoleName(String value) {
+	public List<SecRole> getRolesLikeRoleName(String aRoleName) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecRole.class);
-		criteria.add(Restrictions.ilike("rolShortdescription", value, MatchMode.ANYWHERE));
+		criteria.add(Restrictions.ilike("rolShortdescription", aRoleName, MatchMode.ANYWHERE));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 	}

@@ -26,20 +26,70 @@ import de.forsthaus.backend.model.SecRolegroup;
 
 public interface SecRolegroupDAO {
 
+	/**
+	 * EN: Get a new Security RoleGroup object.<br>
+	 * DE: Gibt ein neues Security RollenGruppen Objekt zurueck.<br>
+	 * 
+	 * @return SecRolegroup
+	 */
 	public SecRolegroup getNewSecRolegroup();
 
-	public int getCountAllSecRolegroup();
-
-	public void saveOrUpdate(SecRolegroup roleGroup);
-
-	public void delete(SecRolegroup roleGroup);
-
-	public List<SecGroup> getGroupsByRole(SecRole role);
-
+	/**
+	 * EN: Get a list of all Security RoleGroups.<br>
+	 * DE: Gibt eine Liste aller Security RollenGruppen zurueck.<br>
+	 * 
+	 * @return List of SecRolegroup
+	 */
 	public List<SecRolegroup> getAllRolegroups();
 
-	public SecRolegroup getRolegroupByRoleAndGroup(SecRole role, SecGroup group);
+	/**
+	 * EN: Get the count of all Security RoleGroups.<br>
+	 * DE: Gibt die Anzahl aller Security RollenGruppen zurueck.<br>
+	 * 
+	 * @return int
+	 */
+	public int getCountAllSecRolegroup();
 
+	/**
+	 * EN: Get a list of all Security RoleGroups by a given Role.<br>
+	 * DE: Gibt eine Liste aller Security Gruppen fuer eine Role zurueck.<br>
+	 * 
+	 * @param aRole
+	 * @return List of SecGroup
+	 */
+	public List<SecGroup> getGroupsByRole(SecRole aRole);
+
+	/**
+	 * EN: Get a list of all Security RoleGroups by a given Role and a given
+	 * Group.<br>
+	 * DE: Gibt eine Liste aller Security RollenGruppen fuer eine Role und eine
+	 * Gruppe zurueck.<br>
+	 * 
+	 * @param aRole
+	 * @param aGroup
+	 * @return List of SecRolegroup
+	 */
+	public SecRolegroup getRolegroupByRoleAndGroup(SecRole aRole, SecGroup aGroup);
+
+	/**
+	 * EN: Checks if a Security Group is in a Role.<br>
+	 * DE: Prueft ob eine Security Gruppe zu einer Rolle gehoert.<br>
+	 * 
+	 * @param aGroup
+	 * @param aRole
+	 * @return boolean
+	 */
 	public boolean isGroupInRole(SecGroup group, SecRole role);
 
+	/**
+	 * EN: Saves or updates a Security RoleGroups in the DB.<br>
+	 * DE: Speichert oder aktualisiert eine Security RollenGruppe in der DB.<br>
+	 */
+	public void saveOrUpdate(SecRolegroup roleGroup);
+
+	/**
+	 * EN: Deletes a Security RoleGroups in the DB.<br>
+	 * DE: Loescht eine Security RollenGruppe in der DB.<br>
+	 */
+	public void delete(SecRolegroup roleGroup);
 }

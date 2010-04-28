@@ -26,18 +26,64 @@ import de.forsthaus.backend.model.SecUserrole;
 
 public interface SecUserroleDAO {
 
+	/**
+	 * EN: Get a new Security UserRole object.<br>
+	 * DE: Gibt ein neues Security UserRole Objekt zurueck.<br>
+	 * 
+	 * @return SecUserrole
+	 */
 	public SecUserrole getNewSecUserrole();
 
-	public int getCountAllSecUserrole();
-
-	public void saveOrUpdate(SecUserrole secUserrole);
-
-	public void delete(SecUserrole secUserrole);
-
+	/**
+	 * EN: Get a list of all Security UserRole.<br>
+	 * DE: Gibt eine Liste aller Security UserRolen zurueck.<br>
+	 * 
+	 * @return List of SecUserrole
+	 */
 	public List<SecUserrole> getAllUserRoles();
 
+	/**
+	 * EN: Get the count of all Security UserRole.<br>
+	 * DE: Gibt die Anzahl aller Security UserRolen zurueck.<br>
+	 * 
+	 * @return int
+	 */
+	public int getCountAllSecUserrole();
+
+	/**
+	 * EN: Get a Security UserRole by a given User and a given Role.<br>
+	 * DE: Gibt eine Security UserRole anhand eines Users und einer Role
+	 * zurueck.<br>
+	 * 
+	 * @param aUser
+	 * @param aRole
+	 * @return SecUserrole
+	 */
 	public SecUserrole getUserroleByUserAndRole(SecUser user, SecRole role);
 
+	/**
+	 * EN: Checks if a User is in a Security Role.<br>
+	 * DE: Prueft ob ein User zu einer Security Rolle gehoert.<br>
+	 * 
+	 * @param aUser
+	 *            the User to check / der zu prüfende User
+	 * @param aRole
+	 *            the Role zu check / die zu prüfende Role
+	 * @return true, if the User is attached to this Role / wahr, wenn der User
+	 *         dieser Role zugeteilt ist.
+	 */
 	public boolean isUserInRole(SecUser user, SecRole role);
+
+	/**
+	 * EN: Saves or updates a Security UserRole in the DB.<br>
+	 * DE: Speichert oder aktualisiert eine Security UserRole in der DB.<br>
+	 */
+	public void saveOrUpdate(SecUserrole secUserrole);
+
+	/**
+	 * EN: Deletes a Security UserRole in the DB.<br>
+	 * DE: Loescht eine Security UserRole in der DB.<br>
+	 */
+	public void delete(SecUserrole secUserrole);
 
 }

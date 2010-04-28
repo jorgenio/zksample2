@@ -24,7 +24,20 @@ import de.forsthaus.backend.model.SecTyp;
 
 public interface SecTypDAO {
 
+	/**
+	 * EN: Get a list of all Security Typs.<br>
+	 * DE: Gibt eine Liste aller Security Typen zurueck.<br>
+	 * 
+	 * @return List of SecTyp
+	 */
 	public List<SecTyp> getAllTypes();
 
+	/**
+	 * EN: Get a Security Typ by its ID.<br>
+	 * DE: Gibt einen Security Typen anhand seiner ID zurueck.<br>
+	 * 
+	 * @param typ_id
+	 * @return List of SecTyp
+	 */
 	public SecTyp getTypById(int typ_id);
 }

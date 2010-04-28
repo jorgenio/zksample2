@@ -29,7 +29,7 @@ import de.forsthaus.backend.dao.OfficeDAO;
 import de.forsthaus.backend.model.Office;
 
 /**
- * DAO implementation for the <b>Office model</b> class.<br>
+ * DAO methods implementation for the <b>Office model</b> class.<br>
  * 
  * @author bbruhns
  * @author sgerth

@@ -26,7 +26,7 @@ import de.forsthaus.backend.dao.IpToCountryDAO;
 import de.forsthaus.backend.model.IpToCountry;
 
 /**
- * DAO implementation for the <b>IpToCountry model</b> class.<br>
+ * DAO methods implementation for the <b>IpToCountry model</b> class.<br>
  * 
  * @author bbruhns
  * @author sgerth

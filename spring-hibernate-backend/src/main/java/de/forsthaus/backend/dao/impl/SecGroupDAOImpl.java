@@ -33,7 +33,7 @@ import de.forsthaus.backend.model.SecRolegroup;
 import de.forsthaus.backend.model.SecUser;
 
 /**
- * DAO implementation for the <b>SecGroup model</b> class.<br>
+ * DAO methods implementation for the <b>SecGroup model</b> class.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -87,23 +87,23 @@ public class SecGroupDAOImpl extends BasisNextidDaoImpl<SecGroup> implements Sec
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SecGroup> getGroupsByUser(SecUser user) {
+	public List<SecGroup> getGroupsByUser(SecUser aUser) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecGroup.class);
 		// Aliases are working only on properties
 		criteria.createAlias("secRolegroups", "rg");
 		criteria.createAlias("secRoles", "rol");
-		criteria.add(Restrictions.eq("rg.rol.secUser", user));
+		criteria.add(Restrictions.eq("rg.rol.secUser", aUser));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SecGroup> getGroupsLikeGroupName(String value) {
+	public List<SecGroup> getGroupsLikeGroupName(String aGroupName) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecGroup.class);
-		criteria.add(Restrictions.ilike("grpShortdescription", value, MatchMode.ANYWHERE));
+		criteria.add(Restrictions.ilike("grpShortdescription", aGroupName, MatchMode.ANYWHERE));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 	}

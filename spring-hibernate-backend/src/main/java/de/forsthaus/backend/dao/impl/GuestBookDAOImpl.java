@@ -24,7 +24,7 @@ import de.forsthaus.backend.dao.GuestBookDAO;
 import de.forsthaus.backend.model.GuestBook;
 
 /**
- * DAO implementation for the <b>Guestbook model</b> class.<br>
+ * DAO methods implementation for the <b>Guestbook model</b> class.<br>
  * 
  * @author bbruhns
  * @author sgerth

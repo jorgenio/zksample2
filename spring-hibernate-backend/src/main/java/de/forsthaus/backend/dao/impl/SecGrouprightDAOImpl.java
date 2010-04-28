@@ -31,7 +31,7 @@ import de.forsthaus.backend.model.SecGroupright;
 import de.forsthaus.backend.model.SecRight;
 
 /**
- * DAO implementation for the <b>SecGroupright model</b> class.<br>
+ * DAO methods implementation for the <b>SecGroupright model</b> class.<br>
  * 
  * @author bbruhns
  * @author sgerth

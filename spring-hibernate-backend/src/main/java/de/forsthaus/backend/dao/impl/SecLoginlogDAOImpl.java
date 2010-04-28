@@ -36,7 +36,7 @@ import de.forsthaus.backend.model.SecLoginlog;
 import de.forsthaus.backend.util.CustomDataAccessUtils;
 
 /**
- * DAO implementation for the <b>SecLoginlog model</b> class.<br>
+ * DAO methods implementation for the <b>SecLoginlog model</b> class.<br>
  * 
  * @author bbruhns
  * @author sgerth

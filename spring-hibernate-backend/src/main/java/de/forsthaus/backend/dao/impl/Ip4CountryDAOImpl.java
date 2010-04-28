@@ -24,7 +24,7 @@ import de.forsthaus.backend.dao.Ip4CountryDAO;
 import de.forsthaus.backend.model.Ip4Country;
 
 /**
- * DAO implementation for the <b>Ip4Country model</b> class.<br>
+ * DAO methods implementation for the <b>Ip4Country model</b> class.<br>
  * 
  * @author bbruhns
  * @author sgerth

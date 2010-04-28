@@ -24,7 +24,7 @@ import de.forsthaus.backend.dao.SecTypDAO;
 import de.forsthaus.backend.model.SecTyp;
 
 /**
- * DAO implementation for the <b>SecType model</b> class.<br>
+ * DAO methods implementation for the <b>SecType model</b> class.<br>
  * 
  * @author bbruhns
  * @author sgerth

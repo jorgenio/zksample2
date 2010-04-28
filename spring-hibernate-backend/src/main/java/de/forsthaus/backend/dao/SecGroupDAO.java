@@ -27,24 +27,87 @@ import de.forsthaus.backend.model.SecUser;
 
 public interface SecGroupDAO {
 
+	/**
+	 * EN: Get a new SecGroup object.<br>
+	 * DE: Gibt ein neues SecurityGruppe Objekt zurueck.<br>
+	 * 
+	 * @return SecGroup
+	 */
 	public SecGroup getNewSecGroup();
 
+	/**
+	 * EN: Get a list af all SecGroups.<br>
+	 * DE: Gibt eine Liste aller SecurityGruppen zurueck.<br>
+	 * 
+	 * @return List of SecGroup
+	 */
 	public List<SecGroup> getAllGroups();
 
+	/**
+	 * EN: Get the count of all SecGroups.<br>
+	 * DE: Gibt die Anzahl aller SecurityGruppen zurueck.<br>
+	 * 
+	 * @return int
+	 */
 	public int getCountAllSecGroup();
 
+	/**
+	 * EN: Get a SecGroup by its ID.<br>
+	 * DE: Gibt eine SecurityGruppen anhand ihrer ID zurueck.<br>
+	 * 
+	 * @param id
+	 * @return SecGroup
+	 */
 	public SecGroup getSecGroupById(Long secGroup_id);
 
+	/**
+	 * EN: Get a SecGroup by a SecGroupRight.<br>
+	 * DE: Gibt eine SecurityGruppen anhand eines GruppenRechts zurueck.<br>
+	 * 
+	 * @param secGroupright
+	 * @return SecGroup
+	 */
 	public SecGroup getGroupByGroupRight(SecGroupright secGroupright);
 
+	/**
+	 * EN: Get a SecGroup by a SecRolegroup.<br>
+	 * DE: Gibt eine SecurityGruppe anhand einer RollenGruppe zurueck.<br>
+	 * 
+	 * @param SecRolegroup
+	 * @return SecGroup
+	 */
 	public SecGroup getGroupByRolegroup(SecRolegroup secRolegroup);
 
-	public List<SecGroup> getGroupsByUser(SecUser user);
+	/**
+	 * EN: Get a list af all SecGroups by a User.<br>
+	 * DE: Gibt eine Liste aller SecurityGruppen fuer einen User zurueck.<br>
+	 * 
+	 * @param aUser
+	 * @return List of SecGroup
+	 */
+	public List<SecGroup> getGroupsByUser(SecUser aUser);
 
+	/**
+	 * EN: Get a list af all SecGroups (SQL) like a %GroupName%.<br>
+	 * DE: Gibt eine Liste aller SecurityGruppen mittels (SQL) 'like
+	 * '%Groupname%' zurueck.<br>
+	 * 
+	 * @param aGroupName
+	 *            a group name / ein Gruppen Name
+	 * @return List of SecGroup
+	 */
+	public List<SecGroup> getGroupsLikeGroupName(String aGroupName);
+
+	/**
+	 * EN: Saves or updates a SecGroup in the DB.<br>
+	 * DE: Speichert oder aktualisiert eine SecurityGruppe in der DB.<br>
+	 */
 	public void saveOrUpdate(SecGroup secGroup);
 
+	/**
+	 * EN: Deletes a SecGroup in the DB.<br>
+	 * DE: Loescht eine SecurityGruppe in der DB.<br>
+	 */
 	public void delete(SecGroup secGroup);
-
-	public List<SecGroup> getGroupsLikeGroupName(String value);
 
 }

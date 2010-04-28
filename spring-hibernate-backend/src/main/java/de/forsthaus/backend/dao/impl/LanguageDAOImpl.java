@@ -30,7 +30,7 @@ import de.forsthaus.backend.dao.LanguageDAO;
 import de.forsthaus.backend.model.Language;
 
 /**
- * DAO implementation for the <b>Language model</b> class.<br>
+ * DAO methods implementation for the <b>Language model</b> class.<br>
  * 
  * @author bbruhns
  * @author sgerth

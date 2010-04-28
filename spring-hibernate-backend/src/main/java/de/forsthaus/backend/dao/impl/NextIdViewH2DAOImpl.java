@@ -22,7 +22,7 @@ import de.forsthaus.backend.dao.NextidviewDAO;
 import de.forsthaus.backend.model.Nextidview;
 
 /**
- * DAO implementation for the H2 database primary keys.<br>
+ * DAO methods implementation for the H2 database primary keys.<br>
  * 
  * @authors bbruhns
  */

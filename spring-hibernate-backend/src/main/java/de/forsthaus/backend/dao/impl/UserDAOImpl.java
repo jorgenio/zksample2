@@ -29,7 +29,7 @@ import de.forsthaus.backend.dao.UserDAO;
 import de.forsthaus.backend.model.SecUser;
 
 /**
- * DAO implementation for the <b>SecUser model</b> class.<br>
+ * DAO methods implementation for the <b>SecUser model</b> class.<br>
  * 
  * @author bbruhns
  * @author sgerth

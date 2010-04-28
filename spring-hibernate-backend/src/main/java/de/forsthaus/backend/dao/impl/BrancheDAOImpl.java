@@ -31,7 +31,7 @@ import de.forsthaus.backend.dao.BrancheDAO;
 import de.forsthaus.backend.model.Branche;
 
 /**
- * DAO implementation for the <b>Branche model</b> class.<br>
+ * DAO methods implementation for the <b>Branche model</b> class.<br>
  * 
  * @author bbruhns
  * @author sgerth

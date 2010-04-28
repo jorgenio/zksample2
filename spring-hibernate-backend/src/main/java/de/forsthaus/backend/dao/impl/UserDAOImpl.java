@@ -96,19 +96,19 @@ public class UserDAOImpl extends BasisNextidDaoImpl<SecUser> implements UserDAO 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SecUser> getUserLikeEmail(String value) {
+	public List<SecUser> getUserLikeEmail(String email) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecUser.class);
-		criteria.add(Restrictions.like("usrEmail", value, MatchMode.ANYWHERE));
+		criteria.add(Restrictions.like("usrEmail", email, MatchMode.ANYWHERE));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SecUser> getUserListByLoginname(String userName) {
+	public List<SecUser> getUserListByLoginname(String loginName) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecUser.class);
-		criteria.add(Restrictions.like("usrLoginname", userName));
+		criteria.add(Restrictions.like("usrLoginname", loginName));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 	}

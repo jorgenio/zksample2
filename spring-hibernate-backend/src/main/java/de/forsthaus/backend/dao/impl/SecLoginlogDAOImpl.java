@@ -71,10 +71,11 @@ public class SecLoginlogDAOImpl extends BasisNextidDaoImpl<SecLoginlog> implemen
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public SecLoginlog getLoginlogById(long log_Id) {
+	public SecLoginlog getLoginlogById(long id) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecLoginlog.class);
-		criteria.add(Restrictions.eq("id", Long.valueOf(log_Id)));
+		criteria.add(Restrictions.eq("id", Long.valueOf(id)));
 		criteria.addOrder(Order.desc("lglLogtime"));
 
 		return (SecLoginlog) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria));
@@ -196,8 +197,7 @@ public class SecLoginlogDAOImpl extends BasisNextidDaoImpl<SecLoginlog> implemen
 
 		Object[] params = { dateFrom, dateTo };
 
-		return new ListIntegerSumBean<DummyBean>(CustomDataAccessUtils.transfer2Bean(getHibernateTemplate().find(hqlStr, params), DummyBean.class,
-				"country", "countryName", "totalCount"));
+		return new ListIntegerSumBean<DummyBean>(CustomDataAccessUtils.transfer2Bean(getHibernateTemplate().find(hqlStr, params), DummyBean.class, "country", "countryName", "totalCount"));
 	}
 
 	@Override
@@ -221,8 +221,7 @@ public class SecLoginlogDAOImpl extends BasisNextidDaoImpl<SecLoginlog> implemen
 
 		Object[] params = { dateFrom, dateTo };
 
-		return new ListIntegerSumBean<DummyBean>(CustomDataAccessUtils.transfer2Bean(getHibernateTemplate().find(hqlStr, params), DummyBean.class,
-				"country", "countryName", "totalCount"));
+		return new ListIntegerSumBean<DummyBean>(CustomDataAccessUtils.transfer2Bean(getHibernateTemplate().find(hqlStr, params), DummyBean.class, "country", "countryName", "totalCount"));
 	}
 
 	@Override

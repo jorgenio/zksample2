@@ -26,22 +26,77 @@ import de.forsthaus.backend.model.SecRight;
 
 public interface SecGrouprightDAO {
 
+	/**
+	 * EN: Get a new SecGroupright object.<br>
+	 * DE: Gibt ein neues Security GruppenRecht Objekt zurueck.<br>
+	 * 
+	 * @return SecGroupright / GruppenRecht
+	 */
 	public SecGroupright getNewSecGroupright();
 
+	/**
+	 * EN: Get the count of all SecGrouprights.<br>
+	 * DE: Gibt die Anzahl aller Security GruppenRecht zurueck.<br>
+	 * 
+	 * @return int
+	 */
 	public int getCountAllSecGroupright();
 
-	public void saveOrUpdate(SecGroupright secGroupright);
-
-	public void delete(SecGroupright secGroupright);
-
+	/**
+	 * EN: Get a list of SecRights by a SecGroup.<br>
+	 * DE: Gibt eine Liste von EinzelRechten fuer eine SecurityGruppe zurueck.<br>
+	 * 
+	 * @param group
+	 * @return List of SecRights / Liste aus EinzelRechten
+	 */
 	public List<SecRight> getRightsByGroup(SecGroup group);
 
+	/**
+	 * EN: Get a list of all SecGroupright.<br>
+	 * DE: Gibt eine Liste alle GruppenRechten zurueck.<br>
+	 * 
+	 * @return List of SecGrouprights / Liste aus GruppenRechten
+	 */
 	public List<SecGroupright> getAllGroupRights();
 
+	/**
+	 * EN: Checks if there is a SecRight in a SecGroup.<br>
+	 * DE: Prueft ob ein Einzelrecht in einer Gruppe vorhanden ist.<br>
+	 * 
+	 * @param right
+	 * @param group
+	 * @return boolean
+	 */
 	public boolean isRightInGroup(SecRight right, SecGroup group);
 
+	/**
+	 * EN: Get a SecGroupright by a SecGroup and a SecRight.<br>
+	 * DE: Gibt ein Gruppenrecht fuer eine Gruppe und ein Einzelrecht zurueck.<br>
+	 * 
+	 * @param group
+	 * @param right
+	 * @return SecGroupright / GruppenRecht
+	 */
 	public SecGroupright getGroupRightByGroupAndRight(SecGroup group, SecRight right);
 
+	/**
+	 * EN: Get a list of SecGroupright by a SecGroup.<br>
+	 * DE: Gibt eine Liste von GruppenRechten fuer eine SecurityGruppe zurueck.<br>
+	 * 
+	 * @param group
+	 * @return List of SecGrouprights / Liste aus GruppenRechten
+	 */
 	public List<SecRight> getGroupRightsByGroup(SecGroup group);
 
+	/**
+	 * EN: Saves or updates a SecGroupright in the DB.<br>
+	 * DE: Speichert oder aktualisiert ein GruppenRecht in der DB.<br>
+	 */
+	public void saveOrUpdate(SecGroupright secGroupright);
+
+	/**
+	 * EN: Deletes a SecGroupright in the DB.<br>
+	 * DE: Loescht ein GruppenRecht in der DB.<br>
+	 */
+	public void delete(SecGroupright secGroupright);
 }

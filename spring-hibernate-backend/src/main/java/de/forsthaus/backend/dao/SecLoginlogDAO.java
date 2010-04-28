@@ -28,33 +28,81 @@ import de.forsthaus.backend.model.SecLoginlog;
 
 public interface SecLoginlogDAO {
 
-	public SecLoginlog saveLog(String userName, String clientAddress, String sessionId, int status);
-
+	/**
+	 * EN: Get a new SecLoginlog object.<br>
+	 * DE: Gibt ein neues SecLoginlog Objekt zurueck.<br>
+	 * 
+	 * @return SecLoginlog
+	 */
 	public SecLoginlog getNewSecLoginlog();
 
+	/**
+	 * EN: Get the count of all SecLoginlog.<br>
+	 * DE: Gibt die Anzahl aller Logins zurueck.<br>
+	 * 
+	 * @return int
+	 */
 	public int getCountAllSecLoginlog();
 
-	public void delete(SecLoginlog loginLog);
-
-	public void saveOrUpdate(SecLoginlog secLoginlog);
-
+	/**
+	 * EN: Get a list af all SecLoginlog.<br>
+	 * DE: Gibt eine Liste aller SecLoginlog zurueck.<br>
+	 * 
+	 * @return List of SecLoginlog
+	 */
 	public List<SecLoginlog> getAllLogs();
 
-	public SecLoginlog getLoginlogById(long log_Id);
+	/**
+	 * EN: Get a SecLoginlog by its ID.<br>
+	 * DE: Gibt ein SecLoginlog Objekt bei seiner ID zurueck.<br>
+	 * 
+	 * @param id
+	 *            / the persistence identifier / der PrimaerKey
+	 * @return SecLoginlog
+	 */
+	public SecLoginlog getLoginlogById(long id);
 
 	public List<SecLoginlog> getLogsByLoginname(String value);
 
+	/**
+	 * EN: Get a list of all Login types.<br>
+	 * DE: Gibt eine Liste aller Login Status Typen zurueck.<br>
+	 * 
+	 * @return List of LoginStatus
+	 */
 	public List<LoginStatus> getAllTypes();
 
+	/**
+	 * EN: Get a Login status typ by its ID.<br>
+	 * DE: Gibt einen LoginStatus bei seiner ID zurueck.<br>
+	 * 
+	 * @return LoginStatus
+	 */
 	public LoginStatus getTypById(int typ_id);
 
+	/**
+	 * EN: Get a list of all successfully logins.<br>
+	 * DE: Gibt eine Liste aller erfolgreichen Logins zurueck.<br>
+	 * 
+	 * @return List of SecLoginlog
+	 */
 	public List<SecLoginlog> getAllLogsForSuccess();
 
+	/**
+	 * EN: Get a list of all failed logins.<br>
+	 * DE: Gibt eine Liste aller erfolglosen Logins zurueck.<br>
+	 * 
+	 * @return List of SecLoginlog
+	 */
 	public List<SecLoginlog> getAllLogsForFailed();
 
+	/**
+	 * EN: Get a list of all successfully logins per hour.<br>
+	 * DE: Gibt eine Liste aller erfolgreichen Logins pro Stunde zurueck.<br>
+	 * 
+	 * @return List of SecLoginlog
+	 */
 	public List<SecLoginlog> getLoginsPerHour(Date startDate);
-
-	public void update(SecLoginlog log);
 
 	public int getMaxSecLoginlogId();
 
@@ -64,6 +112,40 @@ public interface SecLoginlogDAO {
 
 	public ListIntegerSumBean<DummyBean> getDailyCountByCountries(Date aDate);
 
+	/**
+	 * EN: Deletes local IPs from the table.<br>
+	 * DE: Loescht lokale IPs aus der Tabelle.<br>
+	 */
 	public int deleteLocalIPs();
+
+	/**
+	 * EN: Saves a SecLoginlog in the DB.<br>
+	 * DE: Speichert einen Login in der DB.<br>
+	 * 
+	 * @param userName
+	 * @param clientAddress
+	 * @param sessionId
+	 * @param status
+	 * @return SecLoginlog
+	 */
+	public SecLoginlog saveLog(String userName, String clientAddress, String sessionId, int status);
+
+	/**
+	 * EN: Saves or updates a SecLoginlog in the DB.<br>
+	 * DE: Speichert oder aktualisiert einen Login in der DB.<br>
+	 */
+	public void saveOrUpdate(SecLoginlog secLoginlog);
+
+	/**
+	 * EN: Deletes a SecLoginlog in the DB.<br>
+	 * DE: Loescht einen Login in der DB.<br>
+	 */
+	public void delete(SecLoginlog loginLog);
+
+	/**
+	 * EN: Updates a SecLoginlog in the DB.<br>
+	 * DE: Aktualisiert einen Login in der DB.<br>
+	 */
+	public void update(SecLoginlog log);
 
 }

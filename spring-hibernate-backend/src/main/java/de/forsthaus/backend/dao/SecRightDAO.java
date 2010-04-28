@@ -26,28 +26,114 @@ import de.forsthaus.backend.model.SecUser;
 
 public interface SecRightDAO {
 
+	/**
+	 * EN: Get a new SecRight object.<br>
+	 * DE: Gibt ein neues EinzelRecht Objekt zurueck.<br>
+	 * 
+	 * @return SecRight
+	 */
 	public SecRight getNewSecRight();
 
+	/**
+	 * EN: Get a list of all SecRight for a given RightTyp.<br>
+	 * DE: Gibt eine Liste aller EinzelRechte fuer einen RechteTyp zurueck.<br>
+	 * 
+	 * @param type
+	 *            The RightTyp
+	 * @return List of SecRight
+	 */
 	public List<SecRight> getAllRights(int type);
 
+	/**
+	 * EN: Get the count of all SecRight.<br>
+	 * DE: Gibt die Anzahl aller EinzelRechte zurueck.<br>
+	 * 
+	 * @return int
+	 */
 	public int getCountAllSecRights();
 
+	/**
+	 * EN: Get a SecRight by its ID.<br>
+	 * DE: Gibt ein EinzelRecht anhand seiner ID zurueck.<br>
+	 * 
+	 * @param right_id
+	 *            The persistent Identifier / Der Primaerkey
+	 * @return SecRight
+	 */
 	public SecRight getRightById(Long right_id);
-
-	public void saveOrUpdate(SecRight right);
-
-	public void delete(SecRight right);
 
 	public List<SecRight> getRightsByGroupright(SecGroupright secGroupright);
 
+	/**
+	 * EN: Get a list of all SecRight for a given User.<br>
+	 * DE: Gibt eine Liste aller EinzelRechte fuer einen User zurueck.<br>
+	 * 
+	 * @param aUser
+	 *            The User / Der User
+	 * @return List of SecRight
+	 */
 	public List<SecRight> getRightsByUser(SecUser user);
 
-	public List<SecRight> getAllRights(List<Integer> list);
+	/**
+	 * EN: Get a list of all SecRight for a given list of RightTyps.<br>
+	 * DE: Gibt eine Liste aller EinzelRechte fuer eine Liste mit RechteTypen
+	 * zurueck.<br>
+	 * 
+	 * @param aListOfRightTyps
+	 *            The List of the RightTyps / Liste mit RechteTypen
+	 * @return List of SecRight
+	 */
+	public List<SecRight> getAllRights(List<Integer> aListOfRightTyps);
 
-	public List<SecRight> getRightsLikeRightName(String value);
+	/**
+	 * EN: Get a list of all SecRight (SQL) like a %RightName%.<br>
+	 * DE: Gibt eine Liste aller EinzelRechte (SQL) aehnlich einem %RechteNamen%
+	 * zurueck.<br>
+	 * 
+	 * @param aRightName
+	 *            The searched Rightname / der zu suchende RechteNamen
+	 * @return List of SecRight
+	 */
+	public List<SecRight> getRightsLikeRightName(String aRightName);
 
-	public List<SecRight> getRightsLikeRightNameAndType(String value, int type);
+	/**
+	 * EN: Get a list of all SecRight (SQL) like a %RightName% and the exact
+	 * RightTyp.<br>
+	 * DE: Gibt eine Liste aller EinzelRechte (SQL) aehnlich einem %RechteNamen%
+	 * und dem exakten RechteTyp zurueck.<br>
+	 * 
+	 * @param aRightName
+	 *            The searched Rightname / der zu suchende RechteNamen
+	 * @param rightType
+	 *            The RightTyp / Der RechteTyp
+	 * @return List of SecRight
+	 */
+	public List<SecRight> getRightsLikeRightNameAndType(String aRightName, int aRightType);
 
-	public List<SecRight> getRightsLikeRightNameAndTypes(String value, List<Integer> list);
+	/**
+	 * EN: Get a list of all SecRight (SQL) like a %RightName% and a List of
+	 * RightTyps.<br>
+	 * DE: Gibt eine Liste aller EinzelRechte (SQL) aehnlich einem %RechteNamen%
+	 * und einer Liste von RechteTypen zurueck.<br>
+	 * 
+	 * @param aRightName
+	 *            The searched Rightname / der zu suchende RechteNamen
+	 * @param listOfRightTyps
+	 *            List of RightTyps / Liste mit RechteTypen
+	 * @return List of SecRight
+	 */
+	public List<SecRight> getRightsLikeRightNameAndTypes(String aRightName, List<Integer> listOfRightTyps);
+
+	/**
+	 * EN: Saves or updates a SecRight in the DB.<br>
+	 * DE: Speichert oder aktualisiert ein EinzelRecht in der DB.<br>
+	 */
+	public void saveOrUpdate(SecRight right);
+
+	/**
+	 * EN: Deletes a SecRight in the DB.<br>
+	 * DE: Loescht ein EinzelRecht in der DB.<br>
+	 */
+	public void delete(SecRight right);
 
 }

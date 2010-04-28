@@ -49,7 +49,6 @@ public abstract class BasisDAO<T> {
 		hibernateTemplate.initialize(proxy);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected T merge(T entity) throws DataAccessException {
 		return (T) hibernateTemplate.merge(entity);
 	}
@@ -89,7 +88,6 @@ public abstract class BasisDAO<T> {
 		hibernateTemplate.deleteAll(entities);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected T get(Class<T> entityClass, Serializable id) throws DataAccessException {
 		return (T) hibernateTemplate.get(entityClass, id);
 	}

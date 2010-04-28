@@ -35,6 +35,7 @@ public class NextIdViewPostgresDaoImpl extends BasisDAO<Nextidview> implements N
 	 * 
 	 * @return NextID (long)
 	 */
+	@SuppressWarnings("unchecked")
 	public long getNextId() {
 		return ((Nextidview) DataAccessUtils.uniqueResult(getHibernateTemplate().find("from Nextidview"))).getNextval().longValue();
 	}

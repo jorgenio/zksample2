@@ -55,6 +55,7 @@ public class SysCountryCodeDAOImpl extends BasisNextidDaoImpl<SysCountryCode> im
 		return get(SysCountryCode.class, ccd_Id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public SysCountryCode getCountryCodeByCode2(String code2) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(SysCountryCode.class);

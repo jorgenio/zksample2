@@ -69,7 +69,6 @@ public class Ip2CountryDAOImpl extends BasisNextidDaoImpl<Ip2Country> implements
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Ip2Country> getAll() {
 		return getHibernateTemplate().loadAll(Ip2Country.class);

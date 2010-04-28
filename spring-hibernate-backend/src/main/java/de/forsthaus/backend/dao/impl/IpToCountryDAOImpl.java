@@ -49,6 +49,7 @@ public class IpToCountryDAOImpl extends BasisNextidDaoImpl<IpToCountry> implemen
 		getHibernateTemplate().bulkUpdate(hqlQuery);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public IpToCountry getCountry(Long ipNumber) {
 

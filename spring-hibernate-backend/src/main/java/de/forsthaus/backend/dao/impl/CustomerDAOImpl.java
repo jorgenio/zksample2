@@ -97,6 +97,7 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 		return get(Customer.class, kun_id);
 	}
 
+	@SuppressWarnings("unchecked")
 	public Customer getCustomerByKunNr(String kun_nr) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
 		criteria.add(Restrictions.eq("kunNr", kun_nr));
@@ -220,8 +221,12 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 		return (int) max;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.forsthaus.backend.dao.CustomerDAO#initialize(de.forsthaus.backend.model.Customer)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.forsthaus.backend.dao.CustomerDAO#initialize(de.forsthaus.backend.
+	 * model.Customer)
 	 */
 	@Override
 	public void initialize(Customer customer) {

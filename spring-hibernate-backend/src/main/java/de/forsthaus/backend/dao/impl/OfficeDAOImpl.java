@@ -46,6 +46,7 @@ public class OfficeDAOImpl extends BasisNextidDaoImpl<Office> implements OfficeD
 		return get(Office.class, fil_Id);
 	}
 
+	@SuppressWarnings("unchecked")
 	public Office getOfficeByFilNr(String fil_nr) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Office.class);
 		criteria.add(Restrictions.eq("filNr", fil_nr));
@@ -53,7 +54,6 @@ public class OfficeDAOImpl extends BasisNextidDaoImpl<Office> implements OfficeD
 		return (Office) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria));
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Office> getOffices() {
 		return getHibernateTemplate().loadAll(Office.class);

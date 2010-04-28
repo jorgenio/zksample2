@@ -33,7 +33,6 @@ import de.forsthaus.backend.model.ChartData;
  * @author bbruhns
  * @author sgerth
  */
-@SuppressWarnings("deprecation")
 public class ChartDataDAOImpl implements ChartDataDAO {
 
 	@Override

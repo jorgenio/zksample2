@@ -44,6 +44,7 @@ public class PagedListServiceImpl implements PagedListService {
 		this.hibernateSearchSupport = hibernateSearchSupport;
 	}
 
+	@SuppressWarnings("unused")
 	private <T> void initSearchObject(HibernateSearchObject<T> so, int start, int pageSize) {
 		so.setFirstResult(start);
 		so.setMaxResults(pageSize);

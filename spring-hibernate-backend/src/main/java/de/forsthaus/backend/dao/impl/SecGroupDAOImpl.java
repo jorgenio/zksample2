@@ -59,6 +59,7 @@ public class SecGroupDAOImpl extends BasisNextidDaoImpl<SecGroup> implements Sec
 		return get(SecGroup.class, secGroup_id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public SecGroup getGroupByGroupRight(SecGroupright secGroupright) {
 
@@ -71,6 +72,7 @@ public class SecGroupDAOImpl extends BasisNextidDaoImpl<SecGroup> implements Sec
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public SecGroup getGroupByRolegroup(SecRolegroup secRolegroup) {
 

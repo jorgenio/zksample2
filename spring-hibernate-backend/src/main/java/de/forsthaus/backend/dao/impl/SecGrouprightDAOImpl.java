@@ -54,7 +54,6 @@ public class SecGrouprightDAOImpl extends BasisNextidDaoImpl<SecGroupright> impl
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<SecGroupright> getAllGroupRights() {
 		return getHibernateTemplate().loadAll(SecGroupright.class);
@@ -71,6 +70,7 @@ public class SecGrouprightDAOImpl extends BasisNextidDaoImpl<SecGroupright> impl
 		return count > 0;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public SecGroupright getGroupRightByGroupAndRight(SecGroup group, SecRight right) {
 

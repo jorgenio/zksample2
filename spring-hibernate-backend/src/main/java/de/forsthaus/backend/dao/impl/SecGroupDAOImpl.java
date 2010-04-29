@@ -62,33 +62,28 @@ public class SecGroupDAOImpl extends BasisNextidDaoImpl<SecGroup> implements Sec
 	@SuppressWarnings("unchecked")
 	@Override
 	public SecGroup getGroupByGroupRight(SecGroupright secGroupright) {
-
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecGroup.class);
 		// Aliases are working only on properties
 		criteria.createAlias("secGrouprights", "gr");
 		criteria.add(Restrictions.eq("gr.id", Long.valueOf(secGroupright.getId())));
 
 		return (SecGroup) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria));
-
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public SecGroup getGroupByRolegroup(SecRolegroup secRolegroup) {
-
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecGroup.class);
 		// Aliases are working only on properties
 		criteria.createAlias("secRolegroups", "rg");
 		criteria.add(Restrictions.eq("rg.id", Long.valueOf(secRolegroup.getId())));
 
 		return (SecGroup) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria));
-
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<SecGroup> getGroupsByUser(SecUser aUser) {
-
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecGroup.class);
 		// Aliases are working only on properties
 		criteria.createAlias("secRolegroups", "rg");
@@ -101,7 +96,6 @@ public class SecGroupDAOImpl extends BasisNextidDaoImpl<SecGroup> implements Sec
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<SecGroup> getGroupsLikeGroupName(String aGroupName) {
-
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecGroup.class);
 		criteria.add(Restrictions.ilike("grpShortdescription", aGroupName, MatchMode.ANYWHERE));
 

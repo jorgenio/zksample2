@@ -18,6 +18,8 @@
  */
 package de.forsthaus.backend.dao.impl;
 
+import org.hibernate.LockMode;
+
 import de.forsthaus.backend.dao.HibernateStatisticsDao;
 import de.forsthaus.backend.model.HibernateStatistics;
 
@@ -26,4 +28,17 @@ import de.forsthaus.backend.model.HibernateStatistics;
  * 
  */
 public class HibernateStatisticsDaoImpl extends BasisDAO<HibernateStatistics> implements HibernateStatisticsDao {
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.forsthaus.backend.dao.HibernateStatisticsDao#initDetails(de.forsthaus
+	 * .backend.model.HibernateStatistics)
+	 */
+	@Override
+	public void initDetails(HibernateStatistics hibernateStatistics) {
+		getHibernateTemplate().lock(hibernateStatistics, LockMode.NONE);
+		initialize(hibernateStatistics.getHibernateEntityStatisticsSet());
+	}
 }

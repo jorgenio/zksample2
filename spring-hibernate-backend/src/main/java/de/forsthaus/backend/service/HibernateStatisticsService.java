@@ -18,11 +18,17 @@
  */
 package de.forsthaus.backend.service;
 
+import de.forsthaus.backend.model.HibernateStatistics;
 
 /**
  * @author bbruhns
- *
+ * 
  */
 public interface HibernateStatisticsService {
+
+	/**
+	 * @param hibernateStatistics
+	 */
+	void initDetails(HibernateStatistics hibernateStatistics);
 
 }

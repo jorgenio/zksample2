@@ -18,10 +18,15 @@
  */
 package de.forsthaus.util;
 
+import java.lang.reflect.Field;
 import java.util.Iterator;
+import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.zkoss.zk.ui.AbstractComponent;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Components;
 
 /**
  * Helper class for showing the zkoss component tree in the console for a root
@@ -34,6 +39,57 @@ import org.zkoss.zk.ui.Component;
  */
 public class ZkossComponentTreeUtil {
 
+	final private static class FieldListener implements IAddListener {
+		private final Field field;
+
+		FieldListener(Field field) {
+			super();
+			this.field = field;
+		}
+
+		@Override
+		public void addListener(Component component, StringBuilder result, int depth) {
+			try {
+				Map<?, ?> m = (Map<?, ?>) field.get(component);
+				if (m != null && !m.isEmpty()) {
+					for (Map.Entry<?, ?> entry : m.entrySet()) {
+						result.append(StringUtils.leftPad("", depth << 2) + "  " + entry.getKey() + " -> " + entry.getValue() + "\n");
+					}
+				}
+			} catch (IllegalArgumentException e) {
+			} catch (IllegalAccessException e) {
+			}
+		}
+	}
+
+	private interface IAddListener {
+		void addListener(Component component, StringBuilder result, int depth);
+	}
+
+	final private static IAddListener ADD_LISTENER;
+
+	static {
+		IAddListener tmp = null;
+		try {
+			final Field field;
+			field = AbstractComponent.class.getDeclaredField("_listeners");
+			field.setAccessible(true);
+			tmp = new FieldListener(field);
+		} catch (SecurityException e) {
+		} catch (NoSuchFieldException e) {
+		}
+
+		if (tmp == null) {
+			tmp = new IAddListener() {
+				@Override
+				public void addListener(Component component, StringBuilder result, int depth) {
+				}
+			};
+		}
+
+		ADD_LISTENER = tmp;
+	}
+
 	static public CharSequence getZulTree(Component component) {
 		return new ZkossComponentTreeUtil().getZulTreeImpl(component);
 	}
@@ -42,25 +98,45 @@ public class ZkossComponentTreeUtil {
 		super();
 	}
 
+	private CharSequence createCompName(Component component) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(component.getClass().getSimpleName());
+
+		String id = component.getId();
+		if (!Components.isAutoId(id)) {
+			sb.append(" id=\"" + id + "\"");
+		}
+		return sb;
+	}
+
 	private CharSequence getZulTreeImpl(Component component) {
-		return getZulTreeImpl(component, new StringBuilder(6000), -1);
+		if (component == null) {
+			return "Component is null!";
+		}
+
+		StringBuilder result = new StringBuilder(6000);
+		return getZulTreeImpl(component, result, -1);
 	}
 
 	@SuppressWarnings("unchecked")
-	private StringBuilder getZulTreeImpl(Component component,
-			StringBuilder result, int depth) {
+	private StringBuilder getZulTreeImpl(Component component, StringBuilder result, int depth) {
 		++depth;
-		result.append(StringUtils.leftPad("", depth << 2) + "-> " + component
-				+ "\n");
-		if (component.getChildren() != null) {
-			for (Iterator iterator = component.getChildren().iterator(); iterator
-					.hasNext();) {
-				getZulTreeImpl((Component) iterator.next(), result, depth);
-			}
+		CharSequence id = createCompName(component);
+		if (CollectionUtils.isEmpty(component.getChildren())) {
+			result.append(StringUtils.leftPad("", depth << 2) + "<" + id + " />\n");
+			return result;
 		}
 
-		result.append(StringUtils.leftPad("", depth << 2) + "<- " + component
-				+ "\n");
+		result.append(StringUtils.leftPad("", depth << 2) + "<" + id + ">\n");
+		
+		ADD_LISTENER.addListener(component, result, depth);
+
+		for (Iterator iterator = component.getChildren().iterator(); iterator.hasNext();) {
+			getZulTreeImpl((Component) iterator.next(), result, depth);
+		}
+
+		result.append(StringUtils.leftPad("", depth << 2) + "<" + component.getClass().getSimpleName() + " />\n");
 		return result;
 	}
+
 }

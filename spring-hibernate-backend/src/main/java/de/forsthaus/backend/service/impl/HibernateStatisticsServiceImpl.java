@@ -18,6 +18,8 @@
  */
 package de.forsthaus.backend.service.impl;
 
+import de.forsthaus.backend.dao.HibernateStatisticsDao;
+import de.forsthaus.backend.model.HibernateStatistics;
 import de.forsthaus.backend.service.HibernateStatisticsService;
 
 /**
@@ -25,4 +27,18 @@ import de.forsthaus.backend.service.HibernateStatisticsService;
  * 
  */
 public class HibernateStatisticsServiceImpl implements HibernateStatisticsService {
+	private HibernateStatisticsDao hibernateStatisticsDao;
+
+	public HibernateStatisticsDao getHibernateStatisticsDao() {
+		return hibernateStatisticsDao;
+	}
+
+	public void setHibernateStatisticsDao(HibernateStatisticsDao hibernateStatisticsDao) {
+		this.hibernateStatisticsDao = hibernateStatisticsDao;
+	}
+
+	@Override
+	public void initDetails(HibernateStatistics hibernateStatistics) {
+		hibernateStatisticsDao.initDetails(hibernateStatistics);
+	}
 }

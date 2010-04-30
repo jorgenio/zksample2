@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./win" ?>
 
 <zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
-	<window id="win" apply="${hibernateStatisticsCtrl}"
-		border="none" width="100%">
-
-		<grid id="grid" fixedLayout="false" mold="paging" pageSize="10">
+	<window id="win" apply="${hibernateStatisticsCtrl}" border="none"
+		width="100%">
+		<grid id="grid" fixedLayout="false" mold="paging" pageSize="25">
 			<columns>
 				<column width="25px" />
 				<column label="id" />
@@ -23,100 +21,10 @@
 					<label value="@{hs.callMethod}" />
 					<label value="@{hs.javaFinishMs}" />
 					<label value="@{hs.finishTime}" />
-					<detail id="detail" fulfill="onOpen">
-						<groupbox closable="false">
-							<vbox>
-								<hbox>
-									<grid>
-										<rows>
-											<row>
-												<label value="flushcount" />
-												<label value="@{hs.flushCount}" />
-											</row>
-											<row>
-												<label value="prepareStatementCount" />
-												<label value="@{hs.prepareStatementCount}" />
-											</row>
-											<row>
-												<label value="optimisticFailureCount" />
-												<label value="@{hs.optimisticFailureCount}" />
-											</row>
-											<row>
-												<label value="collectionRecreateCount" />
-												<label value="@{hs.collectionRecreateCount}" />
-											</row>
-										</rows>
-									</grid>
-									<grid fixedLayout="true" width="200px">
-										<columns>
-											<column label="count" />
-											<column label="Entity" width="50px" />
-											<column label="Col" width="50px" />
-										</columns>
-										<rows>
-											<row>
-												<label value="load" />
-												<label value="@{hs.entityLoadCount}" />
-												<label value="@{hs.collectionLoadCount}" />
-											</row>
-											<row>
-												<label value="update" />
-												<label value="@{hs.entityUpdateCount}" />
-												<label value="@{hs.collectionUpdateCount}" />
-											</row>
-											<row>
-												<label value="insert" />
-												<label value="@{hs.entityInsertCount}" />
-												<label value="--" />
-											</row>
-											<row>
-												<label value="delete" />
-												<label value="@{hs.entityDeleteCount}" />
-												<label value="@{hs.collectionRemoveCount}" />
-											</row>
-											<row>
-												<label value="fetch" />
-												<label value="@{hs.entityFetchCount}" />
-												<label value="@{hs.collectionFetchCount}" />
-											</row>
-										</rows>
-									</grid>
-									<groupbox closable="false">
-										<caption>
-											<label value="langsamste SQL Anweisung - " />
-											<label value="@{hs.queryExecutionMaxTime}" />
-										</caption>
-										<label value="@{hs.queryExecutionMaxTimeQueryString}" />
-									</groupbox>
-								</hbox>
-								<grid id="entityGrid">
-									<columns>
-										<column label="Entity" />
-										<column label="load" width="50px" />
-										<column label="update" width="50px" />
-										<column label="insert" width="50px" />
-										<column label="delete" width="50px" />
-										<column label="fetch" width="50px" />
-										<column label="optimisticFailure" width="50px" />
-									</columns>
-									<rows>
-										<row>
-											<label value="333" />
-											<label value="3" />
-											<label value="0" />
-											<label value="0" />
-											<label value="0" />
-											<label value="0" />
-											<label value="0" />
-										</row>
-									</rows>
-								</grid>
-							</vbox>
-						</groupbox>
-					</detail>
+					<detail open="false"
+						fulfill="onOpen=/WEB-INF/pages/debug/HibernateStatisticsDetail.zul" />
 				</row>
 			</rows>
-
 		</grid>
 	</window>
 </zk>

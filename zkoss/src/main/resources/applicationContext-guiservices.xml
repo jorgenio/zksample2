@@ -35,5 +35,6 @@
 	<bean id="guiHibernateStatisticsService"
 		class="de.forsthaus.gui.service.impl.GuiHibernateStatisticsServiceImpl"
 		scope="request">
+		<property name="hibernateStatisticsService" ref="hibernateStatisticsService" />
 	</bean>
 </beans>

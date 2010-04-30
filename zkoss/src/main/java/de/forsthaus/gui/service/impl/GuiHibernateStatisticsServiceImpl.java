@@ -18,11 +18,36 @@
  */
 package de.forsthaus.gui.service.impl;
 
+import de.forsthaus.backend.model.HibernateStatistics;
+import de.forsthaus.backend.service.HibernateStatisticsService;
 import de.forsthaus.gui.service.GuiHibernateStatisticsService;
 
 /**
  * @author bbruhns
- *
+ * 
  */
-public class GuiHibernateStatisticsServiceImpl implements GuiHibernateStatisticsService{
+public class GuiHibernateStatisticsServiceImpl implements GuiHibernateStatisticsService {
+
+	private HibernateStatisticsService hibernateStatisticsService;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.forsthaus.gui.service.GuiHibernateStatisticsService#initDetails(de
+	 * .forsthaus.backend.model.HibernateStatistics)
+	 */
+	@Override
+	public void initDetails(HibernateStatistics hibernateStatistics) {
+		hibernateStatisticsService.initDetails(hibernateStatistics);
+
+	}
+
+	public HibernateStatisticsService getHibernateStatisticsService() {
+		return hibernateStatisticsService;
+	}
+
+	public void setHibernateStatisticsService(HibernateStatisticsService hibernateStatisticsService) {
+		this.hibernateStatisticsService = hibernateStatisticsService;
+	}
 }

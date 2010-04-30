@@ -59,11 +59,28 @@
 		<priority value="FATAL" />
 	</category>
 
+	<category name="org.hibernate.stat">
+		<priority value="INFO" />
+	</category>
+	<category name="org.hibernate.engine.query.HQLQueryPlan">
+		<level value="debug" />
+	</category>
+	<category name="org.hibernate.hql.ast.QueryTranslatorImpl">
+		<level value="debug" />
+	</category>
+	<category name="org.hibernate.engine.QueryParameters">
+		<level value="debug" />
+	</category>
+
+
 	<category name="org.springframework.beans.factory">
 		<priority value="INFO" />
 	</category>
 	<category name="org.springframework">
 		<priority value="INFO" />
+	</category>
+	<category name="org.zkoss">
+		<priority value="ALL" />
 	</category>
 
 

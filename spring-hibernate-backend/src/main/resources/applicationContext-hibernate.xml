@@ -245,6 +245,7 @@
 	</bean>
 
 	<bean name="hibernateStatisticsService" class="de.forsthaus.backend.service.impl.HibernateStatisticsServiceImpl">
+	<property name="hibernateStatisticsDao" ref="hibernateStatisticsDao" />
 	 </bean>
 
 	<bean name="commonService" class="de.forsthaus.backend.service.impl.CommonServiceImpl">

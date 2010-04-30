@@ -18,10 +18,16 @@
  */
 package de.forsthaus.backend.dao;
 
+import de.forsthaus.backend.model.HibernateStatistics;
 
 /**
  * @author bbruhns
- *
+ * 
  */
 public interface HibernateStatisticsDao {
+
+	/**
+	 * @param hibernateStatistics
+	 */
+	void initDetails(HibernateStatistics hibernateStatistics);
 }

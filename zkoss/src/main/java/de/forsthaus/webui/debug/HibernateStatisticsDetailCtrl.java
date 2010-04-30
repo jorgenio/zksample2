@@ -20,23 +20,21 @@ package de.forsthaus.webui.debug;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zul.Grid;
+import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.Row;
 
 import de.forsthaus.backend.model.HibernateStatistics;
-import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.gui.service.GuiHibernateStatisticsService;
-import de.forsthaus.webui.util.GFCBaseCtrl;
-import de.forsthaus.webui.util.pagging.PagedGridWrapper;
+import de.forsthaus.util.ZkossComponentTreeUtil;
 
 /**
  * @author bbruhns
  * 
  */
-public class HibernateStatisticsCtrl extends GFCBaseCtrl {
+public class HibernateStatisticsDetailCtrl extends GenericForwardComposer {
 	private transient GuiHibernateStatisticsService guiHibernateStatisticsService;
-	private PagedGridWrapper<HibernateStatistics> gridPagedListWrapper;
 
-	protected Grid grid;
+	private HibernateStatistics statistics;
 
 	@Override
 	public void doBeforeComposeChildren(Component cmp) throws Exception {
@@ -52,22 +50,28 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 		this.guiHibernateStatisticsService = guiHibernateStatisticsService;
 	}
 
-	public void onCreate$win(Event event) throws Exception {
+	public void onCreate(Event event) throws Exception {
+		System.out.println(ZkossComponentTreeUtil.getZulTree(self));
+		final Row row = (Row) event.getTarget().getParent().getParent();
+		final HibernateStatistics hibernateStatistics = (HibernateStatistics) row.getValue();
 
-		final HibernateSearchObject<HibernateStatistics> searchObj = new HibernateSearchObject<HibernateStatistics>(HibernateStatistics.class);
-		searchObj.addSort("id", true);
-		// searchObj.addFetch("hibernateEntityStatisticsSet");
-		// searchObj.addFilterNotEmpty("hibernateEntityStatisticsSet");
-		gridPagedListWrapper.init(searchObj, grid);
+		guiHibernateStatisticsService.initDetails(hibernateStatistics);
 
-		// System.out.println(ZkossComponentTreeUtil.getZulTree(grid.getRoot()));
+		setStatistics(hibernateStatistics);
+
+		event.getTarget().setVariable("hs", getStatistics(), false);
+
 	}
 
-	public PagedGridWrapper<HibernateStatistics> getGridPagedListWrapper() {
-		return gridPagedListWrapper;
+	public void onCreateEntries() {
+		System.out.println("--> " + this + " " + getStatistics());
 	}
 
-	public void setGridPagedListWrapper(PagedGridWrapper<HibernateStatistics> gridPagedListWrapper) {
-		this.gridPagedListWrapper = gridPagedListWrapper;
+	private HibernateStatistics getStatistics() {
+		return statistics;
+	}
+
+	private void setStatistics(HibernateStatistics statistics) {
+		this.statistics = statistics;
 	}
 }

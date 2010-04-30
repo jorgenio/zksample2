@@ -241,6 +241,10 @@
 		<property name="guiHibernateStatisticsService" ref="guiHibernateStatisticsService" />
 		<property name="gridPagedListWrapper" ref="pagedGridWrapper" />
 	</bean>
+	<bean id="hibernateStatisticsDetailCtrl" class="de.forsthaus.webui.debug.HibernateStatisticsDetailCtrl"
+		 scope="prototype">
+		<property name="guiHibernateStatisticsService" ref="guiHibernateStatisticsService" />
+	</bean>
 
 	<bean id="userWorkspace" class="de.forsthaus.UserWorkspace" scope="session" />
 

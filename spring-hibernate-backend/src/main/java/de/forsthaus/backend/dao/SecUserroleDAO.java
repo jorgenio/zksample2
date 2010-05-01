@@ -66,9 +66,9 @@ public interface SecUserroleDAO {
 	 * DE: Prueft ob ein User zu einer Security Rolle gehoert.<br>
 	 * 
 	 * @param aUser
-	 *            the User to check / der zu prüfende User
+	 *            the User to check / der zu prï¿½fende User
 	 * @param aRole
-	 *            the Role zu check / die zu prüfende Role
+	 *            the Role zu check / die zu prï¿½fende Role
 	 * @return true, if the User is attached to this Role / wahr, wenn der User
 	 *         dieser Role zugeteilt ist.
 	 */

@@ -19,12 +19,16 @@
 package de.forsthaus.webui.util.pagging;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listhead;
+import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Paging;
 import org.zkoss.zul.event.PagingEvent;
 
@@ -32,6 +36,8 @@ import com.trg.search.SearchResult;
 
 import de.forsthaus.backend.service.PagedListService;
 import de.forsthaus.backend.util.HibernateSearchObject;
+import de.forsthaus.webui.util.pagging.PagedListWrapper.OnPagingEventListener;
+import de.forsthaus.webui.util.pagging.PagedListWrapper.OnSortEventListener;
 
 /**
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -77,10 +83,12 @@ public class PagedGridWrapper<E> extends ListModelList implements Serializable {
 	}
 
 	public void init(HibernateSearchObject<E> hibernateSearchObject1, Grid grid, Paging paging1) {
+
 		setPaging(paging1);
+		setListeners(grid);
 
 		setSearchObject(hibernateSearchObject1);
-		
+
 		grid.setModel(this);
 	}
 
@@ -120,6 +128,19 @@ public class PagedGridWrapper<E> extends ListModelList implements Serializable {
 	public void clearFilters() {
 		getSearchObject().clearFilters();
 		initModel();
+	}
+
+	/**
+	 * Sets the listeners. <br>
+	 * <br>
+	 * 1. "onPaging" for the paging component. <br>
+	 */
+	private void setListeners(Grid aGrid) {
+
+		// Add 'onPaging' listener to the paging component
+		getPaging().addEventListener("onPaging", new OnPagingEventListener());
+
+		aGrid.setModel(this);
 	}
 
 	/**

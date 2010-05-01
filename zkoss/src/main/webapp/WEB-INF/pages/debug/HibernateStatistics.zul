@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./win" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./window_HibernateStatisticList" ?>
 
-<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml"
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
-	<window id="win" apply="${hibernateStatisticsCtrl}" border="none"
-		width="100%">
-		<grid id="grid" fixedLayout="false" mold="paging" pageSize="25">
+
+	<window id="window_HibernateStatisticList"
+		apply="${hibernateStatisticsCtrl}" border="none" width="100%">
+
+		<paging id="paging_HibernateStatisticList" />
+		<grid id="gridHibernateStatisticList" fixedLayout="false">
 			<columns>
 				<column width="25px" />
 				<column label="id" />
-				<column label="name" />
-				<column label="Java" width="50px" />
+				<column label="called from methodname" />
+				<column label="Java (ms)" tooltiptext="in Milliseconds"
+					width="90px" />
 				<column label="Zeit" width="170px" />
 			</columns>
 			<rows>
-				<row id="row" self="@{each='hs'}" value="@{hs}">
+				<!-- 
+					<row self="@{each='hs'}" value="@{hs}">
 					<label value="@{hs.id}" />
 					<label value="@{hs.callMethod}" />
 					<label value="@{hs.javaFinishMs}" />
 					<label value="@{hs.finishTime}" />
 					<detail open="false"
-						fulfill="onOpen=/WEB-INF/pages/debug/HibernateStatisticsDetail.zul" />
-				</row>
+					fulfill="onOpen=/WEB-INF/pages/debug/HibernateStatisticsDetail.zul" />
+					</row>
+				-->
 			</rows>
 		</grid>
 	</window>
+
 </zk>

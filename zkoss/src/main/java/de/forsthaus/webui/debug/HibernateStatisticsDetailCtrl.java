@@ -18,20 +18,27 @@
  */
 package de.forsthaus.webui.debug;
 
+import java.util.Map;
+
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.CreateEvent;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zul.Row;
 
 import de.forsthaus.backend.model.HibernateStatistics;
 import de.forsthaus.gui.service.GuiHibernateStatisticsService;
 import de.forsthaus.util.ZkossComponentTreeUtil;
+import de.forsthaus.webui.util.GFCBaseCtrl;
 
 /**
  * @author bbruhns
+ * @author sgerth
  * 
  */
 public class HibernateStatisticsDetailCtrl extends GenericForwardComposer {
+
+	private static final long serialVersionUID = 1L;
+
 	private transient GuiHibernateStatisticsService guiHibernateStatisticsService;
 
 	private HibernateStatistics statistics;
@@ -42,29 +49,53 @@ public class HibernateStatisticsDetailCtrl extends GenericForwardComposer {
 		// cmp.setVariable("controller", this, true);
 	}
 
+	@SuppressWarnings("unchecked")
+	public void onCreate(Event event) throws Exception {
+		System.out.println(ZkossComponentTreeUtil.getZulTree(self));
+
+		// get the params map that are overhanded by creation.
+		CreateEvent ce = (CreateEvent) event;
+		Map<String, Object> args = ce.getArg();
+
+		if (args.containsKey("hibernateStatistics")) {
+			HibernateStatistics hs = (HibernateStatistics) args.get("hibernateStatistics");
+			setStatistics(hs);
+		} else {
+			setStatistics(null);
+		}
+
+		// final Row row = (Row) event.getTarget().getParent().getParent();
+		// final HibernateStatistics hibernateStatistics = (HibernateStatistics)
+		// row.getValue();
+
+		guiHibernateStatisticsService.initDetails(getStatistics());
+
+		// setStatistics(hibernateStatistics);
+
+		event.getTarget().setVariable("hs", getStatistics(), false);
+
+		doShowValues(getStatistics());
+	}
+
+	private void doShowValues(HibernateStatistics hs) {
+
+		
+	}
+
+	public void onCreateEntries() {
+		System.out.println("--> " + this + " " + getStatistics());
+	}
+
+	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+	// ++++++++++++++++++ getter / setter +++++++++++++++++++//
+	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
 	public GuiHibernateStatisticsService getGuiHibernateStatisticsService() {
 		return guiHibernateStatisticsService;
 	}
 
 	public void setGuiHibernateStatisticsService(GuiHibernateStatisticsService guiHibernateStatisticsService) {
 		this.guiHibernateStatisticsService = guiHibernateStatisticsService;
-	}
-
-	public void onCreate(Event event) throws Exception {
-		System.out.println(ZkossComponentTreeUtil.getZulTree(self));
-		final Row row = (Row) event.getTarget().getParent().getParent();
-		final HibernateStatistics hibernateStatistics = (HibernateStatistics) row.getValue();
-
-		guiHibernateStatisticsService.initDetails(hibernateStatistics);
-
-		setStatistics(hibernateStatistics);
-
-		event.getTarget().setVariable("hs", getStatistics(), false);
-
-	}
-
-	public void onCreateEntries() {
-		System.out.println("--> " + this + " " + getStatistics());
 	}
 
 	private HibernateStatistics getStatistics() {

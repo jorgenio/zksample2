@@ -45,6 +45,9 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.pagging.PagedGridWrapper;
 
 /**
+ * Controller for the HibernateStatistic Main-Grid. <br>
+ * Zul: /WEB-INF/pages/debug/HibernateStatistics.zul <br>
+ * 
  * @author bbruhns
  * @author sgerth
  * 

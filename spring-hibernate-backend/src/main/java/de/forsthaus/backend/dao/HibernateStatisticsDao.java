@@ -27,7 +27,12 @@ import de.forsthaus.backend.model.HibernateStatistics;
 public interface HibernateStatisticsDao {
 
 	/**
-	 * @param hibernateStatistics
+	 * EN: Load the related HibernateEntityStatistics for the HibernateStatistic
+	 * bean <br>
+	 * DE: laedt die HibernateEntityStatistics zu HibernateStatistic <br>
+	 * 
+	 * @param aHibernateStatistics
 	 */
 	void initDetails(HibernateStatistics hibernateStatistics);
+
 }

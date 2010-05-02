@@ -41,4 +41,5 @@ public class HibernateStatisticsDaoImpl extends BasisDAO<HibernateStatistics> im
 		getHibernateTemplate().lock(hibernateStatistics, LockMode.NONE);
 		initialize(hibernateStatistics.getHibernateEntityStatisticsSet());
 	}
+
 }

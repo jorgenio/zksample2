@@ -409,7 +409,7 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * Set the properties of the fields, like maxLength.<br>
 	 */
 	private void doSetFieldProperties() {
-		grpShortdescription.setMaxlength(30);
+		grpShortdescription.setMaxlength(40);
 		grpLongdescription.setMaxlength(1000);
 	}
 

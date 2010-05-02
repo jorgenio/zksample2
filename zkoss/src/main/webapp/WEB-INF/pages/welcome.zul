@@ -14,7 +14,7 @@
 	{
 		lf = "\n";
 		s = "";
-		s = s + "- 21.04.2010 / Added a logging ( in console and tables! ) to measure the speed of all hibernate " + lf;
+		s = s + "- 02.05.2010 / Added a first Grid in Grid View for the Hibernate Statistic " + lf;
 		s = s + "                      DB transactions, which is implemented by a Spring Aspect. The view will following in" + lf;
 		s = s + "                      the  next days." + lf;
 		s = s + "- 20.04.2010 / Improved speed for the entry page by done all table recordCounts in one transaction." + lf;

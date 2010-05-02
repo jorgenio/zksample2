@@ -420,7 +420,7 @@ ccd_id
 /*==============================================================*/
 create table sec_group (
    grp_id               INT8                 not null,
-   grp_shortdescription VARCHAR(30)          not null,
+   grp_shortdescription VARCHAR(40)          not null,
    grp_longdescription  VARCHAR(1000)        null,
    version              INT4                 not null default 0,
    constraint PK_SEC_GROUP primary key (grp_id)
@@ -815,7 +815,7 @@ INSERT INTO SEC_USERROLE (URR_ID, USR_ID, ROL_ID, VERSION) values
 /******************** Security: SEC_GROUPS ********************/  
 INSERT INTO SEC_GROUP (GRP_ID, GRP_SHORTDESCRIPTION, GRP_LONGDESCRIPTION, VERSION) values
 (13001, 'Headoffice Supervisor Group', 'kjhf ff hgfd', 0),
-(13002, 'common Admin Group + user accounts', 'create/modify user accounts', 0),
+(13002, 'common Admin Group / user accounts', 'create/modify user accounts', 0),
 (13003, 'Guest Group', 'Minimal Rights for the guests', 0),
 (13004, 'Admin Group - user rights', 'edit/modify user rights', 0),
 /* Customers */

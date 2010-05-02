@@ -35,6 +35,4 @@ public interface GuiHibernateStatisticsService {
 	 */
 	void initDetails(HibernateStatistics hibernateStatistics);
 
-	public List<HibernateEntityStatistics> getHibernateEntityStatisticsByHibernateStatistics(HibernateStatistics aHibernateStatistics);
-
 }

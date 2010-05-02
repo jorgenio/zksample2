@@ -815,7 +815,7 @@ INSERT INTO SEC_USERROLE (URR_ID, USR_ID, ROL_ID, VERSION) values
 /******************** Security: SEC_GROUPS ********************/  
 INSERT INTO SEC_GROUP (GRP_ID, GRP_SHORTDESCRIPTION, GRP_LONGDESCRIPTION, VERSION) values
 (13001, 'Headoffice Supervisor Group', 'kjhf ff hgfd', 0),
-(13002, 'Admin Group - user accounts', 'create/modify user accounts', 0),
+(13002, 'common Admin Group + user accounts', 'create/modify user accounts', 0),
 (13003, 'Guest Group', 'Minimal Rights for the guests', 0),
 (13004, 'Admin Group - user rights', 'edit/modify user rights', 0),
 /* Customers */
@@ -985,6 +985,7 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15014, 2, 'menuItem_Administration_Rights', 0),
 (15015, 1, 'menuCat_UserRights', 0),
 (15016, 2, 'menuItem_Administration_LoginsLog', 0),
+(15017, 2, 'menuItem_Administration_HibernateStats', 0),
 
 /* Pages = Type(0) */
 /* --> Page Customer */
@@ -1189,6 +1190,8 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14014, 13002, 15014, 0),
 (14015, 13002, 15015, 0),
 (14016, 13002, 15016, 0),
+/* Hibernate Statistic */
+(14017, 13002, 15017, 0),
 
 /* New */
 /* Group: Customers_View */

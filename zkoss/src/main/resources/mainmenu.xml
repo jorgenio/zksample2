@@ -50,8 +50,8 @@
 			zulNavigation="/WEB-INF/pages/sec_loginlog/secLoginLogMain.zul"
 			rightName="menuItem_Administration_LoginsLog" />
 		<menuItem id="menu_Item_HibernateStatistics" zulNavigation="/WEB-INF/pages/debug/HibernateStatistics.zul"
-			/>
-<!--			rightName="menuItem_Administration_HibernateStatistics" -->
+			rightName="menuItem_Administration_HibernateStats" />
+
 	</menu>
 
 

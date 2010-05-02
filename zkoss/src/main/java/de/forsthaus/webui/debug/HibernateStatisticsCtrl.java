@@ -22,32 +22,31 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.zkoss.zk.ui.Component;
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.ForwardEvent;
+import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Detail;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Intbox;
-import org.zkoss.zul.Label;
 import org.zkoss.zul.Paging;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Rows;
+import org.zkoss.zul.Window;
 
-import de.forsthaus.backend.model.Article;
 import de.forsthaus.backend.model.HibernateStatistics;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.gui.service.GuiHibernateStatisticsService;
-import de.forsthaus.util.ZkossComponentTreeUtil;
-import de.forsthaus.webui.article.ArticleListCtrl;
-import de.forsthaus.webui.article.model.ArticleListModelItemRenderer;
 import de.forsthaus.webui.debug.model.HibernateStatisticListRowRenderer;
 import de.forsthaus.webui.util.GFCBaseCtrl;
+import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.pagging.PagedGridWrapper;
 
 /**
  * @author bbruhns
+ * @author sgerth
  * 
  */
 public class HibernateStatisticsCtrl extends GFCBaseCtrl {
@@ -55,8 +54,11 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 	private static final long serialVersionUID = 1L;
 	private transient static final Logger logger = Logger.getLogger(HibernateStatisticsCtrl.class);
 
+	protected Window window_HibernateStatisticList; // autowired
 	protected Grid gridHibernateStatisticList; // autowired
 	protected Paging paging_HibernateStatisticList; // autowired
+	protected Button btnHelp; // autowired
+	protected Button btnRefresh; // autowired
 
 	// count of rows in the grid
 	private int countRows;
@@ -65,11 +67,11 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 	private transient GuiHibernateStatisticsService guiHibernateStatisticsService;
 	private PagedGridWrapper<HibernateStatistics> gridPagedListWrapper;
 
-	@Override
-	public void doBeforeComposeChildren(Component cmp) throws Exception {
-		super.doBeforeComposeChildren(cmp);
-		// cmp.setVariable("controller", this, true);
-	}
+	// @Override
+	// public void doBeforeComposeChildren(Component cmp) throws Exception {
+	// super.doBeforeComposeChildren(cmp);
+	// // cmp.setVariable("controller", this, true);
+	// }
 
 	public void onCreate$window_HibernateStatisticList(Event event) throws Exception {
 
@@ -79,7 +81,7 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 		 * filled by onClientInfo() in the indexCtroller
 		 */
 
-		int panelHeight = 25;
+		int panelHeight = 5;
 
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		height = height + panelHeight;
@@ -103,30 +105,72 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void onOpenRow(Event event) throws Exception {
-		System.out.println(ZkossComponentTreeUtil.getZulTree(self));
+	public void onOpenDetail(Event event) throws Exception {
+
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
 
+		// System.out.println(ZkossComponentTreeUtil.getZulTree(self));
+
 		Rows rows = gridHibernateStatisticList.getRows();
 		List<Row> list = rows.getChildren();
-		System.out.println("Anzahl Row : " + list.size());
 
 		for (Row row : list) {
 			if (row.getDetailChild().isOpen()) {
-				// CAST AND STORE THE SELECTED OBJECT
-				HibernateStatistics hs = (HibernateStatistics) row.getAttribute("data");
-				System.out.println(hs.getCallMethod());
 
+				// First, Clear old stuff, if exists
+				row.getDetailChild().getChildren().clear();
+
+				// Get and CAST the object from the selected row
+				HibernateStatistics hs = (HibernateStatistics) row.getAttribute("data");
+
+				// create a map and store the Object for overhanding to new
+				// Detail zul-file
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("hibernateStatistics", hs);
 
+				// Get the opened 'Detail' and append the Detail Content.
 				Detail detail = row.getDetailChild();
 				detail.appendChild(Executions.createComponents("/WEB-INF/pages/debug/HibernateStatisticsDetail.zul", detail, map));
 			}
 		}
+	}
 
+	/**
+	 * when the "help" button is clicked. <br>
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnHelp(Event event) throws InterruptedException {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		String message = Labels.getLabel("message_Not_Implemented_Yet");
+		String title = Labels.getLabel("message_Information");
+		MultiLineMessageBox.doSetTemplate();
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+	}
+
+	/**
+	 * when the "refresh" button is clicked. <br>
+	 * <br>
+	 * Refreshes the view by calling the onCreate event manually.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnRefresh(Event event) throws InterruptedException {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("--> " + event.toString());
+		}
+
+		Events.postEvent("onCreate", window_HibernateStatisticList, event);
+		window_HibernateStatisticList.invalidate();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

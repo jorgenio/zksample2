@@ -18,17 +18,41 @@
  */
 package de.forsthaus.gui.service.impl;
 
+import java.util.List;
+
+import de.forsthaus.backend.dao.HibernateStatisticsDao;
+import de.forsthaus.backend.model.HibernateEntityStatistics;
 import de.forsthaus.backend.model.HibernateStatistics;
 import de.forsthaus.backend.service.HibernateStatisticsService;
 import de.forsthaus.gui.service.GuiHibernateStatisticsService;
 
 /**
  * @author bbruhns
+ * @author sgerth
  * 
  */
 public class GuiHibernateStatisticsServiceImpl implements GuiHibernateStatisticsService {
 
 	private HibernateStatisticsService hibernateStatisticsService;
+	private HibernateStatisticsDao hibernateStatisticsDao;
+
+	// ########################### Getter/Setter #############################
+
+	public HibernateStatisticsService getHibernateStatisticsService() {
+		return hibernateStatisticsService;
+	}
+
+	public void setHibernateStatisticsService(HibernateStatisticsService hibernateStatisticsService) {
+		this.hibernateStatisticsService = hibernateStatisticsService;
+	}
+
+	public HibernateStatisticsDao getHibernateStatisticsDao() {
+		return hibernateStatisticsDao;
+	}
+
+	public void setHibernateStatisticsDao(HibernateStatisticsDao hibernateStatisticsDao) {
+		this.hibernateStatisticsDao = hibernateStatisticsDao;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -43,11 +67,8 @@ public class GuiHibernateStatisticsServiceImpl implements GuiHibernateStatistics
 
 	}
 
-	public HibernateStatisticsService getHibernateStatisticsService() {
-		return hibernateStatisticsService;
-	}
-
-	public void setHibernateStatisticsService(HibernateStatisticsService hibernateStatisticsService) {
-		this.hibernateStatisticsService = hibernateStatisticsService;
+	@Override
+	public List<HibernateEntityStatistics> getHibernateEntityStatisticsByHibernateStatistics(HibernateStatistics aHibernateStatistics) {
+		return getHibernateStatisticsDao().getHibernateEntityStatisticsByHibernateStatistics(aHibernateStatistics);
 	}
 }

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 
 <zk xmlns="http://www.zkoss.org/2005/zul"
@@ -11,55 +12,85 @@
 		<vbox>
 			<hbox>
 				<grid>
-					<rows>
-						<row>
-							<label value="flushcount" />
-							<label value="${hs.flushCount}" />
-						</row>
-						<row>
-							<label value="prepareStatementCount" />
-							<label value="${hs.prepareStatementCount}" />
-						</row>
-						<row>
-							<label value="optimisticFailureCount" />
-							<label value="${hs.optimisticFailureCount}" />
-						</row>
-						<row>
-							<label value="collectionRecreateCount" />
-							<label
-								value="${hs.collectionRecreateCount}" />
-						</row>
-					</rows>
-				</grid>
-				<grid fixedLayout="true" width="200px">
 					<columns>
-						<column label="count" />
-						<column label="Entity" width="50px" />
-						<column label="Col" width="50px" />
+						<column
+							label="${c:l('gridHibernateStatisticDetail.column.label.name')}"
+							width="110px" />
+						<column
+							label="${c:l('gridHibernateStatisticDetail.column.label.count')}"
+							width="50px" />
 					</columns>
 					<rows>
 						<row>
-							<label value="load" />
+							<label
+								value="${c:l('gridHibernateStatisticDetail.row.label.flushcount')}"
+								width="110px" />
+							<label value="${hs.flushCount}"
+								width="50px" />
+						</row>
+						<row>
+							<label
+								value="${c:l('gridHibernateStatisticDetail.row.label.prepareStatementCount')}"
+								width="110px" />
+							<label value="${hs.prepareStatementCount}"
+								width="50px" />
+						</row>
+						<row>
+							<label
+								value="${c:l('gridHibernateStatisticDetail.row.label.optimisticFailureCount')}"
+								width="110px" />
+							<label value="${hs.optimisticFailureCount}"
+								width="50px" />
+						</row>
+						<row>
+							<label
+								value="${c:l('gridHibernateStatisticDetail.row.label.collectionRecreateCount')}"
+								width="110px" />
+							<label value="${hs.collectionRecreateCount}"
+								width="50px" />
+						</row>
+					</rows>
+				</grid>
+				<grid fixedLayout="true">
+					<columns>
+						<column
+							label="${c:l('gridHibernateStatisticDetail2.column.label.type')}"
+							width="80px" />
+						<column
+							label="${c:l('gridHibernateStatisticDetail2.column.label.entity')}"
+							width="80px" />
+						<column
+							label="${c:l('gridHibernateStatisticDetail2.column.label.column')}"
+							width="60px" />
+					</columns>
+					<rows>
+						<row>
+							<label
+								value="${c:l('gridHibernateStatisticDetail2.row.label.load')}" />
 							<label value="${hs.entityLoadCount}" />
 							<label value="${hs.collectionLoadCount}" />
 						</row>
 						<row>
-							<label value="update" />
+							<label
+								value="${c:l('gridHibernateStatisticDetail2.row.label.update')}" />
 							<label value="${hs.entityUpdateCount}" />
 							<label value="${hs.collectionUpdateCount}" />
 						</row>
 						<row>
-							<label value="insert" />
+							<label
+								value="${c:l('gridHibernateStatisticDetail2.row.label.insert')}" />
 							<label value="${hs.entityInsertCount}" />
 							<label value="--" />
 						</row>
 						<row>
-							<label value="delete" />
+							<label
+								value="${c:l('gridHibernateStatisticDetail2.row.label.delete')}" />
 							<label value="${hs.entityDeleteCount}" />
 							<label value="${hs.collectionRemoveCount}" />
 						</row>
 						<row>
-							<label value="fetch" />
+							<label
+								value="${c:l('gridHibernateStatisticDetail2.row.label.fetch')}" />
 							<label value="${hs.entityFetchCount}" />
 							<label value="${hs.collectionFetchCount}" />
 						</row>
@@ -67,35 +98,38 @@
 				</grid>
 				<groupbox closable="false">
 					<caption>
-						<label value="langsamste SQL Anweisung - " />
-						<label value="${hs.queryExecutionMaxTime}" />
+						<label
+							value="${c:l('gridHibernateStatisticDetail2.groupbox.caption.label.sql')}" />
+						<label value="${hs.queryExecutionMaxTime} (ms)" />
 					</caption>
 					<label
 						value="${hs.queryExecutionMaxTimeQueryString}" />
 				</groupbox>
 			</hbox>
-			<grid forward="onCreate=onCreateEntries">
+			<!-- 
+				<grid >
 				<columns>
-					<column label="Entity" />
-					<column label="load" width="50px" />
-					<column label="update" width="50px" />
-					<column label="insert" width="50px" />
-					<column label="delete" width="50px" />
-					<column label="fetch" width="50px" />
-					<column label="optimisticFailure" width="50px" />
+				<column label="Entity" />
+				<column label="load" width="50px" />
+				<column label="update" width="50px" />
+				<column label="insert" width="50px" />
+				<column label="delete" width="50px" />
+				<column label="fetch" width="50px" />
+				<column label="optimisticFailure" width="50px" />
 				</columns>
 				<rows>
-					<row>
-						<label value="333" />
-						<label value="3" />
-						<label value="0" />
-						<label value="0" />
-						<label value="0" />
-						<label value="0" />
-						<label value="0" />
-					</row>
+				<row>
+				<label value="333" />
+				<label value="3" />
+				<label value="0" />
+				<label value="0" />
+				<label value="0" />
+				<label value="0" />
+				<label value="0" />
+				</row>
 				</rows>
-			</grid>
+				</grid>
+			-->
 		</vbox>
 	</groupbox>
 

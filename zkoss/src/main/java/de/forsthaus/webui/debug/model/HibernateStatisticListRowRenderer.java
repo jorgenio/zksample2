@@ -29,8 +29,8 @@ public class HibernateStatisticListRowRenderer implements RowRenderer {
 		detail.setOpen(false);
 		detail.setParent(row);
 
-		label = new Label(String.valueOf(hs.getId()));
-		label.setParent(row);
+//		label = new Label(String.valueOf(hs.getId()));
+//		label.setParent(row);
 		label = new Label(hs.getCallMethod());
 		label.setParent(row);
 		label = new Label(String.valueOf(hs.getJavaFinishMs()));
@@ -40,7 +40,8 @@ public class HibernateStatisticListRowRenderer implements RowRenderer {
 
 		row.setAttribute("data", data);
 
-		ComponentsCtrl.applyForward(detail, "onOpen=onOpenRow");
+		// ComponentsCtrl.applyForward(detail, "onOpen=onOpenDetail");
+		ComponentsCtrl.applyForward(detail, "onOpen=onOpenDetail, onClose=onCloseDetail");
 	}
 
 	/**

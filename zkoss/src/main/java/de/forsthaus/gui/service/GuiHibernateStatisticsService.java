@@ -18,10 +18,14 @@
  */
 package de.forsthaus.gui.service;
 
+import java.util.List;
+
+import de.forsthaus.backend.model.HibernateEntityStatistics;
 import de.forsthaus.backend.model.HibernateStatistics;
 
 /**
  * @author bbruhns
+ * @author sgerth
  * 
  */
 public interface GuiHibernateStatisticsService {
@@ -30,5 +34,7 @@ public interface GuiHibernateStatisticsService {
 	 * @param hibernateStatistics
 	 */
 	void initDetails(HibernateStatistics hibernateStatistics);
+
+	public List<HibernateEntityStatistics> getHibernateEntityStatisticsByHibernateStatistics(HibernateStatistics aHibernateStatistics);
 
 }

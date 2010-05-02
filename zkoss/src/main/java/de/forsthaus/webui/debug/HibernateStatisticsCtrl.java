@@ -70,12 +70,6 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 	private transient GuiHibernateStatisticsService guiHibernateStatisticsService;
 	private PagedGridWrapper<HibernateStatistics> gridPagedListWrapper;
 
-	// @Override
-	// public void doBeforeComposeChildren(Component cmp) throws Exception {
-	// super.doBeforeComposeChildren(cmp);
-	// // cmp.setVariable("controller", this, true);
-	// }
-
 	public void onCreate$window_HibernateStatisticList(Event event) throws Exception {
 
 		/**

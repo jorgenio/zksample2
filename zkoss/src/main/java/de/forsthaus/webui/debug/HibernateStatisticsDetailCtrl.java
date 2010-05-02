@@ -136,8 +136,8 @@ public class HibernateStatisticsDetailCtrl extends GenericForwardComposer {
 		Rows rows = new Rows();
 		rows.setParent(entityGrid);
 
-		entityGrid.setModel(new ListModelList(new ArrayList(getStatistics().getHibernateEntityStatisticsSet())));
 		entityGrid.setRowRenderer(new HibernateStatisticDetailRowRenderer());
+		entityGrid.setModel(new ListModelList(new ArrayList(getStatistics().getHibernateEntityStatisticsSet())));
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

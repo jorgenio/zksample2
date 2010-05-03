@@ -464,8 +464,6 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 			logger.debug("--> " + event.toString());
 		}
 
-		org.zkoss.zk.ui.Component comp = new AbstractComponent();
-
 		String str = InputConfirmBox.show(secLoginlogListWindow, Labels.getLabel("message.Information.InputSupervisorPassword"));
 
 		if (StringUtils.equalsIgnoreCase(str, "yes we can")) {

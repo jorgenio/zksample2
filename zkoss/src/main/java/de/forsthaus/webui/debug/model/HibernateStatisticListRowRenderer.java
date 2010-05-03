@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.sys.ComponentsCtrl;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Detail;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Row;

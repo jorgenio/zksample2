@@ -33,9 +33,8 @@ import org.zkoss.zul.Window;
 
 /**
  * This class creates a modal window as a dialog in which the user <br>
- * can input something. These sign are overhanded to the 'aTarget' <br>
- * component. These component can on the other side where the dialog <br>
- * is called inspected to the 'returnValue' .<br>
+ * can input something. By onClosing this InputConfirmBox can return a value. <br>
+ * In this useCase the returnValue is the same as the inputValue.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -45,14 +44,29 @@ public class InputConfirmBox extends Window {
 	private static final long serialVersionUID = 8109634704496621100L;
 	private static final Logger logger = Logger.getLogger(InputConfirmBox.class);
 
+	private final String question;
+	private final Textbox textbox;
+
+	/**
+	 * The Call method.
+	 * 
+	 * @param parent
+	 *            The parent component
+	 * @param anQuestion
+	 *            The question that's to be confirmed.
+	 * @return String from the input textbox.
+	 */
 	public static String show(Component parent, String anQuestion) {
 		return new InputConfirmBox(parent, anQuestion).textbox.getText();
 	}
 
-	private final String question;
-
-	private final Textbox textbox;
-
+	/**
+	 * private constructor. So it can only be created with the static show()
+	 * method
+	 * 
+	 * @param parent
+	 * @param anQuestion
+	 */
 	private InputConfirmBox(Component parent, String anQuestion) {
 		super();
 		question = anQuestion;

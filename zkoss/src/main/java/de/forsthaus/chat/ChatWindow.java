@@ -12,7 +12,6 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.sys.ComponentCtrl;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zkex.zul.Center;
-import org.zkoss.zul.Div;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Tab;

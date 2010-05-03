@@ -18,9 +18,6 @@
  */
 package de.forsthaus.gui.service;
 
-import java.util.List;
-
-import de.forsthaus.backend.model.HibernateEntityStatistics;
 import de.forsthaus.backend.model.HibernateStatistics;
 
 /**

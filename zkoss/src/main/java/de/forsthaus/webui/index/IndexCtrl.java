@@ -92,7 +92,6 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 			logger.debug("--> " + event.toString());
 		}
 
-		// showWelcomePage();
 		mainMenuBar.setVisible(false);
 
 		createMainTreeMenu();

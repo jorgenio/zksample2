@@ -14,6 +14,7 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 04.05.2010 / Zksample2 v2.1 as ready to use war-file in sourceForgge.net available" + lf;
 		s = s + "- 02.05.2010 / Added a first Grid in Grid View for the Hibernate Statistic " + lf;
 		s = s + "                      DB transactions, which is implemented by a Spring Aspect. The view will following in" + lf;
 		s = s + "                      the  next days." + lf;

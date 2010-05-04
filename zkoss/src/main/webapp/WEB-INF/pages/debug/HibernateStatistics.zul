@@ -30,10 +30,6 @@
 		<grid id="gridHibernateStatisticList" fixedLayout="false">
 			<columns>
 				<column width="25px" />
-				<!-- 
-					<column
-					label="${c:l('gridHibernateStatistic.column.label.id')}" />
-				-->
 				<column
 					label="${c:l('gridHibernateStatistic.column.label.methodname')}" />
 				<column
@@ -44,6 +40,7 @@
 					width="170px" />
 			</columns>
 			<rows>
+			
 
 			</rows>
 		</grid>

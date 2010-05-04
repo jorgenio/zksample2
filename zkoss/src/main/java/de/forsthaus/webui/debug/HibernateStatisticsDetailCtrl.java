@@ -80,8 +80,11 @@ public class HibernateStatisticsDetailCtrl extends GenericForwardComposer {
 
 		// Set the variable for accessing in the zul-file the bean.properties
 		event.getTarget().setVariable("hs", getStatistics(), false);
+		event.getTarget().invalidate();
 
+		// create the entity listBox
 		doCreateEntityGrid(getStatistics());
+
 	}
 
 	/**

@@ -181,13 +181,15 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		// init the first entry for showing the long text.
 		ListModelList lml = (ListModelList) listBoxArticle.getModel();
 
-		// Now we would show the text of the first entry in the list.
+		// Now we would select and show the text of the first entry in the list.
 		// We became not the first item FROM the listbox because it's NOT
 		// RENDERED AT THIS TIME.
-		// So we take the first entry in the MODEL (ListModelList) and set as
+		// So we take the first entry from the MODEL (ListModelList) and set as
 		// selected.
 		if (lml.getSize() > 0) {
 			int rowIndex = 0;
+			// only for correct showing after Rendering. No effect as an Event
+			// yet.
 			listBoxArticle.setSelectedIndex(rowIndex);
 			// get the first entry and cast them to the needed object
 			Article article = (Article) lml.get(rowIndex);

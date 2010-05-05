@@ -160,18 +160,19 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 		// init the first entry for showing the long text.
 		ListModelList lml = (ListModelList) listbox_GuestBookList.getModel();
 
-		// Now we would show the text of the first entry in the list.
-		// We became not the first item FROM the list because it's not
-		// rendered at this time.
-		// So we take the first entry in the ListModelList and set as
+		// Now we would select and show the text of the first entry in the list.
+		// We became not the first item FROM the listbox because it's NOT
+		// RENDERED AT THIS TIME.
+		// So we take the first entry from the MODEL (ListModelList) and set as
 		// selected.
 		if (lml.getSize() > 0) {
 			int rowIndex = 0;
+			// only for correct showing after Rendering. No effect as an Event
+			// yet.
 			listbox_GuestBookList.setSelectedIndex(rowIndex);
 			// get the first entry and cast them to the needed object
 			GuestBook aGuestBook = (GuestBook) lml.get(rowIndex);
 			if (aGuestBook != null) {
-				// GuestBook guestBook = (GuestBook) item.getAttribute("data");
 				textbox_GuestBook_gubText.setValue(aGuestBook.getGubText());
 			}
 		}

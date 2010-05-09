@@ -22,6 +22,8 @@
 			<button id="btnRefresh"
 				image="/images/icons/refresh2_yellow_16x16.gif"
 				tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
+			<button id="btnDeleteRecords" image="/images/icons/btn_delete2_16x16.gif"
+				tooltiptext="${c:l('btnDeleteRecords.tooltiptext')}" />
 			<separator orient="vertical" />
 		</toolbar>
 

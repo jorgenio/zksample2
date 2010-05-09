@@ -32,4 +32,11 @@ public interface GuiHibernateStatisticsService {
 	 */
 	void initDetails(HibernateStatistics hibernateStatistics);
 
+	/**
+	 * Deletes all records in the HibernateStatistics and HibernateEntity Table
+	 * 
+	 * @return count of deleted records
+	 */
+	public int deleteAllRecords();
+
 }

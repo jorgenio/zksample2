@@ -152,7 +152,6 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
-
 	}
 
 	/**

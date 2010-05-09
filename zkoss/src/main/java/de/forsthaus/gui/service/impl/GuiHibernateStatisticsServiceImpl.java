@@ -53,4 +53,9 @@ public class GuiHibernateStatisticsServiceImpl implements GuiHibernateStatistics
 		hibernateStatisticsService.initDetails(hibernateStatistics);
 	}
 
+	@Override
+	public int deleteAllRecords() {
+		return getHibernateStatisticsService().deleteAllRecords();
+	}
+
 }

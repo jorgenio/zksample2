@@ -35,4 +35,13 @@ public interface HibernateStatisticsDao {
 	 */
 	void initDetails(HibernateStatistics hibernateStatistics);
 
+	/**
+	 * EN: Deletes all records in the HibernateStatistics and
+	 * HibernateEntityStatitics table. <br>
+	 * DE: Loescht alle Datensaetze in den Tabellen HibernateEntityStatistics
+	 * und HibernateStatistic <br>
+	 * 
+	 */
+	public int deleteAllRecords();
+
 }

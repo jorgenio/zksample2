@@ -27,6 +27,7 @@ import de.forsthaus.backend.service.HibernateStatisticsService;
  * 
  */
 public class HibernateStatisticsServiceImpl implements HibernateStatisticsService {
+
 	private HibernateStatisticsDao hibernateStatisticsDao;
 
 	public HibernateStatisticsDao getHibernateStatisticsDao() {
@@ -40,5 +41,10 @@ public class HibernateStatisticsServiceImpl implements HibernateStatisticsServic
 	@Override
 	public void initDetails(HibernateStatistics hibernateStatistics) {
 		hibernateStatisticsDao.initDetails(hibernateStatistics);
+	}
+
+	@Override
+	public int deleteAllRecords() {
+		return hibernateStatisticsDao.deleteAllRecords();
 	}
 }

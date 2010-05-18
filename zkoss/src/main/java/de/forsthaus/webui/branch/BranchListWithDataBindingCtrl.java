@@ -20,23 +20,23 @@ package de.forsthaus.webui.branch;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
+import org.zkoss.zkplus.databind.BindingListModelList;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.FieldComparator;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listheader;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Paging;
 import org.zkoss.zul.Panel;
 import org.zkoss.zul.Textbox;
@@ -48,7 +48,6 @@ import de.forsthaus.UserWorkspace;
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.service.BrancheService;
 import de.forsthaus.backend.util.HibernateSearchObject;
-import de.forsthaus.webui.branch.model.BranchListModelItemRenderer;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 
@@ -64,6 +63,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
  *          (GenericForwardComposer) for spring-managed creation.<br>
  *          03/09/2009: sge changed for allow repainting after resizing.<br>
  *          with the refresh button.<br>
+ *          05/18/2010: sge changed for working with databinding.
+ * 
  * 
  * @author bbruhns
  * @author sgerth
@@ -83,7 +84,7 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 	protected Panel panel_BranchList; // autowired
 	protected Borderlayout borderLayout_branchListWithDataBinding; // autowire
 
-	// filter components
+	// components for filtering
 	protected Checkbox checkbox_Branch_ShowAll; // autowire
 	protected Textbox tb_Branch_Name; // aurowire
 
@@ -103,11 +104,11 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 
 	private transient BrancheService brancheService;
 
-	private transient List<Branche> branches;
+	// Binding Stuff
+	private transient AnnotateDataBinder binder;
+	private transient BindingListModelList branches;
 	private transient Branche selectedBranche;
 	private transient Branche branche;
-
-	private transient AnnotateDataBinder binder;
 
 	/**
 	 * default constructor.<br>
@@ -120,21 +121,39 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 		}
 	}
 
+	@Override
+	public void doAfterCompose(Component window) throws Exception {
+
+		super.doAfterCompose(window);
+
+		// set the composer name in the zul page for access.
+		if (self != null)
+			self.setVariable("controller", this, true);
+	}
+
 	public void onCreate$window_BranchesListWithDataBinding(Event event) throws Exception {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
 
+		// get the Binder
+		binder = (AnnotateDataBinder) event.getTarget().getVariable("binder", true);
+
 		/* set components visible dependent of the users rights */
 		doCheckRights();
+
+		doShowList();
+
+	}
+
+	public void doShowList() {
 
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
 		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
 		 * filled by onClientInfo() in the indexCtroller
 		 */
-
 		int panelHeight = 25;
 		// TODO put the logic for working with panel in the ApplicationWorkspace
 		boolean withPanel = false;
@@ -170,11 +189,27 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 		// ++ create the searchObject and init sorting ++ //
 		HibernateSearchObject<Branche> searchObjBranch = new HibernateSearchObject<Branche>(Branche.class, getCountRows());
 		searchObjBranch.addSort("braBezeichnung", false);
-		// Set the ListModel
-		getPagedListWrapper().init(searchObjBranch, listBoxBranch, paging_BranchList);
-		// set the itemRenderer
-		listBoxBranch.setItemRenderer(new BranchListModelItemRenderer());
 
+		// ++ Set the BindingListModelList ++ //
+		getPagedBindingListWrapper().init(searchObjBranch, listBoxBranch, paging_BranchList);
+		BindingListModelList lml = (BindingListModelList) listBoxBranch.getModel();
+		setBranches(lml);
+
+		// check if first time opened and INIT databinding for selectedBean
+		if (getSelectedBranche() == null) {
+			// init the bean with the first record in the List
+			if (lml.getSize() > 0) {
+				int rowIndex = 0;
+				// only for correct showing after Rendering. No effect as an
+				// Event
+				// yet.
+				listBoxBranch.setSelectedIndex(rowIndex);
+				// get the first entry and cast them to the needed object
+				setSelectedBranche((Branche) lml.get(0));
+			}
+		}
+
+		binder.loadAll();
 	}
 
 	/**
@@ -221,19 +256,31 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 	 * @param event
 	 * @throws Exception
 	 */
-	public void onDoubleClicked(Event event) throws Exception {
+	public void onBranchListItemDoubleClicked(Event event) throws Exception {
 
+		// // get the selected object
+		// Listitem item = listBoxBranch.getSelectedItem();
+		//
+		// if (item != null) {
+		// // CAST TO THE SELECTED OBJECT
+		// Branche aBranche = (Branche) item.getAttribute("data");
+		//
+		// if (logger.isDebugEnabled()) {
+		// logger.debug("--> " + aBranche.getBraBezeichnung());
+		// }
+		//
+		// showDetailView(aBranche);
+		// }
 		// get the selected object
-		Listitem item = listBoxBranch.getSelectedItem();
+		Branche aBranche = getSelectedBranche();
 
-		if (item != null) {
-			// CAST TO THE SELECTED OBJECT
-			Branche aBranche = (Branche) item.getAttribute("data");
+		if (aBranche != null) {
 
 			if (logger.isDebugEnabled()) {
 				logger.debug("--> " + aBranche.getBraBezeichnung());
 			}
 
+			System.out.println(aBranche.getBraBezeichnung());
 			showDetailView(aBranche);
 		}
 	}
@@ -308,6 +355,7 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 		// empty the text search boxes
 		tb_Branch_Name.setValue(""); // clear
 
+		getPagedBindingListWrapper().clearFilters();
 		// getPagedListWrapper().clearFilters();
 	}
 
@@ -365,7 +413,7 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 			searchObjBranch.addFilter(new Filter("braBezeichnung", "%" + tb_Branch_Name.getValue() + "%", Filter.OP_ILIKE));
 			searchObjBranch.addSort("braBezeichnung", false);
 
-			// getPagedListWrapper().setSearchObject(searchObjBranch);
+			getPagedBindingListWrapper().setSearchObject(searchObjBranch);
 		}
 	}
 
@@ -389,14 +437,6 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 		return branche;
 	}
 
-	public void setBranches(List<Branche> branches) {
-		this.branches = branches;
-	}
-
-	public List<Branche> getBranches() {
-		return branches;
-	}
-
 	public int getCountRows() {
 		return countRows;
 	}
@@ -411,6 +451,22 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 
 	public void setBinder(AnnotateDataBinder binder) {
 		this.binder = binder;
+	}
+
+	public void setBranches(BindingListModelList branches) {
+		this.branches = branches;
+	}
+
+	public BindingListModelList getBranches() {
+		return branches;
+	}
+
+	public Branche getSelectedBranche() {
+		return selectedBranche;
+	}
+
+	public void setSelectedBranche(Branche selectedBranche) {
+		this.selectedBranche = selectedBranche;
 	}
 
 }

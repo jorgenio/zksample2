@@ -18,12 +18,17 @@
  */
 package de.forsthaus.webui.util;
 
+import de.forsthaus.webui.util.pagging.PagedBindingListWrapper;
 import de.forsthaus.webui.util.pagging.PagedListWrapper;
 
 /**
  * Extended the GFCBase controller for a pagedListWrapper for a single type.
  * 
+ * @changes 05/18/2010 sge extended for the Paged<b>Binding</b>ListWrapper that
+ *          can work with zk's databinding mechanism.
+ * 
  * @author bbruhns
+ * @author sgerth
  */
 public class GFCBaseListCtrl<T> extends GFCBaseCtrl {
 
@@ -31,12 +36,22 @@ public class GFCBaseListCtrl<T> extends GFCBaseCtrl {
 
 	private PagedListWrapper<T> pagedListWrapper;
 
+	private PagedBindingListWrapper<T> pagedBindingListWrapper;
+
 	public PagedListWrapper<T> getPagedListWrapper() {
 		return pagedListWrapper;
 	}
 
 	public void setPagedListWrapper(PagedListWrapper<T> pagedListWrapper) {
 		this.pagedListWrapper = pagedListWrapper;
+	}
+
+	public void setPagedBindingListWrapper(PagedBindingListWrapper<T> pagedBindingListWrapper) {
+		this.pagedBindingListWrapper = pagedBindingListWrapper;
+	}
+
+	public PagedBindingListWrapper<T> getPagedBindingListWrapper() {
+		return pagedBindingListWrapper;
 	}
 
 }

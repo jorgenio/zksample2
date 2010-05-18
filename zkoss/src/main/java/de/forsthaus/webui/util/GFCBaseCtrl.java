@@ -29,7 +29,6 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.sys.ComponentsCtrl;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Window;
 
 import de.forsthaus.UserWorkspace;
@@ -38,16 +37,14 @@ import de.forsthaus.UserWorkspace;
  * Base controller for creating the controllers of the zul files with the spring
  * framework.
  * 
+ * @changes 05/18/2010 sge cleaned up from old stuff.
+ * 
  * @author bbruhns
  * @author sgerth
  */
 abstract public class GFCBaseCtrl extends GenericForwardComposer implements Serializable {
 
-	// private transient static final Logger logger =
-	// Logger.getLogger(GFCBaseCtrl.class);
 	private static final long serialVersionUID = -1171206258809472640L;
-
-	protected transient AnnotateDataBinder binder;
 
 	protected transient Map<String, Object> args;
 
@@ -64,19 +61,8 @@ abstract public class GFCBaseCtrl extends GenericForwardComposer implements Seri
 		return ce.getArg();
 	}
 
-	public void doSetComposerName(Window w) throws Exception {
-		// make models visible for the databinder
-		w.setVariable("controller", this, false);
-	}
-
-	public void doOnCreateCommon(Window w) throws Exception {
-		binder = new AnnotateDataBinder(w);
-		binder.loadAll();
-	}
-
 	@SuppressWarnings("unchecked")
 	public void doOnCreateCommon(Window w, Event fe) throws Exception {
-		doOnCreateCommon(w);
 		CreateEvent ce = (CreateEvent) ((ForwardEvent) fe).getOrigin();
 		args = ce.getArg();
 	}

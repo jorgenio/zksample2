@@ -79,20 +79,32 @@
 			</north>
 
 			<center border="none">
+
 				<listbox id="listBoxBranch" vflex="true"
+					model="@{controller.branches}"
+					selectedItem="@{controller.selectedBranche}"
 					tooltiptext="${c:l('listbox.tooltiptext')}" width="99.9%"
 					height="100%" multiple="false">
+
 					<listhead sizable="true">
 						<listheader id="listheader_Branch_Description"
 							image="/images/icons/sequence.gif"
 							label="${c:l('listheader_Branch_Description.label')}" sort="auto"
 							width="50%" />
 					</listhead>
+
+					<listitem self="@{each='branch'}" value="@{branch}"
+						forward="onDoubleClick=onBranchListItemDoubleClicked">
+
+						<listcell label="@{branch.braBezeichnung}"
+							style="padding-left: 5px" />
+
+					</listitem>
 				</listbox>
 			</center>
 
 			<south border="none">
-				<separator />
+			
 			</south>
 
 		</borderlayout>

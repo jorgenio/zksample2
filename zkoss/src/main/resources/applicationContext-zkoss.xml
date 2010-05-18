@@ -242,7 +242,7 @@
 		<property name="gridPagedListWrapper" ref="pagedGridWrapper" />
 	</bean>
 	<bean id="hibernateStatisticsDetailCtrl" class="de.forsthaus.webui.debug.HibernateStatisticsDetailCtrl"
-		 scope="prototype">
+		scope="prototype">
 		<property name="guiHibernateStatisticsService" ref="guiHibernateStatisticsService" />
 	</bean>
 
@@ -259,6 +259,11 @@
 	</bean>
 
 	<bean name="pagedListWrapper" class="de.forsthaus.webui.util.pagging.PagedListWrapper"
+		p:pagedListService-ref="pagedListService" scope="prototype">
+	</bean>
+
+	<bean name="pagedBindingListWrapper"
+		class="de.forsthaus.webui.util.pagging.PagedBindingListWrapper"
 		p:pagedListService-ref="pagedListService" scope="prototype">
 	</bean>
 

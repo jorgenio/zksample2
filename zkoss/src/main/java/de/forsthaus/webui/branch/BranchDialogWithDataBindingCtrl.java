@@ -26,10 +26,11 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -51,6 +52,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
  *          11/07/2009: bbr changed to extending from GFCBaseCtrl<br>
  *          (GenericForwardComposer) for spring-managed creation.<br>
  *          02/16/2010: sge changed to work with Databinding.<br>
+ *          05/18/2010: sge changed to work with Paged<b>Binding</b>ListWrapper.<br>
+ *          clear from old stuff.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -70,10 +73,8 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 	protected Window window_BranchesDialogWithDataBinding; // autowired
 	protected Textbox braBezeichnung; // autowired
 
-	// not wired vars
-	private transient BranchListWithDataBindingCtrl branchListWithDataBindingCtrl; // overhanded
-	// per
-	// param
+	// not wired vars --> overhanded per paramMap
+	private transient BranchListWithDataBindingCtrl branchListWithDataBindingCtrl;
 
 	// Button controller for the CRUD buttons
 	private final String btnCtroller_ClassPrefix = "button_BranchDialog_";
@@ -88,10 +89,12 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 	protected Button btnHelp; // autowire
 
 	// ServiceDAOs / Domain classes
+	private transient BrancheService brancheService;
+
+	// DataBinding Stuff
 	private Branche branche; // overhanded per param
 	private Branche origBranche; // holds the origin bean for reset
-
-	private transient BrancheService brancheService;
+	private AnnotateDataBinder binder;
 
 	/**
 	 * default constructor.<br>
@@ -102,6 +105,16 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> super()");
 		}
+	}
+
+	@Override
+	public void doAfterCompose(Component window) throws Exception {
+
+		super.doAfterCompose(window);
+
+		// set the composer name in the zul page for access.
+		if (self != null)
+			self.setVariable("controller", this, true);
 	}
 
 	/**
@@ -116,10 +129,12 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
+
+		// get the binder instance
+		binder = (AnnotateDataBinder) event.getTarget().getVariable("binder", true);
+
 		// create the Button Controller. Disable not used buttons during working
 		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
-
-		doSetComposerName(window_BranchesDialogWithDataBinding);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -204,6 +219,7 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
+
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}
@@ -452,10 +468,25 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 	 * Set the components for edit mode. <br>
 	 */
 	private void doEdit() {
-		Window w = window_BranchesDialogWithDataBinding;
 
-		Textbox t = (Textbox) w.getFellowIfAny("braBezeichnung");
-		t.setReadonly(false);
+		final Branche aBranche = getBranche();
+
+		// check if it's a system object needed for the application
+		if (StringUtils.isBlank(aBranche.getBraBezeichnung()) && (!aBranche.isNew())) {
+			try {
+				// Show a error box
+				String msg1 = Labels.getLabel("message.information.cannot_made_changes_on_system_object");
+				String title1 = Labels.getLabel("message_Information");
+
+				MultiLineMessageBox.doSetTemplate();
+				MultiLineMessageBox.show(msg1, title1, MultiLineMessageBox.OK, "ERROR", true);
+				return;
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+		braBezeichnung.setReadonly(false);
 
 		btnCtrl.setBtnStatus_Edit();
 
@@ -468,10 +499,7 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 	 */
 	public void doReadOnly() {
 
-		Window w = window_BranchesDialogWithDataBinding;
-
-		Textbox t = (Textbox) w.getFellowIfAny("braBezeichnung");
-		t.setReadonly(true);
+		braBezeichnung.setReadonly(true);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -522,14 +550,8 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 				// delete from database
 				getBrancheService().delete(aBranche);
 
-				// now synchronize the branches listBox
-				ListModelList lml = (ListModelList) getBranchListWithDataBindingCtrl().listBoxBranch.getListModel();
-				// Check if the branch object is new or updated
-				// -1 means that the object is not in the list, so it's new.
-				if (lml.indexOf(aBranche) == -1) {
-				} else {
-					lml.remove(lml.indexOf(aBranche));
-				}
+				// Set the BindingListModelList new
+				getBranchListWithDataBindingCtrl().doShowList();
 
 				// close the dialog
 				window_BranchesDialogWithDataBinding.onClose();
@@ -569,13 +591,6 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 	 */
 	public void doSave() throws InterruptedException {
 
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		// force validation, if on, than execute by component.getValue()
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		// if (!isValidationOn()) {
-		// doSetValidation();
-		// }
-
 		Branche aBranche = getBranche();
 		// UI_to_Bean
 		binder.saveAll();
@@ -614,29 +629,15 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 				return;
 			}
 
-			// Set the ListModel
-			// set the initial Data List
-			getBranchListWithDataBindingCtrl().setBranches(getBrancheService().getAlleBranche());
-
-			// Bean_To_UI
-			getBranchListWithDataBindingCtrl().getBinder().loadAll();
-
-			// now synchronize the branches listBox
-			ListModelList lml = (ListModelList) getBranchListWithDataBindingCtrl().listBoxBranch.getListModel();
-
-			// Check if the branch object is new or updated
-			// -1 means that the object is not in the list, so it's new.
-			if (lml.indexOf(aBranche) == -1) {
-				lml.add(aBranche);
-			} else {
-				lml.set(lml.indexOf(aBranche), aBranche);
-			}
+			// Set the BindingListModelList new
+			getBranchListWithDataBindingCtrl().doShowList();
 
 		}
 
 		doReadOnly();
 		btnCtrl.setInitEdit();
 		// init the old values vars new
+		doStoreInitValues();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

@@ -103,7 +103,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 		date.setDate(18);
 		date.setMonth(4);
 		date.setYear(110);
-		statusBarAppVersion.setLabel("Zksample2 v2.1 / build: " + FDDateFormat.getDateFormater().format(date));
+		statusBarAppVersion.setLabel("Zksample2 v2.1.1 / build: " + FDDateFormat.getDateFormater().format(date));
 		statusBarColUser.setLabel(doGetLoggedInUser());
 
 	}

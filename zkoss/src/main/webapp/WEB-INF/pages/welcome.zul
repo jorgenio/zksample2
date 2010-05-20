@@ -70,11 +70,9 @@
 		s = s + "                      http://www.zkoss.org/forum/listComment/6927/ " + lf;
 		s = s + "- 11.06.2009 / Updated to ZKoss version 3.6.2. " + lf;
 		s = s + "- 15.05.2009 / Updated to ZKoss version 3.6.1.  " + lf;
-		s = s + "- New !!! All listboxes are now working with paging and sorting described in our smalltalk. " + lf;
+		s = s + "- 02.05.2009 / All listboxes are now working with paging and sorting described in our smalltalk. " + lf;
 		s = s + "                      ([Performance] Paging and Sorting with a Filter Object) " + lf;
 		s = s + "                      Link: http://docs.zkoss.org/wiki/Paging_Sorting_with_a_filter_object " + lf;
-		s = s + " " + lf;
-		s = s + "- Only pure Java with small zul-files. Minimal use of ZScript." + lf;
 
 	}
 ]]></zscript>

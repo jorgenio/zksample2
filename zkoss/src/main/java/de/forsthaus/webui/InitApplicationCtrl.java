@@ -32,6 +32,8 @@ import org.zkoss.zhtml.Hr;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zkex.zul.Center;
 import org.zkoss.zkex.zul.North;
@@ -117,7 +119,8 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	private Vbox Vbox_Buttons;
 	private Panelchildren panelChildren_Buttons;
 
-	private Label label_RecordCountCustomer;
+	private Button btn100;
+	private Button btn1000;
 
 	// ServiceDAOs / Domain Classes
 	private transient CustomerService customerService;
@@ -500,35 +503,37 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		div_Buttons.setStyle("padding: 10px;");
 		div_Buttons.setParent(Vbox_Buttons);
 
-		/* 1000. Button */
+		/* 100. Button */
 		Div divBtn1 = new Div();
 		divBtn1.setStyle("align: center");
 		divBtn1.setParent(div_Buttons);
 
-		Button btn = new Button();
-		btn.setLabel("insert 1000");
-		btn.setImage("/images/icons/import_16x16.gif");
-		btn.setTooltiptext("Insert 1.000 randomly created customer records");
-		btn.setParent(divBtn1);
+		btn100 = new Button();
+		btn100.setId("btn100");
+		btn100.setLabel("insert 100");
+		btn100.setImage("/images/icons/import_16x16.gif");
+		btn100.setTooltiptext("Insert 100 randomly created customer records");
+		btn100.setParent(divBtn1);
 
-		btn.addEventListener("onClick", new OnClick1000Eventlistener());
+		btn100.addEventListener("onClick", new OnClick100Eventlistener());
 
 		/* Separator */
 		createNewSeparator(div_Buttons, "horizontal", false, "5", "");
 		createNewSeparator(div_Buttons, "horizontal", false, "5", "");
 
-		/* 10.000 Button */
+		/* 1.000 Button */
 		Div divBtn2 = new Div();
 		divBtn2.setStyle("align: center;");
 		divBtn2.setParent(div_Buttons);
 
-		Button btn2 = new Button();
-		btn2.setLabel("insert 10.000");
-		btn2.setImage("/images/icons/import_16x16.gif");
-		btn2.setTooltiptext("Insert 10.000 randomly created customer records");
-		btn2.setParent(divBtn2);
+		btn1000 = new Button();
+		btn1000.setId("btn1000");
+		btn1000.setLabel("insert 1.000");
+		btn1000.setImage("/images/icons/import_16x16.gif");
+		btn1000.setTooltiptext("Insert 1.000 randomly created customer records");
+		btn1000.setParent(divBtn2);
 
-		btn2.addEventListener("onClick", new OnClick10000Eventlistener());
+		btn1000.addEventListener("onClick", new OnClick1000Eventlistener());
 
 		createNewSeparator(div_Buttons, "horizontal", false, "5", "");
 
@@ -638,10 +643,12 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		Row row;
 		Label label_TableName;
 		Label label_RecordCount;
+
 		row = new Row();
 		label_TableName = new Label(tableName);
 		label_TableName.setParent(row);
 		label_RecordCount = new Label(String.valueOf(value));
+		label_RecordCount.setId("label_RecordCount_" + tableName);
 		label_RecordCount.setParent(row);
 		row.setParent(rowParent);
 	}
@@ -678,33 +685,59 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	}
 
 	/**
-	 * EventListener for the 1000 Button.<br>
-	 * 
-	 * @author sge
-	 * 
+	 * EventListener for the inserted 1000 customers Button.<br>
+	 * The creation of the records runs in an Echo-event that shows the user a
+	 * busy message.
 	 */
 	public final class OnClick1000Eventlistener implements EventListener {
+
 		@Override
 		public void onEvent(Event event) throws Exception {
-			// Clients.showBusy("Long operation is running", true);
-
-			createDemoCustomers(1000);
+			// we create the records in an Echo-event to show a message to the
+			// user for this long running operation.
+			Clients.showBusy(Labels.getLabel("message.Information.LongOperationIsRunning"), true);
+			Events.echoEvent("onCreate1000Customers", startWindow, null);
 		}
 	}
 
 	/**
-	 * EventListener for the 10.000 Button.<br>
+	 * Calls the long running method that creates the records and closes the
+	 * echo event message if ready.
 	 * 
-	 * @author sge
-	 * 
+	 * @param event
+	 * @throws Exception
 	 */
-	public final class OnClick10000Eventlistener implements EventListener {
+	public void onCreate1000Customers(Event event) throws Exception {
+
+		createDemoCustomers(1000); // the long running process
+		Clients.showBusy("", false); // close the message
+	}
+
+	/**
+	 * EventListener for the inserted 100 customers Button.<br>
+	 * The creation of the records runs in an Echo-event that shows the user a
+	 * busy message.
+	 */
+	public final class OnClick100Eventlistener implements EventListener {
 		@Override
 		public void onEvent(Event event) throws Exception {
-			// Clients.showBusy("Long operation is running", true);
-
-			createDemoCustomers(10000);
+			// we create the records in an Echo-event to show a message to the
+			// user for this long running operation.
+			Clients.showBusy(Labels.getLabel("message.Information.LongOperationIsRunning"), true);
+			Events.echoEvent("onCreate100Customers", startWindow, null);
 		}
+	}
+
+	/**
+	 * Calls the long running method that creates the records and closes the
+	 * echo event message if ready.
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
+	public void onCreate100Customers(Event event) throws Exception {
+		createDemoCustomers(100);
+		Clients.showBusy("", false); // close the message
 	}
 
 	/**
@@ -764,7 +797,10 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 			getCustomerService().saveOrUpdate(customer);
 		}
 
-		label_RecordCountCustomer.setValue(String.valueOf(getTotalCountRecordsForCustomer()));
+		// set the value of the records to the label. The Label ID is created
+		// dynamically in the method 'addNewRow()'
+		Label label = (Label) startWindow.getFellowIfAny("label_RecordCount_Customer");
+		label.setValue(String.valueOf(getTotalCountRecordsForCustomer()));
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

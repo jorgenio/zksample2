@@ -10,6 +10,8 @@ import org.zkoss.zul.Textbox;
 
 public class PiggyBackMessageDemo extends Div {
 
+	private static final long serialVersionUID = 1L;
+
 	static volatile String message = null;
 
 	public PiggyBackMessageDemo() {
@@ -33,7 +35,8 @@ public class PiggyBackMessageDemo extends Div {
 		Button readMessage = new Button("Read Message");
 		readMessage.addEventListener(Events.ON_CLICK, new EventListener() {
 			public void onEvent(Event evt) throws Exception {
-                                // this is just an example of user interacting with the application
+				// this is just an example of user interacting with the
+				// application
 			}
 		});
 

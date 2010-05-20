@@ -14,6 +14,8 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 20.05.2010 / Added an ECHO EVENT. The long running process of inserting sample customer records now running" + lf;
+		s = s + "                      in an echo event and shows a localized busy message during the process." + lf;
 		s = s + "- 18.05.2010 / Added a PagedBindingListWrapper ( paging/sorting/searching on DB-side ) for the listbox " + lf;
 		s = s + "                      component that can work with zk's DataBinding mechanism. So the Branch module " + lf;
 		s = s + "                      works now complete databinded. The same for the grid will follow next times." + lf;

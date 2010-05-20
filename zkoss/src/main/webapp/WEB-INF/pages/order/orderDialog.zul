@@ -207,7 +207,7 @@
 									<row>
 										<label
 											id="label_OrderDialog_kunName1"
-											value="${c:l('label_OrderDialog_kunName1.value')}" />
+											value="${c:l('label_OrderDialog_kunName.value')}" />
 										<textbox id="kunName1"
 											width="99%" />
 									</row>

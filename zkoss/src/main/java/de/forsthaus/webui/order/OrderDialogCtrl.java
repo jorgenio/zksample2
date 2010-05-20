@@ -268,7 +268,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doSetFieldProperties() {
 		kunNr.setMaxlength(20);
-		kunName1.setMaxlength(50);
+		kunName1.setMaxlength(150);
 		aufNr.setMaxlength(20);
 		aufBezeichnung.setMaxlength(50);
 	}

@@ -736,6 +736,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	 * @throws Exception
 	 */
 	public void onCreate100Customers(Event event) throws Exception {
+
 		createDemoCustomers(100);
 		Clients.showBusy("", false); // close the message
 	}
@@ -765,10 +766,14 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		/* check if over 200.000 records in DB */
 		if (getTotalCountRecordsForCustomer() >= 200000) {
 
+			// close the echo event bussy message
+			Clients.showBusy("", false); // close the message
+
 			String message = Labels.getLabel("Demo.not_more_than_200000_records");
 			String title = Labels.getLabel("message_Information");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+
 			return;
 		}
 

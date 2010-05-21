@@ -14,6 +14,7 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 21.05.2010 / Fixed bug in the running logic of the echo events and an additional modal message." + lf;
 		s = s + "- 20.05.2010 / Added ECHO EVENTs. The long running process of inserting sample customer records now running" + lf;
 		s = s + "                      in an echo event and shows a localized busy message during the process. DOCUMENTATION updated. " + lf;
 		s = s + "- 18.05.2010 / Added a PagedBindingListWrapper ( paging/sorting/searching on DB-side ) for the listbox " + lf;

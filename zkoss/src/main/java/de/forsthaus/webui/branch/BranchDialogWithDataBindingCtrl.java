@@ -425,7 +425,14 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 		return changed;
 	}
 
+	/**
+	 * Saves the object's current properties. We can get them back if a
+	 * modification is canceled.
+	 * 
+	 * @see doResetToInitValues()
+	 */
 	public void doStoreInitValues() {
+
 		try {
 			setOrigBranche((Branche) org.apache.commons.beanutils.BeanUtils.cloneBean(getBranche()));
 		} catch (IllegalAccessException e) {
@@ -441,9 +448,14 @@ public class BranchDialogWithDataBindingCtrl extends GFCBaseCtrl implements Seri
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
+	/**
+	 * Reset the object to its origin property values.
+	 * 
+	 * @see doStoreInitValues()
+	 * 
+	 */
 	public void doResetToInitValues() {
 
 		try {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Spring namespace-based configuration -->
+	<!-- Spring namespace-based configuration -->
 
 <beans:beans xmlns="http://www.springframework.org/schema/security"
 	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 	       http://www.springframework.org/schema/aop   
@@ -61,7 +61,8 @@
 		<!--                 Per user one session !!                -->
 		<!--               In DEMO mode we set it to 5              -->
 		<!-- ====================================================== -->
-		<!--		<concurrent-session-control max-sessions="5" />-->
+		<!-- v2.x	<concurrent-session-control max-sessions="5" /> -->
+
 	</http>
 
 	<!-- ====================================================== -->
@@ -75,7 +76,7 @@
 	<authentication-manager alias="authenticationManager">
 		<authentication-provider user-service-ref="myUserDetailsService">
 			<!--  The password encoder is additonally for     -->
-			<!--   simulating  a one-time-password mechansim  -->
+			<!--   simulating  a one-time-password mechanism  -->
 			<password-encoder ref="passwordEncoder">
 				<salt-source user-property="token" />
 			</password-encoder>
@@ -102,17 +103,21 @@
 	<!--         Here, only for showing in the console          -->
 	<!--               that we can catches the events.          -->
 	<!-- ====================================================== -->
-<!--	<zksp:zk-event login-template-close-delay="5">-->
-<!--		<zksp:intercept-event path="//**/btn_*" event="onClick"-->
-<!--			access="IS_AUTHENTICATED_REMEMBERED" />-->
-<!--		<zksp:intercept-event path="/**" event="onClick"-->
-<!--			access="IS_AUTHENTICATED_ANONYMOUSLY" />-->
+	<!--	<zksp:zk-event login-template-close-delay="5">-->
+	<!--		<zksp:intercept-event path="//**/btn_*" event="onClick"-->
+	<!--			access="IS_AUTHENTICATED_REMEMBERED" />-->
+	<!--		<zksp:intercept-event path="/**" event="onClick"-->
+	<!--			access="IS_AUTHENTICATED_ANONYMOUSLY" />-->
 <!---->
-<!--		<zksp:intercept-event path="//**/window_BranchesList/listBoxBranch"-->
-<!--			event="onClick" access="IS_AUTHENTICATED_ANONYMOUSLY" />-->
-<!--		<zksp:intercept-event path="//**/window_BranchesList/listBoxBranch"-->
-<!--			event="onDoubleClick" access="IS_AUTHENTICATED_REMEMBERED" />-->
-<!--	</zksp:zk-event>-->
+	<!--
+		<zksp:intercept-event path="//**/window_BranchesList/listBoxBranch"
+	-->
+	<!--			event="onClick" access="IS_AUTHENTICATED_ANONYMOUSLY" />-->
+	<!--
+		<zksp:intercept-event path="//**/window_BranchesList/listBoxBranch"
+	-->
+	<!--			event="onDoubleClick" access="IS_AUTHENTICATED_REMEMBERED" />-->
+	<!--	</zksp:zk-event>-->
 
 
 	<!-- ====================================================== -->

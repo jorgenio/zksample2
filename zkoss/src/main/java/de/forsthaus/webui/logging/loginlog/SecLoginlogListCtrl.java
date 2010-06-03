@@ -25,11 +25,10 @@ import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.zkoss.util.resource.Labels;
-import org.zkoss.zk.device.AjaxDevice;
-import org.zkoss.zk.device.Device;
 import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zul.Bandbox;
@@ -38,10 +37,12 @@ import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.FieldComparator;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Paging;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Timer;
 import org.zkoss.zul.Window;
 
 import com.trg.search.Filter;
@@ -112,10 +113,14 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	protected Listheader listheader_SecLoginlogList_CountryCode2;
 	protected Listheader listheader_SecLoginlogList_lglSessionid; // autowired
 
-	// Server push
+	// Server push -OLD-
 	private transient Desktop desktop;
 	private transient WorkingThreadLoginList thread;
 	private transient WorkingThreadLoginList serverPush;
+
+	// Server push -NEW-
+	private transient Timer timer;
+	private int callChanger = 0;
 
 	// row count for listbox
 	private int countRows;
@@ -192,6 +197,52 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		// set the itemRenderer
 		listBoxSecUserlog.setItemRenderer(new SecLoginlogListModelItemRenderer());
 
+		createServerPushTimer();
+
+	}
+
+	/**
+	 * Creates the Timer for the serverPush mechanism. In it we call to
+	 * different DB methods for showing different result sets.
+	 */
+	private void createServerPushTimer() {
+		timer = new Timer();
+
+		// timer doesn't work without a page as parent
+		timer.setPage(secLoginlogListWindow.getPage());
+		timer.setDelay(4000);
+		timer.setRepeats(true);
+		timer.addEventListener("onTimer", new EventListener() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+				callChanger = callChanger + 1;
+
+				System.out.println(callChanger);
+
+				if (callChanger % 2 == 0) {
+					updateList(); // do something
+				} else {
+					updateList2(); // do something others
+				}
+
+				if (callChanger == 5) {
+					callChanger = 0;
+					// stop serverPush
+					timer.setRunning(false);
+					checkbox_SecLoginlogList_ServerPush.setChecked(false);
+					checkbox_SecLoginlogList_ShowAll.setChecked(true);
+
+					String message = Labels.getLabel("message.information.only5timesAllowedBecauseHS");
+					String title = Labels.getLabel("message_Information") + " --> ServerPush-Sample";
+					MultiLineMessageBox.doSetTemplate();
+					MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+
+					return;
+				}
+			}
+		});
+		timer.setRunning(false);
 	}
 
 	public void onClose$secLoginlogListWindow(Event event) throws Exception {
@@ -355,28 +406,73 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		}
 	}
 
+	/**
+	 * Stops the serverPush mechanism.
+	 * 
+	 * @param event
+	 */
 	private void doStopServerPush(Event event) {
 
-		if (serverPush != null) {
-			try {
-				serverPush.setDone();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		/**
+		 * We changed the serverPush mechanism from working with a thread to a
+		 * timer. Because in our spring managed session this created thread have
+		 * no parent!! So we use newly a timer .
+		 */
+		// if (serverPush != null) {
+		// try {
+		// serverPush.setDone();
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		// }
+
+		if (timer != null) {
+			timer.setRunning(false);
 		}
 	}
 
+	/**
+	 * Starts the serverPush mechanism.
+	 * 
+	 * @param event
+	 */
 	private void doStartServerPush(Event event) {
 
-		Device dv = new AjaxDevice();
-		dv.setServerPushClass(org.zkoss.zkmax.ui.comet.CometServerPush.class);
+		/**
+		 * We changed the serverPush mechanism from working with a thread to a
+		 * timer. Because in our spring managed session this created thread have
+		 * no parent!! So we use newly a timer .
+		 */
+		// Device dv = new AjaxDevice();
+		// dv.setServerPushClass(org.zkoss.zkmax.ui.comet.CometServerPush.class);
+		//
+		// if (!secLoginlogListWindow.getDesktop().isServerPushEnabled()) {
+		// secLoginlogListWindow.getDesktop().enableServerPush(true);
+		// }
+		//
+		// serverPush = new WorkingThreadLoginList((Listbox)
+		// secLoginlogListWindow.getFellow("listBoxSecUserlog"),
+		// getLoginLoggingService());
+		// serverPush.start();
 
-		if (!secLoginlogListWindow.getDesktop().isServerPushEnabled()) {
-			secLoginlogListWindow.getDesktop().enableServerPush(true);
+		// start the timer
+		if (timer != null) {
+			timer.setRunning(true);
 		}
+	}
 
-		serverPush = new WorkingThreadLoginList((Listbox) secLoginlogListWindow.getFellow("listBoxSecUserlog"), getLoginLoggingService());
-		serverPush.start();
+	/**
+	 * Gets all logins for success.
+	 */
+	public void updateList() {
+		listBoxSecUserlog.setModel(new ListModelList(getLoginLoggingService().getAllLogsServerPushForSuccess()));
+	}
+
+	/**
+	 * Gets all logins for failed.
+	 */
+	public void updateList2() {
+		listBoxSecUserlog.setModel(new ListModelList(getLoginLoggingService().getAllLogsServerPushForFailed()));
 	}
 
 	/**

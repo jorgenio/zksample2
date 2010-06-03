@@ -31,6 +31,11 @@ import de.forsthaus.backend.service.LoginLoggingService;
 /**
  * Worker thread for the server push sample.
  * 
+ * @changes 06/03/2010 sge We don't use this code further, because in our spring
+ *          managed session we have problems because this WorkerThread cannot
+ *          applied to a session.<br>
+ *          So we changed the mechanism to work with a timer.<br>
+ * 
  * @author bbruhns
  * @author sgerth
  * 

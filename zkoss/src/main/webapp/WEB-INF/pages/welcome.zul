@@ -14,6 +14,10 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 03.06.2010 / Replacement of the old serverPush mechanism working with a WorkerThread new to work with a timer. " + lf;
+		s = s + "                      Because this application is spring managed. So our Database transactions are spring managed" + lf;
+		s = s + "                      too. So we are not able to start the WorkerThread in such a session context for calling DB methods." + lf;
+		s = s + "                      Further it's limit to 5 calls and self stopped, as long as we logged all DB calls (Hibernate Statistic)." + lf;
 		s = s + "- 21.05.2010 / Fixing bug in the flow logic of the echo events and an additional modal message." + lf;
 		s = s + "- 20.05.2010 / Added ECHO EVENTs. The long running process of inserting sample customer records now running" + lf;
 		s = s + "                      in an echo event and shows a localized busy message during the process. DOCUMENTATION updated. " + lf;

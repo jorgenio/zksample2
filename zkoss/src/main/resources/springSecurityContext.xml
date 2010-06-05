@@ -62,6 +62,9 @@
 		<!--               In DEMO mode we set it to 5              -->
 		<!-- ====================================================== -->
 		<!-- v2.x	<concurrent-session-control max-sessions="5" /> -->
+		<session-management>
+			<concurrency-control max-sessions="5" />
+		</session-management>
 
 	</http>
 

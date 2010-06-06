@@ -39,10 +39,10 @@ public class SecUser implements java.io.Serializable, Entity {
 	private String usrFirstname;
 	private String usrEmail;
 	private String usrLocale;
-	private boolean usrEnabled;
-	private boolean usrAccountnonexpired;
-	private boolean usrCredentialsnonexpired;
-	private boolean usrAccountnonlocked;
+	private boolean usrEnabled = true;
+	private boolean usrAccountnonexpired = true;
+	private boolean usrCredentialsnonexpired = true;
+	private boolean usrAccountnonlocked = true;
 	private String usrToken;
 	private Set<SecUserrole> secUserroles = new HashSet<SecUserrole>(0);
 
@@ -53,8 +53,7 @@ public class SecUser implements java.io.Serializable, Entity {
 	public SecUser() {
 	}
 
-	public SecUser(long id, String usrLoginname, String usrPassword, boolean usrEnabled, boolean usrAccountnonexpired,
-			boolean usrCredentialsnonexpired, boolean usrAccountnonlocked) {
+	public SecUser(long id, String usrLoginname, String usrPassword, boolean usrEnabled, boolean usrAccountnonexpired, boolean usrCredentialsnonexpired, boolean usrAccountnonlocked) {
 		this.setId(id);
 		this.usrLoginname = usrLoginname;
 		this.usrPassword = usrPassword;
@@ -64,9 +63,8 @@ public class SecUser implements java.io.Serializable, Entity {
 		this.usrAccountnonlocked = usrAccountnonlocked;
 	}
 
-	public SecUser(long id, String usrLoginname, String usrPassword, String usrLastname, String usrFirstname, String usrEmail, String usrLocale,
-			boolean usrEnabled, boolean usrAccountnonexpired, boolean usrCredentialsnonexpired, boolean usrAccountnonlocked,
-			Set<SecUserrole> secUserroles) {
+	public SecUser(long id, String usrLoginname, String usrPassword, String usrLastname, String usrFirstname, String usrEmail, String usrLocale, boolean usrEnabled, boolean usrAccountnonexpired,
+			boolean usrCredentialsnonexpired, boolean usrAccountnonlocked, Set<SecUserrole> secUserroles) {
 		this.setId(id);
 		this.usrLoginname = usrLoginname;
 		this.usrPassword = usrPassword;

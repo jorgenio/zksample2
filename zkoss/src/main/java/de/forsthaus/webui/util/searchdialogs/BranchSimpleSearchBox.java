@@ -52,12 +52,8 @@ import de.forsthaus.backend.service.BrancheService;
  * call:
  * 
  * <pre>
- * Branch branch = BranchSimpleSearchBox.show(windowCustomerAddress);
+ * Branch branch = BranchSimpleSearchBox.show(parentComponent);
  * 
- * if (branch != null) {
- * 	getSelectedCustomer().setBranch(branch);
- * 	binder.loadAll();
- * }
  * </pre>
  * 
  * @author bbruhns

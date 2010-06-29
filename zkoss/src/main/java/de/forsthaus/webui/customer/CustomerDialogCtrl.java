@@ -23,6 +23,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.zkoss.util.resource.Labels;
@@ -54,6 +55,7 @@ import de.forsthaus.webui.customer.model.CustomerBrancheListModelItemRenderer;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.searchdialogs.BranchSimpleSearchBox;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -109,8 +111,10 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	protected Textbox kunName1; // autowired
 	protected Textbox kunName2; // autowired
 	protected Textbox kunOrt; // autowired
-	protected Listbox kunBranche; // autowired
 	protected Checkbox kunMahnsperre; // autowired
+
+	protected Textbox kunBranche; // autowired
+	protected Button btnSearchBranch; // autowired
 
 	// tab Chart
 	protected Tab tabCustomerDialogChart; // autowired
@@ -135,7 +139,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private transient String oldVar_kunName1;
 	private transient String oldVar_kunName2;
 	private transient String oldVar_kunOrt;
-	private transient Listitem oldVar_kunBranche;
+	private transient String oldVar_kunBranche;
 	private transient boolean oldVar_kunMahnsperre;
 
 	private transient boolean validationOn;
@@ -167,6 +171,10 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 			logger.debug("--> super()");
 		}
 	}
+
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// +++++++++++++++ Component Events ++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	/**
 	 * Before binding the data and calling the dialog window we check, if the
@@ -210,18 +218,21 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 			setCustomerListCtrl(null);
 		}
 
-		// +++++++++ DropDown ListBox +++++++++++++++++++ //
-		kunBranche.setModel(new ListModelList(getBrancheService().getAlleBranche()));
-
-		kunBranche.setItemRenderer(new CustomerBrancheListModelItemRenderer());
-
-		// get the ListModelList back for this Listbox for work with it
-		ListModelList lml = (ListModelList) kunBranche.getModel();
-		// get Object that we want to select in the Listbox
-		Branche branche = customer.getBranche();
-		// select the ListItem in the Listbox by an integerPosition by getting
-		// it's position in the corresponding ListModelList (lml)
-		kunBranche.setSelectedIndex(lml.indexOf(branche));
+		// // +++++++++ DropDown ListBox +++++++++++++++++++ //
+		// kunBranche.setModel(new
+		// ListModelList(getBrancheService().getAlleBranche()));
+		//
+		// kunBranche.setItemRenderer(new
+		// CustomerBrancheListModelItemRenderer());
+		//
+		// // get the ListModelList back for this Listbox for work with it
+		// ListModelList lml = (ListModelList) kunBranche.getModel();
+		// // get Object that we want to select in the Listbox
+		// Branche branche = customer.getBranche();
+		// // select the ListItem in the Listbox by an integerPosition by
+		// getting
+		// // it's position in the corresponding ListModelList (lml)
+		// kunBranche.setSelectedIndex(lml.indexOf(branche));
 
 		// set Field Properties
 		doSetFieldProperties();
@@ -458,6 +469,15 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	/**
+	 * If the Button 'Search Branch' is clicked.<br>
+	 * 
+	 * @param event
+	 */
+	public void onClick$btnSearchBranch(Event event) {
+		doSearchBranch(event);
+	}
+
+	/**
 	 * when the "close" button is clicked. <br>
 	 * 
 	 * @param event
@@ -552,6 +572,8 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		kunOrt.setValue(aCustomer.getKunOrt());
 		kunMahnsperre.setChecked(aCustomer.getKunMahnsperre());
 
+		kunBranche.setValue(aCustomer.getBranche().getBraBezeichnung());
+
 	}
 
 	/**
@@ -618,6 +640,24 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 	}
 
+	/**
+	 * Opens the Search and Get Dialog for Branches.<br>
+	 * It appends/changes the branch object for the current bean.<br>
+	 * 
+	 * @param event
+	 */
+	private void doSearchBranch(Event event) {
+
+		Branche branche = BranchSimpleSearchBox.show(window_customerDialog);
+
+		if (branche != null) {
+			kunBranche.setValue(branche.getBraBezeichnung());
+			Customer aCustomer = getCustomer();
+			aCustomer.setBranche(branche);
+			setCustomer(aCustomer);
+		}
+	}
+
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// ++++++++++++++++++++++++++++++ helpers ++++++++++++++++++++++++++
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -632,7 +672,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		oldVar_kunName2 = kunName2.getValue();
 		oldVar_kunOrt = kunOrt.getValue();
 
-		oldVar_kunBranche = kunBranche.getSelectedItem();
+		oldVar_kunBranche = kunBranche.getValue();
 		oldVar_kunMahnsperre = kunMahnsperre.isChecked();
 	}
 
@@ -646,7 +686,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		kunName2.setValue(oldVar_kunName2);
 		kunOrt.setValue(oldVar_kunOrt);
 
-		kunBranche.setSelectedItem(oldVar_kunBranche);
+		kunBranche.setValue(oldVar_kunBranche);
 		kunMahnsperre.setChecked(oldVar_kunMahnsperre);
 	}
 
@@ -674,7 +714,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (oldVar_kunOrt != kunOrt.getValue()) {
 			changed = true;
 		}
-		if (oldVar_kunBranche != kunBranche.getSelectedItem()) {
+		if (oldVar_kunBranche != kunBranche.getValue()) {
 			changed = true;
 		}
 		if (oldVar_kunMahnsperre != kunMahnsperre.isChecked()) {
@@ -809,8 +849,10 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		kunName1.setReadonly(false);
 		kunName2.setReadonly(false);
 		kunOrt.setReadonly(false);
-		kunBranche.setDisabled(false);
 		kunMahnsperre.setDisabled(false);
+
+		kunBranche.setReadonly(false);
+		btnSearchBranch.setDisabled(false);
 
 		btnCtrl.setBtnStatus_Edit();
 
@@ -828,8 +870,10 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		kunName1.setReadonly(true);
 		kunName2.setReadonly(true);
 		kunOrt.setReadonly(true);
-		kunBranche.setDisabled(true);
 		kunMahnsperre.setDisabled(true);
+
+		kunBranche.setReadonly(true);
+		btnSearchBranch.setDisabled(true);
 	}
 
 	/**
@@ -848,7 +892,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		kunMahnsperre.setChecked(false);
 
 		// unselect the last customers branch
-		kunBranche.setSelectedIndex(0);
+		kunBranche.setValue("");
 	}
 
 	/**
@@ -871,9 +915,9 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doWriteComponentsToBean(aCustomer);
 
 		// get the selected branch object from the listbox
-		Listitem item = kunBranche.getSelectedItem();
+		// Listitem item = kunBranche.getSelectedItem();
 
-		if (item == null) {
+		if (StringUtils.isEmpty(kunBranche.getValue())) {
 			try {
 				Messagebox.show("Please select a branch !");
 			} catch (InterruptedException e) {
@@ -882,9 +926,9 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 			return;
 		}
 
-		ListModelList lml1 = (ListModelList) kunBranche.getListModel();
-		Branche branche = (Branche) lml1.get(item.getIndex());
-		aCustomer.setBranche(branche);
+		// ListModelList lml1 = (ListModelList) kunBranche.getListModel();
+		// Branche branche = (Branche) lml1.get(item.getIndex());
+		// aCustomer.setBranche(branche);
 
 		if (kunMahnsperre.isChecked() == true) {
 			aCustomer.setKunMahnsperre(true);

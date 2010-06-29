@@ -172,8 +172,15 @@
 																<label
 																	id="label_CustomerDialog_kunBranche"
 																	value="${c:l('label_CustomerDialog_kunBranche.value')}" />
-																<listbox
-																	id="kunBranche" width="100%" mold="select" rows="1" />
+																<hbox
+																	pack="stretch" width="100%">
+																	<textbox
+																		id="kunBranche" width="100%" />
+																	<button
+																		id="btnSearchBranch" disabled="true" width="28px"
+																		image="/images/icons/btn_search2_16x16.gif"
+																		tooltiptext="${c:l('btnSearch.tooltiptext')}" />
+																</hbox>
 															</row>
 														</rows>
 													</grid>

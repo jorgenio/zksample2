@@ -14,6 +14,8 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 29.06.2010 / Added a new modal SearchListboxDialog that gives back an OBJECT. Called SimpleSearchBox. " + lf;
+		s = s + "                      We implemented it in the Customer AdressModule for selecting a branch (BranchSimpleSearchBox.java). " + lf;
 		s = s + "- 03.06.2010 / Replacement of the old serverPush mechanism working with a WorkerThread new to work with a timer. " + lf;
 		s = s + "                      Because this application is spring managed. So our Database transactions are spring managed" + lf;
 		s = s + "                      too. So we are not able to start the WorkerThread in such a session context for calling DB methods." + lf;

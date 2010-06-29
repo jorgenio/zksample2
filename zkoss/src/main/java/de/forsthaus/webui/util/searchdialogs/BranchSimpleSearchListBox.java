@@ -75,7 +75,7 @@ public class BranchSimpleSearchListBox extends Window {
 	// the windows width
 	private int _width = 300;
 
-	// the returns bean object
+	// the returned bean object
 	private Branche branche = null;
 
 	// The service from which we get the data

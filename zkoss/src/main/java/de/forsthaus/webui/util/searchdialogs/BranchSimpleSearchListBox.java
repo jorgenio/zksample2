@@ -44,25 +44,26 @@ import de.forsthaus.backend.service.BrancheService;
 
 /**
  * This class creates a modal window as a dialog in which the user <br>
- * can search and select a branch object. By onClosing this box returned an
- * object or null. <br>
+ * can search and select a branch object. By onClosing this box <b>returns</b>
+ * an object or null. <br>
  * The object can returned by selecting and clicking the OK button or by
  * DoubleClicking on an item from the list.<br>
  * <br>
- * call:
+ * This is a basic skeleton which can be extended for paging or additionally
+ * textboxes for inserting searchparameters.<br>
+ * <br>
  * 
  * <pre>
- * Bean bean = SimpleSearchBox.show(parentComponent);
- * 
+ * call: Branch branch = BranchSimpleSearchBox.show(parentComponent);
  * </pre>
  * 
  * @author bbruhns
  * @author sgerth
  */
-public class BranchSimpleSearchBox extends Window {
+public class BranchSimpleSearchListBox extends Window {
 
 	private static final long serialVersionUID = 8109634704496621100L;
-	private static final Logger logger = Logger.getLogger(BranchSimpleSearchBox.class);
+	private static final Logger logger = Logger.getLogger(BranchSimpleSearchListBox.class);
 
 	private Listbox listbox;
 	// the windows title
@@ -75,7 +76,7 @@ public class BranchSimpleSearchBox extends Window {
 	private int _width = 300;
 
 	// the returns bean object
-	private Branche branche;
+	private Branche branche = null;
 
 	// The service from which we get the data
 	private BrancheService brancheService;
@@ -85,12 +86,10 @@ public class BranchSimpleSearchBox extends Window {
 	 * 
 	 * @param parent
 	 *            The parent component
-	 * @param anQuestion
-	 *            The question that's to be confirmed.
-	 * @return String from the input textbox.
+	 * @return a BeanObject from the listBox or null.
 	 */
 	public static Branche show(Component parent) {
-		return new BranchSimpleSearchBox(parent).getBranche();
+		return new BranchSimpleSearchListBox(parent).getBranche();
 	}
 
 	/**
@@ -98,17 +97,18 @@ public class BranchSimpleSearchBox extends Window {
 	 * method.<br>
 	 * 
 	 * @param parent
-	 * @param anQuestion
 	 */
-	private BranchSimpleSearchBox(Component parent) {
+	private BranchSimpleSearchListBox(Component parent) {
 		super();
-		setBranche(null);
 
 		setParent(parent);
 
 		createBox();
 	}
 
+	/**
+	 * Creates the components, sets the model and show the window as modal.<br>
+	 */
 	private void createBox() {
 
 		// Window
@@ -167,7 +167,7 @@ public class BranchSimpleSearchBox extends Window {
 	}
 
 	/**
-	 * ListItemRenderer class.<br>
+	 * Inner ListItemRenderer class.<br>
 	 */
 	final class SearchBoxItemRenderer implements ListitemRenderer {
 
@@ -185,8 +185,8 @@ public class BranchSimpleSearchBox extends Window {
 	}
 
 	/**
-	 * if a DoubleClick appears on a listItem. <br>
-	 * Method is forwarded in the renderer.<br>
+	 * If a DoubleClick appears on a listItem. <br>
+	 * This method is forwarded in the renderer.<br>
 	 * 
 	 * @param event
 	 */
@@ -202,7 +202,7 @@ public class BranchSimpleSearchBox extends Window {
 	}
 
 	/**
-	 * OnCloseListener class.<br>
+	 * Inner OnCloseListener class.<br>
 	 */
 	final class OnCloseListener implements EventListener {
 		@Override

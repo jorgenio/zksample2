@@ -34,8 +34,6 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.ListModelList;
-import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Panel;
 import org.zkoss.zul.Panelchildren;
@@ -51,11 +49,10 @@ import de.forsthaus.backend.service.BrancheService;
 import de.forsthaus.backend.service.ChartService;
 import de.forsthaus.backend.service.CustomerService;
 import de.forsthaus.backend.util.HibernateSearchObject;
-import de.forsthaus.webui.customer.model.CustomerBrancheListModelItemRenderer;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
-import de.forsthaus.webui.util.searchdialogs.BranchSimpleSearchBox;
+import de.forsthaus.webui.util.searchdialogs.BranchSimpleSearchListBox;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -648,7 +645,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doSearchBranch(Event event) {
 
-		Branche branche = BranchSimpleSearchBox.show(window_customerDialog);
+		Branche branche = BranchSimpleSearchListBox.show(window_customerDialog);
 
 		if (branche != null) {
 			kunBranche.setValue(branche.getBraBezeichnung());

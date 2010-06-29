@@ -52,7 +52,7 @@ import de.forsthaus.backend.service.BrancheService;
  * call:
  * 
  * <pre>
- * Branch branch = BranchSimpleSearchBox.show(parentComponent);
+ * Bean bean = SimpleSearchBox.show(parentComponent);
  * 
  * </pre>
  * 

@@ -177,9 +177,20 @@
 																	<textbox
 																		id="kunBranche" width="100%" />
 																	<button
-																		id="btnSearchBranch" disabled="true" width="28px"
+																		id="btnSearchBranchSimple" disabled="true"
+																		width="28px"
 																		image="/images/icons/btn_search2_16x16.gif"
-																		tooltiptext="${c:l('btnSearch.tooltiptext')}" />
+																		tooltiptext="${c:l('btnSimpleSearchListBox.tooltiptext')}" />
+																	<button
+																		id="btnSearchBranchAdvanced" disabled="true"
+																		width="28px"
+																		image="/images/icons/btn_search2_16x16.gif"
+																		tooltiptext="${c:l('btnAdvancedSearchListBox.tooltiptext')}" />
+																	<button
+																		id="btnSearchBranchExtended" disabled="true"
+																		width="28px"
+																		image="/images/icons/btn_search2_16x16.gif"
+																		tooltiptext="${c:l('btnExtendedSearchListBox.tooltiptext')}" />
 																</hbox>
 															</row>
 														</rows>

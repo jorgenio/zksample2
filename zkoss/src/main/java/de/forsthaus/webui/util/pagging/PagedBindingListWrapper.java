@@ -56,7 +56,7 @@ public class PagedBindingListWrapper<E> extends BindingListModelList implements 
 	// The Listbox component
 	private Listbox listbox;
 
-	// param. The SearchObject
+	// param. The SearchObject, holds the entity and properties to search. <br>
 	private HibernateSearchObject<E> hibernateSearchObject;
 
 	/**
@@ -90,12 +90,8 @@ public class PagedBindingListWrapper<E> extends BindingListModelList implements 
 	 * Refreshes the list by calling the DAO methode with the modified search
 	 * object. <br>
 	 * 
-	 * @param so
-	 *            SearchObject, holds the entity and properties to search. <br>
 	 * @param start
 	 *            Row to start. <br>
-	 * @param pageSize
-	 *            Count rows to fetch. <br>
 	 */
 	void refreshModel(int start) {
 		getSearchObject().setFirstResult(start);
@@ -146,10 +142,10 @@ public class PagedBindingListWrapper<E> extends BindingListModelList implements 
 	}
 
 	/**
-	 * "onPaging" eventlistener for the paging component. <br>
+	 * "onPaging" EventListener for the paging component. <br>
 	 * <br>
 	 * Calculates the next page by currentPage and pageSize values. <br>
-	 * Calls the methode for refreshing the data with the new rowStart and
+	 * Calls the method for refreshing the data with the new rowStart and
 	 * pageSize. <br>
 	 */
 	public final class OnPagingEventListener implements EventListener {

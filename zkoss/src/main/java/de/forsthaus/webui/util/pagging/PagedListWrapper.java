@@ -69,11 +69,8 @@ public class PagedListWrapper<E> extends ListModelList implements Serializable {
 	// param. The listboxes paging component
 	private Paging paging;
 
-	// param. The SearchObject
+	// param. The SearchObject, holds the entity and properties to search. <br>
 	private HibernateSearchObject<E> hibernateSearchObject;
-
-	// not used yet. so it's init to 'true'.
-	private final boolean supportPaging = true;
 
 	/**
 	 * default constructor.<br>
@@ -105,12 +102,8 @@ public class PagedListWrapper<E> extends ListModelList implements Serializable {
 	 * Refreshes the list by calling the DAO methode with the modified search
 	 * object. <br>
 	 * 
-	 * @param so
-	 *            SearchObject, holds the entity and properties to search. <br>
 	 * @param start
 	 *            Row to start. <br>
-	 * @param pageSize
-	 *            Count rows to fetch. <br>
 	 */
 	void refreshModel(int start) {
 		getSearchObject().setFirstResult(start);
@@ -120,10 +113,6 @@ public class PagedListWrapper<E> extends ListModelList implements Serializable {
 		clear();
 
 		addAll(getPagedListService().getBySearchObject(getSearchObject()));
-	}
-
-	boolean isSupportPagging() {
-		return supportPaging;
 	}
 
 	public void clearFilters() {
@@ -165,10 +154,10 @@ public class PagedListWrapper<E> extends ListModelList implements Serializable {
 	}
 
 	/**
-	 * "onPaging" eventlistener for the paging component. <br>
+	 * "onPaging" EventListener for the paging component. <br>
 	 * <br>
 	 * Calculates the next page by currentPage and pageSize values. <br>
-	 * Calls the methode for refreshing the data with the new rowStart and
+	 * Calls the method for refreshing the data with the new rowStart and
 	 * pageSize. <br>
 	 */
 	public final class OnPagingEventListener implements EventListener {
@@ -232,11 +221,9 @@ public class PagedListWrapper<E> extends ListModelList implements Serializable {
 				logger.debug("--> added  getSorts() : " + getSearchObject().getSorts().toString());
 			}
 
-			if (isSupportPagging()) {
-				// refresh the list
-				getPaging().setActivePage(0);
-				refreshModel(0);
-			}
+			// refresh the list
+			getPaging().setActivePage(0);
+			refreshModel(0);
 		}
 	}
 

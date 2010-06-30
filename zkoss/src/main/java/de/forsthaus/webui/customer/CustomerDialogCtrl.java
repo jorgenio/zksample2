@@ -52,6 +52,8 @@ import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.searchdialogs.BranchAdvancedSearchListBox;
+import de.forsthaus.webui.util.searchdialogs.BranchExtendedSearchListBox;
 import de.forsthaus.webui.util.searchdialogs.BranchSimpleSearchListBox;
 
 /**
@@ -111,7 +113,9 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	protected Checkbox kunMahnsperre; // autowired
 
 	protected Textbox kunBranche; // autowired
-	protected Button btnSearchBranch; // autowired
+	protected Button btnSearchBranchSimple; // autowired
+	protected Button btnSearchBranchAdvanced; // autowired
+	protected Button btnSearchBranchExtended; // autowired
 
 	// tab Chart
 	protected Tab tabCustomerDialogChart; // autowired
@@ -466,12 +470,30 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	/**
-	 * If the Button 'Search Branch' is clicked.<br>
+	 * If the Button 'Search Branch SimpleSearch' is clicked.<br>
 	 * 
 	 * @param event
 	 */
-	public void onClick$btnSearchBranch(Event event) {
-		doSearchBranch(event);
+	public void onClick$btnSearchBranchSimple(Event event) {
+		doSearchBranchSimple(event);
+	}
+
+	/**
+	 * If the Button 'Search Branch AdvancedSearch' is clicked.<br>
+	 * 
+	 * @param event
+	 */
+	public void onClick$btnSearchBranchAdvanced(Event event) {
+		doSearchBranchAdvanced(event);
+	}
+
+	/**
+	 * If the Button 'Search Branch ExtendedSearch' is clicked.<br>
+	 * 
+	 * @param event
+	 */
+	public void onClick$btnSearchBranchExtended(Event event) {
+		doSearchBranchExtended(event);
 	}
 
 	/**
@@ -643,9 +665,45 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 
 	 * @param event
 	 */
-	private void doSearchBranch(Event event) {
+	private void doSearchBranchSimple(Event event) {
 
 		Branche branche = BranchSimpleSearchListBox.show(window_customerDialog);
+
+		if (branche != null) {
+			kunBranche.setValue(branche.getBraBezeichnung());
+			Customer aCustomer = getCustomer();
+			aCustomer.setBranche(branche);
+			setCustomer(aCustomer);
+		}
+	}
+
+	/**
+	 * Opens the Search and Get Dialog for Branches.<br>
+	 * It appends/changes the branch object for the current bean.<br>
+	 * 
+	 * @param event
+	 */
+	private void doSearchBranchAdvanced(Event event) {
+
+		Branche branche = BranchAdvancedSearchListBox.show(window_customerDialog);
+
+		if (branche != null) {
+			kunBranche.setValue(branche.getBraBezeichnung());
+			Customer aCustomer = getCustomer();
+			aCustomer.setBranche(branche);
+			setCustomer(aCustomer);
+		}
+	}
+
+	/**
+	 * Opens the Search and Get Dialog for Branches.<br>
+	 * It appends/changes the branch object for the current bean.<br>
+	 * 
+	 * @param event
+	 */
+	private void doSearchBranchExtended(Event event) {
+
+		Branche branche = BranchExtendedSearchListBox.show(window_customerDialog);
 
 		if (branche != null) {
 			kunBranche.setValue(branche.getBraBezeichnung());
@@ -849,7 +907,9 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		kunMahnsperre.setDisabled(false);
 
 		kunBranche.setReadonly(false);
-		btnSearchBranch.setDisabled(false);
+		btnSearchBranchSimple.setDisabled(false);
+		btnSearchBranchAdvanced.setDisabled(false);
+		btnSearchBranchExtended.setDisabled(false);
 
 		btnCtrl.setBtnStatus_Edit();
 
@@ -870,7 +930,9 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		kunMahnsperre.setDisabled(true);
 
 		kunBranche.setReadonly(true);
-		btnSearchBranch.setDisabled(true);
+		btnSearchBranchSimple.setDisabled(true);
+		btnSearchBranchAdvanced.setDisabled(true);
+		btnSearchBranchExtended.setDisabled(true);
 	}
 
 	/**

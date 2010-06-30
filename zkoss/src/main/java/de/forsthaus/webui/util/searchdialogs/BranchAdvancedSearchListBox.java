@@ -19,6 +19,7 @@
 package de.forsthaus.webui.util.searchdialogs;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.zkoss.spring.SpringUtil;
@@ -32,6 +33,7 @@ import org.zkoss.zkex.zul.Borderlayout;
 import org.zkoss.zkex.zul.Center;
 import org.zkoss.zkex.zul.South;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
@@ -39,8 +41,11 @@ import org.zkoss.zul.Listhead;
 import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
+import org.zkoss.zul.Paging;
 import org.zkoss.zul.Window;
+import org.zkoss.zul.event.PagingEvent;
 
+import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.service.BrancheService;
 
@@ -50,9 +55,9 @@ import de.forsthaus.backend.service.BrancheService;
  * an object or null. <br>
  * The object can returned by selecting and clicking the OK button or by
  * DoubleClicking on an item from the list.<br>
+ * 
  * <br>
- * This is a basic skeleton which can be extended for paging or additionally
- * textboxes for inserting searchparameters.<br>
+ * This is a basic skeleton which is extended for database paging.<br>
  * <br>
  * 
  * <pre>
@@ -62,18 +67,32 @@ import de.forsthaus.backend.service.BrancheService;
  * @author bbruhns
  * @author sgerth
  */
-public class BranchSimpleSearchListBox extends Window implements Serializable {
+public class BranchAdvancedSearchListBox extends Window implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(BranchSimpleSearchListBox.class);
+	private static final Logger logger = Logger.getLogger(BranchAdvancedSearchListBox.class);
 
+	// the paging component
+	private Paging _paging;
+
+	// pageSize
+	private int pageSize = 19;
+
+	// the data listbox
 	private Listbox listbox;
+
+	// the model for the listbox
+	private ListModelList listModelList;
+
 	// the windows title
-	private String _title = Labels.getLabel("message.Information.SimpleSearch") + " / " + Labels.getLabel("common.Branch");
+	private String _title = Labels.getLabel("message.Information.AdvancedSearch") + " / " + Labels.getLabel("common.Branch");
+
 	// 1. Listheader
 	private String _listHeader1 = Labels.getLabel("common.Description");
+
 	// the windows height
 	private int _height = 400;
+
 	// the windows width
 	private int _width = 300;
 
@@ -91,7 +110,7 @@ public class BranchSimpleSearchListBox extends Window implements Serializable {
 	 * @return a BeanObject from the listBox or null.
 	 */
 	public static Branche show(Component parent) {
-		return new BranchSimpleSearchListBox(parent).getBranche();
+		return new BranchAdvancedSearchListBox(parent).getBranche();
 	}
 
 	/**
@@ -100,7 +119,7 @@ public class BranchSimpleSearchListBox extends Window implements Serializable {
 	 * 
 	 * @param parent
 	 */
-	private BranchSimpleSearchListBox(Component parent) {
+	private BranchAdvancedSearchListBox(Component parent) {
 		super();
 
 		setParent(parent);
@@ -111,6 +130,7 @@ public class BranchSimpleSearchListBox extends Window implements Serializable {
 	/**
 	 * Creates the components, sets the model and show the window as modal.<br>
 	 */
+	@SuppressWarnings("unchecked")
 	private void createBox() {
 
 		// Window
@@ -140,13 +160,26 @@ public class BranchSimpleSearchListBox extends Window implements Serializable {
 		btnOK.addEventListener("onClick", new OnCloseListener());
 		btnOK.setParent(south);
 
+		Div divCenter = new Div();
+		divCenter.setWidth("100%");
+		divCenter.setHeight("100%");
+		divCenter.setParent(center);
+
+		// Paging
+		_paging = new Paging();
+		_paging.addEventListener("onPaging", new OnPagingEventListener());
+		_paging.setPageSize(getPageSize());
+		_paging.setParent(divCenter);
+
 		// Listbox
 		listbox = new Listbox();
 		listbox.setStyle("border: none;");
 		listbox.setHeight("100%");
 		listbox.setVisible(true);
-		listbox.setParent(center);
+		listbox.setParent(divCenter);
 		listbox.setItemRenderer(new SearchBoxItemRenderer());
+
+		listbox.setPaginal(_paging);
 
 		Listhead listhead = new Listhead();
 		listhead.setParent(listbox);
@@ -154,8 +187,18 @@ public class BranchSimpleSearchListBox extends Window implements Serializable {
 		listheader.setParent(listhead);
 		listheader.setLabel(_listHeader1);
 
-		// Model
-		listbox.setModel(new ListModelList(getBrancheService().getAlleBranche()));
+		/**
+		 * init the model.<br>
+		 * The ResultObject is a helper class that holds the generic list and
+		 * the totalRecord count as int value.
+		 */
+		ResultObject ro = getBrancheService().getAllBranches(0, getPageSize());
+		List<Branche> resultList = (List<Branche>) ro.getList();
+		_paging.setTotalSize(ro.getTotalCount());
+
+		// set the model
+		setListModelList(new ListModelList(resultList));
+		listbox.setModel(getListModelList());
 
 		try {
 			doModal();
@@ -204,6 +247,55 @@ public class BranchSimpleSearchListBox extends Window implements Serializable {
 	}
 
 	/**
+	 * "onPaging" EventListener for the paging component. <br>
+	 * <br>
+	 * Calculates the next page by currentPage and pageSize values. <br>
+	 * Calls the method for refreshing the data with the new rowStart and
+	 * pageSize. <br>
+	 */
+	public final class OnPagingEventListener implements EventListener {
+		@Override
+		public void onEvent(Event event) throws Exception {
+
+			PagingEvent pe = (PagingEvent) event;
+			int pageNo = pe.getActivePage();
+			int start = pageNo * getPageSize();
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("--> : " + start + "/" + getPageSize());
+			}
+
+			// refresh the list
+			refreshModel(start);
+		}
+	}
+
+	/**
+	 * Refreshes the list by calling the DAO methode with the modified search
+	 * object. <br>
+	 * 
+	 * @param so
+	 *            SearchObject, holds the entity and properties to search. <br>
+	 * @param start
+	 *            Row to start. <br>
+	 */
+	@SuppressWarnings("unchecked")
+	void refreshModel(int start) {
+
+		// clear old data
+		getListModelList().clear();
+
+		// init the model
+		ResultObject ro = getBrancheService().getAllBranches(start, getPageSize());
+		List<Branche> resultList = (List<Branche>) ro.getList();
+		_paging.setTotalSize(ro.getTotalCount());
+
+		// set the model
+		setListModelList(new ListModelList(resultList));
+		listbox.setModel(getListModelList());
+	}
+
+	/**
 	 * Inner OnCloseListener class.<br>
 	 */
 	final class OnCloseListener implements EventListener {
@@ -241,6 +333,22 @@ public class BranchSimpleSearchListBox extends Window implements Serializable {
 
 	public void setBrancheService(BrancheService brancheService) {
 		this.brancheService = brancheService;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setListModelList(ListModelList listModelList) {
+		this.listModelList = listModelList;
+	}
+
+	public ListModelList getListModelList() {
+		return listModelList;
 	}
 
 }

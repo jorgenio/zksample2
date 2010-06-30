@@ -52,6 +52,8 @@
 							<button id="btn_zkoss" style="border: 0px"
 								image="/images/zkpowered_60x60.png" href="http://www.zkoss.org"
 								target="_blank" tooltiptext="Go to the zkoss framework site" />
+							<separator />
+							<image src="/images/worldsoccer.gif" />
 						</hbox>
 					</div>
 

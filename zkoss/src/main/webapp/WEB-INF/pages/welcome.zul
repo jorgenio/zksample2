@@ -14,10 +14,10 @@
 	{
 		lf = "\n";
 		s = "";
-		s = s + "- 30.06.2010 / Added TWO more SearchDialog skeletons. Now we have 1.) SimpleSearchListBox: paging on Server. " + lf;
+		s = s + "- 30.06.2010 / Added TWO more SearchListDialog skeletons. Now we have 1.) SimpleSearchListBox: paging on Server. " + lf;
 		s = s + "                      2.) AdvancedSearchListBox: DB Paging on Database; " + lf;
 		s = s + "                      3.) ExtendedSearchListBox: DB Paging + data limiting features.  " + lf;
-		s = s + "                      All three SearchDialogs are implemented in the CustomerDialog module. " + lf;
+		s = s + "                      All three SearchDialogs are implemented in the CustomerDialog module for selecting a branch. " + lf;
 		s = s + "- 29.06.2010 / Added a new modal SearchListboxDialog that gives back an OBJECT. Called SimpleSearchBox. " + lf;
 		s = s + "                      We implemented it in the Customer AdressModule for selecting a branch (BranchSimpleSearchBox.java). " + lf;
 		s = s + "- 03.06.2010 / Replacement of the old serverPush mechanism working with a WorkerThread new to work with a timer. " + lf;

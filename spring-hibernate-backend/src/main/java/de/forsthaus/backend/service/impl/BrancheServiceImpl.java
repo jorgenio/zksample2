@@ -20,6 +20,7 @@ package de.forsthaus.backend.service.impl;
 
 import java.util.List;
 
+import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.dao.BrancheDAO;
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.service.BrancheService;
@@ -81,6 +82,16 @@ public class BrancheServiceImpl implements BrancheService {
 	@Override
 	public int getCountAllBranch() {
 		return getBrancheDAO().getCountAllBranch();
+	}
+
+	@Override
+	public ResultObject getAllBranches(int start, int pageSize) {
+		return getBrancheDAO().getAllBranches(start, pageSize);
+	}
+
+	@Override
+	public ResultObject getAllBranchesLikeText(String text, int start, int pageSize) {
+		return getBrancheDAO().getAllBranchesLikeText(text, start, pageSize);
 	}
 
 }

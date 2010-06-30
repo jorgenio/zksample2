@@ -20,6 +20,7 @@ package de.forsthaus.backend.service;
 
 import java.util.List;
 
+import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.model.Branche;
 
 public interface BrancheService {
@@ -37,4 +38,8 @@ public interface BrancheService {
 	void delete(Branche branche);
 
 	public List<Branche> getBrancheLikeName(String value);
+
+	public ResultObject getAllBranches(int start, int pageSize);
+
+	public ResultObject getAllBranchesLikeText(String text, int start, int pageSize);
 }

@@ -20,6 +20,7 @@ package de.forsthaus.backend.dao;
 
 import java.util.List;
 
+import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.model.Branche;
 
 public interface BrancheDAO {
@@ -43,5 +44,9 @@ public interface BrancheDAO {
 	public List<Branche> getBrancheLikeName(String value);
 
 	public int getBrancheSize();
+
+	public ResultObject getAllBranches(int start, int pageSize);
+
+	public ResultObject getAllBranchesLikeText(String text, int start, int pageSize);
 
 }

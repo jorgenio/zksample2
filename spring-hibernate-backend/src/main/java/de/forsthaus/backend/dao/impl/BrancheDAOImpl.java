@@ -18,15 +18,19 @@
  */
 package de.forsthaus.backend.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
+import org.supercsv.cellprocessor.HashMapper;
 
+import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.dao.BrancheDAO;
 import de.forsthaus.backend.model.Branche;
 
@@ -91,4 +95,36 @@ public class BrancheDAOImpl extends BasisNextidDaoImpl<Branche> implements Branc
 	public int getCountAllBranch() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from Branche"));
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ResultObject getAllBranches(int start, int pageSize) {
+		DetachedCriteria criteria = DetachedCriteria.forClass(Branche.class);
+		criteria.addOrder(Order.asc("braBezeichnung"));
+
+		int totalCount = getHibernateTemplate().findByCriteria(criteria).size();
+
+		List<Branche> list = getHibernateTemplate().findByCriteria(criteria, start, pageSize);
+
+		return new ResultObject(list, totalCount);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ResultObject getAllBranchesLikeText(String text, int start, int pageSize) {
+		DetachedCriteria criteria = DetachedCriteria.forClass(Branche.class);
+
+		if (!StringUtils.isEmpty(text)) {
+			criteria.add(Restrictions.ilike("braBezeichnung", text, MatchMode.ANYWHERE));
+		}
+
+		criteria.addOrder(Order.asc("braBezeichnung"));
+
+		int totalCount = getHibernateTemplate().findByCriteria(criteria).size();
+
+		List<Branche> list = getHibernateTemplate().findByCriteria(criteria, start, pageSize);
+
+		return new ResultObject(list, totalCount);
+	}
+
 }

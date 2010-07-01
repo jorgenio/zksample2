@@ -4,9 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * A helper class that van hold a generic list and an int value for the count of
- * the size of the list.<br>
- * Used by a paging Sample.<br>
+ * A helper class that can hold a generic list and an int value. Used as the
+ * totalSize value of possible records for paging components.<br>
  * 
  * @author sgerth
  * 
@@ -18,7 +17,7 @@ public class ResultObject implements Serializable {
 	// holds a generic List
 	private List<?> list;
 
-	// holds the total count of the list
+	// holds an int
 	private int totalCount;
 
 	public ResultObject() {

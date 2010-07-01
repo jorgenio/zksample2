@@ -8,7 +8,7 @@ import java.util.List;
  * the size of the list.<br>
  * Used by a paging Sample.<br>
  * 
- * @author sge
+ * @author sgerth
  * 
  */
 public class ResultObject implements Serializable {

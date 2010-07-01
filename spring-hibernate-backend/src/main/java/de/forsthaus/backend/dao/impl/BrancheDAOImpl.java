@@ -18,7 +18,6 @@
  */
 package de.forsthaus.backend.dao.impl;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -28,7 +27,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
-import org.supercsv.cellprocessor.HashMapper;
 
 import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.dao.BrancheDAO;

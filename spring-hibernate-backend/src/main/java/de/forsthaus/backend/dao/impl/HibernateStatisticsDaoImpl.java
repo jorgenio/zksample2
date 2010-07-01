@@ -19,10 +19,8 @@
 package de.forsthaus.backend.dao.impl;
 
 import org.hibernate.LockMode;
-import org.springframework.dao.support.DataAccessUtils;
 
 import de.forsthaus.backend.dao.HibernateStatisticsDao;
-import de.forsthaus.backend.model.HibernateEntityStatistics;
 import de.forsthaus.backend.model.HibernateStatistics;
 
 /**

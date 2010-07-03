@@ -61,7 +61,7 @@ import de.forsthaus.backend.service.BrancheService;
  * <br>
  * 
  * <pre>
- * call: Branch branch = BranchSimpleSearchBox.show(parentComponent);
+ * call: Branch branch = BranchAdvancedSearchListBox.show(parentComponent);
  * </pre>
  * 
  * @author bbruhns

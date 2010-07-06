@@ -197,7 +197,6 @@ public class BranchExtendedSearchListBox extends Window implements Serializable 
 		listbox.setVisible(true);
 		listbox.setParent(divCenter2);
 		listbox.setItemRenderer(new SearchBoxItemRenderer());
-		listbox.setPaginal(_paging);
 
 		Listhead listhead = new Listhead();
 		listhead.setParent(listbox);

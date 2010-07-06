@@ -180,8 +180,6 @@ public class BranchAdvancedSearchListBox extends Window implements Serializable 
 		listbox.setParent(divCenter);
 		listbox.setItemRenderer(new SearchBoxItemRenderer());
 
-		listbox.setPaginal(_paging);
-
 		Listhead listhead = new Listhead();
 		listhead.setParent(listbox);
 		Listheader listheader = new Listheader();

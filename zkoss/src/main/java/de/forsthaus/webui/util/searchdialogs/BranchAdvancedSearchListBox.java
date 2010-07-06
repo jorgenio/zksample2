@@ -167,6 +167,7 @@ public class BranchAdvancedSearchListBox extends Window implements Serializable 
 
 		// Paging
 		_paging = new Paging();
+		_paging.setDetailed(true);
 		_paging.addEventListener("onPaging", new OnPagingEventListener());
 		_paging.setPageSize(getPageSize());
 		_paging.setParent(divCenter);

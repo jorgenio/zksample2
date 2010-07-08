@@ -55,29 +55,10 @@
 							<separator />
 							<separator />
 							<separator />
-							<image src="/images/worldsoccer.gif" />
 							<separator />
 							<separator />
 							<separator />
-							<vbox>
-								<grid width="243px">
 
-									<columns>
-										<column width="165px"
-											label="FIFA WM 2010 Final Game " />
-										<column width="73px"
-											label="11.07.2010" />
-									</columns>
-									<rows>
-										<row>
-											<label
-												value="Germany : Netherlands">
-											</label>
-											<label value="3:2"></label>
-										</row>
-									</rows>
-								</grid>
-							</vbox>
 						</hbox>
 					</div>
 
@@ -109,6 +90,7 @@
 
 	</window>
 </zk>
+
 
 <!-- 
 	style="background-image:url(${c:encodeURL('/images/sample.jpg')}) "

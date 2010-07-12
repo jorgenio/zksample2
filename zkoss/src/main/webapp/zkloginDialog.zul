@@ -61,7 +61,7 @@
 						</div>
 						<div align="right">
 							<button id="button_ZKLoginDialog_ServerTime"
-								image="/images/icons/date.gif"
+								image="/images/icons/date_16x16.gif"
 								tooltiptext="${c:l('button_ZKLoginDialog_ServerTime.tooltiptext')}" />
 						</div>
 					</hbox>

@@ -426,6 +426,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		// }
 		// }
 
+		// stops the timer
 		if (timer != null) {
 			timer.setRunning(false);
 		}

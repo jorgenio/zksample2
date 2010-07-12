@@ -171,7 +171,7 @@
 						<listheader
 							id="listheader_SecLoginlogList_lglLogtime"
 							label="${c:l('listheader_SecLoginlogList_lglLogtime.label')}"
-							sort="auto" image="/images/icons/date.gif" />
+							sort="auto" image="/images/icons/date_16x16.gif" />
 						<listheader
 							id="listheader_SecLoginlogList_lglLoginname"
 							image="/images/icons/create_doc.gif"

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="de.forsthaus.backend.model.Ip2Country" table="log_ip2country">
+
+		<id name="id" type="long">
+			<column name="i2c_id" />
+			<generator class="assigned" />
+		</id>
+
+		<version name="version" column="VERSION" type="integer" />
+
+
+		<set name="secLoginlogs" inverse="true">
+			<key>
+				<column name="lgl_id" />
+			</key>
+			<one-to-many class="de.forsthaus.backend.model.SecLoginlog" />
+		</set>
+
+		<many-to-one name="sysCountryCode"
+			class="de.forsthaus.backend.model.SysCountryCode" fetch="select"
+			lazy="false">
+			<column name="ccd_id" />
+		</many-to-one>
+
+		<property name="i2cCity" type="string">
+			<column name="i2c_city" length="50" />
+		</property>
+		<property name="i2cLatitude" type="float">
+			<column name="i2c_latitude" />
+		</property>
+		<property name="i2cLongitude" type="float">
+			<column name="i2c_longitude" />
+		</property>
+	</class>
+</hibernate-mapping>

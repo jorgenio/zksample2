@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	<!-- Generated 27.02.2009 17:17:15 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+	<class name="de.forsthaus.backend.model.SecLoginlog" table="sec_loginlog">
+
+		<id name="id" type="long">
+			<column name="lgl_id" />
+			<generator class="assigned" />
+		</id>
+
+		<version name="version" column="VERSION" type="integer" />
+
+		<many-to-one name="ip2Country" class="de.forsthaus.backend.model.Ip2Country"
+			fetch="select">
+			<column name="i2c_id" />
+		</many-to-one>
+
+		<property name="lglLoginname" type="string">
+			<column name="lgl_loginname" length="50" not-null="true" />
+		</property>
+		<property name="lglLogtime" type="timestamp">
+			<column name="lgl_logtime" length="29" not-null="true" />
+		</property>
+		<property name="lglSessionid" type="string">
+			<column name="lgl_sessionid" length="50" />
+		</property>
+		<property name="lglIp" type="string">
+			<column name="lgl_ip" length="19" />
+		</property>
+		<property name="lglStatusid" type="java.lang.Integer">
+			<column name="lgl_status_id" not-null="true" />
+		</property>
+
+
+	</class>
+</hibernate-mapping>

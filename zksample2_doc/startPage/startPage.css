@@ -1,0 +1,65 @@
+body {
+	background-color: #ccccff; 
+	font-family: Arial,sans-serif;
+}
+
+a img {
+	border-style: none;
+	text-decoration: none;
+	vertical-align: middle;
+}
+
+h1 {
+}
+
+small {
+}
+
+h3 {
+}
+
+h2 {
+}
+
+div.top {
+	position:absolute; 
+	top:0px; 
+	left:0px; 
+	right:0px;
+}
+
+div.content {
+	position:absolute; 
+	top:270px; 
+	left:10px; 
+	right:10px;
+ }
+ 
+ div.content * td {
+	text-align:left;
+	vertical-align:top;	
+}
+
+
+
+div.ru {
+	position:absolute; 
+	bottom:0px; 
+	right:10px;
+ }
+
+div.lu {
+	position:absolute; 
+	bottom:0px; 
+	left:10px;
+}
+
+div.lu * td {
+	white-space: nowrap;
+	text-align:left;
+}
+
+div.lu * th {
+	white-space: nowrap;
+	text-align:left;
+}

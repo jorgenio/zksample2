@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk>
+
+	<log>
+		<log-base>org.zkoss</log-base>
+	</log>
+
+	<!-- Optional -->
+	<!--
+		<desktop-config> <theme-provider-class>zkthemer.ThemeProvider
+		</theme-provider-class> </desktop-config>
+	-->
+	<!-- Optional for testing -->
+	<!--
+		<listener> <description> Serialization Listener for
+		debugging</description>
+		<listener-class>de.forsthaus.util.MySerializationListener
+		</listener-class> </listener>
+	-->
+
+
+	<!-- ====================================================== -->
+	<!--          running a zk application in a CLUSTER         -->
+	<!-- ====================================================== -->
+	<system-config>
+		<ui-factory-class>
+			org.zkoss.zk.ui.http.SerializableUiFactory
+		</ui-factory-class>
+	</system-config>
+
+	<!-- ====================================================== -->
+	<!--                       Optional                         -->
+	<!--      collect statistical data of the running app.      -->
+	<!-- ====================================================== -->
+	<listener>
+		<description> Monitor the statistic</description>
+		<listener-class>de.forsthaus.statistic.Statistic
+		</listener-class>
+	</listener>
+
+	<!-- ====================================================== -->
+	<!--                 Device configurations                  -->
+	<!--          1. Type of server push                        -->
+	<!--          2. Page for showing the Session timeout       -->
+	<!-- ====================================================== -->
+	<device-config>
+		<device-type>ajax</device-type>
+		<server-push-class>org.zkoss.zkmax.ui.comet.CometServerPush
+		</server-push-class>
+		<timeout-uri>/timeout.zul</timeout-uri>
+	</device-config>
+
+	<!-- ====================================================== -->
+	<!--         Listener to make sure servlet thread           -->
+	<!--            and ZK event thread got the same            -->
+	<!--                  ThreadLocal values.                   -->
+	<!-- ====================================================== -->
+	<listener>
+		<description>ThreadLocal Synchronization Listener
+		</description>
+		<listener-class>org.zkoss.zkplus.util.ThreadLocalListener
+		</listener-class>
+	</listener>
+
+	<!-- ====================================================== -->
+	<!--         Besides that, you have to specify what         -->
+	<!--         ThreadLocal variables you want to sync.        -->
+	<!--   1. Spring  RequestContextHolder                      -->
+	<!--   2. Spring  ThreadLocalSecurityContextHolderStrategy  -->
+	<!-- ====================================================== -->
+	<preference>
+		<name>ThreadLocal</name>
+		<value>
+			org.springframework.security.core.context.ThreadLocalSecurityContextHolderStrategy=contextHolder;
+			org.springframework.web.context.request.RequestContextHolder=requestAttributesHolder,inheritableRequestAttributesHolder;
+		</value>
+	</preference>
+
+	<!-- ====================================================== -->
+	<!--                Path to the own error page              -->
+	<!-- ====================================================== -->
+	<error-page>
+		<exception-type>java.lang.Throwable
+		</exception-type>
+		<location>/error.zul</location>
+	</error-page>
+
+	<!-- ====================================================== -->
+	<!--          Path to the character set and sizes           -->
+	<!--                Zkoss configuration file                -->
+	<!--         Custom components are declared here            -->
+	<!-- ====================================================== -->
+	<language-config>
+		<addon-uri>/WEB-INF/lang-addon.xml
+		</addon-uri>
+	</language-config>
+
+	<!-- ====================================================== -->
+	<!--   Maximal count of desktops which a session can hold   -->
+	<!-- ====================================================== -->
+	<session-config>
+		<max-desktops-per-session>15</max-desktops-per-session>
+		<timer-keep-alive>true</timer-keep-alive>
+	</session-config>
+
+</zk>
+

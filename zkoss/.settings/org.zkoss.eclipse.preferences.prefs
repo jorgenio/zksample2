@@ -1,0 +1,5 @@
+#Wed Dec 02 22:24:47 CET 2009
+eclipse.preferences.version=1
+visualeditor.custom_web_content_path=/zkoss/src/main/webapp
+visualeditor.custom_zk_package=zk-bin-3.6.3
+visualeditor.is_use_zks_lib=true

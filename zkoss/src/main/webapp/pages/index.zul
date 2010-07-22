@@ -1,0 +1,156 @@
+<?page id="indexPage" title=" ZKoss sample application " cacheable="false" 
+	language="xul/html" zscriptLanguage="Java"?>
+<?meta content="text/html; charset=UTF-8" 	pageEncoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window id="outerIndexWindow" apply="${indexCtrl}" border="none"
+		width="100%" height="100%">
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ } .z-loading { top: 50%
+			!important; left: 45% !important; align: center;
+			vertical-align: middle; }
+			<!-- groupbox inner content area, NO padding -->
+			.myGroupBoxContentArea .z-groupbox-cnt{ background-color:
+			white; padding: 0px }
+		</style>
+
+		<!-- hidden fields for storing the current desktop height and width -->
+		<intbox id="currentDesktopHeight" visible="false" />
+		<intbox id="currentDesktopWidth" visible="false" />
+		<!-- hidden field for storing the initial menu type -->
+		<checkbox id="CBtreeMenu" checked="true" visible="false" />
+
+		<borderlayout id="borderlayoutMain" height="100%">
+			<north id="borderlayoutMainNorth" border="none"
+				splittable="false">
+
+				<div id="div1" style="background-color:#D6DCDE;">
+					<hbox width="100%">
+						<h:div id="divNo" style="padding:5px"
+							align="left">
+							<image src="/images/zkpowered_16x16.png" />
+							<separator bar="false" orient="vertical" />
+							<separator bar="false" orient="vertical" />
+							<label value=" ZkSample2 "
+								style="font-size:12px; font-weight:normal;" />
+						</h:div>
+
+						<!-- 
+							<h:div id="divNorth" align="left"
+							style="padding:5px">
+							<label
+							style="color:black; font-size:12px; font-weight:bold"
+							value="ZKoss Sample Application ( ZK + Spring + Spring-Security + Hibernate + Hibernate-Generic-DAO + JasperReports )">
+							</label>
+							</h:div>
+						-->
+						<h:div id="divNorthEast" align="right"
+							style="padding: 3px;">
+							<button id="btnLogout"
+								image="/images/icons/btn_exitdoor2_16x16.gif"
+								label="${c:l('btnLogout.label')}"
+								tooltiptext="${c:l('btnLogout.tooltiptext')}" />
+							<!-- href="/index.zul"  -->
+						</h:div>
+					</hbox>
+					<separator bar="true"
+						style="background-color:#D6DCDE;" />
+
+					<div id="divDropDownMenu" width="100%">
+						<menubar id="mainMenuBar" height="25px"></menubar>
+					</div>
+
+				</div>
+			</north>
+
+
+			<west border="none" margins="0,0,0,0" size="230px"
+				style="background-color: #D6DCDE; padding: 5px" flex="true"
+				minsize="100" splittable="true" autoscroll="false">
+				<div id="divWest">WEST</div>
+			</west>
+
+			<!-- MODULE CONTENT AREA -->
+			<center id="center" border="none" margins="0,0,0,0"
+				flex="true" autoscroll="true"
+				style="background-color: #D6DCDE; padding: 5px">
+				<div id="divCenter">
+
+					<groupbox id="groupbox_menu" mold="3d"
+						sclass="myGroupBoxContentArea">
+						<caption
+							style="color: #000000; font-weight: bold;"
+							label="${c:l('workplace')}" />
+						<tabbox id="tabBoxIndexCenter" width="100%"
+							style="padding: 0px">
+							<tabs id="tabsIndexCenter"></tabs>
+							<tabpanels id="tabpanelsBoxIndexCenter">
+							</tabpanels>
+						</tabbox>
+					</groupbox>
+
+				</div>
+			</center>
+
+			<east border="none" margins="0,0,0,0" size="0%">
+				<div id="divEast">EAST</div>
+			</east>
+
+			<south border="none" margins="1,0,0,0" height="20px"
+				splittable="false" flex="true">
+				<div id="divSouth">
+
+					<grid id="statusBarGrid" fixedLayout="true"
+						height="20px" width="100%">
+						<columns sizable="false">
+							<column label="User:" width="10%"
+								style="background-color: #D6DCDE;" />
+							<column id="statusBarColUser" label=""
+								width="20%" style="background-color: #D6DCDE;" />
+							<column label="Office-No.:" width="10%"
+								style="background-color: #D6DCDE;" />
+							<column id="statusBarColOfficeNo" label=""
+								width="10%" style="background-color: #D6DCDE;" />
+							<column id="statusBarZKVersion" width="20%"
+								style="background-color: #D6DCDE;" />
+							<column id="statusBarAppVersion"
+								style="color: #FF0000; background-color: #D6DCDE;" width="20%" />
+							<column id="colDate" width="20%"
+								style="background-color: #D6DCDE;" align="right" />
+						</columns>
+					</grid>
+				</div>
+
+			</south>
+		</borderlayout>
+
+
+	</window>
+
+</zk>
+
+<!-- old Top Background-color style="background-color:#4944F9" -->
+<!-- 	<image src="/images/zkoss3.gif" /> -->
+
+
+<!-- 
+		<label id="lbl2" width="33%" />
+		<timer id="timer2" delay="1000" repeats="true">
+			<attribute name="onTimer">
+	Locale locale = org.zkoss.util.Locales.getCurrent();
+	java.text.DateFormat dateFormat = java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.MEDIUM, java.text.DateFormat.MEDIUM, locale);
+	String strTime = dateFormat.format(java.util.Calendar.getInstance(locale).getTime());
+	colDate.setLabel(strTime);
+</attribute>
+		</timer>
+
+
+ -->

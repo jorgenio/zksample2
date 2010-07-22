@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul
+	http://www.zkoss.org/2005/zul/zul.xsd">
+
+
+	<window id="customerChartWindow" apply="${customerChartCtrl}"
+		border="none" width="100%">
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+		</style>
+
+
+		<toolbar>
+			<button id="btnHelp" image="/images/icons/light_16x16.gif"
+				tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+			<separator orient="vertical" />
+			<button id="button_CustomerChart_PieChart"
+				image="/images/icons/chart_pie3d_16x16.gif"
+				tooltiptext="${c:l('button_CustomerChart_PieChart.tooltiptext')}" />
+			<button id="button_CustomerChart_PieChart3D"
+				image="/images/icons/chart_pie3d_16x16.gif"
+				tooltiptext="${c:l('button_CustomerChart_PieChart3D.tooltiptext')}" />
+			<separator orient="vertical" />
+			<button id="button_CustomerChart_RingChart"
+				image="/images/icons/chart_ring_16x16.gif"
+				tooltiptext="${c:l('button_CustomerChart_RingChart.tooltiptext')}" />
+			<separator orient="vertical" />
+			<button id="button_CustomerChart_BarChart"
+				image="/images/icons/chart_bar_16x16.gif"
+				tooltiptext="${c:l('button_CustomerChart_BarChart.tooltiptext')}" />
+			<button id="button_CustomerChart_BarChart3D"
+				image="/images/icons/chart_bar3d_16x16.gif"
+				tooltiptext="${c:l('button_CustomerChart_BarChart3D.tooltiptext')}" />
+			<separator orient="vertical" />
+			<button id="button_CustomerChart_StackedBar"
+				image="/images/icons/chart_stacked_bar_16x16.gif"
+				tooltiptext="${c:l('button_CustomerChart_StackedBar.tooltiptext')}" />
+			<button id="button_CustomerChart_StackedBar3D"
+				image="/images/icons/chart_stacked_bar3d_16x16.gif"
+				tooltiptext="${c:l('button_CustomerChart_StackedBar3D.tooltiptext')}" />
+			<separator orient="vertical" />
+			<button id="button_CustomerChart_LineBar"
+				image="/images/icons/chart_line_16x16.gif"
+				tooltiptext="${c:l('button_CustomerChart_LineBar.tooltiptext')}" />
+			<button id="button_CustomerChart_LineBar3D"
+				image="/images/icons/chart_line3d_16x16.gif"
+				tooltiptext="${c:l('button_CustomerChart_LineBar3D.tooltiptext')}" />
+		</toolbar>
+
+
+		<div id="div_chartArea" height="100%" width="100%">
+			Please select the chart type.
+		</div>
+
+
+
+	</window>
+</zk>

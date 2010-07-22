@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	<!-- Generated 16.06.2009 15:36:35 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+	<class name="de.forsthaus.backend.model.GuestBook" table="guestbook">
+
+		<id name="id" type="long">
+			<column name="gub_id" />
+			<generator class="assigned" />
+		</id>
+
+		<version name="version" column="VERSION" type="integer" />
+
+		<property name="gubSubject" type="string">
+			<column name="gub_subject" length="40" not-null="true" />
+		</property>
+		<property name="gubDate" type="timestamp">
+			<column name="gub_date" length="29" not-null="true" />
+		</property>
+		<property name="gubUsrname" type="string">
+			<column name="gub_usr_name" length="40" not-null="true" />
+		</property>
+		<property name="gubText" type="string">
+			<column name="gub_text" length="1000" />
+		</property>
+	</class>
+</hibernate-mapping>

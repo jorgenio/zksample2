@@ -1,0 +1,129 @@
+<?page id="loginZul" title="LOGIN"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<style>
+		body { padding: 0 0; /* 0 padding on top and bottom and 0
+		padding on right and left */
+		<!-- background image -->
+		background-image:
+		url(${c:encodeURL('/images/templates/test/Grey_T_R.jpg')});
+		background-repeat:repeat-x; }
+
+		<!-- cut the vertical borders in the rows -->
+		tr.z-row td.z-row-inner { border-right: 0px #CCC; }
+
+		<!-- nicer looking -->
+		.z-window-modal-cnt-noborder {background: none}
+		.z-window-modal-cl-noborder {background: none}
+
+		.z-groupbox-body { background-color : white}
+	</style>
+
+	<window id="loginwin" border="none" width="350px"
+		style="background-color: #EDEDED;"
+		use="de.forsthaus.webui.login.ZkLoginDialogCtrl">
+
+		<!-- 
+			<panel border="none">
+			<panelchildren>
+		-->
+		<groupbox mold="3d" closable="false">
+			<caption label="Login to Zksample2"
+				image="/images/earth2.gif" style="font-weight: bold;">
+
+				<button id="button_ZKLoginDialog_Close"
+					image="/images/icons/stop.gif"
+					tooltiptext="${c:l('button_ZKLoginDialog_Close.tooltiptext')}" />
+			</caption>
+
+			<groupbox if="${not empty param.login_error}">
+				<label style="color:red"
+					value="Login failed. Please try again." />
+				<h:br />
+				<label style="color:red"
+					value="Reason: ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}" />
+				<h:br />
+			</groupbox>
+
+			<groupbox>
+				<caption label="Login" />
+
+				<div align="right" style="padding: 5px">
+					<hbox width="100%">
+						<div align="left">
+							<label id="lbl_ServerTime" />
+						</div>
+						<div align="right">
+							<button id="button_ZKLoginDialog_ServerTime"
+								image="/images/icons/date_16x16.gif"
+								tooltiptext="${c:l('button_ZKLoginDialog_ServerTime.tooltiptext')}" />
+						</div>
+					</hbox>
+					<separator bar="true" />
+				</div>
+
+				<div>
+					<!-- ### Spring Security action-url = j_spring_security_check  ### -->
+					<!--          http://www.zkoss.org/smalltalks/zkspringsec1/        -->
+					<h:form id="f" name="f"
+						action="j_spring_security_check" method="POST">
+
+						<grid fixedLayout="true"
+							sclass="GridLayoutNoBorder" style="border:0px">
+							<columns>
+								<column width="40%" />
+								<column width="60%" />
+							</columns>
+							<rows>
+
+								<row>
+									<label id="label_ZKLoginDialog_user"
+										value="${c:l('label_ZKLoginDialog_user.value')}" />
+									<textbox id="txtbox_Username"
+										name="j_username" width="98%" />
+								</row>
+								<row>
+									<label id="label_ZKLoginDialog_pwd"
+										value="${c:l('label_ZKLoginDialog_pwd.value')}" />
+									<textbox id="txtbox_Password"
+										type="password" name="j_password" width="98%" />
+								</row>
+
+								<row spans="2">
+									<hbox>
+										<h:input type="submit"
+											value="Login" />
+										<button id="btnReset"
+											height="22px" label="Reset" />
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+					</h:form>
+				</div>
+
+			</groupbox>
+
+		</groupbox>
+
+		<!-- 
+			</panelchildren>
+			</panel>
+		-->
+	</window>
+</zk>
+
+
+<!-- Make Plain Grid -->
+<!-- 
+	.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
+	.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+	background: white; border-top: none; border-left: none;
+	border-right: none; border-bottom: none; }
+-->

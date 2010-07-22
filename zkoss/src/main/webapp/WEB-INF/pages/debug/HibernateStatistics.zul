@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./window_HibernateStatisticList" ?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window id="window_HibernateStatisticList"
+		apply="${hibernateStatisticsCtrl}" border="none" width="100%">
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+		</style>
+
+		<toolbar>
+			<button id="btnHelp" image="/images/icons/light_16x16.gif"
+				tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+			<button id="btnRefresh"
+				image="/images/icons/refresh2_yellow_16x16.gif"
+				tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
+			<button id="btnDeleteRecords" image="/images/icons/btn_delete2_16x16.gif"
+				tooltiptext="${c:l('btnDeleteRecords.tooltiptext')}" />
+			<separator orient="vertical" />
+		</toolbar>
+
+
+		<paging id="paging_HibernateStatisticList" />
+		<grid id="gridHibernateStatisticList" fixedLayout="false">
+			<columns>
+				<column width="25px" />
+				<column
+					label="${c:l('gridHibernateStatistic.column.label.methodname')}" />
+				<column
+					label="${c:l('gridHibernateStatistic.column.label.javaDurationTime')}"
+					width="120px" />
+				<column
+					label="${c:l('gridHibernateStatistic.column.label.dateTime')}"
+					width="170px" />
+			</columns>
+			<rows>
+			
+
+			</rows>
+		</grid>
+	</window>
+
+</zk>

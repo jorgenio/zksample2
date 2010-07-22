@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	<!-- Generated 18.10.2008 19:00:08 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+	<class name="de.forsthaus.backend.model.Customer" table="kunde">
+
+		<id name="id" type="long">
+			<column name="kun_id" />
+			<generator class="assigned" />
+		</id>
+
+		<version name="version" column="VERSION" type="integer" />
+
+
+		<many-to-one name="office" class="de.forsthaus.backend.model.Office"
+			fetch="join" lazy="false">
+			<column name="kun_fil_id" not-null="true" />
+		</many-to-one>
+		<many-to-one name="branche" class="de.forsthaus.backend.model.Branche"
+			fetch="select" lazy="false">
+			<column name="kun_bra_id" />
+		</many-to-one>
+
+		<property name="kunNr" type="string">
+			<column name="kun_nr" length="20" />
+		</property>
+		<property name="kunMatchcode" type="string">
+			<column name="kun_matchcode" length="20" />
+		</property>
+		<property name="kunName1" type="string">
+			<column name="kun_name1" length="50" />
+		</property>
+		<property name="kunName2" type="string">
+			<column name="kun_name2" length="50" />
+		</property>
+		<property name="kunOrt" type="string">
+			<column name="kun_ort" length="50" />
+		</property>
+		<property name="kunMahnsperre" type="java.lang.Boolean">
+			<column name="kun_mahnsperre" />
+		</property>
+		<set name="orders" fetch="select" inverse="true">
+			<key>
+				<column name="auf_kun_id" not-null="true" />
+			</key>
+			<one-to-many class="de.forsthaus.backend.model.Order" />
+		</set>
+	</class>
+</hibernate-mapping>

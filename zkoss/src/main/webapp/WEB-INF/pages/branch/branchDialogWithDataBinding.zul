@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- This taglib is used for the translations.           -->
+<!-- title="${c:l('panel_BranchList.title')}"            -->
+<!-- It's the aquivalent to java: Labels.getLabel("xx"); -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- Resolver class that allows Spring to instantiated   -->
+<!-- the controller class for this zul-file. Works on    -->
+<!-- apply="${branchListCtrl}"                           -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:a="http://www.zkoss.org/2005/zk/annotation"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<!-- DataBinding Initiator.                              -->
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./window_BranchesDialogWithDataBinding" ?>
+
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<!-- Window component as container for other components. -->
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<window id="window_BranchesDialogWithDataBinding"
+		title="${c:l('window_BranchesDialog.title')}" border="none"
+		apply="${branchDialogWithDataBindingCtrl}" closable="true"
+		width="450px" height="150px">
+
+		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<!-- Set the HTML BODY style for ONLY this zul file.     -->
+		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+		</style>
+
+		<borderlayout id="borderlayoutBranchDialogWithDataBinding">
+
+			<north border="none" margins="0,0,0,0">
+				<grid>
+					<columns sizable="true" height="20px">
+						<!-- Help Button -->
+						<column width="40px" align="left">
+							<hbox>
+								<button id="btnHelp"
+									image="/images/icons/light_16x16.gif"
+									tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+							</hbox>
+						</column>
+
+						<!-- Addtionally Buttons -->
+						<column align="center">
+							<hbox>
+
+							</hbox>
+						</column>
+
+						<!-- CRUD Buttons -->
+						<column align="right">
+							<hbox spacing="5px" style="padding:1px"
+								align="end">
+								<button id="btnNew" height="20"
+									tooltiptext="${c:l('btnNew.tooltiptext')}" />
+								<!-- label="${c:l('btnNew.label')}"	 -->
+								<button id="btnEdit" height="20"
+									tooltiptext="${c:l('btnEdit.tooltiptext')}" />
+								<button id="btnDelete" height="20"
+									tooltiptext="${c:l('btnDelete.tooltiptext')}" />
+								<button id="btnSave" height="20"
+									tooltiptext="${c:l('btnSave.tooltiptext')}" />
+								<button id="btnCancel" height="20"
+									tooltiptext="${c:l('btnCancel.tooltiptext')}" />
+								<button id="btnClose" height="20"
+									tooltiptext="${c:l('btnClose.tooltiptext')}" />
+							</hbox>
+						</column>
+					</columns>
+				</grid>
+			</north>
+
+			<center border="none" margins="0,0,0,0">
+				<div id="divCenterBranchDialogWithDataBinding">
+
+					<panel id="panel_BranchWithDataBinding"
+						title="${c:l('panel_Branch.title')}" style="margin-bottom:10px"
+						border="normal">
+						<panelchildren>
+							<grid fixedLayout="true"
+								style="border:0px">
+								<columns>
+									<column width="150px" />
+									<column width="100%" />
+								</columns>
+								<rows>
+									<row>
+										<label
+											id="label_Branch_BraBezeichnung"
+											value="${c:l('label_Branch_BraBezeichnung.value')}" />
+										<textbox id="braBezeichnung"
+											constraint="no empty"
+											value="@{controller.Branche.braBezeichnung, load-when='none', save-when='none'}"
+											width="100%" />
+									</row>
+								</rows>
+							</grid>
+						</panelchildren>
+					</panel>
+
+				</div>
+			</center>
+
+		</borderlayout>
+
+	</window>
+</zk>

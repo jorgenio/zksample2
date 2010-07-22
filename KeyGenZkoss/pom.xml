@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.daibutsu</groupId>
+	<artifactId>KeyGenZkoss</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>${project.artifactId}->${project.version}</name>
+	<url>http://sourceforge.net/projects/zksample2/</url>
+	<issueManagement>
+		<url>https://sourceforge.net/tracker/?group_id=297404</url>
+	</issueManagement>
+	<scm>
+		<url>https://zksample2.svn.sourceforge.net/svnroot/zksample2</url>
+	</scm>
+	<organization>
+	</organization>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.12</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1</version>
+		</dependency>
+	</dependencies>
+</project>

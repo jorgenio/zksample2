@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+
+	<window id="welcomeWindow" border="none" width="100%"
+		height="100%">
+
+
+		<zscript language="Java"><![CDATA[
+	{
+		lf = "\n";
+		s = "";
+		s = s + "- 30.06.2010 / Added TWO more SearchListDialog skeletons. Now we have 1.) SimpleSearchListBox: paging on Server. " + lf;
+		s = s + "                      2.) AdvancedSearchListBox: DB Paging on Database; " + lf;
+		s = s + "                      3.) ExtendedSearchListBox: DB Paging + data limiting features.  " + lf;
+		s = s + "                      All three SearchDialogs are implemented in the CustomerDialog module for selecting a branch. " + lf;
+		s = s + "- 29.06.2010 / Added a new modal SearchListboxDialog that gives back an OBJECT. Called SimpleSearchBox. " + lf;
+		s = s + "                      We implemented it in the Customer AdressModule for selecting a branch (BranchSimpleSearchBox.java). " + lf;
+		s = s + "- 03.06.2010 / Replacement of the old serverPush mechanism working with a WorkerThread new to work with a timer. " + lf;
+		s = s + "                      Because this application is spring managed. So our Database transactions are spring managed" + lf;
+		s = s + "                      too. So we are not able to start the WorkerThread in such a session context for calling DB methods." + lf;
+		s = s + "                      Further it's limit to 5 calls and self stopped, as long as we logged all DB calls (Hibernate Statistic)." + lf;
+		s = s + "- 21.05.2010 / Fixing bug in the flow logic of the echo events and an additional modal message." + lf;
+		s = s + "- 20.05.2010 / Added ECHO EVENTs. The long running process of inserting sample customer records now running" + lf;
+		s = s + "                      in an echo event and shows a localized busy message during the process. DOCUMENTATION updated. " + lf;
+		s = s + "- 18.05.2010 / Added a PagedBindingListWrapper ( paging/sorting/searching on DB-side ) for the listbox " + lf;
+		s = s + "                      component that can work with zk's DataBinding mechanism. So the Branch module " + lf;
+		s = s + "                      works now complete databinded. The same for the grid will follow next times." + lf;
+		s = s + "- 04.05.2010 / Zksample2 v2.1 is available on sourceForge.net as ready to use war-file." + lf;
+		s = s + "- 02.05.2010 / Added a first Grid in Grid View for the Hibernate Statistic " + lf;
+		s = s + "                      DB transactions, which is implemented by a Spring Aspect. The view will following in" + lf;
+		s = s + "                      the  next days." + lf;
+		s = s + "- 20.04.2010 / Improved speed for the entry page by done all table recordCounts in one transaction." + lf;
+		s = s + "- 20.03.2010 / Changed the design for the menu and module content area. Hope it's nice." + lf;
+		s = s + "- 09.03.2010 / Added on all listpages a refresh button (next help button ) for resizing the listbox and" + lf;
+		s = s + "                      recalculate their pagesize for adjusting if the browser size is changed." + lf;
+		s = s + "- 02.03.2010 / Several design changes. Bugfixes. " + lf;
+		s = s + "- 06.02.2010 / Updated to the Spring3 framework. " + lf;
+		s = s + "- 04.02.2010 / Implementation of the missing Cancel Button in all dialogs. " + lf;
+		s = s + "- 29.01.2010 / Changed the style of the address tab in customers dialog. Changed to comboboxes with icons. " + lf;
+		s = s + "- 17.01.2010 / Today we checked in this Zksample2 application on SourceForge.net. " + lf;
+		s = s + "                      See thread under http://zkoss.org/forum/listComment/10986 " + lf;
+		s = s + "- 12.01.2010 / We work hardly on the last pages of the documentation. The countdown for checkin is running. " + lf;
+		s = s + "- 04.01.2010 / We fix the 'too many open files' on server. Bad boys attack it! Re-using the webservice " + lf;
+		s = s + "                      for getting the geo-data" + lf;
+		s = s + "- 27.12.2009 / Changed the complete update mechanism for the ip geo data, because problems on the linux" + lf;
+		s = s + "                      'server with too many open files', when calling the Locator Web Service in a loop. " + lf;
+		s = s + "                      Now we imported the geo data from a cvs into a table and can use it from there " + lf;
+		s = s + "                      early by the login process. " + lf;
+		s = s + "- 22.12.2009 / Finished the basic Login Statistic. Hard work!!! Björn writes a mapper that maps the HQL " + lf;
+		s = s + "                      aggregate fields to domain bean properties. Many thanks. " + lf;
+		s = s + "- 19.12.2009 / Splitted the LoginLog module to 3 zul's + 3 controllers. Added some statistics " + lf;
+		s = s + "- 15.12.2009 / Clearing code from old 3.5.x stuff. doOnCreateCommon() not used anymore. " + lf;
+		s = s + "- 13.12.2009 / Tree Menu entries are now openend in Tabs.  " + lf;
+		s = s + "- 08.12.2009 / Replaced the last digits from the Users IP with 'xxx' in the gui loginLog list because privacy. " + lf;
+		s = s + "- 07.12.2009 / Moved in all dialog windows the CRUD buttons as imageButtons to the toolbar. " + lf;
+		s = s + "- 03.12.2009 / Refactoring all Domain/DAO/Service Classes to english names." + lf;
+		s = s + "- 22.11.2009 / Second Ip2Country locator from a webService implemented." + lf;
+		s = s + "- 20.11.2009 / Ip2Country locator new in the Login log." + lf;
+		s = s + "- 14.11.2009 / Refactoring to a spring-managed frontend. " + lf;
+		s = s + "                      Spring-Security can now work with the Annotation @Secured() for securing methods." + lf;
+		s = s + "                      Added a simulation of a one-time password tokenizer. (Thanks to Björn for codes !)" + lf;
+		s = s + "                      Added ListFooters in ORDERS module. Clearing some code. Bugfixes. " + lf;
+		s = s + "- 23.10.2009 / ======>> LAST checkin of the project code in Subversion on code.google as 'zk_sample_gui' " + lf;
+		s = s + "- 23.10.2009 / updating to ZK version 3.6.3 FL 2009-10-23 " + lf;
+		s = s + "- 21.10.2009 / updating to ZK version 3.6.3 FL 2009-10-16 " + lf;
+		s = s + "- 12.10.2009 / allow changing between treeMenu and PullDownMenu (Thanks to Björn for codes !). Modifications " + lf;
+		s = s + "- 29.09.2009 / Added a timer in the main borderlayout south area for date/time." + lf;
+		s = s + "- 17.09.2009 / Added several new chart typs and icons. " + lf;
+		s = s + "- 10.09.2009 / Added a pie chart to the customer dialog. See tab 'Chart'. Data created for custoNo '20' and '21' " + lf;
+		s = s + "- 25.08.2009 / Update to ZKoss version 3.6.3. FL-2009-08-20 " + lf;
+		s = s + "- 04.08.2009 / Update to ZKoss version 3.6.3. (compiled from source). " + lf;
+		s = s + "- 02.08.2009 / Listheaders now fixed by scrolling through a list. " + lf;
+		s = s + "- 30.06.2009 / Added a guestbook. Please leave your comments here. " + lf;
+		s = s + "- 29.06.2009 / Updated to ZKoss version 3.6.2. " + lf;
+		s = s + "-                     new gray theme 'plomo.jar' from here: (thanks to jlcasas) " + lf;
+		s = s + "                      http://www.zkoss.org/forum/listComment/6927/ " + lf;
+		s = s + "- 11.06.2009 / Updated to ZKoss version 3.6.2. " + lf;
+		s = s + "- 15.05.2009 / Updated to ZKoss version 3.6.1.  " + lf;
+		s = s + "- 02.05.2009 / All listboxes are now working with paging and sorting described in our smalltalk. " + lf;
+		s = s + "                      ([Performance] Paging and Sorting with a Filter Object) " + lf;
+		s = s + "                      Link: http://docs.zkoss.org/wiki/Paging_Sorting_with_a_filter_object " + lf;
+
+	}
+]]></zscript>
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+
+			<!-- Title in bold letters -->
+			.z-groupbox-hl, .z-groupbox-header { color: #000000;
+			font-weight: bold; }
+		</style>
+
+
+
+		<tablelayout columns="3" width="100%">
+
+			<tablechildren rowspan="1" width="35%">
+				<panel title="" border="none">
+					<panelchildren>
+
+						<groupbox mold="3d">
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/zkpowered_16x16.png"
+								label="Welcome to the ZKsample2 application." />
+
+							<textbox rows="6" multiline="true"
+								width="98%" readonly="true"
+								style="font-family: verdana; border: none; background-color: white;"
+								value="Stored users are  (username/password):&#13;&#13;admin / admin (full access)&#13;user1 / user1 (full access to the office data)&#13;user2 / user2 (restricted access to the office data. Only view mode.)&#13;headoffice / headoffice (full access to the main data.">
+							</textbox>
+						</groupbox>
+
+					</panelchildren>
+				</panel>
+			</tablechildren>
+
+			<tablechildren rowspan="1" width="35%">
+				<panel border="none">
+					<panelchildren>
+
+						<groupbox mold="3d">
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/icons/about1_16x16.gif"
+								label="Sources available !" />
+
+							<textbox rows="6" multiline="true"
+								width="98%" readonly="true"
+								style="font-family: verdana; border: none; background-color: white;"
+								value="Sources are available as Eclipse Projects. &#13;&#13;Read this thread: http://zkoss.org/forum/listComment/10986  ">
+							</textbox>
+						</groupbox>
+
+					</panelchildren>
+				</panel>
+
+			</tablechildren>
+
+			<tablechildren rowspan="1" width="30%">
+				<panel border="none">
+					<panelchildren>
+
+						<groupbox mold="3d">
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/icons/daysort16x16.gif"
+								label="Need help by your zk projects ?" />
+
+							<textbox rows="6" multiline="true"
+								width="98%" readonly="true"
+								style="font-family: verdana; border: none; background-color: white;"
+								value="You can hire us worldwide ! &#13;&#13;Please contact us under zk(at)forsthaus(dot)de ">
+							</textbox>
+						</groupbox>
+
+					</panelchildren>
+				</panel>
+
+			</tablechildren>
+
+		</tablelayout>
+
+		<tablelayout columns="2" width="100%">
+
+			<tablechildren rowspan="3" width="70%">
+				<panel border="none">
+					<panelchildren>
+
+						<groupbox mold="3d">
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/icons/new_icons_10.gif"
+								label="NEW !!!  PagedBindingListWrapper for working with zk's DataBinding mechanism !!!" />
+
+
+							<textbox height="100%" width="99.5%"
+								multiline="true" rows="17" readonly="true"
+								style="font-family: verdana; border: none; background-color: white;"
+								value="${s}" />
+						</groupbox>
+
+					</panelchildren>
+				</panel>
+			</tablechildren>
+
+
+			<tablechildren width="30%">
+				<panel border="none">
+					<panelchildren>
+						<groupbox mold="3d">
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/hibernate_icon_16x16.png"
+								label="Hibernate (Backend)" />
+
+							<textbox width="98%"
+								value="As ORM (Object relational mapper) we use the Hibernate Framework. Used version = 3.1.3"
+								rows="3" multiline="true" readonly="true"
+								style="font-family: verdana; border: none; background-color: white;">
+							</textbox>
+						</groupbox>
+					</panelchildren>
+				</panel>
+			</tablechildren>
+
+			<tablechildren width="30%">
+				<panel border="none">
+					<panelchildren>
+						<groupbox mold="3d">
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/hibernate_icon_16x16.png"
+								label="Hibernate-Generic-DAO" />
+
+							<textbox width="98%"
+								value="We used the search object from this framework and the hql code generator for our PagedListWrapper. Version = 0.3.4"
+								rows="3" multiline="true" readonly="true"
+								style="font-family: verdana; border: none; background-color: white;">
+							</textbox>
+						</groupbox>
+					</panelchildren>
+				</panel>
+			</tablechildren>
+
+			<tablechildren width="30%">
+				<panel border="none">
+					<panelchildren>
+						<groupbox mold="3d">
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/spring_source_x16.png"
+								label="Spring Integration (Backend) + (Frontend)" />
+
+							<textbox width="98%"
+								value="Integration of the spring-framework with spring managed Services and DAOs in the backend and managed controllers/composers in the frontend. Used version = 3.0.0"
+								rows="4" multiline="true" readonly="true"
+								style="font-family: verdana; border: none; background-color: white;">
+							</textbox>
+						</groupbox>
+					</panelchildren>
+				</panel>
+			</tablechildren>
+		</tablelayout>
+
+		<tablelayout columns="2" width="100%">
+			<tablechildren rowspan="3" width="70%">
+				<panel border="none">
+					<panelchildren>
+						<groupbox mold="3d">
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/icons/database_blue_16x16.gif"
+								label="What's in it and the sample data" />
+
+							<tabbox tabscroll="true">
+								<tabs>
+									<tab label="Base" />
+									<tab label="Chat" />
+									<tab label="Customers" />
+									<tab label="Orders" />
+									<tab label="Articles" />
+									<tab label="Branches" />
+									<tab label="Offices" />
+									<tab label="Administration" />
+									<tab label="Users" />
+									<tab label="User Roles" />
+									<tab label="Roles" />
+									<tab label="Role-Groups" />
+									<tab label="Groups" />
+									<tab label="Group-Rights" />
+									<tab label="Rights" />
+									<tab label="Login log" />
+								</tabs>
+								<tabpanels>
+
+									<!-- Tab base -->
+									<tabpanel>
+										<textbox height="100%"
+											width="98%" multiline="true" rows="12" readonly="true"
+											style="font-family: verdana; border: none; background-color: white;"
+											value="- CRUD operations on all modules with spring managed services and DAO classes which are working with hibernate. &#13;- Uses ButtonControllers for showing next possible CRUD operations.&#13;- checks by onClose if there are unsaved modified data.&#13;- single and mixed searching for data.&#13;- sortable lists.&#13;- internationalization (english/german) language.&#13;- Reporting with the JasperReports. The order report are created with iReport and uses a JRBeanDataSource.&#13;- Full customizable Role based security management wich is extended for groups.&#13;   All is stored in database tables. It's build on top of the spring-security framework.&#13;- Most dialogs you can reach with doubleClick on an item in the lists.&#13;" />
+									</tabpanel>
+
+									<!-- Tab chat -->
+									<tabpanel>
+										<textbox height="100%"
+											width="98%" multiline="true" rows="10" readonly="true"
+											style="font-family: verdana; border: none; background-color: white;"
+											value="- A implementation of the ZKoss chat demo. Modifications only for the date/time format in the chat window. " />
+									</tabpanel>
+
+									<!-- Tab customers -->
+									<tabpanel>
+										<textbox height="100%"
+											width="98%" multiline="true" rows="10" readonly="true"
+											style="font-family: verdana; border: none; background-color: white;"
+											value="- Customer No. 20 + 21 have	predefiened data for orders and order positions. &#13;- Printing orders with JasperReports. A main Report with two subreports &#13;" />
+									</tabpanel>
+
+									<!-- Tab orders -->
+									<tabpanel>
+										<textbox height="100%"
+											width="98%" multiline="true" rows="10" readonly="true"
+											style="font-family: verdana; border: none; background-color: white;"
+											value="- Orders and order-positions data are available for customer No. 20 + 21.&#13;&#13; - All orders are shown in the sample at init. &#13; - In a normal application you must limited the count of shown records by initialisation.&#13;" />
+									</tabpanel>
+
+									<!-- Tab articles -->
+									<tabpanel>
+										<textbox height="100%"
+											width="98%" multiline="true" rows="10" readonly="true"
+											style="font-family: verdana; border: none; background-color: white;"
+											value="- Predefined articles. Under the list is an additionally textbox for the	long article description.&#13;" />
+									</tabpanel>
+
+									<!-- Tab branches -->
+									<tabpanel>
+										<textbox height="100%"
+											width="98%" multiline="true" rows="10" readonly="true"
+											style="font-family: verdana; border: none; background-color: white;"
+											value="- Predefined branches. Branch '000' is a system branch for predefined to a new customer and cannot be deleted.&#13; " />
+									</tabpanel>
+
+									<!-- Tab offices -->
+									<tabpanel>
+										<textbox height="100%"
+											width="98%" multiline="true" rows="10" readonly="true"
+											style="font-family: verdana; border: none; background-color: white;"
+											value="- Offices. Not used in this sample application. " />
+									</tabpanel>
+
+									<!-- Tab Administration -->
+									<tabpanel>
+										<textbox height="100%"
+											width="98%" multiline="true" rows="10" readonly="true"
+											style="font-family: verdana; border: none; background-color: white;"
+											value=" - The Administration menu point includes the whole security administration, the users and Login log list.&#13; - The security is build on top of the spring-security framework and extended for groups and group-rights. &#13; - In the most simple examples roles are defined for ADMIN_ROLE, USER_ROLE or GUEST_ROLE.&#13;&#13;   This is to small for us. &#13;   Because what is a user ??? A user in a bigger business firm can works in a department of &#13;   booking, invoicing, inventory, production, sales, promotion ...&#13;   And these categories can have sub categories.&#13;   Secondly we go away from the xml configuration for assigning the roles to a page or event. &#13;   We do it in database tables and can extend the security for a group and group-right. &#13;   Further we need not a new tomcat start to consider changes in the scurity of pages or events.&#13;&#13; - At last: A right in spring-security is only a STRING &#13; While we secure the application in the CODE and manage these in tables WE and OUR CUSTOMERS would have the abbility &#13;to customize the access/right &#13; While we do not secure with a ROLE-String either we secure with a RIGHT-String. &#13; we can assign a group of right-strings to a logically closed GROUP. &#13; So RIGHTS, GROUPS and GROUP-RIGHTS are defined by the developer who knows what compoents are working together.&#13; All others like ROLES and ROLE-GROUPS can be modified/extended by the customer if needed/allowed.&#13; " />
+									</tabpanel>
+
+									<!-- Tab users -->
+									<tabpanel>
+										<textbox height="100%"
+											width="98%" multiline="true" rows="10" readonly="true"
+											style="font-family: verdana; border: none; background-color: white;"
+											value=" - All users have the right to edit her own peronal data like the name, password.&#13; - User Roles are assigned in the administration area [User Roles].&#13; " />
+									</tabpanel>
+
+									<!-- Tab User Roles -->
+									<tabpanel>
+										<textbox height="100%"
+											width="98%" multiline="true" rows="10" readonly="true"
+											style="font-family: verdana; border: none; background-color: white;"
+											value=" - Here will assigned Roles to the Users. It's possible to assign several Roles to a user.&#13;" />
+									</tabpanel>
+
+									<!-- Tab Roles -->
+									<tabpanel>
+										<textbox height="100%"
+											width="98%" multiline="true" rows="10" readonly="true"
+											style="font-family: verdana; border: none; background-color: white;"
+											value=" - Predefined Roles.&#13; " />
+									</tabpanel>
+
+									<!-- Tab Role-Groups -->
+									<tabpanel>
+										<textbox height="100%"
+											width="98%" multiline="true" rows="10" readonly="true"
+											style="font-family: verdana; border: none; background-color: white;"
+											value=" - Predefined Role Groups.&#13; " />
+									</tabpanel>
+
+									<!-- Tab Groups -->
+									<tabpanel>
+										<textbox height="100%"
+											width="98%" multiline="true" rows="10" readonly="true"
+											style="font-family: verdana; border: none; background-color: white;"
+											value=" - Predefined Groups.&#13; " />
+									</tabpanel>
+
+									<!-- Tab Group-Rights -->
+									<tabpanel>
+										<textbox height="100%"
+											width="98%" multiline="true" rows="10" readonly="true"
+											style="font-family: verdana; border: none; background-color: white;"
+											value=" - Predefined Group-Rights.&#13; " />
+									</tabpanel>
+
+									<!-- Tab Rights -->
+									<tabpanel>
+										<textbox height="100%"
+											width="98%" multiline="true" rows="10" readonly="true"
+											style="font-family: verdana; border: none; background-color: white;"
+											value=" - Predefined Rights.&#13; " />
+									</tabpanel>
+
+									<!-- Tab Login Log -->
+									<tabpanel>
+										<textbox height="100%"
+											width="98%" multiline="true" rows="10" readonly="true"
+											style="font-family: verdana; border: none; background-color: white;"
+											value=" - Login Log list.&#13; " />
+									</tabpanel>
+
+								</tabpanels>
+							</tabbox>
+						</groupbox>
+					</panelchildren>
+				</panel>
+			</tablechildren>
+
+
+			<tablechildren width="30%">
+				<panel border="none">
+					<panelchildren>
+						<groupbox mold="3d">
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/spring_source_x16.png" label="Spring-Security" />
+
+							<textbox width="98%"
+								value="Access management with spring-security.  We extended it for a group and group-rights. All security dependent entries are stored in the database. Userroles/Roles/RoleGroups are customizable on runtime.  Used version = 3.0.1"
+								rows="3" multiline="true" readonly="true"
+								style="font-family: verdana; border: none; background-color: white;">
+							</textbox>
+						</groupbox>
+					</panelchildren>
+				</panel>
+			</tablechildren>
+
+			<tablechildren width="30%">
+				<panel border="none">
+					<panelchildren>
+						<groupbox mold="3d">
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/spring_source_x16.png" label="Spring-AOP" />
+
+							<textbox width="98%"
+								value="We use spring-aop for the database transaction management."
+								rows="2" multiline="true" readonly="true"
+								style="font-family: verdana; border: none; background-color: white;">
+							</textbox>
+						</groupbox>
+					</panelchildren>
+				</panel>
+			</tablechildren>
+
+
+			<tablechildren width="30%">
+				<panel border="none">
+					<panelchildren>
+						<groupbox mold="3d">
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/jasperReport_16x16.ico" label="Jasper Reports" />
+
+							<textbox width="98%"
+								value="JasperReports used version = 3.1.2 . All reports are created with iReport and uses JRBeanDataSources."
+								rows="3" multiline="true" readonly="true"
+								style="font-family: verdana; border: none; background-color: white;">
+							</textbox>
+						</groupbox>
+					</panelchildren>
+				</panel>
+			</tablechildren>
+
+		</tablelayout>
+
+
+
+	</window>
+</zk>
+

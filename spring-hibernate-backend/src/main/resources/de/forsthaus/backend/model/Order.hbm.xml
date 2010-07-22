@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	<!-- Generated 18.10.2008 19:00:08 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+	<class name="de.forsthaus.backend.model.Order" table="auftrag">
+
+		<id name="id" type="long">
+			<column name="auf_id" />
+			<generator class="assigned" />
+		</id>
+
+		<version name="version" column="version" type="int" />
+
+		<many-to-one name="customer" class="de.forsthaus.backend.model.Customer"
+			fetch="select" lazy="false">
+			<column name="auf_kun_id" not-null="true" />
+		</many-to-one>
+		<property name="aufNr" type="string">
+			<column name="auf_nr" length="20" not-null="true" unique="true" />
+		</property>
+		<property name="aufBezeichnung" type="string">
+			<column name="auf_bezeichnung" length="50" />
+		</property>
+		<set name="orderpositions" fetch="select" inverse="true">
+			<key>
+				<column name="aup_auf_id" not-null="true" />
+			</key>
+			<one-to-many class="de.forsthaus.backend.model.Orderposition" />
+		</set>
+
+	</class>
+</hibernate-mapping>

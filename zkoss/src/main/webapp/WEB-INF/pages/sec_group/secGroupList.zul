@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+	<window id="secGroupListWindow" apply="${secGroupListCtrl}"
+		border="none" width="100%">
+
+		<style>
+			body { padding: 0 0; /* 0 padding on top and bottom and 0
+			padding on right and left */ }
+		</style>
+
+		<panel id="panel_SecGroupList"
+			title="${c:l('panel_SecGroupList.title')}" border="none" />
+
+		<toolbar>
+			<button id="btnHelp" image="/images/icons/light_16x16.gif"
+				tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+			<button id="btnRefresh"
+				image="/images/icons/refresh2_yellow_16x16.gif"
+				tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
+			<separator orient="vertical" />
+			<button id="button_SecGroupList_NewGroup"
+				image="/images/icons/btn_new2_16x16.gif"
+				tooltiptext="${c:l('button_SecGroupList_NewGroup.tooltiptext')}" />
+			<button id="button_SecGroupList_PrintGroupList"
+				image="/images/icons/btn_print2_16x16.gif"
+				tooltiptext="${c:l('button_SecGroupList_PrintGroupList.tooltiptext')}" />
+		</toolbar>
+
+		<hbox style="padding: 3px">
+			<space />
+			<checkbox id="checkbox_SecGroupList_ShowAll"
+				label="${c:l('checkbox_SecGroupList_ShowAll.label')}" />
+			<separator bar="true" orient="vertical" />
+
+			<label id="label_SecGroupList_grpShortdescription"
+				value="${c:l('label_SecGroupList_grpShortdescription.value')}" />
+			<textbox id="tb_SecGroup_GroupName" width="120px" />
+			<button id="button_SecGroupList_SearchGroupName"
+				image="/images/icons/search.gif"
+				label="${c:l('button_SecGroupList_SearchGroupName.label')}"
+				tooltiptext="${c:l('button_SecGroupList_SearchGroupName.tooltiptext')}" />
+			<separator bar="true" orient="vertical" />
+		</hbox>
+
+		<borderlayout id="borderLayout_secGroupsList">
+
+			<north border="none" height="26px">
+				<paging id="paging_SecGroupList" />
+			</north>
+
+			<center border="none">
+
+				<listbox id="listBoxSecGroups" vflex="true"
+					tooltiptext="${c:l('listbox.tooltiptext')}" width="99.9%"
+					height="100%" multiple="false">
+					<listhead sizable="true">
+						<listheader
+							id="listheader_SecGroupList_grpShortdescription"
+							image="/images/icons/create_doc.gif"
+							label="${c:l('listheader_SecGroupList_grpShortdescription.label')}"
+							sort="auto" width="30%" />
+						<listheader
+							id="listheader_SecGroupList_grpLongdescription"
+							image="/images/icons/sequence.gif"
+							label="${c:l('listheader_SecGroupList_grpLongdescription.label')}"
+							sort="auto" width="70%" />
+					</listhead>
+				</listbox>
+
+			</center>
+			<south border="none" />
+
+		</borderlayout>
+
+	</window>
+</zk>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:XMLRootMenu xmlns:ns2="http://www.daibutsu.de/zk/menu">
+
+	<!-- Old HomeMenuTree -->
+	<menuItem id="menu_Item_Home" zulNavigation="/WEB-INF/pages/welcome.zul"
+		iconName="/images/icons/console_view.gif" />
+	<menuItem id="menu_Item_Chat" zulNavigation="/WEB-INF/pages/chat/chat.zul" />
+
+	<!-- Old OfficeDataMenuTree -->
+	<menu id="menu_Category_OfficeData" rightName="menuCat_OfficeData">
+		<menuItem id="menu_Item_Customers" zulNavigation="/WEB-INF/pages/customer/customerList.zul"
+			rightName="menuItem_OfficeData_Customers" />
+		<menuItem id="menu_Item_Orders" zulNavigation="/WEB-INF/pages/order/orderList.zul"
+			rightName="menuItem_OfficeData_Orders" />
+	</menu>
+
+	<!-- Old MainDataMenuTree -->
+	<menu id="menu_Category_MainData" rightName="menuCat_MainData">
+		<menuItem id="menu_Item_Articles" zulNavigation="/WEB-INF/pages/article/articleList.zul"
+			rightName="menuItem_MainData_ArticleItems" />
+		<menuItem id="menu_Item_Branches" zulNavigation="/WEB-INF/pages/branch/branchList.zul"
+			rightName="menuItem_MainData_Branch" />
+		<menuItem id="menu_Item_BranchesDataBinding"
+			zulNavigation="/WEB-INF/pages/branch/branchListWithDataBinding.zul"
+			rightName="menuItem_MainData_Branch" />
+		<menuItem id="menu_Item_Offices" zulNavigation="/WEB-INF/pages/office/officeList.zul"
+			rightName="menuItem_MainData_Office" />
+	</menu>
+
+	<!-- Old AdministrationMenuTree -->
+	<menu id="menu_Category_Administration" rightName="menuCat_Administration">
+		<menuItem id="menu_Item_Users" zulNavigation="/WEB-INF/pages/sec_user/userList.zul"
+			rightName="menuItem_Administration_Users" />
+		<menu id="menu_Category_UserRights" rightName="menuCat_UserRights">
+			<menuItem id="menu_Item_UserRoles" zulNavigation="/WEB-INF/pages/sec_userrole/secUserrole.zul"
+				rightName="menuItem_Administration_UserRoles" />
+			<menuItem id="menu_Item_Roles" zulNavigation="/WEB-INF/pages/sec_role/secRoleList.zul"
+				rightName="menuItem_Administration_Roles" />
+			<menuItem id="menu_Item_RoleGroups" zulNavigation="/WEB-INF/pages/sec_rolegroup/secRolegroup.zul"
+				rightName="menuItem_Administration_RoleGroups" />
+			<menuItem id="menu_Item_Groups" zulNavigation="/WEB-INF/pages/sec_group/secGroupList.zul"
+				rightName="menuItem_Administration_Groups" />
+			<menuItem id="menu_Item_GroupRights"
+				zulNavigation="/WEB-INF/pages/sec_groupright/secGroupright.zul"
+				rightName="menuItem_Administration_GroupRights" />
+			<menuItem id="menu_Item_Rights" zulNavigation="/WEB-INF/pages/sec_right/secRightList.zul"
+				rightName="menuItem_Administration_Rights" />
+		</menu>
+		<menuItem id="menu_Item_LoginsLog"
+			zulNavigation="/WEB-INF/pages/sec_loginlog/secLoginLogMain.zul"
+			rightName="menuItem_Administration_LoginsLog" />
+		<menuItem id="menu_Item_HibernateStatistics" zulNavigation="/WEB-INF/pages/debug/HibernateStatistics.zul"
+			rightName="menuItem_Administration_HibernateStats" />
+
+	</menu>
+
+
+</ns2:XMLRootMenu>

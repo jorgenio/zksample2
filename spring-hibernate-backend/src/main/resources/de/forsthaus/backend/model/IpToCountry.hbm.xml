@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="de.forsthaus.backend.model.IpToCountry" table="ipc_ip2country">
+
+		<id name="id" type="long">
+			<column name="ipc_id" />
+			<generator class="assigned" />
+		</id>
+
+		<version name="version" column="VERSION" type="integer" />
+
+		<property name="ipcIpFrom" type="long">
+			<column name="ipc_ip_from" />
+		</property>
+		<property name="ipcIpTo" type="long">
+			<column name="ipc_ip_to" />
+		</property>
+		<property name="ipcCountryCode2" type="string">
+			<column name="ipc_country_code2" length="2" />
+		</property>
+		<property name="ipcCountryCode3" type="string">
+			<column name="ipc_country_code3" length="3" />
+		</property>
+		<property name="ipcCountryName" type="string">
+			<column name="ipc_country_name" length="50" />
+		</property>
+	</class>
+</hibernate-mapping>

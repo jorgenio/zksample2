@@ -127,8 +127,7 @@ public class BranchListWithDataBindingCtrl extends GFCBaseListCtrl<Branche> impl
 		super.doAfterCompose(window);
 
 		// set the composer name in the zul page for access.
-		if (self != null)
-			self.setVariable("controller", this, true);
+		self.setVariable("controller", this, true);
 	}
 
 	public void onCreate$window_BranchesListWithDataBinding(Event event) throws Exception {

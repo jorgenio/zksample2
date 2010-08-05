@@ -56,8 +56,7 @@ public class ButtonStatusCtrl implements Serializable {
 		New, Edit, Delete, Save, Cancel, Close;
 	}
 
-	private final Map<ButtonEnum, Button> buttons = new HashMap<ButtonEnum, Button>(
-			5);
+	private final Map<ButtonEnum, Button> buttons = new HashMap<ButtonEnum, Button>(5);
 
 	final private UserWorkspace workspace;
 
@@ -70,6 +69,9 @@ public class ButtonStatusCtrl implements Serializable {
 	 * false = make the button unvisible<br>
 	 */
 	private final boolean disableButtons = false;
+
+	/** with close button */
+	boolean closeButton = true;
 
 	/**
 	 * Constructor
@@ -85,13 +87,12 @@ public class ButtonStatusCtrl implements Serializable {
 	 * @param btnClose
 	 *            (Close Button)
 	 */
-	public ButtonStatusCtrl(UserWorkspace userWorkspace, String rightPrefix,
-			Button btnNew, Button btnEdit, Button btnDelete, Button btnSave,
-			Button btnCancel, Button btnClose) {
+	public ButtonStatusCtrl(UserWorkspace userWorkspace, String rightPrefix, boolean withCloseBtn, Button btnNew, Button btnEdit, Button btnDelete, Button btnSave, Button btnCancel, Button btnClose) {
 		super();
 		this.workspace = userWorkspace;
 
 		this._rightPrefix = rightPrefix + "btn";
+		this.closeButton = withCloseBtn;
 
 		buttons.put(ButtonEnum.New, btnNew);
 		buttons.put(ButtonEnum.Edit, btnEdit);
@@ -127,14 +128,23 @@ public class ButtonStatusCtrl implements Serializable {
 			setDisabled(ButtonEnum.Delete, true);
 			setDisabled(ButtonEnum.Save, false);
 			setDisabled(ButtonEnum.Cancel, false);
-			setDisabled(ButtonEnum.Close, false);
+			if (closeButton) {
+				setDisabled(ButtonEnum.Close, false);
+			} else {
+				setVisible(ButtonEnum.Close, false);
+			}
+
 		} else {
 			setVisible(ButtonEnum.New, false);
 			setVisible(ButtonEnum.Edit, false);
 			setVisible(ButtonEnum.Delete, false);
 			setVisible(ButtonEnum.Save, true);
 			setVisible(ButtonEnum.Cancel, true);
-			setVisible(ButtonEnum.Close, true);
+			if (closeButton) {
+				setVisible(ButtonEnum.Close, true);
+			} else {
+				setVisible(ButtonEnum.Close, false);
+			}
 		}
 	}
 
@@ -148,14 +158,22 @@ public class ButtonStatusCtrl implements Serializable {
 			setDisabled(ButtonEnum.Delete, true);
 			setDisabled(ButtonEnum.Save, false);
 			setDisabled(ButtonEnum.Cancel, false);
-			setDisabled(ButtonEnum.Close, false);
+			if (closeButton) {
+				setDisabled(ButtonEnum.Close, false);
+			} else {
+				setVisible(ButtonEnum.Close, false);
+			}
 		} else {
 			setVisible(ButtonEnum.New, false);
 			setVisible(ButtonEnum.Edit, false);
 			setVisible(ButtonEnum.Delete, false);
 			setVisible(ButtonEnum.Save, true);
 			setVisible(ButtonEnum.Cancel, true);
-			setVisible(ButtonEnum.Close, true);
+			if (closeButton) {
+				setVisible(ButtonEnum.Close, true);
+			} else {
+				setVisible(ButtonEnum.Close, false);
+			}
 		}
 	}
 
@@ -185,14 +203,22 @@ public class ButtonStatusCtrl implements Serializable {
 			setDisabled(ButtonEnum.Delete, false);
 			setDisabled(ButtonEnum.Save, true);
 			setDisabled(ButtonEnum.Cancel, false);
-			setDisabled(ButtonEnum.Close, false);
+			if (closeButton) {
+				setDisabled(ButtonEnum.Close, false);
+			} else {
+				setVisible(ButtonEnum.Close, false);
+			}
 		} else {
 			setVisible(ButtonEnum.New, true);
 			setVisible(ButtonEnum.Edit, true);
 			setVisible(ButtonEnum.Delete, true);
 			setVisible(ButtonEnum.Save, false);
 			setVisible(ButtonEnum.Cancel, true);
-			setVisible(ButtonEnum.Close, true);
+			if (closeButton) {
+				setVisible(ButtonEnum.Close, true);
+			} else {
+				setVisible(ButtonEnum.Close, false);
+			}
 		}
 	}
 
@@ -208,14 +234,22 @@ public class ButtonStatusCtrl implements Serializable {
 			setDisabled(ButtonEnum.Delete, true);
 			setDisabled(ButtonEnum.Save, false);
 			setDisabled(ButtonEnum.Cancel, false);
-			setDisabled(ButtonEnum.Close, false);
+			if (closeButton) {
+				setDisabled(ButtonEnum.Close, false);
+			} else {
+				setVisible(ButtonEnum.Close, false);
+			}
 		} else {
 			setVisible(ButtonEnum.New, false);
 			setVisible(ButtonEnum.Edit, false);
 			setVisible(ButtonEnum.Delete, false);
 			setVisible(ButtonEnum.Save, true);
 			setVisible(ButtonEnum.Cancel, true);
-			setVisible(ButtonEnum.Close, true);
+			if (closeButton) {
+				setVisible(ButtonEnum.Close, true);
+			} else {
+				setVisible(ButtonEnum.Close, false);
+			}
 		}
 	}
 

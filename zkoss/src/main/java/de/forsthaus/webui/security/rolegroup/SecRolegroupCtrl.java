@@ -27,7 +27,7 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zkex.zul.Borderlayout;
+import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.FieldComparator;
@@ -265,7 +265,7 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 			logger.debug("--> " + event.toString());
 		}
 
-		String message = Labels.getLabel("message_Not_Implemented_Yet");
+		String message = Labels.getLabel("message.Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
@@ -343,7 +343,7 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 					} catch (DataAccessException e) {
 						String message = e.getMessage();
 						// String message = e.getCause().getMessage();
-						String title = Labels.getLabel("message_Error");
+						String title = Labels.getLabel("message.Error");
 						MultiLineMessageBox.doSetTemplate();
 						MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 					}

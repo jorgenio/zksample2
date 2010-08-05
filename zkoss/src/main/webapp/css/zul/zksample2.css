@@ -1,0 +1,113 @@
+<?
+taglib uri                        ="http: //www.zkoss.org /dsp/web/core" prefix       
+	                ="c   
+	                   "?> <style type 
+	                       ="text /css"> /* body Bereich */ body {
+	padding: 0 0;
+	/* 0 padding on top and bottom and 0 padding on right and left */
+}
+
+/********************************/ /* ------ L I S T B O X ------- */
+	/********************************/ /* Listbox Header 1 */
+.FDListBoxHeader1 {
+	background-color: #E6B9CD;
+}
+
+/* Even rows in a listbox */
+tr.z-listitem,tr.z-row td.z-row-inner,tr.z-row td.z-group-inner,tr.z-row td.z-group-foot-inner,tr.z-row
+	{
+	background: #EEEEEE none repeat scroll 0 0;
+}
+
+/* Odd rows in a listbox */
+tr.odd td.gc,tr.odd,tr.z-listbox-odd,tr.z-grid-odd td.z-row-inner,tr.z-grid-odd
+	{
+	background: #FFFFFF none repeat scroll 0 0;
+}
+
+/* Unselected rows with the mouse hovering over them */
+tr.overd,td.overd,tr.z-listitem-over {
+	background: #D3DBFC none repeat scroll 0 0;
+}
+
+/* Selected rows in a listbox */
+tr.seld,td.seld,tr.z-listitem-seld {
+	background: #B8BFDC none repeat scroll 0 0;
+}
+
+/* Selected rows with the mouse hovering over them */
+tr.overseld,td.overseld,tr.z-listitem-over-seld {
+	background: #D3DBFC none repeat scroll 0 0;
+}
+
+/* Workaround for Bug: not the expected Font-Family. will be fixed in 5.0.x */
+div.z-listfooter {
+	font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
+}
+
+/* ------------------- TOOLBAR -------------------- */
+	/* remove white strips between the toolbars */
+.hboxRemoveWhiteStrips td.z-hbox-sep {
+	width: 0;
+	padding: 0;
+}
+
+/* ------------------- TEXTBOX -------------------- */
+	/* Textbox: Disabled / readonly background color */
+.z-textbox-readonly,.z-textbox-text-disd {
+	background: #ECEAE4;
+}
+
+/* ------------------- DECIMALBOX -------------------- */
+	/* Decimalbox: Disabled / readonly background color */
+.z-decimalbox-readonly,.z-decimalbox-text-disd {
+	background: #ECEAE4;
+}
+
+/* ------------------- DATEBOX -------------------- */
+	/* Disabled datebox should have black font */
+.z-datebox {
+	font: #000000;
+}
+
+/* ------------------- GRID -------------------- */
+	/* cut the vertical borders in the rows of the GRID */
+tr.z-row td.z-row-inner {
+	border-right: 0px #CCC;
+}
+
+/* Make Plain Grid+smaller comps Padding */
+	/* "overflow:hidden ;" not working in Chrome/Safari */
+.GridLayoutNoBorder tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body div.z-cell,div.z-grid
+	{
+	border: none;
+	zoom: 1;
+	background: white;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
+	padding: 1px;
+}
+
+/* ------------------- GROUPBOX -------------------- */
+	/* Title in bold letters */
+.z-groupbox-hl .z-groupbox-header {
+	color: #000000;
+	font-weight: bold;
+}
+
+.z-slider-sphere-hor,.z-slider-scale,.z-slider-hor,.z-slider-sphere-hor-center,.z-slider-scale-center,.z-slider-hor-center
+	{
+	background: transparent no-repeat 0 top;
+	background-image: url(${                                       c :  
+		                             
+		      encodeURL('~./zul/img/slider/slider-bg.png')
+}
+
+.z-tabs-header {
+	width: 100%;
+}
+</
+style
+>

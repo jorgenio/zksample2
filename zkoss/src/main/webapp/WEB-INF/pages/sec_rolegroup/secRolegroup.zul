@@ -96,6 +96,7 @@
 																	sizable="true">
 																	<listheader
 																		id="listheader_SecRoleGroup_Rolename"
+																		sclass="FDListBoxHeader1"
 																		image="/images/icons/create_doc.gif" sort="auto"
 																		width="100%"
 																		label="${c:l('listheader_SecRoleGroup_Rolename.label')}" />
@@ -137,11 +138,13 @@
 																	sizable="true">
 																	<listheader
 																		id="listheader_SecRoleGroup_GrantedRight"
+																		sclass="FDListBoxHeader1"
 																		image="/images/icons/exdDialogAction1.gif" sort="none"
 																		width="20%"
 																		label="${c:l('listheader_SecRoleGroup_GrantedRight.label')}" />
 																	<listheader
 																		id="listheader_SecRoleGroup_GroupName"
+																		sclass="FDListBoxHeader1"
 																		image="/images/icons/create_doc.gif" sort="auto"
 																		width="80%"
 																		label="${c:l('listheader_SecRoleGroup_GroupName.label')}" />
@@ -151,15 +154,9 @@
 													</center>
 												</borderlayout>
 
-
-
-
-
 											</panelchildren>
 										</panel>
 									</columnchildren>
-
-
 								</columnlayout>
 
 

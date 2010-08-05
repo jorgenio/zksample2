@@ -30,17 +30,16 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zkex.zul.Borderlayout;
-import org.zkoss.zkex.zul.Center;
-import org.zkoss.zkex.zul.North;
-import org.zkoss.zkex.zul.West;
-import org.zkoss.zul.Button;
+import org.zkoss.zul.Borderlayout;
+import org.zkoss.zul.Center;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Menubar;
 import org.zkoss.zul.Menuitem;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.North;
 import org.zkoss.zul.Separator;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabpanel;
@@ -50,6 +49,7 @@ import org.zkoss.zul.Toolbarbutton;
 import org.zkoss.zul.Tree;
 import org.zkoss.zul.Treechildren;
 import org.zkoss.zul.Treeitem;
+import org.zkoss.zul.West;
 import org.zkoss.zul.Window;
 
 import de.forsthaus.common.menu.dropdown.ZkossDropDownMenuFactory;
@@ -104,18 +104,18 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 	 */
 	private void createMenu() throws InterruptedException {
 
-		Div div = new Div();
-		div.setWidth("100%");
-		div.setHeight("100%");
-		div.setStyle("padding:5px;" + "backgound-color: " + bgColorInner);
-		div.setParent(getMainMenuWindow().getFellowIfAny("groupbox_menu"));
+		Toolbarbutton toolbarbutton;
 
-		div.appendChild(createSeparator(false));
+		Groupbox gb = (Groupbox) getMainMenuWindow().getFellowIfAny("groupbox_menu");
+		// gb.setHeight("500px");
 
+		// Hbox for the expand/collapse buttons
 		Hbox hbox = new Hbox();
 		hbox.setStyle("backgound-color: " + bgColorInner);
-		div.appendChild(hbox);
-		Toolbarbutton toolbarbutton = new Toolbarbutton();
+		hbox.setParent(gb);
+
+		// ToolbarButton for expanding the menutree
+		toolbarbutton = new Toolbarbutton();
 		hbox.appendChild(toolbarbutton);
 		toolbarbutton.setId("btnMainMenuExpandAll");
 		toolbarbutton.setImage("/images/icons/folder_open_16x16.gif");
@@ -126,7 +126,6 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 				onClick$btnMainMenuExpandAll(event);
 			}
 		});
-
 		toolbarbutton = new Toolbarbutton();
 		hbox.appendChild(toolbarbutton);
 		toolbarbutton.setId("btnMainMenuCollapseAll");
@@ -172,16 +171,22 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		separator.setWidth("97%");
 		separator.setStyle("background-color: " + bgColorInner);
 		separator.setBar(false);
-		div.appendChild(separator);
+		separator.setParent(gb);
+
 		separator = createSeparator(false);
 		separator.setWidth("97%");
 		separator.setBar(true);
-		div.appendChild(separator);
+		separator.setParent(gb);
 
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
+		// the menuTree
 		Tree tree = new Tree();
-		div.appendChild(tree);
+		// tree.setSizedByContent(true);
+		tree.setStyle("overflow:auto;");
+		tree.setParent(gb);
 
-		tree.setZclass("z-dottree");
+		// tree.setZclass("z-dottree");
 		tree.setStyle("border: none");
 
 		Treechildren treechildren = new Treechildren();
@@ -193,26 +198,10 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		Separator sep1 = new Separator();
 		sep1.setWidth("97%");
 		sep1.setBar(false);
-		sep1.setParent(div);
-
-		Separator sep2 = new Separator();
-		sep2.setWidth("97%");
-		sep2.setBar(true);
-		sep2.setParent(div);
-
-		Separator sep3 = new Separator();
-		sep3.setWidth("97%");
-		sep3.setBar(false);
-		sep3.setParent(div);
-
-		// Guestbook
-		Button btn = new Button("ZK Guestbook");
-		btn.setParent(div);
-		btn.addEventListener("onClick", new GuestBookListener());
+		sep1.setParent(gb);
 
 		/* as standard, call the welcome page */
 		showPage("/WEB-INF/pages/welcome.zul", "Start");
-
 	}
 
 	/**

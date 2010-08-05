@@ -44,14 +44,14 @@
 					height="100%" multiple="false">
 					<listhead sizable="true">
 						<listheader id="listheader_GuestBook_gubDate"
-							image="/images/icons/sequence.gif" label="date" sort="auto"
-							width="20%" />
+							sclass="FDListBoxHeader1" image="/images/icons/sequence.gif"
+							label="date" sort="auto" width="20%" />
 						<listheader id="listheader_GuestBook_gubUsrName"
-							image="/images/icons/builder.gif" label="user" sort="auto"
-							width="30%" />
+							sclass="FDListBoxHeader1" image="/images/icons/builder.gif"
+							label="user" sort="auto" width="30%" />
 						<listheader id="listheader_GuestBook_gubSubject"
-							image="/images/icons/builder.gif" label="subject" sort="auto"
-							width="50%" />
+							sclass="FDListBoxHeader1" image="/images/icons/builder.gif"
+							label="subject" sort="auto" width="50%" />
 					</listhead>
 				</listbox>
 

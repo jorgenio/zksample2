@@ -9,11 +9,23 @@
 
 		<style>.z-groupbox-body { background-color : white}</style>
 
-		<groupbox id="groupbox_menu" mold="3d" style="">
-			<caption style="color: #000000; font-weight: bold;"
-				label="${c:l('menuTitle')}" />
-		</groupbox>
+		<borderlayout height="100%"
+			style="border: 0px;  background-color: #D6DCDE;">
+			<north height="100%"
+				style="border: 0px;  background-color: #D6DCDE;" flex="true">
+
+				<groupbox id="groupbox_menu" mold="3d" height="100%"
+					contentStyle="background-color: white; overflow:auto">
+					<caption style="color: #000000; font-weight: bold;"
+						label="${c:l('menu.Title')}" />
+				</groupbox>
+			</north>
+
+			<center style="border: 0px;  background-color: #D6DCDE;" />
+
+		</borderlayout>
 	</window>
+
 
 
 </zk>

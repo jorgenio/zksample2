@@ -8,8 +8,6 @@
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
 	<style>
-		body { padding: 0 0; /* 0 padding on top and bottom and 0
-		padding on right and left */
 		<!-- background image -->
 		background-image:
 		url(${c:encodeURL('/images/templates/test/Grey_T_R.jpg')});
@@ -22,18 +20,20 @@
 		.z-window-modal-cnt-noborder {background: none}
 		.z-window-modal-cl-noborder {background: none}
 
-		.z-groupbox-body { background-color : white}
+		.outerGroupBox .z-groupbox-cnt {padding: 0px;}
+
+		<!-- Make Plain Grid -->
+		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
+		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+		background: white; border-top: none; border-left: none;
+		border-right: none; border-bottom: none; }
 	</style>
 
 	<window id="loginwin" border="none" width="350px"
-		style="background-color: #EDEDED;"
 		use="de.forsthaus.webui.login.ZkLoginDialogCtrl">
 
-		<!-- 
-			<panel border="none">
-			<panelchildren>
-		-->
-		<groupbox mold="3d" closable="false">
+		<groupbox mold="3d" closable="false" sclass="outerGroupBox"
+			contentStyle="background-color : white">
 			<caption label="Login to Zksample2"
 				image="/images/earth2.gif" style="font-weight: bold;">
 
@@ -55,7 +55,7 @@
 				<caption label="Login" />
 
 				<div align="right" style="padding: 5px">
-					<hbox width="100%">
+					<hbox pack="stretch" width="100%">
 						<div align="left">
 							<label id="lbl_ServerTime" />
 						</div>
@@ -100,7 +100,7 @@
 										<h:input type="submit"
 											value="Login" />
 										<button id="btnReset"
-											height="22px" label="Reset" />
+											mold="trendy" height="24px" label="Reset" />
 									</hbox>
 								</row>
 							</rows>

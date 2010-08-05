@@ -81,6 +81,10 @@ public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 
 		doOnCreateCommon(loginwin); // do the autowire
 
+		// only for testing
+		txtbox_Username.setValue("admin");
+		txtbox_Password.setValue("admin");
+
 		txtbox_Username.focus(); // set the focus on UserName
 
 		loginwin.setShadow(false);

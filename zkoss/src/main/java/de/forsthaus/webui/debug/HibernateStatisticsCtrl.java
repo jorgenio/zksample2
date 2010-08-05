@@ -146,7 +146,7 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 			logger.debug("--> " + event.toString());
 		}
 
-		String message = Labels.getLabel("message_Not_Implemented_Yet");
+		String message = Labels.getLabel("message.Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
@@ -168,31 +168,6 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 
 		Events.postEvent("onCreate", window_HibernateStatisticList, event);
 		window_HibernateStatisticList.invalidate();
-	}
-
-	/**
-	 * when the "delete records" button is clicked. <br>
-	 * <br>
-	 * Deletes all records from the table.
-	 * 
-	 * @param event
-	 * @throws InterruptedException
-	 */
-	public void onClick$btnDeleteRecords(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		int recCount = getGuiHibernateStatisticsService().deleteAllRecords();
-
-		String message = Labels.getLabel("message.Information.CountRecordsDeleted") + " " + recCount;
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
-
-		// Events.postEvent("onCreate", window_HibernateStatisticList, event);
-		// window_HibernateStatisticList.invalidate();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

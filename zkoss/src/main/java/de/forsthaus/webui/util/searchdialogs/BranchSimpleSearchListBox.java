@@ -28,10 +28,9 @@ import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.sys.ComponentsCtrl;
-import org.zkoss.zkex.zul.Borderlayout;
-import org.zkoss.zkex.zul.Center;
-import org.zkoss.zkex.zul.South;
+import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Center;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
@@ -39,6 +38,7 @@ import org.zkoss.zul.Listhead;
 import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
+import org.zkoss.zul.South;
 import org.zkoss.zul.Window;
 
 import de.forsthaus.backend.model.Branche;
@@ -151,6 +151,7 @@ public class BranchSimpleSearchListBox extends Window implements Serializable {
 		Listhead listhead = new Listhead();
 		listhead.setParent(listbox);
 		Listheader listheader = new Listheader();
+		listheader.setSclass("FDListBoxHeader1");
 		listheader.setParent(listhead);
 		listheader.setLabel(_listHeader1);
 

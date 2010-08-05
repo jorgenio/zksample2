@@ -146,4 +146,22 @@ public class MyThemeProvider implements ThemeProvider, Serializable {
 		// Executions.getCurrent().getDesktop().getWebApp().setAttribute("style",
 		// uris.get(0));
 	}
+
+	@Override
+	public String beforeWCS(Execution exec, String uri) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String beforeWidgetCSS(Execution exec, String uri) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getWCSCacheControl(Execution exec, String uri) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

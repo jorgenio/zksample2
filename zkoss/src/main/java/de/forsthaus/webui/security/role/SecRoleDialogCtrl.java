@@ -119,7 +119,7 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -207,7 +207,7 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 			logger.debug("--> " + event.toString());
 		}
 
-		String message = Labels.getLabel("message_Not_Implemented_Yet");
+		String message = Labels.getLabel("message.Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
@@ -521,8 +521,8 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final SecRole aRole = getRole();
 
 		// Show a confirm box
-		String msg = Labels.getLabel("message.question.are_you_sure_to_delete_this_record") + "\n\n --> " + aRole.getRolShortdescription();
-		String title = Labels.getLabel("message_Deleting_Record");
+		String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> " + aRole.getRolShortdescription();
+		String title = Labels.getLabel("message.Deleting.Record");
 
 		MultiLineMessageBox.doSetTemplate();
 		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
@@ -603,7 +603,7 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 			getSecurityService().saveOrUpdate(aRole);
 		} catch (DataAccessException e) {
 			String message = e.getMessage();
-			String title = Labels.getLabel("message_Error");
+			String title = Labels.getLabel("message.Error");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 

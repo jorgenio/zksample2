@@ -19,36 +19,29 @@
 package de.forsthaus.webui.office;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
-import org.apache.log4j.Logger;
 import org.zkoss.util.resource.Labels;
-import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventQueues;
 import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zkex.zul.Borderlayout;
-import org.zkoss.zul.Button;
-import org.zkoss.zul.Checkbox;
+import org.zkoss.zkplus.databind.AnnotateDataBinder;
+import org.zkoss.zkplus.databind.BindingListModelList;
+import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.FieldComparator;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listheader;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Paging;
 import org.zkoss.zul.Panel;
-import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import com.trg.search.Filter;
-
-import de.forsthaus.UserWorkspace;
 import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.service.OfficeService;
 import de.forsthaus.backend.util.HibernateSearchObject;
-import de.forsthaus.webui.office.model.OfficeListModelItemRenderer;
+import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
-import de.forsthaus.webui.util.MultiLineMessageBox;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -63,6 +56,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
  *          (GenericForwardComposer) for spring-managed creation.<br>
  *          03/09/2009: sge changed for allow repainting after resizing.<br>
  *          with the refresh button.<br>
+ *          07/03/2010: sge modified for zk5.x with complete Annotated
+ *          Databinding.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -70,7 +65,6 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
 public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializable {
 
 	private static final long serialVersionUID = -2170565288232491362L;
-	private transient static final Logger logger = Logger.getLogger(OfficeListCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -79,7 +73,7 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected Window window_OfficeList; // autowired
+	protected Window windowOfficeList; // autowired
 	protected Panel panelOfficeList; // autowired
 
 	protected Borderlayout borderLayout_officeList; // autowired
@@ -90,22 +84,15 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 	protected Listheader listheader_OfficeList_Name2; // autowired
 	protected Listheader listheader_OfficeList_City; // autowired
 
-	// filter components
-	protected Checkbox checkbox_OfficeList_ShowAll; // autowired
-	protected Textbox tb_Office_No; // aurowired
-	protected Textbox tb_Office_Name; // aurowired
-	protected Textbox tb_Office_City; // aurowired
-
-	// checkRights
-	protected Button btnHelp; // aurowired
-	protected Button button_OfficeList_NewOffice; // aurowired
-	protected Button button_OfficeList_PrintList; // aurowired
-	protected Button button_OfficeList_SearchNo; // aurowired
-	protected Button button_OfficeList_SearchName; // aurowired
-	protected Button button_OfficeList_SearchCity; // aurowired
+	// NEEDED for ReUse in the SearchWindow
+	private HibernateSearchObject<Office> searchObj;
 
 	// row count for listbox
 	private int countRows;
+
+	// Databinding
+	private AnnotateDataBinder binder;
+	private OfficeMainCtrl officeMainCtrl;
 
 	// ServiceDAOs / Domain Classes
 	private transient OfficeService officeService;
@@ -116,47 +103,73 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 	public OfficeListCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
+		FDUtils.logEventDebug(this, "super()");
+	}
+
+	@Override
+	public void doAfterCompose(Component window) throws Exception {
+		super.doAfterCompose(window);
+
+		/**
+		 * 1. Set an 'alias' for this composer name to access it in the
+		 * zul-file.<br>
+		 * 2. Set the parameter 'recurse' to 'false' to avoid problems with
+		 * managing more than one zul-file in one page. Otherwise it would be
+		 * overridden and can ends in curious error messages.
+		 */
+		self.setAttribute("controller", this, false);
+
+		/**
+		 * 1. Get the overhanded MainController.<br>
+		 * 2. Set this controller in the MainController.<br>
+		 * 3. Check if a 'selectedObject' exists yet in the MainController.<br>
+		 */
+		if (arg.containsKey("ModuleMainController")) {
+			setOfficeMainCtrl((OfficeMainCtrl) arg.get("ModuleMainController"));
+
+			// SET THIS CONTROLLER TO THE MainController
+			getOfficeMainCtrl().setOfficeListCtrl(this);
+
+			// Get the selected object.
+			// Check if this Controller if created on first time. If so,
+			// than the selectedXXXBean should be null
+			if (getOfficeMainCtrl().getSelectedOffice() != null) {
+				setSelectedOffice(getOfficeMainCtrl().getSelectedOffice());
+			} else
+				setSelectedOffice(null);
+		} else {
+			setSelectedOffice(null);
 		}
 	}
 
-	public void onCreate$window_OfficeList(Event event) throws Exception {
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// +++++++++++++++ Component Events ++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+	/**
+	 * Automatically called method from zk.
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 
-		/* set components visible dependent of the users rights */
-		doCheckRights();
+	public void onCreate$windowOfficeList(Event event) throws Exception {
+		FDUtils.logEventDebug(this, event);
 
-		/**
-		 * Calculate how many rows have been place in the listbox. Get the
-		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
-		 * filled by onClientInfo() in the indexCtroller
-		 */
+		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 
-		int panelHeight = 25;
-		// TODO put the logic for working with panel in the ApplicationWorkspace
-		boolean withPanel = false;
-		if (withPanel == false) {
-			panelOfficeList.setVisible(false);
-		} else {
-			panelOfficeList.setVisible(true);
-			panelHeight = 0;
-		}
+		doFillListbox();
 
-		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		height = height + panelHeight;
-		int maxListBoxHeight = (height - 165);
-		setCountRows(Math.round(maxListBoxHeight / 14));
-		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
-		// System.out.println("==========> : " + getCountRows());
+		binder.loadAll();
+	}
 
-		borderLayout_officeList.setHeight(String.valueOf(maxListBoxHeight) + "px");
+	public void doFillListbox() {
 
-		// init, show all branches
-		checkbox_OfficeList_ShowAll.setChecked(true);
+		doFitSize();
+
+		// set the paging params
+		paging_OfficeList.setPageSize(getCountRows());
+		paging_OfficeList.setDetailed(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
@@ -170,278 +183,180 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 		listheader_OfficeList_City.setSortDescending(new FieldComparator("filOrt", false));
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getCountRows());
-		soOffice.addSort("filName1", false);
+		// ++ create the searchObject and init sorting ++//
+		searchObj = new HibernateSearchObject<Office>(Office.class, getCountRows());
+		searchObj.addSort("filName1", false);
+		setSearchObj(searchObj);
 
-		// set the paging params
-		paging_OfficeList.setPageSize(getCountRows());
-		paging_OfficeList.setDetailed(true);
+		// Set the BindingListModel
+		getPagedBindingListWrapper().init(searchObj, getListBoxOffice(), paging_OfficeList);
+		BindingListModelList lml = (BindingListModelList) getListBoxOffice().getModel();
+		setOffices(lml);
 
-		// Set the ListModel.
-		getPagedListWrapper().init(soOffice, listBoxOffice, paging_OfficeList);
-		// set the itemRenderer
-		listBoxOffice.setItemRenderer(new OfficeListModelItemRenderer());
+		// check if first time opened and init databinding for selectedBean
+		if (getSelectedOffice() == null) {
+			// init the bean with the first record in the List
+			if (lml.getSize() > 0) {
+				int rowIndex = 0;
+				// only for correct showing after Rendering. No effect as an
+				// Event
+				// yet.
+				getListBoxOffice().setSelectedIndex(rowIndex);
+				// get the first entry and cast them to the needed object
+				setSelectedOffice((Office) lml.get(0));
+
+				// call the onSelect Event for showing the objects data in the
+				// statusBar
+				Events.sendEvent(new Event("onSelect", getListBoxOffice(), getSelectedOffice()));
+			}
+		}
 
 	}
 
 	/**
-	 * SetVisible for components by checking if there's a right for it.
+	 * Selects the object in the listbox and change the tab.<br>
+	 * Event is forwarded in the corresponding listbox.
 	 */
-	private void doCheckRights() {
+	public void onDoubleClickedOfficeItem(Event event) {
+		FDUtils.logEventDebug(this, event);
 
-		UserWorkspace workspace = getUserWorkspace();
+		Office anOffice = getSelectedOffice();
 
-		window_OfficeList.setVisible(workspace.isAllowed("window_OfficeList"));
-		btnHelp.setVisible(workspace.isAllowed("button_OfficeList_btnHelp"));
-		button_OfficeList_NewOffice.setVisible(workspace.isAllowed("button_OfficeList_NewOffice"));
-		button_OfficeList_PrintList.setVisible(workspace.isAllowed("button_OfficeList_PrintList"));
-		button_OfficeList_SearchNo.setVisible(workspace.isAllowed("button_OfficeList_SearchNo"));
-		button_OfficeList_SearchName.setVisible(workspace.isAllowed("button_OfficeList_SearchName"));
-		button_OfficeList_SearchCity.setVisible(workspace.isAllowed("button_OfficeList_SearchCity"));
-	}
+		if (anOffice != null) {
+			setSelectedOffice(anOffice);
+			setOffice(anOffice);
 
-	/**
-	 * Call the Office dialog with the selected entry. <br>
-	 * <br>
-	 * This methode is forwarded from the listboxes item renderer. <br>
-	 * see: de.forsthaus.webui.office.model.OfficeListModelItemRenderer.java <br>
-	 * 
-	 * @param event
-	 * @throws Exception
-	 */
-	public void onOfficeListItemDoubleClicked(Event event) throws Exception {
-
-		// get the selected object
-		Listitem item = listBoxOffice.getSelectedItem();
-
-		if (item != null) {
-			// CAST AND STORE THE SELECTED OBJECT
-			Office anOffice = (Office) item.getAttribute("data");
-
-			if (logger.isDebugEnabled()) {
-				logger.debug("--> " + anOffice.getFilBezeichnung());
+			// check first, if the tabs are created
+			if (getOfficeMainCtrl().getOfficeDetailCtrl() == null) {
+				Events.sendEvent(new Event("onSelect", getOfficeMainCtrl().tabOfficeDetail, null));
+				// if we work with spring beanCreation than we must check a
+				// little bit deeper, because the Controller are preCreated ?
+			} else if (getOfficeMainCtrl().getOfficeDetailCtrl().getBinder() == null) {
+				Events.sendEvent(new Event("onSelect", getOfficeMainCtrl().tabOfficeDetail, null));
 			}
 
-			showDetailView(anOffice);
-		}
-	}
-
-	/*
-	 * Call the office dialog with a new empty entry. <br>
-	 */
-	public void onClick$button_OfficeList_NewOffice(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		/** !!! DO NOT BREAK THE TIERS !!! */
-		// We don't create a new DomainObject() in the frontend.
-		// We GET it from the backend.
-		Office anOffice = getOfficeService().getNewOffice();
-
-		showDetailView(anOffice);
-
-	}
-
-	/**
-	 * Opens the detail view. <br>
-	 * Overhanded some params in a map if needed. <br>
-	 * 
-	 * @param anOffice
-	 * @throws Exception
-	 */
-	private void showDetailView(Office anOffice) throws Exception {
-
-		/*
-		 * We can call our Dialog zul-file with parameters. So we can call them
-		 * with a object of the selected item. For handed over these parameter
-		 * only a Map is accepted. So we put the object in a HashMap.
-		 */
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("office", anOffice);
-		/*
-		 * we can additionally handed over the listBox or the controller self,
-		 * so we have in the dialog access to the listbox Listmodel. This is
-		 * fine for synchronizing the data in the customerListbox from the
-		 * dialog when we do a delete, edit or insert a customer.
-		 */
-		map.put("officeListCtrl", this);
-
-		// call the zul-file with the parameters packed in a map
-		try {
-			Executions.createComponents("/WEB-INF/pages/office/officeDialog.zul", null, map);
-		} catch (Exception e) {
-			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
-
-			// Show a error box
-			String msg = e.getMessage();
-			String title = Labels.getLabel("message_Error");
-
-			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
-
+			Events.sendEvent(new Event("onSelect", getOfficeMainCtrl().tabOfficeDetail, anOffice));
 		}
 	}
 
 	/**
-	 * when the "help" button is clicked. <br>
-	 * 
-	 * @param event
-	 * @throws InterruptedException
-	 */
-	public void onClick$btnHelp(Event event) throws InterruptedException {
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message_Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
-	}
-
-	/**
-	 * when the "refresh" button is clicked. <br>
-	 * <br>
-	 * Refreshes the view by calling the onCreate event manually.
-	 * 
-	 * @param event
-	 * @throws InterruptedException
-	 */
-	public void onClick$btnRefresh(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		Events.postEvent("onCreate", window_OfficeList, event);
-		window_OfficeList.invalidate();
-	}
-
-	/**
-	 * when the checkBox 'Show All' for filtering is checked. <br>
+	 * When a listItem in the corresponding listbox is selected.<br>
+	 * Event is forwarded in the corresponding listbox.
 	 * 
 	 * @param event
 	 */
-	public void onCheck$checkbox_OfficeList_ShowAll(Event event) {
+	public void onSelect$listBoxOffice(Event event) {
+		FDUtils.logEventDebug(this, event);
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
+		Office anOffice = getSelectedOffice();
+
+		if (anOffice == null) {
+			return;
 		}
 
-		// empty the text search boxes
-		tb_Office_No.setValue(""); // clear
-		tb_Office_Name.setValue(""); // clear
-		tb_Office_City.setValue(""); // clear
+		// check first, if the tabs are created
+		if (getOfficeMainCtrl().getOfficeDetailCtrl() == null) {
+			Events.sendEvent(new Event("onSelect", getOfficeMainCtrl().tabOfficeDetail, null));
+			// if we work with spring beanCreation than we must check a little
+			// bit deeper, because the Controller are preCreated ?
+		} else if (getOfficeMainCtrl().getOfficeDetailCtrl().getBinder() == null) {
+			Events.sendEvent(new Event("onSelect", getOfficeMainCtrl().tabOfficeDetail, null));
+		}
 
-		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getCountRows());
-		soOffice.addSort("filName1", false);
+		// INIT ALL RELATED Queries/OBJECTS/LISTS NEW
+		getOfficeMainCtrl().getOfficeDetailCtrl().setSelectedOffice(anOffice);
+		getOfficeMainCtrl().getOfficeDetailCtrl().setOffice(anOffice);
 
-		// Set the ListModel.
-		getPagedListWrapper().init(soOffice, listBoxOffice, paging_OfficeList);
+		// store the selected bean values as current
+		getOfficeMainCtrl().doStoreInitValues();
+
+		// show the objects data in the statusBar
+		String str = Labels.getLabel("common.Office") + ": " + anOffice.getFilBezeichnung();
+		EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeSelectedObject", null, str));
 
 	}
 
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// +++++++++++++++++ Business Logic ++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// ++++++++++++++++++++ Helpers ++++++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
 	/**
-	 * when the "print" button is clicked.
+	 * Recalculates the container size for this controller and resize them.
 	 * 
-	 * @param event
-	 * @throws InterruptedException
+	 * Calculate how many rows have been place in the listbox. Get the
+	 * currentDesktopHeight from a hidden Intbox from the index.zul that are
+	 * filled by onClientInfo() in the indexCtroller.
 	 */
-	public void onClick$button_OfficeList_PrintList(Event event) throws InterruptedException {
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+	public void doFitSize() {
+		// normally 0 ! Or we have a i.e. a toolBar on top of the listBox.
+		int specialSize = 0;
+		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		int maxListBoxHeight = (height - specialSize - 138);
+		setCountRows((int) Math.round((maxListBoxHeight) / 17.7));
+		borderLayout_officeList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
-		String message = Labels.getLabel("message_Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
-	}
-
-	/**
-	 * Filter the office list with 'like office number'. <br>
-	 */
-	public void onClick$button_OfficeList_SearchNo(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		// if not empty
-		if (!tb_Office_No.getValue().isEmpty()) {
-			checkbox_OfficeList_ShowAll.setChecked(false); // unCheck
-			tb_Office_Name.setValue(""); // clear
-			tb_Office_City.setValue(""); // clear
-
-			// ++ create the searchObject and init sorting ++//
-			HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getCountRows());
-			soOffice.addFilter(new Filter("filNr", "%" + tb_Office_No.getValue() + "%", Filter.OP_ILIKE));
-			soOffice.addSort("filNr", false);
-
-			// Set the ListModel.
-			getPagedListWrapper().init(soOffice, listBoxOffice, paging_OfficeList);
-
-		}
-	}
-
-	/**
-	 * Filter the office list with 'like office name'. <br>
-	 */
-	public void onClick$button_OfficeList_SearchName(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		// if not empty
-		if (!tb_Office_Name.getValue().isEmpty()) {
-			checkbox_OfficeList_ShowAll.setChecked(false); // unCheck
-			tb_Office_City.setValue(""); // clear
-			tb_Office_No.setValue(""); // clear
-
-			// ++ create the searchObject and init sorting ++//
-			HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getCountRows());
-			soOffice.addFilter(new Filter("filName1", "%" + tb_Office_Name.getValue() + "%", Filter.OP_ILIKE));
-			soOffice.addSort("filName1", false);
-
-			// Set the ListModel.
-			getPagedListWrapper().init(soOffice, listBoxOffice, paging_OfficeList);
-
-		}
-	}
-
-	/**
-	 * Filter the office list with 'like office city'. <br>
-	 */
-	public void onClick$button_OfficeList_SearchCity(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		// if not empty
-		if (!tb_Office_City.getValue().isEmpty()) {
-			checkbox_OfficeList_ShowAll.setChecked(false); // unCheck
-			tb_Office_Name.setValue(""); // clear
-			tb_Office_No.setValue(""); // clear
-
-			// ++ create the searchObject and init sorting ++//
-			HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getCountRows());
-			soOffice.addFilter(new Filter("filOrt", "%" + tb_Office_City.getValue() + "%", Filter.OP_ILIKE));
-			soOffice.addSort("filOrt", false);
-
-			// Set the ListModel.
-			getPagedListWrapper().init(soOffice, listBoxOffice, paging_OfficeList);
-
-		}
+		windowOfficeList.invalidate();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 	// ++++++++++++++++++ getter / setter +++++++++++++++++++//
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
+	/**
+	 * Best Pratice Hint:<br>
+	 * The setters/getters for the local annotated data binded Beans/Sets are
+	 * administered in the module's mainController. Working in this way you have
+	 * clean line to share this beans/sets with other controllers.
+	 */
+	public Office getOffice() {
+		// STORED IN THE module's MainController
+		return getOfficeMainCtrl().getSelectedOffice();
+	}
+
+	public void setOffice(Office anOffice) {
+		// STORED IN THE module's MainController
+		getOfficeMainCtrl().setSelectedOffice(anOffice);
+	}
+
+	public void setSelectedOffice(Office selectedOffice) {
+		// STORED IN THE module's MainController
+		getOfficeMainCtrl().setSelectedOffice(selectedOffice);
+	}
+
+	public Office getSelectedOffice() {
+		// STORED IN THE module's MainController
+		return getOfficeMainCtrl().getSelectedOffice();
+	}
+
+	public void setOffices(BindingListModelList offices) {
+		// STORED IN THE module's MainController
+		getOfficeMainCtrl().setOffices(offices);
+	}
+
+	public BindingListModelList getOffices() {
+		// STORED IN THE module's MainController
+		return getOfficeMainCtrl().getOffices();
+	}
+
+	public void setBinder(AnnotateDataBinder binder) {
+		this.binder = binder;
+	}
+
+	public AnnotateDataBinder getBinder() {
+		return binder;
+	}
+
+	public void setSearchObj(HibernateSearchObject<Office> searchObj) {
+		this.searchObj = searchObj;
+	}
+
+	public HibernateSearchObject<Office> getSearchObj() {
+		return searchObj;
+	}
 
 	public void setOfficeService(OfficeService officeService) {
 		this.officeService = officeService;
@@ -451,12 +366,28 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 		return officeService;
 	}
 
+	public Listbox getListBoxOffice() {
+		return listBoxOffice;
+	}
+
+	public void setListBoxOffice(Listbox listBoxOffice) {
+		this.listBoxOffice = listBoxOffice;
+	}
+
 	public int getCountRows() {
 		return countRows;
 	}
 
 	public void setCountRows(int countRows) {
 		this.countRows = countRows;
+	}
+
+	public void setOfficeMainCtrl(OfficeMainCtrl officeMainCtrl) {
+		this.officeMainCtrl = officeMainCtrl;
+	}
+
+	public OfficeMainCtrl getOfficeMainCtrl() {
+		return officeMainCtrl;
 	}
 
 }

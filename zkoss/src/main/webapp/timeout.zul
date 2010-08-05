@@ -29,9 +29,15 @@
 						<separator />
 
 						<div align="center">
-							<toolbarbutton
-								label="${c:l('btnBackToStart')}" href="/" />
+							<!-- zk 3.6.x only
+								<toolbarbutton
+								style="background-color:white" label="${c:l('btnBackToStart')}"
+								href="/" />
+							-->
+							<!-- zk 5.x  -->
+							<a href="/">${c:l('btnBackToStart')}</a>
 						</div>
+
 
 					</vbox>
 				</panelchildren>

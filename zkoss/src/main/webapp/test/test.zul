@@ -34,9 +34,8 @@
 				</label>
 
 				<hbox>
-					<button label="zur Anwendung" href="index.zul" />
-					<button label="PolicyManager.test()"
-						onClick="userDetailsService.test()" />
+					<button label="zur Anwendung"
+						href="/pages/index.zul" />
 
 					<button id="hhh" label="Logout"
 						href="/j_spring_logout" />
@@ -75,6 +74,16 @@
 				<hbox>
 					<button id="btn_CompileReport"
 						label="compile Report" />
+					<button id="btn_getRemoteAddress" style="color: red"
+						label="get Remote Address" />
+					<button id="btn_getRemoteHost" style="color: red"
+						label="get Remote Host" />
+					<button id="btn_getRemoteUser" style="color: red"
+						label="get Remote User" />
+					<button id="btn_getLocalAddress" style="color: red"
+						label="get Local Address" />
+					<button id="btn_getLocalName" style="color: red"
+						label="get Local Name" />
 				</hbox>
 
 				<div id="div_DateBox">
@@ -82,21 +91,15 @@
 					<button id="Btn_ResetDatebox" label="Reset Datebox" />
 				</div>
 
-				<label id="label_ee"
-					value="${c:l('label_CustomerDialog_kunOrt.value')}" />
-
-
-
 				<hbox>
-
 					<button id="button_insertCustomers"
 						label="insert 10000 Customers" />
 					<label id="label_InsertCustomer" value="0" />
+					<button id="button_deleteCustomers"
+						label="delete new Customers" />
 				</hbox>
 
 
-				<button id="button_deleteCustomers"
-					label="delete new Customers" />
 
 			</vbox>
 			<separator bar="true" width="200px" />
@@ -127,15 +130,15 @@
 			</hbox>
 			<groupbox use="de.forsthaus.webui.util.test.WPanel" />
 
-			<vbox id="testtabelle">
+			<vbox id="testtabelle" width="600px">
 				<paging id="pagingBranch" pageSize="5" />
 				<listbox id="listBoxBranch" vflex="true"
-					tooltiptext="${c:l('listbox.tooltiptext')}" width="350px">
+					tooltiptext="${c:l('listbox.tooltiptext')}" width="100%">
 					<listhead sizable="true">
 						<listheader id="listheader_Branch_Description"
 							image="/images/icons/sequence.gif"
 							label="${c:l('listheader_Branch_Description.label')}"
-							width="25%" />
+							width="80%" />
 						<listheader id="listheader_Branch_No"
 							image="/images/icons/builder.gif"
 							label="${c:l('listheader_Branch_No.label')}" width="20%" />
@@ -143,14 +146,14 @@
 				</listbox>
 			</vbox>
 
-			<vbox>
+			<vbox width="600px">
 				<paging id="pagingKunde" pageSize="5" />
 				<listbox id="listBoxCustomer" multiple="true"
 					checkmark="true" tooltiptext="${c:l('listbox.tooltiptext')}">
 					<listhead sizable="true">
 						<listheader id="listheader_CustNo"
 							image="/images/icons/builder.gif"
-							label="${c:l('listheader_CustNo.label')}" width="5%" />
+							label="${c:l('listheader_CustNo.label')}" width="15%" />
 						<listheader id="listheader_CustMatchcode"
 							image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_CustMatchcode.label')}" width="15%" />

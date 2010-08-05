@@ -85,6 +85,7 @@
 													sizable="true">
 													<listheader
 														id="listheader_SecGroupRight_grpShortdescription"
+														sclass="FDListBoxHeader1"
 														image="/images/icons/create_doc.gif" sort="auto"
 														width="100%"
 														label="${c:l('listheader_SecGroupRight_grpShortdescription.label')}" />
@@ -169,16 +170,19 @@
 																sizable="true">
 																<listheader
 																	id="listheader_SecGroupRight_GrantedRight"
+																	sclass="FDListBoxHeader1"
 																	image="/images/icons/exdDialogAction1.gif" sort="none"
 																	width="20%"
 																	label="${c:l('listheader_SecGroupRight_GrantedRight.label')}" />
 																<listheader
 																	id="listheader_SecGroupRight_RightName"
+																	sclass="FDListBoxHeader1"
 																	image="/images/icons/create_doc.gif" sort="auto"
 																	width="60%"
 																	label="${c:l('listheader_SecGroupRight_RightName.label')}" />
 																<listheader
 																	id="listheader_SecGroupRight_Type"
+																	sclass="FDListBoxHeader1"
 																	image="/images/icons/exdDataPerspective.gif"
 																	sort="auto" width="20%"
 																	label="${c:l('listheader_SecGroupRight_Type.label')}" />
@@ -215,16 +219,19 @@
 																sizable="true">
 																<listheader
 																	id="listheader_SecGroupRight_Details_GrantedRight"
+																	sclass="FDListBoxHeader1"
 																	image="/images/icons/exdDialogAction1.gif" sort="none"
 																	width="20%"
 																	label="${c:l('listheader_SecGroupRight_GrantedRight.label')}" />
 																<listheader
 																	id="listheader_SecGroupRight_Details_RightName"
+																	sclass="FDListBoxHeader1"
 																	image="/images/icons/create_doc.gif" sort="auto"
 																	width="60%"
 																	label="${c:l('listheader_SecGroupRight_RightName.label')}" />
 																<listheader
 																	id="listheader_SecGroupRight_Details_Type"
+																	sclass="FDListBoxHeader1"
 																	image="/images/icons/exdDataPerspective.gif"
 																	sort="auto" width="20%"
 																	label="${c:l('listheader_SecGroupRight_Type.label')}" />

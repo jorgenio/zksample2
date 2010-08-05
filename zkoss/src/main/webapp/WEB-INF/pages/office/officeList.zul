@@ -8,100 +8,63 @@
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
 
-	<window id="window_OfficeList" apply="${officeListCtrl}"
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<!-- DataBinding Initiator.                              -->
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./windowOfficeList" ?>
+
+	<window id="windowOfficeList" apply="${officeListCtrl}"
 		border="none" width="100%">
-
-		<style>
-			body { padding: 0 0; /* 0 padding on top and bottom and 0
-			padding on right and left */ }
-		</style>
-
-		<panel id="panelOfficeList"
-			title="${c:l('panelOfficeList.title')}" border="none" />
-
-		<toolbar>
-			<button id="btnHelp" image="/images/icons/light_16x16.gif"
-				tooltiptext="${c:l('btnHelp.tooltiptext')}" />
-			<button id="btnRefresh"
-				image="/images/icons/refresh2_yellow_16x16.gif"
-				tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
-			<separator orient="vertical" />
-			<button id="button_OfficeList_NewOffice"
-				image="/images/icons/btn_new2_16x16.gif"
-				tooltiptext="${c:l('button_OfficeList_NewOffice.tooltiptext')}" />
-			<button id="button_OfficeList_PrintList"
-				image="/images/icons/btn_print2_16x16.gif"
-				tooltiptext="${c:l('button_OfficeList_PrintList.tooltiptext')}" />
-		</toolbar>
-
-		<hbox style="padding: 3px">
-			<space />
-			<checkbox id="checkbox_OfficeList_ShowAll"
-				label="${c:l('checkbox_OfficeList_ShowAll.label')}" />
-			<separator bar="true" orient="vertical" />
-
-			<label id="label_OfficeList_No"
-				value="${c:l('label_OfficeList_No.value')}" />
-			<textbox id="tb_Office_No" width="100px" />
-			<button id="button_OfficeList_SearchNo"
-				image="/images/icons/search.gif"
-				label="${c:l('button_OfficeList_SearchNo.label')}"
-				tooltiptext="${c:l('button_OfficeList_SearchNo.tooltiptext')}" />
-			<separator bar="true" orient="vertical" />
-
-			<label id="label_OfficeList_Name"
-				value="${c:l('label_OfficeList_Name.value')}" />
-			<textbox id="tb_Office_Name" width="100px" />
-			<button id="button_OfficeList_SearchName"
-				image="/images/icons/search.gif"
-				label="${c:l('button_OfficeList_SearchName.label')}"
-				tooltiptext="${c:l('button_OfficeList_SearchName.tooltiptext')}" />
-			<separator bar="true" orient="vertical" />
-
-			<label id="label_OfficeList_City"
-				value="${c:l('label_OfficeList_City.value')}" />
-			<textbox id="tb_Office_City" width="100px" />
-			<button id="button_OfficeList_SearchCity"
-				image="/images/icons/search.gif"
-				label="${c:l('button_OfficeList_SearchCity.label')}"
-				tooltiptext="${c:l('button_OfficeList_SearchCity.tooltiptext')}" />
-			<separator bar="true" orient="vertical" />
-		</hbox>
 
 		<borderlayout id="borderLayout_officeList">
 
+			<!-- PAGING COMPONENT -->
 			<north border="none" height="26px">
 				<paging id="paging_OfficeList" />
 			</north>
 
 			<center border="none">
 
-				<listbox id="listBoxOffice" vflex="true"
+				<listbox id="listBoxOffice"
+					model="@{controller.offices}"
+					selectedItem="@{controller.selectedOffice}" vflex="true"
 					tooltiptext="${c:l('listbox.tooltiptext')}" width="99.9%"
 					height="100%" multiple="false">
 					<listhead sizable="true">
 						<listheader id="listheader_OfficeList_No"
-							image="/images/icons/create_doc.gif"
+							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_OfficeList_No.label')}" sort="auto"
-							width="10%" />
+							width="20%" />
 						<listheader id="listheader_OfficeList_Name1"
-							image="/images/icons/create_doc.gif"
+							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_OfficeList_Name1.label')}" sort="auto"
 							width="30%" />
 						<listheader id="listheader_OfficeList_Name2"
-							image="/images/icons/create_doc.gif"
+							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_OfficeList_Name2.label')}" sort="auto"
 							width="30%" />
 						<listheader id="listheader_OfficeList_City"
-							image="/images/icons/create_doc.gif"
+							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_OfficeList_City.label')}" sort="auto"
 							width="20%" />
 					</listhead>
+
+					<listitem self="@{each='office'}" value="@{office}"
+						forward="onDoubleClick=onDoubleClickedOfficeItem">
+
+						<listcell label="@{office.filNr}"
+							style="padding-left: 5px" />
+						<listcell label="@{office.filName1}"
+							style="padding-left: 5px" />
+						<listcell label="@{office.filName2}"
+							style="padding-left: 5px" />
+						<listcell label="@{office.filOrt}"
+							style="padding-left: 5px" />
+					</listitem>
+
 				</listbox>
 
 			</center>
-			<south border="none" />
-
 		</borderlayout>
 
 	</window>

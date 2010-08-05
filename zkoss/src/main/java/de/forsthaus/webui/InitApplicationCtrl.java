@@ -34,14 +34,12 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zkex.zul.Borderlayout;
-import org.zkoss.zkex.zul.Center;
-import org.zkoss.zkex.zul.North;
-import org.zkoss.zkex.zul.South;
 import org.zkoss.zkmax.zul.Tablechildren;
 import org.zkoss.zkmax.zul.Tablelayout;
+import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Caption;
+import org.zkoss.zul.Center;
 import org.zkoss.zul.Chart;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
@@ -51,11 +49,13 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.North;
 import org.zkoss.zul.Panel;
 import org.zkoss.zul.Panelchildren;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Rows;
 import org.zkoss.zul.Separator;
+import org.zkoss.zul.South;
 import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
 
@@ -253,7 +253,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		Panel panel = new Panel();
 		panel.setTitle("");
-		panel.setWidth("250px");
+		panel.setWidth("260px");
 		panel.setBorder("none");
 		panel.setStyle("align:left; color:red; ");
 		panel.setParent(tableChildrenRecords);
@@ -264,13 +264,14 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		Groupbox gb = new Groupbox();
 		gb.setMold("3d");
+		gb.setContentStyle("padding: 2px");
 		gb.setParent(panelchildren);
 
 		Caption caption = new Caption();
-		caption.setParent(gb);
 		caption.setImage("/images/icons/database_blue_16x16.gif");
 		caption.setLabel("Demo-Data in PostgreSQL v8.2.6");
 		caption.setStyle("color: #000000;font-weight:bold; text-align:left ");
+		caption.setParent(gb);
 
 		Grid grid = new Grid();
 		grid.setWidth("100%");
@@ -379,6 +380,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		Groupbox gb = new Groupbox();
 		gb.setMold("3d");
+		gb.setContentStyle("padding: 2px");
 		gb.setParent(panelchildren);
 
 		Caption caption = new Caption();
@@ -466,6 +468,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		Groupbox gb = new Groupbox();
 		gb.setMold("3d");
+		gb.setContentStyle("padding: 2px");
 		gb.setParent(panelchildren);
 
 		Caption caption = new Caption();
@@ -562,6 +565,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		Groupbox gb = new Groupbox();
 		gb.setMold("3d");
+		gb.setContentStyle("padding: 2px");
 		gb.setParent(panelchildren);
 
 		Caption caption = new Caption();

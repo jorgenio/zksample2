@@ -12,58 +12,53 @@
 		sizable="true" apply="${orderPositionDialogCtrl}" closable="true"
 		width="600px" height="320px">
 
-		<style>
-			body { padding: 0 0; /* 0 padding on top and bottom and 0
-			padding on right and left */ }
-		</style>
-
 		<borderlayout id="borderlayoutOrderPositionDialog">
 
-			<north border="none" margins="0,0,0,0">
-				<grid>
-					<columns sizable="true" height="20px">
-						<!-- Help Button -->
-						<column width="80px" align="left">
-							<hbox>
-								<button id="btnHelp"
-									image="/images/icons/light_16x16.gif"
-									tooltiptext="${c:l('btnHelp.tooltiptext')}" />
-								<button
-									id="button_OrderPositionDialog_PrintOrderPositions"
-									image="/images/icons/btn_print2_16x16.gif"
-									tooltiptext="${c:l('button_OrderPositionDialog_PrintOrder.tooltiptext')}" />
+			<north border="none">
+
+				<div sclass="z-toolbar" style="padding:0">
+					<hbox pack="stretch" sclass="hboxRemoveWhiteStrips"
+						width="100%">
+
+						<!-- COMMON BUTTONS -->
+						<toolbar align="start"
+							style="float:left; border-style: none;" height="28px">
+							<button id="btnHelp" height="24px"
+								image="/images/icons/light_16x16.gif"
+								tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+							<button
+								id="button_OrderPositionDialog_PrintOrderPositions"
+								height="24px" image="/images/icons/btn_print2_16x16.gif"
+								tooltiptext="${c:l('button_OrderPositionDialog_PrintOrder.tooltiptext')}" />
+						</toolbar>
+
+						<!-- SEARCH AREA -->
+						<toolbar align="center"
+							style="float:left; border-style: none;" height="28px">
+							<hbox align="center" style="padding: 2px">
 							</hbox>
-						</column>
+						</toolbar>
 
-						<!-- Addtionally Buttons -->
-						<column align="center">
-							<hbox>
+						<!-- CRUD BUTTONS -->
+						<toolbar align="end"
+							style="float:right; border-style: none;" height="28px">
+							<button id="btnNew" height="24px"
+								tooltiptext="${c:l('btnNew.tooltiptext')}" />
+							<!-- label="${c:l('btnNew.label')}"	 -->
+							<button id="btnEdit" height="24px"
+								tooltiptext="${c:l('btnEdit.tooltiptext')}" />
+							<button id="btnDelete" height="24px"
+								tooltiptext="${c:l('btnDelete.tooltiptext')}" />
+							<button id="btnSave" height="24px"
+								tooltiptext="${c:l('btnSave.tooltiptext')}" />
+							<button id="btnCancel" height="24px"
+								tooltiptext="${c:l('btnCancel.tooltiptext')}" />
+							<button id="btnClose" height="24px"
+								tooltiptext="${c:l('btnClose.tooltiptext')}" />
+						</toolbar>
+					</hbox>
+				</div>
 
-							</hbox>
-						</column>
-
-						<!-- CRUD Buttons -->
-						<column align="right">
-							<hbox spacing="5px" style="padding:1px"
-								align="end">
-								<button id="btnNew" height="20"
-									tooltiptext="${c:l('btnNew.tooltiptext')}" />
-								<!-- label="${c:l('btnNew.label')}"	 -->
-								<button id="btnEdit" height="20"
-									tooltiptext="${c:l('btnEdit.tooltiptext')}" />
-								<button id="btnDelete" height="20"
-									tooltiptext="${c:l('btnDelete.tooltiptext')}" />
-								<button id="btnSave" height="20"
-									tooltiptext="${c:l('btnSave.tooltiptext')}" />
-								<button id="btnCancel" height="20"
-									tooltiptext="${c:l('btnCancel.tooltiptext')}" />
-								<button id="btnClose" height="20"
-									tooltiptext="${c:l('btnClose.tooltiptext')}" />
-							</hbox>
-
-						</column>
-					</columns>
-				</grid>
 			</north>
 
 
@@ -161,16 +156,19 @@
 																					sizable="true">
 																					<listheader
 																						id="listheader_ArticleSearch_artNr"
+																						sclass="FDListBoxHeader1"
 																						image="/images/icons/builder.gif" sort="auto"
 																						width="25%"
 																						label="${c:l('listheader_ArticleSearch_artNr.label')}" />
 																					<listheader
 																						id="listheader_ArticleSearch_artKurzbezeichnung"
+																						sclass="FDListBoxHeader1"
 																						image="/images/icons/create_doc.gif" sort="auto"
 																						width="60%"
 																						label="${c:l('listheader_ArticleSearch_artKurzbezeichnung.label')}" />
 																					<listheader
 																						id="listheader_ArticleSearch_aupEinzelwert"
+																						sclass="FDListBoxHeader1"
 																						image="/images/icons/builder.gif" sort="none"
 																						width="15%"
 																						label="${c:l('listheader_ArticleSearch_aupEinzelwert.label')}" />
@@ -250,8 +248,6 @@
 			<south border="none" />
 
 		</borderlayout>
-
-
 
 	</window>
 

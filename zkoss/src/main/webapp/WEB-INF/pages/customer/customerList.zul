@@ -55,25 +55,26 @@
 					height="100%" multiple="false">
 					<listhead sizable="true">
 						<listheader id="listheader_CustNo"
-							image="/images/icons/builder.gif"
+							sclass="FDListBoxHeader1" image="/images/icons/builder.gif"
 							label="${c:l('listheader_CustNo.label')}" sort="auto" width="5%" />
 						<listheader id="listheader_CustMatchcode"
-							image="/images/icons/create_doc.gif"
+							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_CustMatchcode.label')}" sort="auto"
 							width="15%" />
 						<listheader id="listheader_CustName1"
-							image="/images/icons/create_doc.gif"
+							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_CustName1.label')}" sort="auto"
 							width="20%" />
 						<listheader id="listheader_CustName2"
-							image="/images/icons/create_doc.gif"
+							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_CustName2.label')}" sort="auto"
 							width="20%" />
 						<listheader id="listheader_CustCity"
+							sclass="FDListBoxHeader1"
 							image="/images/icons/home_blue16x16.gif"
 							label="${c:l('listheader_CustCity.label')}" sort="auto"
 							width="20%" />
-						<listheader
+						<listheader sclass="FDListBoxHeader1"
 							image="/images/icons/edittsk_tsk1.gif" label="Mahnsperre"
 							width="10%" />
 					</listhead>

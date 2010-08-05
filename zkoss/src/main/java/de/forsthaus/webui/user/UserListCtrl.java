@@ -29,7 +29,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zkex.zul.Borderlayout;
+import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.FieldComparator;
@@ -50,6 +50,7 @@ import de.forsthaus.backend.model.SecUser;
 import de.forsthaus.backend.service.UserService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.user.model.UserListModelItemRenderer;
+import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 
@@ -263,10 +264,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * Call the SecUser dialog with a new empty entry. <br>
 	 */
 	public void onClick$button_UserList_NewUser(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		FDUtils.logEventDebug(this, event);
 
 		// create a new SecUser object
 		/** !!! DO NOT BREAK THE TIERS !!! */
@@ -311,7 +309,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 
 			// Show a error box
 			String msg = e.getMessage();
-			String title = Labels.getLabel("message_Error");
+			String title = Labels.getLabel("messag.Error");
 
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
@@ -327,15 +325,8 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message_Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		FDUtils.logEventDebug(this, event);
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -347,10 +338,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		FDUtils.logEventDebug(this, event);
 
 		Events.postEvent("onCreate", userListWindow, event);
 		userListWindow.invalidate();
@@ -363,25 +351,15 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_UserList_PrintUserList(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message_Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		FDUtils.logEventDebug(this, event);
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	/*
 	 * Filter the user list with 'like Loginname'
 	 */
 	public void onClick$button_UserList_SearchLoginname(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		FDUtils.logEventDebug(this, event);
 
 		// if not empty
 		if (!tb_SecUser_Loginname.getValue().isEmpty()) {
@@ -420,10 +398,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * Filter the user list with 'like Lastname'
 	 */
 	public void onClick$button_UserList_SearchLastname(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		FDUtils.logEventDebug(this, event);
 
 		// if not empty
 		if (!tb_SecUser_Lastname.getValue().isEmpty()) {
@@ -463,10 +438,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * Filter the user list with 'like Email'
 	 */
 	public void onClick$button_UserList_SearchEmail(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		FDUtils.logEventDebug(this, event);
 
 		// if not empty
 		if (!tb_SecUser_Email.getValue().isEmpty()) {
@@ -508,10 +480,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * @param event
 	 */
 	public void onCheck$checkbox_UserList_ShowAll(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		FDUtils.logEventDebug(this, event);
 
 		// empty the text search boxes
 		tb_SecUser_Loginname.setValue("");

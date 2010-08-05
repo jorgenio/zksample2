@@ -154,6 +154,10 @@ abstract public class ZkossMenuFactory implements Serializable {
 	protected void setAttributes(IMenuDomain treecellValue, ILabelElement defaultTreecell) {
 		if (treecellValue.isWithOnClickAction() == null || treecellValue.isWithOnClickAction().booleanValue()) {
 			defaultTreecell.setZulNavigation(treecellValue.getZulNavigation());
+
+			if (!StringUtils.isEmpty(treecellValue.getIconName())) {
+				defaultTreecell.setImage(treecellValue.getIconName());
+			}
 		}
 
 		setAttributesWithoutAction(treecellValue, defaultTreecell);

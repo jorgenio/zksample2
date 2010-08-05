@@ -63,12 +63,12 @@
 					<listhead sizable="true">
 						<listheader
 							id="listheader_SecRoleList_rolShortdescription"
-							image="/images/icons/create_doc.gif"
+							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_SecRoleList_rolShortdescription.label')}"
 							sort="auto" width="30%" />
 						<listheader
 							id="listheader_SecRoleList_rolLongdescription"
-							image="/images/icons/sequence.gif"
+							sclass="FDListBoxHeader1" image="/images/icons/sequence.gif"
 							label="${c:l('listheader_SecRoleList_rolLongdescription.label')}"
 							sort="none" width="70%" />
 					</listhead>

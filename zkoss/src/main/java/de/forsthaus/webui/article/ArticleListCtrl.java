@@ -19,37 +19,30 @@
 package de.forsthaus.webui.article;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 import org.zkoss.util.resource.Labels;
-import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventQueues;
 import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zkex.zul.Borderlayout;
-import org.zkoss.zul.Button;
-import org.zkoss.zul.Checkbox;
+import org.zkoss.zkplus.databind.AnnotateDataBinder;
+import org.zkoss.zkplus.databind.BindingListModelList;
+import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.FieldComparator;
 import org.zkoss.zul.Intbox;
-import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listheader;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Paging;
-import org.zkoss.zul.Panel;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import com.trg.search.Filter;
-
-import de.forsthaus.UserWorkspace;
 import de.forsthaus.backend.model.Article;
 import de.forsthaus.backend.service.ArticleService;
 import de.forsthaus.backend.util.HibernateSearchObject;
-import de.forsthaus.webui.article.model.ArticleListModelItemRenderer;
+import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
-import de.forsthaus.webui.util.MultiLineMessageBox;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -63,6 +56,8 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
  *          (GenericForwardComposer) for spring-managed creation.<br>
  *          03/09/2009: sge changed for allow repainting after resizing.<br>
  *          with the refresh button.<br>
+ *          07/03/2010: sge modified for zk5.x with complete Annotated
+ *          Databinding.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -79,13 +74,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected Window window_ArticlesList; // autowired
-	protected Panel panelArticleList; // autowired
-
-	// search/filter components
-	protected Checkbox checkbox_ArticleList_ShowAll; // autowired
-	protected Textbox tb_Article_ArticleID; // aurowired
-	protected Textbox tb_Article_Name; // aurowired
+	protected Window windowArticlesList; // autowired
 
 	// listbox articles
 	protected Borderlayout borderLayout_articleList; // autowired
@@ -98,13 +87,15 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	// textbox long description
 	protected Textbox longBoxArt_LangBeschreibung; // autowired
 
-	// checkRights
-	protected Button btnHelp;
-	protected Button button_ArticleList_NewArticle;
-	protected Button button_ArticleList_PrintList;
-
 	// count of rows in the listbox
 	private int countRows;
+
+	// NEEDED for ReUse in a SearchWindow
+	private HibernateSearchObject<Article> searchObj;
+
+	// Databinding
+	private AnnotateDataBinder binder;
+	private ArticleMainCtrl articleMainCtrl;
 
 	// ServiceDAOs / Domain Classes
 	private transient ArticleService articleService;
@@ -115,48 +106,64 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	public ArticleListCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
+		FDUtils.logEventDebug(this, "super()");
+	}
+
+	@Override
+	public void doAfterCompose(Component window) throws Exception {
+		super.doAfterCompose(window);
+
+		/**
+		 * 1. Set an 'alias' for this composer name to access it in the
+		 * zul-file.<br>
+		 * 2. Set the parameter 'recurse' to 'false' to avoid problems with
+		 * managing more than one zul-file in one page. Otherwise it would be
+		 * overridden and can ends in curious error messages.
+		 */
+		self.setAttribute("controller", this, false);
+
+		/**
+		 * 1. Get the overhanded MainController.<br>
+		 * 2. Set this controller in the MainController.<br>
+		 * 3. Check if a 'selectedObject' exists yet in the MainController.<br>
+		 */
+		if (arg.containsKey("ModuleMainController")) {
+			setArticleMainCtrl((ArticleMainCtrl) arg.get("ModuleMainController"));
+
+			// SET THIS CONTROLLER TO THE MainController
+			getArticleMainCtrl().setArticleListCtrl(this);
+
+			// Get the selected object.
+			// Check if this Controller if created on first time. If so,
+			// than the selectedXXXBean should be null
+			if (getArticleMainCtrl().getSelectedArticle() != null) {
+				setSelectedArticle(getArticleMainCtrl().getSelectedArticle());
+			} else
+				setSelectedArticle(null);
+		} else {
+			setSelectedArticle(null);
 		}
 	}
 
-	public void onCreate$window_ArticlesList(Event event) throws Exception {
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// +++++++++++++++ Component Events ++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+	public void onCreate$windowArticlesList(Event event) throws Exception {
+		FDUtils.logEventDebug(this, event);
 
-		/* set components visible dependent of the users rights */
-		doCheckRights();
+		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 
-		/**
-		 * Calculate how many rows have been place in the listbox. Get the
-		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
-		 * filled by onClientInfo() in the indexCtroller
-		 */
+		doFillListbox();
 
-		int panelHeight = 25;
-		// TODO put the logic for working with panel in the ApplicationWorkspace
-		boolean withPanel = false;
-		if (withPanel == false) {
-			panelArticleList.setVisible(false);
-		} else {
-			panelArticleList.setVisible(true);
-			panelHeight = 0;
-		}
+		binder.loadAll();
+	}
 
-		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		height = height + panelHeight;
-		int maxListBoxHeight = (height - 210);
-		setCountRows(Math.round(maxListBoxHeight / 14));
-		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
-		// System.out.println("==========> : " + getCountRows());
+	public void doFillListbox() {
 
-		borderLayout_articleList.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		doFitSize();
 
-		// init, show all articles
-		checkbox_ArticleList_ShowAll.setChecked(true);
-
+		// set the paging params
 		paging_ArticleList.setPageSize(getCountRows());
 		paging_ArticleList.setDetailed(true);
 
@@ -169,296 +176,177 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		listheader_ArticleList_SinglePrice.setSortAscending(new FieldComparator("artPreis", true));
 		listheader_ArticleList_SinglePrice.setSortDescending(new FieldComparator("artPreis", false));
 
-		// ++ create the searchObject and init sorting ++ //
-		HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, getCountRows());
-		soArticle.addSort("artNr", false);
+		// ++ create the searchObject and init sorting ++//
+		// get customers and only their latest address
+		searchObj = new HibernateSearchObject<Article>(Article.class, getCountRows());
+		searchObj.addSort("artNr", false);
+		setSearchObj(searchObj);
 
-		// Set the ListModel for the articles.
-		getPagedListWrapper().init(soArticle, listBoxArticle, paging_ArticleList);
-		// set the itemRenderer
-		listBoxArticle.setItemRenderer(new ArticleListModelItemRenderer());
-
-		// init the first entry for showing the long text.
-		ListModelList lml = (ListModelList) listBoxArticle.getModel();
+		// Set the BindingListModel
+		getPagedBindingListWrapper().init(searchObj, getListBoxArticle(), paging_ArticleList);
+		BindingListModelList lml = (BindingListModelList) getListBoxArticle().getModel();
+		setArticles(lml);
 
 		// Now we would select and show the text of the first entry in the list.
 		// We became not the first item FROM the listbox because it's NOT
 		// RENDERED AT THIS TIME.
 		// So we take the first entry from the MODEL (ListModelList) and set as
 		// selected.
-		if (lml.getSize() > 0) {
-			int rowIndex = 0;
-			// only for correct showing after Rendering. No effect as an Event
-			// yet.
-			listBoxArticle.setSelectedIndex(rowIndex);
-			// get the first entry and cast them to the needed object
-			Article article = (Article) lml.get(rowIndex);
-			if (article != null) {
-				longBoxArt_LangBeschreibung.setValue(article.getArtLangbezeichnung());
+		// check if first time opened and init databinding for selectedBean
+		if (getSelectedArticle() == null) {
+			// init the bean with the first record in the List
+			if (lml.getSize() > 0) {
+				int rowIndex = 0;
+				// only for correct showing after Rendering. No effect as an
+				// Event
+				// yet.
+				getListBoxArticle().setSelectedIndex(rowIndex);
+				// get the first entry and cast them to the needed object
+				setSelectedArticle((Article) lml.get(0));
+
+				// call the onSelect Event for showing the objects data in the
+				// statusBar
+				Events.sendEvent(new Event("onSelect", getListBoxArticle(), getSelectedArticle()));
 			}
 		}
 	}
 
 	/**
-	 * SetVisible for components by checking if there's a right for it.
+	 * Selects the object in the listbox and change the tab.<br>
+	 * Event is forwarded in the corresponding listbox.
 	 */
-	private void doCheckRights() {
+	public void onDoubleClickedArticleItem(Event event) {
+		FDUtils.logEventDebug(this, event);
 
-		UserWorkspace workspace = getUserWorkspace();
+		Article anArticle = getSelectedArticle();
 
-		window_ArticlesList.setVisible(workspace.isAllowed("window_ArticlesList"));
-		btnHelp.setVisible(workspace.isAllowed("button_ArticlesList_btnHelp"));
-		button_ArticleList_NewArticle.setVisible(workspace.isAllowed("button_ArticleList_NewArticle"));
-		button_ArticleList_PrintList.setVisible(workspace.isAllowed("button_ArticleList_PrintList"));
-	}
+		if (anArticle != null) {
+			setSelectedArticle(anArticle);
+			setArticle(anArticle);
 
-	/**
-	 * If the user clicked or select a item in the list. <br>
-	 * 
-	 * @param event
-	 * @throws Exception
-	 */
-	public void onSelect$listBoxArticle(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		// get the selected object
-		Listitem item = listBoxArticle.getSelectedItem();
-
-		if (item != null) {
-			// CAST AND STORE THE SELECTED OBJECT
-			Article article = (Article) item.getAttribute("data");
-
-			if (logger.isDebugEnabled()) {
-				logger.debug("--> " + article.getArtKurzbezeichnung());
+			// check first, if the tabs are created
+			if (getArticleMainCtrl().getArticleDetailCtrl() == null) {
+				Events.sendEvent(new Event("onSelect", getArticleMainCtrl().tabArticleDetail, null));
+				// if we work with spring beanCreation than we must check a
+				// little bit deeper, because the Controller are preCreated ?
+			} else if (getArticleMainCtrl().getArticleDetailCtrl().getBinder() == null) {
+				Events.sendEvent(new Event("onSelect", getArticleMainCtrl().tabArticleDetail, null));
 			}
 
-			longBoxArt_LangBeschreibung.setValue(article.getArtLangbezeichnung());
+			Events.sendEvent(new Event("onSelect", getArticleMainCtrl().tabArticleDetail, anArticle));
 		}
 	}
 
 	/**
-	 * Call the Article dialog with the selected entry. <br>
-	 * <br>
-	 * This methode is forwarded from the listboxes item renderer. <br>
-	 * see: de.forsthaus.webui.article.model.ArticleListModelItemRenderer.java <br>
-	 * 
-	 * @param event
-	 * @throws Exception
-	 */
-	public void onDoubleClicked(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		// get the selected object
-		Listitem item = listBoxArticle.getSelectedItem();
-
-		if (item != null) {
-			// CAST AND STORE THE SELECTED OBJECT
-			Article anArticle = (Article) item.getAttribute("data");
-
-			if (logger.isDebugEnabled()) {
-				logger.debug("--> " + anArticle.getArtKurzbezeichnung());
-			}
-
-			showDetailView(anArticle);
-		}
-	}
-
-	/**
-	 * Call the Article dialog with a new empty entry. <br>
-	 */
-	public void onClick$button_ArticleList_NewArticle(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		// create a new article object
-		/** !!! DO NOT BREAK THE TIERS !!! */
-		// We don't create a new DomainObject() in the frontend.
-		// We GET it from the backend.
-		Article anArticle = getArticleService().getNewArticle();
-
-		showDetailView(anArticle);
-
-	}
-
-	/**
-	 * Opens the detail view. <br>
-	 * Overhanded some params in a map if needed. <br>
-	 * 
-	 * @param anArticle
-	 * @throws Exception
-	 */
-	private void showDetailView(Article anArticle) throws Exception {
-
-		/*
-		 * We can call our Dialog zul-file with parameters. So we can call them
-		 * with a object of the selected item. For handed over these parameter
-		 * only a Map is accepted. So we put the object in a HashMap.
-		 */
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("article", anArticle);
-		/*
-		 * we can additionally handed over the listBox or the controller self,
-		 * so we have in the dialog access to the listbox Listmodel. This is
-		 * fine for synchronizing the data in the customerListbox from the
-		 * dialog when we do a delete, edit or insert a customer.
-		 */
-		map.put("articleListCtrl", this);
-
-		// call the zul-file with the parameters packed in a map
-		try {
-			Executions.createComponents("/WEB-INF/pages/article/articleDialog.zul", null, map);
-		} catch (Exception e) {
-			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
-
-			// Show a error box
-			String msg = e.getMessage();
-			String title = Labels.getLabel("message_Error");
-
-			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
-
-		}
-	}
-
-	/**
-	 * when the "help" button is clicked. <br>
-	 * 
-	 * @param event
-	 * @throws InterruptedException
-	 */
-	public void onClick$btnHelp(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message_Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
-	}
-
-	/**
-	 * when the checkBox 'Show All' for filtering is checked. <br>
+	 * When a listItem in the corresponding listbox is selected.<br>
+	 * Event is forwarded in the corresponding listbox.
 	 * 
 	 * @param event
 	 */
-	public void onCheck$checkbox_ArticleList_ShowAll(Event event) {
+	public void onSelect$listBoxArticle(Event event) {
+		FDUtils.logEventDebug(this, event);
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
+		Article anArticle = getSelectedArticle();
+
+		if (anArticle == null) {
+			return;
 		}
 
-		// empty the text search boxes
-		tb_Article_ArticleID.setValue(""); // clear
-		tb_Article_Name.setValue(""); // clear
+		// check first, if the tabs are created
+		if (getArticleMainCtrl().getArticleDetailCtrl() == null) {
+			Events.sendEvent(new Event("onSelect", getArticleMainCtrl().tabArticleDetail, null));
+			// if we work with spring beanCreation than we must check a little
+			// bit deeper, because the Controller are preCreated ?
+		} else if (getArticleMainCtrl().getArticleDetailCtrl().getBinder() == null) {
+			Events.sendEvent(new Event("onSelect", getArticleMainCtrl().tabArticleDetail, null));
+		}
 
-		// ++ create the searchObject and init sorting ++ //
-		HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, getCountRows());
-		soArticle.addSort("artNr", false);
+		// INIT ALL RELATED Queries/OBJECTS/LISTS NEW
+		getArticleMainCtrl().getArticleDetailCtrl().setSelectedArticle(anArticle);
+		getArticleMainCtrl().getArticleDetailCtrl().setArticle(anArticle);
 
-		// Set the ListModel for the articles.
-		getPagedListWrapper().init(soArticle, listBoxArticle, paging_ArticleList);
+		// store the selected bean values as current
+		getArticleMainCtrl().doStoreInitValues();
+
+		// show the objects data in the statusBar
+		String str = Labels.getLabel("common.Article") + ": " + anArticle.getArtKurzbezeichnung();
+		EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeSelectedObject", null, str));
 
 	}
 
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// +++++++++++++++++ Business Logic ++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// ++++++++++++++++++++ Helpers ++++++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
 	/**
-	 * when the "print" button is clicked.
+	 * Recalculates the container size for this controller and resize them.
 	 * 
-	 * @param event
-	 * @throws InterruptedException
+	 * Calculate how many rows have been place in the listbox. Get the
+	 * currentDesktopHeight from a hidden Intbox from the index.zul that are
+	 * filled by onClientInfo() in the indexCtroller.
 	 */
-	public void onClick$button_ArticleList_PrintList(Event event) throws InterruptedException {
+	public void doFitSize() {
+		// normally 0 ! Or we have a i.e. a toolBar on top of the listBox.
+		int specialSize = 0;
+		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		int maxListBoxHeight = (height - specialSize - 138);
+		setCountRows((int) Math.round((maxListBoxHeight) / 17.7));
+		borderLayout_articleList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message_Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
-	}
-
-	/**
-	 * when the "refresh" button is clicked. <br>
-	 * <br>
-	 * Refreshes the view by calling the onCreate event manually.
-	 * 
-	 * @param event
-	 * @throws InterruptedException
-	 */
-	public void onClick$btnRefresh(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		Events.postEvent("onCreate", window_ArticlesList, event);
-		window_ArticlesList.invalidate();
-	}
-
-	/**
-	 * Filter the article list with 'like ArticleID'. <br>
-	 */
-	public void onClick$button_ArticleList_SearchArticleID(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		// if not empty
-		if (!tb_Article_ArticleID.getValue().isEmpty()) {
-			checkbox_ArticleList_ShowAll.setChecked(false); // unCheck
-			tb_Article_Name.setValue(""); // clear
-
-			// ++ create the searchObject and init sorting ++ //
-			HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, getCountRows());
-			soArticle.addFilter(new Filter("artNr", "%" + tb_Article_ArticleID.getValue() + "%", Filter.OP_ILIKE));
-			soArticle.addSort("artNr", false);
-
-			// Set the ListModel for the articles.
-			getPagedListWrapper().init(soArticle, listBoxArticle, paging_ArticleList);
-
-		}
-	}
-
-	/**
-	 * Filter the article list with 'like article shortname'. <br>
-	 */
-	public void onClick$button_ArticleList_SearchName(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		// if not empty
-		if (!tb_Article_Name.getValue().isEmpty()) {
-			checkbox_ArticleList_ShowAll.setChecked(false); // unCheck
-			tb_Article_ArticleID.setValue(""); // clear
-
-			// ++ create the searchObject and init sorting ++ //
-			HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, getCountRows());
-			soArticle.addFilter(new Filter("artKurzbezeichnung", "%" + tb_Article_Name.getValue() + "%", Filter.OP_ILIKE));
-			soArticle.addSort("artKurzbezeichnung", false);
-
-			// Set the ListModel for the articles.
-			getPagedListWrapper().init(soArticle, listBoxArticle, paging_ArticleList);
-
-		}
+		windowArticlesList.invalidate();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 	// ++++++++++++++++++ getter / setter +++++++++++++++++++//
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
+	/**
+	 * Best Pratice Hint:<br>
+	 * The setters/getters for the local annotated data binded Beans/Sets are
+	 * administered in the module's mainController. Working in this way you have
+	 * clean line to share this beans/sets with other controllers.
+	 */
+	public Article getArticle() {
+		// STORED IN THE module's MainController
+		return getArticleMainCtrl().getSelectedArticle();
+	}
+
+	public void setArticle(Article article) {
+		// STORED IN THE module's MainController
+		getArticleMainCtrl().setSelectedArticle(article);
+	}
+
+	public void setSelectedArticle(Article selectedArticle) {
+		// STORED IN THE module's MainController
+		getArticleMainCtrl().setSelectedArticle(selectedArticle);
+	}
+
+	public Article getSelectedArticle() {
+		// STORED IN THE module's MainController
+		return getArticleMainCtrl().getSelectedArticle();
+	}
+
+	public void setArticles(BindingListModelList articles) {
+		// STORED IN THE module's MainController
+		getArticleMainCtrl().setArticles(articles);
+	}
+
+	public BindingListModelList getArticles() {
+		// STORED IN THE module's MainController
+		return getArticleMainCtrl().getArticles();
+	}
+
+	public void setBinder(AnnotateDataBinder binder) {
+		this.binder = binder;
+	}
+
+	public AnnotateDataBinder getBinder() {
+		return binder;
+	}
 
 	public void setArticleService(ArticleService articleService) {
 		this.articleService = articleService;
@@ -474,6 +362,30 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 
 	public void setCountRows(int countRows) {
 		this.countRows = countRows;
+	}
+
+	public void setArticleMainCtrl(ArticleMainCtrl articleMainCtrl) {
+		this.articleMainCtrl = articleMainCtrl;
+	}
+
+	public ArticleMainCtrl getArticleMainCtrl() {
+		return articleMainCtrl;
+	}
+
+	public HibernateSearchObject<Article> getSearchObj() {
+		return searchObj;
+	}
+
+	public void setSearchObj(HibernateSearchObject<Article> searchObj) {
+		this.searchObj = searchObj;
+	}
+
+	public Listbox getListBoxArticle() {
+		return listBoxArticle;
+	}
+
+	public void setListBoxArticle(Listbox listBoxArticle) {
+		this.listBoxArticle = listBoxArticle;
 	}
 
 }

@@ -19,6 +19,13 @@
 		</listener-class> </listener>
 	-->
 
+	<!-- ========================================================== -->
+	<!--            Enable event thread for modal windows           -->
+	<!-- ========================================================== -->
+	<system-config>
+		<disable-event-thread>false</disable-event-thread>
+	</system-config>
+
 
 	<!-- ====================================================== -->
 	<!--          running a zk application in a CLUSTER         -->
@@ -104,5 +111,29 @@
 		<timer-keep-alive>true</timer-keep-alive>
 	</session-config>
 
+	<!-- ====================================================== -->
+	<!--   Displays the wait indicator for every user action    -->
+	<!-- ====================================================== -->
+	<library-property>
+		<name>org.zkoss.zul.progressbox.position</name>
+		<value>center</value>
+	</library-property>
+	<client-config>
+		<processing-prompt-delay>1</processing-prompt-delay>
+	</client-config>
+
+	<!-- ========================================================== -->
+	<!--                       since 5.0.3                          -->
+	<!--  The default font size is changed to "arial, sans-serif"   -->
+	<!--             Here we set to the old settings                -->
+	<!-- ========================================================== -->
+	<library-property>
+		<name>org.zkoss.zul.theme.fontFamilyT</name>
+		<value>Verdana, Tahoma, Arial, Helvetica, sans-serif</value>
+	</library-property>
+	<library-property>
+		<name>org.zkoss.zul.theme.fontFamilyC</name>
+		<value>Verdana, Tahoma, Arial, Helvetica, sans-serif</value>
+	</library-property>
 </zk>
 

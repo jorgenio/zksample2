@@ -47,6 +47,7 @@ import de.forsthaus.backend.service.UserService;
 import de.forsthaus.webui.user.model.LanguageListModelItemRenderer;
 import de.forsthaus.webui.user.model.UserRolesListModelItemRenderer;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
+import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.NoEmptyAndEqualStringsConstraint;
@@ -172,7 +173,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doCheckRights();
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -302,7 +303,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 			logger.debug("--> " + event.toString());
 		}
 
-		String message = Labels.getLabel("message_Not_Implemented_Yet");
+		String message = Labels.getLabel("message.Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
@@ -741,9 +742,9 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final SecUser anUser = getUser();
 
 		// Show a confirm box
-		String msg = Labels.getLabel("message.question.are_you_sure_to_delete_this_record") + "\n\n --> " + anUser.getUsrLoginname() + " | " + anUser.getUsrFirstname() + " ,"
+		String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> " + anUser.getUsrLoginname() + " | " + anUser.getUsrFirstname() + " ,"
 				+ anUser.getUsrLastname();
-		String title = Labels.getLabel("message_Deleting_Record");
+		String title = Labels.getLabel("message.Deleting.Record");
 
 		MultiLineMessageBox.doSetTemplate();
 		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
@@ -758,18 +759,30 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 			private void deleteUser() {
 
-				// delete from database
-				getUserService().delete(anUser);
+				/**
+				 * Prevent the deleting of the demo users
+				 */
+				try {
+					if (anUser.getId() == new Long(10) || anUser.getId() == new Long(11) || anUser.getId() == new Long(12) || anUser.getId() == new Long(13) || anUser.getId() == new Long(14)) {
+						FDUtils.doShowNotAllowedForDemoRecords();
+						return;
+					} else {
+						// delete from database
+						getUserService().delete(anUser);
 
-				// now synchronize the listBox
-				ListModelList lml = (ListModelList) listBoxUser.getListModel();
+						// now synchronize the listBox
+						ListModelList lml = (ListModelList) listBoxUser.getListModel();
 
-				// Check if the object is new or updated
-				// -1 means that the obj is not in the list, so it's
-				// new..
-				if (lml.indexOf(anUser) == -1) {
-				} else {
-					lml.remove(lml.indexOf(anUser));
+						// Check if the object is new or updated
+						// -1 means that the obj is not in the list, so it's
+						// new..
+						if (lml.indexOf(anUser) == -1) {
+						} else {
+							lml.remove(lml.indexOf(anUser));
+						}
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
 
 				userDialogWindow.onClose(); // close the dialog
@@ -844,7 +857,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		} catch (DataAccessException e) {
 			String message = e.getMessage();
 			// String message = e.getCause().getMessage();
-			String title = Labels.getLabel("message_Error");
+			String title = Labels.getLabel("message.Error");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 

@@ -81,37 +81,42 @@
 					multiple="false">
 					<listhead sizable="true">
 						<listheader
-							id="listheader_UserList_usrLoginname"
+							id="listheader_UserList_usrLoginname" sclass="FDListBoxHeader1"
 							image="/images/icons/create_doc.gif" sort="auto" width="20%"
 							label="${c:l('listheader_UserList_usrLoginname.label')}" />
 						<listheader id="listheader_UserList_usrLastname"
-							image="/images/icons/create_doc.gif" sort="auto" width="15%"
+							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"
+							sort="auto" width="15%"
 							label="${c:l('listheader_UserList_usrLastname.label')}" />
 						<listheader id="listheader_UserList_usrEmail"
-							image="/images/icons/mail16x16.gif" sort="auto" width="20%"
+							sclass="FDListBoxHeader1" image="/images/icons/mail16x16.gif"
+							sort="auto" width="20%"
 							label="${c:l('listheader_UserList_usrEmail.label')}" />
-						<listheader
-							id="listheader_UserList_usrEnabled">
+						<listheader id="listheader_UserList_usrEnabled"
+							sclass="FDListBoxHeader1">
 							<label id="label_lh_UserList_usrEnabled"
 								value="${c:l('label_lh_UserList_usrEnabled.value')}" width="85%"
 								sclass="word-wrap" multiline="true" />
 						</listheader>
 						<listheader
-							id="listheader_UserList_usrAccountnonexpired" sort="auto">
+							id="listheader_UserList_usrAccountnonexpired"
+							sclass="FDListBoxHeader1" sort="auto">
 							<label
 								id="label_lh_UserList_usrAccountnonexpired"
 								value="${c:l('label_lh_UserList_usrAccountnonexpired.value')}"
 								width="85%" sclass="word-wrap" multiline="true" />
 						</listheader>
 						<listheader
-							id="listheader_UserList_usrCredentialsnonexpired" sort="auto">
+							id="listheader_UserList_usrCredentialsnonexpired"
+							sclass="FDListBoxHeader1" sort="auto">
 							<label
 								id="label_lh_UserList_usrCredentialsnonexpired"
 								value="${c:l('label_lh_UserList_usrCredentialsnonexpired.value')}"
 								width="85%" sclass="word-wrap" multiline="true" />
 						</listheader>
 						<listheader
-							id="listheader_UserList_usrAccountnonlocked" sort="auto">
+							id="listheader_UserList_usrAccountnonlocked"
+							sclass="FDListBoxHeader1" sort="auto">
 							<label
 								id="label_lh_UserList_usrAccountnonlocked"
 								value="${c:l('label_lh_UserList_usrAccountnonlocked.value')}"

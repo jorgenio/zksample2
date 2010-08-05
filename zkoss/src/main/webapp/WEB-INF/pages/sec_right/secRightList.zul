@@ -72,10 +72,11 @@
 					height="100%" multiple="false">
 					<listhead sizable="true">
 						<listheader id="listheader_SecRightList_rigName"
-							image="/images/icons/create_doc.gif"
+							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_SecRightList_rigName.label')}"
 							sort="auto" width="70%" />
 						<listheader id="listheader_SecRightList_rigType"
+							sclass="FDListBoxHeader1"
 							image="/images/icons/exdDataPerspective.gif"
 							label="${c:l('listheader_SecRightList_rigType.label')}"
 							sort="auto" width="30%" />

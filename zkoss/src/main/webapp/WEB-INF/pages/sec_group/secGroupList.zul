@@ -63,12 +63,12 @@
 					<listhead sizable="true">
 						<listheader
 							id="listheader_SecGroupList_grpShortdescription"
-							image="/images/icons/create_doc.gif"
+							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_SecGroupList_grpShortdescription.label')}"
 							sort="auto" width="30%" />
 						<listheader
 							id="listheader_SecGroupList_grpLongdescription"
-							image="/images/icons/sequence.gif"
+							sclass="FDListBoxHeader1" image="/images/icons/sequence.gif"
 							label="${c:l('listheader_SecGroupList_grpLongdescription.label')}"
 							sort="auto" width="70%" />
 					</listhead>

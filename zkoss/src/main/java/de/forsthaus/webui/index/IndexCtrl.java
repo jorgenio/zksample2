@@ -24,20 +24,28 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.zkoss.zk.ui.ComponentNotFoundException;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.ClientInfoEvent;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zkex.zul.Borderlayout;
-import org.zkoss.zkex.zul.Center;
-import org.zkoss.zkex.zul.West;
+import org.zkoss.zk.ui.event.EventQueues;
+import org.zkoss.zul.Borderlayout;
+import org.zkoss.zul.Center;
 import org.zkoss.zul.Checkbox;
-import org.zkoss.zul.Column;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Menubar;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabpanel;
+import org.zkoss.zul.Tabpanels;
+import org.zkoss.zul.Tabs;
+import org.zkoss.zul.West;
 
 import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.service.OfficeService;
+import de.forsthaus.policy.model.UserImpl;
 import de.forsthaus.webui.util.FDDateFormat;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 
@@ -65,10 +73,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
 	protected Menubar mainMenuBar; // autowired
-
-	protected Column statusBarZKVersion; // autowired
-	protected Column statusBarAppVersion; // autowired
-	protected Column statusBarColUser; // autowired
+	protected Label label_AppName; // autowired
 
 	protected Intbox currentDesktopHeight; // autowired
 	protected Intbox currentDesktopWidth; // autowired
@@ -77,6 +82,8 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	private transient OfficeService officeService;
 
 	private int centerAreaHeightOffset = 50;
+
+	private String appName = "Zksample2";
 
 	public IndexCtrl() {
 		super();
@@ -98,13 +105,31 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 		doDemoMode();
 
-		statusBarZKVersion.setLabel("ZK version: " + doGetZkVersion());
+		label_AppName.setValue(appName);
+
 		Date date = new Date();
-		date.setDate(30);
-		date.setMonth(5);
+		date.setDate(05);
+		date.setMonth(6);
 		date.setYear(110);
-		statusBarAppVersion.setLabel("Zksample2 v2.1.4 / build: " + FDDateFormat.getDateFormater().format(date));
-		statusBarColUser.setLabel(doGetLoggedInUser());
+
+		String zkVersion = doGetZkVersion();
+		String appVersion = appName + " v5.0.3 / build: " + FDDateFormat.getDateFormater().format(date);
+
+		String userName = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+		String version = zkVersion + " | " + appVersion;
+		String tenantId = "4711";
+		String officeID = "39";
+		String tableSchemaName = "public";
+
+		EventQueues.lookup("userNameEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeUser", null, userName));
+
+		EventQueues.lookup("tenantIdEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeTenant", null, tenantId));
+
+		EventQueues.lookup("officeIdEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeOfficeId", null, officeID));
+
+		EventQueues.lookup("appVersionEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeAppVersion", null, version));
+
+		EventQueues.lookup("tableSchemaEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeTableSchema", null, tableSchemaName));
 
 	}
 
@@ -137,7 +162,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 		String version = Executions.getCurrent().getDesktop().getWebApp().getVersion();
 		String build = Executions.getCurrent().getDesktop().getWebApp().getBuild();
-		return version + " / build : " + build;
+		return "ZK " + version + " EE" + " / build : " + build;
 	}
 
 	/**
@@ -206,6 +231,115 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 		center.getChildren().clear();
 		// call the zul-file and put it in the center layout area
 		Executions.createComponents("/WEB-INF/pages/welcome.zul", center, null);
+	}
+
+	/**
+	 * When the 'My Settings' toolbarButton is clicked.<br>
+	 * 
+	 * @throws IOException
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnIndexMySettings() throws IOException, InterruptedException {
+		showPage("/WEB-INF/pages/sec_user/userSettings.zul", "UserSettings");
+	}
+
+	/**
+	 * When the 'Configuration' toolbarButton is clicked.<br>
+	 * 
+	 * @throws IOException
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnIndexUserAppConfiguration() throws IOException, InterruptedException {
+		showPage("/WEB-INF/pages/sec_user/userAppConfiguration.zul", "Configuration");
+	}
+
+	/**
+	 * Creates a page from a zul-file in a tab in the center area of the
+	 * borderlayout. Checks if the tab is opened before. If yes than it selects
+	 * this tab.
+	 * 
+	 * @param zulFilePathName
+	 *            The ZulFile Name with path.
+	 * @param tabName
+	 *            The tab name.
+	 * @throws InterruptedException
+	 */
+	private void showPage(String zulFilePathName, String tabName) throws InterruptedException {
+
+		try {
+			// TODO get the parameter for working with tabs from the application
+			// params
+			int workWithTabs = 1;
+
+			if (workWithTabs == 1) {
+
+				/* get an instance of the borderlayout defined in the zul-file */
+				Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
+				/* get an instance of the searched CENTER layout area */
+				Center center = bl.getCenter();
+				// get the tabs component
+				Tabs tabs = (Tabs) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter");
+
+				/**
+				 * Check if the tab is already opened than select them and<br>
+				 * go out of here. If not than create them.<br>
+				 */
+
+				Tab checkTab = null;
+				try {
+					// checkTab = (Tab) tabs.getFellow(tabName);
+					checkTab = (Tab) tabs.getFellow("tab_" + tabName.trim());
+					checkTab.setSelected(true);
+				} catch (ComponentNotFoundException ex) {
+					// Ignore if can not get tab.
+				}
+
+				if (checkTab == null) {
+
+					Tab tab = new Tab();
+					tab.setId("tab_" + tabName.trim());
+					tab.setLabel(tabName.trim());
+					tab.setClosable(true);
+
+					tab.setParent(tabs);
+
+					Tabpanels tabpanels = (Tabpanels) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter").getFellow("tabpanelsBoxIndexCenter");
+					Tabpanel tabpanel = new Tabpanel();
+					tabpanel.setHeight("100%");
+					tabpanel.setStyle("padding: 0px;");
+					tabpanel.setParent(tabpanels);
+
+					/**
+					 * Create the page and put it in the tabs area. If zul-file
+					 * is not found, detach the created tab
+					 */
+					try {
+						Executions.createComponents(zulFilePathName, tabpanel, null);
+						tab.setSelected(true);
+					} catch (Exception e) {
+						tab.detach();
+					}
+
+				}
+			} else {
+				/* get an instance of the borderlayout defined in the zul-file */
+				Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
+				/* get an instance of the searched CENTER layout area */
+				Center center = bl.getCenter();
+				/* clear the center child comps */
+				center.getChildren().clear();
+				/*
+				 * create the page and put it in the center layout area
+				 */
+				Executions.createComponents(zulFilePathName, center, null);
+			}
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("--> calling zul-file: " + zulFilePathName);
+			}
+		} catch (Exception e) {
+			Messagebox.show(e.toString());
+		}
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

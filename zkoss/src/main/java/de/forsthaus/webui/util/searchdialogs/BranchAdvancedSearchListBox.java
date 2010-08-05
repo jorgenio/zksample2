@@ -29,10 +29,9 @@ import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.sys.ComponentsCtrl;
-import org.zkoss.zkex.zul.Borderlayout;
-import org.zkoss.zkex.zul.Center;
-import org.zkoss.zkex.zul.South;
+import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Center;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
@@ -42,6 +41,7 @@ import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Paging;
+import org.zkoss.zul.South;
 import org.zkoss.zul.Window;
 import org.zkoss.zul.event.PagingEvent;
 
@@ -154,7 +154,7 @@ public class BranchAdvancedSearchListBox extends Window implements Serializable 
 		south.setHeight("26px");
 		south.setParent(bl);
 
-		// Button
+		// OK Button
 		Button btnOK = new Button();
 		btnOK.setLabel("OK");
 		btnOK.addEventListener("onClick", new OnCloseListener());
@@ -183,6 +183,7 @@ public class BranchAdvancedSearchListBox extends Window implements Serializable 
 		Listhead listhead = new Listhead();
 		listhead.setParent(listbox);
 		Listheader listheader = new Listheader();
+		listheader.setSclass("FDListBoxHeader1");
 		listheader.setParent(listhead);
 		listheader.setLabel(_listHeader1);
 

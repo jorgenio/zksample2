@@ -19,36 +19,28 @@
 package de.forsthaus.webui.branch;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
-import org.apache.log4j.Logger;
 import org.zkoss.util.resource.Labels;
-import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventQueues;
 import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zkex.zul.Borderlayout;
-import org.zkoss.zul.Button;
-import org.zkoss.zul.Checkbox;
+import org.zkoss.zkplus.databind.AnnotateDataBinder;
+import org.zkoss.zkplus.databind.BindingListModelList;
+import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.FieldComparator;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listheader;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Paging;
-import org.zkoss.zul.Panel;
-import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import com.trg.search.Filter;
-
-import de.forsthaus.UserWorkspace;
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.service.BrancheService;
 import de.forsthaus.backend.util.HibernateSearchObject;
-import de.forsthaus.webui.branch.model.BranchListModelItemRenderer;
+import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
-import de.forsthaus.webui.util.MultiLineMessageBox;
 
 /**
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -62,14 +54,16 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
  *          (GenericForwardComposer) for spring-managed creation.<br>
  *          03/09/2009: sge changed for allow repainting after resizing.<br>
  *          with the refresh button.<br>
+ *          07/04/2010: sge modified for zk5.x with complete Annotated
+ *          Databinding.<br>
  * 
  * @author bbruhns
  * @author sgerth
  */
 public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializable {
 
-	private static final long serialVersionUID = 2038742641853727975L;
-	private transient final static Logger logger = Logger.getLogger(BranchListCtrl.class);
+	private static final long serialVersionUID = 1L;
+
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * All the components that are defined here and have a corresponding
@@ -77,29 +71,26 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected Window window_BranchesList; // autowire
-	protected Panel panel_BranchList; // autowired
-	protected Borderlayout borderLayout_branchList; // autowire
+	protected Window windowBranchList; // autowired
 
-	// filter components
-	protected Checkbox checkbox_Branch_ShowAll; // autowire
-	protected Textbox tb_Branch_Name; // aurowire
+	private Borderlayout borderLayout_branchList; // autowired
 
-	// listBox
-	protected Paging paging_BranchList; // autowired
-	protected Listbox listBoxBranch; // autowired
-	protected Listheader listheader_Branch_Description; // autowired
-
-	// checkRights
-	protected Button btnHelp;
-	protected Button button_BranchList_NewBranch;
-	protected Button button_BranchList_PrintBranches;
-	protected Button button_BranchList_Search_BranchName;
+	private Paging pagingBranchList; // autowired
+	private Listbox listBoxBranch; // autowired
+	private Listheader listheader_BranchText; // autowired
 
 	// row count for listbox
 	private int countRows;
 
-	private transient BrancheService brancheService;
+	// NEEDED for ReUse in a SearchWindow
+	private HibernateSearchObject<Branche> searchObj;
+
+	// Databinding
+	private AnnotateDataBinder binder;
+	private BranchMainCtrl branchMainCtrl;
+
+	// ServiceDAOs / Domain Classes
+	BrancheService brancheService;
 
 	/**
 	 * default constructor.<br>
@@ -107,278 +98,283 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	public BranchListCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
+		FDUtils.logEventDebug(this, "super()");
+	}
+
+	@Override
+	public void doAfterCompose(Component window) throws Exception {
+		super.doAfterCompose(window);
+
+		/**
+		 * 1. Set an 'alias' for this composer name to access it in the
+		 * zul-file.<br>
+		 * 2. Set the parameter 'recurse' to 'false' to avoid problems with
+		 * managing more than one zul-file in one page. Otherwise it would be
+		 * overridden and can ends in curious error messages.
+		 */
+		self.setAttribute("controller", this, false);
+
+		/**
+		 * 1. Get the overhanded MainController.<br>
+		 * 2. Set this controller in the MainController.<br>
+		 * 3. Check if a 'selectedObject' exists yet in the MainController.<br>
+		 */
+		if (arg.containsKey("ModuleMainController")) {
+			setBranchMainCtrl((BranchMainCtrl) arg.get("ModuleMainController"));
+
+			// SET THIS CONTROLLER TO THE MainController
+			getBranchMainCtrl().setBranchListCtrl(this);
+
+			// Get the selected object.
+			// Check if this Controller if created on first time. If so,
+			// than the selectedXXXBean should be null
+			if (getBranchMainCtrl().getSelectedBranche() != null) {
+				setSelectedBranche(getBranchMainCtrl().getSelectedBranche());
+			} else
+				setSelectedBranche(null);
+		} else {
+			setSelectedBranche(null);
 		}
 	}
 
-	public void onCreate$window_BranchesList(Event event) throws Exception {
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// +++++++++++++++ Component Events ++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+	/**
+	 * Automatically called method from zk.
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
+	public void onCreate$windowBranchList(Event event) throws Exception {
+		FDUtils.logEventDebug(this, event);
 
-		/* set components visible dependent of the users rights */
-		doCheckRights();
+		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 
-		/**
-		 * Calculate how many rows have been place in the listbox. Get the
-		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
-		 * filled by onClientInfo() in the indexCtroller
-		 */
+		doFillListbox();
 
-		int panelHeight = 25;
-		// TODO put the logic for working with panel in the ApplicationWorkspace
-		boolean withPanel = false;
-		if (withPanel == false) {
-			panel_BranchList.setVisible(false);
-		} else {
-			panel_BranchList.setVisible(true);
-			panelHeight = 0;
-		}
+		binder.loadAll();
+	}
 
-		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		height = height + panelHeight;
+	public void doFillListbox() {
 
-		int maxListBoxHeight = (height - 165);
-		setCountRows((int) Math.round(maxListBoxHeight / 16.8));
-		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
-		// System.out.println("==========> : " + getCountRows());
-
-		borderLayout_branchList.setHeight(String.valueOf(maxListBoxHeight) + "px");
-
-		// init, show all branches
-		checkbox_Branch_ShowAll.setChecked(true);
+		doFitSize();
 
 		// set the paging params
-		paging_BranchList.setPageSize(getCountRows());
-		paging_BranchList.setDetailed(true);
+		pagingBranchList.setPageSize(getCountRows());
+		pagingBranchList.setDetailed(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		listheader_Branch_Description.setSortAscending(new FieldComparator("braBezeichnung", true));
-		listheader_Branch_Description.setSortDescending(new FieldComparator("braBezeichnung", false));
+		listheader_BranchText.setSortAscending(new FieldComparator("text", true));
+		listheader_BranchText.setSortDescending(new FieldComparator("text", false));
 
-		// ++ create the searchObject and init sorting ++ //
-		HibernateSearchObject<Branche> searchObjBranch = new HibernateSearchObject<Branche>(Branche.class, getCountRows());
-		searchObjBranch.addSort("braBezeichnung", false);
-		// Set the ListModel
-		getPagedListWrapper().init(searchObjBranch, listBoxBranch, paging_BranchList);
-		// set the itemRenderer
-		listBoxBranch.setItemRenderer(new BranchListModelItemRenderer());
+		// ++ create the searchObject and init sorting ++//
+		// get customers and only their latest address
+		searchObj = new HibernateSearchObject<Branche>(Branche.class, getCountRows());
+		searchObj.addSort("braBezeichnung", false);
+		setSearchObj(searchObj);
 
-	}
+		// Set the BindingListModel
+		getPagedBindingListWrapper().init(searchObj, getListBoxBranch(), pagingBranchList);
+		BindingListModelList lml = (BindingListModelList) getListBoxBranch().getModel();
+		setBranches(lml);
 
-	/**
-	 * SetVisible for components by checking if there's a right for it.
-	 */
-	private void doCheckRights() {
+		// check if first time opened and init databinding for selectedBean
+		if (getSelectedBranche() == null) {
+			// init the bean with the first record in the List
+			if (lml.getSize() > 0) {
+				int rowIndex = 0;
+				// only for correct showing after Rendering. No effect as an
+				// Event
+				// yet.
+				getListBoxBranch().setSelectedIndex(rowIndex);
+				// get the first entry and cast them to the needed object
+				setSelectedBranche((Branche) lml.get(0));
 
-		UserWorkspace workspace = getUserWorkspace();
-
-		window_BranchesList.setVisible(workspace.isAllowed("window_BranchesList"));
-		btnHelp.setVisible(workspace.isAllowed("button_BranchList_btnHelp"));
-		button_BranchList_NewBranch.setVisible(workspace.isAllowed("button_BranchList_NewBranch"));
-		button_BranchList_PrintBranches.setVisible(workspace.isAllowed("button_BranchList_PrintBranches"));
-		button_BranchList_Search_BranchName.setVisible(workspace.isAllowed("button_BranchList_Search_BranchName"));
-	}
-
-	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	// +++++++++++++++++++++++ Components events +++++++++++++++++++++++
-	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-	/**
-	 * when the "help" button is clicked. <br>
-	 * 
-	 * @param event
-	 * @throws InterruptedException
-	 */
-	public void onClick$btnHelp(Event event) throws InterruptedException {
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
+				// call the onSelect Event for showing the objects data in the
+				// statusBar
+				Events.sendEvent(new Event("onSelect", getListBoxBranch(), getSelectedBranche()));
+			}
 		}
 
-		String message = Labels.getLabel("message_Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 	}
 
 	/**
-	 * Call the Branch dialog with the selected entry. <br>
-	 * <br>
-	 * This methode is forwarded from the listboxes item renderer. <br>
-	 * see: de.forsthaus.webui.branch.model.BranchListModelItemRenderer.java <br>
-	 * 
-	 * @param event
-	 * @throws Exception
+	 * Selects the object in the listbox and change the tab.<br>
+	 * Event is forwarded in the corresponding listbox.
 	 */
-	public void onDoubleClicked(Event event) throws Exception {
+	public void onDoubleClickedBranchItem(Event event) {
+		FDUtils.logEventDebug(this, event);
 
-		// get the selected object
-		Listitem item = listBoxBranch.getSelectedItem();
+		Branche aBranche = getSelectedBranche();
 
-		if (item != null) {
-			// CAST TO THE SELECTED OBJECT
-			Branche aBranche = (Branche) item.getAttribute("data");
+		if (aBranche != null) {
+			setSelectedBranche(aBranche);
+			setBranche(aBranche);
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("--> " + aBranche.getBraBezeichnung());
+			// check first, if the tabs are created
+			if (getBranchMainCtrl().getBranchDetailCtrl() == null) {
+				Events.sendEvent(new Event("onSelect", getBranchMainCtrl().tabBranchDetail, null));
+				// if we work with spring beanCreation than we must check a
+				// little bit deeper, because the Controller are preCreated ?
+			} else if (getBranchMainCtrl().getBranchDetailCtrl().getBinder() == null) {
+				Events.sendEvent(new Event("onSelect", getBranchMainCtrl().tabBranchDetail, null));
 			}
 
-			showDetailView(aBranche);
+			Events.sendEvent(new Event("onSelect", getBranchMainCtrl().tabBranchDetail, aBranche));
 		}
 	}
 
 	/**
-	 * Call the Article dialog with a new empty entry. <br>
-	 */
-	public void onClick$button_BranchList_NewBranch(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		// create a new branch object
-		/** !!! DO NOT BREAK THE TIERS !!! */
-		// We don't create a new DomainObject() in the frontend.
-		// We GET it from the backend.
-		Branche aBranche = getBrancheService().getNewBranche();
-
-		showDetailView(aBranche);
-	}
-
-	/**
-	 * Opens the detail view. <br>
-	 * Overhanded some params in a map if needed. <br>
-	 * 
-	 * @param aBranche
-	 * @throws Exception
-	 */
-	private void showDetailView(Branche aBranche) throws Exception {
-		/*
-		 * We can call our Dialog zul-file with parameters. So we can call them
-		 * with a object of the selected item. For handed over these parameter
-		 * only a Map is accepted. So we put the object in a HashMap.
-		 */
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("branche", aBranche);
-		/*
-		 * we can additionally handed over the listBox or the controller self,
-		 * so we have in the dialog access to the listbox Listmodel. This is
-		 * fine for synchronizing the data in the customerListbox from the
-		 * dialog when we do a delete, edit or insert a customer.
-		 */
-		map.put("branchListCtrl", this);
-
-		// call the zul-file with the parameters packed in a map
-		try {
-			Executions.createComponents("/WEB-INF/pages/branch/branchDialog.zul", null, map);
-		} catch (Exception e) {
-			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
-
-			// Show a error box
-			String msg = e.getMessage();
-			String title = Labels.getLabel("message_Error");
-
-			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
-		}
-	}
-
-	/**
-	 * when the checkBox 'Show All' for filtering is checked. <br>
+	 * When a listItem in the corresponding listbox is selected.<br>
+	 * Event is forwarded in the corresponding listbox.
 	 * 
 	 * @param event
 	 */
-	public void onCheck$checkbox_Branch_ShowAll(Event event) {
+	public void onSelect$listBoxBranch(Event event) {
+		FDUtils.logEventDebug(this, event);
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
+		Branche aBranche = getSelectedBranche();
+
+		if (aBranche == null) {
+			return;
 		}
 
-		// empty the text search boxes
-		tb_Branch_Name.setValue(""); // clear
+		// check first, if the tabs are created
+		if (getBranchMainCtrl().getBranchDetailCtrl() == null) {
+			Events.sendEvent(new Event("onSelect", getBranchMainCtrl().tabBranchDetail, null));
+			// if we work with spring beanCreation than we must check a little
+			// bit deeper, because the Controller are preCreated ?
+		} else if (getBranchMainCtrl().getBranchDetailCtrl().getBinder() == null) {
+			Events.sendEvent(new Event("onSelect", getBranchMainCtrl().tabBranchDetail, null));
+		}
 
-		getPagedListWrapper().clearFilters();
+		// INIT ALL RELATED Queries/OBJECTS/LISTS NEW
+		getBranchMainCtrl().getBranchDetailCtrl().setSelectedBranche(aBranche);
+		getBranchMainCtrl().getBranchDetailCtrl().setBranche(aBranche);
+
+		// store the selected bean values as current
+		getBranchMainCtrl().doStoreInitValues();
+
+		// show the objects data in the statusBar
+		String str = Labels.getLabel("common.Branch") + ": " + aBranche.getBraBezeichnung();
+		EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeSelectedObject", null, str));
+
 	}
 
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// +++++++++++++++++ Business Logic ++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// ++++++++++++++++++++ Helpers ++++++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
 	/**
-	 * when the "print branches list" button is clicked.
+	 * Recalculates the container size for this controller and resize them.
 	 * 
-	 * @param event
-	 * @throws InterruptedException
+	 * Calculate how many rows have been place in the listbox. Get the
+	 * currentDesktopHeight from a hidden Intbox from the index.zul that are
+	 * filled by onClientInfo() in the indexCtroller.
 	 */
-	public void onClick$button_BranchList_PrintBranches(Event event) throws InterruptedException {
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+	public void doFitSize() {
+		// normally 0 ! Or we have a i.e. a toolBar on top of the listBox.
+		int specialSize = 0;
+		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		int maxListBoxHeight = (height - specialSize - 138);
+		setCountRows((int) Math.round((maxListBoxHeight) / 17.7));
+		borderLayout_branchList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
-		String message = Labels.getLabel("message_Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
-
+		windowBranchList.invalidate();
 	}
+
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	/**
-	 * when the "refresh" button is clicked. <br>
-	 * <br>
-	 * Refreshes the view by calling the onCreate event manually.
-	 * 
-	 * @param event
-	 * @throws InterruptedException
+	 * Best Pratice Hint:<br>
+	 * The setters/getters for the local annotated data binded Beans/Sets are
+	 * administered in the module's mainController. Working in this way you have
+	 * clean line to share this beans/sets with other controllers.
 	 */
-	public void onClick$btnRefresh(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		Events.postEvent("onCreate", window_BranchesList, event);
-		window_BranchesList.invalidate();
+	public Branche getBranche() {
+		// STORED IN THE module's MainController
+		return getBranchMainCtrl().getSelectedBranche();
 	}
 
-	/**
-	 * Filter the branch list with 'like branch name'. <br>
-	 */
-	public void onClick$button_BranchList_Search_BranchName(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		// if not empty
-		if (!tb_Branch_Name.getValue().isEmpty()) {
-			checkbox_Branch_ShowAll.setChecked(false); // unCheck
-
-			// ++ create the searchObject and init sorting ++//
-			HibernateSearchObject<Branche> searchObjBranch = new HibernateSearchObject<Branche>(Branche.class, getCountRows());
-			searchObjBranch.addFilter(new Filter("braBezeichnung", "%" + tb_Branch_Name.getValue() + "%", Filter.OP_ILIKE));
-			searchObjBranch.addSort("braBezeichnung", false);
-
-			getPagedListWrapper().setSearchObject(searchObjBranch);
-		}
+	public void setBranche(Branche branche) {
+		// STORED IN THE module's MainController
+		getBranchMainCtrl().setSelectedBranche(branche);
 	}
 
-	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
-	// ++++++++++++++++++ getter / setter +++++++++++++++++++//
-	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
-
-	public void setBrancheService(BrancheService brancheService) {
-		this.brancheService = brancheService;
+	public void setSelectedBranche(Branche selectedBranche) {
+		// STORED IN THE module's MainController
+		getBranchMainCtrl().setSelectedBranche(selectedBranche);
 	}
 
-	public BrancheService getBrancheService() {
-		return brancheService;
+	public Branche getSelectedBranche() {
+		// STORED IN THE module's MainController
+		return getBranchMainCtrl().getSelectedBranche();
 	}
 
-	public int getCountRows() {
-		return countRows;
+	public void setBranches(BindingListModelList branches) {
+		// STORED IN THE module's MainController
+		getBranchMainCtrl().setBranches(branches);
+	}
+
+	public BindingListModelList getBranches() {
+		// STORED IN THE module's MainController
+		return getBranchMainCtrl().getBranches();
+	}
+
+	public void setBinder(AnnotateDataBinder binder) {
+		this.binder = binder;
+	}
+
+	public AnnotateDataBinder getBinder() {
+		return binder;
+	}
+
+	public void setSearchObj(HibernateSearchObject<Branche> searchObj) {
+		this.searchObj = searchObj;
+	}
+
+	public HibernateSearchObject<Branche> getSearchObj() {
+		return searchObj;
 	}
 
 	public void setCountRows(int countRows) {
 		this.countRows = countRows;
 	}
 
+	public int getCountRows() {
+		return countRows;
+	}
+
+	public void setBranchMainCtrl(BranchMainCtrl branchMainCtrl) {
+		this.branchMainCtrl = branchMainCtrl;
+	}
+
+	public BranchMainCtrl getBranchMainCtrl() {
+		return branchMainCtrl;
+	}
+
+	public BrancheService getBrancheService() {
+		return brancheService;
+	}
+
+	public void setBrancheService(BrancheService brancheService) {
+		this.brancheService = brancheService;
+	}
+
+	public void setListBoxBranch(Listbox listBoxBranch) {
+		this.listBoxBranch = listBoxBranch;
+	}
+
+	public Listbox getListBoxBranch() {
+		return listBoxBranch;
+	}
 }

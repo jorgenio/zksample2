@@ -49,6 +49,7 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listhead;
 import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Paging;
 import org.zkoss.zul.Panelchildren;
@@ -71,7 +72,6 @@ import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.gui.service.GuiLoginLoggingService;
 import de.forsthaus.services.report.service.ReportService;
 import de.forsthaus.util.ZkossComponentTreeUtil;
-import de.forsthaus.webui.branch.model.BranchListModelItemRenderer;
 import de.forsthaus.webui.customer.model.CustomerListModelItemRenderer;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.MyThemeProvider;
@@ -123,6 +123,12 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	protected Button Btn_ResetDatebox;
 	protected Button btn_javaListbox;
 	protected Panelchildren panelChildJavaListbox;
+
+	protected Button btn_getRemoteAddress;
+	protected Button btn_getRemoteHost;
+	protected Button btn_getRemoteUser;
+	protected Button btn_getLocalAddress;
+	protected Button btn_getLocalName;
 
 	protected Label label_InsertCustomer;
 	protected Listbox listBoxCustomer;
@@ -229,6 +235,31 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 		}
 	}
 
+	public void onClick$btn_getRemoteAddress(Event event) throws InterruptedException {
+		String str = Executions.getCurrent().getRemoteAddr();
+		Messagebox.show("Remote Adress: " + str);
+	}
+
+	public void onClick$btn_getRemoteHost(Event event) throws InterruptedException {
+		String str = Executions.getCurrent().getRemoteHost();
+		Messagebox.show("Remote Host: " + str);
+	}
+
+	public void onClick$btn_getRemoteUser(Event event) throws InterruptedException {
+		String str = Executions.getCurrent().getRemoteUser();
+		Messagebox.show("Remote User: " + str);
+	}
+
+	public void onClick$btn_getLocalAddress(Event event) throws InterruptedException {
+		String str = Executions.getCurrent().getLocalAddr();
+		Messagebox.show("Client Local Address: " + str);
+	}
+
+	public void onClick$btn_getLocalName(Event event) throws InterruptedException {
+		String str = Executions.getCurrent().getLocalName();
+		Messagebox.show("Client Local Name: " + str);
+	}
+
 	public void onClick$BtnSerializeFC(Event event) throws InterruptedException {
 
 		FieldComparator fcOld;
@@ -325,7 +356,19 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 		listheader_Branch_Description.setSortAscending(fcBraBezeichnung_Asc);
 		listheader_Branch_Description.setSortDescending(fcBraBezeichnung_Desc);
 
-		listBoxBranch.setItemRenderer(new BranchListModelItemRenderer());
+		listBoxBranch.setItemRenderer(new ListitemRenderer() {
+			@Override
+			public void render(Listitem item, Object data) throws Exception {
+				Branche branche = (Branche) data;
+				Listcell lc;
+				lc = new Listcell(String.valueOf(branche.getBraBezeichnung()));
+				lc.setStyle("text-align: left; padding-left: 5px;");
+				lc.setParent(item);
+				lc = new Listcell(String.valueOf(branche.getId()));
+				lc.setStyle("text-align: left; padding-left: 5px;");
+				lc.setParent(item);
+			}
+		});
 
 		pagedListWrapperBranche.init(so, listBoxBranch, pagingBranch);
 
@@ -468,7 +511,7 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 		// + "&var2=" + dtb.getValue());
 		// Executions.getCurrent().sendRedirect("/WEB-INF/pages/branch/branchList.zul?var1="
 		// + tb1.getValue());
-		//	System.out.println("Onnnnnnnnnnnnnnklji jfivjofj ovijfdiovfdvfd");
+		// System.out.println("Onnnnnnnnnnnnnnklji jfivjofj ovijfdiovfdvfd");
 
 	}
 

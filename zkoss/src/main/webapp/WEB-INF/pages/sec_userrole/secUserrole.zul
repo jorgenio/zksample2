@@ -96,6 +96,7 @@
 																	sizable="true">
 																	<listheader
 																		id="listheader_SecUserRole_usrLoginname"
+																		sclass="FDListBoxHeader1"
 																		image="/images/icons/create_doc.gif" sort="auto"
 																		width="100%"
 																		label="${c:l('listheader_SecUserRole_usrLoginname.label')}" />
@@ -134,11 +135,13 @@
 																	sizable="true">
 																	<listheader
 																		id="listheader_SecUserRole_GrantedRight"
+																		sclass="FDListBoxHeader1"
 																		image="/images/icons/exdDialogAction1.gif" sort="none"
 																		width="20%"
 																		label="${c:l('listheader_SecUserRole_GrantedRight.label')}" />
 																	<listheader
 																		id="listheader_SecUserRole_RoleName"
+																		sclass="FDListBoxHeader1"
 																		image="/images/icons/create_doc.gif" sort="auto"
 																		width="80%"
 																		label="${c:l('listheader_SecUserRole_RoleName.label')}" />

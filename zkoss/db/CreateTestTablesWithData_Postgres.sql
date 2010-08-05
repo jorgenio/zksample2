@@ -123,7 +123,7 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE hibernate_statistics OWNER TO toledo;
-COMMENT ON TABLE hibernate_statistics IS 'Enth�lt eine Hibernatestatistik';
+COMMENT ON TABLE hibernate_statistics IS 'Enth�lt eine Hibernatestatistik';
 
 /*==============================================================*/
 /* Table: Hibernate_                                               */
@@ -919,8 +919,9 @@ alter table sec_userrole
 
 
 /******************** Filiale Daten ********************/
-INSERT INTO FILIALE (FIL_ID, FIL_NR, FIL_BEZEICHNUNG,FIL_NAME1,FIL_NAME2,FIL_ORT,VERSION)
-values (1,'0001','Filiale München','Härmann Gmbh','Personaldienstleistungen','München',0);
+INSERT INTO FILIALE (FIL_ID, FIL_NR, FIL_BEZEICHNUNG,FIL_NAME1,FIL_NAME2,FIL_ORT,VERSION) values
+(1,'0001','Filiale Muenchen','Hoermann Gmbh','Personaldienstleistungen','Muenchen',0),
+(2,'0002','Filiale Berlin',  'Hoermann Gmbh','Personaldienstleistungen','Berlin',0);
 
 /******************** Security: USERS ********************/  
 INSERT INTO SEC_USER (USR_ID, USR_LOGINNAME, USR_PASSWORD, USR_LASTNAME, USR_FIRSTNAME, USR_EMAIL, USR_LOCALE, USR_ENABLED, USR_ACCOUNTNONEXPIRED, USR_CREDENTIALSNONEXPIRED, USR_ACCOUNTNONLOCKED, USR_TOKEN,  VERSION) values 
@@ -1140,7 +1141,7 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15102, 0, 'orderListWindow', 0),
 (15103, 0, 'orderDialogWindow', 0),
 /* --> Page Articles */
-(15104, 0, 'window_ArticlesList', 0),
+(15104, 0, 'windowArticlesList', 0),
 (15105, 0, 'window_ArticlesDialog', 0),
 /* --> Page Branches */
 (15106, 0, 'window_BranchesList', 0),
@@ -1243,17 +1244,15 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 /* BRANCHES */
 /* branchListWindow Buttons*/
 /* --> button_BranchList_btnHelp */
-(15500, 0, 'button_BranchList_btnHelp', 0),
-(15501, 0, 'button_BranchList_NewBranch', 0),
-(15502, 0, 'button_BranchList_PrintBranches', 0),
-(15503, 0, 'button_BranchList_Search_BranchName', 0),
+(15502, 0, 'button_BranchMain_PrintBranches', 0),
+(15503, 0, 'button_BranchMain_Search_BranchName', 0),
 /* branchDialogWindow BUTTONS */
-(15510, 6, 'button_BranchDialog_btnHelp', 0),
-(15511, 6, 'button_BranchDialog_btnNew', 0),
-(15512, 6, 'button_BranchDialog_btnEdit', 0),
-(15513, 6, 'button_BranchDialog_btnDelete', 0),
-(15514, 6, 'button_BranchDialog_btnSave', 0),
-(15515, 6, 'button_BranchDialog_btnClose', 0),
+(15510, 6, 'button_BranchMain_btnHelp', 0),
+(15511, 6, 'button_BranchMain_btnNew', 0),
+(15512, 6, 'button_BranchMain_btnEdit', 0),
+(15513, 6, 'button_BranchMain_btnDelete', 0),
+(15514, 6, 'button_BranchMain_btnSave', 0),
+(15515, 6, 'button_BranchMain_btnClose', 0),
 /* ARTICLES */
 /* window_ArticlesList Buttons*/
 (15530, 6, 'button_ArticlesList_btnHelp', 0),
@@ -1271,20 +1270,17 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 /* OFFICES */
 /* window_OfficeList Buttons*/
 /* --> button_BranchList_btnHelp */
-(15600, 6, 'button_OfficeList_btnHelp', 0),
-(15601, 6, 'button_OfficeList_NewOffice', 0),
 (15602, 6, 'button_OfficeList_PrintList', 0),
 (15603, 6, 'button_OfficeList_SearchNo', 0),
 (15604, 6, 'button_OfficeList_SearchName', 0),
 (15605, 6, 'button_OfficeList_SearchCity', 0),
 /* window_OfficeDialog BUTTONS */
-(15610, 6, 'button_OfficeDialog_PrintOffice', 0),
-(15611, 6, 'button_OfficeDialog_btnHelp', 0),
-(15612, 6, 'button_OfficeDialog_btnNew', 0),
-(15613, 6, 'button_OfficeDialog_btnEdit', 0),
-(15614, 6, 'button_OfficeDialog_btnDelete', 0),
-(15615, 6, 'button_OfficeDialog_btnSave', 0),
-(15616, 6, 'button_OfficeDialog_btnClose', 0),
+(15611, 6, 'button_OfficeMain_btnHelp', 0),
+(15612, 6, 'button_OfficeMain_btnNew', 0),
+(15613, 6, 'button_OfficeMain_btnEdit', 0),
+(15614, 6, 'button_OfficeMain_btnDelete', 0),
+(15615, 6, 'button_OfficeMain_btnSave', 0),
+(15616, 6, 'button_OfficeMain_btnClose', 0),
 
 /* Method/Event = Type(3) */
 /* --> CustomerList BUTTON */
@@ -1579,8 +1575,6 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14501, 13020, 15005, 0),
 /* Right: page_BranchesList */
 (14502, 13020, 15106, 0),
-/* Right: button_BranchList_btnHelp */
-(14503, 13020, 15500, 0),
 /* Right: button_BranchList_PrintBranches */
 (14504, 13020, 15502, 0),
 /* Right: button_BranchList_Search_BranchName */
@@ -1593,8 +1587,6 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14509, 13020, 15515, 0),
 
 /* Group: Branch_New */
-/* Right: button_BranchList_NewBranch */
-(14510, 13021, 15501, 0),
 /* Right: button_BranchDialog_btnNew */
 (14511, 13021, 15511, 0),
 /* Right: button_BranchDialog_btnSave */
@@ -1628,6 +1620,12 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14546, 13030, 15540, 0),
 /* Right: button_ArticlesDialog_btnClose */
 (14547, 13030, 15545, 0),
+/* Right: button_ArticleList_SearchArticleID */
+(14548, 13030, 15533, 0),
+/* Right: button_ArticleList_SearchName */
+(14549, 13030, 15534, 0),
+
+
 
 /* Group: Articles_New */
 /* Right: button_ArticleList_NewArticle */
@@ -1655,8 +1653,6 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14571, 13040, 15006, 0),
 /* Right: window_OfficesList */
 (14572, 13040, 15108, 0),
-/* Right: button_OfficeList_btnHelp */
-(14573, 13040, 15600, 0),
 /* Right: button_OfficeList_PrintList */
 (14574, 13040, 15602, 0),
 /* Right: button_OfficeList_SearchNo */
@@ -1671,12 +1667,8 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14579, 13040, 15611, 0),
 /* Right: button_OfficeDialog_btnClose */
 (14580, 13040, 15616, 0),
-/* Right: button_OfficeDialog_PrintOffice */
-(14581, 13040, 15610, 0),
 
 /* Group: Offices_New */
-/* Right: button_OfficeList_NewOffice */
-(14585, 13041, 15601, 0),
 /* Right: button_OfficeDialog_btnNew */
 (14586, 13041, 15612, 0),
 /* Right: button_OfficeDialog_btnSave */
@@ -1775,7 +1767,7 @@ INSERT INTO BRANCHE (BRA_ID, BRA_NR, BRA_BEZEICHNUNG, VERSION) VALUES
 (1030, '130', 'Trockenbau',0),
 (1031, '131', 'Trockenbau- und Sanierung',0),
 (1032, '132', 'Huehnerfarm',0),
-(1033, '000', '',0),
+(1033, '000', '.',0),
 (1034, '134', 'Transportwesen allgemein',0),
 (1035, '135', 'Schwertransport',0),
 (1036, '136', 'Gefahrgut Transport',0),
@@ -1828,7 +1820,7 @@ INSERT INTO ARTIKEL (ART_ID,ART_KURZBEZEICHNUNG,ART_LANGBEZEICHNUNG,ART_NR,ART_P
 (3002,'Luesterklemmen 10-fach, bis 1.5mm','Luesterklemmen, grau, bis Querschnitt 1.5mm','LUESTER1002',0.78,0),
 (3003,'Euro-Platine','Euro-Platine fuer Versuchsaufbauten','PLAT3003',2.34,0),
 (3004,'Leuchtmittel 22 Watt','Leuchtmittel 22 Watt Sparlampe weiss, mittlere Lebensdauer ca. 6000 Std.','SPARLA3004',2.84,0),
-(3005,'Leuchte einzel bis 100 Watt','Hngeleuchte einzel, Farbe=grau, bis 100 Watt','LEU3005',32.00,0),
+(3005,'Leuchte einzel bis 100 Watt','Haengeleuchte einzel, Farbe=grau, bis 100 Watt','LEU3005',32.00,0),
 (3006,'5-adriges Kabel 1,5mm','mehradriges Kabel, 5 Adern, Farbe=grau, Querschnitt= 1,5 mm','MK3006',0.22, 0),
 (3007,'Kabelbinder 12cm','Kabelbinder, Menge: 100 Stk. Lnge: 12 cm, Farbe: weiss','KB3007',1.34, 0),
 (3008,'Kabelverschraubung DN 17','Kabelverschraubung Messing verchromt DN 17','KS3008',2.90,0),

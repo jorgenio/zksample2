@@ -22,8 +22,6 @@
 			<button id="btnRefresh"
 				image="/images/icons/refresh2_yellow_16x16.gif"
 				tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
-			<button id="btnDeleteRecords" image="/images/icons/btn_delete2_16x16.gif"
-				tooltiptext="${c:l('btnDeleteRecords.tooltiptext')}" />
 			<separator orient="vertical" />
 		</toolbar>
 
@@ -31,18 +29,18 @@
 		<paging id="paging_HibernateStatisticList" />
 		<grid id="gridHibernateStatisticList" fixedLayout="false">
 			<columns>
-				<column width="25px" />
-				<column
+				<column width="30px" />
+				<column width="60%"
 					label="${c:l('gridHibernateStatistic.column.label.methodname')}" />
 				<column
 					label="${c:l('gridHibernateStatistic.column.label.javaDurationTime')}"
-					width="120px" />
+					width="20%" />
 				<column
 					label="${c:l('gridHibernateStatistic.column.label.dateTime')}"
-					width="170px" />
+					width="20%" />
 			</columns>
 			<rows>
-			
+
 
 			</rows>
 		</grid>

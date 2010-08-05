@@ -773,8 +773,9 @@ alter table sec_userrole
 
 
 /******************** Filiale Daten ********************/
-INSERT INTO FILIALE (FIL_ID, FIL_NR, FIL_BEZEICHNUNG,FIL_NAME1,FIL_NAME2,FIL_ORT,VERSION)
-values (1,'0001','Filiale Berlin','Hörmann Gmbh','Personaldienstleistungen','Berlin',0);
+INSERT INTO FILIALE (FIL_ID, FIL_NR, FIL_BEZEICHNUNG,FIL_NAME1,FIL_NAME2,FIL_ORT,VERSION) values
+(1,'0001','Filiale Muenchen','Hoermann Gmbh','Personaldienstleistungen','Muenchen',0),
+(2,'0002','Filiale Berlin',  'Hoermann Gmbh','Personaldienstleistungen','Berlin',  0);
 
 /******************** Security: USERS ********************/  
 INSERT INTO SEC_USER (USR_ID, USR_LOGINNAME, USR_PASSWORD, USR_LASTNAME, USR_FIRSTNAME, USR_EMAIL, USR_LOCALE, USR_ENABLED, USR_ACCOUNTNONEXPIRED, USR_CREDENTIALSNONEXPIRED, USR_ACCOUNTNONLOCKED, USR_TOKEN,  VERSION) values 
@@ -815,7 +816,7 @@ INSERT INTO SEC_USERROLE (URR_ID, USR_ID, ROL_ID, VERSION) values
 /******************** Security: SEC_GROUPS ********************/  
 INSERT INTO SEC_GROUP (GRP_ID, GRP_SHORTDESCRIPTION, GRP_LONGDESCRIPTION, VERSION) values
 (13001, 'Headoffice Supervisor Group', 'kjhf ff hgfd', 0),
-(13002, 'common Admin Group / user accounts', 'create/modify user accounts', 0),
+(13002, 'Admin Group - user accounts', 'create/modify user accounts', 0),
 (13003, 'Guest Group', 'Minimal Rights for the guests', 0),
 (13004, 'Admin Group - user rights', 'edit/modify user rights', 0),
 /* Customers */
@@ -985,7 +986,6 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15014, 2, 'menuItem_Administration_Rights', 0),
 (15015, 1, 'menuCat_UserRights', 0),
 (15016, 2, 'menuItem_Administration_LoginsLog', 0),
-(15017, 2, 'menuItem_Administration_HibernateStats', 0),
 
 /* Pages = Type(0) */
 /* --> Page Customer */
@@ -995,7 +995,7 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15102, 0, 'orderListWindow', 0),
 (15103, 0, 'orderDialogWindow', 0),
 /* --> Page Articles */
-(15104, 0, 'window_ArticlesList', 0),
+(15104, 0, 'windowArticlesList', 0),
 (15105, 0, 'window_ArticlesDialog', 0),
 /* --> Page Branches */
 (15106, 0, 'window_BranchesList', 0),
@@ -1098,17 +1098,15 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 /* BRANCHES */
 /* branchListWindow Buttons*/
 /* --> button_BranchList_btnHelp */
-(15500, 0, 'button_BranchList_btnHelp', 0),
-(15501, 0, 'button_BranchList_NewBranch', 0),
-(15502, 0, 'button_BranchList_PrintBranches', 0),
-(15503, 0, 'button_BranchList_Search_BranchName', 0),
+(15502, 0, 'button_BranchMain_PrintBranches', 0),
+(15503, 0, 'button_BranchMain_Search_BranchName', 0),
 /* branchDialogWindow BUTTONS */
-(15510, 6, 'button_BranchDialog_btnHelp', 0),
-(15511, 6, 'button_BranchDialog_btnNew', 0),
-(15512, 6, 'button_BranchDialog_btnEdit', 0),
-(15513, 6, 'button_BranchDialog_btnDelete', 0),
-(15514, 6, 'button_BranchDialog_btnSave', 0),
-(15515, 6, 'button_BranchDialog_btnClose', 0),
+(15510, 6, 'button_BranchMain_btnHelp', 0),
+(15511, 6, 'button_BranchMain_btnNew', 0),
+(15512, 6, 'button_BranchMain_btnEdit', 0),
+(15513, 6, 'button_BranchMain_btnDelete', 0),
+(15514, 6, 'button_BranchMain_btnSave', 0),
+(15515, 6, 'button_BranchMain_btnClose', 0),
 /* ARTICLES */
 /* window_ArticlesList Buttons*/
 (15530, 6, 'button_ArticlesList_btnHelp', 0),
@@ -1126,20 +1124,17 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 /* OFFICES */
 /* window_OfficeList Buttons*/
 /* --> button_BranchList_btnHelp */
-(15600, 6, 'button_OfficeList_btnHelp', 0),
-(15601, 6, 'button_OfficeList_NewOffice', 0),
 (15602, 6, 'button_OfficeList_PrintList', 0),
 (15603, 6, 'button_OfficeList_SearchNo', 0),
 (15604, 6, 'button_OfficeList_SearchName', 0),
 (15605, 6, 'button_OfficeList_SearchCity', 0),
 /* window_OfficeDialog BUTTONS */
-(15610, 6, 'button_OfficeDialog_PrintOffice', 0),
-(15611, 6, 'button_OfficeDialog_btnHelp', 0),
-(15612, 6, 'button_OfficeDialog_btnNew', 0),
-(15613, 6, 'button_OfficeDialog_btnEdit', 0),
-(15614, 6, 'button_OfficeDialog_btnDelete', 0),
-(15615, 6, 'button_OfficeDialog_btnSave', 0),
-(15616, 6, 'button_OfficeDialog_btnClose', 0),
+(15611, 6, 'button_OfficeMain_btnHelp', 0),
+(15612, 6, 'button_OfficeMain_btnNew', 0),
+(15613, 6, 'button_OfficeMain_btnEdit', 0),
+(15614, 6, 'button_OfficeMain_btnDelete', 0),
+(15615, 6, 'button_OfficeMain_btnSave', 0),
+(15616, 6, 'button_OfficeMain_btnClose', 0),
 
 /* Method/Event = Type(3) */
 /* --> CustomerList BUTTON */
@@ -1190,8 +1185,6 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14014, 13002, 15014, 0),
 (14015, 13002, 15015, 0),
 (14016, 13002, 15016, 0),
-/* Hibernate Statistic */
-(14017, 13002, 15017, 0),
 
 /* New */
 /* Group: Customers_View */
@@ -1436,8 +1429,6 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14501, 13020, 15005, 0),
 /* Right: page_BranchesList */
 (14502, 13020, 15106, 0),
-/* Right: button_BranchList_btnHelp */
-(14503, 13020, 15500, 0),
 /* Right: button_BranchList_PrintBranches */
 (14504, 13020, 15502, 0),
 /* Right: button_BranchList_Search_BranchName */
@@ -1450,8 +1441,6 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14509, 13020, 15515, 0),
 
 /* Group: Branch_New */
-/* Right: button_BranchList_NewBranch */
-(14510, 13021, 15501, 0),
 /* Right: button_BranchDialog_btnNew */
 (14511, 13021, 15511, 0),
 /* Right: button_BranchDialog_btnSave */
@@ -1485,6 +1474,10 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14546, 13030, 15540, 0),
 /* Right: button_ArticlesDialog_btnClose */
 (14547, 13030, 15545, 0),
+/* Right: button_ArticleList_SearchArticleID */
+(14548, 13030, 15533, 0),
+/* Right: button_ArticleList_SearchName */
+(14549, 13030, 15534, 0),
 
 /* Group: Articles_New */
 /* Right: button_ArticleList_NewArticle */
@@ -1512,8 +1505,6 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14571, 13040, 15006, 0),
 /* Right: window_OfficesList */
 (14572, 13040, 15108, 0),
-/* Right: button_OfficeList_btnHelp */
-(14573, 13040, 15600, 0),
 /* Right: button_OfficeList_PrintList */
 (14574, 13040, 15602, 0),
 /* Right: button_OfficeList_SearchNo */
@@ -1528,12 +1519,8 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14579, 13040, 15611, 0),
 /* Right: button_OfficeDialog_btnClose */
 (14580, 13040, 15616, 0),
-/* Right: button_OfficeDialog_PrintOffice */
-(14581, 13040, 15610, 0),
 
 /* Group: Offices_New */
-/* Right: button_OfficeList_NewOffice */
-(14585, 13041, 15601, 0),
 /* Right: button_OfficeDialog_btnNew */
 (14586, 13041, 15612, 0),
 /* Right: button_OfficeDialog_btnSave */
@@ -1632,7 +1619,7 @@ INSERT INTO BRANCHE (BRA_ID, BRA_NR, BRA_BEZEICHNUNG, VERSION) VALUES
 (1030, '130', 'Trockenbau',0),
 (1031, '131', 'Trockenbau- und Sanierung',0),
 (1032, '132', 'Huehnerfarm',0),
-(1033, '000', '',0),
+(1033, '000', '.',0),
 (1034, '134', 'Transportwesen allgemein',0),
 (1035, '135', 'Schwertransport',0),
 (1036, '136', 'Gefahrgut Transport',0),
@@ -1640,22 +1627,22 @@ INSERT INTO BRANCHE (BRA_ID, BRA_NR, BRA_BEZEICHNUNG, VERSION) VALUES
 
 /******************** Kunden Daten ********************/
 INSERT INTO KUNDE (KUN_ID,KUN_FIL_ID,KUN_BRA_ID, KUN_NR, KUN_MATCHCODE,KUN_NAME1,KUN_NAME2,KUN_ORT,KUN_MAHNSPERRE,VERSION) VALUES 
-(20,1,1000, '20', 'MUELLER','--> Mueller','Elektroinstallationen','Freiburg',true,0),
-(21,1,1000, '21', 'HUBER','--> Huber','Elektroinstallationen','Oberursel',true,0),
-(22,1,1000, '22', 'SIEMENS','Siemens AG','Elektroinstallationen','Braunschweig',false,0),
-(23,1,1000, '23', 'AEG','AEG','Elektroinstallationen','Stuttgart',false,0),
-(24,1,1019, '24', 'BUDERUS','Buderus Heizungsbau GmbH','Elektroinstallationen','Rastatt',true,0),
-(25,1,1000, '25', 'MEILER','Elektro Meiler','Inhaber W. Erler','Karlsruhe',true,0),
-(26,1,1000, '26', 'BADER','Bader GmbH','Elektroinstallationen','Berlin',false,0),
-(27,1,1000, '27', 'HESKENS','Heskens GmbH','Elektroinstallationen','Badenweiler',false,0),
-(28,1,1000, '28', 'MAIER','Maier GmbH','Elektroinstallationen','Friedberg',false,0),
-(29,1,1000, '29', 'SCHULZE','Schulze GmbH','Elektroinstallationen','Freiburg',true,0),
-(30,1,1004, '30', 'SCHMIERFINK','Schmierfink AG','Versicherungen','Freiburg',true,0),
-(31,1,1005, '31', 'SCHULZE','Schulze Ltd.','Anlagenbau','Buxtehude',true,0),
-(32,1,1005, '32', 'SCHREINER','Schreiner','SPS-Steuerungsbau','Hamburg',true,0),
-(33,1,1004, '33', 'GUTE RUHE','Gute Ruhe AG','Versicherungen','Berlin',true,0),
-(34,1,1003, '34', 'FREIBERGER','Freiberger GmbH','In- und Export','Aachen',true,0),
-(35,1,1002, '35', 'BERGMANN','Saegewerk Bergmann','Holzverarbeitung','Neustadt',true,0),
+(  20,1,1000, '20', 'MUELLER','--> MUEller','Elektroinstallationen','Freiburg',true,0),
+(  21,1,1000, '21', 'HUBER','--> Huber','Elektroinstallationen','Oberursel',true,0),
+(  22,1,1000, '22', 'SIEMENS','Siemens AG','Elektroinstallationen','Braunschweig',false,0),
+(  23,1,1000, '23', 'AEG','AEG','Elektroinstallationen','Stuttgart',false,0),
+(  24,1,1019, '24', 'BUDERUS','Buderus Heizungsbau GmbH','Elektroinstallationen','Rastatt',true,0),
+(  25,1,1000, '25', 'MEILER','Elektro Meiler','Inhaber W. Erler','Karlsruhe',true,0),
+(  26,1,1000, '26', 'BADER','Bader GmbH','Elektroinstallationen','Berlin',false,0),
+(  27,1,1000, '27', 'HESKENS','Heskens GmbH','Elektroinstallationen','Badenweiler',false,0),
+(  28,1,1000, '28', 'MAIER','Maier GmbH','Elektroinstallationen','Friedberg',false,0),
+(  29,1,1000, '29', 'SCHULZE','Schulze GmbH','Elektroinstallationen','Freiburg',true,0),
+(  30,1,1004, '30', 'SCHMIERFINK','Schmierfink AG','Versicherungen','Freiburg',true,0),
+(  31,1,1005, '31', 'SCHULZE','Schulze Ltd.','Anlagenbau','Buxtehude',true,0),
+(  32,1,1005, '32', 'SCHREINER','Schreiner','SPS-Steuerungsbau','Hamburg',true,0),
+(  33,1,1004, '33', 'GUTE RUHE','Gute Ruhe AG','Versicherungen','Berlin',true,0),
+(  34,1,1003, '34', 'FREIBERGER','Freiberger GmbH','In- und Export','Aachen',true,0),
+(  35,1,1002, '35', 'BERGMANN','Saegewerk Bergmann','Holzverarbeitung','Neustadt',true,0),
 (2000,1,1002, '2000', 'SEILER','Saegewerk Seiler','Holzverarbeitung','Freiburg',true,0),
 (2001,1,1002, '2001', 'BAUER','Hermann Bauer','Sgerwerk','Titisee-Neustadt',true,0),
 (2002,1,1000, '2002', 'BEINHARD','Gebrueder Beinhard GbR','Elektroinstallationen','Muenchen',true,0),
@@ -1685,7 +1672,7 @@ INSERT INTO ARTIKEL (ART_ID,ART_KURZBEZEICHNUNG,ART_LANGBEZEICHNUNG,ART_NR,ART_P
 (3002,'Luesterklemmen 10-fach, bis 1.5mm','Luesterklemmen, grau, bis Querschnitt 1.5mm','LUESTER1002',0.78,0),
 (3003,'Euro-Platine','Euro-Platine fuer Versuchsaufbauten','PLAT3003',2.34,0),
 (3004,'Leuchtmittel 22 Watt','Leuchtmittel 22 Watt Sparlampe weiss, mittlere Lebensdauer ca. 6000 Std.','SPARLA3004',2.84,0),
-(3005,'Leuchte einzel bis 100 Watt','Hngeleuchte einzel, Farbe=grau, bis 100 Watt','LEU3005',32.00,0),
+(3005,'Leuchte einzel bis 100 Watt','Haengeleuchte einzel, Farbe=grau, bis 100 Watt','LEU3005',32.00,0),
 (3006,'5-adriges Kabel 1,5mm','mehradriges Kabel, 5 Adern, Farbe=grau, Querschnitt= 1,5 mm','MK3006',0.22, 0),
 (3007,'Kabelbinder 12cm','Kabelbinder, Menge: 100 Stk. Lnge: 12 cm, Farbe: weiss','KB3007',1.34, 0),
 (3008,'Kabelverschraubung DN 17','Kabelverschraubung Messing verchromt DN 17','KS3008',2.90,0),
@@ -1979,6 +1966,7 @@ INSERT INTO sys_countrycode(CCD_ID, CCD_NAME, CCD_CODE2, VERSION) VALUES
 (248,'JERSEY','JE', 0),
 (249,'EAST TIMOR','TP', 0),
 (250,'MONTENEGRO','ME', 0);
+
 
  /* fill sample logins */
 INSERT INTO sec_loginlog(lgl_id, i2c_id, lgl_loginname,lgl_logtime, lgl_ip, lgl_status_id,lgl_sessionid, VERSION) VALUES 

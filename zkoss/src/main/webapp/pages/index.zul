@@ -30,51 +30,65 @@
 
 		<borderlayout id="borderlayoutMain" height="100%">
 			<north id="borderlayoutMainNorth" border="none"
-				splittable="false">
+				height="38px" splittable="false">
 
-				<div id="div1" style="background-color:#D6DCDE;">
-					<hbox width="100%">
-						<h:div id="divNo" style="padding:5px"
+				<div id="div1" style="background-color:silver;">
+
+					<hbox pack="stretch" width="100%">
+
+						<div id="divNo" style="padding-left:5px"
 							align="left">
-							<image src="/images/zkpowered_16x16.png" />
-							<separator bar="false" orient="vertical" />
-							<separator bar="false" orient="vertical" />
-							<label value=" ZkSample2 "
-								style="font-size:12px; font-weight:normal;" />
-						</h:div>
+							<image src="/images/zkpowered_34x34.png" />
+						</div>
 
-						<!-- 
-							<h:div id="divNorth" align="left"
-							style="padding:5px">
-							<label
-							style="color:black; font-size:12px; font-weight:bold"
-							value="ZKoss Sample Application ( ZK + Spring + Spring-Security + Hibernate + Hibernate-Generic-DAO + JasperReports )">
-							</label>
-							</h:div>
-						-->
-						<h:div id="divNorthEast" align="right"
-							style="padding: 3px;">
-							<button id="btnLogout"
-								image="/images/icons/btn_exitdoor2_16x16.gif"
-								label="${c:l('btnLogout.label')}"
-								tooltiptext="${c:l('btnLogout.tooltiptext')}" />
-							<!-- href="/index.zul"  -->
-						</h:div>
+						<div style="padding:3px" align="left">
+							<label id="label_AppName"
+								style="font-size:14px; font-weight:bold;" />
+						</div>
+						<div align="right" style="float: right">
+							<vbox>
+
+								<div align="right"
+									style="float: right">
+
+									<!-- USER-BAR. Comps are created in the Controller -->
+									<window id="winUserBar"
+										apply="${userBarCtrl}" border="none" width="100%"
+										height="100%" />
+
+								</div>
+
+								<div align="right"
+									style="float: right; padding-bottom: 3px;">
+									<hbox pack="end">
+										<toolbarbutton
+											id="btnIndexMySettings" label="${c:l('common.MySettings')}"
+											style="text-decoration: underline; " />
+										<toolbarbutton
+											id="btnIndexUserAppConfiguration"
+											label="${c:l('common.Configuration')}"
+											style="text-decoration: underline;" />
+										<button id="btnLogout"
+											height="20px" label="${c:l('btnLogout.label')}"
+											tooltiptext="${c:l('btnLogout.tooltiptext')}" />
+										<!-- href="/index.zul"  -->
+									</hbox>
+								</div>
+
+							</vbox>
+						</div>
 					</hbox>
-					<separator bar="true"
-						style="background-color:#D6DCDE;" />
 
 					<div id="divDropDownMenu" width="100%">
 						<menubar id="mainMenuBar" height="25px"></menubar>
 					</div>
-
 				</div>
 			</north>
 
-
+			<!-- MAIN MENU AREA -->
 			<west border="none" margins="0,0,0,0" size="230px"
-				style="background-color: #D6DCDE; padding: 5px" flex="true"
-				minsize="100" splittable="true" autoscroll="false">
+				collapsible="true" style="background-color: #D6DCDE; padding: 5px"
+				flex="true" minsize="100" splittable="true" autoscroll="false">
 				<div id="divWest">WEST</div>
 			</west>
 
@@ -104,31 +118,17 @@
 				<div id="divEast">EAST</div>
 			</east>
 
-			<south border="none" margins="1,0,0,0" height="20px"
-				splittable="false" flex="true">
+
+			<!-- STATUS BAR AREA -->
+			<south id="south" border="none" margins="1,0,0,0"
+				height="20px" splittable="false" flex="true">
 				<div id="divSouth">
 
-					<grid id="statusBarGrid" fixedLayout="true"
-						height="20px" width="100%">
-						<columns sizable="false">
-							<column label="User:" width="10%"
-								style="background-color: #D6DCDE;" />
-							<column id="statusBarColUser" label=""
-								width="20%" style="background-color: #D6DCDE;" />
-							<column label="Office-No.:" width="10%"
-								style="background-color: #D6DCDE;" />
-							<column id="statusBarColOfficeNo" label=""
-								width="10%" style="background-color: #D6DCDE;" />
-							<column id="statusBarZKVersion" width="20%"
-								style="background-color: #D6DCDE;" />
-							<column id="statusBarAppVersion"
-								style="color: #FF0000; background-color: #D6DCDE;" width="20%" />
-							<column id="colDate" width="20%"
-								style="background-color: #D6DCDE;" align="right" />
-						</columns>
-					</grid>
-				</div>
+					<!-- The StatusBar. Comps are created in the Controller -->
+					<window id="winStatusBar" apply="${statusBarCtrl}"
+						border="none" width="100%" height="100%" />
 
+				</div>
 			</south>
 		</borderlayout>
 
@@ -142,15 +142,15 @@
 
 
 <!-- 
-		<label id="lbl2" width="33%" />
-		<timer id="timer2" delay="1000" repeats="true">
-			<attribute name="onTimer">
+	<label id="lbl2" width="33%" />
+	<timer id="timer2" delay="1000" repeats="true">
+	<attribute name="onTimer">
 	Locale locale = org.zkoss.util.Locales.getCurrent();
 	java.text.DateFormat dateFormat = java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.MEDIUM, java.text.DateFormat.MEDIUM, locale);
 	String strTime = dateFormat.format(java.util.Calendar.getInstance(locale).getTime());
 	colDate.setLabel(strTime);
-</attribute>
-		</timer>
-
-
- -->
+	</attribute>
+	</timer>
+	
+	
+-->

@@ -170,28 +170,31 @@
 					<listhead sizable="true">
 						<listheader
 							id="listheader_SecLoginlogList_lglLogtime"
+							sclass="FDListBoxHeader1"
 							label="${c:l('listheader_SecLoginlogList_lglLogtime.label')}"
 							sort="auto" image="/images/icons/date_16x16.gif" />
 						<listheader
 							id="listheader_SecLoginlogList_lglLoginname"
-							image="/images/icons/create_doc.gif"
+							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_SecLoginlogList_lglLoginname.label')}"
 							sort="auto" width="120px" />
 						<listheader
 							id="listheader_SecLoginlogList_lglStatusid"
-							image="/images/icons/edittsk_tsk1.gif"
+							sclass="FDListBoxHeader1" image="/images/icons/edittsk_tsk1.gif"
 							label="${c:l('listheader_SecLoginlogList_lglStatusid.label')}"
 							sort="auto" width="100px" />
 						<listheader
-							id="listheader_SecLoginlogList_lglIp"
+							id="listheader_SecLoginlogList_lglIp" sclass="FDListBoxHeader1"
 							label="${c:l('listheader_SecLoginlogList_lglIp.label')}"
 							image="/images/icons/monitorView.gif" sort="auto" />
 						<listheader
 							id="listheader_SecLoginlogList_CountryCode2"
-							image="/images/icons/web.gif" sort="auto" width="240px"
+							sclass="FDListBoxHeader1" image="/images/icons/web.gif"
+							sort="auto" width="240px"
 							label="${c:l('listheader_SecLoginlogList_CountryCode2.label')}" />
 						<listheader
 							id="listheader_SecLoginlogList_lglSessionid"
+							sclass="FDListBoxHeader1"
 							image="/images/icons/exdDataPerspective.gif"
 							label="${c:l('listheader_SecLoginlogList_lglSessionid.label')}"
 							sort="auto" />

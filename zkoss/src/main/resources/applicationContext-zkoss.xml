@@ -33,9 +33,20 @@
 		<property name="pagedListWrapperCustomer" ref="pagedListWrapper" />
 	</bean>
 
-	<!-- Articles -->
+	<!-- Articles / Artikelstammdaten -->
+	<bean id="articleMainCtrl" class="de.forsthaus.webui.article.ArticleMainCtrl"
+		parent="basisCtrl" scope="prototype">
+		<property name="articleService" ref="articleService" />
+		<property name="articleListCtrl" ref="articleListCtrl" />
+		<property name="articleDetailCtrl" ref="articleDetailCtrl" />
+		<property name="articleDialogCtrl" ref="articleDialogCtrl" />
+	</bean>
 	<bean id="articleListCtrl" class="de.forsthaus.webui.article.ArticleListCtrl"
 		parent="basisListCtrl" scope="prototype">
+		<property name="articleService" ref="articleService" />
+	</bean>
+	<bean id="articleDetailCtrl" class="de.forsthaus.webui.article.ArticleDetailCtrl"
+		parent="basisCtrl" scope="prototype">
 		<property name="articleService" ref="articleService" />
 	</bean>
 	<bean id="articleDialogCtrl" class="de.forsthaus.webui.article.ArticleDialogCtrl"
@@ -43,26 +54,23 @@
 		<property name="articleService" ref="articleService" />
 	</bean>
 
-	<!-- Branches -->
+	<!-- Branch / Branchenstammdaten -->
+	<bean id="branchMainCtrl" class="de.forsthaus.webui.branch.BranchMainCtrl"
+		parent="basisCtrl" scope="prototype">
+		<property name="brancheService" ref="brancheService" />
+		<property name="branchListCtrl" ref="branchListCtrl" />
+		<property name="branchDetailCtrl" ref="branchDetailCtrl" />
+	</bean>
+	<!-- BranchList / BranchenListe -->
 	<bean id="branchListCtrl" class="de.forsthaus.webui.branch.BranchListCtrl"
 		parent="basisListCtrl" scope="prototype">
 		<property name="brancheService" ref="brancheService" />
 	</bean>
-	<bean id="branchDialogCtrl" class="de.forsthaus.webui.branch.BranchDialogCtrl"
+	<!-- BranchDetails / Branchen-Details -->
+	<bean id="branchDetailCtrl" class="de.forsthaus.webui.branch.BranchDetailCtrl"
 		parent="basisCtrl" scope="prototype">
 		<property name="brancheService" ref="brancheService" />
 	</bean>
-	<!-- Branches (DataBinding) -->
-	<bean id="branchListWithDataBindingCtrl" class="de.forsthaus.webui.branch.BranchListWithDataBindingCtrl"
-		parent="basisListCtrl" scope="prototype">
-		<property name="brancheService" ref="brancheService" />
-	</bean>
-	<bean id="branchDialogWithDataBindingCtrl"
-		class="de.forsthaus.webui.branch.BranchDialogWithDataBindingCtrl"
-		parent="basisCtrl" scope="prototype">
-		<property name="brancheService" ref="brancheService" />
-	</bean>
-
 
 	<!-- Customers -->
 	<bean id="customerListCtrl" class="de.forsthaus.webui.customer.CustomerListCtrl"
@@ -99,12 +107,18 @@
 		<property name="guestBookService" ref="guestBookService" />
 	</bean>
 
-	<!-- Offices -->
+	<!-- Offices / Filialstammdaten -->
+	<bean id="officeMainCtrl" class="de.forsthaus.webui.office.OfficeMainCtrl"
+		parent="basisCtrl" scope="prototype">
+		<property name="officeService" ref="officeService" />
+		<property name="officeListCtrl" ref="officeListCtrl" />
+		<property name="officeDetailCtrl" ref="officeDetailCtrl" />
+	</bean>
 	<bean id="officeListCtrl" class="de.forsthaus.webui.office.OfficeListCtrl"
 		parent="basisCtrl" scope="prototype">
 		<property name="officeService" ref="officeService" />
 	</bean>
-	<bean id="officeDialogCtrl" class="de.forsthaus.webui.office.OfficeDialogCtrl"
+	<bean id="officeDetailCtrl" class="de.forsthaus.webui.office.OfficeDetailCtrl"
 		parent="basisCtrl" scope="prototype">
 		<property name="officeService" ref="officeService" />
 	</bean>
@@ -162,10 +176,6 @@
 		<property name="loginLoggingService" ref="loginLoggingService" />
 	</bean>
 
-	<!-- Chat -->
-	<bean id="chatWindow" class="de.forsthaus.chat.ChatWindow" parent="basisCtrl"
-		scope="prototype">
-	</bean>
 
 	<!-- +++++ SECURITY +++++ -->
 	<!-- Groups -->
@@ -269,6 +279,15 @@
 
 	<bean name="pagedGridWrapper" class="de.forsthaus.webui.util.pagging.PagedGridWrapper"
 		p:pagedListService-ref="pagedListService" scope="prototype">
+	</bean>
+
+	<!-- StatusBarController -->
+	<bean id="statusBarCtrl" class="de.forsthaus.webui.util.StatusBarCtrl"
+		scope="prototype">
+	</bean>
+	<!-- UserBarController -->
+	<bean id="userBarCtrl" class="de.forsthaus.webui.util.UserBarCtrl"
+		scope="prototype">
 	</bean>
 
 	<!--

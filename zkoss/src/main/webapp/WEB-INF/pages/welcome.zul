@@ -9,14 +9,26 @@
 	<window id="welcomeWindow" border="none" width="100%"
 		height="100%">
 
-
 		<zscript language="Java"><![CDATA[
 	{
 		lf = "\n";
 		s = "";
-		s = s + "- 30.06.2010 / Added TWO more SearchListDialog skeletons. Now we have 1.) SimpleSearchListBox: paging on Server. " + lf;
+		s = s + "- 05.07.2010 / Checkin of the new Zksample2 based on zk 5.0.3 in /trunk. More changes comes in the next days.  " + lf;
+		s = s + "- 04.07.2010 / Begin to modifying some modules to work completely with Annotated Databinding mechanism.  " + lf;
+		s = s + "                      Decreasing absolut the LoC. These annotated databinded modules have an (adb) after  " + lf;
+		s = s + "                      the menu text.  " + lf;
+		s = s + "                      All modules who have more than one TAB became a mainModuleController " + lf;
+		s = s + "                      for holding the shared models and beans for all related tabControllers. " + lf;
+		s = s + "                      Read the docu for best Practice on sharing the models and not the binder. " + lf;
+		s = s + "                      Working with an additional css file, declared in the web.xml. " + lf;
+		s = s + "- 02.07.2010 / Added a new StatusBarController with the new EventQueues in zk5 that works like a global listener." + lf;
+		s = s + "                      Added a new UserBarController with the new EventQueues in zk5 that works like a global listener." + lf;
+		s = s + "- 01.07.2010 / Updated the zk framework version to 5.0.3. " + lf;
+		s = s + "- 30.06.2010 / ======= Last Zksample2 version who's based on zk 3.6.3 =======" + lf;
+		s = s + "- 30.06.2010 / Added TWO more SearchListDialog skeletons. Now we have: " + lf;
+		s = s + "                      1.) SimpleSearchListBox: ZK paging on ServerSide. " + lf;
 		s = s + "                      2.) AdvancedSearchListBox: DB Paging on Database; " + lf;
-		s = s + "                      3.) ExtendedSearchListBox: DB Paging + data limiting features.  " + lf;
+		s = s + "                      3.) ExtendedSearchListBox: DB Paging + one data limiting feature.  " + lf;
 		s = s + "                      All three SearchDialogs are implemented in the CustomerDialog module for selecting a branch. " + lf;
 		s = s + "- 29.06.2010 / Added a new modal SearchListboxDialog that gives back an OBJECT. Called SimpleSearchBox. " + lf;
 		s = s + "                      We implemented it in the Customer AdressModule for selecting a branch (BranchSimpleSearchBox.java). " + lf;
@@ -65,6 +77,7 @@
 		s = s + "                      Spring-Security can now work with the Annotation @Secured() for securing methods." + lf;
 		s = s + "                      Added a simulation of a one-time password tokenizer. (Thanks to Björn for codes !)" + lf;
 		s = s + "                      Added ListFooters in ORDERS module. Clearing some code. Bugfixes. " + lf;
+		s = s + "- 13.11.2009 / ZkSample2 is now the new project name. " + lf;
 		s = s + "- 23.10.2009 / ======>> LAST checkin of the project code in Subversion on code.google as 'zk_sample_gui' " + lf;
 		s = s + "- 23.10.2009 / updating to ZK version 3.6.3 FL 2009-10-23 " + lf;
 		s = s + "- 21.10.2009 / updating to ZK version 3.6.3 FL 2009-10-16 " + lf;
@@ -156,7 +169,7 @@
 
 							<textbox rows="6" multiline="true"
 								width="98%" readonly="true"
-								style="font-family: verdana; border: none; background-color: white;"
+								style="font-family: verdana; border: none; color: blue; background-color: white; "
 								value="You can hire us worldwide ! &#13;&#13;Please contact us under zk(at)forsthaus(dot)de ">
 							</textbox>
 						</groupbox>
@@ -178,8 +191,7 @@
 							<caption
 								style="color: #000000; font-weight:bold;"
 								image="/images/icons/new_icons_10.gif"
-								label="NEW !!!  PagedBindingListWrapper for working with zk's DataBinding mechanism !!!" />
-
+								label="NEW !!!  Updated to ZK v5.0.3. !!!  Please read the actual documentation." />
 
 							<textbox height="100%" width="99.5%"
 								multiline="true" rows="17" readonly="true"

@@ -12,68 +12,49 @@
 		apply="${customerDialogCtrl}" closable="true" width="800px"
 		height="600px" sizable="true">
 
-		<style>
-			body { padding: 0 0; /* 0 padding on top and bottom and 0
-			padding on right and left */ }
 
-			<!-- cut the vertical borders in the rows -->
-			tr.z-row td.z-row-inner { border-right: 0px #CCC; }
+		<div sclass="z-toolbar" style="padding:0">
+			<hbox pack="stretch" sclass="hboxRemoveWhiteStrips"
+				width="100%">
 
-			<!-- Make Plain Grid -->
-			.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
-			.z-cell,div.z-grid { border: none; overflow: hidden; zoom:
-			1; background: white; border-top: none; border-left: none;
-			border-right: none; border-bottom: none; }
+				<!-- COMMON BUTTONS -->
+				<toolbar align="start"
+					style="float:left; border-style: none;" height="28px">
 
-			<!-- Title in bold letters -->
-			.z-groupbox-hl .z-groupbox-header { color: #000000;
-			font-weight: bold; }
-		</style>
+					<button id="btnHelp" height="24px"
+						image="/images/icons/light_16x16.gif"
+						tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+
+				</toolbar>
+
+				<!-- SEARCH AREA -->
+				<toolbar align="center"
+					style="float:left; border-style: none;" height="28px">
+					<hbox align="center" style="padding: 2px"></hbox>
+				</toolbar>
+
+				<!-- CRUD BUTTONS -->
+				<toolbar align="end"
+					style="float:right; border-style: none;" height="28px">
+					<button id="btnNew" height="24px"
+						tooltiptext="${c:l('btnNew.tooltiptext')}" />
+					<!-- label="${c:l('btnNew.label')}"	 -->
+					<button id="btnEdit" height="24px"
+						tooltiptext="${c:l('btnEdit.tooltiptext')}" />
+					<button id="btnDelete" height="24px"
+						tooltiptext="${c:l('btnDelete.tooltiptext')}" />
+					<button id="btnSave" height="24px"
+						tooltiptext="${c:l('btnSave.tooltiptext')}" />
+					<button id="btnCancel" height="24px"
+						tooltiptext="${c:l('btnCancel.tooltiptext')}" />
+					<button id="btnClose" height="24px"
+						tooltiptext="${c:l('btnClose.tooltiptext')}" />
+				</toolbar>
+			</hbox>
+		</div>
 
 		<borderlayout id="borderlayoutCustomer">
-
-			<north border="none" margins="0,0,0,0">
-				<grid>
-					<columns sizable="true" height="20px">
-						<!-- Help Button -->
-						<column width="40px" align="left">
-							<hbox>
-								<button id="btnHelp"
-									image="/images/icons/light_16x16.gif"
-									tooltiptext="${c:l('btnHelp.tooltiptext')}" />
-							</hbox>
-						</column>
-
-						<!-- Addtionally Buttons -->
-						<column align="center">
-							<hbox>
-
-							</hbox>
-						</column>
-
-						<!-- CRUD Buttons -->
-						<column align="right">
-							<hbox spacing="5px" style="padding:1px"
-								align="end">
-								<button id="btnNew" height="20"
-									tooltiptext="${c:l('btnNew.tooltiptext')}" />
-								<!-- label="${c:l('btnNew.label')}"	 -->
-								<button id="btnEdit" height="20"
-									tooltiptext="${c:l('btnEdit.tooltiptext')}" />
-								<button id="btnDelete" height="20"
-									tooltiptext="${c:l('btnDelete.tooltiptext')}" />
-								<button id="btnSave" height="20"
-									tooltiptext="${c:l('btnSave.tooltiptext')}" />
-								<button id="btnCancel" height="20"
-									tooltiptext="${c:l('btnCancel.tooltiptext')}" />
-								<button id="btnClose" height="20"
-									tooltiptext="${c:l('btnClose.tooltiptext')}" />
-							</hbox>
-
-						</column>
-					</columns>
-				</grid>
-			</north>
+			<north border="none" margins="0,0,0,0"></north>
 
 			<center border="none">
 				<div id="divCenterCustomer">
@@ -180,17 +161,17 @@
 																		id="btnSearchBranchSimple" disabled="true"
 																		width="28px"
 																		image="/images/icons/btn_search2_16x16.gif"
-																		tooltiptext="${c:l('btnSimpleSearchListBox.tooltiptext')}" />
+																		tooltiptext="${c:l('btnSimpleSearchListBoxBranch.tooltiptext')}" />
 																	<button
 																		id="btnSearchBranchAdvanced" disabled="true"
 																		width="28px"
 																		image="/images/icons/btn_search2_16x16.gif"
-																		tooltiptext="${c:l('btnAdvancedSearchListBox.tooltiptext')}" />
+																		tooltiptext="${c:l('btnAdvancedSearchListBoxBranch.tooltiptext')}" />
 																	<button
 																		id="btnSearchBranchExtended" disabled="true"
 																		width="28px"
 																		image="/images/icons/btn_search2_16x16.gif"
-																		tooltiptext="${c:l('btnExtendedSearchListBox.tooltiptext')}" />
+																		tooltiptext="${c:l('btnExtendedSearchListBoxBranch.tooltiptext')}" />
 																</hbox>
 															</row>
 														</rows>

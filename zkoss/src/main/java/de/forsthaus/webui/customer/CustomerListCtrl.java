@@ -28,7 +28,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zkex.zul.Borderlayout;
+import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.FieldComparator;
 import org.zkoss.zul.Intbox;
@@ -45,6 +45,7 @@ import de.forsthaus.backend.service.BrancheService;
 import de.forsthaus.backend.service.CustomerService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.customer.model.CustomerListModelItemRenderer;
+import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 
@@ -209,12 +210,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 */
 	@Secured( { "CustomerList_listBoxCustomer.onDoubleClick" })
 	public void onCustomerItemDoubleClicked(Event event) throws Exception {
-
-		// if
-		// (!getUserWorkspace().isAllowed("CustomerList_listBoxCustomer.onDoubleClick"))
-		// {
-		// return;
-		// }
+		FDUtils.logEventDebug(this, event);
 
 		// get the selected customer object
 		Listitem item = listBoxCustomer.getSelectedItem();
@@ -235,6 +231,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 * Call the Customer dialog with a new empty entry. <br>
 	 */
 	public void onClick$button_CustomerList_NewCustomer(Event event) throws Exception {
+		FDUtils.logEventDebug(this, event);
 
 		// create a new customer object
 		/** !!! DO NOT BREAK THE TIERS !!! */
@@ -279,13 +276,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		} catch (Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
-			// Show a error box
-			String msg = e.getMessage();
-			String title = Labels.getLabel("message_Error");
-
-			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
-
+			FDUtils.showErrorMessage(e.toString());
 		}
 	}
 
@@ -296,14 +287,8 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message_Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		FDUtils.logEventDebug(this, event);
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -315,10 +300,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		FDUtils.logEventDebug(this, event);
 
 		Events.postEvent("onCreate", window_customerList, event);
 		window_customerList.invalidate();
@@ -345,14 +327,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 			Executions.createComponents("/WEB-INF/pages/customer/customerSearchDialog.zul", null, map);
 		} catch (Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
-
-			// Show a error box
-			String msg = e.getMessage();
-			String title = Labels.getLabel("message_Error");
-
-			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
-
+			FDUtils.showErrorMessage(e.toString());
 		}
 
 	}
@@ -364,15 +339,8 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_CustomerList_PrintList(Event event) throws InterruptedException {
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message_Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
-
+		FDUtils.logEventDebug(this, event);
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

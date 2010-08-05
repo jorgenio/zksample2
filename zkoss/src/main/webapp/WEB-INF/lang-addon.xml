@@ -42,5 +42,6 @@
 		</property>
 	</component>
 
+	<stylesheet href="/css/zul/zksample2.css" type="text/css" />
 
 </language-addon>

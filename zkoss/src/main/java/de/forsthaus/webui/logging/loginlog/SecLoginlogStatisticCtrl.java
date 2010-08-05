@@ -28,9 +28,9 @@ import org.apache.log4j.Logger;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zkex.zul.Borderlayout;
-import org.zkoss.zkex.zul.Center;
+import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Box;
+import org.zkoss.zul.Center;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.FieldComparator;
 import org.zkoss.zul.Intbox;
@@ -148,7 +148,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 			logger.debug("--> " + event.toString());
 		}
 
-		String message = Labels.getLabel("message_Not_Implemented_Yet");
+		String message = Labels.getLabel("message.Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
@@ -166,7 +166,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 			logger.debug("--> " + event.toString());
 		}
 
-		String message = Labels.getLabel("message_Not_Implemented_Yet");
+		String message = Labels.getLabel("message.Not_Implemented_Yet");
 		String title = Labels.getLabel("message_Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
@@ -265,16 +265,19 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		listhead.setSizable(true);
 		listhead.setParent(lbTotalCount);
 		Listheader lh1 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.Countries.Label"));
+		lh1.setSclass("FDListBoxHeader1");
 		lh1.setWidth("53px");
 		lh1.setSortAscending(new FieldComparator("country", true));
 		lh1.setSortDescending(new FieldComparator("country", false));
 		lh1.setParent(listhead);
 		Listheader lh2 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.CountryName.Label"));
+		lh2.setSclass("FDListBoxHeader1");
 		lh2.setWidth("185px");
 		lh2.setSortAscending(new FieldComparator("countryName", true));
 		lh2.setSortDescending(new FieldComparator("countryName", false));
 		lh2.setParent(listhead);
 		Listheader lh3 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.TotalCount.Label"));
+		lh3.setSclass("FDListBoxHeader1");
 		lh3.setWidth("");
 		lh3.setSortAscending(new FieldComparator("totalCount", true));
 		lh3.setSortDescending(new FieldComparator("totalCount", false));
@@ -373,16 +376,19 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		listhead.setSizable(true);
 		listhead.setParent(lbMonthlyCount);
 		Listheader lh1 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.Countries.Label"));
+		lh1.setSclass("FDListBoxHeader1");
 		lh1.setWidth("52px");
 		lh1.setSortAscending(new FieldComparator("country", true));
 		lh1.setSortDescending(new FieldComparator("country", false));
 		lh1.setParent(listhead);
 		Listheader lh2 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.CountryName.Label"));
+		lh2.setSclass("FDListBoxHeader1");
 		lh2.setWidth("185px");
 		lh2.setSortAscending(new FieldComparator("countryName", true));
 		lh2.setSortDescending(new FieldComparator("countryName", false));
 		lh2.setParent(listhead);
 		Listheader lh3 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.TotalCount.Label"));
+		lh3.setSclass("FDListBoxHeader1");
 		lh3.setWidth("");
 		lh3.setSortAscending(new FieldComparator("totalCount", true));
 		lh3.setSortDescending(new FieldComparator("totalCount", false));
@@ -484,16 +490,19 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		listhead.setSizable(true);
 		listhead.setParent(lbDailyCount);
 		Listheader lh1 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.Countries.Label"));
+		lh1.setSclass("FDListBoxHeader1");
 		lh1.setWidth("52px");
 		lh1.setSortAscending(new FieldComparator("country", true));
 		lh1.setSortDescending(new FieldComparator("country", false));
 		lh1.setParent(listhead);
 		Listheader lh2 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.CountryName.Label"));
+		lh2.setSclass("FDListBoxHeader1");
 		lh2.setWidth("185px");
 		lh2.setSortAscending(new FieldComparator("countryName", true));
 		lh2.setSortDescending(new FieldComparator("countryName", false));
 		lh2.setParent(listhead);
 		Listheader lh3 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.TotalCount.Label"));
+		lh3.setSclass("FDListBoxHeader1");
 		lh3.setWidth("");
 		lh3.setSortAscending(new FieldComparator("totalCount", true));
 		lh3.setSortDescending(new FieldComparator("totalCount", false));

@@ -281,6 +281,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		lh3.setWidth("");
 		lh3.setSortAscending(new FieldComparator("totalCount", true));
 		lh3.setSortDescending(new FieldComparator("totalCount", false));
+		lh3.setSortDirection("descending");
 		lh3.setParent(listhead);
 
 		Listfoot listfoot = new Listfoot();
@@ -392,6 +393,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		lh3.setWidth("");
 		lh3.setSortAscending(new FieldComparator("totalCount", true));
 		lh3.setSortDescending(new FieldComparator("totalCount", false));
+		lh3.setSortDirection("descending");
 		lh3.setParent(listhead);
 
 		Listfoot listfoot = new Listfoot();
@@ -506,6 +508,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		lh3.setWidth("");
 		lh3.setSortAscending(new FieldComparator("totalCount", true));
 		lh3.setSortDescending(new FieldComparator("totalCount", false));
+		lh3.setSortDirection("descending");
 		lh3.setParent(listhead);
 
 		Listfoot listfoot = new Listfoot();

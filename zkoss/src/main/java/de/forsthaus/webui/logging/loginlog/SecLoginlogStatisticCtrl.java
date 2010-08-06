@@ -264,7 +264,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		Listhead listhead = new Listhead();
 		listhead.setSizable(true);
 		listhead.setParent(lbTotalCount);
-		Listheader lh1 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.Countries.Label"));
+		Listheader lh1 = new Listheader();
 		lh1.setSclass("FDListBoxHeader1");
 		lh1.setWidth("53px");
 		lh1.setSortAscending(new FieldComparator("country", true));
@@ -375,7 +375,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		Listhead listhead = new Listhead();
 		listhead.setSizable(true);
 		listhead.setParent(lbMonthlyCount);
-		Listheader lh1 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.Countries.Label"));
+		Listheader lh1 = new Listheader();
 		lh1.setSclass("FDListBoxHeader1");
 		lh1.setWidth("52px");
 		lh1.setSortAscending(new FieldComparator("country", true));
@@ -489,7 +489,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		Listhead listhead = new Listhead();
 		listhead.setSizable(true);
 		listhead.setParent(lbDailyCount);
-		Listheader lh1 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.Countries.Label"));
+		Listheader lh1 = new Listheader();
 		lh1.setSclass("FDListBoxHeader1");
 		lh1.setWidth("52px");
 		lh1.setSortAscending(new FieldComparator("country", true));

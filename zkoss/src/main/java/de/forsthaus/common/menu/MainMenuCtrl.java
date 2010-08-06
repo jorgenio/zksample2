@@ -30,6 +30,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Center;
 import org.zkoss.zul.Checkbox;
@@ -139,19 +140,19 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 			}
 		});
 
-//		toolbarbutton = new Toolbarbutton();
-//		hbox.appendChild(toolbarbutton);
-//		toolbarbutton.setId("btnMainMenuChange");
-//
-//		toolbarbutton.setImage("/images/icons/menu_16x16.gif");
-//		// toolbarbutton.setImage("/images/icons/combobox_16x16.gif");
-//		toolbarbutton.setTooltiptext(Labels.getLabel("btnMainMenuChange.tooltiptext"));
-//		toolbarbutton.addEventListener("onClick", new EventListener() {
-//			@Override
-//			public void onEvent(Event event) throws Exception {
-//				onClick$btnMainMenuChange(event);
-//			}
-//		});
+		// toolbarbutton = new Toolbarbutton();
+		// hbox.appendChild(toolbarbutton);
+		// toolbarbutton.setId("btnMainMenuChange");
+		//
+		// toolbarbutton.setImage("/images/icons/menu_16x16.gif");
+		// // toolbarbutton.setImage("/images/icons/combobox_16x16.gif");
+		// toolbarbutton.setTooltiptext(Labels.getLabel("btnMainMenuChange.tooltiptext"));
+		// toolbarbutton.addEventListener("onClick", new EventListener() {
+		// @Override
+		// public void onEvent(Event event) throws Exception {
+		// onClick$btnMainMenuChange(event);
+		// }
+		// });
 
 		toolbarbutton = new Toolbarbutton();
 		hbox.appendChild(toolbarbutton);
@@ -163,7 +164,11 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 			@Override
 			public void onEvent(Event event) throws Exception {
 				// Executions.getCurrent().sendRedirect("the_url_generated_of_report","_blank");
-				Executions.getCurrent().sendRedirect("http://sunet.dl.sourceforge.net/project/zksample2/Documentation/zksample2-doc.pdf", "_blank");
+				// Executions.getCurrent().sendRedirect("http://sunet.dl.sourceforge.net/project/zksample2/Documentation/zksample2-doc.pdf",
+				// "_blank");
+
+				String url1 = "http://sunet.dl.sourceforge.net/project/zksample2/Documentation/zksample2-doc.pdf";
+				Clients.evalJavaScript("window.open('" + url1 + "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 			}
 		});
 

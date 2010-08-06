@@ -291,10 +291,10 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	 */
 	public void doFitSize() {
 		// normally 0 ! Or we have a i.e. a toolBar on top of the listBox.
-		int specialSize = 35;
+		int specialSize = 0;
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		int maxListBoxHeight = (height - specialSize - 138);
-		setCountRows((int) Math.round((maxListBoxHeight) / 17.7));
+		int maxListBoxHeight = (height - specialSize - 142);
+		setCountRows((int) Math.round((maxListBoxHeight) / 18.1));
 		borderLayout_articleList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		windowArticlesList.invalidate();

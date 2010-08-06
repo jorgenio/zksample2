@@ -49,11 +49,12 @@
 					</hbox>
 				</toolbar>
 
-
+				<!-- 
+					if="${sec:isAllGranted('ROLE_SUPERVISOR')}"
+				-->
 
 				<!-- CRUD BUTTONS -->
-				<toolbar align="end"
-					if="${sec:isAllGranted('ROLE_SUPERVISOR')}">
+				<toolbar align="end">
 					style="float:right; border-style: none;"
 					height="28px">
 					<button id="btnNew" height="24px"
@@ -69,7 +70,7 @@
 					<button id="btnClose" height="24px"
 						tooltiptext="${c:l('btnClose.tooltiptext')}" />
 				</toolbar>
-	
+
 			</hbox>
 		</div>
 

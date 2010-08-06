@@ -100,7 +100,7 @@
 										<h:input type="submit"
 											value="Login" />
 										<button id="btnReset"
-											mold="trendy" height="24px" label="Reset" />
+											mold="trendy" height="22px" label="Reset" />
 									</hbox>
 								</row>
 							</rows>

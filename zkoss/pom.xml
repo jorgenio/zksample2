@@ -6,14 +6,19 @@
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>${project.artifactId}->${project.version}</name>
-		<repositories>
+	<repositories>
 		<repository>
 			<id>trg-dao-repo</id>
-			<url>http://hibernate-generic-dao.googlecode.com/svn/trunk/maven-repo/</url>
+			<url>http://hibernate-generic-dao.googlecode.com/svn/trunk/maven-repo/
+			</url>
 		</repository>
 		<repository>
 			<id>zk repository</id>
 			<url>http://mavensync.zkoss.org/maven2</url>
+		</repository>
+		<repository>
+			<id>zk ee evalualtion repository</id>
+			<url>http://mavensync.zkoss.org/eval-ee/</url>
 		</repository>
 	</repositories>
 	<dependencies>
@@ -62,6 +67,16 @@
 		<dependency>
 			<groupId>org.zkoss.zk</groupId>
 			<artifactId>zk</artifactId>
+			<version>${zkoss.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zkex</artifactId>
+			<version>${zkoss.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zkmax</artifactId>
 			<version>${zkoss.version}</version>
 		</dependency>
 		<dependency>
@@ -196,6 +211,11 @@
 			<artifactId>javassist</artifactId>
 			<version>3.4.GA</version>
 		</dependency>
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zkspring-security</artifactId>
+			<version>3.0RC</version>
+		</dependency>
 	</dependencies>
 	<url>http://sourceforge.net/projects/zksample2/</url>
 	<issueManagement>
@@ -229,4 +249,6 @@
 	</properties>
 </project>
 
-	<!--		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+	<!--
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	-->

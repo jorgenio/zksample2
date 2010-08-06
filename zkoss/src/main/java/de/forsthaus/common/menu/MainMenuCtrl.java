@@ -139,19 +139,19 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 			}
 		});
 
-		toolbarbutton = new Toolbarbutton();
-		hbox.appendChild(toolbarbutton);
-		toolbarbutton.setId("btnMainMenuChange");
-
-		toolbarbutton.setImage("/images/icons/menu_16x16.gif");
-		// toolbarbutton.setImage("/images/icons/combobox_16x16.gif");
-		toolbarbutton.setTooltiptext(Labels.getLabel("btnMainMenuChange.tooltiptext"));
-		toolbarbutton.addEventListener("onClick", new EventListener() {
-			@Override
-			public void onEvent(Event event) throws Exception {
-				onClick$btnMainMenuChange(event);
-			}
-		});
+//		toolbarbutton = new Toolbarbutton();
+//		hbox.appendChild(toolbarbutton);
+//		toolbarbutton.setId("btnMainMenuChange");
+//
+//		toolbarbutton.setImage("/images/icons/menu_16x16.gif");
+//		// toolbarbutton.setImage("/images/icons/combobox_16x16.gif");
+//		toolbarbutton.setTooltiptext(Labels.getLabel("btnMainMenuChange.tooltiptext"));
+//		toolbarbutton.addEventListener("onClick", new EventListener() {
+//			@Override
+//			public void onEvent(Event event) throws Exception {
+//				onClick$btnMainMenuChange(event);
+//			}
+//		});
 
 		toolbarbutton = new Toolbarbutton();
 		hbox.appendChild(toolbarbutton);
@@ -402,14 +402,13 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		// Guestbook
 		Menuitem guestBookMenu = new Menuitem();
 		guestBookMenu.setLabel("ZK Guestbook");
-		guestBookMenu.setParent(menuBar);
 		guestBookMenu.addEventListener("onClick", new GuestBookListener());
+		guestBookMenu.setParent(menuBar);
 
 		// Refresh the whole page for setting correct sizes of the
 		// components
 		Window win = (Window) Path.getComponent("/outerIndexWindow");
 		win.invalidate();
-
 	}
 
 	private void doCollapseExpandAll(Component component, boolean aufklappen) {

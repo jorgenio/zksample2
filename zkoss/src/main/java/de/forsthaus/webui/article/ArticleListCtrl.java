@@ -294,7 +294,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		int specialSize = 0;
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		int maxListBoxHeight = (height - specialSize - 142);
-		setCountRows((int) Math.round((maxListBoxHeight) / 18.1));
+		setCountRows((int) Math.round((maxListBoxHeight) / 18.4));
 		borderLayout_articleList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		windowArticlesList.invalidate();

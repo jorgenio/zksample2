@@ -4,6 +4,10 @@
 	<!-- Old HomeMenuTree -->
 	<menuItem id="menu_Item_Home" zulNavigation="/WEB-INF/pages/welcome.zul"
 		iconName="/images/icons/console_view.gif" />
+	<!-- Guestbook -->
+	<menuItem id="menu_Item_Guestbook" zulNavigation="/WEB-INF/pages/guestbook/guestBookList.zul"
+		iconName="/images/icons/create_doc_16x16.gif" />
+
 	<!--
 		<menuItem id="menu_Item_Chat"
 		zulNavigation="/WEB-INF/pages/chat/chat.zul" />
@@ -51,8 +55,8 @@
 			iconName="/images/icons/method_16x16.gif" rightName="menuItem_Administration_LoginsLog" />
 		<menuItem id="menu_Item_HibernateStatistics" zulNavigation="/WEB-INF/pages/debug/HibernateStatistics.zul"
 			iconName="/images/icons/method_16x16.gif" rightName="menuItem_Administration_HibernateStats" />
-
 	</menu>
+
 
 
 </ns2:XMLRootMenu>

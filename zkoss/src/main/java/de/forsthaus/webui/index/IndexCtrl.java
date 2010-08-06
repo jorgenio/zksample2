@@ -108,7 +108,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 		label_AppName.setValue(appName);
 
 		Date date = new Date();
-		date.setDate(05);
+		date.setDate(06);
 		date.setMonth(6);
 		date.setYear(110);
 

@@ -54,9 +54,8 @@
 				-->
 
 				<!-- CRUD BUTTONS -->
-				<toolbar align="end">
-					style="float:right; border-style: none;"
-					height="28px">
+				<toolbar align="end"
+					style="float:right; border-style: none;" height="28px">
 					<button id="btnNew" height="24px"
 						tooltiptext="${c:l('btnNew.tooltiptext')}" />
 					<button id="btnEdit" height="24px"

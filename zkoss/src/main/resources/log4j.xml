@@ -7,7 +7,7 @@
 		<param name="Target" value="System.out" />
 		<param name="Threshold" value="ALL" />
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d{ISO8601} %-6p [%t] %c{1} M[%M] - %m\n" />
+			<param name="ConversionPattern" value="%d{ISO8601} %-6p [%t] %c{1} M[%M] --> %m\n" />
 			<!--
 				param name="ConversionPattern" value="%d{ISO8601} %-6p [%t] %c{1}
 				M[%M] - %m\n" /
@@ -22,7 +22,7 @@
 		<param name="Target" value="System.err" />
 		<param name="Threshold" value="ERROR" />
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d{ISO8601} %-6p [%t] %c{1} M[%M] - %m\n" />
+			<param name="ConversionPattern" value="%d{ISO8601} %-6p [%t] %c{1} M[%M] --> %m\n" />
 		</layout>
 	</appender>
 
@@ -32,7 +32,7 @@
 		<param name="MaxBackupIndex" value="2" />
 		<param name="Threshold" value="ALL" />
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d{ISO8601} %-6p [%t] %c{1} M[%M] - %m\n" />
+			<param name="ConversionPattern" value="%d{ISO8601} %-6p [%t] %c{1} M[%M] --> %m\n" />
 		</layout>
 	</appender>
 

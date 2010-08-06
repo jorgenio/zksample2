@@ -2,6 +2,8 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 
+<?taglib uri="http://www.zkoss.org/zkspring/security" prefix="sec"?>
+
 <zk xmlns="http://www.zkoss.org/2005/zul"
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -47,9 +49,13 @@
 					</hbox>
 				</toolbar>
 
+
+
 				<!-- CRUD BUTTONS -->
 				<toolbar align="end"
-					style="float:right; border-style: none;" height="28px">
+					if="${sec:isAllGranted('ROLE_SUPERVISOR')}">
+					style="float:right; border-style: none;"
+					height="28px">
 					<button id="btnNew" height="24px"
 						tooltiptext="${c:l('btnNew.tooltiptext')}" />
 					<button id="btnEdit" height="24px"
@@ -63,6 +69,7 @@
 					<button id="btnClose" height="24px"
 						tooltiptext="${c:l('btnClose.tooltiptext')}" />
 				</toolbar>
+	
 			</hbox>
 		</div>
 

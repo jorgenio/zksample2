@@ -293,7 +293,7 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 	 */
 	public void doFitSize() {
 		// normally 0 ! Or we have a i.e. a toolBar on top of the listBox.
-		int specialSize = 0;
+		int specialSize = 5;
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		int maxListBoxHeight = (height - specialSize - 138);
 		setCountRows((int) Math.round((maxListBoxHeight) / 17.7));

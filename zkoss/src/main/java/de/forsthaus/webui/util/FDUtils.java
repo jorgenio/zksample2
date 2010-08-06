@@ -143,7 +143,7 @@ public class FDUtils implements Serializable {
 			}
 		}
 
-		logger.debug("--> " + str);
+		logger.debug(str);
 	}
 
 	/**
@@ -164,7 +164,7 @@ public class FDUtils implements Serializable {
 
 		}
 
-		logger.debug("--> " + str);
+		logger.debug(str);
 	}
 
 	/**
@@ -185,7 +185,7 @@ public class FDUtils implements Serializable {
 			}
 		}
 
-		logger.debug("--> " + str);
+		logger.debug(str);
 	}
 
 }

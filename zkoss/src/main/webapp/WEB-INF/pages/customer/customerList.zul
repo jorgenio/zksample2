@@ -10,33 +10,24 @@
 	<window id="window_customerList" apply="${customerListCtrl}"
 		border="none" width="100%">
 
-		<style>
-			body { padding: 0 0; /* 0 padding on top and bottom and 0
-			padding on right and left */ }
-
-			<!-- Toolbar background color -->
-			<!-- .z-toolbar { background: #FFFFFF }  -->
-			<!-- Paging background color -->
-			<!-- .z-paging { background: #FFFFFF }  -->
-		</style>
-
 		<panel id="panel_CustomerList"
 			title="${c:l('panel_CustomerList.title')}" border="none" />
 
 		<toolbar>
-			<button id="btnHelp" image="/images/icons/light_16x16.gif"
+			<button id="btnHelp" height="24px"
+				image="/images/icons/light_16x16.gif"
 				tooltiptext="${c:l('btnHelp.tooltiptext')}" />
-			<button id="btnRefresh"
+			<button id="btnRefresh" height="24px"
 				image="/images/icons/refresh2_yellow_16x16.gif"
 				tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
 			<separator orient="vertical" />
-			<button id="button_CustomerList_NewCustomer"
+			<button id="button_CustomerList_NewCustomer" height="24px"
 				image="/images/icons/btn_new2_16x16.gif"
 				tooltiptext="${c:l('button_CustomerList_NewCustomer.tooltiptext')}" />
 			<button id="button_CustomerList_CustomerFindDialog"
-				image="/images/icons/btn_search2_16x16.gif"
+				height="24px" image="/images/icons/btn_search2_16x16.gif"
 				tooltiptext="${c:l('button_CustomerList_CustomerFindDialog.tooltiptext')}" />
-			<button id="button_CustomerList_PrintList"
+			<button id="button_CustomerList_PrintList" height="24px"
 				image="/images/icons/btn_print2_16x16.gif"
 				tooltiptext="${c:l('button_CustomerList_PrintList.tooltiptext')}" />
 		</toolbar>

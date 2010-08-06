@@ -233,7 +233,7 @@
 								label="Hibernate-Generic-DAO" />
 
 							<textbox width="98%"
-								value="We used the search object from this framework and the hql code generator for our PagedListWrapper. Version = 0.3.4"
+								value="We used the search object from this framework and the hql code generator for our PagedListWrapper. Version = 0.4.3"
 								rows="3" multiline="true" readonly="true"
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>

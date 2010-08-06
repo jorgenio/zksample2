@@ -48,6 +48,7 @@ import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.security.groupright.SecGrouprightCtrl;
 import de.forsthaus.webui.security.rolegroup.model.SecRolegroupGroupListModelItemRenderer;
 import de.forsthaus.webui.security.rolegroup.model.SecRolegroupRoleListModelItemRenderer;
+import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.SelectionCtrl;
@@ -135,9 +136,7 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	public SecRolegroupCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	/**
@@ -146,10 +145,7 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	 * @throws Exception
 	 */
 	public void onCreate$secRolegroupWindow(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		/* ++++ calculate the heights +++++ */
 		int topHeader = 30;
@@ -245,10 +241,7 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnSave(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doSave();
 	}
@@ -260,15 +253,9 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
+		logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -280,10 +267,7 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		Events.postEvent("onCreate", secRolegroupWindow, event);
 		secRolegroupWindow.invalidate();

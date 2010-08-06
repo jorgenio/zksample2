@@ -20,6 +20,7 @@ package de.forsthaus.webui.office;
 
 import java.io.Serializable;
 
+import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
@@ -33,6 +34,7 @@ import org.zkoss.zul.Window;
 
 import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.service.OfficeService;
+import de.forsthaus.webui.security.group.SecGroupDialogCtrl;
 import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 
@@ -56,6 +58,7 @@ import de.forsthaus.webui.util.GFCBaseCtrl;
 public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -8352659530536077973L;
+	private transient static final Logger logger = Logger.getLogger(OfficeDetailCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -88,7 +91,7 @@ public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 	public OfficeDetailCtrl() {
 		super();
 
-		FDUtils.logEventDebug(this, "super()");
+		logger.debug("super()");
 	}
 
 	@Override
@@ -139,7 +142,7 @@ public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowOfficeDetail(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 

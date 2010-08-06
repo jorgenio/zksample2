@@ -39,6 +39,7 @@ import de.forsthaus.backend.model.SecTyp;
 import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.webui.security.right.model.SecRightSecTypListModelItemRenderer;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
+import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 
@@ -103,9 +104,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	public SecRightDialogCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	/**
@@ -116,10 +115,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$secRightDialogWindow(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// create the Button Controller. Disable not used buttons during working
 		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
@@ -176,10 +172,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onClose$secRightDialogWindow(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doClose();
 	}
@@ -191,10 +184,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnSave(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doSave();
 	}
@@ -205,10 +195,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnEdit(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doEdit();
 	}
@@ -220,15 +207,9 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
+		logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -237,10 +218,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnNew(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doNew();
 	}
@@ -252,10 +230,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnDelete(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doDelete();
 	}
@@ -266,10 +241,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnCancel(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doCancel();
 	}
@@ -281,10 +253,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnClose(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		try {
 			doClose();
@@ -306,10 +275,6 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 
 	 */
 	private void doClose() throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> DataIsChanged :" + isDataChanged());
-		}
 
 		if (isDataChanged()) {
 

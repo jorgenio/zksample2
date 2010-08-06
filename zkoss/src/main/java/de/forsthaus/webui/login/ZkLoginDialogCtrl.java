@@ -68,16 +68,11 @@ public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 	public ZkLoginDialogCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super() ");
-		}
+		logger.debug("super()");
 	}
 
 	public void onCreate$loginwin(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doOnCreateCommon(loginwin); // do the autowire
 
@@ -107,10 +102,6 @@ public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 	 */
 	public void onClick$button_ZKLoginDialog_Close() throws IOException {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("-->");
-		}
-
 		Executions.sendRedirect("/j_spring_logout");
 	}
 
@@ -121,9 +112,7 @@ public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 	 */
 	public void onClick$button_ZKLoginDialog_ServerTime() throws IOException {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> get the server date/time");
-		}
+		logger.debug("get the server date/time");
 
 		// TODO get the tomcat servers time, if the TimeServer doesn't answers.
 		long l = getCurrentHttpTokenTime();

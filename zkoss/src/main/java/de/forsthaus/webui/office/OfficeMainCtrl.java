@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 
+import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
@@ -55,6 +56,7 @@ import de.forsthaus.webui.util.MultiLineMessageBox;
 public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private transient static final Logger logger = Logger.getLogger(OfficeMainCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -117,7 +119,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	public OfficeMainCtrl() {
 		super();
 
-		FDUtils.logEventDebug(this, "super()");
+		logger.debug("super()");
 	}
 
 	@Override
@@ -145,7 +147,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowOfficeMain(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		windowOfficeMain.setContentStyle("padding:0px;");
 
@@ -176,7 +178,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onSelect$tabOfficeList(Event event) throws IOException {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// Check if the tabpanel is already loaded
 		if (tabPanelOfficeList.getFirstChild() != null) {
@@ -199,7 +201,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onSelect$tabOfficeDetail(Event event) throws IOException {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// Check if the tabpanel is already loaded
 		if (tabPanelOfficeDetail.getFirstChild() != null) {
@@ -223,7 +225,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_OfficeList_PrintList(Event event) throws InterruptedException {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		FDUtils.doShowNotImplementedMessage();
 	}
@@ -234,7 +236,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onCheck$checkbox_OfficeList_ShowAll(Event event) {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// empty the text search boxes
 		txtb_Office_No.setValue(""); // clear
@@ -267,7 +269,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * Filter the office list with 'like office number'. <br>
 	 */
 	public void onClick$button_OfficeList_SearchNo(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// if not empty
 		if (!txtb_Office_No.getValue().isEmpty()) {
@@ -302,7 +304,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * Filter the office list with 'like office name'. <br>
 	 */
 	public void onClick$button_OfficeList_SearchName(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// if not empty
 		if (!txtb_Office_Name.getValue().isEmpty()) {
@@ -337,7 +339,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * Filter the office list with 'like office city'. <br>
 	 */
 	public void onClick$button_OfficeList_SearchCity(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// if not empty
 		if (!txtb_Office_City.getValue().isEmpty()) {
@@ -451,7 +453,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doCancel(Event event) throws InterruptedException {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// reset to the original object
 		doResetToInitValues();
@@ -478,7 +480,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doEdit(Event event) {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// get the current Tab for later checking if we must change it
 		Tab currentTab = tabbox_OfficeMain.getSelectedTab();
@@ -520,7 +522,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doDelete(Event event) throws InterruptedException {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// check first, if the tabs are created, if not than create them
 		if (getOfficeDetailCtrl().getBinder() == null) {
@@ -594,7 +596,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doSave(Event event) throws InterruptedException {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// save all components data in the several tabs to the bean
 		getOfficeDetailCtrl().getBinder().saveAll();
@@ -648,7 +650,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doNew(Event event) {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// check first, if the tabs are created
 		if (getOfficeDetailCtrl() == null) {
@@ -697,7 +699,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	private void doResizeSelectedTab(Event event) {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		if (tabbox_OfficeMain.getSelectedTab() == tabOfficeDetail) {
 			getOfficeDetailCtrl().doFitSize(event);

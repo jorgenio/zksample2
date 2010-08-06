@@ -20,6 +20,7 @@ package de.forsthaus.webui.office;
 
 import java.io.Serializable;
 
+import org.apache.log4j.Logger;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
@@ -65,6 +66,7 @@ import de.forsthaus.webui.util.GFCBaseListCtrl;
 public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializable {
 
 	private static final long serialVersionUID = -2170565288232491362L;
+	private transient static final Logger logger = Logger.getLogger(OfficeListCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -103,7 +105,7 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 	public OfficeListCtrl() {
 		super();
 
-		FDUtils.logEventDebug(this, "super()");
+		logger.debug("super()");
 	}
 
 	@Override
@@ -154,7 +156,7 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 	 */
 
 	public void onCreate$windowOfficeList(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 
@@ -218,7 +220,7 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 	 * Event is forwarded in the corresponding listbox.
 	 */
 	public void onDoubleClickedOfficeItem(Event event) {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		Office anOffice = getSelectedOffice();
 
@@ -246,7 +248,7 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 	 * @param event
 	 */
 	public void onSelect$listBoxOffice(Event event) {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		Office anOffice = getSelectedOffice();
 

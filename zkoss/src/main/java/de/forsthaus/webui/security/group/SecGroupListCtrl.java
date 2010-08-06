@@ -45,6 +45,7 @@ import de.forsthaus.backend.model.SecGroup;
 import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.security.group.model.SecGroupListModelItemRenderer;
+import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 
@@ -103,16 +104,11 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	public SecGroupListCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	public void onCreate$secGroupListWindow(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
@@ -200,10 +196,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	 * Call the SecGroup dialog with a new empty entry. <br>
 	 */
 	public void onClick$button_SecGroupList_NewGroup(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// create a new customer object
 		SecGroup aGroup = getSecurityService().getNewSecGroup();
@@ -259,15 +252,9 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
+		logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		FDUtils.doShowNotAllowedInDemoModeMessage();
 	}
 
 	/**
@@ -279,10 +266,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		Events.postEvent("onCreate", secGroupListWindow, event);
 		secGroupListWindow.invalidate();
@@ -294,10 +278,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	 * @param event
 	 */
 	public void onCheck$checkbox_SecGroupList_ShowAll(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// empty the text search boxes
 		tb_SecGroup_GroupName.setValue(""); // clear
@@ -318,25 +299,16 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecGroupList_PrintGroupList(Event event) throws InterruptedException {
+		logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	/**
 	 * Filter the group list with 'like GroupName'. <br>
 	 */
 	public void onClick$button_SecGroupList_SearchGroupName(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// if not empty
 		if (!tb_SecGroup_GroupName.getValue().isEmpty()) {
@@ -349,9 +321,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 
 			// Set the ListModel.
 			getPagedListWrapper().init(soSecGroup, listBoxSecGroups, paging_SecGroupList);
-
 		}
-
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

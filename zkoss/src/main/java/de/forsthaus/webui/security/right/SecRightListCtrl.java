@@ -48,6 +48,7 @@ import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.security.right.model.SecRightListModelItemRenderer;
 import de.forsthaus.webui.security.right.model.SecRightSecTypListModelItemRenderer;
+import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 
@@ -107,16 +108,11 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	public SecRightListCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	public void onCreate$secRightListWindow(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
@@ -187,6 +183,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * @throws Exception
 	 */
 	public void onDoubleClickedRightItem(Event event) throws Exception {
+		logger.debug(event.toString());
 
 		// get the selected object
 		Listitem item = listBoxSecRights.getSelectedItem();
@@ -207,10 +204,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * Call the SecRight dialog with a new empty entry. <br>
 	 */
 	public void onClick$button_SecRightList_NewRight(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// create a new right object
 		/** !!! DO NOT BREAK THE TIERS !!! */
@@ -271,15 +265,9 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
+		logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -291,10 +279,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		Events.postEvent("onCreate", secRightListWindow, event);
 		secRightListWindow.invalidate();
@@ -306,10 +291,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * @param event
 	 */
 	public void onCheck$checkbox_SecRightList_ShowAll(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// empty the text search boxes
 		tb_SecRightList_rigName.setValue(""); // clear
@@ -331,15 +313,9 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecRightList_PrintRightList(Event event) throws InterruptedException {
+		logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -348,10 +324,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * for including in the search statement.<br>
 	 */
 	public void onClick$button_SecRightList_SearchRightName(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// ++ create the searchObject and init sorting ++//
 		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRows());
@@ -393,10 +366,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * for including in the search statement.
 	 */
 	public void onClick$button_SecRightList_SearchRightType(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// ++ create the searchObject and init sorting ++//
 		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRows());
@@ -426,9 +396,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 		} else {
 			// Set the ListModel.
 			getPagedListWrapper().init(soSecRight, listBoxSecRights, paging_SecRightList);
-
 		}
-
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

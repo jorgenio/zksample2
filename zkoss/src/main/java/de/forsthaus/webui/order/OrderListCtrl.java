@@ -53,6 +53,7 @@ import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.order.model.OrderListModelItemRenderer;
 import de.forsthaus.webui.order.model.OrderSearchCustomerListModelItemRenderer;
 import de.forsthaus.webui.orderposition.model.OrderpositionListModelItemRenderer;
+import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.pagging.PagedListWrapper;
@@ -145,15 +146,11 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	public OrderListCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	public void onCreate$orderListWindow(Event event) throws Exception {
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		/* autowire comps the vars */
 		// doOnCreateCommon(orderListWindow, event);
@@ -300,10 +297,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public void onSelect$listBoxOrder(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		Listitem item = listBoxOrder.getSelectedItem();
 
@@ -372,10 +366,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	 * Call the order dialog with a new empty entry. <br>
 	 */
 	public void onClick$button_OrderList_NewOrder(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// create a new order object
 		/** !!! DO NOT BREAK THE TIERS !!! */
@@ -416,13 +407,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 		} catch (Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
-			// Show a error box
-			String msg = e.getMessage();
-			String title = Labels.getLabel("message.Error");
-
-			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
-
+			FDUtils.showErrorMessage(e.toString());
 		}
 
 	}
@@ -434,15 +419,9 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_OrderList_OrderNameSearch(Event event) throws InterruptedException {
+		logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -452,15 +431,9 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
+		logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -472,10 +445,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		paintComponents();
 		orderListWindow.invalidate();
@@ -491,10 +461,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$button_bbox_CustomerSearch_Close(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		bandbox_OrderList_CustomerSearch.close();
 	}
@@ -505,19 +472,13 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$button_bbox_CustomerSearch_Search(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doSearch();
 	}
 
 	public void onOpen$bandbox_OrderList_CustomerSearch(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
@@ -591,9 +552,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onDoubleClickedCustomerItem(Event event) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// get the customer
 		Listitem item = listBoxCustomerSearch.getSelectedItem();

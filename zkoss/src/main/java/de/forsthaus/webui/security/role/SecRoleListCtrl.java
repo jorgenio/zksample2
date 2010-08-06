@@ -45,6 +45,7 @@ import de.forsthaus.backend.model.SecRole;
 import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.security.role.model.SecRoleListModelItemRenderer;
+import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 
@@ -100,16 +101,11 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	public SecRoleListCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	public void onCreate$secRoleListWindow(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
@@ -172,6 +168,7 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	 * @throws Exception
 	 */
 	public void onRoleItemDoubleClicked(Event event) throws Exception {
+		logger.debug(event.toString());
 
 		// get the selected object
 		Listitem item = listBoxSecRoles.getSelectedItem();
@@ -192,10 +189,7 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	 * Call the SecRole dialog with a new empty entry. <br>
 	 */
 	public void onClick$button_SecRoleList_NewSecRole(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// create a new branch object
 		/** !!! DO NOT BREAK THE TIERS !!! */
@@ -237,13 +231,7 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 		} catch (Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
-			// Show a error box
-			String msg = e.getMessage();
-			String title = Labels.getLabel("message.Error");
-
-			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
-
+			FDUtils.showErrorMessage(e.toString());
 		}
 	}
 
@@ -254,15 +242,9 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
+		logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -274,10 +256,7 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		Events.postEvent("onCreate", secRoleListWindow, event);
 		secRoleListWindow.invalidate();
@@ -289,10 +268,7 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	 * @param event
 	 */
 	public void onCheck$checkbox_SecRoleList_ShowAll(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// empty the text search boxes
 		tb_SecRole_RoleName.setValue(""); // clear
@@ -313,25 +289,16 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecRoleList_PrintSecRole(Event event) throws InterruptedException {
+		logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	/**
 	 * Filter the role list with 'like RoleName'. <br>
 	 */
 	public void onClick$button_SecRoleList_rolShortdescription(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// if not empty
 		if (!tb_SecRole_RoleName.getValue().isEmpty()) {

@@ -57,6 +57,7 @@ import de.forsthaus.backend.service.OrderService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.order.model.SearchArticleListModelItemRenderer;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
+import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.pagging.PagedListWrapper;
@@ -164,9 +165,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	public OrderPositionDialogCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	/**
@@ -177,10 +176,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @throws Exception
 	 */
 	public void onCreate$orderPositionDialogWindow(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		/* set comps cisible dependent of the users rights */
 		doCheckRights();
@@ -280,13 +276,9 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @throws Exception
 	 */
 	public void onClose$orderPositionDialogWindow(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doClose();
-
 	}
 
 	/**
@@ -296,10 +288,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnSave(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doSave();
 	}
@@ -310,10 +299,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onClick$btnEdit(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doEdit();
 	}
@@ -324,10 +310,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onClick$btnNew(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doNew();
 	}
@@ -339,10 +322,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnDelete(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doDelete();
 	}
@@ -353,10 +333,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onClick$btnCancel(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doCancel();
 	}
@@ -368,10 +345,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnClose(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		try {
 			doClose();
@@ -835,9 +809,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onClick$bt_Orders_CustomerSearchClose(Event event) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		bbox_Orders_CustomerSearch.close();
 	}
@@ -850,10 +822,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onClick$bt_Orders_CustomerNew(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		/** !!! DO NOT BREAK THE TIERS !!! */
 		// We don't create a new DomainObject() in the frontend.
@@ -893,10 +862,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onClick$button_bbox_ArticleSearch_Close(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		bandbox_OrderPositionDialog_ArticleSearch.close();
 	}
@@ -907,19 +873,13 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onClick$button_bbox_ArticleSearch_Search(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doSearchArticle();
 	}
 
 	public void onOpen$bandbox_OrderPositionDialog_ArticleSearch(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// ++ create the searchObject and init sorting ++//
 		// only in sample app init with all orders
@@ -968,10 +928,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onDoubleClickedArticleItem(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// get the customer
 		Listitem item = listBoxArticleSearch.getSelectedItem();
@@ -1001,13 +958,9 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onClick$button_OrderPositionDialog_Calculate(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doCalculate();
-
 	}
 
 	/**
@@ -1016,10 +969,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onClick$btn_ArticleSearchClose(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// close the bandbox
 		bandbox_OrderPositionDialog_ArticleSearch.close();
@@ -1032,15 +982,9 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
+		logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -1049,15 +993,9 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onClick$button_OrderPositionDialog_PrintOrderPositions(Event event) throws InterruptedException {
+		logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

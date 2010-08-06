@@ -81,7 +81,7 @@ public class InputConfirmBox extends Window {
 
 		setWidth("350px");
 		setHeight("110px");
-		setTitle(Labels.getLabel("message_Information"));
+		setTitle(Labels.getLabel("message.Information"));
 		setId("confBox");
 		setVisible(true);
 		setClosable(true);

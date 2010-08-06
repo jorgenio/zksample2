@@ -51,6 +51,7 @@ import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.security.groupright.model.SecGrouprightDialogGroupListModelItemRenderer;
 import de.forsthaus.webui.security.groupright.model.SecGrouprightRightListModelItemRenderer;
+import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.SelectionCtrl;
@@ -171,9 +172,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	public SecGrouprightCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	/**
@@ -182,10 +181,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 * @throws Exception
 	 */
 	public void onCreate$secGroupRightWindow(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		/* ++++ calculate the heights +++++ */
 		int topHeader = 30;
@@ -334,10 +330,8 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	public void onCheck$checkbox_SecGroupRight_All(Event event) {
+		logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
 		checkbox_SecGroupRight_Pages.setChecked(false);
 		checkbox_SecGroupRight_Tabs.setChecked(false);
 		checkbox_SecGroupRight_MenuCat.setChecked(false);
@@ -447,10 +441,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnSave(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doSave();
 	}
@@ -462,15 +453,9 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
+		logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -482,10 +467,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		Events.postEvent("onCreate", secGroupRightWindow, event);
 		secGroupRightWindow.invalidate();
@@ -501,10 +483,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 * @param event
 	 */
 	public void onSelect$tab_SecGroupRight_Details(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// ++ create the searchObject and init sorting ++//
 		HibernateSearchObject<SecRight> soSecRightDetails = new HibernateSearchObject<SecRight>(SecRight.class, getCountRowsRightDetails());
@@ -526,10 +505,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 * @param event
 	 */
 	public void onSelect$tab_SecGroupRight_AllRights(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		filterTypeForShowingRights();
 	}
@@ -638,10 +614,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	}
 
 	public void onClick$button_GroupRight_NewGroupRight(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// get the selected object
 		Listitem item = listBoxSecGroup.getSelectedItem();

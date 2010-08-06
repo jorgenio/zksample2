@@ -53,6 +53,7 @@ import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.gui.service.GuiLoginLoggingService;
 import de.forsthaus.webui.logging.loginlog.model.SecLoginlogListModelItemRenderer;
 import de.forsthaus.webui.logging.loginlog.model.WorkingThreadLoginList;
+import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.InputConfirmBox;
 import de.forsthaus.webui.util.MultiLineMessageBox;
@@ -135,9 +136,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	public SecLoginlogListCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -145,10 +144,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	public void onCreate$secLoginlogListWindow(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
@@ -170,6 +166,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		// lh.setSortAscending(""); lh.setSortDescending("")
 		listheader_SecLoginlogList_lglLogtime.setSortAscending(new FieldComparator("lglLogtime", true));
 		listheader_SecLoginlogList_lglLogtime.setSortDescending(new FieldComparator("lglLogtime", false));
+		listheader_SecLoginlogList_lglLogtime.setSortDirection("descending");
 		listheader_SecLoginlogList_lglLoginname.setSortAscending(new FieldComparator("lglLoginname", true));
 		listheader_SecLoginlogList_lglLoginname.setSortDescending(new FieldComparator("lglLoginname", false));
 		listheader_SecLoginlogList_lglStatusid.setSortAscending(new FieldComparator("lglStatusid", true));
@@ -245,24 +242,13 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		timer.setRunning(false);
 	}
 
-	public void onClose$secLoginlogListWindow(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-	}
-
 	/**
 	 * when the checkBox 'Show All' for filtering is checked. <br>
 	 * 
 	 * @param event
 	 */
 	public void onCheck$checkbox_SecLoginlogList_ShowAll(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// empty the text search boxes
 		tb_SecUserlog_LoginName.setValue(""); // clear
@@ -287,10 +273,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @param event
 	 */
 	public void onCheck$checkbox_SecLoginlogList_ShowOnlySuccess(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// empty the text search boxes
 		tb_SecUserlog_LoginName.setValue(""); // clear
@@ -317,10 +300,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @param event
 	 */
 	public void onCheck$checkbox_SecLoginlogList_ShowOnlyFailed(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// empty the text search boxes
 		tb_SecUserlog_LoginName.setValue(""); // clear
@@ -348,16 +328,9 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecLoginlogList_PrintLoginList(Event event) throws InterruptedException {
+		logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
-
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -366,10 +339,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * for including in the search statement.<br>
 	 */
 	public void onClick$button_SecLoginlogList_SearchLoginName(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// if not empty
 		if (!tb_SecUserlog_LoginName.getValue().isEmpty()) {
@@ -394,10 +364,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * Start the server push mechanism to refresh the login list. <br>
 	 */
 	public void onCheck$checkbox_SecLoginlogList_ServerPush(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		if (checkbox_SecLoginlogList_ServerPush.isChecked()) {
 			doStartServerPush(event);
@@ -483,16 +450,9 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
+		logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
-
+		FDUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -504,10 +464,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		Events.postEvent("onCreate", secLoginlogListWindow, event);
 		secLoginlogListWindow.invalidate();
@@ -522,10 +479,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecLoginlogList_DeleteLocalIPs(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		int recCount = getLoginLoggingService().deleteLocalIPs();
 
@@ -555,10 +509,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecLoginlogList_ImportIPToCountryCSV(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		String str = InputConfirmBox.show(secLoginlogListWindow, Labels.getLabel("message.Information.InputSupervisorPassword"));
 
@@ -587,10 +538,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecLoginlogList_UpdateGeoData(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		String str = InputConfirmBox.show(secLoginlogListWindow, Labels.getLabel("message.Information.InputSupervisorPassword"));
 
@@ -631,9 +579,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @param event
 	 */
 	public void onClick$button_SecLoginlogList_bb_SearchClose(Event event) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		bandbox_SecLoginlogList_PeriodSearch.close();
 	}
@@ -646,10 +592,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @throws Exception
 	 */
 	public void onOpen$bandbox_SecLoginlogList_PeriodSearch(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		dbox_LoginLog_DateFrom.setValue(new Date());
 		dbox_LoginLog_DateTo.setValue(new Date());
@@ -662,10 +605,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @param event
 	 */
 	public void onClick$button_SecLoginlogList_bb_SearchDate(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		if ((!(dbox_LoginLog_DateFrom.getValue() == null)) && (!(dbox_LoginLog_DateTo.getValue() == null))) {
 

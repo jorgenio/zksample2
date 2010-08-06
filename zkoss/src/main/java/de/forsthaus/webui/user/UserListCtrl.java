@@ -122,16 +122,11 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	public UserListCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	public void onCreate$userListWindow(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		/* set comps cisible dependent of the users rights */
 		doCheckRights();
@@ -264,7 +259,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * Call the SecUser dialog with a new empty entry. <br>
 	 */
 	public void onClick$button_UserList_NewUser(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// create a new SecUser object
 		/** !!! DO NOT BREAK THE TIERS !!! */
@@ -325,7 +320,8 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
+
 		FDUtils.doShowNotImplementedMessage();
 	}
 
@@ -338,7 +334,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		Events.postEvent("onCreate", userListWindow, event);
 		userListWindow.invalidate();
@@ -351,7 +347,8 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_UserList_PrintUserList(Event event) throws InterruptedException {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
+
 		FDUtils.doShowNotImplementedMessage();
 	}
 
@@ -359,7 +356,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * Filter the user list with 'like Loginname'
 	 */
 	public void onClick$button_UserList_SearchLoginname(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// if not empty
 		if (!tb_SecUser_Loginname.getValue().isEmpty()) {
@@ -398,7 +395,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * Filter the user list with 'like Lastname'
 	 */
 	public void onClick$button_UserList_SearchLastname(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// if not empty
 		if (!tb_SecUser_Lastname.getValue().isEmpty()) {
@@ -438,7 +435,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * Filter the user list with 'like Email'
 	 */
 	public void onClick$button_UserList_SearchEmail(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// if not empty
 		if (!tb_SecUser_Email.getValue().isEmpty()) {
@@ -480,7 +477,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * @param event
 	 */
 	public void onCheck$checkbox_UserList_ShowAll(Event event) {
-		FDUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// empty the text search boxes
 		tb_SecUser_Loginname.setValue("");

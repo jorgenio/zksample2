@@ -768,12 +768,12 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	public void createDemoCustomers(int newRecords) throws InterruptedException {
 
 		/* check if over 200.000 records in DB */
-		if (getTotalCountRecordsForCustomer() >= 200000) {
+		if (getTotalCountRecordsForCustomer() >= 80000) {
 
 			// close the echo event bussy message
 			Clients.showBusy("", false); // close the message
 
-			String message = Labels.getLabel("Demo.not_more_than_200000_records");
+			String message = Labels.getLabel("Demo.not_more_than_80000_records");
 			String title = Labels.getLabel("message_Information");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);

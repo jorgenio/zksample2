@@ -113,7 +113,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 		date.setYear(110);
 
 		String zkVersion = doGetZkVersion();
-		String appVersion = appName + " v5.0.3 / build: " + FDDateFormat.getDateFormater().format(date);
+		String appVersion = appName + " v5.0.320 / build: " + FDDateFormat.getDateFormater().format(date);
 
 		String userName = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
 		String version = zkVersion + " | " + appVersion;

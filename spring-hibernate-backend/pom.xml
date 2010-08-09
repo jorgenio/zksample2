@@ -56,7 +56,7 @@
 		<dependency>
 			<groupId>jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>3.1.2</version>
+			<version>3.5.0</version>
 			<exclusions>
 				<exclusion>
 					<groupId>com.lowagie</groupId>

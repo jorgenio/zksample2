@@ -14,7 +14,7 @@
 		lf = "\n";
 		s = "";
 		s = s + "- 09.07.2010 / First JasperReport build with the great DynamicJasper framework. Only pure Java, no XML. " + lf;
-		s = s + "                      Report is placed in the Article module. More next days.   " + lf;
+		s = s + "                      Report is placed in the Article module. More advanced reports comes in the next days.   " + lf;
 		s = s + "- 06.07.2010 / Checkin of the new Zksample2 based on zk 5.0.3 in /trunk. More changes comes in the next days.  " + lf;
 		s = s + "- 04.07.2010 / Begin to modifying some modules to work completely with Annotated Databinding mechanism.  " + lf;
 		s = s + "                      Decreasing absolut the LoC. These annotated databinded modules have an (adb) after  " + lf;

@@ -474,11 +474,12 @@
 						<groupbox mold="3d">
 							<caption
 								style="color: #000000; font-weight:bold;"
-								image="/images/jasperReport_16x16.ico" label="Jasper Reports" />
+								image="/images/jasperReport_16x16.ico"
+								label="Jasper Reports + DynamicJasper lib" />
 
 							<textbox width="98%"
-								value="JasperReports used version = 3.1.2 . All reports are created with iReport and uses JRBeanDataSources."
-								rows="3" multiline="true" readonly="true"
+								value="JasperReports(v3.5.0). DynamicJasper(v3.0.13) " rows="3"
+								multiline="true" readonly="true"
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
 						</groupbox>

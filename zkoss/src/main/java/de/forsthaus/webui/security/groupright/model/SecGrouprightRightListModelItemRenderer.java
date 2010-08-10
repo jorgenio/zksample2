@@ -70,9 +70,9 @@ public class SecGrouprightRightListModelItemRenderer implements ListitemRenderer
 
 		SecRight right = (SecRight) data;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + right.getRigName());
-		}
+		// if (logger.isDebugEnabled()) {
+		// logger.debug("--> " + right.getRigName());
+		// }
 
 		Listcell lc = new Listcell();
 		Checkbox cb = new Checkbox();

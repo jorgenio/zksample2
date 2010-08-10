@@ -61,9 +61,10 @@ public class SecGrouprightListModelItemRenderer implements ListitemRenderer, Ser
 
 		SecGroupright groupRight = (SecGroupright) data;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + groupRight.getSecGroup().getGrpShortdescription());
-		}
+		// if (logger.isDebugEnabled()) {
+		// logger.debug("--> " +
+		// groupRight.getSecGroup().getGrpShortdescription());
+		// }
 
 		Listcell lc = null;
 		lc = new Listcell(groupRight.getSecGroup().getGrpShortdescription());

@@ -13,58 +13,50 @@
 		apply="${userDialogCtrl}" closable="true" width="800px" height="520px"
 		sizable="true" sclass="pageWindowTitle">
 
-		<style>
-			body { padding: 0 0; /* 0 padding on top and bottom and 0
-			padding on right and left */ }
-
-			.pageWindowTitle .z-window-embedded-header {color: #FF0000;
-			font-weight:bold; }
-
-		</style>
 
 		<borderlayout id="borderlayoutUser">
 
 			<north border="none" margins="0,0,0,0">
-				<grid>
-					<columns sizable="true" height="20px">
-						<!-- Help Button -->
-						<column width="40px" align="left">
-							<hbox>
-								<button id="btnHelp"
-									image="/images/icons/light_16x16.gif"
-									tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+
+				<div sclass="z-toolbar" style="padding:0">
+					<hbox pack="stretch" sclass="hboxRemoveWhiteStrips"
+						width="100%">
+
+						<!-- COMMON BUTTONS -->
+						<toolbar align="start"
+							style="float:left; border-style: none;">
+							<button id="btnHelp" height="24px"
+								image="/images/icons/light_16x16.gif"
+								tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+						</toolbar>
+
+						<!-- SEARCH AREA -->
+						<toolbar align="center"
+							style="float:left; border-style: none;">
+							<hbox align="center" style="padding: 2px">
+
 							</hbox>
-						</column>
+						</toolbar>
 
-						<!-- Addtionally Buttons -->
-						<column align="center">
-							<hbox>
+						<!-- CRUD BUTTONS -->
+						<toolbar align="end"
+							style="float:right; border-style: none;">
+							<button id="btnNew" height="24px"
+								tooltiptext="${c:l('btnNew.tooltiptext')}" />
+							<button id="btnEdit" height="24px"
+								tooltiptext="${c:l('btnEdit.tooltiptext')}" />
+							<button id="btnDelete" height="24px"
+								tooltiptext="${c:l('btnDelete.tooltiptext')}" />
+							<button id="btnSave" height="24px"
+								tooltiptext="${c:l('btnSave.tooltiptext')}" />
+							<button id="btnCancel" height="24px"
+								tooltiptext="${c:l('btnCancel.tooltiptext')}" />
+							<button id="btnClose" height="24px"
+								tooltiptext="${c:l('btnClose.tooltiptext')}" />
+						</toolbar>
+					</hbox>
+				</div>
 
-							</hbox>
-						</column>
-
-						<!-- CRUD Buttons -->
-						<column align="right">
-							<hbox spacing="5px" style="padding:1px"
-								align="end">
-								<button id="btnNew" height="20"
-									tooltiptext="${c:l('btnNew.tooltiptext')}" />
-								<!-- label="${c:l('btnNew.label')}"	 -->
-								<button id="btnEdit" height="20"
-									tooltiptext="${c:l('btnEdit.tooltiptext')}" />
-								<button id="btnDelete" height="20"
-									tooltiptext="${c:l('btnDelete.tooltiptext')}" />
-								<button id="btnSave" height="20"
-									tooltiptext="${c:l('btnSave.tooltiptext')}" />
-								<button id="btnCancel" height="20"
-									tooltiptext="${c:l('btnCancel.tooltiptext')}" />
-								<button id="btnClose" height="20"
-									tooltiptext="${c:l('btnClose.tooltiptext')}" />
-							</hbox>
-
-						</column>
-					</columns>
-				</grid>
 			</north>
 
 			<center border="none" margins="0,0,0,0">
@@ -84,190 +76,215 @@
 								<columnlayout>
 									<columnchildren width="50%"
 										style="padding: 5px">
-										<panel
-											id="panel_UserDialog_AccountDetails"
-											title="${c:l('panel_UserDialog_AccountDetails.title')}"
-											style="margin-bottom:10px" border="normal">
+										<panel border="none">
 											<panelchildren>
-												<grid fixedLayout="true"
-													style="border:0px">
-													<columns>
-														<column
-															width="150px" />
-														<column
-															width="100%" />
-													</columns>
-													<rows>
-														<row>
-															<label
-																id="label_UserDialog_usrLoginname"
-																value="${c:l('label_UserDialog_usrLoginname.value')}" />
-															<textbox
-																id="usrLoginname" maxlength="50" width="150px" />
-														</row>
-														<row>
-															<separator
-																bar="true">
-															</separator>
-															<separator
-																bar="true">
-															</separator>
-														</row>
-														<row>
-															<label
-																id="label_UserDialog_usrPassword"
-																value="${c:l('label_UserDialog_usrPassword.value')}" />
-															<textbox
-																id="usrPassword" type="password" maxlength="50"
-																width="150px" />
-														</row>
-														<row>
-															<label
-																id="label_UserDialog_usrPasswordRetype"
-																value="${c:l('label_UserDialog_usrPasswordRetype.value')}" />
-															<textbox
-																id="usrPasswordRetype" type="password" maxlength="50"
-																width="150px" />
-														</row>
-														<row>
-															<separator
-																bar="true">
-															</separator>
-															<separator
-																bar="true">
-															</separator>
-														</row>
-														<row>
-															<label
-																id="label_UserDialog_usrFirstname"
-																value="${c:l('label_UserDialog_usrFirstname.value')}" />
-															<textbox
-																id="usrFirstname" maxlength="50" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_UserDialog_usrLastname"
-																value="${c:l('label_UserDialog_usrLastname.value')}" />
-															<textbox
-																id="usrLastname" maxlength="50" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_UserDialog_usrEmail"
-																value="${c:l('label_UserDialog_usrEmail.value')}" />
-															<textbox
-																id="usrEmail" maxlength="200" width="99%" />
-														</row>
-														<row>
-															<label
-																id="label_UserDialog_usrLocale"
-																value="${c:l('label_UserDialog_usrLocale.value')}" />
-															<listbox
-																id="lbox_usrLocale" width="120px" mold="select"
-																multiple="false" rows="1" />
-														</row>
 
-													</rows>
-												</grid>
+												<groupbox mold="3d">
+													<caption
+														image="/images/icons/view.gif"
+														label="${c:l('panel_UserDialog_AccountDetails.title')}" />
+
+													<grid
+														sclass="GridLayoutNoBorder" fixedLayout="true"
+														style="border:0px; padding-left:5px; padding-right:5px;">
+														<columns>
+															<column
+																width="150px" />
+															<column
+																width="100%" />
+														</columns>
+														<rows>
+															<row>
+																<label
+																	id="label_UserDialog_usrLoginname"
+																	value="${c:l('label_UserDialog_usrLoginname.value')}" />
+																<textbox
+																	id="usrLoginname" maxlength="50" width="150px" />
+															</row>
+															<row>
+																<separator
+																	bar="true">
+																</separator>
+																<separator
+																	bar="true">
+																</separator>
+															</row>
+															<row>
+																<label
+																	id="label_UserDialog_usrPassword"
+																	value="${c:l('label_UserDialog_usrPassword.value')}" />
+																<textbox
+																	id="usrPassword" type="password" maxlength="50"
+																	width="150px" />
+															</row>
+															<row>
+																<label
+																	id="label_UserDialog_usrPasswordRetype"
+																	value="${c:l('label_UserDialog_usrPasswordRetype.value')}" />
+																<textbox
+																	id="usrPasswordRetype" type="password" maxlength="50"
+																	width="150px" />
+															</row>
+															<row>
+																<separator
+																	bar="true">
+																</separator>
+																<separator
+																	bar="true">
+																</separator>
+															</row>
+															<row>
+																<label
+																	id="label_UserDialog_usrFirstname"
+																	value="${c:l('label_UserDialog_usrFirstname.value')}" />
+																<textbox
+																	id="usrFirstname" maxlength="50" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_UserDialog_usrLastname"
+																	value="${c:l('label_UserDialog_usrLastname.value')}" />
+																<textbox
+																	id="usrLastname" maxlength="50" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_UserDialog_usrEmail"
+																	value="${c:l('label_UserDialog_usrEmail.value')}" />
+																<textbox
+																	id="usrEmail" maxlength="200" width="99%" />
+															</row>
+															<row>
+																<label
+																	id="label_UserDialog_usrLocale"
+																	value="${c:l('label_UserDialog_usrLocale.value')}" />
+																<listbox
+																	id="lbox_usrLocale" width="120px" mold="select"
+																	multiple="false" rows="1" />
+															</row>
+
+														</rows>
+													</grid>
+												</groupbox>
 											</panelchildren>
 										</panel>
+
 										<panel
-											id="panel_UserDialog_Status" title="Status"
-											style="margin-bottom:10px" border="normal">
+											id="panel_UserDialog_Status" border="none">
 											<panelchildren>
-												<grid fixedLayout="true"
-													style="border:0px">
-													<columns>
-														<column
-															width="150px" />
-														<column
-															width="100%" />
-													</columns>
-													<rows>
-														<row>
-															<label
-																id="label_UserDialog_usrEnabled"
-																value="${c:l('label_UserDialog_usrEnabled.value')}" />
-															<checkbox
-																id="usrEnabled" />
-														</row>
-														<row>
-															<label
-																id="label_UserDialog_usrAccountnonexpired"
-																value="${c:l('label_UserDialog_usrAccountnonexpired.value')}" />
-															<checkbox
-																id="usrAccountnonexpired" />
-														</row>
-														<row>
-															<label
-																id="label_UserDialog_usrCredentialsnonexpired"
-																value="${c:l('label_UserDialog_usrCredentialsnonexpired.value')}" />
-															<checkbox
-																id="usrCredentialsnonexpired" />
-														</row>
-														<row>
-															<label
-																id="label_UserDialog_usrAccountnonlocked"
-																value="${c:l('label_UserDialog_usrAccountnonlocked.value')}" />
-															<checkbox
-																id="usrAccountnonlocked" />
-														</row>
-													</rows>
-												</grid>
+
+												<groupbox mold="3d">
+													<caption
+														image="/images/icons/view.gif" label="Status" />
+
+													<grid
+														sclass="GridLayoutNoBorder" fixedLayout="true"
+														style="border:0px; padding-left:5px; padding-right:5px;">
+
+														<columns>
+															<column
+																width="150px" />
+															<column
+																width="100%" />
+														</columns>
+														<rows>
+															<row>
+																<label
+																	id="label_UserDialog_usrEnabled"
+																	value="${c:l('label_UserDialog_usrEnabled.value')}" />
+																<checkbox
+																	id="usrEnabled" />
+															</row>
+															<row>
+																<label
+																	id="label_UserDialog_usrAccountnonexpired"
+																	value="${c:l('label_UserDialog_usrAccountnonexpired.value')}" />
+																<checkbox
+																	id="usrAccountnonexpired" />
+															</row>
+															<row>
+																<label
+																	id="label_UserDialog_usrCredentialsnonexpired"
+																	value="${c:l('label_UserDialog_usrCredentialsnonexpired.value')}" />
+																<checkbox
+																	id="usrCredentialsnonexpired" />
+															</row>
+															<row>
+																<label
+																	id="label_UserDialog_usrAccountnonlocked"
+																	value="${c:l('label_UserDialog_usrAccountnonlocked.value')}" />
+																<checkbox
+																	id="usrAccountnonlocked" />
+															</row>
+														</rows>
+													</grid>
+												</groupbox>
 											</panelchildren>
 										</panel>
 									</columnchildren>
 
 									<columnchildren width="50%"
 										style="padding: 5px">
+
 										<panel
-											id="panel_UserDialog_SecurityToken"
-											title="${c:l('panel_UserDialog_SecurityToken.title')}"
-											style="margin-bottom:10px" border="normal">
+											id="panel_UserDialog_SecurityToken" border="none">
 											<panelchildren>
-												<grid fixedLayout="true"
-													style="border:0px">
-													<columns>
-														<column
-															width="150px" />
-														<column
-															width="100%" />
-													</columns>
-													<rows>
-														<row>
-															<label
-																id="label_UserDialog_usrToken"
-																value="${c:l('label_UserDialog_usrToken.value')}" />
-															<textbox
-																id="usrToken" type="password" maxlength="20"
+
+												<groupbox mold="3d">
+													<caption
+														image="/images/icons/view.gif"
+														label="${c:l('panel_UserDialog_SecurityToken.title')}" />
+
+													<grid
+														sclass="GridLayoutNoBorder" fixedLayout="true"
+														style="border:0px; padding-left:5px; padding-right:5px;">
+
+														<columns>
+															<column
 																width="150px" />
-														</row>
-													</rows>
-												</grid>
+															<column
+																width="100%" />
+														</columns>
+														<rows>
+															<row>
+																<label
+																	id="label_UserDialog_usrToken"
+																	value="${c:l('label_UserDialog_usrToken.value')}" />
+																<textbox
+																	id="usrToken" type="password" maxlength="20"
+																	width="150px" />
+															</row>
+														</rows>
+													</grid>
+												</groupbox>
 											</panelchildren>
 										</panel>
 
-										<panel
-											id="panel_UserDialog_GrantedRoles"
-											title="${c:l('panel_UserDialog_GrantedRoles.title')}"
-											style="margin-bottom:10px" border="normal">
+										<panel border="none">
 											<panelchildren>
-												<listbox
-													id="listBoxDetails_UserRoles" width="100%" height="100%"
-													pagingPosition="top" mold="paging" pageSize="20"
-													multiple="false">
-													<listhead
-														sizable="true">
-														<listheader
-															id="listheader_UserDialog_UserRoleId" sort="none"
-															width="30%"
-															label="${c:l('listheader_UserDialog_UserRoleId.label')}" />
-														<listheader
-															id="listheader_UserDialog_UserRoleShortDescription"
-															sort="none" width="70%"
-															label="${c:l('listheader_UserDialog_UserRoleShortDescription.label')}" />
-													</listhead>
-												</listbox>
+
+												<groupbox mold="3d">
+													<caption
+														image="/images/icons/view.gif"
+														label="${c:l('panel_UserDialog_GrantedRoles.title')}" />
+
+													<listbox
+														id="listBoxDetails_UserRoles" width="100%" height="100%"
+														pagingPosition="top" mold="paging" pageSize="20"
+														multiple="false">
+														<listhead
+															sizable="true">
+															<listheader
+																id="listheader_UserDialog_UserRoleId" sort="none"
+																width="30%"
+																label="${c:l('listheader_UserDialog_UserRoleId.label')}" />
+															<listheader
+																id="listheader_UserDialog_UserRoleShortDescription"
+																sort="none" width="70%"
+																label="${c:l('listheader_UserDialog_UserRoleShortDescription.label')}" />
+														</listhead>
+													</listbox>
+												</groupbox>
 											</panelchildren>
 										</panel>
 									</columnchildren>
@@ -295,4 +312,14 @@
 	</window>
 </zk>
 
+<!-- 
+	<style>
+	body { padding: 0 0; /* 0 padding on top and bottom and 0
+	padding on right and left */ }
+	
+	.pageWindowTitle .z-window-embedded-header {color: #FF0000;
+	font-weight:bold; }
+	
+	</style>
+-->
 

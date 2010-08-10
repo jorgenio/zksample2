@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Zksample2.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
-package de.forsthaus.webui.article.report;
+package de.forsthaus.webui.office.report;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -59,14 +59,16 @@ import ar.com.fdvs.dj.domain.constants.Border;
 import ar.com.fdvs.dj.domain.constants.Font;
 import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
 import de.forsthaus.backend.model.Article;
+import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.service.ArticleService;
+import de.forsthaus.backend.service.OfficeService;
 import de.forsthaus.webui.util.FDDateFormat;
 import de.forsthaus.webui.util.FDUtils;
 
 /**
  * A simple report implemented with the DynamicJasper framework.<br>
  *<br>
- * This report shows a list of articles.<br>
+ * This report shows a list of Offices.<br>
  * <br>
  * The report uses the FastReportBuilder that have many parameters defined as
  * defaults, so it's very easy to create a simple report with it.<br>
@@ -75,7 +77,7 @@ import de.forsthaus.webui.util.FDUtils;
  * @author sge
  * 
  */
-public class ArticleSimpleDJReport extends Window implements Serializable {
+public class OfficeSimpleDJReport extends Window implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -86,7 +88,7 @@ public class ArticleSimpleDJReport extends Window implements Serializable {
 	private AMedia amedia;
 	private String zksample2title = "[Zksample2] DynamicJasper Report Sample";
 
-	public ArticleSimpleDJReport(Component parent) throws InterruptedException {
+	public OfficeSimpleDJReport(Component parent) throws InterruptedException {
 		super();
 		this.setParent(parent);
 
@@ -134,35 +136,41 @@ public class ArticleSimpleDJReport extends Window implements Serializable {
 		subtitleStyle.setFont(Font.ARIAL_MEDIUM_BOLD);
 
 		// Localized column headers
-		String artNo = Labels.getLabel("common.Article.No");
-		String artShortText = Labels.getLabel("common.Description.Short");
-		String artPrice = Labels.getLabel("common.Price");
+		String filNr = Labels.getLabel("common.Office.ID");
+		String filBezeichnung = Labels.getLabel("common.Description.Short");
+		String filName1 = Labels.getLabel("common.Name1");
+		String filName2 = Labels.getLabel("common.Name2");
+		String filOrt = Labels.getLabel("common.City");
 
-		drb.addColumn(artNo, "artNr", String.class.getName(), 20, columnStyleText, columnStyleTextBold);
-		drb.addColumn(artShortText, "artKurzbezeichnung", String.class.getName(), 50, columnStyleText, columnStyleTextBold);
-		drb.addColumn(artPrice, "artPreis", String.class.getName(), 20, columnStyleNumbers, columnStyleNumbersBold);
+		drb.addColumn(filNr, "filNr", String.class.getName(), 20, columnStyleText, columnStyleTextBold);
+		drb.addColumn(filBezeichnung, "filBezeichnung", String.class.getName(), 50, columnStyleText, columnStyleTextBold);
+		drb.addColumn(filName1, "filName1", String.class.getName(), 50, columnStyleText, columnStyleTextBold);
+		drb.addColumn(filName2, "filName2", String.class.getName(), 50, columnStyleText, columnStyleTextBold);
+		drb.addColumn(filOrt, "filOrt", String.class.getName(), 50, columnStyleText, columnStyleTextBold);
 
 		// Sets the Report Columns, header, Title, Groups, Etc Formats
 		// DynamicJasper documentation
 		drb.setTitle(zksample2title);
-		drb.setSubtitle("Article-List: " + FDDateFormat.getDateFormater().format(new Date()));
+		drb.setSubtitle("List of Offices: " + FDDateFormat.getDateFormater().format(new Date()));
 		drb.setSubtitleStyle(subtitleStyle);
 		drb.setPrintBackgroundOnOddRows(true);
 		drb.setUseFullPageWidth(true);
 		dr = drb.build();
 
 		// Get information from database
-		ArticleService as = (ArticleService) SpringUtil.getBean("articleService");
-		List<Article> articles = as.getAllArticles();
+		OfficeService as = (OfficeService) SpringUtil.getBean("officeService");
+		List<Office> offices = as.getOffices();
 
 		// Create Datasource and put it in Dynamic Jasper Format
-		List data = new ArrayList(articles.size());
+		List data = new ArrayList(offices.size());
 
-		for (Article article : articles) {
+		for (Office office : offices) {
 			Map<String, String> map1 = new HashMap<String, String>();
-			map1.put("artNr", article.getArtNr());
-			map1.put("artKurzbezeichnung", article.getArtKurzbezeichnung());
-			map1.put("artPreis", String.valueOf(article.getArtPreis()));
+			map1.put("filNr", office.getFilNr());
+			map1.put("filBezeichnung", office.getFilBezeichnung());
+			map1.put("filName1", String.valueOf(office.getFilName1()));
+			map1.put("filName2", String.valueOf(office.getFilName2()));
+			map1.put("filOrt", String.valueOf(office.getFilOrt()));
 			data.add(map1);
 		}
 

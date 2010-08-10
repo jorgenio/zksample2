@@ -113,7 +113,7 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 		 * filled by onClientInfo() in the indexCtroller
 		 */
 
-		int panelHeight = 25;
+		int panelHeight = 50;
 		// TODO put the logic for working with panel in the ApplicationWorkspace
 		boolean withPanel = false;
 		if (withPanel == false) {

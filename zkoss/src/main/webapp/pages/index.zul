@@ -22,10 +22,10 @@
 			white; padding: 0px }
 		</style>
 
-		<!-- hidden fields for storing the current desktop height and width -->
+		<!-- HIDDEN fields for storing the current desktop height and width -->
 		<intbox id="currentDesktopHeight" visible="false" />
 		<intbox id="currentDesktopWidth" visible="false" />
-		<!-- hidden field for storing the initial menu type -->
+		<!-- HIDDEN field for storing the initial menu type -->
 		<checkbox id="CBtreeMenu" checked="true" visible="false" />
 
 		<borderlayout id="borderlayoutMain" height="100%">

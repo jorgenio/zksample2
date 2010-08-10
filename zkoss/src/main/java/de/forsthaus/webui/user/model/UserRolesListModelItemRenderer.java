@@ -45,9 +45,9 @@ public class UserRolesListModelItemRenderer implements ListitemRenderer, Seriali
 
 		SecRole role = (SecRole) data;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + role.getRolShortdescription());
-		}
+		// if (logger.isDebugEnabled()) {
+		// logger.debug("--> " + role.getRolShortdescription());
+		// }
 
 		Listcell lc = new Listcell(String.valueOf(role.getId()));
 		lc.setParent(item);

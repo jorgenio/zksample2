@@ -10,44 +10,62 @@
 	<window id="secRoleListWindow" apply="${secRoleListCtrl}"
 		border="none" width="100%">
 
-		<style>
-			body { padding: 0 0; /* 0 padding on top and bottom and 0
-			padding on right and left */ }
-		</style>
-
 		<panel id="panel_SecRoleList"
 			title="${c:l('panel_SecRoleList.title')}" border="none" />
 
-		<toolbar>
-			<button id="btnHelp" image="/images/icons/light_16x16.gif"
-				tooltiptext="${c:l('btnHelp.tooltiptext')}" />
-			<button id="btnRefresh"
-				image="/images/icons/refresh2_yellow_16x16.gif"
-				tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
-			<separator orient="vertical" />
-			<button id="button_SecRoleList_NewSecRole"
-				image="/images/icons/btn_new2_16x16.gif"
-				tooltiptext="${c:l('button_SecRoleList_NewSecRole.tooltiptext')}" />
-			<button id="button_SecRoleList_PrintSecRole"
-				image="/images/icons/btn_print2_16x16.gif"
-				tooltiptext="${c:l('button_SecRoleList_PrintSecRole.tooltiptext')}" />
-		</toolbar>
+		<div sclass="z-toolbar" style="padding:0">
+			<hbox pack="stretch" sclass="hboxRemoveWhiteStrips"
+				width="100%">
 
-		<hbox style="padding: 3px">
-			<space />
-			<checkbox id="checkbox_SecRoleList_ShowAll"
-				label="${c:l('checkbox_SecRoleList_ShowAll.label')}" />
-			<separator bar="true" orient="vertical" />
+				<!-- COMMON BUTTONS -->
+				<toolbar align="start"
+					style="float:left; border-style: none;">
+					<button id="btnHelp" height="24px"
+						image="/images/icons/light_16x16.gif"
+						tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+					<button id="btnRefresh" height="24px"
+						image="/images/icons/refresh2_yellow_16x16.gif"
+						tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
+					<separator orient="vertical" />
+					<button id="button_SecRoleList_NewSecRole"
+						height="24px" image="/images/icons/btn_new2_16x16.gif"
+						tooltiptext="${c:l('button_SecRoleList_NewSecRole.tooltiptext')}" />
+					<button id="button_SecRoleList_PrintSecRole"
+						height="24px" image="/images/icons/btn_print2_16x16.gif"
+						tooltiptext="${c:l('button_SecRoleList_PrintSecRole.tooltiptext')}" />
+				</toolbar>
 
-			<label id="label_SecRoleList_rolShortdescription"
-				value="${c:l('label_SecRoleList_rolShortdescription.value')}" />
-			<textbox id="tb_SecRole_RoleName" width="120px" />
-			<button id="button_SecRoleList_rolShortdescription"
-				image="/images/icons/search.gif"
-				label="${c:l('button_SecRoleList_rolShortdescription.label')}"
-				tooltiptext="${c:l('button_SecRoleList_rolShortdescription.tooltiptext')}" />
-			<separator bar="true" orient="vertical" />
-		</hbox>
+				<!-- SEARCH AREA -->
+				<toolbar align="center"
+					style="float:left; border-style: none;">
+					<hbox align="center" style="padding: 2px">
+
+						<separator bar="true" orient="vertical" />
+						<space />
+						<checkbox id="checkbox_SecRoleList_ShowAll"
+							label="${c:l('common.Show.All')}" />
+						<separator bar="true" orient="vertical" />
+
+						<label
+							id="label_SecRoleList_rolShortdescription"
+							value="${c:l('label_SecRoleList_rolShortdescription.value')}" />
+						<textbox id="tb_SecRole_RoleName" width="120px" />
+						<button
+							id="button_SecRoleList_rolShortdescription" height="24px"
+							image="/images/icons/search.gif"
+							tooltiptext="${c:l('button_SecRoleList_rolShortdescription.tooltiptext')}" />
+						<separator bar="true" orient="vertical" />
+
+					</hbox>
+				</toolbar>
+
+				<!-- CRUD BUTTONS -->
+				<toolbar align="end"
+					style="float:right; border-style: none;">
+				</toolbar>
+			</hbox>
+		</div>
+
 
 		<borderlayout id="borderLayout_secRolesList">
 

@@ -62,9 +62,9 @@ public class SecRightListModelItemRenderer implements ListitemRenderer, Serializ
 
 		SecRight right = (SecRight) data;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + right.getRigName());
-		}
+		// if (logger.isDebugEnabled()) {
+		// logger.debug("--> " + right.getRigName());
+		// }
 
 		Listcell lc;
 

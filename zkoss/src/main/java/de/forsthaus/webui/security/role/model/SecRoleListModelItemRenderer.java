@@ -45,9 +45,10 @@ public class SecRoleListModelItemRenderer implements ListitemRenderer, Serializa
 
 		SecRole role = (SecRole) data;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + role.getRolShortdescription());
-		}
+		// if (logger.isDebugEnabled()) {
+		// logger.debug("--> " + role.getRolShortdescription());
+		// }
+
 		Listcell lc;
 
 		lc = new Listcell(role.getRolShortdescription());

@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.EventQueues;
@@ -28,6 +29,8 @@ import de.forsthaus.UserWorkspace;
 import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.service.OfficeService;
 import de.forsthaus.backend.util.HibernateSearchObject;
+import de.forsthaus.webui.branch.report.BranchSimpleDJReport;
+import de.forsthaus.webui.office.report.OfficeSimpleDJReport;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
@@ -225,9 +228,8 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_OfficeList_PrintList(Event event) throws InterruptedException {
-		logger.debug(event.toString());
-
-		FDUtils.doShowNotImplementedMessage();
+		Window win = (Window) Path.getComponent("/outerIndexWindow");
+		new OfficeSimpleDJReport(win);
 	}
 
 	/**

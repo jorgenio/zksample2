@@ -68,9 +68,9 @@ public class SecRolegroupGroupListModelItemRenderer implements ListitemRenderer,
 
 		SecGroup group = (SecGroup) data;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + group.getGrpShortdescription());
-		}
+		// if (logger.isDebugEnabled()) {
+		// logger.debug("--> " + group.getGrpShortdescription());
+		// }
 
 		Listcell lc = new Listcell();
 		Checkbox cb = new Checkbox();

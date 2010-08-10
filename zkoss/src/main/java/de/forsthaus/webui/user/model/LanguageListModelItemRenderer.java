@@ -44,9 +44,9 @@ public class LanguageListModelItemRenderer implements ListitemRenderer, Serializ
 
 		Language language = (Language) data;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + language.getLanText());
-		}
+//		if (logger.isDebugEnabled()) {
+//			logger.debug("--> " + language.getLanText());
+//		}
 
 		Listcell lc = new Listcell(language.getLanText());
 		lc.setParent(item);

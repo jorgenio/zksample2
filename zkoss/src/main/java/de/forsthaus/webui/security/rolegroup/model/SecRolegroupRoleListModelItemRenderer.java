@@ -45,9 +45,9 @@ public class SecRolegroupRoleListModelItemRenderer implements ListitemRenderer, 
 
 		SecRole role = (SecRole) data;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + role.getRolShortdescription());
-		}
+		// if (logger.isDebugEnabled()) {
+		// logger.debug("--> " + role.getRolShortdescription());
+		// }
 
 		Listcell lc;
 

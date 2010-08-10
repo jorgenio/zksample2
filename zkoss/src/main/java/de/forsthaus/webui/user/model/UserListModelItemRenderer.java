@@ -46,9 +46,10 @@ public class UserListModelItemRenderer implements ListitemRenderer, Serializable
 
 		SecUser user = (SecUser) data;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + user.getUsrLoginname() + "|" + user.getUsrLastname());
-		}
+		// if (logger.isDebugEnabled()) {
+		// logger.debug("--> " + user.getUsrLoginname() + "|" +
+		// user.getUsrLastname());
+		// }
 
 		Listcell lc;
 		lc = new Listcell(user.getUsrLoginname());

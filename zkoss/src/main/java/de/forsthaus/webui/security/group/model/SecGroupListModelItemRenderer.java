@@ -45,9 +45,9 @@ public class SecGroupListModelItemRenderer implements ListitemRenderer, Serializ
 
 		SecGroup group = (SecGroup) data;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + group.getGrpShortdescription());
-		}
+		// if (logger.isDebugEnabled()) {
+		// logger.debug("--> " + group.getGrpShortdescription());
+		// }
 
 		Listcell lc;
 

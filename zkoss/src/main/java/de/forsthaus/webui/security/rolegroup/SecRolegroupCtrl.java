@@ -149,7 +149,7 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 
 		/* ++++ calculate the heights +++++ */
 		int topHeader = 30;
-		int btnTopArea = 45;
+		int btnTopArea = 42;
 		int winTitle = 30;
 
 		/**
@@ -201,8 +201,8 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 		borderLayout_Roles.setHeight(String.valueOf(maxListBoxHeight - 5) + "px");
 		borderLayout_Groups.setHeight(String.valueOf(maxListBoxHeight - 5) + "px");
 
-		listBoxSecRole.setHeight(String.valueOf(maxListBoxHeight - 150) + "px");
-		listBoxSecRolegroup.setHeight(String.valueOf(maxListBoxHeight - 150) + "px");
+		listBoxSecRole.setHeight(String.valueOf(maxListBoxHeight - 130) + "px");
+		listBoxSecRolegroup.setHeight(String.valueOf(maxListBoxHeight - 130) + "px");
 
 		/* Tab Details */
 		// ++ create the searchObject and init sorting ++//

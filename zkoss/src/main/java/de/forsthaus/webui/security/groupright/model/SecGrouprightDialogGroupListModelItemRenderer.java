@@ -45,9 +45,9 @@ public class SecGrouprightDialogGroupListModelItemRenderer implements ListitemRe
 
 		SecGroup group = (SecGroup) data;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + group.getGrpShortdescription());
-		}
+		// if (logger.isDebugEnabled()) {
+		// logger.debug("--> " + group.getGrpShortdescription());
+		// }
 
 		Listcell lc = new Listcell(group.getGrpShortdescription());
 		lc.setParent(item);

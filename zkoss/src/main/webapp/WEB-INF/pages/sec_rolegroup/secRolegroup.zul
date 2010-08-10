@@ -10,51 +10,47 @@
 	<window id="secRolegroupWindow" apply="${secRolegroupCtrl}"
 		border="none" width="100%" height="100%">
 
-		<style>
-			body { padding: 0 0; /* 0 padding on top and bottom and 0
-			padding on right and left */ }
-		</style>
-
 		<panel id="panel_SecRoleGroup"
 			title="${c:l('panel_SecRoleGroup.title')}" border="none" />
 
 		<borderlayout id="borderlayoutSecRolegroup" height="100%">
 
 			<north border="none" margins="0,0,0,0">
-				<grid>
-					<columns sizable="true" height="20px">
-						<!-- Help Button -->
-						<column width="80px" align="left">
-							<hbox>
-								<button id="btnHelp"
-									image="/images/icons/light_16x16.gif"
-									tooltiptext="${c:l('btnHelp.tooltiptext')}" />
-								<button id="btnRefresh"
-									image="/images/icons/refresh2_yellow_16x16.gif"
-									tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
-								<separator orient="vertical" />
+
+				<div sclass="z-toolbar" style="padding:0">
+					<hbox pack="stretch" sclass="hboxRemoveWhiteStrips"
+						width="100%">
+
+						<!-- COMMON BUTTONS -->
+						<toolbar align="start"
+							style="float:left; border-style: none;">
+							<button id="btnHelp" height="24px"
+								image="/images/icons/light_16x16.gif"
+								tooltiptext="${c:l('btnHelp.tooltiptext')}" />
+							<button id="btnRefresh" height="24px"
+								image="/images/icons/refresh2_yellow_16x16.gif"
+								tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
+							<separator orient="vertical" />
+						</toolbar>
+
+						<!-- SEARCH AREA -->
+						<toolbar align="center"
+							style="float:left; border-style: none;">
+							<hbox align="center" style="padding: 2px">
+
 							</hbox>
-						</column>
+						</toolbar>
 
-						<!-- Addtionally Buttons -->
-						<column align="center">
-							<hbox>
+						<!-- CRUD BUTTONS -->
+						<toolbar align="end"
+							style="float:right; border-style: none;">
+							<button id="btnSave" height="24px"
+								image="/images/icons/btn_save2_16x16.gif"
+								tooltiptext="${c:l('btnSave.tooltiptext')}" />
+						</toolbar>
+					</hbox>
+				</div>
 
-							</hbox>
-						</column>
-
-						<!-- CRUD Buttons -->
-						<column align="right">
-							<hbox spacing="5px" style="padding:1px"
-								align="end">
-								<button id="btnSave" height="20"
-									image="/images/icons/btn_save2_16x16.gif"
-									tooltiptext="${c:l('btnSave.tooltiptext')}" />
-							</hbox>
-
-						</column>
-					</columns>
-				</grid>
 			</north>
 
 			<center border="none" margins="0,0,0,0">

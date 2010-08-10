@@ -45,9 +45,9 @@ public class SecUserroleUserListModelItemRenderer implements ListitemRenderer, S
 
 		SecUser user = (SecUser) data;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + user.getUsrLoginname());
-		}
+		// if (logger.isDebugEnabled()) {
+		// logger.debug("--> " + user.getUsrLoginname());
+		// }
 
 		Listcell lc;
 

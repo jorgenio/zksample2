@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Zksample2.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
-package de.forsthaus.webui.article.report;
+package de.forsthaus.webui.branch.report;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -58,15 +58,15 @@ import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
 import ar.com.fdvs.dj.domain.constants.Border;
 import ar.com.fdvs.dj.domain.constants.Font;
 import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
-import de.forsthaus.backend.model.Article;
-import de.forsthaus.backend.service.ArticleService;
+import de.forsthaus.backend.model.Branche;
+import de.forsthaus.backend.service.BrancheService;
 import de.forsthaus.webui.util.FDDateFormat;
 import de.forsthaus.webui.util.FDUtils;
 
 /**
  * A simple report implemented with the DynamicJasper framework.<br>
- *<br>
- * This report shows a list of articles.<br>
+ * <br>
+ * This report shows a list of branches.<br>
  * <br>
  * The report uses the FastReportBuilder that have many parameters defined as
  * defaults, so it's very easy to create a simple report with it.<br>
@@ -75,7 +75,7 @@ import de.forsthaus.webui.util.FDUtils;
  * @author sge
  * 
  */
-public class ArticleSimpleDJReport extends Window implements Serializable {
+public class BranchSimpleDJReport extends Window implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -86,7 +86,7 @@ public class ArticleSimpleDJReport extends Window implements Serializable {
 	private AMedia amedia;
 	private String zksample2title = "[Zksample2] DynamicJasper Report Sample";
 
-	public ArticleSimpleDJReport(Component parent) throws InterruptedException {
+	public BranchSimpleDJReport(Component parent) throws InterruptedException {
 		super();
 		this.setParent(parent);
 
@@ -134,35 +134,29 @@ public class ArticleSimpleDJReport extends Window implements Serializable {
 		subtitleStyle.setFont(Font.ARIAL_MEDIUM_BOLD);
 
 		// Localized column headers
-		String artNo = Labels.getLabel("common.Article.No");
-		String artShortText = Labels.getLabel("common.Description.Short");
-		String artPrice = Labels.getLabel("common.Price");
+		String description = Labels.getLabel("common.Description");
 
-		drb.addColumn(artNo, "artNr", String.class.getName(), 20, columnStyleText, columnStyleTextBold);
-		drb.addColumn(artShortText, "artKurzbezeichnung", String.class.getName(), 50, columnStyleText, columnStyleTextBold);
-		drb.addColumn(artPrice, "artPreis", String.class.getName(), 20, columnStyleNumbers, columnStyleNumbersBold);
+		drb.addColumn(description, "braBezeichnung", String.class.getName(), 20, columnStyleText, columnStyleTextBold);
 
 		// Sets the Report Columns, header, Title, Groups, Etc Formats
 		// DynamicJasper documentation
 		drb.setTitle(zksample2title);
-		drb.setSubtitle("Article-List: " + FDDateFormat.getDateFormater().format(new Date()));
+		drb.setSubtitle("List of branches: " + FDDateFormat.getDateFormater().format(new Date()));
 		drb.setSubtitleStyle(subtitleStyle);
 		drb.setPrintBackgroundOnOddRows(true);
 		drb.setUseFullPageWidth(true);
 		dr = drb.build();
 
 		// Get information from database
-		ArticleService as = (ArticleService) SpringUtil.getBean("articleService");
-		List<Article> articles = as.getAllArticles();
+		BrancheService as = (BrancheService) SpringUtil.getBean("brancheService");
+		List<Branche> branches = as.getAlleBranche();
 
 		// Create Datasource and put it in Dynamic Jasper Format
-		List data = new ArrayList(articles.size());
+		List data = new ArrayList(branches.size());
 
-		for (Article article : articles) {
+		for (Branche branche : branches) {
 			Map<String, String> map1 = new HashMap<String, String>();
-			map1.put("artNr", article.getArtNr());
-			map1.put("artKurzbezeichnung", article.getArtKurzbezeichnung());
-			map1.put("artPreis", String.valueOf(article.getArtPreis()));
+			map1.put("braBezeichnung", branche.getBraBezeichnung());
 			data.add(map1);
 		}
 

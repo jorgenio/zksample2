@@ -13,6 +13,8 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 10.07.2010 / Added two more reports ( OfficeList and BranchesList ), every report needs only 10 min. for coding. " + lf;
+		s = s + "                      A lot of design changes in the Administrator sections for the next coming databinding restructuring." + lf;
 		s = s + "- 09.07.2010 / First JasperReport build with the great DynamicJasper framework. Only pure Java, no XML. " + lf;
 		s = s + "                      Report is placed in the Article module. More advanced reports are coming in the next days." + lf;
 		s = s + "- 06.07.2010 / Checkin of the new Zksample2 based on zk 5.0.3 in /trunk. More changes comes in the next days.  " + lf;

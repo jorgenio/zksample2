@@ -149,7 +149,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		height = height + panelHeight;
-		int maxListBoxHeight = (height - 165);
+		int maxListBoxHeight = (height - 137);
 		setCountRows(Math.round(maxListBoxHeight / 25));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());
@@ -160,6 +160,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 		// lh.setSortAscending(""); lh.setSortDescending("")
 		listheader_UserList_usrLoginname.setSortAscending(new FieldComparator("usrLoginname", true));
 		listheader_UserList_usrLoginname.setSortDescending(new FieldComparator("usrLoginname", false));
+		listheader_UserList_usrLoginname.setSortDirection("ascending");
 		listheader_UserList_usrLastname.setSortAscending(new FieldComparator("usrLastname", true));
 		listheader_UserList_usrLastname.setSortDescending(new FieldComparator("usrLastname", false));
 		listheader_UserList_usrEmail.setSortAscending(new FieldComparator("usrEmail", true));

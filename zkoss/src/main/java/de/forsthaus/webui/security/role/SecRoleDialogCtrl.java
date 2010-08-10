@@ -263,7 +263,7 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 			// Show a confirm box
 			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
-			String title = Labels.getLabel("message_Information");
+			String title = Labels.getLabel("message.Information");
 
 			MultiLineMessageBox.doSetTemplate();
 			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
@@ -296,6 +296,7 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doCancel() {
 		doResetInitValues();
+		doReadOnly();
 		btnCtrl.setInitEdit();
 	}
 

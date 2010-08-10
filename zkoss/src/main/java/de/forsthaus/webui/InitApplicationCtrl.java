@@ -774,7 +774,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 			Clients.showBusy("", false); // close the message
 
 			String message = Labels.getLabel("Demo.not_more_than_80000_records");
-			String title = Labels.getLabel("message_Information");
+			String title = Labels.getLabel("message.Information");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 

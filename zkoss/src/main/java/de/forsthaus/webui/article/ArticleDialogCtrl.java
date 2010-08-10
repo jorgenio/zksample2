@@ -243,7 +243,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
+		String title = Labels.getLabel("message.Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 	}
@@ -332,7 +332,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 			// Show a confirm box
 			String message = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
-			String title = Labels.getLabel("message_Information");
+			String title = Labels.getLabel("message.Information");
 
 			MultiLineMessageBox.doSetTemplate();
 			if (MultiLineMessageBox.show(message, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {

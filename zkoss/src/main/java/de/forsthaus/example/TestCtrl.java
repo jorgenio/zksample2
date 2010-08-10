@@ -298,7 +298,7 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 		String longString5 = "Hello. I'm a long string\n\n Hello i'm the second line.\n hjdgf hgjhdgsfhsd jhgjd sfjgj gfdsfg röplg reo ropekpo rekerop ok orek oprek porkeop re ";
 		String longString6 = "Hello. I'm a long string\n\n Hello i'm the second line.\n hjdgf hgjhdgsfhsd jhgjd sfjgj gfdsfg pork oprkk opre opkrepok oprek kopre oprekpo rkeop rke ";
 		String message = longString1 + longString2 + longString3 + longString4 + longString5 + longString6;
-		String title = Labels.getLabel("message_Information");
+		String title = Labels.getLabel("message.Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 
@@ -453,7 +453,7 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 
 		try {
 			String message = Labels.getLabel("message.Information.OutOfOrder");
-			String title = Labels.getLabel("message_Information");
+			String title = Labels.getLabel("message.Information");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 			return;

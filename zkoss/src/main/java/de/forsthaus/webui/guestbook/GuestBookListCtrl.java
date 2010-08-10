@@ -207,7 +207,7 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 		}
 
 		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message_Information");
+		String title = Labels.getLabel("message.Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 	}

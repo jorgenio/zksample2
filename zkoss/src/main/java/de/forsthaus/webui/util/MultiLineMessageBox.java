@@ -129,8 +129,7 @@ public class MultiLineMessageBox extends Messagebox implements Serializable {
 	 * @return
 	 * @throws InterruptedException
 	 */
-	public static final int show(String message, String title, int buttons, String icon, boolean padding, EventListener listener)
-			throws InterruptedException {
+	public static final int show(String message, String title, int buttons, String icon, boolean padding, EventListener listener) throws InterruptedException {
 
 		String msg = message;
 

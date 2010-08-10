@@ -10,7 +10,7 @@
 	<window id="secGroupDialogWindow"
 		title="${c:l('secGroupDialogWindow.title')}" border="none"
 		apply="${secGroupDialogCtrl}" closable="true" width="500px"
-		height="200px" sizable="true">
+		height="230px" sizable="true">
 
 		<borderlayout id="borderlayoutSecGroup">
 

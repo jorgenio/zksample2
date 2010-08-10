@@ -262,7 +262,7 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 			// Show a confirm box
 			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
-			String title = Labels.getLabel("message_Information");
+			String title = Labels.getLabel("message.Information");
 
 			MultiLineMessageBox.doSetTemplate();
 			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
@@ -294,6 +294,7 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doCancel() {
 		doResetInitValues();
+		doReadOnly();
 		btnCtrl.setInitEdit();
 	}
 
@@ -491,6 +492,9 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doNew() {
 
+		// remember the old vars
+		doStoreInitValues();
+
 		/** !!! DO NOT BREAK THE TIERS !!! */
 		// We don't create a new DomainObject() in the frontend.
 		// We GET it from the backend.
@@ -501,8 +505,6 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		btnCtrl.setBtnStatus_New();
 
-		// remember the old vars
-		doStoreInitValues();
 	}
 
 	/**

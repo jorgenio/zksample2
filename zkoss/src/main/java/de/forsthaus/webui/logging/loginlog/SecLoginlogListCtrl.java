@@ -231,7 +231,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 					checkbox_SecLoginlogList_ShowAll.setChecked(true);
 
 					String message = Labels.getLabel("message.information.only5timesAllowedBecauseHS");
-					String title = Labels.getLabel("message_Information") + " --> ServerPush-Sample";
+					String title = Labels.getLabel("message.Information") + " --> ServerPush-Sample";
 					MultiLineMessageBox.doSetTemplate();
 					MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 
@@ -484,7 +484,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		int recCount = getLoginLoggingService().deleteLocalIPs();
 
 		String message = Labels.getLabel("message.Information.CountRecordsDeleted") + " " + recCount;
-		String title = Labels.getLabel("message_Information");
+		String title = Labels.getLabel("message.Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 
@@ -517,7 +517,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 			int recCount = getGuiLoginLoggingService().importIP2CountryCSV();
 
 			String message = Labels.getLabel("message.Information.CountRecordsInsertedUpdated") + " " + recCount;
-			String title = Labels.getLabel("message_Information");
+			String title = Labels.getLabel("message.Information");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 		} else {
@@ -546,7 +546,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 			int recCount = getGuiLoginLoggingService().updateFromHostLookUpMain();
 
 			String message = Labels.getLabel("message.Information.CountRecordsInsertedUpdated") + " " + recCount;
-			String title = Labels.getLabel("message_Information");
+			String title = Labels.getLabel("message.Information");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 

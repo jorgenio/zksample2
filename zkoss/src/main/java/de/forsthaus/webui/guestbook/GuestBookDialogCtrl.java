@@ -124,11 +124,11 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 			logger.debug("--> " + event.toString());
 		}
 
-		/* set components visible dependent of the users rights */
-		doCheckRights();
-
 		// create the Button Controller. Disable not used buttons during working
 		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+
+		/* set components visible dependent of the users rights */
+		doCheckRights();
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -365,7 +365,10 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doCancel() {
 		doResetInitValues();
-		btnCtrl.setInitEdit();
+
+		// manually settings
+		// btnCtrl.setInitEdit();
+
 	}
 
 	/**
@@ -420,10 +423,13 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// set Readonly mode accordingly if the object is new or not.
 		if (aGuestBook.isNew()) {
-			btnCtrl.setInitNew();
+
+			// manually settings
+			// btnCtrl.setInitNew();
 			doEdit();
 		} else {
-			btnCtrl.setInitEdit();
+			// manually settings
+			// btnCtrl.setInitEdit();
 			doReadOnly();
 		}
 
@@ -578,7 +584,8 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doClear(); // clear all commponents
 		doEdit(); // edit mode
 
-		btnCtrl.setBtnStatus_New();
+		// manually settings
+		// btnCtrl.setBtnStatus_New();
 
 		// remember the old vars
 		doStoreInitValues();
@@ -593,7 +600,8 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 		textbox_gubSubject.setReadonly(false);
 		textbox_gubText.setReadonly(false);
 
-		btnCtrl.setBtnStatus_Edit();
+		// manually settings
+		// btnCtrl.setBtnStatus_Edit();
 
 		// remember the old vars
 		doStoreInitValues();
@@ -654,7 +662,8 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 			doResetInitValues();
 
 			doReadOnly();
-			btnCtrl.setBtnStatus_Save();
+			// manually settings
+			// btnCtrl.setBtnStatus_Save();
 			return;
 		}
 
@@ -670,7 +679,10 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		doReadOnly();
-		btnCtrl.setBtnStatus_Save();
+
+		// manually settings
+		// btnCtrl.setBtnStatus_Save();
+
 		// init the old values vars new
 		doStoreInitValues();
 	}

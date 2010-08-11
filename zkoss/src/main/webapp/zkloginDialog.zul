@@ -61,7 +61,7 @@
 						</div>
 						<div align="right">
 							<button id="button_ZKLoginDialog_ServerTime"
-								image="/images/icons/date_16x16.gif"
+								height="22px" image="/images/icons/date_16x16.gif"
 								tooltiptext="${c:l('button_ZKLoginDialog_ServerTime.tooltiptext')}" />
 						</div>
 					</hbox>
@@ -94,20 +94,19 @@
 									<textbox id="txtbox_Password"
 										type="password" name="j_password" width="98%" />
 								</row>
-								<row>
-									<separator bar="true" />
-									<separator bar="true" />
-								</row>
-								<row spans="2">
-									<hbox>
-										<h:input type="submit"
-											value="Login" />
-										<button id="btnReset"
-											mold="trendy" height="22px" label="Reset" />
-									</hbox>
-								</row>
+
 							</rows>
 						</grid>
+
+						<separator bar="false" />
+						<separator bar="true" />
+
+						<hbox>
+							<h:input type="submit" value="Login" />
+							<button id="btnReset" mold="trendy"
+								height="20px" label="Reset" />
+						</hbox>
+
 					</h:form>
 				</div>
 
@@ -115,18 +114,7 @@
 
 		</groupbox>
 
-		<!-- 
-			</panelchildren>
-			</panel>
-		-->
 	</window>
 </zk>
 
 
-<!-- Make Plain Grid -->
-<!-- 
-	.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
-	.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-	background: white; border-top: none; border-left: none;
-	border-right: none; border-bottom: none; }
--->

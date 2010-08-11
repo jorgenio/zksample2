@@ -81,7 +81,7 @@ public class OfficeSimpleDJReport extends Window implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Window window;
+
 	private Iframe iFrame;
 	private ByteArrayOutputStream output;
 	private InputStream mediais;
@@ -159,19 +159,19 @@ public class OfficeSimpleDJReport extends Window implements Serializable {
 
 		// Get information from database
 		OfficeService as = (OfficeService) SpringUtil.getBean("officeService");
-		List<Office> offices = as.getOffices();
+		List<Office> resultList = as.getOffices();
 
 		// Create Datasource and put it in Dynamic Jasper Format
-		List data = new ArrayList(offices.size());
+		List data = new ArrayList(resultList.size());
 
-		for (Office office : offices) {
-			Map<String, String> map1 = new HashMap<String, String>();
-			map1.put("filNr", office.getFilNr());
-			map1.put("filBezeichnung", office.getFilBezeichnung());
-			map1.put("filName1", String.valueOf(office.getFilName1()));
-			map1.put("filName2", String.valueOf(office.getFilName2()));
-			map1.put("filOrt", String.valueOf(office.getFilOrt()));
-			data.add(map1);
+		for (Office obj : resultList) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("filNr", obj.getFilNr());
+			map.put("filBezeichnung", obj.getFilBezeichnung());
+			map.put("filName1", String.valueOf(obj.getFilName1()));
+			map.put("filName2", String.valueOf(obj.getFilName2()));
+			map.put("filOrt", String.valueOf(obj.getFilOrt()));
+			data.add(map);
 		}
 
 		// Generate the Jasper Print Object

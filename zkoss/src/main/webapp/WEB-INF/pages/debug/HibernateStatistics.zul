@@ -11,15 +11,12 @@
 	<window id="window_HibernateStatisticList"
 		apply="${hibernateStatisticsCtrl}" border="none" width="100%">
 
-		<style>
-			body { padding: 0 0; /* 0 padding on top and bottom and 0
-			padding on right and left */ }
-		</style>
 
 		<toolbar>
-			<button id="btnHelp" image="/images/icons/light_16x16.gif"
+			<button id="btnHelp" height="24px"
+				image="/images/icons/light_16x16.gif"
 				tooltiptext="${c:l('btnHelp.tooltiptext')}" />
-			<button id="btnRefresh"
+			<button id="btnRefresh" height="24px"
 				image="/images/icons/refresh2_yellow_16x16.gif"
 				tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
 			<separator orient="vertical" />

@@ -10,7 +10,7 @@
 	<window id="secRightDialogWindow"
 		title="${c:l('secRightDialogWindow.title')}" border="none"
 		apply="${secRightDialogCtrl}" closable="true" width="470px"
-		height="185px" sizable="true">
+		height="175px" sizable="true">
 
 
 		<borderlayout id="borderlayoutSecRight">
@@ -40,7 +40,7 @@
 						<!-- CRUD BUTTONS -->
 						<toolbar align="end"
 							style="float:right; border-style: none;">
-							<button id="btnNew" height="20"
+							<button id="btnNew" height="24px"
 								tooltiptext="${c:l('btnNew.tooltiptext')}" />
 							<!-- label="${c:l('btnNew.label')}"	 -->
 							<button id="btnEdit" height="24px"

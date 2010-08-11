@@ -90,7 +90,7 @@
 										id="label_SecRoleDialog_rolLongdescription"
 										value="${c:l('label_SecRoleDialog_rolLongdescription.value')}" />
 									<textbox id="rolLongdescription"
-										width="99%" multiline="true" rows="5" />
+										width="98%" multiline="true" rows="5" />
 								</row>
 
 							</rows>

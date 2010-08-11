@@ -27,9 +27,7 @@
 						image="/images/icons/refresh2_yellow_16x16.gif"
 						tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
 					<separator orient="vertical" />
-					<button id="button_SecRoleList_NewSecRole"
-						height="24px" image="/images/icons/btn_new2_16x16.gif"
-						tooltiptext="${c:l('button_SecRoleList_NewSecRole.tooltiptext')}" />
+
 					<button id="button_SecRoleList_PrintSecRole"
 						height="24px" image="/images/icons/btn_print2_16x16.gif"
 						tooltiptext="${c:l('button_SecRoleList_PrintSecRole.tooltiptext')}" />
@@ -62,6 +60,9 @@
 				<!-- CRUD BUTTONS -->
 				<toolbar align="end"
 					style="float:right; border-style: none;">
+					<button id="button_SecRoleList_NewSecRole"
+						height="24px" image="/images/icons/btn_new2_16x16.gif"
+						tooltiptext="${c:l('button_SecRoleList_NewSecRole.tooltiptext')}" />
 				</toolbar>
 			</hbox>
 		</div>

@@ -45,6 +45,9 @@ import de.forsthaus.UserWorkspace;
  *          "button_CustomerDialog_btnNew" <br>
  *          12/02/2009 sge Changed Buttons from Text to Images with Tooltext.<br>
  *          02/04/2010 sge added a Cancel Button.<br>
+ *          07/01/2010 sge added a constructor parameter for let the CloseButton
+ *          appears or not. (Dialogs=Yes / DetailView = No).<br>
+ * 
  * @author bbruhns
  * @author sgerth
  */

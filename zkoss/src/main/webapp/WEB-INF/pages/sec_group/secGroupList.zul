@@ -20,16 +20,14 @@
 				<!-- COMMON BUTTONS -->
 				<toolbar align="start"
 					style="float:left; border-style: none;">
-					<button id="btnHelp"
+					<button id="btnHelp" height="24px"
 						image="/images/icons/light_16x16.gif"
 						tooltiptext="${c:l('btnHelp.tooltiptext')}" />
 					<button id="btnRefresh" height="24px"
 						image="/images/icons/refresh2_yellow_16x16.gif"
 						tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
 					<separator orient="vertical" />
-					<button id="button_SecGroupList_NewGroup"
-						height="24px" image="/images/icons/btn_new2_16x16.gif"
-						tooltiptext="${c:l('button_SecGroupList_NewGroup.tooltiptext')}" />
+
 					<button id="button_SecGroupList_PrintGroupList"
 						height="24px" image="/images/icons/btn_print2_16x16.gif"
 						tooltiptext="${c:l('button_SecGroupList_PrintGroupList.tooltiptext')}" />
@@ -60,7 +58,9 @@
 				<!-- CRUD BUTTONS -->
 				<toolbar align="end"
 					style="float:right; border-style: none;">
-
+					<button id="button_SecGroupList_NewGroup"
+						height="24px" image="/images/icons/btn_new2_16x16.gif"
+						tooltiptext="${c:l('button_SecGroupList_NewGroup.tooltiptext')}" />
 				</toolbar>
 			</hbox>
 		</div>

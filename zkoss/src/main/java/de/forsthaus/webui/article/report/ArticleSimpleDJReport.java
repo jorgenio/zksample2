@@ -23,6 +23,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -79,7 +80,6 @@ public class ArticleSimpleDJReport extends Window implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Window window;
 	private Iframe iFrame;
 	private ByteArrayOutputStream output;
 	private InputStream mediais;
@@ -140,7 +140,7 @@ public class ArticleSimpleDJReport extends Window implements Serializable {
 
 		drb.addColumn(artNo, "artNr", String.class.getName(), 20, columnStyleText, columnStyleTextBold);
 		drb.addColumn(artShortText, "artKurzbezeichnung", String.class.getName(), 50, columnStyleText, columnStyleTextBold);
-		drb.addColumn(artPrice, "artPreis", String.class.getName(), 20, columnStyleNumbers, columnStyleNumbersBold);
+		drb.addColumn(artPrice, "artPreis", BigDecimal.class.getName(), 20, columnStyleNumbers, columnStyleNumbersBold);
 
 		// Sets the Report Columns, header, Title, Groups, Etc Formats
 		// DynamicJasper documentation
@@ -153,17 +153,17 @@ public class ArticleSimpleDJReport extends Window implements Serializable {
 
 		// Get information from database
 		ArticleService as = (ArticleService) SpringUtil.getBean("articleService");
-		List<Article> articles = as.getAllArticles();
+		List<Article> resultList = as.getAllArticles();
 
 		// Create Datasource and put it in Dynamic Jasper Format
-		List data = new ArrayList(articles.size());
+		List data = new ArrayList(resultList.size());
 
-		for (Article article : articles) {
-			Map<String, String> map1 = new HashMap<String, String>();
-			map1.put("artNr", article.getArtNr());
-			map1.put("artKurzbezeichnung", article.getArtKurzbezeichnung());
-			map1.put("artPreis", String.valueOf(article.getArtPreis()));
-			data.add(map1);
+		for (Article obj : resultList) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("artNr", obj.getArtNr());
+			map.put("artKurzbezeichnung", obj.getArtKurzbezeichnung());
+			map.put("artPreis", obj.getArtPreis());
+			data.add(map);
 		}
 
 		// Generate the Jasper Print Object

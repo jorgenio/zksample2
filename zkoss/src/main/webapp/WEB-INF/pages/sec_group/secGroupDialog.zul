@@ -10,7 +10,7 @@
 	<window id="secGroupDialogWindow"
 		title="${c:l('secGroupDialogWindow.title')}" border="none"
 		apply="${secGroupDialogCtrl}" closable="true" width="500px"
-		height="230px" sizable="true">
+		height="225px" sizable="true">
 
 		<borderlayout id="borderlayoutSecGroup">
 
@@ -88,7 +88,7 @@
 										id="label_SecGroupDialog_grpLongdescription"
 										value="${c:l('label_SecGroupDialog_grpLongdescription.value')}" />
 									<textbox id="grpLongdescription"
-										width="99%" multiline="true" rows="5" />
+										width="98%" multiline="true" rows="5" />
 								</row>
 
 							</rows>

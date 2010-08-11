@@ -27,9 +27,7 @@
 						image="/images/icons/refresh2_yellow_16x16.gif"
 						tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
 					<separator orient="vertical" />
-					<button id="button_SecRightList_NewRight"
-						height="24px" image="/images/icons/btn_new2_16x16.gif"
-						tooltiptext="${c:l('button_SecRightList_NewRight.tooltiptext')}" />
+
 					<button id="button_SecRightList_PrintRightList"
 						height="24px" image="/images/icons/btn_print2_16x16.gif"
 						tooltiptext="${c:l('button_SecRightList_PrintRightList.tooltiptext')}" />
@@ -70,7 +68,9 @@
 				<!-- CRUD BUTTONS -->
 				<toolbar align="end"
 					style="float:right; border-style: none;">
-
+					<button id="button_SecRightList_NewRight"
+						height="24px" image="/images/icons/btn_new2_16x16.gif"
+						tooltiptext="${c:l('button_SecRightList_NewRight.tooltiptext')}" />
 				</toolbar>
 			</hbox>
 		</div>

@@ -57,7 +57,7 @@ public class GuestBookListtemRenderer implements ListitemRenderer, Serializable 
 		lc.setParent(item);
 
 		item.setAttribute("data", data);
-		ComponentsCtrl.applyForward(item, "onDoubleClick=onGuestBookItemDoubleClicked");
+		ComponentsCtrl.applyForward(item, "onDoubleClick=onDoubleClickedGuestBookItem");
 	}
 
 	/**

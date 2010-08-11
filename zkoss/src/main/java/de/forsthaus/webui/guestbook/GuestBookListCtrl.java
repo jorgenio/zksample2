@@ -281,7 +281,7 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 	 * @param event
 	 * @throws Exception
 	 */
-	public void onGuestBookItemDoubleClicked(Event event) throws Exception {
+	public void onDoubleClickedGuestBookItem(Event event) throws Exception {
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
 		}

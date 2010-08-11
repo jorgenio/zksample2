@@ -50,6 +50,7 @@ import de.forsthaus.backend.model.SecUser;
 import de.forsthaus.backend.service.UserService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.user.model.UserListModelItemRenderer;
+import de.forsthaus.webui.user.report.UserSimpleDJReport;
 import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
@@ -342,15 +343,14 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	}
 
 	/**
-	 * when the "print" button is clicked.
+	 * when the "print user list" button is clicked.
 	 * 
 	 * @param event
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_UserList_PrintUserList(Event event) throws InterruptedException {
-		logger.debug(event.toString());
-
-		FDUtils.doShowNotImplementedMessage();
+		Window win = (Window) Path.getComponent("/outerIndexWindow");
+		new UserSimpleDJReport(win);
 	}
 
 	/*

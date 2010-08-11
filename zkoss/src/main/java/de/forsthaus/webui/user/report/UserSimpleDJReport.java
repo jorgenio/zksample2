@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Zksample2.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
-package de.forsthaus.webui.branch.report;
+package de.forsthaus.webui.user.report;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -51,31 +51,36 @@ import org.zkoss.zul.Window;
 
 import ar.com.fdvs.dj.core.DynamicJasperHelper;
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
+import ar.com.fdvs.dj.domain.CustomExpression;
 import ar.com.fdvs.dj.domain.DynamicReport;
 import ar.com.fdvs.dj.domain.Style;
+import ar.com.fdvs.dj.domain.builders.ColumnBuilder;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
-import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
+import ar.com.fdvs.dj.domain.builders.DynamicReportBuilder;
 import ar.com.fdvs.dj.domain.constants.Border;
 import ar.com.fdvs.dj.domain.constants.Font;
 import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
-import de.forsthaus.backend.model.Branche;
-import de.forsthaus.backend.service.BrancheService;
+import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
+import de.forsthaus.backend.model.SecUser;
+import de.forsthaus.backend.service.UserService;
 import de.forsthaus.webui.util.FDDateFormat;
 import de.forsthaus.webui.util.FDUtils;
 
 /**
- * A simple report implemented with the DynamicJasper framework.<br>
+ * A report implemented with the DynamicJasper framework.<br>
+ *<br>
+ * This report shows a list of Users.<br>
  * <br>
- * This report shows a list of branches.<br>
- * <br>
- * The report uses the FastReportBuilder that have many parameters defined as
- * defaults, so it's very easy to create a simple report with it.<br>
+ * The report uses the DynamicReportBuilder that allowed more control over the
+ * columns. Additionally the report uses a CustomExpression for showing how to
+ * work with it. The CustomExpression checks a boolean field and writes only a
+ * 'T' for 'true and 'F' as 'False.<br>
  * 
  * @author bbruhns
  * @author sge
  * 
  */
-public class BranchSimpleDJReport extends Window implements Serializable {
+public class UserSimpleDJReport extends Window implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -85,7 +90,7 @@ public class BranchSimpleDJReport extends Window implements Serializable {
 	private AMedia amedia;
 	private String zksample2title = "[Zksample2] DynamicJasper Report Sample";
 
-	public BranchSimpleDJReport(Component parent) throws InterruptedException {
+	public UserSimpleDJReport(Component parent) throws InterruptedException {
 		super();
 		this.setParent(parent);
 
@@ -98,65 +103,126 @@ public class BranchSimpleDJReport extends Window implements Serializable {
 
 	public void doPrint() throws JRException, ColumnBuilderException, ClassNotFoundException, IOException {
 
-		FastReportBuilder drb = new FastReportBuilder();
-		DynamicReport dr;
+		// Localized column headers
+		String usrLoginname = Labels.getLabel("common.Loginname");
+		String usrLastname = Labels.getLabel("common.Lastname");
+		String usrFirstname = Labels.getLabel("common.Firstname");
+		String usrEmail = Labels.getLabel("common.Email");
+		String usrEnabled = Labels.getLabel("common.Enabled");
+
+		// Styles: Title
+		Style titleStyle = new Style();
+		titleStyle.setHorizontalAlign(HorizontalAlign.CENTER);
+		titleStyle.setFont(Font.ARIAL_BIG_BOLD);
+
+		// Styles: Subtitle
+		Style subtitleStyle = new Style();
+		subtitleStyle.setHorizontalAlign(HorizontalAlign.LEFT);
+		subtitleStyle.setFont(Font.ARIAL_MEDIUM_BOLD);
 
 		/**
 		 * Set the styles. In a report created with DynamicReportBuilder we do
 		 * this in an other way.
 		 */
+		// Header Style Text (left)
+		Style columnHeaderStyleText = new Style();
+		columnHeaderStyleText.setFont(Font.ARIAL_MEDIUM_BOLD);
+		columnHeaderStyleText.setHorizontalAlign(HorizontalAlign.LEFT);
+		columnHeaderStyleText.setBorderBottom(Border.PEN_1_POINT);
+
+		// Header Style Text (left)
+		Style columnHeaderStyleNumber = new Style();
+		columnHeaderStyleNumber.setFont(Font.ARIAL_MEDIUM_BOLD);
+		columnHeaderStyleNumber.setHorizontalAlign(HorizontalAlign.RIGHT);
+		columnHeaderStyleNumber.setBorderBottom(Border.PEN_1_POINT);
+
 		// Rows content
-		Style columnStyleNumbers = new Style();
-		columnStyleNumbers.setFont(Font.ARIAL_SMALL);
-		columnStyleNumbers.setHorizontalAlign(HorizontalAlign.RIGHT);
-
-		// Header for number row content
-		Style columnStyleNumbersBold = new Style();
-		columnStyleNumbersBold.setFont(Font.ARIAL_MEDIUM_BOLD);
-		columnStyleNumbersBold.setHorizontalAlign(HorizontalAlign.RIGHT);
-		columnStyleNumbersBold.setBorderBottom(Border.PEN_1_POINT);
+		Style columnDetailStyleText = new Style();
+		columnDetailStyleText.setFont(Font.ARIAL_SMALL);
+		columnDetailStyleText.setHorizontalAlign(HorizontalAlign.LEFT);
 
 		// Rows content
-		Style columnStyleText = new Style();
-		columnStyleText.setFont(Font.ARIAL_SMALL);
-		columnStyleText.setHorizontalAlign(HorizontalAlign.LEFT);
+		Style columnDetailStyleNumbers = new Style();
+		columnDetailStyleNumbers.setFont(Font.ARIAL_SMALL);
+		columnDetailStyleNumbers.setHorizontalAlign(HorizontalAlign.RIGHT);
 
-		// Header for String row content
-		Style columnStyleTextBold = new Style();
-		columnStyleTextBold.setFont(Font.ARIAL_MEDIUM_BOLD);
-		columnStyleTextBold.setHorizontalAlign(HorizontalAlign.LEFT);
-		columnStyleTextBold.setBorderBottom(Border.PEN_1_POINT);
-
-		// Subtitle
-		Style subtitleStyle = new Style();
-		subtitleStyle.setHorizontalAlign(HorizontalAlign.LEFT);
-		subtitleStyle.setFont(Font.ARIAL_MEDIUM_BOLD);
-
-		// Localized column headers
-		String description = Labels.getLabel("common.Description");
-
-		drb.addColumn(description, "braBezeichnung", String.class.getName(), 20, columnStyleText, columnStyleTextBold);
+		DynamicReportBuilder drb = new DynamicReportBuilder();
+		DynamicReport dr;
 
 		// Sets the Report Columns, header, Title, Groups, Etc Formats
 		// DynamicJasper documentation
 		drb.setTitle(zksample2title);
-		drb.setSubtitle("List of branches: " + FDDateFormat.getDateFormater().format(new Date()));
+		drb.setSubtitle("List of Users: " + FDDateFormat.getDateFormater().format(new Date()));
 		drb.setSubtitleStyle(subtitleStyle);
+		drb.setDetailHeight(10);
+		drb.setMargins(20, 20, 30, 15);
+		drb.setDefaultStyles(titleStyle, subtitleStyle, columnHeaderStyleText, columnDetailStyleText);
 		drb.setPrintBackgroundOnOddRows(true);
-		drb.setUseFullPageWidth(true);
-		dr = drb.build();
+
+		/**
+		 * Columns Definitions. A new ColumnBuilder instance for each column.
+		 */
+		// Login name
+		AbstractColumn colLoginName = ColumnBuilder.getNew().setColumnProperty("usrLoginname", String.class.getName()).build();
+		colLoginName.setTitle(usrLoginname);
+		colLoginName.setWidth(30);
+		colLoginName.setHeaderStyle(columnHeaderStyleText);
+		colLoginName.setStyle(columnDetailStyleText);
+		// Last name
+		AbstractColumn colLastName = ColumnBuilder.getNew().setColumnProperty("usrLastname", String.class.getName()).build();
+		colLastName.setTitle(usrLastname);
+		colLastName.setWidth(50);
+		colLastName.setHeaderStyle(columnHeaderStyleText);
+		colLastName.setStyle(columnDetailStyleText);
+		// First name
+		AbstractColumn colFirstName = ColumnBuilder.getNew().setColumnProperty("usrFirstname", String.class.getName()).build();
+		colFirstName.setTitle(usrFirstname);
+		colFirstName.setWidth(50);
+		colFirstName.setHeaderStyle(columnHeaderStyleText);
+		colFirstName.setStyle(columnDetailStyleText);
+		// Email address
+		AbstractColumn colEmail = ColumnBuilder.getNew().setColumnProperty("usrEmail", String.class.getName()).build();
+		colEmail.setTitle(usrEmail);
+		colEmail.setWidth(50);
+		colEmail.setHeaderStyle(columnHeaderStyleText);
+		colEmail.setStyle(columnDetailStyleText);
+		// Account enabled
+		AbstractColumn colEnabled = ColumnBuilder.getNew().setCustomExpression(getMyBooleanExpression()).build();
+		colEnabled.setTitle(usrEnabled);
+		colEnabled.setWidth(10);
+		colEnabled.setHeaderStyle(columnHeaderStyleText);
+		colEnabled.setStyle(columnDetailStyleText);
+
+		// Add the columns to the report in the whished order
+		drb.addColumn(colLoginName);
+		drb.addColumn(colLastName);
+		drb.addColumn(colFirstName);
+		drb.addColumn(colEmail);
+		drb.addColumn(colEnabled);
+
+		// Add the usrEnabled field to the report.
+		drb.addField("usrEnabled", Boolean.class.getName());
+
+		drb.setUseFullPageWidth(true); // use full width of the page
+		dr = drb.build(); // build the report
 
 		// Get information from database
-		BrancheService as = (BrancheService) SpringUtil.getBean("brancheService");
-		List<Branche> resultList = as.getAlleBranche();
+		UserService sv = (UserService) SpringUtil.getBean("userService");
+		List<SecUser> resultList = sv.getAlleUser();
 
 		// Create Datasource and put it in Dynamic Jasper Format
 		List data = new ArrayList(resultList.size());
 
-		for (Branche obj : resultList) {
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("braBezeichnung", obj.getBraBezeichnung());
+		for (SecUser obj : resultList) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("usrLoginname", obj.getUsrLoginname());
+			map.put("usrLastnusrEnabledame", obj.getUsrLastname());
+			map.put("usrFirstname", String.valueOf(obj.getUsrFirstname()));
+			map.put("usrEmail", String.valueOf(obj.getUsrEmail()));
+			// map.put("usrEnabled", String.valueOf(obj.isUsrEnabled()));
+			map.put("usrEnabled", obj.isUsrEnabled());
 			data.add(map);
+
 		}
 
 		// Generate the Jasper Print Object
@@ -195,6 +261,36 @@ public class BranchSimpleDJReport extends Window implements Serializable {
 
 			callReportWindow(amedia, "RTF-DOC");
 		}
+	}
+
+	/**
+	 * A CustomExpression that checks a boolean value and writes a 'T' as true
+	 * and a 'F' as false.<br>
+	 * 
+	 * @return
+	 */
+	private CustomExpression getMyBooleanExpression() {
+		return new CustomExpression() {
+
+			public Object evaluate(Map fields, Map variables, Map parameters) {
+				String result = "";
+
+				System.out.println("fieldsSize : " + fields.size());
+
+				boolean enabled = (Boolean) fields.get("usrEnabled");
+
+				if (enabled == true) {
+					result = Labels.getLabel("common.Yes");
+				} else
+					result = Labels.getLabel("common.No");
+
+				return result;
+			}
+
+			public String getClassName() {
+				return String.class.getName();
+			}
+		};
 	}
 
 	private void callReportWindow(AMedia aMedia, String format) {

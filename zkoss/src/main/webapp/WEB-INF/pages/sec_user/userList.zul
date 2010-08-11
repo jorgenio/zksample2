@@ -27,9 +27,7 @@
 						image="/images/icons/refresh2_yellow_16x16.gif"
 						tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
 					<separator orient="vertical" />
-					<button id="button_UserList_NewUser" height="24px"
-						image="/images/icons/btn_new2_16x16.gif"
-						tooltiptext="${c:l('button_UserList_NewUser.tooltiptext')}" />
+
 					<button id="button_UserList_PrintUserList"
 						height="24px" image="/images/icons/btn_print2_16x16.gif"
 						tooltiptext="${c:l('button_UserList_PrintUserList.tooltiptext')}" />
@@ -76,7 +74,9 @@
 				<!-- CRUD BUTTONS -->
 				<toolbar align="end"
 					style="float:right; border-style: none;">
-
+					<button id="button_UserList_NewUser" height="24px"
+						image="/images/icons/btn_new2_16x16.gif"
+						tooltiptext="${c:l('button_UserList_NewUser.tooltiptext')}" />
 				</toolbar>
 			</hbox>
 		</div>
@@ -97,15 +97,15 @@
 						<listheader
 							id="listheader_UserList_usrLoginname" sclass="FDListBoxHeader1"
 							image="/images/icons/create_doc.gif" sort="auto" width="20%"
-							label="${c:l('listheader_UserList_usrLoginname.label')}" />
+							label="${c:l('common.Loginname')}" />
 						<listheader id="listheader_UserList_usrLastname"
 							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"
 							sort="auto" width="15%"
-							label="${c:l('listheader_UserList_usrLastname.label')}" />
+							label="${c:l('common.Lastname')}" />
 						<listheader id="listheader_UserList_usrEmail"
 							sclass="FDListBoxHeader1" image="/images/icons/mail16x16.gif"
 							sort="auto" width="20%"
-							label="${c:l('listheader_UserList_usrEmail.label')}" />
+							label="${c:l('common.Email')}" />
 						<listheader id="listheader_UserList_usrEnabled"
 							sclass="FDListBoxHeader1">
 							<label id="label_lh_UserList_usrEnabled"

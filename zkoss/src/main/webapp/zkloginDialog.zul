@@ -94,7 +94,10 @@
 									<textbox id="txtbox_Password"
 										type="password" name="j_password" width="98%" />
 								</row>
-
+								<row>
+									<separator bar="true" />
+									<separator bar="true" />
+								</row>
 								<row spans="2">
 									<hbox>
 										<h:input type="submit"

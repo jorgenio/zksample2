@@ -154,7 +154,7 @@ public class BranchSimpleDJReport extends Window implements Serializable {
 		List data = new ArrayList(resultList.size());
 
 		for (Branche obj : resultList) {
-			Map<String, String> map = new HashMap<String, String>();
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("braBezeichnung", obj.getBraBezeichnung());
 			data.add(map);
 		}

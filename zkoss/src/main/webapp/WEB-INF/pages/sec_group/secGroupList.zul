@@ -37,7 +37,7 @@
 				<toolbar align="center"
 					style="float:left; border-style: none;">
 					<hbox align="center" style="padding: 2px">
-						<separator bar="true" orient="vertical" />
+
 						<space />
 						<checkbox id="checkbox_SecGroupList_ShowAll"
 							label="${c:l('common.Show.All')}" />
@@ -51,7 +51,7 @@
 						<button id="button_SecGroupList_SearchGroupName"
 							height="24px" image="/images/icons/search.gif"
 							tooltiptext="${c:l('button_SecGroupList_SearchGroupName.tooltiptext')}" />
-						<separator bar="true" orient="vertical" />
+
 					</hbox>
 				</toolbar>
 

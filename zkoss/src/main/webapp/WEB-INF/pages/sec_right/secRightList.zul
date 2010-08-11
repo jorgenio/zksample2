@@ -39,7 +39,6 @@
 					<hbox align="center" style="padding: 2px">
 
 						<space />
-						<separator bar="true" orient="vertical" />
 						<checkbox id="checkbox_SecRightList_ShowAll"
 							label="${c:l('common.Show.All')}" />
 						<separator bar="true" orient="vertical" />
@@ -60,7 +59,6 @@
 						<button id="button_SecRightList_SearchRightType"
 							height="24px" image="/images/icons/search.gif"
 							tooltiptext="${c:l('button_SecRightList_SearchRightType.tooltiptext')}" />
-						<separator bar="true" orient="vertical" />
 
 					</hbox>
 				</toolbar>

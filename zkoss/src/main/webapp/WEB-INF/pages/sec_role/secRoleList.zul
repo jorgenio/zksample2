@@ -38,7 +38,6 @@
 					style="float:left; border-style: none;">
 					<hbox align="center" style="padding: 2px">
 
-						<separator bar="true" orient="vertical" />
 						<space />
 						<checkbox id="checkbox_SecRoleList_ShowAll"
 							label="${c:l('common.Show.All')}" />
@@ -52,7 +51,6 @@
 							id="button_SecRoleList_rolShortdescription" height="24px"
 							image="/images/icons/search.gif"
 							tooltiptext="${c:l('button_SecRoleList_rolShortdescription.tooltiptext')}" />
-						<separator bar="true" orient="vertical" />
 
 					</hbox>
 				</toolbar>

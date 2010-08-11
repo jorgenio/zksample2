@@ -22,7 +22,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 import org.apache.log4j.Logger;
-import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
@@ -45,9 +44,9 @@ import de.forsthaus.backend.model.SecRole;
 import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.security.role.model.SecRoleListModelItemRenderer;
+import de.forsthaus.webui.security.role.report.SecRoleSimpleDJReport;
 import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
-import de.forsthaus.webui.util.MultiLineMessageBox;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -289,9 +288,8 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecRoleList_PrintSecRole(Event event) throws InterruptedException {
-		logger.debug(event.toString());
-
-		FDUtils.doShowNotImplementedMessage();
+		Window win = (Window) Path.getComponent("/outerIndexWindow");
+		new SecRoleSimpleDJReport(win);
 	}
 
 	/**

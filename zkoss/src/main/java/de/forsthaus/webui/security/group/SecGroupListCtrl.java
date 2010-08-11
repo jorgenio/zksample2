@@ -45,6 +45,7 @@ import de.forsthaus.backend.model.SecGroup;
 import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.security.group.model.SecGroupListModelItemRenderer;
+import de.forsthaus.webui.security.group.report.SecGroupSimpleDJReport;
 import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
@@ -293,15 +294,14 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	}
 
 	/**
-	 * when the "xxxxxxxxx" button is clicked.
+	 * when the "print group list" button is clicked.
 	 * 
 	 * @param event
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecGroupList_PrintGroupList(Event event) throws InterruptedException {
-		logger.debug(event.toString());
-
-		FDUtils.doShowNotImplementedMessage();
+		Window win = (Window) Path.getComponent("/outerIndexWindow");
+		new SecGroupSimpleDJReport(win);
 	}
 
 	/**

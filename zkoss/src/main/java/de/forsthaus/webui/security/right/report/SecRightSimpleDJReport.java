@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Zksample2.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
-package de.forsthaus.webui.user.report;
+package de.forsthaus.webui.security.right.report;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -57,19 +57,26 @@ import ar.com.fdvs.dj.domain.Style;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilder;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 import ar.com.fdvs.dj.domain.builders.DynamicReportBuilder;
+import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
 import ar.com.fdvs.dj.domain.constants.Border;
 import ar.com.fdvs.dj.domain.constants.Font;
 import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
+import de.forsthaus.backend.model.Branche;
+import de.forsthaus.backend.model.SecRight;
+import de.forsthaus.backend.model.SecRole;
 import de.forsthaus.backend.model.SecUser;
+import de.forsthaus.backend.service.BrancheService;
+import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.backend.service.UserService;
+import de.forsthaus.webui.user.report.UserSimpleDJReport.OnCloseReportEventListener;
 import de.forsthaus.webui.util.FDDateFormat;
 import de.forsthaus.webui.util.FDUtils;
 
 /**
- * A report implemented with the DynamicJasper framework.<br>
- *<br>
- * This report shows a list of Users.<br>
+ * A simple report implemented with the DynamicJasper framework.<br>
+ * <br>
+ * This report shows a list of Security Single Rights.<br>
  * <br>
  * The report uses the DynamicReportBuilder that allowed more control over the
  * columns. Additionally the report uses a CustomExpression for showing how to
@@ -80,7 +87,7 @@ import de.forsthaus.webui.util.FDUtils;
  * @author sge
  * 
  */
-public class UserSimpleDJReport extends Window implements Serializable {
+public class SecRightSimpleDJReport extends Window implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -90,7 +97,7 @@ public class UserSimpleDJReport extends Window implements Serializable {
 	private AMedia amedia;
 	private String zksample2title = "[Zksample2] DynamicJasper Report Sample";
 
-	public UserSimpleDJReport(Component parent) throws InterruptedException {
+	public SecRightSimpleDJReport(Component parent) throws InterruptedException {
 		super();
 		this.setParent(parent);
 
@@ -104,11 +111,8 @@ public class UserSimpleDJReport extends Window implements Serializable {
 	public void doPrint() throws JRException, ColumnBuilderException, ClassNotFoundException, IOException {
 
 		// Localized column headers
-		String usrLoginname = Labels.getLabel("common.Loginname");
-		String usrLastname = Labels.getLabel("common.Lastname");
-		String usrFirstname = Labels.getLabel("common.Firstname");
-		String usrEmail = Labels.getLabel("common.Email");
-		String usrEnabled = Labels.getLabel("common.Enabled");
+		String rigName = Labels.getLabel("listheader_SecRightList_rigName.label");
+		String rigType = Labels.getLabel("listheader_SecRightList_rigType.label");
 
 		// Styles: Title
 		Style titleStyle = new Style();
@@ -152,7 +156,7 @@ public class UserSimpleDJReport extends Window implements Serializable {
 		// Sets the Report Columns, header, Title, Groups, Etc Formats
 		// DynamicJasper documentation
 		drb.setTitle(zksample2title);
-		drb.setSubtitle("List of Users: " + FDDateFormat.getDateFormater().format(new Date()));
+		drb.setSubtitle("List of security single rights: " + FDDateFormat.getDateFormater().format(new Date()));
 		drb.setSubtitleStyle(subtitleStyle);
 		drb.setDetailHeight(10);
 		drb.setMargins(20, 20, 30, 15);
@@ -162,65 +166,40 @@ public class UserSimpleDJReport extends Window implements Serializable {
 		/**
 		 * Columns Definitions. A new ColumnBuilder instance for each column.
 		 */
-		// Login name
-		AbstractColumn colLoginName = ColumnBuilder.getNew().setColumnProperty("usrLoginname", String.class.getName()).build();
-		colLoginName.setTitle(usrLoginname);
-		colLoginName.setWidth(30);
-		colLoginName.setHeaderStyle(columnHeaderStyleText);
-		colLoginName.setStyle(columnDetailStyleText);
-		// Last name
-		AbstractColumn colLastName = ColumnBuilder.getNew().setColumnProperty("usrLastname", String.class.getName()).build();
-		colLastName.setTitle(usrLastname);
-		colLastName.setWidth(50);
-		colLastName.setHeaderStyle(columnHeaderStyleText);
-		colLastName.setStyle(columnDetailStyleText);
-		// First name
-		AbstractColumn colFirstName = ColumnBuilder.getNew().setColumnProperty("usrFirstname", String.class.getName()).build();
-		colFirstName.setTitle(usrFirstname);
-		colFirstName.setWidth(50);
-		colFirstName.setHeaderStyle(columnHeaderStyleText);
-		colFirstName.setStyle(columnDetailStyleText);
-		// Email address
-		AbstractColumn colEmail = ColumnBuilder.getNew().setColumnProperty("usrEmail", String.class.getName()).build();
-		colEmail.setTitle(usrEmail);
-		colEmail.setWidth(50);
-		colEmail.setHeaderStyle(columnHeaderStyleText);
-		colEmail.setStyle(columnDetailStyleText);
-		// Account enabled
-		AbstractColumn colEnabled = ColumnBuilder.getNew().setCustomExpression(getMyBooleanExpression()).build();
-		colEnabled.setTitle(usrEnabled);
-		colEnabled.setWidth(10);
-		colEnabled.setHeaderStyle(columnHeaderStyleText);
-		colEnabled.setStyle(columnDetailStyleText);
+		// Right name
+		AbstractColumn colRightName = ColumnBuilder.getNew().setColumnProperty("rigName", String.class.getName()).build();
+		colRightName.setTitle(rigName);
+		colRightName.setWidth(60);
+		colRightName.setHeaderStyle(columnHeaderStyleText);
+		colRightName.setStyle(columnDetailStyleText);
+		// Right type
+		AbstractColumn colRightType = ColumnBuilder.getNew().setCustomExpression(getMyRightTypExpression()).build();
+		colRightType.setTitle(rigType);
+		colRightType.setWidth(40);
+		colRightType.setHeaderStyle(columnHeaderStyleText);
+		colRightType.setStyle(columnDetailStyleText);
 
 		// Add the columns to the report in the whished order
-		drb.addColumn(colLoginName);
-		drb.addColumn(colLastName);
-		drb.addColumn(colFirstName);
-		drb.addColumn(colEmail);
-		drb.addColumn(colEnabled);
+		drb.addColumn(colRightName);
+		drb.addColumn(colRightType);
 
-		// Add the usrEnabled field to the report.
-		drb.addField("usrEnabled", Boolean.class.getName());
+		// ADD ALL USED FIELDS to the report.
+		drb.addField("rigType", Integer.class.getName());
 
 		drb.setUseFullPageWidth(true); // use full width of the page
 		dr = drb.build(); // build the report
 
 		// Get information from database
-		UserService sv = (UserService) SpringUtil.getBean("userService");
-		List<SecUser> resultList = sv.getAlleUser();
+		SecurityService sv = (SecurityService) SpringUtil.getBean("securityService");
+		List<SecRight> resultList = sv.getAllRights();
 
 		// Create Datasource and put it in Dynamic Jasper Format
 		List data = new ArrayList(resultList.size());
 
-		for (SecUser obj : resultList) {
+		for (SecRight obj : resultList) {
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("usrLoginname", obj.getUsrLoginname());
-			map.put("usrLastnusrEnabledame", obj.getUsrLastname());
-			map.put("usrFirstname", String.valueOf(obj.getUsrFirstname()));
-			map.put("usrEmail", String.valueOf(obj.getUsrEmail()));
-			// map.put("usrEnabled", String.valueOf(obj.isUsrEnabled()));
-			map.put("usrEnabled", obj.isUsrEnabled());
+			map.put("rigName", obj.getRigName());
+			map.put("rigType", obj.getRigType());
 			data.add(map);
 		}
 
@@ -268,19 +247,43 @@ public class UserSimpleDJReport extends Window implements Serializable {
 	 * 
 	 * @return
 	 */
-	private CustomExpression getMyBooleanExpression() {
+	@SuppressWarnings("serial")
+	private CustomExpression getMyRightTypExpression() {
 		return new CustomExpression() {
 
 			public Object evaluate(Map fields, Map variables, Map parameters) {
+
 				String result = "";
 
-				boolean enabled = (Boolean) fields.get("usrEnabled");
+				/**
+				 * Int | Type <br>
+				 * --------------------------<br>
+				 * 0 | Page <br>
+				 * 1 | Menu Category <br>
+				 * 2 | Menu Item <br>
+				 * 3 | Method/Event <br>
+				 * 4 | DomainObject/Property <br>
+				 * 5 | Tab <br>
+				 * 6 | Component <br>
+				 */
 
-				if (enabled == true) {
-					result = Labels.getLabel("common.Yes");
-				} else
-					result = Labels.getLabel("common.No");
+				int rigType = (Integer) fields.get("rigType");
 
+				if (rigType == 0) {
+					result = "Page";
+				} else if (rigType == 1) {
+					result = "Menu Category";
+				} else if (rigType == 2) {
+					result = "Menu Item";
+				} else if (rigType == 3) {
+					result = "Method/Event";
+				} else if (rigType == 4) {
+					result = "DomainObject/Property";
+				} else if (rigType == 5) {
+					result = "Tab";
+				} else if (rigType == 6) {
+					result = "Component";
+				}
 				return result;
 			}
 

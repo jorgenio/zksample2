@@ -48,6 +48,7 @@ import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.security.right.model.SecRightListModelItemRenderer;
 import de.forsthaus.webui.security.right.model.SecRightSecTypListModelItemRenderer;
+import de.forsthaus.webui.security.right.report.SecRightSimpleDJReport;
 import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
@@ -313,9 +314,8 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecRightList_PrintRightList(Event event) throws InterruptedException {
-		logger.debug(event.toString());
-
-		FDUtils.doShowNotImplementedMessage();
+		Window win = (Window) Path.getComponent("/outerIndexWindow");
+		new SecRightSimpleDJReport(win);
 	}
 
 	/**

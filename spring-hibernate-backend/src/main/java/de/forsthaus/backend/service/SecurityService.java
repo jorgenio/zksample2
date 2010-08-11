@@ -113,6 +113,8 @@ public interface SecurityService {
 
 	public List<SecRight> getAllRights(List<Integer> list);
 
+	public List<SecRight> getAllRights();
+
 	public boolean isRightinGroup(SecRight right, SecGroup group);
 
 	/* +++++ Security: Grouprights +++++++ */

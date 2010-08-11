@@ -45,6 +45,16 @@ public interface SecRightDAO {
 	public List<SecRight> getAllRights(int type);
 
 	/**
+	 * EN: Get a list of all SecRight.<br>
+	 * DE: Gibt eine Liste aller EinzelRechte zurueck.<br>
+	 * 
+	 * @param type
+	 *            The RightTyp
+	 * @return List of SecRight
+	 */
+	public List<SecRight> getAllRights();
+
+	/**
 	 * EN: Get the count of all SecRight.<br>
 	 * DE: Gibt die Anzahl aller EinzelRechte zurueck.<br>
 	 * 

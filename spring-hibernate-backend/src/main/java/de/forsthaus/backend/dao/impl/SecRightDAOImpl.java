@@ -44,6 +44,15 @@ public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements Sec
 		return new SecRight();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<SecRight> getAllRights() {
+		DetachedCriteria criteria = DetachedCriteria.forClass(SecRight.class);
+		criteria.addOrder(Order.asc("rigName"));
+
+		return getHibernateTemplate().findByCriteria(criteria);
+	}
+
 	/**
 	 * Int | Type <br>
 	 * --------------------------<br>
@@ -227,4 +236,5 @@ public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements Sec
 	public int getCountAllSecRights() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from SecRight"));
 	}
+
 }

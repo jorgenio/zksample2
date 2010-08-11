@@ -292,6 +292,11 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
+	public List<SecRight> getAllRights() {
+		return getSecRightDAO().getAllRights();
+	}
+
+	@Override
 	public List<SecRight> getRightsLikeRightName(String value) {
 		return getSecRightDAO().getRightsLikeRightName(value);
 	}

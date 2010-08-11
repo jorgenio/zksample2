@@ -1132,6 +1132,7 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15014, 2, 'menuItem_Administration_Rights', 0),
 (15015, 1, 'menuCat_UserRights', 0),
 (15016, 2, 'menuItem_Administration_LoginsLog', 0),
+(15017, 2, 'menuItem_Administration_HibernateStats', 0),
 
 /* Pages = Type(0) */
 /* --> Page Customer */
@@ -1331,6 +1332,7 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14014, 13002, 15014, 0),
 (14015, 13002, 15015, 0),
 (14016, 13002, 15016, 0),
+(14017, 13002, 15017, 0),
 
 /* New */
 /* Group: Customers_View */

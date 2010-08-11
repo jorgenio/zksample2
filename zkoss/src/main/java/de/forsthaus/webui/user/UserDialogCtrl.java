@@ -189,9 +189,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 			listBoxUser = null;
 		}
 
-		// Set the ListModel and the itemRenderer. The ZKoss ListmodelList do in
-		// most times satisfy your needs
-		/* Tab Details */
+		// Set the ListModel and the itemRenderer.
 		listBoxDetails_UserRoles.setModel(new ListModelList(getUserService().getRolesByUser(user)));
 		listBoxDetails_UserRoles.setItemRenderer(new UserRolesListModelItemRenderer());
 

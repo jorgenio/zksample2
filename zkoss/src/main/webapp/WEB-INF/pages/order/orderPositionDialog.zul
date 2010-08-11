@@ -10,7 +10,7 @@
 	<window id="orderPositionDialogWindow"
 		title="${c:l('orderPositionDialogWindow.title')}" border="none"
 		sizable="true" apply="${orderPositionDialogCtrl}" closable="true"
-		width="600px" height="320px">
+		width="600px" height="280px">
 
 		<borderlayout id="borderlayoutOrderPositionDialog">
 
@@ -66,191 +66,194 @@
 				<div id="divCenterOffice">
 
 					<panel id="panel_OrderPositionDialog"
-						title="${c:l('panel_OrderPositionDialog.title')}"
-						style="margin-bottom:10px" border="normal">
+						style="margin-bottom:10px" border="none">
 						<panelchildren>
-							<grid fixedLayout="true"
-								style="border:0px">
-								<columns>
-									<column width="150px" />
-									<column width="100%" />
-								</columns>
-								<rows>
-									<row>
-										<label
-											id="label_OrderPositionDialog_artNr"
-											value="${c:l('label_OrderPositionDialog_artNr.value')}" />
 
-										<hbox>
-											<textbox id="artNr"
-												value="" />
+							<style>.z-groupbox-cnt {border: 0}</style>
+							<groupbox mold="3d" closable="false">
+								<caption image="/images/icons/view.gif"
+									label="${c:l('panel_OrderPositionDialog.title')}" />
 
-											<!-- Bandbox for searching articles -->
-											<bandbox
-												id="bandbox_OrderPositionDialog_ArticleSearch"
-												sclass="mybandbox" width="0px"
-												tooltiptext="${c:l('bandbox_OrderPositionDialog_ArticleSearch.tooltiptext')}">
-												<bandpopup
-													id="bpop_OrderPosition_ArticleSearch" width="540px"
-													height="450px">
-													<panel
-														id="panel_bboxArticleSearch"
-														title="${c:l('panel_bboxArticleSearch.title')}" />
+								<grid sclass="GridLayoutNoBorder"
+									fixedLayout="true"
+									style="border:0px; padding-left:5px; padding-right:5px;">
+									<columns>
+										<column width="150px" />
+										<column width="100%" />
+									</columns>
+									<rows>
+										<row>
+											<label
+												id="label_OrderPositionDialog_artNr"
+												value="${c:l('label_OrderPositionDialog_artNr.value')}" />
 
-													<vbox>
-														<hbox
-															width="100%">
+											<hbox>
+												<textbox id="artNr"
+													value="" />
 
-															<grid
-																fixedLayout="true" style="border:0px" width="100%">
-																<columns>
-																	<column
-																		width="150px" />
-																	<column
-																		width="250px" />
-																	<column
-																		width="100px" />
-																	<column
-																		width="40px" />
-																</columns>
-																<rows>
-																	<row>
-																		<label
-																			id="label_ArticleSearch_artNr"
-																			value="${c:l('label_ArticleSearch_artNr.value')}" />
-																		<textbox
-																			id="tb_OrderPosition_SearchArticlelNo" width="99%" />
-																		<button
-																			id="button_bbox_ArticleSearch_Search"
-																			image="/images/icons/search.gif"
-																			label="${c:l('button_bbox_ArticleSearch_Search.label')}"
-																			tooltiptext="${c:l('button_bbox_ArticleSearch_Search.tooltiptext')}" />
-																		<button
-																			id="button_bbox_ArticleSearch_Close"
-																			image="/images/icons/stop.gif"
-																			tooltiptext="${c:l('button_bbox_ArticleSearch_Close.tooltiptext')}" />
-																	</row>
-																	<row>
-																		<label
-																			id="label_ArticleSearch_artKurzbezeichnung"
-																			value="${c:l('label_ArticleSearch_artKurzbezeichnung.value')}" />
-																		<textbox
-																			id="tb_OrderPosition_SearchArticleDesc" width="99%" />
-																		<button
-																			id="button_bbox_ArticleSearch_NewArticle"
-																			image="/images/icons/edit_table_data.gif"
-																			label="${c:l('button_bbox_ArticleSearch_NewArticle.label')}"
-																			tooltiptext="${c:l('button_bbox_ArticleSearch_NewArticle.tooltiptext')}" />
-																	</row>
+												<!-- Bandbox for searching articles -->
+												<bandbox
+													id="bandbox_OrderPositionDialog_ArticleSearch"
+													sclass="mybandbox" width="0px"
+													tooltiptext="${c:l('bandbox_OrderPositionDialog_ArticleSearch.tooltiptext')}">
+													<bandpopup
+														id="bpop_OrderPosition_ArticleSearch" width="540px"
+														height="450px">
+														<panel
+															id="panel_bboxArticleSearch"
+															title="${c:l('panel_bboxArticleSearch.title')}" />
 
-																	<row
-																		spans="4">
+														<vbox>
+															<hbox
+																width="100%">
 
-																		<div>
-																			<paging
-																				id="paging_ListBoxArticleSearch" />
-																			<listbox
-																				id="listBoxArticleSearch" width="100%" height="100%"
-																				multiple="false">
-																				<listhead
-																					sizable="true">
-																					<listheader
-																						id="listheader_ArticleSearch_artNr"
-																						sclass="FDListBoxHeader1"
-																						image="/images/icons/builder.gif" sort="auto"
-																						width="25%"
-																						label="${c:l('listheader_ArticleSearch_artNr.label')}" />
-																					<listheader
-																						id="listheader_ArticleSearch_artKurzbezeichnung"
-																						sclass="FDListBoxHeader1"
-																						image="/images/icons/create_doc.gif" sort="auto"
-																						width="60%"
-																						label="${c:l('listheader_ArticleSearch_artKurzbezeichnung.label')}" />
-																					<listheader
-																						id="listheader_ArticleSearch_aupEinzelwert"
-																						sclass="FDListBoxHeader1"
-																						image="/images/icons/builder.gif" sort="none"
-																						width="15%"
-																						label="${c:l('listheader_ArticleSearch_aupEinzelwert.label')}" />
-																				</listhead>
-																			</listbox>
-																		</div>
-																	</row>
+																<grid
+																	sclass="GridLayoutNoBorder" fixedLayout="true"
+																	style="border:0px" width="100%">
+																	<columns>
+																		<column
+																			width="150px" />
+																		<column
+																			width="250px" />
+																		<column
+																			width="100px" />
+																		<column
+																			width="40px" />
+																	</columns>
+																	<rows>
+																		<row>
+																			<label
+																				id="label_ArticleSearch_artNr"
+																				value="${c:l('label_ArticleSearch_artNr.value')}" />
+																			<textbox
+																				id="tb_OrderPosition_SearchArticlelNo" width="99%" />
+																			<button
+																				id="button_bbox_ArticleSearch_Search"
+																				image="/images/icons/search.gif"
+																				label="${c:l('button_bbox_ArticleSearch_Search.label')}"
+																				tooltiptext="${c:l('button_bbox_ArticleSearch_Search.tooltiptext')}" />
+																			<button
+																				id="button_bbox_ArticleSearch_Close"
+																				image="/images/icons/stop.gif"
+																				tooltiptext="${c:l('button_bbox_ArticleSearch_Close.tooltiptext')}" />
+																		</row>
+																		<row>
+																			<label
+																				id="label_ArticleSearch_artKurzbezeichnung"
+																				value="${c:l('label_ArticleSearch_artKurzbezeichnung.value')}" />
+																			<textbox
+																				id="tb_OrderPosition_SearchArticleDesc" width="99%" />
+																			<button
+																				id="button_bbox_ArticleSearch_NewArticle"
+																				image="/images/icons/edit_table_data.gif"
+																				label="${c:l('button_bbox_ArticleSearch_NewArticle.label')}"
+																				tooltiptext="${c:l('button_bbox_ArticleSearch_NewArticle.tooltiptext')}" />
+																		</row>
 
-																</rows>
-															</grid>
+																		<row
+																			spans="4">
 
-														</hbox>
-													</vbox>
-												</bandpopup>
-											</bandbox>
+																			<div>
+																				<paging
+																					id="paging_ListBoxArticleSearch" />
+																				<listbox
+																					id="listBoxArticleSearch" width="100%"
+																					height="100%" multiple="false">
+																					<listhead
+																						sizable="true">
+																						<listheader
+																							id="listheader_ArticleSearch_artNr"
+																							sclass="FDListBoxHeader1"
+																							image="/images/icons/builder.gif" sort="auto"
+																							width="25%"
+																							label="${c:l('listheader_ArticleSearch_artNr.label')}" />
+																						<listheader
+																							id="listheader_ArticleSearch_artKurzbezeichnung"
+																							sclass="FDListBoxHeader1"
+																							image="/images/icons/create_doc.gif" sort="auto"
+																							width="60%"
+																							label="${c:l('listheader_ArticleSearch_artKurzbezeichnung.label')}" />
+																						<listheader
+																							id="listheader_ArticleSearch_aupEinzelwert"
+																							sclass="FDListBoxHeader1"
+																							image="/images/icons/builder.gif" sort="none"
+																							width="15%"
+																							label="${c:l('listheader_ArticleSearch_aupEinzelwert.label')}" />
+																					</listhead>
+																				</listbox>
+																			</div>
+																		</row>
+
+																	</rows>
+																</grid>
+
+															</hbox>
+														</vbox>
+													</bandpopup>
+												</bandbox>
 
 
-										</hbox>
+											</hbox>
 
 
-									</row>
-									<row>
+										</row>
+										<row>
 
-										<label
-											id="label_OrderPositionDialog_artKurzbezeichnung"
-											value="${c:l('label_OrderPositionDialog_artKurzbezeichnung.value')}" />
-										<textbox id="artKurzbezeichnung"
-											width="99%" />
+											<label
+												id="label_OrderPositionDialog_artKurzbezeichnung"
+												value="${c:l('label_OrderPositionDialog_artKurzbezeichnung.value')}" />
+											<textbox
+												id="artKurzbezeichnung" readonly="true" width="99%" />
 
-									</row>
-									<row>
-										<separator bar="true"></separator>
-										<separator bar="true"></separator>
-									</row>
-									<row>
-										<label
-											id="label_OrderPositionDialog_aupMenge"
-											value="${c:l('label_OrderPositionDialog_aupMenge.value')}" />
-										<hbox>
-											<decimalbox id="aupMenge"
-												width="100px" />
-											<space />
-											<button
-												id="button_OrderPositionDialog_Calculate"
-												image="/images/icons/calculator_16x16.gif"
-												tooltiptext="${c:l('button_OrderPositionDialog_Calculate.tooltiptext')}" />
-										</hbox>
-									</row>
-									<row>
-										<label
-											id="label_OrderPositionDialog_aupEinzelwert"
-											value="${c:l('label_OrderPositionDialog_aupEinzelwert.value')}" />
-										<decimalbox id="aupEinzelwert"
-											width="100px" />
-									</row>
-									<row>
-										<separator bar="true"></separator>
-										<separator bar="true"></separator>
-									</row>
-									<row>
-										<label
-											id="label_OrderPositionDialog_aupGesamtwert"
-											value="${c:l('label_OrderPositionDialog_aupGesamtwert.value')}" />
-										<decimalbox id="aupGesamtwert"
-											width="100px" />
-									</row>
-								</rows>
-							</grid>
+										</row>
+										<row>
+											<separator bar="true"></separator>
+											<separator bar="true"></separator>
+										</row>
+										<row>
+											<label
+												id="label_OrderPositionDialog_aupMenge"
+												value="${c:l('label_OrderPositionDialog_aupMenge.value')}" />
+											<hbox>
+												<decimalbox
+													id="aupMenge" readonly="true" width="100px" />
+												<space />
+												<button
+													id="button_OrderPositionDialog_Calculate"
+													image="/images/icons/calculator_16x16.gif"
+													tooltiptext="${c:l('button_OrderPositionDialog_Calculate.tooltiptext')}" />
+											</hbox>
+										</row>
+										<row>
+											<label
+												id="label_OrderPositionDialog_aupEinzelwert"
+												value="${c:l('label_OrderPositionDialog_aupEinzelwert.value')}" />
+											<decimalbox
+												id="aupEinzelwert" readonly="true" width="100px" />
+										</row>
+										<row>
+											<separator bar="true"></separator>
+											<separator bar="true"></separator>
+										</row>
+										<row>
+											<label
+												id="label_OrderPositionDialog_aupGesamtwert"
+												value="${c:l('label_OrderPositionDialog_aupGesamtwert.value')}" />
+											<decimalbox
+												id="aupGesamtwert" readonly="true" width="100px" />
+										</row>
+									</rows>
+								</grid>
+							</groupbox>
 						</panelchildren>
 					</panel>
 
 				</div>
 			</center>
 
-			<east border="none" />
-			<west border="none" />
-			<south border="none" />
-
 		</borderlayout>
 
 	</window>
-
 </zk>
 
 <!-- 

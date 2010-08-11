@@ -406,6 +406,11 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 */
 	private void doCancel() {
 		doResetInitValues();
+
+		aupMenge.setReadonly(true);
+		aupEinzelwert.setReadonly(true);
+		aupGesamtwert.setReadonly(true);
+
 		btnCtrl.setInitEdit();
 	}
 

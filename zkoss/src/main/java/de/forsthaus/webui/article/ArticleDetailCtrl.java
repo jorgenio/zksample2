@@ -15,8 +15,8 @@ import org.zkoss.zul.Window;
 
 import de.forsthaus.backend.model.Article;
 import de.forsthaus.backend.service.ArticleService;
-import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -69,7 +69,7 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 	public ArticleDetailCtrl() {
 		super();
 
-		FDUtils.logEventDebug(this, "super()");
+		ZksampleUtils.logEventDebug(this, "super()");
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowArticleDetail(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 

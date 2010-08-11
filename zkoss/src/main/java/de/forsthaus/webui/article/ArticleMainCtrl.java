@@ -30,9 +30,9 @@ import de.forsthaus.backend.service.ArticleService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.article.report.ArticleSimpleDJReport;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
-import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -126,7 +126,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	public ArticleMainCtrl() {
 		super();
 
-		FDUtils.logEventDebug(this, "super()");
+		ZksampleUtils.logEventDebug(this, "super()");
 	}
 
 	@Override
@@ -154,7 +154,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowArticleMain(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		// create the Button Controller. Disable not used buttons during working
 		btnCtrlArticle = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, false, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
@@ -167,7 +167,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		 */
 		tabArticleList.setSelected(true);
 		if (tabPanelArticleList != null) {
-			FDUtils.createTabPanelContent(tabPanelArticleList, this, "ModuleMainController", "/WEB-INF/pages/article/articleList.zul");
+			ZksampleUtils.createTabPanelContent(tabPanelArticleList, this, "ModuleMainController", "/WEB-INF/pages/article/articleList.zul");
 		}
 
 		// Set the buttons for editMode
@@ -182,7 +182,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onSelect$tabArticleList(Event event) throws IOException {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		// Check if the tabpanel is already loaded
 		if (tabPanelArticleList.getFirstChild() != null) {
@@ -191,7 +191,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (tabPanelArticleList != null) {
-			FDUtils.createTabPanelContent(tabPanelArticleList, this, "ModuleMainController", "/WEB-INF/pages/article/articleList.zul");
+			ZksampleUtils.createTabPanelContent(tabPanelArticleList, this, "ModuleMainController", "/WEB-INF/pages/article/articleList.zul");
 		}
 	}
 
@@ -203,7 +203,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onSelect$tabArticleDetail(Event event) throws IOException {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		// Check if the tabpanel is already loaded
 		if (tabPanelArticleDetail.getFirstChild() != null) {
@@ -216,7 +216,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (tabPanelArticleDetail != null) {
-			FDUtils.createTabPanelContent(tabPanelArticleDetail, this, "ModuleMainController", "/WEB-INF/pages/article/articleDetail.zul");
+			ZksampleUtils.createTabPanelContent(tabPanelArticleDetail, this, "ModuleMainController", "/WEB-INF/pages/article/articleDetail.zul");
 		}
 	}
 
@@ -341,7 +341,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	private void doArticleListShowAll(Event event) {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		// empty the text search boxes
 		tb_Article_ArticleID.setValue(""); // clear
@@ -366,7 +366,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * Filter the branch list with 'like article no'. <br>
 	 */
 	private void doArticleListSearchLikeArticleNo(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		// if not empty
 		if (!tb_Article_ArticleID.getValue().isEmpty()) {
@@ -401,7 +401,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * Filter the branch list with 'like article name'. <br>
 	 */
 	private void doArticleListSearchLikeArticleName(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		// if not empty
 		if (!tb_Article_Name.getValue().isEmpty()) {
@@ -439,7 +439,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doCancel(Event event) throws InterruptedException {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		// reset to the original object
 		doResetToInitValues();
@@ -466,7 +466,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doEdit(Event event) {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		// get the current Tab for later checking if we must change it
 		Tab currentTab = tabbox_ArticleMain.getSelectedTab();
@@ -508,7 +508,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doDelete(Event event) throws InterruptedException {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		// check first, if the tabs are created, if not than create them
 		if (getArticleDetailCtrl().getBinder() == null) {
@@ -568,7 +568,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doSave(Event event) throws InterruptedException {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		// save all components data in the several tabs to the bean
 		getArticleDetailCtrl().getBinder().saveAll();
@@ -613,7 +613,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doNew(Event event) {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		// check first, if the tabs are created
 		if (getArticleDetailCtrl() == null) {
@@ -662,7 +662,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	private void doResizeSelectedTab(Event event) {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		if (tabbox_ArticleMain.getSelectedTab() == tabArticleDetail) {
 			getArticleDetailCtrl().doFitSize(event);
@@ -680,7 +680,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doHelp(Event event) throws InterruptedException {
 
-		FDUtils.doShowNotImplementedMessage();
+		ZksampleUtils.doShowNotImplementedMessage();
 
 		// we stop the propagation of the event, because zk will call ALL events
 		// with the same name in the namespace and 'btnHelp' is a standard

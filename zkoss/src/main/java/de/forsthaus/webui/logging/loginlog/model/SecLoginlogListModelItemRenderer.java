@@ -39,7 +39,7 @@ import de.forsthaus.backend.model.SysCountryCode;
 import de.forsthaus.backend.service.IpToCountryService;
 import de.forsthaus.backend.service.LoginLoggingService;
 import de.forsthaus.backend.service.SecurityService;
-import de.forsthaus.webui.util.FDDateFormat;
+import de.forsthaus.webui.util.ZksampleDateFormat;
 
 /**
  * Item renderer for listitems in the listbox.
@@ -218,7 +218,7 @@ public class SecLoginlogListModelItemRenderer implements ListitemRenderer, Seria
 	 */
 	private String getDateTime(Date date) {
 		if (date != null) {
-			return FDDateFormat.getDateTimeLongFormater().format(date);
+			return ZksampleDateFormat.getDateTimeLongFormater().format(date);
 		}
 		return "";
 	}

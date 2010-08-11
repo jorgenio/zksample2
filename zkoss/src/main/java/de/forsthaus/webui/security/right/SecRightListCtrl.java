@@ -49,9 +49,9 @@ import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.security.right.model.SecRightListModelItemRenderer;
 import de.forsthaus.webui.security.right.model.SecRightSecTypListModelItemRenderer;
 import de.forsthaus.webui.security.right.report.SecRightSimpleDJReport;
-import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -268,7 +268,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		FDUtils.doShowNotImplementedMessage();
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	/**

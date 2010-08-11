@@ -28,7 +28,7 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
 
 import de.forsthaus.backend.model.HibernateStatistics;
-import de.forsthaus.webui.util.FDDateFormat;
+import de.forsthaus.webui.util.ZksampleDateFormat;
 
 /**
  * Item renderer for listitems in the listbox.
@@ -77,7 +77,7 @@ public class HibernateStatisticListRowRenderer implements RowRenderer {
 	 */
 	private String getDateTime(Date date) {
 		if (date != null) {
-			return FDDateFormat.getDateTimeLongFormater().format(date);
+			return ZksampleDateFormat.getDateTimeLongFormater().format(date);
 		}
 		return "";
 	}

@@ -60,8 +60,8 @@ import ar.com.fdvs.dj.domain.constants.Font;
 import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.service.BrancheService;
-import de.forsthaus.webui.util.FDDateFormat;
-import de.forsthaus.webui.util.FDUtils;
+import de.forsthaus.webui.util.ZksampleDateFormat;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * A simple report implemented with the DynamicJasper framework.<br>
@@ -92,7 +92,7 @@ public class BranchSimpleDJReport extends Window implements Serializable {
 		try {
 			doPrint();
 		} catch (Exception e) {
-			FDUtils.showErrorMessage(e.toString());
+			ZksampleUtils.showErrorMessage(e.toString());
 		}
 	}
 
@@ -140,7 +140,7 @@ public class BranchSimpleDJReport extends Window implements Serializable {
 		// Sets the Report Columns, header, Title, Groups, Etc Formats
 		// DynamicJasper documentation
 		drb.setTitle(zksample2title);
-		drb.setSubtitle("List of branches: " + FDDateFormat.getDateFormater().format(new Date()));
+		drb.setSubtitle("List of branches: " + ZksampleDateFormat.getDateFormater().format(new Date()));
 		drb.setSubtitleStyle(subtitleStyle);
 		drb.setPrintBackgroundOnOddRows(true);
 		drb.setUseFullPageWidth(true);

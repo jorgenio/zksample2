@@ -14,8 +14,8 @@ import org.zkoss.zul.Window;
 
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.service.BrancheService;
-import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -65,7 +65,7 @@ public class BranchDetailCtrl extends GFCBaseCtrl implements Serializable {
 	public BranchDetailCtrl() {
 		super();
 
-		FDUtils.logEventDebug(this, "super()");
+		ZksampleUtils.logEventDebug(this, "super()");
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class BranchDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowBranchDetail(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 

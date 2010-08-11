@@ -47,10 +47,10 @@ import de.forsthaus.backend.service.UserService;
 import de.forsthaus.webui.user.model.LanguageListModelItemRenderer;
 import de.forsthaus.webui.user.model.UserRolesListModelItemRenderer;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
-import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.NoEmptyAndEqualStringsConstraint;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -284,7 +284,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		FDUtils.doShowNotImplementedMessage();
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -727,7 +727,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 				 */
 				try {
 					if (anUser.getId() == new Long(10) || anUser.getId() == new Long(11) || anUser.getId() == new Long(12) || anUser.getId() == new Long(13) || anUser.getId() == new Long(14)) {
-						FDUtils.doShowNotAllowedForDemoRecords();
+						ZksampleUtils.doShowNotAllowedForDemoRecords();
 						return;
 					} else {
 						// delete from database

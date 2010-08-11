@@ -33,8 +33,8 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import de.forsthaus.webui.util.FDDateFormat;
 import de.forsthaus.webui.util.WindowBaseCtrl;
+import de.forsthaus.webui.util.ZksampleDateFormat;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -119,7 +119,7 @@ public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 
 		// FIXME Zeitzone wird hier ignoriert! Es ist nicht ersichtig, in
 		// welcher Zeitzone der Server läuft.
-		String dateStr = FDDateFormat.getDateTimeLongFormater().format(l);
+		String dateStr = ZksampleDateFormat.getDateTimeLongFormater().format(l);
 
 		lbl_ServerTime.setMultiline(true);
 		lbl_ServerTime.setValue("time on synchronization-server:\n" + dateStr);
@@ -132,7 +132,7 @@ public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 	 * @return String of date/time
 	 */
 	private String getDateTime() {
-		return FDDateFormat.getDateTimeLongFormater().format(new Date());
+		return ZksampleDateFormat.getDateTimeLongFormater().format(new Date());
 	}
 
 	/**

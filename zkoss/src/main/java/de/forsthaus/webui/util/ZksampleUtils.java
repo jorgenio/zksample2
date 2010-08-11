@@ -17,16 +17,20 @@ import org.zkoss.zul.Tabpanel;
  * DE: Utility Klasse.<br>
  * 
  * 1. doShowNotImplementedMessage / Shows a messagebox.<br>
+ * 2. doShowNotAllowedInDemoModeMessage / Shows a messagebox.<br>
+ * 3. doShowNotAllowedForDemoRecords / Shows a messagebox.<br>
+ * 4. createTabPanelContent / creates the gui module in a tabpanel.<br>
+ * 5. showErrorMessage / shows a multiline errormessage.<br>
  * 
  * @author bbruhns
  * @author sge
  * 
  */
-public class FDUtils implements Serializable {
+public class ZksampleUtils implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public FDUtils() {
+	public ZksampleUtils() {
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //

@@ -46,9 +46,9 @@ import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.security.group.model.SecGroupListModelItemRenderer;
 import de.forsthaus.webui.security.group.report.SecGroupSimpleDJReport;
-import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -255,7 +255,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		FDUtils.doShowNotAllowedInDemoModeMessage();
+		ZksampleUtils.doShowNotAllowedInDemoModeMessage();
 	}
 
 	/**

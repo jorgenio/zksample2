@@ -57,9 +57,9 @@ import de.forsthaus.backend.service.OrderService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.order.model.SearchArticleListModelItemRenderer;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
-import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.ZksampleUtils;
 import de.forsthaus.webui.util.pagging.PagedListWrapper;
 
 /**
@@ -984,7 +984,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		FDUtils.doShowNotImplementedMessage();
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -995,7 +995,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	public void onClick$button_OrderPositionDialog_PrintOrderPositions(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		FDUtils.doShowNotImplementedMessage();
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

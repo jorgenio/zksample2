@@ -48,10 +48,10 @@ import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.security.groupright.SecGrouprightCtrl;
 import de.forsthaus.webui.security.rolegroup.model.SecRolegroupGroupListModelItemRenderer;
 import de.forsthaus.webui.security.rolegroup.model.SecRolegroupRoleListModelItemRenderer;
-import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.SelectionCtrl;
+import de.forsthaus.webui.util.ZksampleUtils;
 import de.forsthaus.webui.util.pagging.PagedListWrapper;
 
 /**
@@ -255,7 +255,7 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		FDUtils.doShowNotImplementedMessage();
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	/**

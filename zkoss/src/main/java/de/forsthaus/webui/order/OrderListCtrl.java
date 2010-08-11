@@ -24,7 +24,6 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.Bandbox;
@@ -53,9 +52,8 @@ import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.order.model.OrderListModelItemRenderer;
 import de.forsthaus.webui.order.model.OrderSearchCustomerListModelItemRenderer;
 import de.forsthaus.webui.orderposition.model.OrderpositionListModelItemRenderer;
-import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
-import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.ZksampleUtils;
 import de.forsthaus.webui.util.pagging.PagedListWrapper;
 
 /**
@@ -407,7 +405,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 		} catch (Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
-			FDUtils.showErrorMessage(e.toString());
+			ZksampleUtils.showErrorMessage(e.toString());
 		}
 
 	}
@@ -421,7 +419,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$button_OrderList_OrderNameSearch(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		FDUtils.doShowNotImplementedMessage();
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -433,7 +431,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		FDUtils.doShowNotImplementedMessage();
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	/**

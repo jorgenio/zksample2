@@ -57,21 +57,14 @@ import ar.com.fdvs.dj.domain.Style;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilder;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 import ar.com.fdvs.dj.domain.builders.DynamicReportBuilder;
-import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
 import ar.com.fdvs.dj.domain.constants.Border;
 import ar.com.fdvs.dj.domain.constants.Font;
 import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
-import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.model.SecRight;
-import de.forsthaus.backend.model.SecRole;
-import de.forsthaus.backend.model.SecUser;
-import de.forsthaus.backend.service.BrancheService;
 import de.forsthaus.backend.service.SecurityService;
-import de.forsthaus.backend.service.UserService;
-import de.forsthaus.webui.user.report.UserSimpleDJReport.OnCloseReportEventListener;
-import de.forsthaus.webui.util.FDDateFormat;
-import de.forsthaus.webui.util.FDUtils;
+import de.forsthaus.webui.util.ZksampleDateFormat;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * A simple report implemented with the DynamicJasper framework.<br>
@@ -104,7 +97,7 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		try {
 			doPrint();
 		} catch (Exception e) {
-			FDUtils.showErrorMessage(e.toString());
+			ZksampleUtils.showErrorMessage(e.toString());
 		}
 	}
 
@@ -156,7 +149,7 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		// Sets the Report Columns, header, Title, Groups, Etc Formats
 		// DynamicJasper documentation
 		drb.setTitle(zksample2title);
-		drb.setSubtitle("List of security single rights: " + FDDateFormat.getDateFormater().format(new Date()));
+		drb.setSubtitle("List of security single rights: " + ZksampleDateFormat.getDateFormater().format(new Date()));
 		drb.setSubtitleStyle(subtitleStyle);
 		drb.setDetailHeight(10);
 		drb.setMargins(20, 20, 30, 15);

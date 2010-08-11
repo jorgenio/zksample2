@@ -25,7 +25,7 @@ import org.zkoss.util.resource.Labels;
  * @author bbruhns
  * 
  */
-final public class FDDateFormat {
+final public class ZksampleDateFormat {
 	static public FastDateFormat getDateFormater() {
 		return FastDateFormat.getInstance(Labels.getLabel("format.date", "dd.MM.yyyy"));
 	}

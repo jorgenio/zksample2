@@ -45,8 +45,8 @@ import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.security.role.model.SecRoleListModelItemRenderer;
 import de.forsthaus.webui.security.role.report.SecRoleSimpleDJReport;
-import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -230,7 +230,7 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 		} catch (Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
-			FDUtils.showErrorMessage(e.toString());
+			ZksampleUtils.showErrorMessage(e.toString());
 		}
 	}
 
@@ -243,7 +243,7 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		FDUtils.doShowNotImplementedMessage();
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	/**

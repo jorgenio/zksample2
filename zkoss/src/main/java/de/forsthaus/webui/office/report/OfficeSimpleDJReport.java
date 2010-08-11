@@ -58,12 +58,10 @@ import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
 import ar.com.fdvs.dj.domain.constants.Border;
 import ar.com.fdvs.dj.domain.constants.Font;
 import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
-import de.forsthaus.backend.model.Article;
 import de.forsthaus.backend.model.Office;
-import de.forsthaus.backend.service.ArticleService;
 import de.forsthaus.backend.service.OfficeService;
-import de.forsthaus.webui.util.FDDateFormat;
-import de.forsthaus.webui.util.FDUtils;
+import de.forsthaus.webui.util.ZksampleDateFormat;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * A simple report implemented with the DynamicJasper framework.<br>
@@ -95,7 +93,7 @@ public class OfficeSimpleDJReport extends Window implements Serializable {
 		try {
 			doPrint();
 		} catch (Exception e) {
-			FDUtils.showErrorMessage(e.toString());
+			ZksampleUtils.showErrorMessage(e.toString());
 		}
 	}
 
@@ -151,7 +149,7 @@ public class OfficeSimpleDJReport extends Window implements Serializable {
 		// Sets the Report Columns, header, Title, Groups, Etc Formats
 		// DynamicJasper documentation
 		drb.setTitle(zksample2title);
-		drb.setSubtitle("List of Offices: " + FDDateFormat.getDateFormater().format(new Date()));
+		drb.setSubtitle("List of Offices: " + ZksampleDateFormat.getDateFormater().format(new Date()));
 		drb.setSubtitleStyle(subtitleStyle);
 		drb.setPrintBackgroundOnOddRows(true);
 		drb.setUseFullPageWidth(true);

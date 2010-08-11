@@ -29,12 +29,11 @@ import de.forsthaus.UserWorkspace;
 import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.service.OfficeService;
 import de.forsthaus.backend.util.HibernateSearchObject;
-import de.forsthaus.webui.branch.report.BranchSimpleDJReport;
 import de.forsthaus.webui.office.report.OfficeSimpleDJReport;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
-import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -166,7 +165,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		tabOfficeList.setSelected(true);
 
 		if (tabPanelOfficeList != null) {
-			FDUtils.createTabPanelContent(tabPanelOfficeList, this, "ModuleMainController", "/WEB-INF/pages/office/officeList.zul");
+			ZksampleUtils.createTabPanelContent(tabPanelOfficeList, this, "ModuleMainController", "/WEB-INF/pages/office/officeList.zul");
 		}
 
 		// init the buttons for editMode
@@ -191,7 +190,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (tabPanelOfficeList != null) {
-			FDUtils.createTabPanelContent(tabPanelOfficeList, this, "ModuleMainController", "/WEB-INF/pages/office/officeList.zul");
+			ZksampleUtils.createTabPanelContent(tabPanelOfficeList, this, "ModuleMainController", "/WEB-INF/pages/office/officeList.zul");
 		}
 
 	}
@@ -217,7 +216,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (tabPanelOfficeDetail != null) {
-			FDUtils.createTabPanelContent(tabPanelOfficeDetail, this, "ModuleMainController", "/WEB-INF/pages/office/officeDetail.zul");
+			ZksampleUtils.createTabPanelContent(tabPanelOfficeDetail, this, "ModuleMainController", "/WEB-INF/pages/office/officeDetail.zul");
 		}
 	}
 
@@ -562,7 +561,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 					 */
 					if (getOfficeDetailCtrl().getOffice().getId() == new Long(1) || getOfficeDetailCtrl().getOffice().getId() == new Long(2)) {
 						try {
-							FDUtils.doShowNotAllowedForDemoRecords();
+							ZksampleUtils.doShowNotAllowedForDemoRecords();
 							return;
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
@@ -609,7 +608,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 			 * Do not allow to modify the demo offices
 			 */
 			if (getOfficeDetailCtrl().getOffice().getId() == new Long(1) || getOfficeDetailCtrl().getOffice().getId() == new Long(2)) {
-				FDUtils.doShowNotAllowedForDemoRecords();
+				ZksampleUtils.doShowNotAllowedForDemoRecords();
 				return;
 			}
 
@@ -719,7 +718,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doHelp(Event event) throws InterruptedException {
 
-		FDUtils.doShowNotImplementedMessage();
+		ZksampleUtils.doShowNotImplementedMessage();
 
 		// we stop the propagation of the event, because zk will call ALL events
 		// with the same name in the namespace and 'btnHelp' is a standard

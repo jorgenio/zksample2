@@ -28,7 +28,7 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
 
 import de.forsthaus.backend.model.GuestBook;
-import de.forsthaus.webui.util.FDDateFormat;
+import de.forsthaus.webui.util.ZksampleDateFormat;
 
 /**
  * Item renderer for listitems in the listbox.
@@ -67,7 +67,7 @@ public class GuestBookListtemRenderer implements ListitemRenderer, Serializable 
 	 */
 	private String getDateTime(Date date) {
 		if (date != null) {
-			return FDDateFormat.getDateTimeLongFormater().format(date);
+			return ZksampleDateFormat.getDateTimeLongFormater().format(date);
 		}
 		return "";
 	}

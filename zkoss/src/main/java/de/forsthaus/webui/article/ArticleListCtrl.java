@@ -41,8 +41,8 @@ import org.zkoss.zul.Window;
 import de.forsthaus.backend.model.Article;
 import de.forsthaus.backend.service.ArticleService;
 import de.forsthaus.backend.util.HibernateSearchObject;
-import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -106,7 +106,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	public ArticleListCtrl() {
 		super();
 
-		FDUtils.logEventDebug(this, "super()");
+		ZksampleUtils.logEventDebug(this, "super()");
 	}
 
 	@Override
@@ -150,7 +150,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	public void onCreate$windowArticlesList(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 
@@ -216,7 +216,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	 * Event is forwarded in the corresponding listbox.
 	 */
 	public void onDoubleClickedArticleItem(Event event) {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		Article anArticle = getSelectedArticle();
 
@@ -244,7 +244,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	 * @param event
 	 */
 	public void onSelect$listBoxArticle(Event event) {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		Article anArticle = getSelectedArticle();
 

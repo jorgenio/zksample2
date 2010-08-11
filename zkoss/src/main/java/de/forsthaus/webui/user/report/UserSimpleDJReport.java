@@ -63,8 +63,8 @@ import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
 import de.forsthaus.backend.model.SecUser;
 import de.forsthaus.backend.service.UserService;
-import de.forsthaus.webui.util.FDDateFormat;
-import de.forsthaus.webui.util.FDUtils;
+import de.forsthaus.webui.util.ZksampleDateFormat;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * A report implemented with the DynamicJasper framework.<br>
@@ -97,7 +97,7 @@ public class UserSimpleDJReport extends Window implements Serializable {
 		try {
 			doPrint();
 		} catch (Exception e) {
-			FDUtils.showErrorMessage(e.toString());
+			ZksampleUtils.showErrorMessage(e.toString());
 		}
 	}
 
@@ -152,7 +152,7 @@ public class UserSimpleDJReport extends Window implements Serializable {
 		// Sets the Report Columns, header, Title, Groups, Etc Formats
 		// DynamicJasper documentation
 		drb.setTitle(zksample2title);
-		drb.setSubtitle("List of Users: " + FDDateFormat.getDateFormater().format(new Date()));
+		drb.setSubtitle("List of Users: " + ZksampleDateFormat.getDateFormater().format(new Date()));
 		drb.setSubtitleStyle(subtitleStyle);
 		drb.setDetailHeight(10);
 		drb.setMargins(20, 20, 30, 15);

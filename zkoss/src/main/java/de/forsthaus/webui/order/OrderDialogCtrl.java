@@ -62,9 +62,9 @@ import de.forsthaus.webui.reports.order.TestReport;
 import de.forsthaus.webui.reports.util.JRreportCompiler;
 import de.forsthaus.webui.reports.util.JRreportWindow;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
-import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.ZksampleUtils;
 import de.forsthaus.webui.util.pagging.PagedListWrapper;
 
 /**
@@ -349,7 +349,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		FDUtils.doShowNotImplementedMessage();
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	/**

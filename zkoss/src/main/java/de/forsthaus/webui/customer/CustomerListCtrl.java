@@ -23,7 +23,6 @@ import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.access.annotation.Secured;
-import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
@@ -45,9 +44,8 @@ import de.forsthaus.backend.service.BrancheService;
 import de.forsthaus.backend.service.CustomerService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.customer.model.CustomerListModelItemRenderer;
-import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
-import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -210,7 +208,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 */
 	@Secured( { "CustomerList_listBoxCustomer.onDoubleClick" })
 	public void onCustomerItemDoubleClicked(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		// get the selected customer object
 		Listitem item = listBoxCustomer.getSelectedItem();
@@ -231,7 +229,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 * Call the Customer dialog with a new empty entry. <br>
 	 */
 	public void onClick$button_CustomerList_NewCustomer(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		// create a new customer object
 		/** !!! DO NOT BREAK THE TIERS !!! */
@@ -276,7 +274,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		} catch (Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
-			FDUtils.showErrorMessage(e.toString());
+			ZksampleUtils.showErrorMessage(e.toString());
 		}
 	}
 
@@ -287,8 +285,8 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		FDUtils.logEventDebug(this, event);
-		FDUtils.doShowNotImplementedMessage();
+		ZksampleUtils.logEventDebug(this, event);
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -300,7 +298,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		Events.postEvent("onCreate", window_customerList, event);
 		window_customerList.invalidate();
@@ -327,7 +325,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 			Executions.createComponents("/WEB-INF/pages/customer/customerSearchDialog.zul", null, map);
 		} catch (Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
-			FDUtils.showErrorMessage(e.toString());
+			ZksampleUtils.showErrorMessage(e.toString());
 		}
 
 	}
@@ -339,8 +337,8 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_CustomerList_PrintList(Event event) throws InterruptedException {
-		FDUtils.logEventDebug(this, event);
-		FDUtils.doShowNotImplementedMessage();
+		ZksampleUtils.logEventDebug(this, event);
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

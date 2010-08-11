@@ -48,9 +48,9 @@ import de.forsthaus.backend.bean.DummyBean;
 import de.forsthaus.backend.bean.ListIntegerSumBean;
 import de.forsthaus.backend.service.LoginLoggingService;
 import de.forsthaus.webui.logging.loginlog.model.SecLoginlogStatisticTotalListModelItemRenderer;
-import de.forsthaus.webui.util.FDDateFormat;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.ZksampleDateFormat;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -571,7 +571,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 */
 	private String getDateTime(Date date) {
 		if (date != null) {
-			return FDDateFormat.getDateFormater().format(date);
+			return ZksampleDateFormat.getDateFormater().format(date);
 		}
 		return "";
 	}

@@ -46,8 +46,8 @@ import org.zkoss.zul.West;
 import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.service.OfficeService;
 import de.forsthaus.policy.model.UserImpl;
-import de.forsthaus.webui.util.FDDateFormat;
 import de.forsthaus.webui.util.GFCBaseCtrl;
+import de.forsthaus.webui.util.ZksampleDateFormat;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -113,7 +113,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 		date.setYear(110);
 
 		String zkVersion = doGetZkVersion();
-		String appVersion = appName + " v5.0.323 / build: " + FDDateFormat.getDateFormater().format(date);
+		String appVersion = appName + " v5.0.323 / build: " + ZksampleDateFormat.getDateFormater().format(date);
 
 		String userName = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
 		String version = zkVersion + " | " + appVersion;

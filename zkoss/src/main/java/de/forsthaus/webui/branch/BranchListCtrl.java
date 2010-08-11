@@ -39,8 +39,8 @@ import org.zkoss.zul.Window;
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.service.BrancheService;
 import de.forsthaus.backend.util.HibernateSearchObject;
-import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -98,7 +98,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	public BranchListCtrl() {
 		super();
 
-		FDUtils.logEventDebug(this, "super()");
+		ZksampleUtils.logEventDebug(this, "super()");
 	}
 
 	@Override
@@ -148,7 +148,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	 * @throws Exception
 	 */
 	public void onCreate$windowBranchList(Event event) throws Exception {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 
@@ -206,7 +206,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	 * Event is forwarded in the corresponding listbox.
 	 */
 	public void onDoubleClickedBranchItem(Event event) {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		Branche aBranche = getSelectedBranche();
 
@@ -234,7 +234,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	 * @param event
 	 */
 	public void onSelect$listBoxBranch(Event event) {
-		FDUtils.logEventDebug(this, event);
+		ZksampleUtils.logEventDebug(this, event);
 
 		Branche aBranche = getSelectedBranche();
 

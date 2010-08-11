@@ -51,10 +51,10 @@ import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.security.groupright.model.SecGrouprightDialogGroupListModelItemRenderer;
 import de.forsthaus.webui.security.groupright.model.SecGrouprightRightListModelItemRenderer;
-import de.forsthaus.webui.util.FDUtils;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.SelectionCtrl;
+import de.forsthaus.webui.util.ZksampleUtils;
 import de.forsthaus.webui.util.pagging.PagedListWrapper;
 
 /**
@@ -455,7 +455,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		FDUtils.doShowNotImplementedMessage();
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	/**

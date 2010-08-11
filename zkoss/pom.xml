@@ -31,12 +31,12 @@
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.12</version>
+			<version>1.2.14</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
-			<version>1.1</version>
+			<version>1.1.1</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>servlet-api</artifactId>
@@ -68,7 +68,7 @@
 		<dependency>
 			<groupId>org.zkoss.zkforge.el</groupId>
 			<artifactId>zcommons-el</artifactId>
-			<version>1.0.2</version>
+			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.zkoss.zk</groupId>
@@ -195,12 +195,12 @@
 		<dependency>
 			<groupId>jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>3.5.0</version>
+			<version>3.5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.5.8</version>
+			<version>1.5.11</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -256,8 +256,8 @@
 	</dependencyManagement>
 	<properties>
 		<zkosslibs>${basedir}/src/main/webapp/WEB-INF/lib/</zkosslibs>
-		<spring.version>3.0.0.RELEASE</spring.version>
-		<springsecurity.version>3.0.1.RELEASE</springsecurity.version>
+		<spring.version>3.0.1.RELEASE</spring.version>
+		<springsecurity.version>3.0.2.RELEASE</springsecurity.version>
 		<zkoss.version>5.0.3</zkoss.version>
 	</properties>
 </project>

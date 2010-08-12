@@ -217,7 +217,7 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		name1.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
 		AutoText name2 = new AutoText("Software Consulting", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		name2.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
-		AutoText street = new AutoText("ZK Direct RIA Street 256", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		AutoText street = new AutoText("256, ZK Direct RIA Street ", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		street.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
 		AutoText city = new AutoText("ZKoss City", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		city.setPrintWhenExpression(ExpressionHelper.printInFirstPage());

@@ -83,7 +83,7 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		height = height + panelHeight;
 
-		int maxListBoxHeight = (height - 210);
+		int maxListBoxHeight = (height - 220);
 		setCountRows((int) Math.round(maxListBoxHeight / 19.2));
 
 		paging_HibernateStatisticList.setPageSize(getCountRows());

@@ -1,16 +1,25 @@
 <?
-taglib uri                        ="http: //www.zkoss.org /dsp/web/core" prefix       
-	                ="c   
-	                   "?> <style type 
-	                       ="text /css"> /* body Bereich */ body {
+taglib uri                                ="http: //www.zkoss.org
+	/dsp/web/core" prefix       
+	                        ="c   
+	                           "?> <style type 
+	                               ="text /css"> /* body Bereich */ body {
 	padding: 0 0;
 	/* 0 padding on top and bottom and 0 padding on right and left */
 }
 
 /********************************/ /* ------ L I S T B O X ------- */
-	/********************************/ /* Listbox Header 1 */
+	/* Listbox Header 1 */
 .FDListBoxHeader1 {
 	background-color: #E6B9CD;
+}
+
+/* no border on top,left,right */
+.FDListBoxNoBorders {
+	border-top-width: 0px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 1px;
 }
 
 /* Even rows in a listbox */
@@ -97,12 +106,23 @@ tr.z-row td.z-row-inner {
 	font-weight: bold;
 }
 
+/* --------------------- TABS ---------------------- */ /* no border */
+.z-tabs-scroll {
+	border: 0px;
+}
+
+/* -------------------- TabPanel ------------------- */ /* no border */
+.z-tabpanel,.z-tabbox-ver .z-tabpanels-ver {
+	border-style: none;
+}
+
 .z-slider-sphere-hor,.z-slider-scale,.z-slider-hor,.z-slider-sphere-hor-center,.z-slider-scale-center,.z-slider-hor-center
 	{
 	background: transparent no-repeat 0 top;
-	background-image: url(${                                       c :  
+	background-image: url(${                                                       c :
+		         
 		                             
-		      encodeURL('~./zul/img/slider/slider-bg.png')
+		              encodeURL('~./zul/img/slider/slider-bg.png')
 }
 
 .z-tabs-header {

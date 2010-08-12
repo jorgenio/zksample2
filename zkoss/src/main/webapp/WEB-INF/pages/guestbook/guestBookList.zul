@@ -55,11 +55,12 @@
 				<paging id="paging_GuestBookList" />
 			</north>
 
-			<center border="normal">
+			<center border="none">
 
-				<listbox id="listbox_GuestBookList" vflex="true"
-					tooltiptext="${c:l('listbox.tooltiptext')}" width="99.9%"
-					height="100%" multiple="false">
+				<listbox id="listbox_GuestBookList"
+					style="border-top-width: 0px; border-left-width: 0px; border-right-width: 0px; border-bottom-width: 1px;"
+					vflex="true" tooltiptext="${c:l('listbox.tooltiptext')}"
+					width="99.9%" height="100%" multiple="false">
 					<listhead sizable="true">
 						<listheader id="listheader_GuestBook_gubDate"
 							sclass="FDListBoxHeader1" image="/images/icons/sequence.gif"

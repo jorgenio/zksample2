@@ -24,8 +24,9 @@
 
 				<panel>
 					<panelchildren style="padding: 5px">
-						<grid fixedLayout="true" style="border:0px"
-							width="auto">
+						<grid sclass="GridLayoutNoBorder"
+							fixedLayout="true"
+							style="border:0px; padding-left:5px; padding-right:5px;">
 							<columns>
 								<column width="130px" />
 								<column width="50px" />

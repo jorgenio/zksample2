@@ -26,6 +26,7 @@
 
 				<!-- DATABINDED LISTBOX -->
 				<listbox id="listBoxBranch"
+					style="border-top-width: 0px; border-left-width: 0px; border-right-width: 0px; border-bottom-width: 1px;"
 					model="@{controller.branches}"
 					selectedItem="@{controller.selectedBranche}" vflex="true"
 					tooltiptext="${c:l('listbox.tooltiptext')}" width="99.9%"

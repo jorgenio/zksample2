@@ -81,9 +81,10 @@
 
 			<center border="none">
 
-				<listbox id="listBoxSecRights" vflex="true"
-					tooltiptext="${c:l('listbox.tooltiptext')}" width="99.9%"
-					height="100%" multiple="false">
+				<listbox id="listBoxSecRights"
+					style="border-top-width: 0px; border-left-width: 0px; border-right-width: 0px; border-bottom-width: 1px;"
+					vflex="true" tooltiptext="${c:l('listbox.tooltiptext')}"
+					width="100%" height="100%" multiple="false">
 					<listhead sizable="true">
 						<listheader id="listheader_SecRightList_rigName"
 							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"

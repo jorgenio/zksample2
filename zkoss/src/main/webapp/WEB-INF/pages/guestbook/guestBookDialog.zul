@@ -100,7 +100,7 @@
 												value="${c:l('label_GuestBook_gubText.value')}" />
 
 											<textbox
-												id="textbox_gubText" multiline="true" width="99%" rows="16" />
+												id="textbox_gubText" multiline="true" width="98%" rows="16" />
 
 										</row>
 									</rows>

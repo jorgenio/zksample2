@@ -47,6 +47,7 @@ import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.guestbook.model.GuestBookListtemRenderer;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -100,16 +101,11 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 	public GuestBookListCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super(");
 	}
 
 	public void onCreate$window_GuestBookList(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug("--> " + event.toString());
 
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
@@ -128,7 +124,7 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		height = height + panelHeight;
-		int maxListBoxHeight = (height - 175);
+		int maxListBoxHeight = (height - 134);
 		setCountRows(Math.round(maxListBoxHeight / 23));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());
@@ -201,15 +197,9 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
+		// logger.debug("--> " + event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message.Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -221,10 +211,7 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug("--> " + event.toString());
 
 		Events.postEvent("onCreate", window_GuestBookList, event);
 		window_GuestBookList.invalidate();
@@ -237,10 +224,7 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 	 * @throws Exception
 	 */
 	public void onSelect$listbox_GuestBookList(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug("--> " + event.toString());
 
 		// get the selected object
 		Listitem item = listbox_GuestBookList.getSelectedItem();
@@ -258,10 +242,7 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 	 * Call the GuestBook dialog with a new empty entry. <br>
 	 */
 	public void onClick$button_GuestBookList_NewEntry(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug("--> " + event.toString());
 
 		// create a new GuestBook object
 		/** !!! DO NOT BREAK THE TIERS !!! */
@@ -282,9 +263,7 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 	 * @throws Exception
 	 */
 	public void onDoubleClickedGuestBookItem(Event event) throws Exception {
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug("--> " + event.toString());
 
 		// get the selected object
 		Listitem item = listbox_GuestBookList.getSelectedItem();

@@ -134,13 +134,14 @@
 
 
 	</window>
-
 </zk>
+
 
 <!-- old Top Background-color style="background-color:#4944F9" -->
 <!-- 	<image src="/images/zkoss3.gif" /> -->
 
-
+<!-- 	<style>.z-groupbox-cnt {border: 0px;}</style> -->
+<!--  <style>.z-tabs-scroll {border: 0px;}</style> -->
 <!-- 
 	<label id="lbl2" width="33%" />
 	<timer id="timer2" delay="1000" repeats="true">
@@ -151,6 +152,4 @@
 	colDate.setLabel(strTime);
 	</attribute>
 	</timer>
-	
-	
 -->

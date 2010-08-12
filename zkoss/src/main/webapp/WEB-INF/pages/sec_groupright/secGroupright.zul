@@ -116,7 +116,8 @@
 									<tabpanels>
 
 										<!-- Tab All -->
-										<tabpanel style="border: 0px">
+										<tabpanel
+											style="border: 0px; padding: 0px">
 
 											<hbox>
 												<space />
@@ -188,7 +189,8 @@
 										</tabpanel>
 
 										<!-- Tab Details -->
-										<tabpanel style="border: 0px">
+										<tabpanel
+											style="border: 0px; padding: 0px">
 											<toolbar>
 												<button
 													id="button_GroupRight_NewGroupRight"

@@ -65,11 +65,12 @@
 						<tabpanels>
 
 							<!-- Tab Details -->
-							<tabpanel style="border: 0px">
+							<tabpanel
+								style="border: 0px; padding: 0px">
 
 								<columnlayout>
 									<columnchildren width="30%"
-										style="padding: 2px">
+										style="padding: 1px">
 										<panel
 											id="panel_SecRoleGroup_Roles"
 											title="${c:l('panel_SecRoleGroup_Roles.title')}"
@@ -86,7 +87,7 @@
 															<paging
 																id="paging_ListBoxSecRole" />
 															<listbox
-																id="listBoxSecRole" width="99.5%" height="100%"
+																id="listBoxSecRole" width="100%" height="100%"
 																multiple="false">
 																<listhead
 																	sizable="true">
@@ -111,7 +112,7 @@
 
 
 									<columnchildren width="70%"
-										style="padding: 2px">
+										style="padding: 1px">
 										<panel
 											id="panel_SecRoleGroup_Groups"
 											title="${c:l('panel_SecRoleGroup_Groups.title')}"
@@ -128,7 +129,7 @@
 															<paging
 																id="paging_ListBoxSecRolegroup" />
 															<listbox
-																id="listBoxSecRolegroup" width="99.5%" height="100%"
+																id="listBoxSecRolegroup" width="100%" height="100%"
 																multiple="false">
 																<listhead
 																	sizable="true">
@@ -164,9 +165,6 @@
 				</div>
 			</center>
 
-			<east border="none"></east>
-			<west border="none"></west>
-			<south border="none"></south>
 
 		</borderlayout>
 

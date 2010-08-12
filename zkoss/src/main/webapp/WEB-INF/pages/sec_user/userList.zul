@@ -90,9 +90,10 @@
 
 			<center border="none">
 
-				<listbox id="listBoxUser" vflex="true" width="99.9%"
-					height="100%" tooltiptext="${c:l('listbox.tooltiptext')}"
-					multiple="false">
+				<listbox id="listBoxUser"
+					style="border-top-width: 0px; border-left-width: 0px; border-right-width: 0px; border-bottom-width: 1px;"
+					vflex="true" width="100%" height="100%"
+					tooltiptext="${c:l('listbox.tooltiptext')}" multiple="false">
 					<listhead sizable="true">
 						<listheader
 							id="listheader_UserList_usrLoginname" sclass="FDListBoxHeader1"
@@ -100,12 +101,10 @@
 							label="${c:l('common.Loginname')}" />
 						<listheader id="listheader_UserList_usrLastname"
 							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"
-							sort="auto" width="15%"
-							label="${c:l('common.Lastname')}" />
+							sort="auto" width="15%" label="${c:l('common.Lastname')}" />
 						<listheader id="listheader_UserList_usrEmail"
 							sclass="FDListBoxHeader1" image="/images/icons/mail16x16.gif"
-							sort="auto" width="20%"
-							label="${c:l('common.Email')}" />
+							sort="auto" width="20%" label="${c:l('common.Email')}" />
 						<listheader id="listheader_UserList_usrEnabled"
 							sclass="FDListBoxHeader1">
 							<label id="label_lh_UserList_usrEnabled"

@@ -55,6 +55,7 @@ import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
 import ar.com.fdvs.dj.core.layout.HorizontalBandAlignment;
 import ar.com.fdvs.dj.domain.AutoText;
 import ar.com.fdvs.dj.domain.CustomExpression;
+import ar.com.fdvs.dj.domain.DJLabel;
 import ar.com.fdvs.dj.domain.DynamicReport;
 import ar.com.fdvs.dj.domain.ExpressionHelper;
 import ar.com.fdvs.dj.domain.Style;
@@ -93,7 +94,7 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 	private ByteArrayOutputStream output;
 	private InputStream mediais;
 	private AMedia amedia;
-	private String zksample2title = "[Zksample2] DynamicJasper Report Sample";
+	private String zksample2title = "Security single rights list";
 
 	public SecRightSimpleDJReport(Component parent) throws InterruptedException {
 		super();
@@ -115,7 +116,10 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		// Styles: Title
 		Style titleStyle = new Style();
 		titleStyle.setHorizontalAlign(HorizontalAlign.CENTER);
-		titleStyle.setFont(Font.ARIAL_BIG_BOLD);
+		Font titleFont = Font.ARIAL_BIG_BOLD;
+		titleFont.setUnderline(true);
+		titleStyle.setFont(titleFont);
+		// titleStyle.setBorderBottom(Border.PEN_1_POINT);
 
 		// Styles: Subtitle
 		Style subtitleStyle = new Style();
@@ -126,24 +130,31 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		 * Set the styles. In a report created with DynamicReportBuilder we do
 		 * this in an other way.
 		 */
-		// Header Style Text (left)
+		// ColumnHeader Style Text (left-align)
 		Style columnHeaderStyleText = new Style();
 		columnHeaderStyleText.setFont(Font.ARIAL_MEDIUM_BOLD);
 		columnHeaderStyleText.setHorizontalAlign(HorizontalAlign.LEFT);
 		columnHeaderStyleText.setBorderBottom(Border.PEN_1_POINT);
 
-		// Header Style Text (left)
+		// ColumnHeader Style Text (right-align)
 		Style columnHeaderStyleNumber = new Style();
 		columnHeaderStyleNumber.setFont(Font.ARIAL_MEDIUM_BOLD);
 		columnHeaderStyleNumber.setHorizontalAlign(HorizontalAlign.RIGHT);
 		columnHeaderStyleNumber.setBorderBottom(Border.PEN_1_POINT);
 
-		// Rows content
+		// Footer Style (center-align)
+		Style footerStyle = new Style();
+		footerStyle.setFont(Font.ARIAL_SMALL);
+		footerStyle.getFont().setFontSize(8);
+		footerStyle.setHorizontalAlign(HorizontalAlign.CENTER);
+		footerStyle.setBorderTop(Border.PEN_1_POINT);
+
+		// Rows content Style (left-align)
 		Style columnDetailStyleText = new Style();
 		columnDetailStyleText.setFont(Font.ARIAL_SMALL);
 		columnDetailStyleText.setHorizontalAlign(HorizontalAlign.LEFT);
 
-		// Rows content
+		// Rows content Style (right-align)
 		Style columnDetailStyleNumbers = new Style();
 		columnDetailStyleNumbers.setFont(Font.ARIAL_SMALL);
 		columnDetailStyleNumbers.setHorizontalAlign(HorizontalAlign.RIGHT);
@@ -154,10 +165,14 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		// Sets the Report Columns, header, Title, Groups, Etc Formats
 		// DynamicJasper documentation
 		drb.setTitle(zksample2title);
-		drb.setSubtitle("List of security single rights: " + ZksampleDateFormat.getDateFormater().format(new Date()));
+		// drb.setSubtitle("DynamicJasper Sample");
 		drb.setSubtitleStyle(subtitleStyle);
+
+		drb.setHeaderHeight(20);
 		drb.setDetailHeight(10);
+		drb.setFooterVariablesHeight(10);
 		drb.setMargins(20, 20, 30, 15);
+
 		drb.setDefaultStyles(titleStyle, subtitleStyle, columnHeaderStyleText, columnDetailStyleText);
 		drb.setPrintBackgroundOnOddRows(true);
 
@@ -187,13 +202,30 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		 * Adding many autotexts in the same position (header/footer and
 		 * aligment) makes them to be one on top of the other
 		 */
-		String strPage = Labels.getLabel("common.Page") + ": ";
-		AutoText autoText = new AutoText(AutoText.AUTOTEXT_PAGE_X, AutoText.POSITION_HEADER, HorizontalBandAlignment.RIGHT);
-		autoText.setMessageKey(strPage);
-		autoText.setWidth(new Integer(100));
+
+		AutoText created = new AutoText("Created: " + ZksampleDateFormat.getDateFormater().format(new Date()), AutoText.POSITION_HEADER, HorizontalBandAlignment.RIGHT);
+		created.setWidth(new Integer(100));
+		created.setStyle(atStyle);
+		drb.addAutoText(created);
+
+		AutoText autoText = new AutoText(AutoText.AUTOTEXT_PAGE_X_SLASH_Y, AutoText.POSITION_HEADER, HorizontalBandAlignment.RIGHT);
+		autoText.setWidth(new Integer(20));
 		autoText.setStyle(atStyle);
 		drb.addAutoText(autoText);
-		// END Test
+
+		AutoText name1 = new AutoText("The Zksample2 Ltd.", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		name1.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
+		AutoText name2 = new AutoText("Software Consulting", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		name2.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
+		AutoText street = new AutoText("ZK Direct RIA Street 256", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		street.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
+		AutoText city = new AutoText("ZKoss City", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		city.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
+		drb.addAutoText(name1).addAutoText(name2).addAutoText(street).addAutoText(city);
+		// Footer
+		AutoText footerText = new AutoText("Help to prevent the global warming by writing cool software.", AutoText.POSITION_FOOTER, HorizontalBandAlignment.CENTER);
+		footerText.setStyle(footerStyle);
+		drb.addAutoText(footerText);
 
 		// ADD ALL USED FIELDS to the report.
 		drb.addField("rigType", Integer.class.getName());
@@ -308,7 +340,7 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 	private void callReportWindow(AMedia aMedia, String format) {
 		boolean modal = true;
 
-		this.setTitle("Dynamic JasperReports. Sample Report for ZKoss");
+		this.setTitle("Dynamic JasperReports. Sample Report for the zk framework.");
 		this.setId("ReportWindow");
 		this.setVisible(true);
 		this.setMaximizable(true);

@@ -18,6 +18,7 @@
  */
 package de.forsthaus.webui.office.report;
 
+import java.awt.Color;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -51,10 +52,14 @@ import org.zkoss.zul.Window;
 
 import ar.com.fdvs.dj.core.DynamicJasperHelper;
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
+import ar.com.fdvs.dj.core.layout.HorizontalBandAlignment;
+import ar.com.fdvs.dj.domain.AutoText;
 import ar.com.fdvs.dj.domain.DynamicReport;
+import ar.com.fdvs.dj.domain.ExpressionHelper;
 import ar.com.fdvs.dj.domain.Style;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
+import ar.com.fdvs.dj.domain.builders.StyleBuilder;
 import ar.com.fdvs.dj.domain.constants.Border;
 import ar.com.fdvs.dj.domain.constants.Font;
 import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
@@ -78,7 +83,6 @@ import de.forsthaus.webui.util.ZksampleUtils;
 public class OfficeSimpleDJReport extends Window implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
 
 	private Iframe iFrame;
 	private ByteArrayOutputStream output;
@@ -149,7 +153,7 @@ public class OfficeSimpleDJReport extends Window implements Serializable {
 		// Sets the Report Columns, header, Title, Groups, Etc Formats
 		// DynamicJasper documentation
 		drb.setTitle(zksample2title);
-		drb.setSubtitle("List of Offices: " + ZksampleDateFormat.getDateFormater().format(new Date()));
+		drb.setSubtitle("List of Offices: " + ZksampleDateFormat.getDateTimeFormater().format(new Date()));
 		drb.setSubtitleStyle(subtitleStyle);
 		drb.setPrintBackgroundOnOddRows(true);
 		drb.setUseFullPageWidth(true);

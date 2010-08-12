@@ -146,14 +146,14 @@ public class SecLoginlogMainCtrl extends GFCBaseCtrl implements Serializable {
 	public void onSelect$tabLoginStatistic(Event event) throws IOException {
 		logger.debug(event.toString());
 
-		try {
-			ZksampleUtils.doShowOutOfOrderMessage();
-			tabLoginList.setSelected(true);
-			return;
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			ZksampleUtils.doShowOutOfOrderMessage();
+//			tabLoginList.setSelected(true);
+//			return;
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 		Tabpanel listTab = (Tabpanel) Path.getComponent("/outerIndexWindow/secLoginlogMainWindow/tabPanelLoginStatistic");
 		listTab.getChildren().clear();

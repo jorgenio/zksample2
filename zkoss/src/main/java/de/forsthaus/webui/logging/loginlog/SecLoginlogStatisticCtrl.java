@@ -151,11 +151,9 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements
 			System.out.println(sw.toString());
 
 		}
-		// boxSecLoginLogStatistikCenter.appendChild(doGetTotalCountByCountries());
-		// boxSecLoginLogStatistikCenter.appendChild(doGetMonthlyCountByCountries(currentMonth,
-		// currentYear));
-		// boxSecLoginLogStatistikCenter.appendChild(doGetDailyCountByCountries(new
-		// Date()));
+		boxSecLoginLogStatistikCenter.appendChild(doGetTotalCountByCountries());
+		boxSecLoginLogStatistikCenter.appendChild(doGetMonthlyCountByCountries(currentMonth, currentYear));
+		boxSecLoginLogStatistikCenter.appendChild(doGetDailyCountByCountries(new Date()));
 	}
 
 	/**

@@ -65,7 +65,7 @@
 				<listbox id="listBoxCustomer"
 					style="border-top-width: 0px; border-left-width: 0px; border-right-width: 0px; border-bottom-width: 1px;"
 					vflex="true" tooltiptext="${c:l('listbox.tooltiptext')}"
-					width="99.9%" height="100%" multiple="false">
+					width="100%" height="100%" multiple="false">
 					<listhead sizable="true">
 						<listheader id="listheader_CustNo"
 							sclass="FDListBoxHeader1" image="/images/icons/builder.gif"

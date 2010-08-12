@@ -169,7 +169,7 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		drb.setSubtitleStyle(subtitleStyle);
 
 		drb.setHeaderHeight(20);
-		drb.setDetailHeight(10);
+		drb.setDetailHeight(15);
 		drb.setFooterVariablesHeight(10);
 		drb.setMargins(20, 20, 30, 15);
 

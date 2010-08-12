@@ -22,10 +22,10 @@ package de.forsthaus.backend.bean;
  * @author sge
  * 
  */
-public class DummyBean implements IntegerCount {
+public class DummyBean implements LongCount {
 	private String country;
 	private String countryName;
-	private Integer totalCount;
+	private Long totalCount;
 
 	public String getCountry() {
 		return country;
@@ -35,15 +35,23 @@ public class DummyBean implements IntegerCount {
 		this.country = country;
 	}
 
-	public void setTotalCount(Integer totalCount) {
-		this.totalCount = totalCount;
+	public void setTotalCount(Number totalCount) {
+		if (totalCount == null) {
+			throw new NullPointerException("totalCount is null!");
+		}
+		
+		if (totalCount instanceof Long) {
+			this.totalCount = (Long) totalCount;
+		} else {
+			this.totalCount = Long.valueOf(totalCount.longValue());
+		}
 	}
 
 	public void setCountryName(String countryName) {
 		this.countryName = countryName;
 	}
 
-	public Integer getTotalCount() {
+	public Long getTotalCount() {
 		return totalCount;
 	}
 
@@ -52,7 +60,7 @@ public class DummyBean implements IntegerCount {
 	}
 
 	@Override
-	public Integer getCount() {
+	public Long getCount() {
 		return getTotalCount();
 	}
 }

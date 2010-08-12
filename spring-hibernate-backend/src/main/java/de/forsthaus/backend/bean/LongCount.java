@@ -18,33 +18,6 @@
  */
 package de.forsthaus.backend.bean;
 
-import java.util.List;
-
-/**
- * @author bbruhns
- * 
- */
-public class ListIntegerSumBean<T extends IntegerCount> {
-	public ListIntegerSumBean(List<T> list) {
-		super();
-		this.list = list;
-		int c = 0;
-		for (T counter : list) {
-			if (counter.getCount() != null) {
-				c += counter.getCount().intValue();
-			}
-		}
-		this.sum = c;
-	}
-
-	final private List<T> list;
-	final private int sum;
-
-	public List<T> getList() {
-		return list;
-	}
-
-	public int getSum() {
-		return sum;
-	}
+public interface LongCount {
+	Long getCount();
 }

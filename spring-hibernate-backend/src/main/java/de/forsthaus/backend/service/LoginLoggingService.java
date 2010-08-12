@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 import de.forsthaus.backend.bean.DummyBean;
-import de.forsthaus.backend.bean.ListIntegerSumBean;
+import de.forsthaus.backend.bean.ListLongSumBean;
 import de.forsthaus.backend.model.LoginStatus;
 import de.forsthaus.backend.model.SecLoginlog;
 
@@ -68,9 +68,9 @@ public interface LoginLoggingService {
 
 	public int getTotalCountOfLogs();
 
-	public ListIntegerSumBean<DummyBean> getMonthlyCountByCountries(int aMonth, int aYear);
+	public ListLongSumBean<DummyBean> getMonthlyCountByCountries(int aMonth, int aYear);
 
-	public ListIntegerSumBean<DummyBean> getDailyCountByCountries(Date aDate);
+	public ListLongSumBean<DummyBean> getDailyCountByCountries(Date aDate);
 
 	public int deleteLocalIPs();
 }

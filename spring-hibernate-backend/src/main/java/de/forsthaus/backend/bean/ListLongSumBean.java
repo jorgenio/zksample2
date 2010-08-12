@@ -18,6 +18,33 @@
  */
 package de.forsthaus.backend.bean;
 
-public interface IntegerCount {
-	Integer getCount();
+import java.util.List;
+
+/**
+ * @author bbruhns
+ * 
+ */
+public class ListLongSumBean<T extends LongCount> {
+	public ListLongSumBean(List<T> list) {
+		super();
+		this.list = list;
+		long c = 0;
+		for (T counter : list) {
+			if (counter.getCount() != null) {
+				c += counter.getCount().longValue();
+			}
+		}
+		this.sum = c;
+	}
+
+	final private List<T> list;
+	final private long sum;
+
+	public List<T> getList() {
+		return list;
+	}
+
+	public long getSum() {
+		return sum;
+	}
 }

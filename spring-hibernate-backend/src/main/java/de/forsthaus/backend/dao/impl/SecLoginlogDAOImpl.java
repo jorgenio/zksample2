@@ -29,7 +29,7 @@ import org.jfree.data.time.Month;
 import org.springframework.dao.support.DataAccessUtils;
 
 import de.forsthaus.backend.bean.DummyBean;
-import de.forsthaus.backend.bean.ListIntegerSumBean;
+import de.forsthaus.backend.bean.ListLongSumBean;
 import de.forsthaus.backend.dao.SecLoginlogDAO;
 import de.forsthaus.backend.model.LoginStatus;
 import de.forsthaus.backend.model.SecLoginlog;
@@ -175,7 +175,7 @@ public class SecLoginlogDAOImpl extends BasisNextidDaoImpl<SecLoginlog> implemen
 	}
 
 	@Override
-	public ListIntegerSumBean<DummyBean> getMonthlyCountByCountries(int aMonth, int aYear) {
+	public ListLongSumBean<DummyBean> getMonthlyCountByCountries(int aMonth, int aYear) {
 
 		/**
 		 * we set the dateFrom time manually to hh/mm/ss = 00:00:01 and the
@@ -197,11 +197,11 @@ public class SecLoginlogDAOImpl extends BasisNextidDaoImpl<SecLoginlog> implemen
 
 		Object[] params = { dateFrom, dateTo };
 
-		return new ListIntegerSumBean<DummyBean>(CustomDataAccessUtils.transfer2Bean(getHibernateTemplate().find(hqlStr, params), DummyBean.class, "country", "countryName", "totalCount"));
+		return new ListLongSumBean<DummyBean>(CustomDataAccessUtils.transfer2Bean(getHibernateTemplate().find(hqlStr, params), DummyBean.class, "country", "countryName", "totalCount"));
 	}
 
 	@Override
-	public ListIntegerSumBean<DummyBean> getDailyCountByCountries(Date aDate) {
+	public ListLongSumBean<DummyBean> getDailyCountByCountries(Date aDate) {
 		/**
 		 * we set the dateFrom time manually to hh/mm/ss = 00:00:01 and the
 		 * dateTo time manually to date + hh/mm/SS = 23:59:59.<br>
@@ -221,7 +221,7 @@ public class SecLoginlogDAOImpl extends BasisNextidDaoImpl<SecLoginlog> implemen
 
 		Object[] params = { dateFrom, dateTo };
 
-		return new ListIntegerSumBean<DummyBean>(CustomDataAccessUtils.transfer2Bean(getHibernateTemplate().find(hqlStr, params), DummyBean.class, "country", "countryName", "totalCount"));
+		return new ListLongSumBean<DummyBean>(CustomDataAccessUtils.transfer2Bean(getHibernateTemplate().find(hqlStr, params), DummyBean.class, "country", "countryName", "totalCount"));
 	}
 
 	@Override

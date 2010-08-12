@@ -52,7 +52,7 @@ import org.zkoss.zul.Panelchildren;
 import org.zkoss.zul.Window;
 
 import de.forsthaus.backend.bean.DummyBean;
-import de.forsthaus.backend.bean.ListIntegerSumBean;
+import de.forsthaus.backend.bean.ListLongSumBean;
 import de.forsthaus.backend.service.LoginLoggingService;
 import de.forsthaus.webui.logging.loginlog.model.SecLoginlogStatisticTotalListModelItemRenderer;
 import de.forsthaus.webui.util.GFCBaseCtrl;
@@ -63,7 +63,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
  * This is the controller class for the
  * /WEB-INF/pages/sec_loginlog/secLoginLogStatistic.zul file.<br>
- *<br>
+ * <br>
  * This class creates the tabs + panels for the list and statistic panel.
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
  * 
@@ -72,10 +72,12 @@ import de.forsthaus.webui.util.ZksampleUtils;
  * @author bbruhns
  * @author sgerth
  */
-public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializable {
+public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements
+		Serializable {
 
 	private static final long serialVersionUID = 4249471372492633246L;
-	private transient static final Logger logger = Logger.getLogger(SecLoginlogStatisticCtrl.class);
+	private transient static final Logger logger = Logger
+			.getLogger(SecLoginlogStatisticCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -114,7 +116,8 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	// +++++++++++++++ Component Events ++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
-	public void onCreate$windowTabPanelLoginStatistic(Event event) throws Exception {
+	public void onCreate$windowTabPanelLoginStatistic(Event event)
+			throws Exception {
 		logger.debug(event.toString());
 
 		/**
@@ -122,11 +125,14 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
 		 * filled by onClientInfo() in the indexCtroller
 		 */
-		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		int height = ((Intbox) Path
+				.getComponent("/outerIndexWindow/currentDesktopHeight"))
+				.getValue().intValue();
 		maxPanelHeight = (height - 140);
 		maxlistBoxHeight = maxPanelHeight - 25;
 
-		panelSecLoginLogStatistikCenter.setHeight(String.valueOf(maxPanelHeight) + "px");
+		panelSecLoginLogStatistikCenter.setHeight(String
+				.valueOf(maxPanelHeight) + "px");
 
 		Calendar aDate = Calendar.getInstance();
 		aDate.setTime(new Date());
@@ -168,7 +174,8 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 * @param event
 	 * @throws InterruptedException
 	 */
-	public void onClick$button_SecLoginlogList_PrintLoginList(Event event) throws InterruptedException {
+	public void onClick$button_SecLoginlogList_PrintLoginList(Event event)
+			throws InterruptedException {
 		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
@@ -178,7 +185,8 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 * @param event
 	 * @throws InterruptedException
 	 */
-	public void onClick$buttonSecLoginListStatisticTotalCountByCountries(Event event) throws InterruptedException {
+	public void onClick$buttonSecLoginListStatisticTotalCountByCountries(
+			Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
 		doRefreshTotalCount();
@@ -190,7 +198,8 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 * @param event
 	 * @throws InterruptedException
 	 */
-	public void onClick$buttonSecLoginListStatisticMonthlyCountByCountries(Event event) throws InterruptedException {
+	public void onClick$buttonSecLoginListStatisticMonthlyCountByCountries(
+			Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
 		Calendar aDate = Calendar.getInstance();
@@ -207,7 +216,8 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 * @param event
 	 * @throws InterruptedException
 	 */
-	public void onClick$buttonSecLoginListStatisticDailyCountByCountries(Event event) throws InterruptedException {
+	public void onClick$buttonSecLoginListStatisticDailyCountByCountries(
+			Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
 		doRefreshDailyCount(new Date());
@@ -220,7 +230,8 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 */
 	private Div doGetTotalCountByCountries() {
 
-		List<DummyBean> list = getLoginLoggingService().getTotalCountByCountries();
+		List<DummyBean> list = getLoginLoggingService()
+				.getTotalCountByCountries();
 		int recCount = getLoginLoggingService().getTotalCountOfLogs();
 
 		Div div = new Div();
@@ -259,13 +270,15 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		lh1.setSortAscending(new FieldComparator("country", true));
 		lh1.setSortDescending(new FieldComparator("country", false));
 		lh1.setParent(listhead);
-		Listheader lh2 = new Listheader(Labels.getLabel("listheader_SecLoginlogList_CountryCode2.label"));
+		Listheader lh2 = new Listheader(
+				Labels.getLabel("listheader_SecLoginlogList_CountryCode2.label"));
 		lh2.setSclass("FDListBoxHeader1");
 		lh2.setWidth("185px");
 		lh2.setSortAscending(new FieldComparator("countryName", true));
 		lh2.setSortDescending(new FieldComparator("countryName", false));
 		lh2.setParent(listhead);
-		Listheader lh3 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.TotalCount.Label"));
+		Listheader lh3 = new Listheader(
+				Labels.getLabel("ListheaderStatisticTotalCountByCountries.TotalCount.Label"));
 		lh3.setSclass("FDListBoxHeader1");
 		lh3.setWidth("");
 		lh3.setSortAscending(new FieldComparator("totalCount", true));
@@ -292,7 +305,8 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		lfTotalCount.setWidth("50px");
 		lfTotalCount.setStyle("font-weight:bold; text-align: right");
 
-		lbTotalCount.setItemRenderer(new SecLoginlogStatisticTotalListModelItemRenderer());
+		lbTotalCount
+				.setItemRenderer(new SecLoginlogStatisticTotalListModelItemRenderer());
 		lbTotalCount.setModel(new ListModelList(list));
 
 		/** +++ get the SUM of all logs for the ListFooter +++ */
@@ -306,10 +320,12 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 
 	private void doRefreshTotalCount() {
 
-		List<DummyBean> list = getLoginLoggingService().getTotalCountByCountries();
+		List<DummyBean> list = getLoginLoggingService()
+				.getTotalCountByCountries();
 		int recCount = getLoginLoggingService().getTotalCountOfLogs();
 
-		lbTotalCount.setItemRenderer(new SecLoginlogStatisticTotalListModelItemRenderer());
+		lbTotalCount
+				.setItemRenderer(new SecLoginlogStatisticTotalListModelItemRenderer());
 		lbTotalCount.setModel(new ListModelList(list));
 
 		/** +++ get the SUM of all logs for the ListFooter +++ */
@@ -329,17 +345,19 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 */
 	private Div doGetMonthlyCountByCountries(int aMonth, int aYear) {
 
-		ListIntegerSumBean<DummyBean> listIntegerSumBean = getLoginLoggingService().getMonthlyCountByCountries(aMonth, aYear);
+		ListLongSumBean<DummyBean> listIntegerSumBean = getLoginLoggingService()
+				.getMonthlyCountByCountries(aMonth, aYear);
 
 		List<DummyBean> list = listIntegerSumBean.getList();
-		int recCount = listIntegerSumBean.getSum();
+		final long recCount = listIntegerSumBean.getSum();
 
 		Div div = new Div();
 		div.setHeight("100%");
 		div.setWidth("100%");
 
 		Panel panel = new Panel();
-		panel.setTitle(Labels.getLabel("panelMonthlyCount.Title") + " " + (aMonth + 1) + "/" + aYear);
+		panel.setTitle(Labels.getLabel("panelMonthlyCount.Title") + " "
+				+ (aMonth + 1) + "/" + aYear);
 		panel.setBorder("none");
 		panel.setHeight("100%");
 		panel.setWidth("292px");
@@ -371,13 +389,15 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		lh1.setSortAscending(new FieldComparator("country", true));
 		lh1.setSortDescending(new FieldComparator("country", false));
 		lh1.setParent(listhead);
-		Listheader lh2 = new Listheader(Labels.getLabel("listheader_SecLoginlogList_CountryCode2.label"));
+		Listheader lh2 = new Listheader(
+				Labels.getLabel("listheader_SecLoginlogList_CountryCode2.label"));
 		lh2.setSclass("FDListBoxHeader1");
 		lh2.setWidth("185px");
 		lh2.setSortAscending(new FieldComparator("countryName", true));
 		lh2.setSortDescending(new FieldComparator("countryName", false));
 		lh2.setParent(listhead);
-		Listheader lh3 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.TotalCount.Label"));
+		Listheader lh3 = new Listheader(
+				Labels.getLabel("ListheaderStatisticTotalCountByCountries.TotalCount.Label"));
 		lh3.setSclass("FDListBoxHeader1");
 		lh3.setWidth("");
 		lh3.setSortAscending(new FieldComparator("totalCount", true));
@@ -404,14 +424,12 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		lfMonthlyCount.setWidth("50px");
 		lfMonthlyCount.setStyle("font-weight:bold; text-align: right");
 
-		lbMonthlyCount.setItemRenderer(new SecLoginlogStatisticTotalListModelItemRenderer());
+		lbMonthlyCount
+				.setItemRenderer(new SecLoginlogStatisticTotalListModelItemRenderer());
 		lbMonthlyCount.setModel(new ListModelList(list));
 
 		/** +++ get the SUM of all logs for the ListFooter +++ */
-		if (!StringUtils.isEmpty(String.valueOf(recCount))) {
-			lfMonthlyCount.setLabel(String.valueOf(recCount));
-		} else
-			lfMonthlyCount.setLabel("0");
+		lfMonthlyCount.setLabel(String.valueOf(recCount));
 
 		return div;
 
@@ -419,20 +437,18 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 
 	private void doRefreshMonthlyCount(int aMonth, int aYear) {
 
-		ListIntegerSumBean<DummyBean> listIntegerSumBean = getLoginLoggingService().getMonthlyCountByCountries(aMonth, aYear);
+		ListLongSumBean<DummyBean> listIntegerSumBean = getLoginLoggingService()
+				.getMonthlyCountByCountries(aMonth, aYear);
 
 		List<DummyBean> list = listIntegerSumBean.getList();
-		int recCount = listIntegerSumBean.getSum();
+		long recCount = listIntegerSumBean.getSum();
 
 		// lbMonthlyCount.setItemRenderer(new
 		// SecLoginlogStatisticTotalListModelItemRenderer());
 		lbMonthlyCount.setModel(new ListModelList(list));
 
 		/** +++ get the SUM of all logs for the ListFooter +++ */
-		if (!StringUtils.isEmpty(String.valueOf(recCount))) {
-			lfMonthlyCount.setLabel(String.valueOf(recCount));
-		} else
-			lfMonthlyCount.setLabel("0");
+		lfMonthlyCount.setLabel(String.valueOf(recCount));
 	}
 
 	/**
@@ -443,17 +459,19 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 * @return div
 	 */
 	private Div doGetDailyCountByCountries(Date aDate) {
-		ListIntegerSumBean<DummyBean> listIntegerSumBean = getLoginLoggingService().getDailyCountByCountries(aDate);
+		ListLongSumBean<DummyBean> listIntegerSumBean = getLoginLoggingService()
+				.getDailyCountByCountries(aDate);
 
 		List<DummyBean> list = listIntegerSumBean.getList();
-		int recCount = listIntegerSumBean.getSum();
+		long recCount = listIntegerSumBean.getSum();
 
 		Div div = new Div();
 		div.setHeight("100%");
 		div.setWidth("100%");
 
 		Panel panel = new Panel();
-		panel.setTitle(Labels.getLabel("panelDailyCount.Title") + ": " + getDateTime(aDate));
+		panel.setTitle(Labels.getLabel("panelDailyCount.Title") + ": "
+				+ getDateTime(aDate));
 		panel.setBorder("none");
 		panel.setHeight("100%");
 		panel.setWidth("292px");
@@ -486,13 +504,15 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		lh1.setSortAscending(new FieldComparator("country", true));
 		lh1.setSortDescending(new FieldComparator("country", false));
 		lh1.setParent(listhead);
-		Listheader lh2 = new Listheader(Labels.getLabel("listheader_SecLoginlogList_CountryCode2.label"));
+		Listheader lh2 = new Listheader(
+				Labels.getLabel("listheader_SecLoginlogList_CountryCode2.label"));
 		lh2.setSclass("FDListBoxHeader1");
 		lh2.setWidth("185px");
 		lh2.setSortAscending(new FieldComparator("countryName", true));
 		lh2.setSortDescending(new FieldComparator("countryName", false));
 		lh2.setParent(listhead);
-		Listheader lh3 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.TotalCount.Label"));
+		Listheader lh3 = new Listheader(
+				Labels.getLabel("ListheaderStatisticTotalCountByCountries.TotalCount.Label"));
 		lh3.setSclass("FDListBoxHeader1");
 		lh3.setWidth("");
 		lh3.setSortAscending(new FieldComparator("totalCount", true));
@@ -519,33 +539,30 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		lfDailyCount.setWidth("50px");
 		lfDailyCount.setStyle("font-weight:bold; text-align: right");
 
-		lbDailyCount.setItemRenderer(new SecLoginlogStatisticTotalListModelItemRenderer());
+		lbDailyCount
+				.setItemRenderer(new SecLoginlogStatisticTotalListModelItemRenderer());
 		lbDailyCount.setModel(new ListModelList(list));
 
 		/** +++ get the SUM of all logs for the ListFooter +++ */
-		if (!StringUtils.isEmpty(String.valueOf(recCount))) {
-			lfDailyCount.setLabel(String.valueOf(recCount));
-		} else
-			lfDailyCount.setLabel("0");
+		lfDailyCount.setLabel(String.valueOf(recCount));
 
 		return div;
 	}
 
 	private void doRefreshDailyCount(Date aDate) {
 
-		ListIntegerSumBean<DummyBean> listIntegerSumBean = getLoginLoggingService().getDailyCountByCountries(aDate);
+		ListLongSumBean<DummyBean> listIntegerSumBean = getLoginLoggingService()
+				.getDailyCountByCountries(aDate);
 
 		List<DummyBean> list = listIntegerSumBean.getList();
-		int recCount = listIntegerSumBean.getSum();
+		long recCount = listIntegerSumBean.getSum();
 
-		lbDailyCount.setItemRenderer(new SecLoginlogStatisticTotalListModelItemRenderer());
+		lbDailyCount
+				.setItemRenderer(new SecLoginlogStatisticTotalListModelItemRenderer());
 		lbDailyCount.setModel(new ListModelList(list));
 
 		/** +++ get the SUM of all logs for the ListFooter +++ */
-		if (!StringUtils.isEmpty(String.valueOf(recCount))) {
-			lfDailyCount.setLabel(String.valueOf(recCount));
-		} else
-			lfDailyCount.setLabel("0");
+		lfDailyCount.setLabel(String.valueOf(recCount));
 
 	}
 

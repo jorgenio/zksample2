@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 import de.forsthaus.backend.bean.DummyBean;
-import de.forsthaus.backend.bean.ListIntegerSumBean;
+import de.forsthaus.backend.bean.ListLongSumBean;
 import de.forsthaus.backend.dao.Ip2CountryDAO;
 import de.forsthaus.backend.dao.SecLoginlogDAO;
 import de.forsthaus.backend.dao.SysCountryCodeDAO;
@@ -236,12 +236,12 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 	}
 
 	@Override
-	public ListIntegerSumBean<DummyBean> getMonthlyCountByCountries(int aMonth, int aYear) {
+	public ListLongSumBean<DummyBean> getMonthlyCountByCountries(int aMonth, int aYear) {
 		return getSecLoginlogDAO().getMonthlyCountByCountries(aMonth, aYear);
 	}
 
 	@Override
-	public ListIntegerSumBean<DummyBean> getDailyCountByCountries(Date aDate) {
+	public ListLongSumBean<DummyBean> getDailyCountByCountries(Date aDate) {
 		return getSecLoginlogDAO().getDailyCountByCountries(aDate);
 	}
 

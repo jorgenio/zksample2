@@ -76,9 +76,7 @@ public class SecLoginlogMainCtrl extends GFCBaseCtrl implements Serializable {
 	public SecLoginlogMainCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -86,10 +84,7 @@ public class SecLoginlogMainCtrl extends GFCBaseCtrl implements Serializable {
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	public void onCreate$secLoginlogMainWindow(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		int panelHeight = 25;
 		// TODO put the logic for working with panel in the ApplicationWorkspace
@@ -126,10 +121,7 @@ public class SecLoginlogMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onSelect$tabLoginList(Event event) throws IOException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		Tabpanel listTab = (Tabpanel) Path.getComponent("/outerIndexWindow/secLoginlogMainWindow/tabPanelLoginList");
 		listTab.getChildren().clear();
@@ -152,10 +144,7 @@ public class SecLoginlogMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onSelect$tabLoginStatistic(Event event) throws IOException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		try {
 			ZksampleUtils.doShowOutOfOrderMessage();

@@ -54,6 +54,7 @@ import de.forsthaus.backend.model.Customer;
 import de.forsthaus.backend.service.ChartService;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -113,16 +114,11 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	public CustomerChartCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	public void onCreate$customerChartWindow(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		/* set components visible dependent of the users rights */
 		doCheckRights();
@@ -165,15 +161,7 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message.Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -183,10 +171,7 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onClick$button_CustomerChart_PieChart(Event event) throws InterruptedException, IOException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		div_chartArea.getChildren().clear();
 
@@ -248,10 +233,7 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onClick$button_CustomerChart_PieChart3D(Event event) throws InterruptedException, IOException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		div_chartArea.getChildren().clear();
 
@@ -313,10 +295,7 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onClick$button_CustomerChart_RingChart(Event event) throws InterruptedException, IOException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		div_chartArea.getChildren().clear();
 
@@ -378,10 +357,7 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onClick$button_CustomerChart_BarChart(Event event) throws InterruptedException, IOException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		div_chartArea.getChildren().clear();
 
@@ -445,10 +421,7 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onClick$button_CustomerChart_BarChart3D(Event event) throws InterruptedException, IOException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		div_chartArea.getChildren().clear();
 
@@ -511,10 +484,7 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onClick$button_CustomerChart_StackedBar(Event event) throws InterruptedException, IOException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		div_chartArea.getChildren().clear();
 
@@ -578,10 +548,7 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onClick$button_CustomerChart_StackedBar3D(Event event) throws InterruptedException, IOException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		div_chartArea.getChildren().clear();
 
@@ -645,10 +612,7 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onClick$button_CustomerChart_LineBar(Event event) throws InterruptedException, IOException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		div_chartArea.getChildren().clear();
 
@@ -712,10 +676,7 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onClick$button_CustomerChart_LineBar3D(Event event) throws InterruptedException, IOException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		div_chartArea.getChildren().clear();
 

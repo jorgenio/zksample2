@@ -20,6 +20,7 @@ package de.forsthaus.webui.branch;
 
 import java.io.Serializable;
 
+import org.apache.log4j.Logger;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
@@ -39,6 +40,7 @@ import org.zkoss.zul.Window;
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.service.BrancheService;
 import de.forsthaus.backend.util.HibernateSearchObject;
+import de.forsthaus.webui.article.ArticleDetailCtrl;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.ZksampleUtils;
 
@@ -63,6 +65,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
 public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private transient static final Logger logger = Logger.getLogger(BranchListCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -98,7 +101,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	public BranchListCtrl() {
 		super();
 
-		ZksampleUtils.logEventDebug(this, "super()");
+		logger.debug("super()");
 	}
 
 	@Override
@@ -148,7 +151,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	 * @throws Exception
 	 */
 	public void onCreate$windowBranchList(Event event) throws Exception {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 
@@ -206,7 +209,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	 * Event is forwarded in the corresponding listbox.
 	 */
 	public void onDoubleClickedBranchItem(Event event) {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		Branche aBranche = getSelectedBranche();
 
@@ -234,7 +237,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	 * @param event
 	 */
 	public void onSelect$listBoxBranch(Event event) {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		Branche aBranche = getSelectedBranche();
 

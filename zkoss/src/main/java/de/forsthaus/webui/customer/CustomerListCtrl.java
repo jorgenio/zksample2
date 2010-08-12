@@ -113,16 +113,11 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	public CustomerListCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	public void onCreate$window_customerList(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		/* autowire comps the vars */
 		// doOnCreateCommon(window_customerList, event);
@@ -208,7 +203,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 */
 	@Secured( { "CustomerList_listBoxCustomer.onDoubleClick" })
 	public void onCustomerItemDoubleClicked(Event event) throws Exception {
-		ZksampleUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// get the selected customer object
 		Listitem item = listBoxCustomer.getSelectedItem();
@@ -229,7 +224,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 * Call the Customer dialog with a new empty entry. <br>
 	 */
 	public void onClick$button_CustomerList_NewCustomer(Event event) throws Exception {
-		ZksampleUtils.logEventDebug(this, event);
+		logger.debug(event.toString());
 
 		// create a new customer object
 		/** !!! DO NOT BREAK THE TIERS !!! */
@@ -285,7 +280,8 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
+
 		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
@@ -298,7 +294,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		Events.postEvent("onCreate", window_customerList, event);
 		window_customerList.invalidate();
@@ -309,6 +305,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 */
 	@SuppressWarnings("unchecked")
 	public void onClick$button_CustomerList_CustomerFindDialog(Event event) throws Exception {
+		// logger.debug(event.toString());
 
 		/*
 		 * we can call our customerDialog zul-file with parameters. So we can
@@ -337,7 +334,8 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_CustomerList_PrintList(Event event) throws InterruptedException {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
+
 		ZksampleUtils.doShowNotImplementedMessage();
 	}
 

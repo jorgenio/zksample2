@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 
+import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
@@ -64,6 +65,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
 public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private transient static final Logger logger = Logger.getLogger(ArticleMainCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -126,7 +128,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	public ArticleMainCtrl() {
 		super();
 
-		ZksampleUtils.logEventDebug(this, "super()");
+		logger.debug("super()");
 	}
 
 	@Override
@@ -154,7 +156,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowArticleMain(Event event) throws Exception {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// create the Button Controller. Disable not used buttons during working
 		btnCtrlArticle = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, false, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
@@ -182,7 +184,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onSelect$tabArticleList(Event event) throws IOException {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// Check if the tabpanel is already loaded
 		if (tabPanelArticleList.getFirstChild() != null) {
@@ -203,7 +205,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onSelect$tabArticleDetail(Event event) throws IOException {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// Check if the tabpanel is already loaded
 		if (tabPanelArticleDetail.getFirstChild() != null) {
@@ -341,7 +343,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	private void doArticleListShowAll(Event event) {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// empty the text search boxes
 		tb_Article_ArticleID.setValue(""); // clear
@@ -366,7 +368,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * Filter the branch list with 'like article no'. <br>
 	 */
 	private void doArticleListSearchLikeArticleNo(Event event) throws Exception {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// if not empty
 		if (!tb_Article_ArticleID.getValue().isEmpty()) {
@@ -401,7 +403,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * Filter the branch list with 'like article name'. <br>
 	 */
 	private void doArticleListSearchLikeArticleName(Event event) throws Exception {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// if not empty
 		if (!tb_Article_Name.getValue().isEmpty()) {
@@ -439,7 +441,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doCancel(Event event) throws InterruptedException {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// reset to the original object
 		doResetToInitValues();
@@ -466,7 +468,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doEdit(Event event) {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// get the current Tab for later checking if we must change it
 		Tab currentTab = tabbox_ArticleMain.getSelectedTab();
@@ -508,7 +510,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doDelete(Event event) throws InterruptedException {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// check first, if the tabs are created, if not than create them
 		if (getArticleDetailCtrl().getBinder() == null) {
@@ -568,7 +570,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doSave(Event event) throws InterruptedException {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// save all components data in the several tabs to the bean
 		getArticleDetailCtrl().getBinder().saveAll();
@@ -613,7 +615,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doNew(Event event) {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// check first, if the tabs are created
 		if (getArticleDetailCtrl() == null) {
@@ -662,7 +664,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	private void doResizeSelectedTab(Event event) {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		if (tabbox_ArticleMain.getSelectedTab() == tabArticleDetail) {
 			getArticleDetailCtrl().doFitSize(event);

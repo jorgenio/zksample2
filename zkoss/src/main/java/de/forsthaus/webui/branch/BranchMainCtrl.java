@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 
+import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
@@ -61,6 +62,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
 public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private transient static final Logger logger = Logger.getLogger(BranchMainCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -119,7 +121,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	public BranchMainCtrl() {
 		super();
 
-		ZksampleUtils.logEventDebug(this, "super()");
+		logger.debug("super()");
 	}
 
 	@Override
@@ -147,7 +149,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowBranchMain(Event event) throws Exception {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// create the Button Controller. Disable not used buttons during working
 		btnCtrlBranch = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, false, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
@@ -175,7 +177,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onSelect$tabBranchList(Event event) throws IOException {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// Check if the tabpanel is already loaded
 		if (tabPanelBranchList.getFirstChild() != null) {
@@ -196,7 +198,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onSelect$tabBranchDetail(Event event) throws IOException {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// Check if the tabpanel is already loaded
 		if (tabPanelBranchDetail.getFirstChild() != null) {
@@ -322,7 +324,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * Filter the branch list with 'like branch name'. <br>
 	 */
 	private void doBranchListSearchLikeBranchName(Event event) throws Exception {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// if not empty
 		if (!tb_Branch_Name.getValue().isEmpty()) {
@@ -358,7 +360,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	private void doBranchListShowAll(Event event) {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// empty the text search boxes
 		tb_Branch_Name.setValue(""); // clear
@@ -386,7 +388,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doCancel(Event event) throws InterruptedException {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// reset to the original object
 		doResetToInitValues();
@@ -413,7 +415,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doEdit(Event event) {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// get the current Tab for later checking if we must change it
 		Tab currentTab = tabbox_BranchMain.getSelectedTab();
@@ -455,7 +457,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doDelete(Event event) throws InterruptedException {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// check first, if the tabs are created, if not than create them
 		if (getBranchDetailCtrl().getBinder() == null) {
@@ -515,7 +517,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doSave(Event event) throws InterruptedException {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// save all components data in the several tabs to the bean
 		getBranchDetailCtrl().getBinder().saveAll();
@@ -560,7 +562,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doNew(Event event) {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		// check first, if the tabs are created
 		if (getBranchDetailCtrl() == null) {
@@ -609,7 +611,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	private void doResizeSelectedTab(Event event) {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		if (tabbox_BranchMain.getSelectedTab() == tabBranchDetail) {
 			getBranchDetailCtrl().doFitSize(event);

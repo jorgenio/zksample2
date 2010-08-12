@@ -52,6 +52,7 @@ import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.ZksampleUtils;
 import de.forsthaus.webui.util.searchdialogs.BranchAdvancedSearchListBox;
 import de.forsthaus.webui.util.searchdialogs.BranchExtendedSearchListBox;
 import de.forsthaus.webui.util.searchdialogs.BranchSimpleSearchListBox;
@@ -168,9 +169,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	public CustomerDialogCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -186,10 +185,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$window_customerDialog(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// window_customerDialog.setContentStyle("padding-left: 0px; padding-right: 0px; padding-top: 0px; padding-bottom: 0px;");
 
@@ -295,10 +291,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onSelect$tabCustomerDialogOrders(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		Customer aCustomer = getCustomer();
 
@@ -331,10 +324,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onSelect$tabCustomerDialogChart(Event event) throws IOException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		Customer aCustomer = getCustomer();
 
@@ -372,10 +362,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onClose$window_customerDialog(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doClose();
 	}
@@ -387,10 +374,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnSave(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doSave();
 	}
@@ -401,10 +385,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnEdit(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doEdit();
 	}
@@ -416,14 +397,8 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message.Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		logger.debug(event.toString());
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -432,10 +407,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnNew(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doNew();
 	}
@@ -447,10 +419,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnDelete(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doDelete();
 	}
@@ -461,10 +430,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnCancel(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doCancel();
 	}
@@ -503,10 +469,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnClose(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		try {
 			doClose();
@@ -531,10 +494,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 
 	 */
 	private void doClose() throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> DataIsChanged :" + isDataChanged());
-		}
+		logger.debug("DataIsChanged :" + isDataChanged());
 
 		if (isDataChanged()) {
 

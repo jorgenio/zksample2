@@ -106,7 +106,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	public ArticleListCtrl() {
 		super();
 
-		ZksampleUtils.logEventDebug(this, "super()");
+		logger.debug("super()");
 	}
 
 	@Override
@@ -150,7 +150,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	public void onCreate$windowArticlesList(Event event) throws Exception {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 
@@ -216,7 +216,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	 * Event is forwarded in the corresponding listbox.
 	 */
 	public void onDoubleClickedArticleItem(Event event) {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		Article anArticle = getSelectedArticle();
 
@@ -244,7 +244,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	 * @param event
 	 */
 	public void onSelect$listBoxArticle(Event event) {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		Article anArticle = getSelectedArticle();
 

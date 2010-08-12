@@ -2,6 +2,7 @@ package de.forsthaus.webui.article;
 
 import java.io.Serializable;
 
+import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
@@ -15,6 +16,7 @@ import org.zkoss.zul.Window;
 
 import de.forsthaus.backend.model.Article;
 import de.forsthaus.backend.service.ArticleService;
+import de.forsthaus.webui.logging.loginlog.SecLoginlogListCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.ZksampleUtils;
 
@@ -40,6 +42,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
 public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private transient static final Logger logger = Logger.getLogger(ArticleDetailCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -69,7 +72,7 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 	public ArticleDetailCtrl() {
 		super();
 
-		ZksampleUtils.logEventDebug(this, "super()");
+		logger.debug("super()");
 	}
 
 	@Override
@@ -119,7 +122,7 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowArticleDetail(Event event) throws Exception {
-		ZksampleUtils.logEventDebug(this, event);
+		// logger.debug(event.toString());
 
 		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 

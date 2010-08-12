@@ -42,6 +42,7 @@ import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -111,9 +112,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	public ArticleDialogCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	/**
@@ -127,10 +126,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$window_ArticlesDialog(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		/* set components visible dependent of the users rights */
 		doCheckRights();
@@ -193,13 +189,9 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onClose$window_ArticlesDialog(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		doClose();
-
 	}
 
 	/**
@@ -209,9 +201,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnSave(Event event) throws InterruptedException {
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		doSave();
 	}
@@ -222,10 +212,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnEdit(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		doEdit();
 	}
@@ -237,15 +224,9 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
+		// logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message.Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -254,10 +235,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnNew(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		doNew();
 	}
@@ -269,10 +247,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnDelete(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		doDelete();
 	}
@@ -283,10 +258,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnCancel(Event event) {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		doCancel();
 	}
@@ -298,10 +270,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnClose(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		try {
 			doClose();
@@ -323,10 +292,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 
 	 */
 	private void doClose() throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> DataIsChanged :" + isDataChanged());
-		}
+		// logger.debug("DataIsChanged :" + isDataChanged());
 
 		if (isDataChanged()) {
 

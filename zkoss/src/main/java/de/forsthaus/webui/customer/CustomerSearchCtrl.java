@@ -102,9 +102,7 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 	public CustomerSearchCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	/**
@@ -113,10 +111,7 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	@SuppressWarnings("unchecked")
 	public void onCreate$customerSearchWindow(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		// doOnCreateCommon(customerSearchWindow, event); // autowire the vars
 
@@ -230,9 +225,7 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnSearch(Event event) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doSearch();
 	}
@@ -243,9 +236,7 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnClose(Event event) throws InterruptedException {
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doClose();
 	}

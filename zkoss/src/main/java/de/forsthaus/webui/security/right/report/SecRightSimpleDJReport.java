@@ -18,6 +18,7 @@
  */
 package de.forsthaus.webui.security.right.report;
 
+import java.awt.Color;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -51,12 +52,16 @@ import org.zkoss.zul.Window;
 
 import ar.com.fdvs.dj.core.DynamicJasperHelper;
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
+import ar.com.fdvs.dj.core.layout.HorizontalBandAlignment;
+import ar.com.fdvs.dj.domain.AutoText;
 import ar.com.fdvs.dj.domain.CustomExpression;
 import ar.com.fdvs.dj.domain.DynamicReport;
+import ar.com.fdvs.dj.domain.ExpressionHelper;
 import ar.com.fdvs.dj.domain.Style;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilder;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 import ar.com.fdvs.dj.domain.builders.DynamicReportBuilder;
+import ar.com.fdvs.dj.domain.builders.StyleBuilder;
 import ar.com.fdvs.dj.domain.constants.Border;
 import ar.com.fdvs.dj.domain.constants.Font;
 import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
@@ -175,6 +180,20 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		// Add the columns to the report in the whished order
 		drb.addColumn(colRightName);
 		drb.addColumn(colRightType);
+
+		// TEST
+		Style atStyle = new StyleBuilder(true).setFont(Font.COMIC_SANS_SMALL).setTextColor(Color.red).build();
+		/**
+		 * Adding many autotexts in the same position (header/footer and
+		 * aligment) makes them to be one on top of the other
+		 */
+		String strPage = Labels.getLabel("common.Page") + ": ";
+		AutoText autoText = new AutoText(AutoText.AUTOTEXT_PAGE_X, AutoText.POSITION_HEADER, HorizontalBandAlignment.RIGHT);
+		autoText.setMessageKey(strPage);
+		autoText.setWidth(new Integer(100));
+		autoText.setStyle(atStyle);
+		drb.addAutoText(autoText);
+		// END Test
 
 		// ADD ALL USED FIELDS to the report.
 		drb.addField("rigType", Integer.class.getName());

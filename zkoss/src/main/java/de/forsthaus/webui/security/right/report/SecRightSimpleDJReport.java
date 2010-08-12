@@ -94,7 +94,7 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 	private ByteArrayOutputStream output;
 	private InputStream mediais;
 	private AMedia amedia;
-	private String zksample2title = "Security single rights list";
+	private String zksample2title = Labels.getLabel("print.Title.Security_single_rights_list");
 
 	public SecRightSimpleDJReport(Component parent) throws InterruptedException {
 		super();
@@ -203,8 +203,8 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		 * aligment) makes them to be one on top of the other
 		 */
 
-		AutoText created = new AutoText("Created: " + ZksampleDateFormat.getDateFormater().format(new Date()), AutoText.POSITION_HEADER, HorizontalBandAlignment.RIGHT);
-		created.setWidth(new Integer(100));
+		AutoText created = new AutoText(Labels.getLabel("common.Created") + ": " + ZksampleDateFormat.getDateTimeFormater().format(new Date()), AutoText.POSITION_HEADER, HorizontalBandAlignment.RIGHT);
+		created.setWidth(new Integer(120));
 		created.setStyle(atStyle);
 		drb.addAutoText(created);
 

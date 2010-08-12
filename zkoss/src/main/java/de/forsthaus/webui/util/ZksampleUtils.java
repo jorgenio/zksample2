@@ -19,8 +19,9 @@ import org.zkoss.zul.Tabpanel;
  * 1. doShowNotImplementedMessage / Shows a messagebox.<br>
  * 2. doShowNotAllowedInDemoModeMessage / Shows a messagebox.<br>
  * 3. doShowNotAllowedForDemoRecords / Shows a messagebox.<br>
- * 4. createTabPanelContent / creates the gui module in a tabpanel.<br>
- * 5. showErrorMessage / shows a multiline errormessage.<br>
+ * 4. doShowOutOfOrderMessage / Shows a messagebox.<br>
+ * 5. createTabPanelContent / creates the gui module in a tabpanel.<br>
+ * 6. showErrorMessage / shows a multiline errormessage.<br>
  * 
  * @author bbruhns
  * @author sge
@@ -74,6 +75,20 @@ public class ZksampleUtils implements Serializable {
 	public static void doShowNotAllowedForDemoRecords() throws InterruptedException {
 
 		String message = Labels.getLabel("message.Not_Allowed_On_System_Objects");
+		String title = Labels.getLabel("message.Information");
+		MultiLineMessageBox.doSetTemplate();
+		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+	}
+
+	/**
+	 * EN: Shows a messagebox with text: 'temporarely out of order'.<br>
+	 * DE: Zeigt eine MessageBox: 'Noch nicht implementiert'.<br>
+	 * 
+	 * @throws InterruptedException
+	 */
+	public static void doShowOutOfOrderMessage() throws InterruptedException {
+
+		String message = Labels.getLabel("message.Information.OutOfOrder");
 		String title = Labels.getLabel("message.Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);

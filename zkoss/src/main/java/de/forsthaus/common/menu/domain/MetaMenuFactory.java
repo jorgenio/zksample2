@@ -41,7 +41,7 @@ public class MetaMenuFactory {
 				referenceRootMenuDomain = new SoftReference<RootMenuDomain>(rootMenuDomain);
 				final Log LOGGER = LogFactory.getLog(MetaMenuFactory.class);
 				if (LOGGER.isDebugEnabled()) {
-					LOGGER.debug("Menü-Metamodel geladen");
+					LOGGER.debug("Menu-Metamodel is successfully loaded. ");
 				}
 
 			} catch (JAXBException e) {

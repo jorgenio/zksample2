@@ -33,6 +33,7 @@ import org.zkoss.zul.Window;
 
 import de.forsthaus.backend.service.LoginLoggingService;
 import de.forsthaus.webui.util.GFCBaseCtrl;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -154,6 +155,15 @@ public class SecLoginlogMainCtrl extends GFCBaseCtrl implements Serializable {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("--> " + event.toString());
+		}
+
+		try {
+			ZksampleUtils.doShowOutOfOrderMessage();
+			tabLoginList.setSelected(true);
+			return;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		Tabpanel listTab = (Tabpanel) Path.getComponent("/outerIndexWindow/secLoginlogMainWindow/tabPanelLoginStatistic");

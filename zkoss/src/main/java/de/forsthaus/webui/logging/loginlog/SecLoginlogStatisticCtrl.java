@@ -18,7 +18,14 @@
  */
 package de.forsthaus.webui.logging.loginlog;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.io.StringWriter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -49,8 +56,8 @@ import de.forsthaus.backend.bean.ListIntegerSumBean;
 import de.forsthaus.backend.service.LoginLoggingService;
 import de.forsthaus.webui.logging.loginlog.model.SecLoginlogStatisticTotalListModelItemRenderer;
 import de.forsthaus.webui.util.GFCBaseCtrl;
-import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.ZksampleDateFormat;
+import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -100,9 +107,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	public SecLoginlogStatisticCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		logger.debug("super()");
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -110,10 +115,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	public void onCreate$windowTabPanelLoginStatistic(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
@@ -131,9 +133,23 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		int currentYear = aDate.get(Calendar.YEAR);
 		int currentMonth = aDate.get(Calendar.MONTH);
 
-		boxSecLoginLogStatistikCenter.appendChild(doGetTotalCountByCountries());
-		boxSecLoginLogStatistikCenter.appendChild(doGetMonthlyCountByCountries(currentMonth, currentYear));
-		boxSecLoginLogStatistikCenter.appendChild(doGetDailyCountByCountries(new Date()));
+		try {
+			// boxSecLoginLogStatistikCenter.appendChild(doGetTotalCountByCountries());
+		} catch (Exception e) {
+
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			ZksampleUtils.showErrorMessage(pw.toString());
+
+			System.out.println(sw.toString());
+
+		}
+		// boxSecLoginLogStatistikCenter.appendChild(doGetTotalCountByCountries());
+		// boxSecLoginLogStatistikCenter.appendChild(doGetMonthlyCountByCountries(currentMonth,
+		// currentYear));
+		// boxSecLoginLogStatistikCenter.appendChild(doGetDailyCountByCountries(new
+		// Date()));
 	}
 
 	/**
@@ -143,15 +159,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message.Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -161,16 +169,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecLoginlogList_PrintLoginList(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message.Information");
-		MultiLineMessageBox.doSetTemplate();
-		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
-
+		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -180,10 +179,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 * @throws InterruptedException
 	 */
 	public void onClick$buttonSecLoginListStatisticTotalCountByCountries(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doRefreshTotalCount();
 	}
@@ -195,16 +191,12 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 * @throws InterruptedException
 	 */
 	public void onClick$buttonSecLoginListStatisticMonthlyCountByCountries(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		Calendar aDate = Calendar.getInstance();
 		aDate.setTime(new Date());
 		int currentYear = aDate.get(Calendar.YEAR);
 		int currentMonth = aDate.get(Calendar.MONTH);
-		;
 
 		doRefreshMonthlyCount(currentMonth, currentYear);
 	}
@@ -216,10 +208,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 * @throws InterruptedException
 	 */
 	public void onClick$buttonSecLoginListStatisticDailyCountByCountries(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		logger.debug(event.toString());
 
 		doRefreshDailyCount(new Date());
 	}

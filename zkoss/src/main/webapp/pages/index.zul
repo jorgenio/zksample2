@@ -32,20 +32,35 @@
 			<north id="borderlayoutMainNorth" border="none"
 				height="38px" splittable="false">
 
-				<div id="div1" style="background-color:silver;">
+				<!-- 
+					<div id="div1" style="background-color:silver;">
+				-->
+				<div id="div1"
+					style="background-color:silver; background-image:url(${c:encodeURL('/images/ZKHeader_2x38.png')});  background-repeat:repeat-x; border: 'none';">
+
 
 					<hbox pack="stretch" width="100%">
 
-						<div id="divNo" style="padding-left:5px"
-							align="left">
+						<div id="divNo" align="left" width="38px"
+							style="padding: 2px;">
 							<image src="/images/zkpowered_34x34.png" />
 						</div>
 
-						<div style="padding:3px" align="left">
+						<div
+							style="background-color:silver; background-image:url(${c:encodeURL('/images/ZKHeader_2x38.png')});  background-repeat:repeat-x; float:left; border: 'none'; "
+							align="left">
 							<label id="label_AppName"
-								style="font-size:14px; font-weight:bold;" />
+								style="font-size:24px; font-weight:bold; color: #D70303" />
 						</div>
+
+
 						<div align="right" style="float: right">
+							<!-- Monitor Background pic -->
+							<div
+								style="background-color:silver; background-image:url(${c:encodeURL('/images/ZKHeaderMonitorOnly_70x38.png')}); background-repeat:no-repeat; float:left; border: 'none'; width:70px;height:38px; "
+								align="right">
+							</div>
+
 							<vbox>
 
 								<div align="right"
@@ -63,11 +78,11 @@
 									<hbox pack="end">
 										<toolbarbutton
 											id="btnIndexMySettings" label="${c:l('common.MySettings')}"
-											style="text-decoration: underline; " />
+											style="text-decoration: underline; color: white;" />
 										<toolbarbutton
 											id="btnIndexUserAppConfiguration"
 											label="${c:l('common.Configuration')}"
-											style="text-decoration: underline;" />
+											style="text-decoration: underline; color: white;" />
 										<button id="btnLogout"
 											height="20px" label="${c:l('btnLogout.label')}"
 											tooltiptext="${c:l('btnLogout.tooltiptext')}" />

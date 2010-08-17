@@ -54,7 +54,6 @@ END
 delimiter ;
 
 
-DELIMITER ;
 
 
 DELIMITER $$

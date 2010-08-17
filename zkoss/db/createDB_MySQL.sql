@@ -773,11 +773,10 @@ alter table sec_userrole
 
 /******************** TEST DATA ********************/
 
-
 /******************** Filiale Daten ********************/
 INSERT INTO FILIALE (FIL_ID, FIL_NR, FIL_BEZEICHNUNG,FIL_NAME1,FIL_NAME2,FIL_ORT,VERSION) values
 (1,'0001','Filiale Muenchen','Hoermann Gmbh','Personaldienstleistungen','Muenchen',0),
-(2,'0002','Filiale Berlin',  'Hoermann Gmbh','Personaldienstleistungen','Berlin',0);
+(2,'0002','Filiale Berlin',  'Hoermann Gmbh','Personaldienstleistungen','Berlin',  0);
 
 /******************** Security: USERS ********************/  
 INSERT INTO SEC_USER (USR_ID, USR_LOGINNAME, USR_PASSWORD, USR_LASTNAME, USR_FIRSTNAME, USR_EMAIL, USR_LOCALE, USR_ENABLED, USR_ACCOUNTNONEXPIRED, USR_CREDENTIALSNONEXPIRED, USR_ACCOUNTNONLOCKED, USR_TOKEN,  VERSION) values 
@@ -1483,8 +1482,6 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 /* Right: button_ArticleList_SearchName */
 (14549, 13030, 15534, 0),
 
-
-
 /* Group: Articles_New */
 /* Right: button_ArticleList_NewArticle */
 (14550, 13031, 15531, 0),
@@ -1633,22 +1630,22 @@ INSERT INTO BRANCHE (BRA_ID, BRA_NR, BRA_BEZEICHNUNG, VERSION) VALUES
 
 /******************** Kunden Daten ********************/
 INSERT INTO KUNDE (KUN_ID,KUN_FIL_ID,KUN_BRA_ID, KUN_NR, KUN_MATCHCODE,KUN_NAME1,KUN_NAME2,KUN_ORT,KUN_MAHNSPERRE,VERSION) VALUES 
-(20,1,1000, '20', 'MUELLER','--> MUEller','Elektroinstallationen','Freiburg',true,0),
-(21,1,1000, '21', 'HUBER','--> Huber','Elektroinstallationen','Oberursel',true,0),
-(22,1,1000, '22', 'SIEMENS','Siemens AG','Elektroinstallationen','Braunschweig',false,0),
-(23,1,1000, '23', 'AEG','AEG','Elektroinstallationen','Stuttgart',false,0),
-(24,1,1019, '24', 'BUDERUS','Buderus Heizungsbau GmbH','Elektroinstallationen','Rastatt',true,0),
-(25,1,1000, '25', 'MEILER','Elektro Meiler','Inhaber W. Erler','Karlsruhe',true,0),
-(26,1,1000, '26', 'BADER','Bader GmbH','Elektroinstallationen','Berlin',false,0),
-(27,1,1000, '27', 'HESKENS','Heskens GmbH','Elektroinstallationen','Badenweiler',false,0),
-(28,1,1000, '28', 'MAIER','Maier GmbH','Elektroinstallationen','Friedberg',false,0),
-(29,1,1000, '29', 'SCHULZE','Schulze GmbH','Elektroinstallationen','Freiburg',true,0),
-(30,1,1004, '30', 'SCHMIERFINK','Schmierfink AG','Versicherungen','Freiburg',true,0),
-(31,1,1005, '31', 'SCHULZE','Schulze Ltd.','Anlagenbau','Buxtehude',true,0),
-(32,1,1005, '32', 'SCHREINER','Schreiner','SPS-Steuerungsbau','Hamburg',true,0),
-(33,1,1004, '33', 'GUTE RUHE','Gute Ruhe AG','Versicherungen','Berlin',true,0),
-(34,1,1003, '34', 'FREIBERGER','Freiberger GmbH','In- und Export','Aachen',true,0),
-(35,1,1002, '35', 'BERGMANN','Saegewerk Bergmann','Holzverarbeitung','Neustadt',true,0),
+(  20,1,1000, '20', 'MUELLER','--> MUEller','Elektroinstallationen','Freiburg',true,0),
+(  21,1,1000, '21', 'HUBER','--> Huber','Elektroinstallationen','Oberursel',true,0),
+(  22,1,1000, '22', 'SIEMENS','Siemens AG','Elektroinstallationen','Braunschweig',false,0),
+(  23,1,1000, '23', 'AEG','AEG','Elektroinstallationen','Stuttgart',false,0),
+(  24,1,1019, '24', 'BUDERUS','Buderus Heizungsbau GmbH','Elektroinstallationen','Rastatt',true,0),
+(  25,1,1000, '25', 'MEILER','Elektro Meiler','Inhaber W. Erler','Karlsruhe',true,0),
+(  26,1,1000, '26', 'BADER','Bader GmbH','Elektroinstallationen','Berlin',false,0),
+(  27,1,1000, '27', 'HESKENS','Heskens GmbH','Elektroinstallationen','Badenweiler',false,0),
+(  28,1,1000, '28', 'MAIER','Maier GmbH','Elektroinstallationen','Friedberg',false,0),
+(  29,1,1000, '29', 'SCHULZE','Schulze GmbH','Elektroinstallationen','Freiburg',true,0),
+(  30,1,1004, '30', 'SCHMIERFINK','Schmierfink AG','Versicherungen','Freiburg',true,0),
+(  31,1,1005, '31', 'SCHULZE','Schulze Ltd.','Anlagenbau','Buxtehude',true,0),
+(  32,1,1005, '32', 'SCHREINER','Schreiner','SPS-Steuerungsbau','Hamburg',true,0),
+(  33,1,1004, '33', 'GUTE RUHE','Gute Ruhe AG','Versicherungen','Berlin',true,0),
+(  34,1,1003, '34', 'FREIBERGER','Freiberger GmbH','In- und Export','Aachen',true,0),
+(  35,1,1002, '35', 'BERGMANN','Saegewerk Bergmann','Holzverarbeitung','Neustadt',true,0),
 (2000,1,1002, '2000', 'SEILER','Saegewerk Seiler','Holzverarbeitung','Freiburg',true,0),
 (2001,1,1002, '2001', 'BAUER','Hermann Bauer','Sgerwerk','Titisee-Neustadt',true,0),
 (2002,1,1000, '2002', 'BEINHARD','Gebrueder Beinhard GbR','Elektroinstallationen','Muenchen',true,0),
@@ -1973,6 +1970,29 @@ INSERT INTO sys_countrycode(CCD_ID, CCD_NAME, CCD_CODE2, VERSION) VALUES
 (249,'EAST TIMOR','TP', 0),
 (250,'MONTENEGRO','ME', 0);
 
+
+ /* fill sample logins */
+INSERT INTO sec_loginlog(lgl_id, i2c_id, lgl_loginname,lgl_logtime, lgl_ip, lgl_status_id,lgl_sessionid, VERSION) VALUES 
+( 1, NULL, 'admin',      '2010-08-12 13:52:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+( 2, NULL, 'user1',      '2010-08-12 10:12:33', '203.237.141.216', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+( 3, NULL, 'admin',      '2010-12-08 11:12:33', '202.96.188.101', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+( 4, NULL, 'aaaa',       '2010-12-08 12:22:33', '84.234.27.179', 0, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+( 5, NULL, 'admin',      '2010-12-08 12:32:33', '84.139.11.102', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+( 6, NULL, 'user2',      '2010-01-08 13:52:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+( 7, NULL, 'admin',      '2010-01-08 14:45:33', '212.227.148.189', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+( 8, NULL, 'admin',      '2010-01-08 15:33:33', '84.185.153.21', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+( 9, NULL, 'admin',      '2010-01-08 17:22:33', '212.156.5.254', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(10, NULL, 'user1',      '2010-01-08 17:22:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(11, NULL, 'admin',      '2010-01-08 17:22:33', '121.242.65.131', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(12, NULL, 'admin',      '2010-01-08 17:22:33', '202.96.188.101', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(13, NULL, 'headoffice', '2010-01-08 17:22:33', '118.68.97.90', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(14, NULL, 'test',       '2010-01-08 17:22:33', '125.160.32.182', 0, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(15, NULL, 'headoffice', '2010-01-08 17:22:33', '70.171.254.160', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(16, NULL, 'headoffice', '2010-01-08 17:22:33', '89.218.26.20', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(17, NULL, 'headoffice', '2010-01-08 17:22:33', '118.68.97.45', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(18, NULL, 'admin',      '2010-01-08 17:22:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0);
+
+commit;
 
 
 

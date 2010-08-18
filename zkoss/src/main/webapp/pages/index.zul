@@ -36,7 +36,7 @@
 					<div id="div1" style="background-color:silver;">
 				-->
 				<div id="div1"
-					style="background-color:silver; background-image:url(${c:encodeURL('/images/ZKHeader_2x38.png')});  background-repeat:repeat-x; border: 'none';">
+					style="background-color:silver; background-image:url(${c:encodeURL('/images/ZKHeader_2x38.png')});  background-repeat: repeat-x; border: 'none';">
 
 
 					<hbox pack="stretch" width="100%">
@@ -47,7 +47,7 @@
 						</div>
 
 						<div
-							style="background-color:silver; background-image:url(${c:encodeURL('/images/ZKHeader_2x38.png')});  background-repeat:repeat-x; float:left; border: 'none'; "
+							style="background-color:silver; background-image:url(${c:encodeURL('/images/ZKHeader_2x38.png')});  background-repeat:repeat-x; float:left; border: 'none';  padding-left: 5px; padding-bottom: 4px;"
 							align="left">
 							<label id="label_AppName"
 								style="font-size:24px; font-weight:bold; color: #D70303" />
@@ -55,42 +55,44 @@
 
 
 						<div align="right" style="float: right">
+
 							<!-- Monitor Background pic -->
 							<div
 								style="background-color:silver; background-image:url(${c:encodeURL('/images/ZKHeaderMonitorOnly_70x38.png')}); background-repeat:no-repeat; float:left; border: 'none'; width:70px;height:38px; "
 								align="right">
 							</div>
 
-							<vbox>
 
-								<div align="right"
-									style="float: right">
+							<div align="right" style="float: right">
+								<vbox>
 
-									<!-- USER-BAR. Comps are created in the Controller -->
-									<window id="winUserBar"
-										apply="${userBarCtrl}" border="none" width="100%"
-										height="100%" />
+									<div align="right"
+										style="float: right">
+										<!-- USER-BAR. Comps are created in the Controller -->
+										<window id="winUserBar"
+											apply="${userBarCtrl}" border="none" width="100%"
+											height="100%" />
+									</div>
 
-								</div>
+									<div align="right"
+										style="float: right; padding-bottom: 3px;">
+										<hbox pack="end">
+											<toolbarbutton
+												id="btnIndexMySettings" label="${c:l('common.MySettings')}"
+												style="text-decoration: underline; color: white;" />
+											<toolbarbutton
+												id="btnIndexUserAppConfiguration"
+												label="${c:l('common.Configuration')}"
+												style="text-decoration: underline; color: white;" />
+											<button id="btnLogout"
+												height="20px" label="${c:l('btnLogout.label')}"
+												tooltiptext="${c:l('btnLogout.tooltiptext')}" />
+										</hbox>
+									</div>
 
-								<div align="right"
-									style="float: right; padding-bottom: 3px;">
-									<hbox pack="end">
-										<toolbarbutton
-											id="btnIndexMySettings" label="${c:l('common.MySettings')}"
-											style="text-decoration: underline; color: white;" />
-										<toolbarbutton
-											id="btnIndexUserAppConfiguration"
-											label="${c:l('common.Configuration')}"
-											style="text-decoration: underline; color: white;" />
-										<button id="btnLogout"
-											height="20px" label="${c:l('btnLogout.label')}"
-											tooltiptext="${c:l('btnLogout.tooltiptext')}" />
-										<!-- href="/index.zul"  -->
-									</hbox>
-								</div>
+								</vbox>
+							</div>
 
-							</vbox>
 						</div>
 					</hbox>
 

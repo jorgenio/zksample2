@@ -40,7 +40,6 @@ import org.jfree.chart.plot.RingPlot;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.zkoss.image.AImage;
-import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Div;
@@ -53,7 +52,6 @@ import de.forsthaus.backend.model.ChartData;
 import de.forsthaus.backend.model.Customer;
 import de.forsthaus.backend.service.ChartService;
 import de.forsthaus.webui.util.GFCBaseCtrl;
-import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.ZksampleUtils;
 
 /**

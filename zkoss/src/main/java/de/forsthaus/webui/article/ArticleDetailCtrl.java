@@ -16,9 +16,7 @@ import org.zkoss.zul.Window;
 
 import de.forsthaus.backend.model.Article;
 import de.forsthaus.backend.service.ArticleService;
-import de.forsthaus.webui.logging.loginlog.SecLoginlogListCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
-import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>

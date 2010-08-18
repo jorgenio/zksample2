@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Zksample2.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
-package de.forsthaus.webui.security.right.report;
+package de.forsthaus.webui.order.report;
 
 import java.awt.Color;
 import java.io.ByteArrayInputStream;
@@ -24,11 +24,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -54,7 +52,7 @@ import ar.com.fdvs.dj.core.DynamicJasperHelper;
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
 import ar.com.fdvs.dj.core.layout.HorizontalBandAlignment;
 import ar.com.fdvs.dj.domain.AutoText;
-import ar.com.fdvs.dj.domain.CustomExpression;
+import ar.com.fdvs.dj.domain.DJCalculation;
 import ar.com.fdvs.dj.domain.DynamicReport;
 import ar.com.fdvs.dj.domain.ExpressionHelper;
 import ar.com.fdvs.dj.domain.Style;
@@ -66,26 +64,29 @@ import ar.com.fdvs.dj.domain.constants.Border;
 import ar.com.fdvs.dj.domain.constants.Font;
 import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
-import de.forsthaus.backend.model.SecRight;
-import de.forsthaus.backend.service.SecurityService;
+import de.forsthaus.backend.model.Customer;
+import de.forsthaus.backend.model.Order;
+import de.forsthaus.backend.model.Orderposition;
+import de.forsthaus.backend.service.OrderService;
 import de.forsthaus.webui.util.ZksampleDateFormat;
 import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
- * A simple report implemented with the DynamicJasper framework.<br>
- * <br>
- * This report shows a list of Security Single Rights.<br>
+ * A report implemented with the DynamicJasper framework.<br>
+ *<br>
+ * This report shows an Order with its orderPositions.<br>
  * <br>
  * The report uses the DynamicReportBuilder that allowed more control over the
  * columns. Additionally the report uses a CustomExpression for showing how to
- * work with it. The CustomExpression checks a boolean field and writes only a
- * 'T' for 'true and 'F' as 'False.<br>
+ * work with it. <br>
+ * This report have a GrandTotal sum displayed at the end.<br>
+ * Uses a money Pattern for all money fields.<br>
  * 
  * @author bbruhns
  * @author sge
  * 
  */
-public class SecRightSimpleDJReport extends Window implements Serializable {
+public class OrderDJReport extends Window implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -93,42 +94,64 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 	private ByteArrayOutputStream output;
 	private InputStream mediais;
 	private AMedia amedia;
-	private String zksample2title = Labels.getLabel("print.Title.Security_single_rights_list");
+	private String zksample2title = Labels.getLabel("print.Title.Order");
 
-	public SecRightSimpleDJReport(Component parent) throws InterruptedException {
+	// Data Beans
+	private Order order;
+	private List<Orderposition> orderpositions;
+	private Customer customer;
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param parent
+	 * @param anOrder
+	 * @throws InterruptedException
+	 */
+	public OrderDJReport(Component parent, Order anOrder) throws InterruptedException {
 		super();
 		this.setParent(parent);
+		this.setOrder(anOrder);
+		this.setCustomer(getOrder().getCustomer());
 
 		try {
 			doPrint();
 		} catch (Exception e) {
 			ZksampleUtils.showErrorMessage(e.toString());
+			e.printStackTrace();
 		}
 	}
 
 	public void doPrint() throws JRException, ColumnBuilderException, ClassNotFoundException, IOException {
 
 		// Localized column headers
-		String rigName = Labels.getLabel("listheader_SecRightList_rigName.label");
-		String rigType = Labels.getLabel("listheader_SecRightList_rigType.label");
+		String quantity = Labels.getLabel("listheader_OrderPosList2_Count.label");
+		String articleText = Labels.getLabel("listheader_OrderPosList2_Shorttext.label");
+		String singlePrice = Labels.getLabel("listheader_OrderPosList2_SinglePrice.label");
+		String lineSum = Labels.getLabel("listheader_OrderPosList2_WholePrice.label");
 
+		/**
+		 * STYLES
+		 */
 		// Styles: Title
 		Style titleStyle = new Style();
 		titleStyle.setHorizontalAlign(HorizontalAlign.CENTER);
 		Font titleFont = Font.ARIAL_BIG_BOLD;
 		titleFont.setUnderline(true);
 		titleStyle.setFont(titleFont);
-		// titleStyle.setBorderBottom(Border.PEN_1_POINT);
 
 		// Styles: Subtitle
 		Style subtitleStyle = new Style();
 		subtitleStyle.setHorizontalAlign(HorizontalAlign.LEFT);
 		subtitleStyle.setFont(Font.ARIAL_MEDIUM_BOLD);
 
-		/**
-		 * Set the styles. In a report created with DynamicReportBuilder we do
-		 * this in an other way.
-		 */
+		// Styles: Subtitle underlined
+		Style subtitleStyleUL = new Style();
+		subtitleStyleUL.setHorizontalAlign(HorizontalAlign.LEFT);
+		Font subtitleULFont = Font.ARIAL_MEDIUM_BOLD;
+		subtitleULFont.setUnderline(true);
+		subtitleStyleUL.setFont(titleFont);
+
 		// ColumnHeader Style Text (left-align)
 		Style columnHeaderStyleText = new Style();
 		columnHeaderStyleText.setFont(Font.ARIAL_MEDIUM_BOLD);
@@ -158,6 +181,12 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		columnDetailStyleNumbers.setFont(Font.ARIAL_SMALL);
 		columnDetailStyleNumbers.setHorizontalAlign(HorizontalAlign.RIGHT);
 
+		// TotalSum (left-right)
+		Style footerStyleTotalSumValue = new Style();
+		footerStyleTotalSumValue.setFont(Font.ARIAL_MEDIUM_BOLD);
+		footerStyleTotalSumValue.setHorizontalAlign(HorizontalAlign.RIGHT);
+		footerStyleTotalSumValue.setBorderTop(Border.PEN_1_POINT);
+
 		DynamicReportBuilder drb = new DynamicReportBuilder();
 		DynamicReport dr;
 
@@ -176,31 +205,10 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		drb.setPrintBackgroundOnOddRows(true);
 
 		/**
-		 * Columns Definitions. A new ColumnBuilder instance for each column.
-		 */
-		// Right name
-		AbstractColumn colRightName = ColumnBuilder.getNew().setColumnProperty("rigName", String.class.getName()).build();
-		colRightName.setTitle(rigName);
-		colRightName.setWidth(60);
-		colRightName.setHeaderStyle(columnHeaderStyleText);
-		colRightName.setStyle(columnDetailStyleText);
-		// Right type
-		AbstractColumn colRightType = ColumnBuilder.getNew().setCustomExpression(getMyRightTypExpression()).build();
-		colRightType.setTitle(rigType);
-		colRightType.setWidth(40);
-		colRightType.setHeaderStyle(columnHeaderStyleText);
-		colRightType.setStyle(columnDetailStyleText);
-
-		// Add the columns to the report in the whished order
-		drb.addColumn(colRightName);
-		drb.addColumn(colRightType);
-
-		// TEST
-		Style atStyle = new StyleBuilder(true).setFont(Font.COMIC_SANS_SMALL).setTextColor(Color.red).build();
-		/**
 		 * Adding many autotexts in the same position (header/footer and
 		 * aligment) makes them to be one on top of the other
 		 */
+		Style atStyle = new StyleBuilder(true).setFont(Font.COMIC_SANS_SMALL).setTextColor(Color.red).build();
 
 		AutoText created = new AutoText(Labels.getLabel("common.Created") + ": " + ZksampleDateFormat.getDateTimeFormater().format(new Date()), AutoText.POSITION_HEADER, HorizontalBandAlignment.RIGHT);
 		created.setWidth(new Integer(120));
@@ -212,42 +220,84 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		autoText.setStyle(atStyle);
 		drb.addAutoText(autoText);
 
-		AutoText name1 = new AutoText("The Zksample2 Ltd.", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		AutoText atCustomerHeader = new AutoText(Labels.getLabel("orderDialogWindow.title") + " :  " + getOrder().getAufBezeichnung(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		atCustomerHeader.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
+		atCustomerHeader.setStyle(subtitleStyleUL);
+		AutoText name1 = new AutoText(getCustomer().getKunName1(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		name1.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
-		AutoText name2 = new AutoText("Software Consulting", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		AutoText name2 = new AutoText(getCustomer().getKunName2(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		name2.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
-		AutoText street = new AutoText("256, ZK Direct RIA Street ", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
-		street.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
-		AutoText city = new AutoText("ZKoss City", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		AutoText city = new AutoText(getCustomer().getKunOrt(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		city.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
-		drb.addAutoText(name1).addAutoText(name2).addAutoText(street).addAutoText(city);
+		AutoText emptyLine = new AutoText("", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		emptyLine.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
+		drb.addAutoText(atCustomerHeader).addAutoText(emptyLine).addAutoText(name1).addAutoText(name2).addAutoText(city).addAutoText(emptyLine);
+
 		// Footer
 		AutoText footerText = new AutoText("Help to prevent the global warming by writing cool software.", AutoText.POSITION_FOOTER, HorizontalBandAlignment.CENTER);
 		footerText.setStyle(footerStyle);
 		drb.addAutoText(footerText);
 
+		/**
+		 * Columns Definitions. A new ColumnBuilder instance for each column.
+		 */
+		// Quantity
+		AbstractColumn colQuantity = ColumnBuilder.getNew().setColumnProperty("aupMenge", BigDecimal.class.getName()).build();
+		colQuantity.setTitle(quantity);
+		colQuantity.setWidth(40);
+		colQuantity.setPattern("#,##0.00");
+		colQuantity.setHeaderStyle(columnHeaderStyleNumber);
+		colQuantity.setStyle(columnDetailStyleNumbers);
+
+		// Article Text
+		AbstractColumn colArticleText = ColumnBuilder.getNew().setColumnProperty("article.artKurzbezeichnung", String.class.getName()).build();
+		colArticleText.setTitle(articleText);
+		colArticleText.setWidth(100);
+		colArticleText.setHeaderStyle(columnHeaderStyleText);
+		colArticleText.setStyle(columnDetailStyleText);
+
+		// Single Price
+		AbstractColumn colSinglePrice = ColumnBuilder.getNew().setColumnProperty("aupEinzelwert", BigDecimal.class.getName()).build();
+		colSinglePrice.setTitle(singlePrice);
+		colSinglePrice.setWidth(40);
+		colSinglePrice.setPattern("#,##0.00");
+		colSinglePrice.setHeaderStyle(columnHeaderStyleNumber);
+		colSinglePrice.setStyle(columnDetailStyleNumbers);
+
+		// Line Sum
+		AbstractColumn colLineSum = ColumnBuilder.getNew().setColumnProperty("aupGesamtwert", BigDecimal.class.getName()).build();
+		colLineSum.setTitle(lineSum);
+		colLineSum.setWidth(40);
+		// #,##0. €00
+		colLineSum.setPattern("#,##0.00");
+		colLineSum.setHeaderStyle(columnHeaderStyleNumber);
+		colLineSum.setStyle(columnDetailStyleNumbers);
+
+		// Add the columns to the report in the whished order
+		drb.addColumn(colQuantity);
+		drb.addColumn(colArticleText);
+		drb.addColumn(colSinglePrice);
+		drb.addColumn(colLineSum);
+
+		/**
+		 * Add a global total sum for the lineSum field.
+		 */
+		drb.addGlobalFooterVariable(colLineSum, DJCalculation.SUM, footerStyleTotalSumValue);
+		drb.setGlobalFooterVariableHeight(new Integer(20));
+		drb.setGrandTotalLegend(Labels.getLabel("common.Sum"));
+
 		// ADD ALL USED FIELDS to the report.
-		drb.addField("rigType", Integer.class.getName());
+		// drb.addField("rigType", Integer.class.getName());
 
 		drb.setUseFullPageWidth(true); // use full width of the page
 		dr = drb.build(); // build the report
 
 		// Get information from database
-		SecurityService sv = (SecurityService) SpringUtil.getBean("securityService");
-		List<SecRight> resultList = sv.getAllRights();
-
-		// Create Datasource and put it in Dynamic Jasper Format
-		List data = new ArrayList(resultList.size());
-
-		for (SecRight obj : resultList) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("rigName", obj.getRigName());
-			map.put("rigType", obj.getRigType());
-			data.add(map);
-		}
+		OrderService sv = (OrderService) SpringUtil.getBean("orderService");
+		List<Orderposition> resultList = sv.getOrderpositionsByOrder(getOrder());
 
 		// Generate the Jasper Print Object
-		JRDataSource ds = new JRBeanCollectionDataSource(data);
+		JRDataSource ds = new JRBeanCollectionDataSource(resultList);
 		JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
 
 		String outputFormat = "PDF";
@@ -282,58 +332,6 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 
 			callReportWindow(amedia, "RTF-DOC");
 		}
-	}
-
-	/**
-	 * A CustomExpression that checks a boolean value and writes a 'T' as true
-	 * and a 'F' as false.<br>
-	 * 
-	 * @return
-	 */
-	@SuppressWarnings("serial")
-	private CustomExpression getMyRightTypExpression() {
-		return new CustomExpression() {
-
-			public Object evaluate(Map fields, Map variables, Map parameters) {
-
-				String result = "";
-
-				/**
-				 * Int | Type <br>
-				 * --------------------------<br>
-				 * 0 | Page <br>
-				 * 1 | Menu Category <br>
-				 * 2 | Menu Item <br>
-				 * 3 | Method/Event <br>
-				 * 4 | DomainObject/Property <br>
-				 * 5 | Tab <br>
-				 * 6 | Component <br>
-				 */
-
-				int rigType = (Integer) fields.get("rigType");
-
-				if (rigType == 0) {
-					result = "Page";
-				} else if (rigType == 1) {
-					result = "Menu Category";
-				} else if (rigType == 2) {
-					result = "Menu Item";
-				} else if (rigType == 3) {
-					result = "Method/Event";
-				} else if (rigType == 4) {
-					result = "DomainObject/Property";
-				} else if (rigType == 5) {
-					result = "Tab";
-				} else if (rigType == 6) {
-					result = "Component";
-				}
-				return result;
-			}
-
-			public String getClassName() {
-				return String.class.getName();
-			}
-		};
 	}
 
 	private void callReportWindow(AMedia aMedia, String format) {
@@ -404,6 +402,34 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 
 		this.onClose();
 
+	}
+
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setOrderpositions(List<Orderposition> orderpositions) {
+		this.orderpositions = orderpositions;
+	}
+
+	public List<Orderposition> getOrderpositions() {
+		return orderpositions;
 	}
 
 }

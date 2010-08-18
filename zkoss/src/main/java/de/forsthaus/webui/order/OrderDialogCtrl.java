@@ -30,6 +30,7 @@ import org.springframework.dao.DataAccessException;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -57,6 +58,7 @@ import de.forsthaus.backend.service.CustomerService;
 import de.forsthaus.backend.service.OrderService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.order.model.OrderSearchCustomerListModelItemRenderer;
+import de.forsthaus.webui.order.report.OrderDJReport;
 import de.forsthaus.webui.orderposition.model.OrderpositionListModelItemRenderer;
 import de.forsthaus.webui.reports.order.TestReport;
 import de.forsthaus.webui.reports.util.JRreportCompiler;
@@ -179,7 +181,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$orderDialogWindow(Event event) throws Exception {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		setPageSizeOrderPosition(10);
 		setPageSizeSearchCustomer(20);
@@ -260,16 +262,6 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	/**
-	 * Set the properties of the fields, like maxLength.<br>
-	 */
-	private void doSetFieldProperties() {
-		kunNr.setMaxlength(20);
-		kunName1.setMaxlength(150);
-		aufNr.setMaxlength(20);
-		aufBezeichnung.setMaxlength(50);
-	}
-
-	/**
 	 * SetVisible for components by checking if there's a right for it.
 	 */
 	private void doCheckRights() {
@@ -300,7 +292,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onClose$orderDialogWindow(Event event) throws Exception {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doClose();
 
@@ -313,7 +305,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnSave(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doSave();
 	}
@@ -324,7 +316,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnEdit(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doEdit();
 	}
@@ -335,7 +327,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnNew(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doNew();
 	}
@@ -347,7 +339,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		ZksampleUtils.doShowNotImplementedMessage();
 	}
@@ -359,7 +351,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnDelete(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doDelete();
 	}
@@ -370,7 +362,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnCancel(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doCancel();
 	}
@@ -382,7 +374,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnClose(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		try {
 			doClose();
@@ -397,15 +389,27 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * when 'print order' is clicked.<br>
 	 * 
 	 * @param event
+	 * @throws InterruptedException
 	 */
-	public void onClick$button_OrderDialog_PrintOrder(Event event) {
-		logger.debug(event.toString());
+	public void onClick$button_OrderDialog_PrintOrder(Event event) throws InterruptedException {
+		// logger.debug(event.toString());
+
+		// doPrintReport();
+		doPrintOrderReport(event);
+	}
+
+	private void doPrintOrderReport(Event event) throws InterruptedException {
+
+		Order anOrder = getOrder();
+
+		Window win = (Window) Path.getComponent("/outerIndexWindow");
 
 		try {
-			doPrintReport();
+			new OrderDJReport(win, anOrder);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			ZksampleUtils.showErrorMessage(e.toString());
 		}
+
 	}
 
 	/**
@@ -414,7 +418,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doPrintReport() throws InterruptedException {
-		logger.debug("begin with printing");
+		// logger.debug("begin with printing");
 
 		// Get the real path for the report
 		String repSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reports/order/Test_Report.jasper");
@@ -468,7 +472,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$button_OrderDialog_NewOrderPosition(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		// create a new orderPosition object
 		Orderposition anOrderposition = getOrderService().getNewOrderposition();
@@ -614,6 +618,16 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// ++++++++++++++++++++++++++++++ helpers ++++++++++++++++++++++++++
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+	/**
+	 * Set the properties of the fields, like maxLength.<br>
+	 */
+	private void doSetFieldProperties() {
+		kunNr.setMaxlength(20);
+		kunName1.setMaxlength(150);
+		aufNr.setMaxlength(20);
+		aufBezeichnung.setMaxlength(50);
+	}
 
 	/**
 	 * Stores the init values in mem vars. <br>

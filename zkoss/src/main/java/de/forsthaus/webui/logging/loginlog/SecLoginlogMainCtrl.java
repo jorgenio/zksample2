@@ -33,7 +33,6 @@ import org.zkoss.zul.Window;
 
 import de.forsthaus.backend.service.LoginLoggingService;
 import de.forsthaus.webui.util.GFCBaseCtrl;
-import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>

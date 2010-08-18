@@ -150,7 +150,6 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	protected Button btnClose; // autowire
 
 	protected Button btnHelp; // autowire
-	protected Button button_OrderPositionDialog_PrintOrderPositions; // autowire
 
 	// ServiceDAOs / Domain Classes
 	private transient Customer customer;
@@ -260,8 +259,6 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 		btnDelete.setVisible(workspace.isAllowed("button_OrderPositionDialog_btnDelete"));
 		btnSave.setVisible(workspace.isAllowed("button_OrderPositionDialog_btnSave"));
 		btnClose.setVisible(workspace.isAllowed("button_OrderPositionDialog_btnClose"));
-
-		button_OrderPositionDialog_PrintOrderPositions.setVisible(workspace.isAllowed("button_OrderPositionDialog_PrintOrderPositions"));
 
 	}
 
@@ -987,17 +984,6 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		logger.debug(event.toString());
-
-		ZksampleUtils.doShowNotImplementedMessage();
-	}
-
-	/**
-	 * onClick button print. <br>
-	 * 
-	 * @param event
-	 */
-	public void onClick$button_OrderPositionDialog_PrintOrderPositions(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
 		ZksampleUtils.doShowNotImplementedMessage();

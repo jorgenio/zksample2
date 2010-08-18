@@ -1629,7 +1629,7 @@ INSERT INTO BRANCHE (BRA_ID, BRA_NR, BRA_BEZEICHNUNG, VERSION) VALUES
 
 /******************** Kunden Daten ********************/
 INSERT INTO KUNDE (KUN_ID,KUN_FIL_ID,KUN_BRA_ID, KUN_NR, KUN_MATCHCODE,KUN_NAME1,KUN_NAME2,KUN_ORT,KUN_MAHNSPERRE,VERSION) VALUES 
-(  20,1,1000, '20', 'MUELLER','--> MUEller','Elektroinstallationen','Freiburg',true,0),
+(  20,1,1000, '20', 'MUELLER','--> Mueller','Elektroinstallationen','Freiburg',true,0),
 (  21,1,1000, '21', 'HUBER','--> Huber','Elektroinstallationen','Oberursel',true,0),
 (  22,1,1000, '22', 'SIEMENS','Siemens AG','Elektroinstallationen','Braunschweig',false,0),
 (  23,1,1000, '23', 'AEG','AEG','Elektroinstallationen','Stuttgart',false,0),

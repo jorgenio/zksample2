@@ -3,9 +3,7 @@ package de.forsthaus.webui.util;
 import java.io.Serializable;
 import java.util.Locale;
 
-import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Iframe;

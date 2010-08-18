@@ -13,6 +13,7 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 18.07.2010 / Added a new report for printing an Order with it's positions. Shows how to add a grandTotal sum. " + lf;
 		s = s + "- 11.07.2010 / Added new reports for printing: User-List / Security: Rights-List; Group-List; Roles-List. Some of these " + lf;
 		s = s + "                      report uses the DynamicReportBuilder from DynamicJasper wich allows more control over the report. " + lf;
 		s = s + "                      Additionally we shows in it how to use a CustomExpression. " + lf;

@@ -67,7 +67,7 @@
 			<panelchildren
 				id="panelchildrenSecLoginLogStatistikCenter">
 				<box id="boxSecLoginLogStatistikCenter" align="start"
-					height="100%" orient="horizontal" />
+					height="100%" width="100%" orient="horizontal" />
 
 			</panelchildren>
 		</panel>

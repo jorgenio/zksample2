@@ -32,7 +32,10 @@ import org.zkoss.zk.ui.Components;
  * Helper class for showing the zkoss component tree in the console for a root
  * component.
  * 
- * Call it with ZkossComponentTreeUtil.getZulTree(aComponent)
+ * <pre>
+ * Call it with:
+ * System.out.println(ZkossComponentTreeUtil.getZulTree(aComponent));
+ * </pre>
  * 
  * @author bbruhns
  * 
@@ -128,7 +131,7 @@ public class ZkossComponentTreeUtil {
 		}
 
 		result.append(StringUtils.leftPad("", depth << 2) + "<" + id + ">\n");
-		
+
 		ADD_LISTENER.addListener(component, result, depth);
 
 		for (Iterator iterator = component.getChildren().iterator(); iterator.hasNext();) {

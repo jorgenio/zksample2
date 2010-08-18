@@ -289,6 +289,11 @@
 	<bean id="userBarCtrl" class="de.forsthaus.webui.util.UserBarCtrl"
 		scope="prototype">
 	</bean>
+	<!-- HelpPopupController -->
+	<bean id="helpWindowCtrl" class="de.forsthaus.webui.util.HelpWindowCtrl"
+		scope="prototype">
+	</bean>
+
 
 	<!--
 		<bean id="bBruhnsTestBean"

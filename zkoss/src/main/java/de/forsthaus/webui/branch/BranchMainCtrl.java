@@ -3,16 +3,20 @@ package de.forsthaus.webui.branch;
 import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.EventQueues;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.ForwardEvent;
+import org.zkoss.zk.ui.event.MouseEvent;
 import org.zkoss.zkplus.databind.BindingListModelList;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
@@ -629,7 +633,12 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doHelp(Event event) throws InterruptedException {
 
-		ZksampleUtils.doShowNotImplementedMessage();
+//		Component comp = (Button) ((ForwardEvent) event).getOrigin().getTarget();
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//		map.put("parentComponent", comp);
+//		Executions.createComponents("/WEB-INF/pages/util/helpWindow.zul", windowBranchMain, map);
+
+		 ZksampleUtils.doShowNotImplementedMessage();
 
 		// we stop the propagation of the event, because zk will call ALL events
 		// with the same name in the namespace and 'btnHelp' is a standard

@@ -162,19 +162,19 @@ public class StatusBarCtrl extends GenericForwardComposer implements Serializabl
 
 		statusBarSelectedObject = new Column();
 		statusBarSelectedObject.setLabel(_labelSelectedObject);
-		statusBarSelectedObject.setWidth("40%");
+		statusBarSelectedObject.setWidth("50%");
 		statusBarSelectedObject.setStyle("background-color: #D6DCDE; color: blue;");
 		statusBarSelectedObject.setParent(columns);
 
 		statusBarAppVersion = new Column();
 		statusBarAppVersion.setLabel(_labelAppVersion);
-		statusBarAppVersion.setWidth("20%");
+		statusBarAppVersion.setWidth("35%");
 		statusBarAppVersion.setStyle("background-color: #D6DCDE; color: #FF0000;");
 		statusBarAppVersion.setParent(columns);
 
 		statusBarTableSchema = new Column();
 		statusBarTableSchema.setLabel(_labelTableSchema);
-		statusBarTableSchema.setWidth("10%");
+		statusBarTableSchema.setWidth("15%");
 		statusBarTableSchema.setStyle("background-color: #D6DCDE; color: blue;");
 		statusBarTableSchema.setParent(columns);
 

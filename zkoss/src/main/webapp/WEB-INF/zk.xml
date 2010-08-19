@@ -42,7 +42,7 @@
 	<!-- ====================================================== -->
 	<listener>
 		<description> Monitor the statistic</description>
-		<listener-class>de.forsthaus.statistic.Statistic
+		<listener-class>de.forsthaus.statistic.FDStatisticMonitor
 		</listener-class>
 	</listener>
 

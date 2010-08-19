@@ -987,6 +987,7 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15015, 1, 'menuCat_UserRights', 0),
 (15016, 2, 'menuItem_Administration_LoginsLog', 0),
 (15017, 2, 'menuItem_Administration_HibernateStats', 0),
+(15018, 2, 'menu_Item_Calendar', 0),
 
 /* Pages = Type(0) */
 /* --> Page Customer */

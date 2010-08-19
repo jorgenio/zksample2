@@ -107,6 +107,11 @@
 		<property name="guestBookService" ref="guestBookService" />
 	</bean>
 
+	<!-- Calendar / Kalender -->
+	<bean id="calendarCtrl" class="de.forsthaus.webui.calendar.CalendarCtrl"
+		parent="basisCtrl" scope="prototype">
+	</bean>
+
 	<!-- Offices / Filialstammdaten -->
 	<bean id="officeMainCtrl" class="de.forsthaus.webui.office.OfficeMainCtrl"
 		parent="basisCtrl" scope="prototype">

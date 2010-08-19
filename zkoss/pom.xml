@@ -229,6 +229,13 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.zkoss</groupId>
+			<artifactId>calendar</artifactId>
+			<version>2.0</version>
+			<scope>system</scope>
+			<systemPath>${zkosslibs}calendar.jar</systemPath>
+		</dependency>
 	</dependencies>
 	<url>http://sourceforge.net/projects/zksample2/</url>
 	<issueManagement>

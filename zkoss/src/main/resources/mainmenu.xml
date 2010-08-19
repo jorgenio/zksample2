@@ -9,7 +9,7 @@
 		iconName="/images/icons/create_doc_16x16.gif" />
 	<!-- Calendar -->
 	<menuItem id="menu_Item_Calendar" zulNavigation="/WEB-INF/pages/calendar/calendar.zul"
-		iconName="/images/icons/planner_16x16.gif" />
+		iconName="/images/icons/daysort16x16.gif" />
 
 	<!--
 		<menuItem id="menu_Item_Chat"

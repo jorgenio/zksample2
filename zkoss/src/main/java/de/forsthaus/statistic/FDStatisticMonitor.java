@@ -47,47 +47,29 @@ public final class FDStatisticMonitor implements Monitor, Serializable {
 	private final static AtomicInteger ACTIVE_UPDATECOUNT = new AtomicInteger(0);
 
 	public void sessionCreated(Session sess) {
-
-		System.out.println("sessionCreated(...)");
-
 		ACTIVE_SESSIONCOUNT.incrementAndGet();
 		TOTAL_SESSIONCOUNT.incrementAndGet();
 	}
 
 	public void sessionDestroyed(Session sess) {
-
-		System.out.println("sessionDestroyed(...)");
-
 		ACTIVE_SESSIONCOUNT.decrementAndGet();
 	}
 
 	public void desktopCreated(Desktop desktop) {
-
-		System.out.println("desktopCreated(...)");
-
 		ACTIVE_DESKTOPCOUNT.incrementAndGet();
 		TOTAL_DESKTOPCOUNT.incrementAndGet();
 	}
 
 	public void desktopDestroyed(Desktop desktop) {
-
-		System.out.println("desktopDestroyed(...)");
-
 		ACTIVE_DESKTOPCOUNT.decrementAndGet();
 	}
 
 	public void beforeUpdate(Desktop desktop, @SuppressWarnings("rawtypes") List requests) {
-
-		System.out.println("beforeUpdate(...)");
-
 		ACTIVE_UPDATECOUNT.incrementAndGet();
 		TOTAL_UPDATECOUNT.incrementAndGet();
 	}
 
 	public void afterUpdate(Desktop desktop) {
-
-		System.out.println("afterUpdate(...)");
-
 		ACTIVE_UPDATECOUNT.decrementAndGet();
 	}
 }

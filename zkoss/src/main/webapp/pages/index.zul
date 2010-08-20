@@ -41,10 +41,17 @@
 
 					<hbox pack="stretch" width="100%">
 
-						<div id="divNo" align="left" width="38px"
+						<div id="divNo" align="left"
 							style="padding: 2px;">
 							<image src="/images/zkpowered_34x34.png" />
 						</div>
+
+						<!--
+							<div align="left" style="padding: 0px;">
+							<image src="/images/logo.jpg" />
+							</div>
+						-->
+
 
 						<div
 							style="background-color:silver; background-image:url(${c:encodeURL('/images/ZKHeader_2x38.png')});  background-repeat:repeat-x; float:left; border: 'none';  padding-left: 5px; padding-bottom: 4px;"
@@ -52,7 +59,6 @@
 							<label id="label_AppName"
 								style="font-size:24px; font-weight:bold; color: #D70303" />
 						</div>
-
 
 						<div align="right" style="float: right">
 

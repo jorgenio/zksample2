@@ -44,8 +44,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 
 	protected Borderlayout borderLayout_calendar; // autowired
 	protected Div divCenter; // autowired
-
-	private Calendars cals;
+	protected Calendars cal; // autowired
 
 	/**
 	 * default constructor.<br>
@@ -82,11 +81,6 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void onCreate$windowCalendar(Event event) throws Exception {
 		// logger.debug(event.toString());
-
-		cals = new Calendars();
-		cals.setParent(divCenter);
-
-		// cals.setMold("month");
 
 		doFitSize();
 

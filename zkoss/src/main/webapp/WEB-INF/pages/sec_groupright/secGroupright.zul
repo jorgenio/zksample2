@@ -119,35 +119,58 @@
 										<tabpanel
 											style="border: 0px; padding: 0px">
 
-											<hbox>
-												<space />
-												<space />
+											<div sclass="z-toolbar"
+												style="padding:0">
+												<hbox pack="stretch"
+													sclass="hboxRemoveWhiteStrips" width="100%">
 
-												<checkbox
-													id="checkbox_SecGroupRight_All" height="25px"
-													label="${c:l('checkbox_SecGroupRight_All.label')}" />
-												<checkbox
-													id="checkbox_SecGroupRight_Pages"
-													label="${c:l('checkbox_SecGroupRight_Pages.label')}" />
-												<checkbox
-													id="checkbox_SecGroupRight_Tabs"
-													label="${c:l('checkbox_SecGroupRight_Tabs.label')}" />
-												<checkbox
-													id="checkbox_SecGroupRight_MenuCat"
-													label="${c:l('checkbox_SecGroupRight_MenuCat.label')}" />
-												<checkbox
-													id="checkbox_SecGroupRight_MenuItems"
-													label="${c:l('checkbox_SecGroupRight_MenuItems.label')}" />
-												<checkbox
-													id="checkbox_SecGroupRight_Methods"
-													label="${c:l('checkbox_SecGroupRight_Methods.label')}" />
-												<checkbox
-													id="checkbox_SecGroupRight_Domain"
-													label="${c:l('checkbox_SecGroupRight_Domain.label')}" />
-												<checkbox
-													id="checkbox_SecGroupRight_Components"
-													label="${c:l('checkbox_SecGroupRight_Components.label')}" />
-											</hbox>
+													<!-- COMMON BUTTONS -->
+													<toolbar
+														align="start" style="float:left; border-style: none;">
+														<checkbox
+															id="checkbox_SecGroupRight_All" height="25px"
+															label="${c:l('checkbox_SecGroupRight_All.label')}" />
+														<checkbox
+															id="checkbox_SecGroupRight_Pages"
+															label="${c:l('checkbox_SecGroupRight_Pages.label')}" />
+														<checkbox
+															id="checkbox_SecGroupRight_Tabs"
+															label="${c:l('checkbox_SecGroupRight_Tabs.label')}" />
+														<checkbox
+															id="checkbox_SecGroupRight_MenuCat"
+															label="${c:l('checkbox_SecGroupRight_MenuCat.label')}" />
+														<checkbox
+															id="checkbox_SecGroupRight_MenuItems"
+															label="${c:l('checkbox_SecGroupRight_MenuItems.label')}" />
+														<checkbox
+															id="checkbox_SecGroupRight_Methods"
+															label="${c:l('checkbox_SecGroupRight_Methods.label')}" />
+														<checkbox
+															id="checkbox_SecGroupRight_Domain"
+															label="${c:l('checkbox_SecGroupRight_Domain.label')}" />
+														<checkbox
+															id="checkbox_SecGroupRight_Components"
+															label="${c:l('checkbox_SecGroupRight_Components.label')}" />
+
+													</toolbar>
+
+													<!-- SEARCH AREA -->
+													<toolbar
+														align="center" style="float:left; border-style: none;">
+														<hbox
+															align="center" style="padding: 2px">
+
+														</hbox>
+													</toolbar>
+
+													<!-- CRUD BUTTONS -->
+													<toolbar align="end"
+														style="float:right; border-style: none;">
+													</toolbar>
+												</hbox>
+											</div>
+
+
 
 
 											<borderlayout
@@ -245,20 +268,10 @@
 							</panelchildren>
 						</panel>
 
-
 					</columnchildren>
-
 				</columnlayout>
 
-
-
-
-
 			</center>
-
-			<east border="none"></east>
-			<west border="none"></west>
-			<south border="none"></south>
 
 		</borderlayout>
 

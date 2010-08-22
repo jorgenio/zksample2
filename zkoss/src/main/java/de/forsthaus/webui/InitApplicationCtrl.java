@@ -74,6 +74,7 @@ import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.backend.service.SysCountryCodeService;
 import de.forsthaus.backend.service.UserService;
 import de.forsthaus.example.RandomDataEngine;
+import de.forsthaus.statistic.FDStatistic;
 import de.forsthaus.statistic.Statistic;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.WindowBaseCtrl;
@@ -366,7 +367,9 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		/**
 		 * These Statistic Class is activated in the zk.xml
 		 */
-		Statistic stat = de.forsthaus.statistic.Statistic.getStatistic();
+		// Statistic stat = de.forsthaus.statistic.Statistic.getStatistic();
+		// new Statistic class since 20.08.2010
+		FDStatistic stat = de.forsthaus.statistic.FDStatistic.getStatistic();
 
 		Panel panel = new Panel();
 		panel.setWidth("450px");

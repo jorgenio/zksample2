@@ -8,7 +8,7 @@
 	<menuItem id="menu_Item_Guestbook" zulNavigation="/WEB-INF/pages/guestbook/guestBookList.zul"
 		iconName="/images/icons/create_doc_16x16.gif" />
 	<!-- Calendar -->
-	<menuItem id="menu_Item_Calendar" zulNavigation="/WEB-INF/pages/calendar/calendar.zul"
+	<menuItem id="menu_Item_Calendar" zulNavigation="/WEB-INF/pages/calendar/calendar1.zul"
 		iconName="/images/icons/daysort16x16.gif" />
 
 	<!--

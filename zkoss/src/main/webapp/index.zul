@@ -52,13 +52,7 @@
 							<button id="btn_zkoss" style="border: 0px"
 								image="/images/zkpowered_60x60.png" href="http://www.zkoss.org"
 								target="_blank" tooltiptext="Go to the zk framework site" />
-							<separator />
-							<separator />
-							<separator />
-							<separator />
-							<separator />
-							<separator />
-
+							<separator width="30px" />
 						</hbox>
 					</div>
 

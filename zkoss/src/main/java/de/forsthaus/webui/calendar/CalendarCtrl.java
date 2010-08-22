@@ -1,9 +1,17 @@
 package de.forsthaus.webui.calendar;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.zkoss.calendar.Calendars;
+import org.zkoss.calendar.impl.SimpleCalendarEvent;
+import org.zkoss.calendar.impl.SimpleCalendarModel;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
@@ -46,6 +54,8 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	protected Div divCenter; // autowired
 	protected Calendars cal; // autowired
 
+	private SimpleCalendarModel cm;
+
 	/**
 	 * default constructor.<br>
 	 */
@@ -67,6 +77,8 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		 * overridden and can ends in curious error messages.
 		 */
 		self.setAttribute("controller", this, false);
+
+		init();
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -82,8 +94,20 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	public void onCreate$windowCalendar(Event event) throws Exception {
 		// logger.debug(event.toString());
 
+		dofillModel();
+
 		doFitSize();
 
+	}
+
+	public void init() {
+		// cal.addTimeZone("Mexico", "GMT-6");
+		cal.addTimeZone("Germany", "GMT+1");
+		cal.setMold("default");
+		cal.setFirstDayOfWeek("sunday");
+		cal.setDays(7);
+		cal.setCurrentDate(new Date());
+		cal.setReadonly(true);
 	}
 
 	/**
@@ -117,9 +141,141 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
+	/**
+	 * when the "previous" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btn_Previous(Event event) throws InterruptedException {
+		cal.previousPage();
+	}
+
+	/**
+	 * when the "next" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btn_Next(Event event) throws InterruptedException {
+		cal.previousPage();
+	}
+
+	/**
+	 * when the "show 1 Day" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btn_Show1Day(Event event) throws InterruptedException {
+		cal.setDays(1);
+	}
+
+	/**
+	 * when the "show 5 Day" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btn_Show5Days(Event event) throws InterruptedException {
+		cal.setFirstDayOfWeek("SUNDAY");
+		cal.setDays(5);
+	}
+
+	/**
+	 * when the "show week" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btn_ShowWeek(Event event) throws InterruptedException {
+		cal.setFirstDayOfWeek("SUNDAY");
+		cal.setDays(7);
+	}
+
+	/**
+	 * when the "show month" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btn_ShowMonth(Event event) throws InterruptedException {
+		cal.setMold("month");
+	}
+
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 	// +++++++++++++++++ Business Logic ++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
+	public void dofillModel() throws ParseException {
+
+		List dateTime = new LinkedList();
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+
+		for (int i = 0; i < 48; i++) {
+			dateTime.add(sdf.format(calendar.getTime()));
+			calendar.add(Calendar.MINUTE, 30);
+
+		}
+		// prepare model data
+		SimpleDateFormat dataSDF = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		Date today = new Date();
+		int mod = today.getMonth() + 1;
+		int year = today.getYear() + 1900;
+		String date2 = mod > 9 ? year + "/" + mod + "" : year + "/" + "0" + mod;
+		String date1 = --mod > 9 ? year + "/" + mod + "" : year + "/" + "0" + mod;
+		++mod;
+		String date3 = ++mod > 9 ? year + "/" + mod + "" : year + "/" + "0" + mod;
+		String[][] evts = new String[][] {
+				// Red Events
+				new String[] { date1 + "/28 15:00", date1 + "/30 16:30", "#A32929", "#D96666", "Red events: 1" },
+				new String[] { date1 + "/04 13:00", date1 + "/07 15:00", "#A32929", "#D96666", "Red events: 2" },
+				new String[] { date2 + "/12 13:00", date2 + "/12 17:30", "#A32929", "#D96666", "Red events: 3" },
+				new String[] { date2 + "/21 08:00", date2 + "/21 12:00", "#A32929", "#D96666", "Red events: 4" },
+				new String[] { date2 + "/08 13:00", date2 + "/08 15:00", "#A32929", "#D96666", "Red events: 5" },
+				// Blue Events
+				new String[] { date1 + "/29 03:00", date2 + "/02 06:00", "#3467CE", "#668CD9", "Blue events: 1" },
+				new String[] { date2 + "/02 10:00", date2 + "/02 12:30", "#3467CE", "#668CD9", "Blue events: 2" },
+				new String[] { date2 + "/17 14:00", date2 + "/18 16:00", "#3467CE", "#668CD9", "Blue events: 3" },
+				new String[] { date2 + "/26 00:00", date2 + "/27 00:00", "#3467CE", "#668CD9", "Blue events: 4" },
+				new String[] { date3 + "/01 14:30", date3 + "/01 17:30", "#3467CE", "#668CD9", "Blue events: 5" },
+				// Purple Events
+				new String[] { date1 + "/29 08:00", date2 + "/03 12:00", "#7A367A", "#B373B3", "Purple events: 1" },
+				new String[] { date2 + "/07 08:00", date2 + "/07 12:00", "#7A367A", "#B373B3", "Purple events: 2" },
+				new String[] { date2 + "/13 11:00", date2 + "/13 14:30", "#7A367A", "#B373B3", "Purple events: 3" },
+				new String[] { date2 + "/16 14:00", date2 + "/18 16:00", "#7A367A", "#B373B3", "Purple events: 4" },
+				new String[] { date3 + "/02 12:00", date3 + "/02 17:00", "#7A367A", "#B373B3", "Purple events: 5" },
+				// Khaki Events
+				new String[] { date1 + "/03 00:00", date1 + "/04 00:00", "#88880E", "#BFBF4D", "Khaki events: 1" },
+				new String[] { date2 + "/04 00:00", date2 + "/07 00:00", "#88880E", "#BFBF4D", "Khaki events: 2" },
+				new String[] { date2 + "/13 05:00", date2 + "/13 07:00", "#88880E", "#BFBF4D", "Khaki events: 3" },
+				new String[] { date2 + "/24 19:30", date2 + "/24 20:00", "#88880E", "#BFBF4D", "Khaki events: 4" },
+				new String[] { date3 + "/03 00:00", date3 + "/04 00:00", "#88880E", "#BFBF4D", "Khaki events: 5" },
+				// Green Events
+				new String[] { date1 + "/28 10:00", date1 + "/28 12:30", "#0D7813", "#4CB052", "Green events: 1" },
+				new String[] { date2 + "/03 00:00", date2 + "/03 05:30", "#0D7813", "#4CB052", "Green events: 2" },
+				new String[] { date2 + "/05 20:30", date2 + "/06 00:00", "#0D7813", "#4CB052", "Green events: 3" },
+				new String[] { date2 + "/23 00:00", date2 + "/25 16:30", "#0D7813", "#4CB052", "Green events: 4" },
+				new String[] { date3 + "/01 08:30", date3 + "/01 19:30", "#0D7813", "#4CB052", "Green events: 5" } };
+		// fill the events' data
+		SimpleCalendarModel cm = new SimpleCalendarModel();
+		for (int i = 0; i < evts.length; i++) {
+			SimpleCalendarEvent sce = new SimpleCalendarEvent();
+			sce.setBeginDate(dataSDF.parse(evts[i][0]));
+			sce.setEndDate(dataSDF.parse(evts[i][1]));
+			sce.setHeaderColor(evts[i][2]);
+			sce.setContentColor(evts[i][3]);
+			// ce.setTitle() if any, otherwise, the time stamp is assumed.
+			sce.setContent(evts[i][4]);
+			cm.add(sce);
+		}
+		// set the model
+		setCm(cm);
+	}
 
 	/**
 	 * Opens the help screen for the current module.
@@ -163,5 +319,13 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
+	public void setCm(SimpleCalendarModel cm) {
+		this.cm = cm;
+	}
+
+	public SimpleCalendarModel getCm() {
+		return cm;
+	}
 
 }

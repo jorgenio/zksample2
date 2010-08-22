@@ -88,16 +88,12 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	public IndexCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
+		// logger.debug("super()");
+
 	}
 
 	public void onCreate$outerIndexWindow(Event event) throws Exception {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
+		// logger.debug(event.toString());
 
 		mainMenuBar.setVisible(false);
 
@@ -180,10 +176,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onClick$btnLogout() throws IOException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("-->");
-		}
+		// logger.debug(event.toString());
 
 		getUserWorkspace().doLogout(); // logout.
 	}

@@ -146,16 +146,13 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	public InitApplicationCtrl() {
 		super();
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super() ");
-		}
+		// logger.debug("super()");
+
 	}
 
 	public void onCreate$startWindow(Event event) throws Exception {
+		// logger.debug(event.toString());
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
 		doOnCreateCommon(startWindow); // do the autowire stuff
 
 		createMainGrid();

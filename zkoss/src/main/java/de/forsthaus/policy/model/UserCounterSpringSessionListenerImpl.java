@@ -31,7 +31,7 @@ import org.aspectj.lang.reflect.Pointcut;
 public class UserCounterSpringSessionListenerImpl implements Serializable {
 
 	private static final long serialVersionUID = 8979460663616009375L;
-	private transient static final Logger logger = Logger.getLogger(UserCounterSpringSessionListenerImpl.class);
+	private static final Logger logger = Logger.getLogger(UserCounterSpringSessionListenerImpl.class);
 	private UserCounterImpl userCounter;
 
 	public void startSession() {
@@ -55,7 +55,8 @@ public class UserCounterSpringSessionListenerImpl implements Serializable {
 		// return call.proceed();
 	}
 
-	public void removeSessionInformation(Object returnValue, Method method, Object[] args, Object target) throws Throwable {
+	public void removeSessionInformation(Object returnValue, Method method, Object[] args, Object target)
+			throws Throwable {
 		final String user = (String) args[0];
 		System.err.println("-----------------------------------------");
 		System.err.println(" -> " + user);
@@ -64,7 +65,7 @@ public class UserCounterSpringSessionListenerImpl implements Serializable {
 	}
 
 	public UserCounterImpl getUserCounter() {
-		return userCounter;
+		return this.userCounter;
 	}
 
 	public void setUserCounter(UserCounterImpl userCounter) {

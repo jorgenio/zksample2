@@ -62,7 +62,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
 public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(BranchMainCtrl.class);
+	private static final Logger logger = Logger.getLogger(BranchMainCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -120,8 +120,6 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public BranchMainCtrl() {
 		super();
-
-		// logger.debug("super()");
 	}
 
 	@Override
@@ -135,7 +133,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		 * managing more than one zul-file in one page. Otherwise it would be
 		 * overridden and can ends in curious error messages.
 		 */
-		self.setAttribute("controller", this, false);
+		this.self.setAttribute("controller", this, false);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -152,7 +150,8 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrlBranch = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, false, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+		this.btnCtrlBranch = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, false, this.btnNew,
+				this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
 
 		doCheckRights();
 
@@ -160,13 +159,14 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		 * Initiate the first loading by selecting the customerList tab and
 		 * create the components from the zul-file.
 		 */
-		tabBranchList.setSelected(true);
-		if (tabPanelBranchList != null) {
-			ZksampleUtils.createTabPanelContent(tabPanelBranchList, this, "ModuleMainController", "/WEB-INF/pages/branch/branchList.zul");
+		this.tabBranchList.setSelected(true);
+		if (this.tabPanelBranchList != null) {
+			ZksampleUtils.createTabPanelContent(this.tabPanelBranchList, this, "ModuleMainController",
+					"/WEB-INF/pages/branch/branchList.zul");
 		}
 
 		// Set the buttons for editMode
-		btnCtrlBranch.setInitEdit();
+		this.btnCtrlBranch.setInitEdit();
 	}
 
 	/**
@@ -180,13 +180,14 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// Check if the tabpanel is already loaded
-		if (tabPanelBranchList.getFirstChild() != null) {
-			tabBranchList.setSelected(true);
+		if (this.tabPanelBranchList.getFirstChild() != null) {
+			this.tabBranchList.setSelected(true);
 			return;
 		}
 
-		if (tabPanelBranchList != null) {
-			ZksampleUtils.createTabPanelContent(tabPanelBranchList, this, "ModuleMainController", "/WEB-INF/pages/branch/branchList.zul");
+		if (this.tabPanelBranchList != null) {
+			ZksampleUtils.createTabPanelContent(this.tabPanelBranchList, this, "ModuleMainController",
+					"/WEB-INF/pages/branch/branchList.zul");
 		}
 	}
 
@@ -201,8 +202,8 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// Check if the tabpanel is already loaded
-		if (tabPanelBranchDetail.getFirstChild() != null) {
-			tabBranchDetail.setSelected(true);
+		if (this.tabPanelBranchDetail.getFirstChild() != null) {
+			this.tabBranchDetail.setSelected(true);
 
 			// refresh the Binding mechanism
 			getBranchDetailCtrl().setBranche(getSelectedBranche());
@@ -210,8 +211,9 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 			return;
 		}
 
-		if (tabPanelBranchDetail != null) {
-			ZksampleUtils.createTabPanelContent(tabPanelBranchDetail, this, "ModuleMainController", "/WEB-INF/pages/branch/branchDetail.zul");
+		if (this.tabPanelBranchDetail != null) {
+			ZksampleUtils.createTabPanelContent(this.tabPanelBranchDetail, this, "ModuleMainController",
+					"/WEB-INF/pages/branch/branchDetail.zul");
 		}
 	}
 
@@ -231,7 +233,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_BranchMain_PrintBranches(Event event) throws InterruptedException {
-		Window win = (Window) Path.getComponent("/outerIndexWindow");
+		final Window win = (Window) Path.getComponent("/outerIndexWindow");
 		new BranchSimpleDJReport(win);
 	}
 
@@ -327,26 +329,28 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// if not empty
-		if (!tb_Branch_Name.getValue().isEmpty()) {
-			checkbox_Branch_ShowAll.setChecked(false); // unCheck
+		if (!this.tb_Branch_Name.getValue().isEmpty()) {
+			this.checkbox_Branch_ShowAll.setChecked(false); // unCheck
 
 			if (getBranchListCtrl().getBinder() != null) {
 
 				// ++ create a searchObject and init sorting ++//
-				HibernateSearchObject<Branche> searchObjBranch = new HibernateSearchObject<Branche>(Branche.class, getBranchListCtrl().getCountRows());
-				searchObjBranch.addFilter(new Filter("braBezeichnung", "%" + tb_Branch_Name.getValue() + "%", Filter.OP_ILIKE));
+				final HibernateSearchObject<Branche> searchObjBranch = new HibernateSearchObject<Branche>(
+						Branche.class, getBranchListCtrl().getCountRows());
+				searchObjBranch.addFilter(new Filter("braBezeichnung", "%" + this.tb_Branch_Name.getValue() + "%",
+						Filter.OP_ILIKE));
 				searchObjBranch.addSort("braBezeichnung", false);
 
 				// Change the BindingListModel.
 				getBranchListCtrl().getPagedBindingListWrapper().setSearchObject(searchObjBranch);
 
 				// get the current Tab for later checking if we must change it
-				Tab currentTab = tabbox_BranchMain.getSelectedTab();
+				final Tab currentTab = this.tabbox_BranchMain.getSelectedTab();
 
 				// check if the tab is one of the Detail tabs. If so do not
 				// change the selection of it
-				if (!currentTab.equals(tabBranchList)) {
-					tabBranchList.setSelected(true);
+				if (!currentTab.equals(this.tabBranchList)) {
+					this.tabBranchList.setSelected(true);
 				} else {
 					currentTab.setSelected(true);
 				}
@@ -363,18 +367,18 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// empty the text search boxes
-		tb_Branch_Name.setValue(""); // clear
+		this.tb_Branch_Name.setValue(""); // clear
 
 		if (getBranchListCtrl().getBinder() != null) {
 			getBranchListCtrl().getPagedBindingListWrapper().clearFilters();
 
 			// get the current Tab for later checking if we must change it
-			Tab currentTab = tabbox_BranchMain.getSelectedTab();
+			final Tab currentTab = this.tabbox_BranchMain.getSelectedTab();
 
 			// check if the tab is one of the Detail tabs. If so do not
 			// change the selection of it
-			if (!currentTab.equals(tabBranchList)) {
-				tabBranchList.setSelected(true);
+			if (!currentTab.equals(this.tabBranchList)) {
+				this.tabBranchList.setSelected(true);
 			} else {
 				currentTab.setSelected(true);
 			}
@@ -402,7 +406,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 			// set edit-Mode
 			getBranchDetailCtrl().doReadOnlyMode(true);
 
-			btnCtrlBranch.setInitEdit();
+			this.btnCtrlBranch.setInitEdit();
 		}
 	}
 
@@ -418,21 +422,21 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// get the current Tab for later checking if we must change it
-		Tab currentTab = tabbox_BranchMain.getSelectedTab();
+		final Tab currentTab = this.tabbox_BranchMain.getSelectedTab();
 
 		// check first, if the tabs are created, if not than create it
 		if (getBranchDetailCtrl() == null) {
-			Events.sendEvent(new Event("onSelect", tabBranchDetail, null));
+			Events.sendEvent(new Event("onSelect", this.tabBranchDetail, null));
 			// if we work with spring beanCreation than we must check a little
 			// bit deeper, because the Controller are preCreated ?
 		} else if (getBranchDetailCtrl().getBinder() == null) {
-			Events.sendEvent(new Event("onSelect", tabBranchDetail, null));
+			Events.sendEvent(new Event("onSelect", this.tabBranchDetail, null));
 		}
 
 		// check if the tab is one of the Detail tabs. If so do not change the
 		// selection of it
-		if (!currentTab.equals(tabBranchDetail)) {
-			tabBranchDetail.setSelected(true);
+		if (!currentTab.equals(this.tabBranchDetail)) {
+			this.tabBranchDetail.setSelected(true);
 		} else {
 			currentTab.setSelected(true);
 		}
@@ -442,7 +446,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		// remember the old vars
 		doStoreInitValues();
 
-		btnCtrlBranch.setBtnStatus_Edit();
+		this.btnCtrlBranch.setBtnStatus_Edit();
 
 		getBranchDetailCtrl().doReadOnlyMode(false);
 		// set focus
@@ -461,7 +465,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 
 		// check first, if the tabs are created, if not than create them
 		if (getBranchDetailCtrl().getBinder() == null) {
-			Events.sendEvent(new Event("onSelect", tabBranchDetail, null));
+			Events.sendEvent(new Event("onSelect", this.tabBranchDetail, null));
 		}
 
 		// check first, if the tabs are created
@@ -473,34 +477,37 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		if (aBranche != null) {
 
 			// Show a confirm box
-			String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> " + aBranche.getBraBezeichnung();
-			String title = Labels.getLabel("message.Deleting.Record");
+			final String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> "
+					+ aBranche.getBraBezeichnung();
+			final String title = Labels.getLabel("message.Deleting.Record");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, true, new EventListener() {
-				public void onEvent(Event evt) {
-					switch (((Integer) evt.getData()).intValue()) {
-					case MultiLineMessageBox.YES:
-						deleteBean();
-						break; // 
-					case MultiLineMessageBox.NO:
-						break; // 
+			if (MultiLineMessageBox.show(msg, title, Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, true,
+					new EventListener() {
+						@Override
+						public void onEvent(Event evt) {
+							switch (((Integer) evt.getData()).intValue()) {
+							case MultiLineMessageBox.YES:
+								deleteBean();
+								break; //
+							case MultiLineMessageBox.NO:
+								break; //
+							}
+						}
+
+						private void deleteBean() {
+							// delete from database
+							getBrancheService().delete(aBranche);
+						}
+
 					}
-				}
-
-				private void deleteBean() {
-					// delete from database
-					getBrancheService().delete(aBranche);
-				}
-
-			}
 
 			) == MultiLineMessageBox.YES) {
 			}
 
 		}
 
-		btnCtrlBranch.setInitEdit();
+		this.btnCtrlBranch.setInitEdit();
 
 		setSelectedBranche(null);
 		// refresh the list
@@ -534,12 +541,13 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 			Events.postEvent("onSelect", getBranchListCtrl().getListBoxBranch(), getSelectedBranche());
 
 			// show the objects data in the statusBar
-			String str = getSelectedBranche().getBraBezeichnung();
-			EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeSelectedObject", null, str));
+			final String str = getSelectedBranche().getBraBezeichnung();
+			EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(
+					new Event("onChangeSelectedObject", null, str));
 
-		} catch (DataAccessException e) {
-			String message = e.getMessage();
-			String title = Labels.getLabel("message.Error");
+		} catch (final DataAccessException e) {
+			final String message = e.getMessage();
+			final String title = Labels.getLabel("message.Error");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 
@@ -549,7 +557,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 			return;
 
 		} finally {
-			btnCtrlBranch.setInitEdit();
+			this.btnCtrlBranch.setInitEdit();
 			getBranchDetailCtrl().doReadOnlyMode(true);
 		}
 	}
@@ -566,11 +574,11 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 
 		// check first, if the tabs are created
 		if (getBranchDetailCtrl() == null) {
-			Events.sendEvent(new Event("onSelect", tabBranchDetail, null));
+			Events.sendEvent(new Event("onSelect", this.tabBranchDetail, null));
 			// if we work with spring beanCreation than we must check a little
 			// bit deeper, because the Controller are preCreated ?
 		} else if (getBranchDetailCtrl().getBinder() == null) {
-			Events.sendEvent(new Event("onSelect", tabBranchDetail, null));
+			Events.sendEvent(new Event("onSelect", this.tabBranchDetail, null));
 		}
 
 		// remember the current object
@@ -579,7 +587,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		/** !!! DO NOT BREAK THE TIERS !!! */
 		// We don't create a new DomainObject() in the frontend.
 		// We GET it from the backend.
-		Branche aBranche = getBrancheService().getNewBranche();
+		final Branche aBranche = getBrancheService().getNewBranche();
 
 		// set the beans in the related databinded controllers
 		getBranchDetailCtrl().setBranche(aBranche);
@@ -593,9 +601,9 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		getBranchDetailCtrl().doReadOnlyMode(false);
 
 		// set the ButtonStatus to New-Mode
-		btnCtrlBranch.setInitNew();
+		this.btnCtrlBranch.setInitNew();
 
-		tabBranchDetail.setSelected(true);
+		this.tabBranchDetail.setSelected(true);
 		// set focus
 		getBranchDetailCtrl().txtb_BranchText.focus();
 
@@ -613,9 +621,9 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	private void doResizeSelectedTab(Event event) {
 		// logger.debug(event.toString());
 
-		if (tabbox_BranchMain.getSelectedTab() == tabBranchDetail) {
+		if (this.tabbox_BranchMain.getSelectedTab() == this.tabBranchDetail) {
 			getBranchDetailCtrl().doFitSize(event);
-		} else if (tabbox_BranchMain.getSelectedTab() == tabBranchList) {
+		} else if (this.tabbox_BranchMain.getSelectedTab() == this.tabBranchList) {
 			// resize and fill Listbox new
 			getBranchListCtrl().doFillListbox();
 		}
@@ -656,19 +664,16 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		if (getSelectedBranche() != null) {
 
 			try {
+				// FIXME ist das notwendig?
 				setOriginalBranche((Branche) org.apache.commons.beanutils.BeanUtils.cloneBean(getSelectedBranche()));
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (final IllegalAccessException e) {
+				throw new RuntimeException(e);
+			} catch (final InstantiationException e) {
+				throw new RuntimeException(e);
+			} catch (final InvocationTargetException e) {
+				throw new RuntimeException(e);
+			} catch (final NoSuchMethodException e) {
+				throw new RuntimeException(e);
 			}
 		}
 	}
@@ -684,24 +689,21 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		if (getOriginalBranche() != null) {
 
 			try {
-				getBranchDetailCtrl().setBranche((Branche) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalBranche()));
+				getBranchDetailCtrl().setBranche(
+						(Branche) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalBranche()));
 				setSelectedBranche((Branche) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalBranche()));
 				// TODO Bug in DataBinder??
-				windowBranchMain.invalidate();
+				this.windowBranchMain.invalidate();
 				getBranchDetailCtrl().windowBranchDetail.invalidate();
 
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (final IllegalAccessException e) {
+				throw new RuntimeException(e);
+			} catch (final InstantiationException e) {
+				throw new RuntimeException(e);
+			} catch (final InvocationTargetException e) {
+				throw new RuntimeException(e);
+			} catch (final NoSuchMethodException e) {
+				throw new RuntimeException(e);
 			}
 		}
 	}
@@ -717,17 +719,17 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	// TODO move it to the zul-file
 	private void doCheckRights() {
 
-		UserWorkspace workspace = getUserWorkspace();
+		final UserWorkspace workspace = getUserWorkspace();
 
-		btnHelp.setVisible(workspace.isAllowed("button_BranchMain_btnHelp"));
-		btnNew.setVisible(workspace.isAllowed("button_BranchMain_btnNew"));
-		btnEdit.setVisible(workspace.isAllowed("button_BranchMain_btnEdit"));
-		btnDelete.setVisible(workspace.isAllowed("button_BranchMain_btnDelete"));
-		btnSave.setVisible(workspace.isAllowed("button_BranchMain_btnSave"));
-		btnClose.setVisible(workspace.isAllowed("button_BranchMain_btnClose"));
+		this.btnHelp.setVisible(workspace.isAllowed("button_BranchMain_btnHelp"));
+		this.btnNew.setVisible(workspace.isAllowed("button_BranchMain_btnNew"));
+		this.btnEdit.setVisible(workspace.isAllowed("button_BranchMain_btnEdit"));
+		this.btnDelete.setVisible(workspace.isAllowed("button_BranchMain_btnDelete"));
+		this.btnSave.setVisible(workspace.isAllowed("button_BranchMain_btnSave"));
+		this.btnClose.setVisible(workspace.isAllowed("button_BranchMain_btnClose"));
 
-		button_BranchMain_PrintBranches.setVisible(workspace.isAllowed("button_BranchMain_PrintBranches"));
-		button_BranchMain_Search_BranchName.setVisible(workspace.isAllowed("button_BranchMain_Search_BranchName"));
+		this.button_BranchMain_PrintBranches.setVisible(workspace.isAllowed("button_BranchMain_PrintBranches"));
+		this.button_BranchMain_Search_BranchName.setVisible(workspace.isAllowed("button_BranchMain_Search_BranchName"));
 
 	}
 
@@ -740,7 +742,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public Branche getBranche() {
-		return branche;
+		return this.branche;
 	}
 
 	public void setOriginalBranche(Branche originalBranche) {
@@ -748,7 +750,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public Branche getOriginalBranche() {
-		return originalBranche;
+		return this.originalBranche;
 	}
 
 	public void setSelectedBranche(Branche selectedBranche) {
@@ -756,7 +758,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public Branche getSelectedBranche() {
-		return selectedBranche;
+		return this.selectedBranche;
 	}
 
 	public void setBranches(BindingListModelList branches) {
@@ -764,11 +766,11 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public BindingListModelList getBranches() {
-		return branches;
+		return this.branches;
 	}
 
 	public BrancheService getBrancheService() {
-		return brancheService;
+		return this.brancheService;
 	}
 
 	public void setBrancheService(BrancheService brancheService) {
@@ -780,7 +782,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public BranchListCtrl getBranchListCtrl() {
-		return branchListCtrl;
+		return this.branchListCtrl;
 	}
 
 	public void setBranchDetailCtrl(BranchDetailCtrl branchDetailCtrl) {
@@ -788,7 +790,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public BranchDetailCtrl getBranchDetailCtrl() {
-		return branchDetailCtrl;
+		return this.branchDetailCtrl;
 	}
 
 }

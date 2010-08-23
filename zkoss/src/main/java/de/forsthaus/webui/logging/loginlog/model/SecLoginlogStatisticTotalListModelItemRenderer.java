@@ -42,35 +42,32 @@ import de.forsthaus.backend.bean.DummyBean;
 public class SecLoginlogStatisticTotalListModelItemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(SecLoginlogStatisticTotalListModelItemRenderer.class);
+	private transient static final Logger logger = Logger
+			.getLogger(SecLoginlogStatisticTotalListModelItemRenderer.class);
 
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		DummyBean dummyBean = (DummyBean) data;
-
-		if (logger.isDebugEnabled()) {
-			// logger.debug("--> " + dummyBean.getCountry());
-		}
+		final DummyBean dummyBean = (DummyBean) data;
 
 		Listcell lc;
 
 		lc = new Listcell();
-		Hbox hbox = new Hbox();
+		final Hbox hbox = new Hbox();
 		hbox.setParent(lc);
 
 		/* Flag-image */
-		Image img = new Image();
-		String path = "/images/countrycode_flags/";
-		String flag = StringUtils.lowerCase(dummyBean.getCountry()) + ".gif";
+		final Image img = new Image();
+		final String path = "/images/countrycode_flags/";
+		final String flag = StringUtils.lowerCase(dummyBean.getCountry()) + ".gif";
 		img.setSrc(path + flag);
 		hbox.appendChild(img);
 
-		Separator sep = new Separator();
+		final Separator sep = new Separator();
 		hbox.appendChild(sep);
 
 		/* Country */
-		Label label = new Label();
+		final Label label = new Label();
 		label.setValue(dummyBean.getCountry());
 		hbox.appendChild(label);
 		lc.setParent(item);

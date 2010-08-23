@@ -39,7 +39,7 @@ import de.forsthaus.webui.util.GFCBaseCtrl;
 public class BranchDetailCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(BranchDetailCtrl.class);
+	private static final Logger logger = Logger.getLogger(BranchDetailCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -65,8 +65,6 @@ public class BranchDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public BranchDetailCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	@Override
@@ -79,15 +77,15 @@ public class BranchDetailCtrl extends GFCBaseCtrl implements Serializable {
 		 * managing more than one zul-file in one page. Otherwise it would be
 		 * overridden and can ends in curious error messages.
 		 */
-		self.setAttribute("controller", this, false);
+		this.self.setAttribute("controller", this, false);
 
 		/**
 		 * 1. Get the overhanded MainController.<br>
 		 * 2. Set this controller in the MainController.<br>
 		 * 3. Check if a 'selectedObject' exists yet in the MainController.<br>
 		 */
-		if (arg.containsKey("ModuleMainController")) {
-			setBranchMainCtrl((BranchMainCtrl) arg.get("ModuleMainController"));
+		if (this.arg.containsKey("ModuleMainController")) {
+			setBranchMainCtrl((BranchMainCtrl) this.arg.get("ModuleMainController"));
 
 			// SET THIS CONTROLLER TO THE MainController
 			getBranchMainCtrl().setBranchDetailCtrl(this);
@@ -116,11 +114,9 @@ public class BranchDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowBranchDetail(Event event) throws Exception {
-		// logger.debug(event.toString());
+		this.binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 
-		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
-
-		binder.loadAll();
+		this.binder.loadAll();
 
 		doFitSize(event);
 	}
@@ -141,11 +137,11 @@ public class BranchDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 * filled by onClientInfo() in the indexCtroller.
 	 */
 	public void doFitSize(Event event) {
-		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		int maxListBoxHeight = (height - 138);
-		borderLayout_branchDetail.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		final int maxListBoxHeight = height - 138;
+		this.borderLayout_branchDetail.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
-		windowBranchDetail.invalidate();
+		this.windowBranchDetail.invalidate();
 	}
 
 	/**
@@ -157,7 +153,7 @@ public class BranchDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param b
 	 */
 	public void doReadOnlyMode(boolean b) {
-		txtb_BranchText.setReadonly(b);
+		this.txtb_BranchText.setReadonly(b);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -201,7 +197,7 @@ public class BranchDetailCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public AnnotateDataBinder getBinder() {
-		return binder;
+		return this.binder;
 	}
 
 	public void setBinder(AnnotateDataBinder binder) {
@@ -213,7 +209,7 @@ public class BranchDetailCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public BrancheService getBrancheService() {
-		return brancheService;
+		return this.brancheService;
 	}
 
 	public void setBranchMainCtrl(BranchMainCtrl branchMainCtrl) {
@@ -221,7 +217,7 @@ public class BranchDetailCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public BranchMainCtrl getBranchMainCtrl() {
-		return branchMainCtrl;
+		return this.branchMainCtrl;
 	}
 
 }

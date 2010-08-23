@@ -58,7 +58,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
 public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -546886879998950467L;
-	private transient static final Logger logger = Logger.getLogger(SecRoleDialogCtrl.class);
+	private static final Logger logger = Logger.getLogger(SecRoleDialogCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -100,8 +100,6 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public SecRoleDialogCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	/**
@@ -112,16 +110,15 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$secRoleDialogWindow(Event event) throws Exception {
-		logger.debug(event.toString());
-
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+		this.btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, true, this.btnNew,
+				this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
 
 		// get the params map that are overhanded by creation.
-		Map<String, Object> args = getCreationArgsMap(event);
+		final Map<String, Object> args = getCreationArgsMap(event);
 
 		if (args.containsKey("role")) {
-			SecRole aRole = (SecRole) args.get("role");
+			final SecRole aRole = (SecRole) args.get("role");
 			setRole(aRole);
 		} else {
 			setRole(null);
@@ -131,9 +128,9 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// to it and can synchronize the shown data when we do insert, edit or
 		// delete users here.
 		if (args.containsKey("listBoxSecRoles")) {
-			listBoxSecRoles = (Listbox) args.get("listBoxSecRoles");
+			this.listBoxSecRoles = (Listbox) args.get("listBoxSecRoles");
 		} else {
-			listBoxSecRoles = null;
+			this.listBoxSecRoles = null;
 		}
 
 		// set Field Properties
@@ -239,9 +236,9 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		try {
 			doClose();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			// close anyway
-			secRoleDialogWindow.onClose();
+			this.secRoleDialogWindow.onClose();
 			// Messagebox.show(e.toString());
 		}
 	}
@@ -262,30 +259,32 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
-			String title = Labels.getLabel("message.Information");
+			final String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
+			final String title = Labels.getLabel("message.Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
-				public void onEvent(Event evt) {
-					switch (((Integer) evt.getData()).intValue()) {
-					case MultiLineMessageBox.YES:
-						try {
-							doSave();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO,
+					MultiLineMessageBox.QUESTION, true, new EventListener() {
+						@Override
+						public void onEvent(Event evt) {
+							switch (((Integer) evt.getData()).intValue()) {
+							case MultiLineMessageBox.YES:
+								try {
+									doSave();
+								} catch (final InterruptedException e) {
+									throw new RuntimeException(e);
+								}
+							case MultiLineMessageBox.NO:
+								break; //
+							}
 						}
-					case MultiLineMessageBox.NO:
-						break; // 
 					}
-				}
-			}
 
 			) == MultiLineMessageBox.YES) {
 			}
 		}
 
-		secRoleDialogWindow.onClose();
+		this.secRoleDialogWindow.onClose();
 	}
 
 	/**
@@ -297,7 +296,7 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private void doCancel() {
 		doResetInitValues();
 		doReadOnly();
-		btnCtrl.setInitEdit();
+		this.btnCtrl.setInitEdit();
 	}
 
 	/**
@@ -307,8 +306,8 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doWriteBeanToComponents(SecRole aRole) {
 
-		rolShortdescription.setValue(aRole.getRolShortdescription());
-		rolLongdescription.setValue(aRole.getRolLongdescription());
+		this.rolShortdescription.setValue(aRole.getRolShortdescription());
+		this.rolLongdescription.setValue(aRole.getRolLongdescription());
 
 	}
 
@@ -319,8 +318,8 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doWriteComponentsToBean(SecRole aRole) {
 
-		aRole.setRolShortdescription(rolShortdescription.getValue());
-		aRole.setRolLongdescription(rolLongdescription.getValue());
+		aRole.setRolShortdescription(this.rolShortdescription.getValue());
+		aRole.setRolLongdescription(this.rolLongdescription.getValue());
 
 	}
 
@@ -350,10 +349,10 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// set Readonly mode accordingly if the object is new or not.
 		if (aRole.isNew()) {
-			btnCtrl.setInitNew();
+			this.btnCtrl.setInitNew();
 			doEdit();
 		} else {
-			btnCtrl.setInitEdit();
+			this.btnCtrl.setInitEdit();
 			doReadOnly();
 		}
 
@@ -365,8 +364,8 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 			// during user action.
 			doStoreInitValues();
 
-			secRoleDialogWindow.doModal(); // open the dialog in modal mode
-		} catch (Exception e) {
+			this.secRoleDialogWindow.doModal(); // open the dialog in modal mode
+		} catch (final Exception e) {
 			Messagebox.show(e.toString());
 		}
 	}
@@ -379,24 +378,24 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * Set the properties of the fields, like maxLength.<br>
 	 */
 	private void doSetFieldProperties() {
-		rolShortdescription.setMaxlength(30);
-		rolLongdescription.setMaxlength(1000);
+		this.rolShortdescription.setMaxlength(30);
+		this.rolLongdescription.setMaxlength(1000);
 	}
 
 	/**
 	 * Stores the init values in mem vars. <br>
 	 */
 	private void doStoreInitValues() {
-		oldVar_rolShortdescription = rolShortdescription.getValue();
-		oldVar_rolLongdescription = rolLongdescription.getValue();
+		this.oldVar_rolShortdescription = this.rolShortdescription.getValue();
+		this.oldVar_rolLongdescription = this.rolLongdescription.getValue();
 	}
 
 	/**
 	 * Resets the init values from mem vars. <br>
 	 */
 	private void doResetInitValues() {
-		rolShortdescription.setValue(oldVar_rolShortdescription);
-		rolLongdescription.setValue(oldVar_rolLongdescription);
+		this.rolShortdescription.setValue(this.oldVar_rolShortdescription);
+		this.rolLongdescription.setValue(this.oldVar_rolLongdescription);
 	}
 
 	/**
@@ -408,10 +407,10 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private boolean isDataChanged() {
 		boolean changed = false;
 
-		if (oldVar_rolShortdescription != rolShortdescription.getValue()) {
+		if (this.oldVar_rolShortdescription != this.rolShortdescription.getValue()) {
 			changed = true;
 		}
-		if (oldVar_rolLongdescription != rolLongdescription.getValue()) {
+		if (this.oldVar_rolLongdescription != this.rolLongdescription.getValue()) {
 			changed = true;
 		}
 
@@ -425,7 +424,7 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		setValidationOn(true);
 
-		rolShortdescription.setConstraint("NO EMPTY");
+		this.rolShortdescription.setConstraint("NO EMPTY");
 	}
 
 	/**
@@ -435,7 +434,7 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		setValidationOn(false);
 
-		rolShortdescription.setConstraint("");
+		this.rolShortdescription.setConstraint("");
 	}
 
 	/**
@@ -443,10 +442,10 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doEdit() {
 
-		rolShortdescription.setReadonly(false);
-		rolLongdescription.setReadonly(false);
+		this.rolShortdescription.setReadonly(false);
+		this.rolLongdescription.setReadonly(false);
 
-		btnCtrl.setBtnStatus_Edit();
+		this.btnCtrl.setBtnStatus_Edit();
 
 		// remember the old vars
 		doStoreInitValues();
@@ -457,8 +456,8 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doReadOnly() {
 
-		rolShortdescription.setReadonly(true);
-		rolLongdescription.setReadonly(true);
+		this.rolShortdescription.setReadonly(true);
+		this.rolLongdescription.setReadonly(true);
 	}
 
 	/**
@@ -469,8 +468,8 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// temporarely disable the validation to allow the field's clearing
 		doRemoveValidation();
 
-		rolShortdescription.setValue("");
-		rolLongdescription.setValue("");
+		this.rolShortdescription.setValue("");
+		this.rolLongdescription.setValue("");
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -487,39 +486,44 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final SecRole aRole = getRole();
 
 		// Show a confirm box
-		String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> " + aRole.getRolShortdescription();
-		String title = Labels.getLabel("message.Deleting.Record");
+		final String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> "
+				+ aRole.getRolShortdescription();
+		final String title = Labels.getLabel("message.Deleting.Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
-			public void onEvent(Event evt) {
-				switch (((Integer) evt.getData()).intValue()) {
-				case MultiLineMessageBox.YES:
-					delete();
-				case MultiLineMessageBox.NO:
-					break; // 
+		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO,
+				MultiLineMessageBox.QUESTION, true, new EventListener() {
+					@Override
+					public void onEvent(Event evt) {
+						switch (((Integer) evt.getData()).intValue()) {
+						case MultiLineMessageBox.YES:
+							delete();
+						case MultiLineMessageBox.NO:
+							break; //
+						}
+					}
+
+					private void delete() {
+
+						// delete from database
+						getSecurityService().delete(aRole);
+
+						// now synchronize the listBox
+						final ListModelList lml = (ListModelList) SecRoleDialogCtrl.this.listBoxSecRoles.getListModel();
+
+						// Check if the object is new or updated
+						// -1 means that the obj is not in the list, so it's
+						// new..
+						if (lml.indexOf(aRole) == -1) {
+						} else {
+							lml.remove(lml.indexOf(aRole));
+						}
+
+						SecRoleDialogCtrl.this.secRoleDialogWindow.onClose(); // close
+																				// the
+																				// dialog
+					}
 				}
-			}
-
-			private void delete() {
-
-				// delete from database
-				getSecurityService().delete(aRole);
-
-				// now synchronize the listBox
-				ListModelList lml = (ListModelList) listBoxSecRoles.getListModel();
-
-				// Check if the object is new or updated
-				// -1 means that the obj is not in the list, so it's
-				// new..
-				if (lml.indexOf(aRole) == -1) {
-				} else {
-					lml.remove(lml.indexOf(aRole));
-				}
-
-				secRoleDialogWindow.onClose(); // close the dialog
-			}
-		}
 
 		) == MultiLineMessageBox.YES) {
 		}
@@ -539,7 +543,7 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doClear(); // clear all commponents
 		doEdit(); // edit mode
 
-		btnCtrl.setBtnStatus_New();
+		this.btnCtrl.setBtnStatus_New();
 
 		// remember the old vars
 		doStoreInitValues();
@@ -552,7 +556,7 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doSave() throws InterruptedException {
 
-		SecRole aRole = getRole();
+		final SecRole aRole = getRole();
 
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// force validation, if on, than execute by component.getValue()
@@ -567,9 +571,9 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// save it to database
 		try {
 			getSecurityService().saveOrUpdate(aRole);
-		} catch (DataAccessException e) {
-			String message = e.getMessage();
-			String title = Labels.getLabel("message.Error");
+		} catch (final DataAccessException e) {
+			final String message = e.getMessage();
+			final String title = Labels.getLabel("message.Error");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 
@@ -577,12 +581,12 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 			doResetInitValues();
 
 			doReadOnly();
-			btnCtrl.setBtnStatus_Save();
+			this.btnCtrl.setBtnStatus_Save();
 			return;
 		}
 
 		// now synchronize the listBox
-		ListModelList lml = (ListModelList) listBoxSecRoles.getListModel();
+		final ListModelList lml = (ListModelList) this.listBoxSecRoles.getListModel();
 
 		// Check if the object is new or updated
 		// -1 means that the obj is not in the list, so it's new.
@@ -593,7 +597,7 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		doReadOnly();
-		btnCtrl.setBtnStatus_Save();
+		this.btnCtrl.setBtnStatus_Save();
 
 		// init the old values vars new
 		doStoreInitValues();
@@ -604,7 +608,7 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
 	public SecRole getRole() {
-		return role;
+		return this.role;
 	}
 
 	public void setRole(SecRole role) {
@@ -616,11 +620,11 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public boolean isValidationOn() {
-		return validationOn;
+		return this.validationOn;
 	}
 
 	public SecurityService getSecurityService() {
-		return securityService;
+		return this.securityService;
 	}
 
 	public void setSecurityService(SecurityService securityService) {

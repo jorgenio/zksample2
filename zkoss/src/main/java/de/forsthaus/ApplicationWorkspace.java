@@ -40,7 +40,7 @@ public class ApplicationWorkspace implements Serializable {
 	private static ApplicationWorkspace instance = new ApplicationWorkspace();
 
 	private static final long serialVersionUID = -1397646202890802880L;
-	private transient final static Logger logger = Logger.getLogger(ApplicationWorkspace.class);
+	private final static Logger logger = Logger.getLogger(ApplicationWorkspace.class);
 
 	/**
 	 * Default Constructor, cannot invoked from outer this class. <br>

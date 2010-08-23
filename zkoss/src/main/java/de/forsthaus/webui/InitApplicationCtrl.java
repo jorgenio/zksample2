@@ -75,7 +75,6 @@ import de.forsthaus.backend.service.SysCountryCodeService;
 import de.forsthaus.backend.service.UserService;
 import de.forsthaus.example.RandomDataEngine;
 import de.forsthaus.statistic.FDStatistic;
-import de.forsthaus.statistic.Statistic;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.WindowBaseCtrl;
 
@@ -97,7 +96,7 @@ import de.forsthaus.webui.util.WindowBaseCtrl;
  */
 public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable {
 
-	private transient final static Logger logger = Logger.getLogger(InitApplicationCtrl.class);
+	private final static Logger logger = Logger.getLogger(InitApplicationCtrl.class);
 	private static final long serialVersionUID = 1L;
 
 	/*
@@ -145,15 +144,12 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	 */
 	public InitApplicationCtrl() {
 		super();
-
-		// logger.debug("super()");
-
 	}
 
 	public void onCreate$startWindow(Event event) throws Exception {
 		// logger.debug(event.toString());
 
-		doOnCreateCommon(startWindow); // do the autowire stuff
+		doOnCreateCommon(this.startWindow); // do the autowire stuff
 
 		createMainGrid();
 
@@ -173,72 +169,72 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	 */
 	private void createMainGrid() {
 
-		Div div = new Div();
-		div.setParent(bl_center);
+		final Div div = new Div();
+		div.setParent(this.bl_center);
 
-		Hr hr = new Hr();
+		final Hr hr = new Hr();
 		hr.setParent(div);
 
 		/*
 		 * Borderlayout around the grid for make it scrollable to see all table
 		 * records if the browser window are to small.
 		 */
-		Borderlayout bl = new Borderlayout();
+		final Borderlayout bl = new Borderlayout();
 		bl.setParent(div);
-		Center ct = new Center();
+		final Center ct = new Center();
 		ct.setAutoscroll(true);
 		ct.setStyle("background-color: #EBEBEB");
 		ct.setBorder("none");
 		ct.setFlex(true);
 		ct.setParent(bl);
-		Div divCt = new Div();
+		final Div divCt = new Div();
 		divCt.setParent(ct);
 
-		tableLayout = new Tablelayout();
-		tableLayout.setColumns(3);
-		tableLayout.setParent(divCt);
+		this.tableLayout = new Tablelayout();
+		this.tableLayout.setColumns(3);
+		this.tableLayout.setParent(divCt);
 
-		tableChildrenRecords = new Tablechildren();
-		tableChildrenRecords.setRowspan(1);
-		tableChildrenRecords.setWidth("250px");
-		tableChildrenRecords.setStyle("padding-left: 5px;");
-		tableChildrenRecords.setParent(tableLayout);
+		this.tableChildrenRecords = new Tablechildren();
+		this.tableChildrenRecords.setRowspan(1);
+		this.tableChildrenRecords.setWidth("250px");
+		this.tableChildrenRecords.setStyle("padding-left: 5px;");
+		this.tableChildrenRecords.setParent(this.tableLayout);
 
-		tableChildrenStatistic = new Tablechildren();
-		tableChildrenStatistic.setRowspan(1);
-		tableChildrenStatistic.setWidth("450px");
-		tableChildrenStatistic.setStyle("padding-left: 5px;");
-		tableChildrenStatistic.setParent(tableLayout);
+		this.tableChildrenStatistic = new Tablechildren();
+		this.tableChildrenStatistic.setRowspan(1);
+		this.tableChildrenStatistic.setWidth("450px");
+		this.tableChildrenStatistic.setStyle("padding-left: 5px;");
+		this.tableChildrenStatistic.setParent(this.tableLayout);
 
-		tableChildrenButtons = new Tablechildren();
-		tableChildrenButtons.setRowspan(1);
-		tableChildrenButtons.setWidth("240px");
-		tableChildrenButtons.setStyle("padding-left: 5px;");
-		tableChildrenButtons.setParent(tableLayout);
+		this.tableChildrenButtons = new Tablechildren();
+		this.tableChildrenButtons.setRowspan(1);
+		this.tableChildrenButtons.setWidth("240px");
+		this.tableChildrenButtons.setStyle("padding-left: 5px;");
+		this.tableChildrenButtons.setParent(this.tableLayout);
 
-		Panel pb = new Panel();
+		final Panel pb = new Panel();
 		// pb.setHeight("100%");
 		pb.setWidth("240px");
 		pb.setBorder("none");
 		pb.setStyle("align:left; color:red");
-		pb.setParent(tableChildrenButtons);
+		pb.setParent(this.tableChildrenButtons);
 
-		panelChildren_Buttons = new Panelchildren();
-		panelChildren_Buttons.setParent(pb);
+		this.panelChildren_Buttons = new Panelchildren();
+		this.panelChildren_Buttons.setParent(pb);
 
-		Separator sep = new Separator();
+		final Separator sep = new Separator();
 		sep.setParent(divCt);
-		Separator sep2 = new Separator();
+		final Separator sep2 = new Separator();
 		sep2.setParent(divCt);
 
-		Div divFooter = new Div();
+		final Div divFooter = new Div();
 		divFooter.setAlign("center");
-		divFooter.setParent(bl_south);
+		divFooter.setParent(this.bl_south);
 
-		Hr hr2 = new Hr();
+		final Hr hr2 = new Hr();
 		hr2.setParent(divFooter);
 
-		Label footerLabel = new Label();
+		final Label footerLabel = new Label();
 		footerLabel.setValue(" Help to prevent the global warming by writing cool software.");
 		footerLabel.setStyle("align:center; padding-top:0px; font-family:Verdana;  font-size: 0.6em; ");
 		footerLabel.setParent(divFooter);
@@ -249,54 +245,54 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	 */
 	private void countDemoData() {
 
-		Panel panel = new Panel();
+		final Panel panel = new Panel();
 		panel.setTitle("");
 		panel.setWidth("260px");
 		panel.setBorder("none");
 		panel.setStyle("align:left; color:red; ");
-		panel.setParent(tableChildrenRecords);
+		panel.setParent(this.tableChildrenRecords);
 
-		Panelchildren panelchildren = new Panelchildren();
+		final Panelchildren panelchildren = new Panelchildren();
 		panelchildren.setParent(panel);
 		panelchildren.setStyle("background-color: #EBEBEB;");
 
-		Groupbox gb = new Groupbox();
+		final Groupbox gb = new Groupbox();
 		gb.setMold("3d");
 		gb.setContentStyle("padding: 2px");
 		gb.setParent(panelchildren);
 
-		Caption caption = new Caption();
+		final Caption caption = new Caption();
 		caption.setImage("/images/icons/database_blue_16x16.gif");
 		caption.setLabel("Demo-Data in PostgreSQL v8.2.6");
 		caption.setStyle("color: #000000;font-weight:bold; text-align:left ");
 		caption.setParent(gb);
 
-		Grid grid = new Grid();
+		final Grid grid = new Grid();
 		grid.setWidth("100%");
 		// grid.setParent(panelchildren);
 		grid.setParent(gb);
 
-		Columns columns = new Columns();
+		final Columns columns = new Columns();
 		columns.setSizable(true);
 		columns.setParent(grid);
 
-		Column column1 = new Column();
+		final Column column1 = new Column();
 		column1.setWidth("65%");
 		column1.setLabel("Table");
 		column1.setParent(columns);
-		Column column2 = new Column();
+		final Column column2 = new Column();
 		column2.setWidth("35%");
 		column2.setLabel("records");
 		column2.setParent(columns);
 
-		Rows rows = new Rows();
+		final Rows rows = new Rows();
 		rows.setParent(grid);
 
 		/**
 		 * For performance boosting, we get now all the table recordCounts out
 		 * from ONE Service Call and get back the results in a map.
 		 */
-		Map<String, Object> map = getCommonService().getAllTablesRecordCounts();
+		final Map<String, Object> map = getCommonService().getAllTablesRecordCounts();
 
 		if (map.containsKey("Customer")) {
 			addNewRow(rows, "Customer", map.get("Customer"));
@@ -366,48 +362,48 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		 */
 		// Statistic stat = de.forsthaus.statistic.Statistic.getStatistic();
 		// new Statistic class since 20.08.2010
-		FDStatistic stat = de.forsthaus.statistic.FDStatistic.getStatistic();
+		final FDStatistic stat = de.forsthaus.statistic.FDStatistic.getStatistic();
 
-		Panel panel = new Panel();
+		final Panel panel = new Panel();
 		panel.setWidth("450px");
 		panel.setBorder("none");
 		panel.setStyle("align:left; color:red;");
-		panel.setParent(tableChildrenStatistic);
+		panel.setParent(this.tableChildrenStatistic);
 
-		Panelchildren panelchildren = new Panelchildren();
+		final Panelchildren panelchildren = new Panelchildren();
 		panelchildren.setParent(panel);
 		panelchildren.setStyle("background-color: #EBEBEB;");
 
-		Groupbox gb = new Groupbox();
+		final Groupbox gb = new Groupbox();
 		gb.setMold("3d");
 		gb.setContentStyle("padding: 2px");
 		gb.setParent(panelchildren);
 
-		Caption caption = new Caption();
+		final Caption caption = new Caption();
 		caption.setParent(gb);
 		caption.setImage("/images/icons/monitorView.gif");
 		caption.setLabel("Application Statistic");
 		caption.setStyle("color: #000000;font-weight:bold; text-align:left ");
 
-		Grid grid = new Grid();
+		final Grid grid = new Grid();
 		grid.setWidth("100%");
 		// grid.setParent(panelchildren);
 		grid.setParent(gb);
 
-		Columns columns = new Columns();
+		final Columns columns = new Columns();
 		columns.setSizable(true);
 		columns.setParent(grid);
 
-		Column column1 = new Column();
+		final Column column1 = new Column();
 		column1.setWidth("55%");
 		column1.setLabel("Subject");
 		column1.setParent(columns);
-		Column column2 = new Column();
+		final Column column2 = new Column();
 		column2.setWidth("45%");
 		column2.setLabel("value");
 		column2.setParent(columns);
 
-		Rows rows = new Rows();
+		final Rows rows = new Rows();
 		rows.setParent(grid);
 
 		addNewRow(rows, "Application Start-Time", String.valueOf(new Date(stat.getStartTime())));
@@ -427,10 +423,11 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		addNewRow(rows, "Count of total Updates since start", String.valueOf(stat.getTotalUpdateCount()));
 
 		// Get the free Memory of the JAVA VM
-		double value = ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) * 100.0) / Runtime.getRuntime().maxMemory();
+		final double value = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) * 100.0
+				/ Runtime.getRuntime().maxMemory();
 		addNewRow(rows, "current free memory on the JAVA VM", getRoundedDouble(value) + " MB", "red");
 		// Get the number of processors that are available for the JAVA VM
-		int countCPU = Runtime.getRuntime().availableProcessors();
+		final int countCPU = Runtime.getRuntime().availableProcessors();
 		addNewRow(rows, "available processors to the JAVA VM", countCPU, "red");
 	}
 
@@ -443,7 +440,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	private String getRoundedDouble(double d) {
 		String result = "";
 
-		DecimalFormat df = new DecimalFormat("0.00");
+		final DecimalFormat df = new DecimalFormat("0.00");
 		result = df.format(d);
 
 		return result;
@@ -455,94 +452,94 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	 */
 	private void createButtons() {
 
-		Panel panel = new Panel();
+		final Panel panel = new Panel();
 		// panel.setTitle("Demo Customers");
 		panel.setWidth("240px");
 		panel.setBorder("none");
 		panel.setStyle("align:left; color:red;");
-		panel.setParent(panelChildren_Buttons);
+		panel.setParent(this.panelChildren_Buttons);
 
-		Panelchildren panelchildren = new Panelchildren();
+		final Panelchildren panelchildren = new Panelchildren();
 		panelchildren.setParent(panel);
 		panelchildren.setStyle("background-color: #EBEBEB;");
 
-		Groupbox gb = new Groupbox();
+		final Groupbox gb = new Groupbox();
 		gb.setMold("3d");
 		gb.setContentStyle("padding: 2px");
 		gb.setParent(panelchildren);
 
-		Caption caption = new Caption();
+		final Caption caption = new Caption();
 		caption.setParent(gb);
 		caption.setImage("/images/icons/advice_16x16.gif");
 		caption.setLabel("Demo Customers");
 		caption.setStyle("color: #000000;font-weight:bold; text-align:left ");
 
-		Grid grid = new Grid();
+		final Grid grid = new Grid();
 		grid.setWidth("100%");
 		grid.setParent(gb);
 		// grid.setParent(panelchildren);
 
-		Columns columns = new Columns();
+		final Columns columns = new Columns();
 		columns.setSizable(true);
 		columns.setParent(grid);
 
-		Column column1 = new Column();
+		final Column column1 = new Column();
 		column1.setWidth("100%");
 		column1.setLabel("values are randomly created");
 		column1.setParent(columns);
 
-		Rows rows = new Rows();
+		final Rows rows = new Rows();
 		rows.setParent(grid);
 
-		Row row = new Row();
+		final Row row = new Row();
 		row.setParent(rows);
 
-		Vbox_Buttons = new Vbox();
-		Vbox_Buttons.setParent(panelchildren);
+		this.Vbox_Buttons = new Vbox();
+		this.Vbox_Buttons.setParent(panelchildren);
 
-		div_Buttons = new Div();
-		div_Buttons.setWidth("100%");
-		div_Buttons.setHeight("100%");
-		div_Buttons.setStyle("padding: 10px;");
-		div_Buttons.setParent(Vbox_Buttons);
+		this.div_Buttons = new Div();
+		this.div_Buttons.setWidth("100%");
+		this.div_Buttons.setHeight("100%");
+		this.div_Buttons.setStyle("padding: 10px;");
+		this.div_Buttons.setParent(this.Vbox_Buttons);
 
 		/* 100. Button */
-		Div divBtn1 = new Div();
+		final Div divBtn1 = new Div();
 		divBtn1.setStyle("align: center");
-		divBtn1.setParent(div_Buttons);
+		divBtn1.setParent(this.div_Buttons);
 
-		btn100 = new Button();
-		btn100.setId("btn100");
-		btn100.setLabel("insert 100");
-		btn100.setImage("/images/icons/import_16x16.gif");
-		btn100.setTooltiptext("Insert 100 randomly created customer records");
-		btn100.setParent(divBtn1);
+		this.btn100 = new Button();
+		this.btn100.setId("btn100");
+		this.btn100.setLabel("insert 100");
+		this.btn100.setImage("/images/icons/import_16x16.gif");
+		this.btn100.setTooltiptext("Insert 100 randomly created customer records");
+		this.btn100.setParent(divBtn1);
 
-		btn100.addEventListener("onClick", new OnClick100Eventlistener());
+		this.btn100.addEventListener("onClick", new OnClick100Eventlistener());
 
 		/* Separator */
-		createNewSeparator(div_Buttons, "horizontal", false, "5", "");
-		createNewSeparator(div_Buttons, "horizontal", false, "5", "");
+		createNewSeparator(this.div_Buttons, "horizontal", false, "5", "");
+		createNewSeparator(this.div_Buttons, "horizontal", false, "5", "");
 
 		/* 1.000 Button */
-		Div divBtn2 = new Div();
+		final Div divBtn2 = new Div();
 		divBtn2.setStyle("align: center;");
-		divBtn2.setParent(div_Buttons);
+		divBtn2.setParent(this.div_Buttons);
 
-		btn1000 = new Button();
-		btn1000.setId("btn1000");
-		btn1000.setLabel("insert 1.000");
-		btn1000.setImage("/images/icons/import_16x16.gif");
-		btn1000.setTooltiptext("Insert 1.000 randomly created customer records");
-		btn1000.setParent(divBtn2);
+		this.btn1000 = new Button();
+		this.btn1000.setId("btn1000");
+		this.btn1000.setLabel("insert 1.000");
+		this.btn1000.setImage("/images/icons/import_16x16.gif");
+		this.btn1000.setTooltiptext("Insert 1.000 randomly created customer records");
+		this.btn1000.setParent(divBtn2);
 
-		btn1000.addEventListener("onClick", new OnClick1000Eventlistener());
+		this.btn1000.addEventListener("onClick", new OnClick1000Eventlistener());
 
-		createNewSeparator(div_Buttons, "horizontal", false, "5", "");
+		createNewSeparator(this.div_Buttons, "horizontal", false, "5", "");
 
-		Vbox_Buttons.setParent(row);
+		this.Vbox_Buttons.setParent(row);
 
-		createNewSeparator(panelChildren_Buttons, "horizontal", false, "5", "#EBEBEB");
+		createNewSeparator(this.panelChildren_Buttons, "horizontal", false, "5", "#EBEBEB");
 
 	}
 
@@ -552,39 +549,39 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	 */
 	private void showUsersOnlineChart() {
 
-		Panel panel = new Panel();
+		final Panel panel = new Panel();
 		// panel.setTitle("Users online");
 		panel.setWidth("240px");
 		panel.setHeight("260px");
 		panel.setBorder("none");
-		panel.setParent(panelChildren_Buttons);
+		panel.setParent(this.panelChildren_Buttons);
 
-		Panelchildren panelchildren = new Panelchildren();
+		final Panelchildren panelchildren = new Panelchildren();
 		panelchildren.setParent(panel);
 		panelchildren.setStyle("background-color: #EBEBEB;");
 
-		Groupbox gb = new Groupbox();
+		final Groupbox gb = new Groupbox();
 		gb.setMold("3d");
 		gb.setContentStyle("padding: 2px");
 		gb.setParent(panelchildren);
 
-		Caption caption = new Caption();
+		final Caption caption = new Caption();
 		caption.setParent(gb);
 		caption.setImage("/images/icons/console_view.gif");
 		caption.setLabel("Users online");
 		caption.setStyle("color: #000000;font-weight:bold; text-align:left ");
 
-		Div div = new Div();
+		final Div div = new Div();
 		div.setWidth("100%");
 		div.setHeight("100%");
 		div.setParent(gb);
 
 		// Chart Dial
-		Random random = new Random();
+		final Random random = new Random();
 
-		int val = random.nextInt(100);
-		DialModel dialmodel = new DialModel();
-		DialModelScale scale = dialmodel.newScale(0.0, 500.0, -120.0, -300.0, 100.0, 4);// scale's
+		final int val = random.nextInt(100);
+		final DialModel dialmodel = new DialModel();
+		final DialModelScale scale = dialmodel.newScale(0.0, 500.0, -120.0, -300.0, 100.0, 4);// scale's
 		// configuration
 		// data
 		scale.setText("Users");
@@ -592,7 +589,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		scale.newRange(360, 450, "#FFC426", 0.83, 0.89);
 		scale.setValue(val);
 
-		Chart chart = new Chart();
+		final Chart chart = new Chart();
 		chart.setType("dial");
 		chart.setWidth("228px");
 		chart.setHeight("220px");
@@ -614,9 +611,10 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	 * @param bkgrColor
 	 * @return
 	 */
-	private Separator createNewSeparator(Component parent, String orientation, boolean isBarVisible, String spacing, String bkgrColor) {
+	private Separator createNewSeparator(Component parent, String orientation, boolean isBarVisible, String spacing,
+			String bkgrColor) {
 
-		Separator sep = new Separator();
+		final Separator sep = new Separator();
 
 		sep.setOrient(orientation);
 		sep.setBar(isBarVisible);
@@ -700,7 +698,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 			// we create the records in an Echo-event to show a message to the
 			// user for this long running operation.
 			Clients.showBusy(Labels.getLabel("message.Information.LongOperationIsRunning"), true);
-			Events.echoEvent("onCreate1000Customers", startWindow, null);
+			Events.echoEvent("onCreate1000Customers", InitApplicationCtrl.this.startWindow, null);
 		}
 	}
 
@@ -728,7 +726,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 			// we create the records in an Echo-event to show a message to the
 			// user for this long running operation.
 			Clients.showBusy(Labels.getLabel("message.Information.LongOperationIsRunning"), true);
-			Events.echoEvent("onCreate100Customers", startWindow, null);
+			Events.echoEvent("onCreate100Customers", InitApplicationCtrl.this.startWindow, null);
 		}
 	}
 
@@ -773,22 +771,22 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 			// close the echo event bussy message
 			Clients.showBusy("", false); // close the message
 
-			String message = Labels.getLabel("Demo.not_more_than_80000_records");
-			String title = Labels.getLabel("message.Information");
+			final String message = Labels.getLabel("Demo.not_more_than_80000_records");
+			final String title = Labels.getLabel("message.Information");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 
 			return;
 		}
 
-		Branche branche = getBrancheService().getBrancheById(1000);
+		final Branche branche = getBrancheService().getBrancheById(1000);
 
-		int countRecords = newRecords;
+		final int countRecords = newRecords;
 
-		RandomDataEngine randomDataEngine = new RandomDataEngine();
+		final RandomDataEngine randomDataEngine = new RandomDataEngine();
 
 		for (int j = 0; j < countRecords; j++) {
-			Customer customer = getCustomerService().getNewCustomer();
+			final Customer customer = getCustomerService().getNewCustomer();
 
 			customer.setKunName1(randomDataEngine.getRandomManFirstname());
 			customer.setKunName2(randomDataEngine.getRandomLastname());
@@ -808,7 +806,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		// set the value of the records to the label. The Label ID is created
 		// dynamically in the method 'addNewRow()'
-		Label label = (Label) startWindow.getFellowIfAny("label_RecordCount_Customer");
+		final Label label = (Label) this.startWindow.getFellowIfAny("label_RecordCount_Customer");
 		label.setValue(String.valueOf(getTotalCountRecordsForCustomer()));
 	}
 
@@ -821,11 +819,11 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	}
 
 	public CustomerService getCustomerService() {
-		if (customerService == null) {
-			customerService = (CustomerService) SpringUtil.getBean("customerService");
-			setCustomerService(customerService);
+		if (this.customerService == null) {
+			this.customerService = (CustomerService) SpringUtil.getBean("customerService");
+			setCustomerService(this.customerService);
 		}
-		return customerService;
+		return this.customerService;
 	}
 
 	public void setIpToCountryService(IpToCountryService ipToCountryService) {
@@ -833,11 +831,11 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	}
 
 	public IpToCountryService getIpToCountryService() {
-		if (ipToCountryService == null) {
-			ipToCountryService = (IpToCountryService) SpringUtil.getBean("ipToCountryService");
-			setIpToCountryService(ipToCountryService);
+		if (this.ipToCountryService == null) {
+			this.ipToCountryService = (IpToCountryService) SpringUtil.getBean("ipToCountryService");
+			setIpToCountryService(this.ipToCountryService);
 		}
-		return ipToCountryService;
+		return this.ipToCountryService;
 	}
 
 	public void setBrancheService(BrancheService brancheService) {
@@ -845,11 +843,11 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	}
 
 	public BrancheService getBrancheService() {
-		if (brancheService == null) {
-			brancheService = (BrancheService) SpringUtil.getBean("brancheService");
-			setBrancheService(brancheService);
+		if (this.brancheService == null) {
+			this.brancheService = (BrancheService) SpringUtil.getBean("brancheService");
+			setBrancheService(this.brancheService);
 		}
-		return brancheService;
+		return this.brancheService;
 	}
 
 	public void setOfficeService(OfficeService officeService) {
@@ -857,19 +855,19 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	}
 
 	public OfficeService getOfficeService() {
-		if (officeService == null) {
-			officeService = (OfficeService) SpringUtil.getBean("officeService");
-			setOfficeService(officeService);
+		if (this.officeService == null) {
+			this.officeService = (OfficeService) SpringUtil.getBean("officeService");
+			setOfficeService(this.officeService);
 		}
-		return officeService;
+		return this.officeService;
 	}
 
 	public ArticleService getArticleService() {
-		if (articleService == null) {
-			articleService = (ArticleService) SpringUtil.getBean("articleService");
-			setArticleService(articleService);
+		if (this.articleService == null) {
+			this.articleService = (ArticleService) SpringUtil.getBean("articleService");
+			setArticleService(this.articleService);
 		}
-		return articleService;
+		return this.articleService;
 	}
 
 	public void setArticleService(ArticleService articleService) {
@@ -877,11 +875,11 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	}
 
 	public OrderService getOrderService() {
-		if (orderService == null) {
-			orderService = (OrderService) SpringUtil.getBean("orderService");
-			setOrderService(orderService);
+		if (this.orderService == null) {
+			this.orderService = (OrderService) SpringUtil.getBean("orderService");
+			setOrderService(this.orderService);
 		}
-		return orderService;
+		return this.orderService;
 	}
 
 	public void setOrderService(OrderService orderService) {
@@ -889,11 +887,11 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	}
 
 	public GuestBookService getGuestBookService() {
-		if (guestBookService == null) {
-			guestBookService = (GuestBookService) SpringUtil.getBean("guestBookService");
-			setGuestBookService(guestBookService);
+		if (this.guestBookService == null) {
+			this.guestBookService = (GuestBookService) SpringUtil.getBean("guestBookService");
+			setGuestBookService(this.guestBookService);
 		}
-		return guestBookService;
+		return this.guestBookService;
 	}
 
 	public void setGuestBookService(GuestBookService guestBookService) {
@@ -901,11 +899,11 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	}
 
 	public SecurityService getSecurityService() {
-		if (securityService == null) {
-			securityService = (SecurityService) SpringUtil.getBean("securityService");
-			setSecurityService(securityService);
+		if (this.securityService == null) {
+			this.securityService = (SecurityService) SpringUtil.getBean("securityService");
+			setSecurityService(this.securityService);
 		}
-		return securityService;
+		return this.securityService;
 	}
 
 	public void setSecurityService(SecurityService securityService) {
@@ -913,11 +911,11 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	}
 
 	public UserService getUserService() {
-		if (userService == null) {
-			userService = (UserService) SpringUtil.getBean("userService");
-			setUserService(userService);
+		if (this.userService == null) {
+			this.userService = (UserService) SpringUtil.getBean("userService");
+			setUserService(this.userService);
 		}
-		return userService;
+		return this.userService;
 	}
 
 	public void setUserService(UserService userService) {
@@ -925,11 +923,11 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	}
 
 	public LoginLoggingService getLoginLoggingService() {
-		if (loginLoggingService == null) {
-			loginLoggingService = (LoginLoggingService) SpringUtil.getBean("loginLoggingService");
-			setLoginLoggingService(loginLoggingService);
+		if (this.loginLoggingService == null) {
+			this.loginLoggingService = (LoginLoggingService) SpringUtil.getBean("loginLoggingService");
+			setLoginLoggingService(this.loginLoggingService);
 		}
-		return loginLoggingService;
+		return this.loginLoggingService;
 	}
 
 	public void setLoginLoggingService(LoginLoggingService loginLoggingService) {
@@ -937,11 +935,11 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	}
 
 	public SysCountryCodeService getSysCountryCodeService() {
-		if (sysCountryCodeService == null) {
-			sysCountryCodeService = (SysCountryCodeService) SpringUtil.getBean("sysCountryCodeService");
-			setSysCountryCodeService(sysCountryCodeService);
+		if (this.sysCountryCodeService == null) {
+			this.sysCountryCodeService = (SysCountryCodeService) SpringUtil.getBean("sysCountryCodeService");
+			setSysCountryCodeService(this.sysCountryCodeService);
 		}
-		return sysCountryCodeService;
+		return this.sysCountryCodeService;
 	}
 
 	public void setSysCountryCodeService(SysCountryCodeService sysCountryCodeService) {
@@ -953,11 +951,11 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	}
 
 	public CommonService getCommonService() {
-		if (commonService == null) {
-			commonService = (CommonService) SpringUtil.getBean("commonService");
-			setCommonService(commonService);
+		if (this.commonService == null) {
+			this.commonService = (CommonService) SpringUtil.getBean("commonService");
+			setCommonService(this.commonService);
 		}
-		return commonService;
+		return this.commonService;
 	}
 
 }

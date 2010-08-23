@@ -38,16 +38,12 @@ import de.forsthaus.backend.model.Customer;
 public class OrderSearchCustomerListModelItemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1925499383404057064L;
-	private transient static final Logger logger = Logger.getLogger(OrderSearchCustomerListModelItemRenderer.class);
+	private static final Logger logger = Logger.getLogger(OrderSearchCustomerListModelItemRenderer.class);
 
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		Customer customer = (Customer) data;
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + customer.getKunMatchcode() + ", " + customer.getKunOrt());
-		}
+		final Customer customer = (Customer) data;
 
 		Listcell lc = new Listcell(customer.getKunNr());
 		lc.setParent(item);

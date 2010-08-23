@@ -61,7 +61,8 @@ import org.zkoss.zul.Window;
  * call in java to actualize a columns label:
  * 
  * <pre>
- * EventQueues.lookup(&quot;userNameEventQueue&quot;, EventQueues.DESKTOP, true).publish(new Event(&quot;onChangeSelectedObject&quot;, null, &quot;new Value&quot;));
+ * EventQueues.lookup(&quot;userNameEventQueue&quot;, EventQueues.DESKTOP, true).publish(
+ * 		new Event(&quot;onChangeSelectedObject&quot;, null, &quot;new Value&quot;));
  * </pre>
  * 
  * Spring bean declaration:
@@ -81,7 +82,7 @@ import org.zkoss.zul.Window;
 public class UserBarCtrl extends GenericForwardComposer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient final static Logger logger = Logger.getLogger(UserBarCtrl.class);
+	private final static Logger logger = Logger.getLogger(UserBarCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -98,9 +99,9 @@ public class UserBarCtrl extends GenericForwardComposer implements Serializable 
 	private Label officeLabel;
 
 	// Localized labels for the columns
-	private String _UserLabel = Labels.getLabel("common.User") + ": ";
-	private String _TenantIdLabel = Labels.getLabel("common.Tenant.ID") + ": ";
-	private String _OfficeIdLabel = Labels.getLabel("common.Office.ID") + ": ";
+	private final String _UserLabel = Labels.getLabel("common.User") + ": ";
+	private final String _TenantIdLabel = Labels.getLabel("common.Tenant.ID") + ": ";
+	private final String _OfficeIdLabel = Labels.getLabel("common.Office.ID") + ": ";
 
 	// Used Labels
 	private Label userLabelText;
@@ -116,10 +117,6 @@ public class UserBarCtrl extends GenericForwardComposer implements Serializable 
 	 */
 	public UserBarCtrl() {
 		super();
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
 	}
 
 	@Override
@@ -128,8 +125,9 @@ public class UserBarCtrl extends GenericForwardComposer implements Serializable 
 
 		// Listener for user
 		EventQueues.lookup("userNameEventQueue", EventQueues.DESKTOP, true).subscribe(new EventListener() {
+			@Override
 			public void onEvent(Event event) throws Exception {
-				String msg = (String) event.getData();
+				final String msg = (String) event.getData();
 				set_UserText(msg);
 				doShowLabel();
 			}
@@ -137,8 +135,9 @@ public class UserBarCtrl extends GenericForwardComposer implements Serializable 
 
 		// Listener for TenantId
 		EventQueues.lookup("tenantIdEventQueue", EventQueues.DESKTOP, true).subscribe(new EventListener() {
+			@Override
 			public void onEvent(Event event) throws Exception {
-				String msg = (String) event.getData();
+				final String msg = (String) event.getData();
 				set_TenantIdText(msg);
 				doShowLabel();
 			}
@@ -146,8 +145,9 @@ public class UserBarCtrl extends GenericForwardComposer implements Serializable 
 
 		// Listener for OfficeId
 		EventQueues.lookup("officeIdEventQueue", EventQueues.DESKTOP, true).subscribe(new EventListener() {
+			@Override
 			public void onEvent(Event event) throws Exception {
-				String msg = (String) event.getData();
+				final String msg = (String) event.getData();
 				set_OfficeIdText(msg);
 				doShowLabel();
 			}
@@ -162,31 +162,31 @@ public class UserBarCtrl extends GenericForwardComposer implements Serializable 
 	 */
 	public void onCreate$winUserBar(Event event) {
 
-		winUserBar.setBorder("none");
+		this.winUserBar.setBorder("none");
 
-		Hbox hbox = new Hbox();
-		hbox.setParent(winUserBar);
+		final Hbox hbox = new Hbox();
+		hbox.setParent(this.winUserBar);
 
-		userLabel = new Label();
-		userLabel.setStyle("padding-right: 5px; text-align: right;");
-		userLabel.setParent(hbox);
-		userLabelText = new Label();
-		userLabelText.setStyle("padding-right: 5px; text-align: right; color: blue;");
-		userLabelText.setParent(hbox);
+		this.userLabel = new Label();
+		this.userLabel.setStyle("padding-right: 5px; text-align: right;");
+		this.userLabel.setParent(hbox);
+		this.userLabelText = new Label();
+		this.userLabelText.setStyle("padding-right: 5px; text-align: right; color: blue;");
+		this.userLabelText.setParent(hbox);
 
-		tenantLabel = new Label();
-		tenantLabel.setStyle("padding-right: 5px; text-align: right;");
-		tenantLabel.setParent(hbox);
-		tenantLabelText = new Label();
-		tenantLabelText.setStyle("padding-right: 5px; text-align: right; color: blue;");
-		tenantLabelText.setParent(hbox);
+		this.tenantLabel = new Label();
+		this.tenantLabel.setStyle("padding-right: 5px; text-align: right;");
+		this.tenantLabel.setParent(hbox);
+		this.tenantLabelText = new Label();
+		this.tenantLabelText.setStyle("padding-right: 5px; text-align: right; color: blue;");
+		this.tenantLabelText.setParent(hbox);
 
-		officeLabel = new Label();
-		officeLabel.setStyle("padding-right: 5px; text-align: right;");
-		officeLabel.setParent(hbox);
-		officeLabelText = new Label();
-		officeLabelText.setStyle("padding-right: 5px; text-align: right; color: blue;");
-		officeLabelText.setParent(hbox);
+		this.officeLabel = new Label();
+		this.officeLabel.setStyle("padding-right: 5px; text-align: right;");
+		this.officeLabel.setParent(hbox);
+		this.officeLabelText = new Label();
+		this.officeLabelText.setStyle("padding-right: 5px; text-align: right; color: blue;");
+		this.officeLabelText.setParent(hbox);
 	}
 
 	/**
@@ -194,14 +194,14 @@ public class UserBarCtrl extends GenericForwardComposer implements Serializable 
 	 */
 	private void doShowLabel() {
 
-		userLabel.setValue(_UserLabel);
-		userLabelText.setValue(get_UserText());
+		this.userLabel.setValue(this._UserLabel);
+		this.userLabelText.setValue(get_UserText());
 
-		tenantLabel.setValue(" / " + _TenantIdLabel);
-		tenantLabelText.setValue(get_TenantIdText());
+		this.tenantLabel.setValue(" / " + this._TenantIdLabel);
+		this.tenantLabelText.setValue(get_TenantIdText());
 
-		officeLabel.setValue(" / " + _OfficeIdLabel);
-		officeLabelText.setValue(get_OfficeIdText());
+		this.officeLabel.setValue(" / " + this._OfficeIdLabel);
+		this.officeLabelText.setValue(get_OfficeIdText());
 
 	}
 
@@ -214,7 +214,7 @@ public class UserBarCtrl extends GenericForwardComposer implements Serializable 
 	}
 
 	public String get_UserText() {
-		return _UserText;
+		return this._UserText;
 	}
 
 	public void set_TenantIdText(String _TenantIdText) {
@@ -222,7 +222,7 @@ public class UserBarCtrl extends GenericForwardComposer implements Serializable 
 	}
 
 	public String get_TenantIdText() {
-		return _TenantIdText;
+		return this._TenantIdText;
 	}
 
 	public void set_OfficeIdText(String _OfficeIdText) {
@@ -230,7 +230,7 @@ public class UserBarCtrl extends GenericForwardComposer implements Serializable 
 	}
 
 	public String get_OfficeIdText() {
-		return _OfficeIdText;
+		return this._OfficeIdText;
 	}
 
 }

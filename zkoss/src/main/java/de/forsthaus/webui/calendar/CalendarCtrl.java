@@ -39,7 +39,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
 public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(CalendarCtrl.class);
+	private static final Logger logger = Logger.getLogger(CalendarCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -61,8 +61,6 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public CalendarCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	@Override
@@ -76,7 +74,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		 * managing more than one zul-file in one page. Otherwise it would be
 		 * overridden and can ends in curious error messages.
 		 */
-		self.setAttribute("controller", this, false);
+		this.self.setAttribute("controller", this, false);
 
 		init();
 	}
@@ -92,8 +90,6 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowCalendar(Event event) throws Exception {
-		// logger.debug(event.toString());
-
 		dofillModel();
 
 		doFitSize();
@@ -102,12 +98,12 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 
 	public void init() {
 		// cal.addTimeZone("Mexico", "GMT-6");
-		cal.addTimeZone("Germany", "GMT+1");
-		cal.setMold("default");
-		cal.setFirstDayOfWeek("sunday");
-		cal.setDays(7);
-		cal.setCurrentDate(new Date());
-		cal.setReadonly(true);
+		this.cal.addTimeZone("Germany", "GMT+1");
+		this.cal.setMold("default");
+		this.cal.setFirstDayOfWeek("sunday");
+		this.cal.setDays(7);
+		this.cal.setCurrentDate(new Date());
+		this.cal.setReadonly(true);
 	}
 
 	/**
@@ -148,7 +144,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_Previous(Event event) throws InterruptedException {
-		cal.previousPage();
+		this.cal.previousPage();
 	}
 
 	/**
@@ -158,7 +154,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_Next(Event event) throws InterruptedException {
-		cal.previousPage();
+		this.cal.previousPage();
 	}
 
 	/**
@@ -168,7 +164,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_Show1Day(Event event) throws InterruptedException {
-		cal.setDays(1);
+		this.cal.setDays(1);
 	}
 
 	/**
@@ -178,8 +174,8 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_Show5Days(Event event) throws InterruptedException {
-		cal.setFirstDayOfWeek("SUNDAY");
-		cal.setDays(5);
+		this.cal.setFirstDayOfWeek("SUNDAY");
+		this.cal.setDays(5);
 	}
 
 	/**
@@ -189,8 +185,8 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_ShowWeek(Event event) throws InterruptedException {
-		cal.setFirstDayOfWeek("SUNDAY");
-		cal.setDays(7);
+		this.cal.setFirstDayOfWeek("SUNDAY");
+		this.cal.setDays(7);
 	}
 
 	/**
@@ -200,7 +196,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_ShowMonth(Event event) throws InterruptedException {
-		cal.setMold("month");
+		this.cal.setMold("month");
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -209,9 +205,9 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 
 	public void dofillModel() throws ParseException {
 
-		List dateTime = new LinkedList();
-		Calendar calendar = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		final List dateTime = new LinkedList();
+		final Calendar calendar = Calendar.getInstance();
+		final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
@@ -222,15 +218,15 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 
 		}
 		// prepare model data
-		SimpleDateFormat dataSDF = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-		Date today = new Date();
+		final SimpleDateFormat dataSDF = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		final Date today = new Date();
 		int mod = today.getMonth() + 1;
-		int year = today.getYear() + 1900;
-		String date2 = mod > 9 ? year + "/" + mod + "" : year + "/" + "0" + mod;
-		String date1 = --mod > 9 ? year + "/" + mod + "" : year + "/" + "0" + mod;
+		final int year = today.getYear() + 1900;
+		final String date2 = mod > 9 ? year + "/" + mod + "" : year + "/" + "0" + mod;
+		final String date1 = --mod > 9 ? year + "/" + mod + "" : year + "/" + "0" + mod;
 		++mod;
-		String date3 = ++mod > 9 ? year + "/" + mod + "" : year + "/" + "0" + mod;
-		String[][] evts = new String[][] {
+		final String date3 = ++mod > 9 ? year + "/" + mod + "" : year + "/" + "0" + mod;
+		final String[][] evts = new String[][] {
 				// Red Events
 				new String[] { date1 + "/28 15:00", date1 + "/30 16:30", "#A32929", "#D96666", "Red events: 1" },
 				new String[] { date1 + "/04 13:00", date1 + "/07 15:00", "#A32929", "#D96666", "Red events: 2" },
@@ -262,9 +258,9 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 				new String[] { date2 + "/23 00:00", date2 + "/25 16:30", "#0D7813", "#4CB052", "Green events: 4" },
 				new String[] { date3 + "/01 08:30", date3 + "/01 19:30", "#0D7813", "#4CB052", "Green events: 5" } };
 		// fill the events' data
-		SimpleCalendarModel cm = new SimpleCalendarModel();
+		final SimpleCalendarModel cm = new SimpleCalendarModel();
 		for (int i = 0; i < evts.length; i++) {
-			SimpleCalendarEvent sce = new SimpleCalendarEvent();
+			final SimpleCalendarEvent sce = new SimpleCalendarEvent();
 			sce.setBeginDate(dataSDF.parse(evts[i][0]));
 			sce.setEndDate(dataSDF.parse(evts[i][1]));
 			sce.setHeaderColor(evts[i][2]);
@@ -307,11 +303,11 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doFitSize() {
 		// normally 0 ! Or we have a i.e. a toolBar on top of the listBox.
-		int specialSize = 0;
-		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		int maxListBoxHeight = (height - specialSize - 103);
+		final int specialSize = 0;
+		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		final int maxListBoxHeight = height - specialSize - 103;
 		// setCountRows((int) Math.round((maxListBoxHeight) / 17.7));
-		borderLayout_calendar.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		this.borderLayout_calendar.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		// cals.invalidate();
 	}
@@ -325,7 +321,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public SimpleCalendarModel getCm() {
-		return cm;
+		return this.cm;
 	}
 
 }

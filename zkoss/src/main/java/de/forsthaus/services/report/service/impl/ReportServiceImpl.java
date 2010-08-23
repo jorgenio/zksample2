@@ -35,6 +35,9 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+
+import org.apache.log4j.Logger;
+
 import de.forsthaus.backend.dao.BrancheDAO;
 import de.forsthaus.backend.dao.CustomerDAO;
 import de.forsthaus.backend.dao.OfficeDAO;
@@ -66,12 +69,12 @@ public class ReportServiceImpl implements ReportService {
 	public JRDataSource getBeanCollectionByAuftrag(Order anOrder) {
 
 		// init all needed lists
-		ArrayList<Customer> customerList = new ArrayList<Customer>();
-		Set<Orderposition> orderpositionsSet = new HashSet<Orderposition>();
-		Set<Order> orderSet = new HashSet<Order>();
+		final ArrayList<Customer> customerList = new ArrayList<Customer>();
+		final Set<Orderposition> orderpositionsSet = new HashSet<Orderposition>();
+		final Set<Order> orderSet = new HashSet<Order>();
 
 		// get the customer for this order
-		Customer customer = getOrderService().getCustomerForOrder(anOrder);
+		final Customer customer = getOrderService().getCustomerForOrder(anOrder);
 
 		/* fill the orderPositionList */
 		orderpositionsSet.addAll(getOrderService().getOrderpositionsByOrder(anOrder));
@@ -84,7 +87,7 @@ public class ReportServiceImpl implements ReportService {
 		customer.setOrders(orderSet);
 		customerList.add(customer);
 
-		return new JRBeanCollectionDataSource((java.util.Collection<Customer>) customerList);
+		return new JRBeanCollectionDataSource(customerList);
 	}
 
 	/*
@@ -99,38 +102,41 @@ public class ReportServiceImpl implements ReportService {
 
 		try {
 
-			InputStream inputStream = getClass().getResourceAsStream("/de/forsthaus/webui/reports/AuftragDetailsPojo_Report.jrxml");
+			final InputStream inputStream = getClass().getResourceAsStream(
+					"/de/forsthaus/webui/reports/AuftragDetailsPojo_Report.jrxml");
 
 			/* Liste mit Daten füllen */
-			List<Orderposition> result = getOrderService().getOrderpositionsByOrder(auftrag);
+			final List<Orderposition> result = getOrderService().getOrderpositionsByOrder(auftrag);
 
 			/* DataSource mit der Liste erstellen */
-			JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(result);
+			final JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(result);
 
-			JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
-			JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+			final JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
+			final JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, repParams, datasource);
+			final JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, repParams, datasource);
 			JasperViewer.viewReport(jasperPrint, false);
-		} catch (JRException ex) {
-			String connectMsg = "JasperReports: Could not create the report " + ex.getMessage() + " " + ex.getLocalizedMessage();
-			System.out.println(connectMsg);
-		} catch (Exception ex) {
-			String connectMsg = "Could not create the report " + ex.getMessage() + " " + ex.getLocalizedMessage();
-			System.out.println(connectMsg);
+		} catch (final JRException ex) {
+			final String connectMsg = "JasperReports: Could not create the report " + ex.getMessage() + " "
+					+ ex.getLocalizedMessage();
+			Logger.getLogger(getClass()).error(connectMsg, ex);
+		} catch (final Exception ex) {
+			final String connectMsg = "Could not create the report " + ex.getMessage() + " " + ex.getLocalizedMessage();
+			Logger.getLogger(getClass()).error(connectMsg, ex);
 		}
 	}
 
 	@Override
 	public void compileReport(String aReportPathName) {
 		try {
-			InputStream inputStream = getClass().getResourceAsStream(aReportPathName);
-			JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
-			JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+			final InputStream inputStream = getClass().getResourceAsStream(aReportPathName);
+			final JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
+			final JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
-		} catch (Exception ex) {
-			String connectMsg = "JasperReports: Could not create the report " + ex.getMessage() + " " + ex.getLocalizedMessage();
-			System.out.println(connectMsg);
+		} catch (final Exception ex) {
+			final String connectMsg = "JasperReports: Could not create the report " + ex.getMessage() + " "
+					+ ex.getLocalizedMessage();
+			Logger.getLogger(getClass()).error(connectMsg, ex);
 		}
 
 	}
@@ -140,7 +146,7 @@ public class ReportServiceImpl implements ReportService {
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
 	public BrancheDAO getBrancheDAO() {
-		return brancheDAO;
+		return this.brancheDAO;
 	}
 
 	public void setBrancheDAO(BrancheDAO brancheDAO) {
@@ -152,7 +158,7 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	public CustomerDAO getCustomerDAO() {
-		return customerDAO;
+		return this.customerDAO;
 	}
 
 	public void setOfficeDAO(OfficeDAO officeDAO) {
@@ -160,7 +166,7 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	public OfficeDAO getOfficeDAO() {
-		return officeDAO;
+		return this.officeDAO;
 	}
 
 	public void setOrderDAO(OrderDAO orderDAO) {
@@ -168,7 +174,7 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	public OrderDAO getOrderDAO() {
-		return orderDAO;
+		return this.orderDAO;
 	}
 
 	public void setOrderpositionDAO(OrderpositionDAO orderpositionDAO) {
@@ -176,7 +182,7 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	public OrderpositionDAO getOrderpositionDAO() {
-		return orderpositionDAO;
+		return this.orderpositionDAO;
 	}
 
 	public void setOrderService(OrderService orderService) {
@@ -184,7 +190,7 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	public OrderService getOrderService() {
-		return orderService;
+		return this.orderService;
 	}
 
 }

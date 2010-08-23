@@ -56,7 +56,7 @@ import de.forsthaus.webui.util.GFCBaseCtrl;
 public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -8352659530536077973L;
-	private transient static final Logger logger = Logger.getLogger(OfficeDetailCtrl.class);
+	private static final Logger logger = Logger.getLogger(OfficeDetailCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -88,8 +88,6 @@ public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public OfficeDetailCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	@Override
@@ -103,15 +101,15 @@ public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 		 * managing more than one zul-file in one page. Otherwise it would be
 		 * overridden and can ends in curious error messages.
 		 */
-		self.setAttribute("controller", this, false);
+		this.self.setAttribute("controller", this, false);
 
 		/**
 		 * 1. Get the overhanded MainController.<br>
 		 * 2. Set this controller in the MainController.<br>
 		 * 3. Check if a 'selectedObject' exists yet in the MainController.<br>
 		 */
-		if (arg.containsKey("ModuleMainController")) {
-			setOfficeMainCtrl((OfficeMainCtrl) arg.get("ModuleMainController"));
+		if (this.arg.containsKey("ModuleMainController")) {
+			setOfficeMainCtrl((OfficeMainCtrl) this.arg.get("ModuleMainController"));
 
 			// SET THIS CONTROLLER TO THE MainController
 			getOfficeMainCtrl().setOfficeDetailCtrl(this);
@@ -140,11 +138,9 @@ public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowOfficeDetail(Event event) throws Exception {
-		logger.debug(event.toString());
+		this.binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 
-		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
-
-		binder.loadAll();
+		this.binder.loadAll();
 
 		doFitSize(event);
 	}
@@ -165,11 +161,11 @@ public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 * filled by onClientInfo() in the indexCtroller.
 	 */
 	public void doFitSize(Event event) {
-		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		int maxListBoxHeight = (height - 138);
-		borderlayout_OfficeDetail.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		final int maxListBoxHeight = height - 138;
+		this.borderlayout_OfficeDetail.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
-		windowOfficeDetail.invalidate();
+		this.windowOfficeDetail.invalidate();
 	}
 
 	/**
@@ -181,11 +177,11 @@ public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param b
 	 */
 	public void doReadOnlyMode(boolean b) {
-		txtb_filNr.setReadonly(b);
-		txtb_filBezeichnung.setReadonly(b);
-		txtb_filName1.setReadonly(b);
-		txtb_filName2.setReadonly(b);
-		txtb_filOrt.setReadonly(b);
+		this.txtb_filNr.setReadonly(b);
+		this.txtb_filBezeichnung.setReadonly(b);
+		this.txtb_filName1.setReadonly(b);
+		this.txtb_filName2.setReadonly(b);
+		this.txtb_filOrt.setReadonly(b);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -229,7 +225,7 @@ public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public AnnotateDataBinder getBinder() {
-		return binder;
+		return this.binder;
 	}
 
 	public void setBinder(AnnotateDataBinder binder) {
@@ -241,7 +237,7 @@ public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public OfficeService getOfficeService() {
-		return officeService;
+		return this.officeService;
 	}
 
 	public void setOfficeMainCtrl(OfficeMainCtrl officeMainCtrl) {
@@ -249,7 +245,7 @@ public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public OfficeMainCtrl getOfficeMainCtrl() {
-		return officeMainCtrl;
+		return this.officeMainCtrl;
 	}
 
 }

@@ -65,21 +65,21 @@ public class IpLocator {
 	 *             in case of any error/exception
 	 */
 	public static IpLocator locate(String ip) throws IOException {
-		String url = HOSTIP_LOOKUP_URL + ip;
-		URL u = new URL(url);
-		List<String> response = getContent(u);
+		final String url = HOSTIP_LOOKUP_URL + ip;
+		final URL u = new URL(url);
+		final List<String> response = getContent(u);
 
-		Pattern splitterPattern = Pattern.compile(":");
-		IpLocator ipl = new IpLocator();
+		final Pattern splitterPattern = Pattern.compile(":");
+		final IpLocator ipl = new IpLocator();
 
-		for (String token : response) {
-			String[] keyValue = splitterPattern.split(token);
+		for (final String token : response) {
+			final String[] keyValue = splitterPattern.split(token);
 			if (keyValue.length != 2) {
 				continue;
 			}
 
-			String key = StringUtils.upperCase(keyValue[0]);
-			String value = keyValue[1];
+			final String key = StringUtils.upperCase(keyValue[0]);
+			final String value = keyValue[1];
 			if (KEY_COUNTRY.equals(key)) {
 				ipl.setCountry(value);
 			} else if (KEY_CITY.equals(key)) {
@@ -96,7 +96,7 @@ public class IpLocator {
 	private static float stringToFloat(String fString) {
 		try {
 			return Float.parseFloat(fString);
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return -1;
 		}
 	}
@@ -115,13 +115,14 @@ public class IpLocator {
 	 */
 	private static List<String> getContent(URL url) throws IOException {
 
-		HttpURLConnection http = (HttpURLConnection) url.openConnection();
+		final HttpURLConnection http = (HttpURLConnection) url.openConnection();
 		try {
 			http.connect();
 
-			int code = http.getResponseCode();
+			final int code = http.getResponseCode();
 			if (code != 200)
-				throw new IOException("IP Locator failed to get the location. Http Status code : " + code + " [" + url + "]");
+				throw new IOException("IP Locator failed to get the location. Http Status code : " + code + " [" + url
+						+ "]");
 			return getContent(http);
 		} finally {
 			http.disconnect();
@@ -138,11 +139,11 @@ public class IpLocator {
 	 */
 
 	private static List<String> getContent(HttpURLConnection connection) throws IOException {
-		InputStream in = connection.getInputStream();
+		final InputStream in = connection.getInputStream();
 		try {
-			List<String> result = new ArrayList<String>(5);
-			InputStreamReader isr = new InputStreamReader(in);
-			BufferedReader bufRead = new BufferedReader(isr);
+			final List<String> result = new ArrayList<String>(5);
+			final InputStreamReader isr = new InputStreamReader(in);
+			final BufferedReader bufRead = new BufferedReader(isr);
 
 			String aLine = null;
 			while (null != (aLine = bufRead.readLine())) {
@@ -154,7 +155,7 @@ public class IpLocator {
 		} finally {
 			try {
 				in.close();
-			} catch (IOException e) {
+			} catch (final IOException e) {
 			}
 		}
 	}
@@ -163,7 +164,7 @@ public class IpLocator {
 	 * @return the city
 	 */
 	public String getCity() {
-		return city;
+		return this.city;
 	}
 
 	/**
@@ -178,7 +179,7 @@ public class IpLocator {
 	 * @return the country
 	 */
 	public String getCountry() {
-		return country;
+		return this.country;
 	}
 
 	/**
@@ -193,7 +194,7 @@ public class IpLocator {
 	 * @return the longitude
 	 */
 	public float getLongitude() {
-		return longitude;
+		return this.longitude;
 	}
 
 	/**
@@ -208,7 +209,7 @@ public class IpLocator {
 	 * @return the latitude
 	 */
 	public float getLatitude() {
-		return latitude;
+		return this.latitude;
 	}
 
 	/**
@@ -228,13 +229,13 @@ public class IpLocator {
 		System.err.println("Start");
 		try {
 
-			IpLocator ipl = IpLocator.locate("12.215.42.19");
+			final IpLocator ipl = IpLocator.locate("12.215.42.19");
 			System.out.println("City=" + ipl.getCity());
 			System.out.println("Country=" + ipl.getCountry());
 			System.out.println("CountryCode=" + ipl.getCountryCode());
 			System.out.println("Latitude=" + ipl.getLatitude());
 			System.out.println("Longitude=" + ipl.getLongitude());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			System.err.println(Thread.currentThread().getName() + " FEHLER - " + e);
 			e.printStackTrace();
 		}
@@ -244,6 +245,6 @@ public class IpLocator {
 	 * @return the country
 	 */
 	public String getCountryCode() {
-		return StringUtils.defaultString(StringUtils.substringBetween(country, "(", ")"));
+		return StringUtils.defaultString(StringUtils.substringBetween(this.country, "(", ")"));
 	}
 }

@@ -86,7 +86,7 @@ import de.forsthaus.webui.util.pagging.PagedListWrapper;
 public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, SelectionCtrl<SecRole> {
 
 	private static final long serialVersionUID = -546886879998950467L;
-	private transient static final Logger logger = Logger.getLogger(SecRolegroupCtrl.class);
+	private static final Logger logger = Logger.getLogger(SecRolegroupCtrl.class);
 
 	private transient PagedListWrapper<SecRole> plwSecRoles;
 	private transient PagedListWrapper<SecGroup> plwSecGroups;
@@ -135,8 +135,6 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	 */
 	public SecRolegroupCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	/**
@@ -145,12 +143,10 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	 * @throws Exception
 	 */
 	public void onCreate$secRolegroupWindow(Event event) throws Exception {
-		logger.debug(event.toString());
-
 		/* ++++ calculate the heights +++++ */
-		int topHeader = 30;
-		int btnTopArea = 42;
-		int winTitle = 30;
+		final int topHeader = 30;
+		final int btnTopArea = 42;
+		final int winTitle = 30;
 
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
@@ -160,73 +156,75 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 
 		int panelHeight = 25;
 		// TODO put the logic for working with panel in the ApplicationWorkspace
-		boolean withPanel = false;
+		final boolean withPanel = false;
 		if (withPanel == false) {
-			panel_SecRoleGroup.setVisible(false);
+			this.panel_SecRoleGroup.setVisible(false);
 		} else {
-			panel_SecRoleGroup.setVisible(true);
+			this.panel_SecRoleGroup.setVisible(true);
 			panelHeight = 0;
 		}
 
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		height = height + panelHeight;
-		int maxListBoxHeight = (height - topHeader - btnTopArea - winTitle);
+		final int maxListBoxHeight = height - topHeader - btnTopArea - winTitle;
 		setCountRowsSecRole(Math.round(maxListBoxHeight / 30));
 		setCountRowsSecRolegroup(Math.round(maxListBoxHeight / 30));
-		System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
-		System.out.println("==========> : " + getCountRowsSecRole());
-		System.out.println("==========> : " + getCountRowsSecRolegroup());
+		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
+		// System.out.println("==========> : " + getCountRowsSecRole());
+		// System.out.println("==========> : " + getCountRowsSecRolegroup());
 
 		// secRolegroupWindow.setHeight((height - topHeader) + "px");
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
 		// Assign the Comparator for sorting listBoxSecRole
-		listheader_SecRoleGroup_Rolename.setSortAscending(new FieldComparator("rolShortdescription", true));
-		listheader_SecRoleGroup_Rolename.setSortDescending(new FieldComparator("rolShortdescription", false));
+		this.listheader_SecRoleGroup_Rolename.setSortAscending(new FieldComparator("rolShortdescription", true));
+		this.listheader_SecRoleGroup_Rolename.setSortDescending(new FieldComparator("rolShortdescription", false));
 
 		// Assign the Comparator for sorting listBoxRoleGroups
-		listheader_SecRoleGroup_GroupName.setSortAscending(new FieldComparator("grpShortdescription", true));
-		listheader_SecRoleGroup_GroupName.setSortDescending(new FieldComparator("grpShortdescription", false));
+		this.listheader_SecRoleGroup_GroupName.setSortAscending(new FieldComparator("grpShortdescription", true));
+		this.listheader_SecRoleGroup_GroupName.setSortDescending(new FieldComparator("grpShortdescription", false));
 
 		/* set the PageSize */
-		paging_ListBoxSecRole.setPageSize(getCountRowsSecRole());
-		paging_ListBoxSecRole.setDetailed(true);
+		this.paging_ListBoxSecRole.setPageSize(getCountRowsSecRole());
+		this.paging_ListBoxSecRole.setDetailed(true);
 
-		paging_ListBoxSecRolegroup.setPageSize(getCountRowsSecRolegroup());
-		paging_ListBoxSecRolegroup.setDetailed(true);
+		this.paging_ListBoxSecRolegroup.setPageSize(getCountRowsSecRolegroup());
+		this.paging_ListBoxSecRolegroup.setDetailed(true);
 
 		// main borderlayout height = window.height - (Panels Top)
-		borderlayoutSecRolegroup.setHeight(String.valueOf(maxListBoxHeight) + "px");
-		borderLayout_Roles.setHeight(String.valueOf(maxListBoxHeight - 5) + "px");
-		borderLayout_Groups.setHeight(String.valueOf(maxListBoxHeight - 5) + "px");
+		this.borderlayoutSecRolegroup.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		this.borderLayout_Roles.setHeight(String.valueOf(maxListBoxHeight - 5) + "px");
+		this.borderLayout_Groups.setHeight(String.valueOf(maxListBoxHeight - 5) + "px");
 
-		listBoxSecRole.setHeight(String.valueOf(maxListBoxHeight - 130) + "px");
-		listBoxSecRolegroup.setHeight(String.valueOf(maxListBoxHeight - 130) + "px");
+		this.listBoxSecRole.setHeight(String.valueOf(maxListBoxHeight - 130) + "px");
+		this.listBoxSecRolegroup.setHeight(String.valueOf(maxListBoxHeight - 130) + "px");
 
 		/* Tab Details */
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRowsSecRole());
+		final HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class,
+				getCountRowsSecRole());
 		soSecRole.addSort("rolShortdescription", false);
 
 		// Set the ListModel.
-		getPlwSecRoles().init(soSecRole, listBoxSecRole, paging_ListBoxSecRole);
+		getPlwSecRoles().init(soSecRole, this.listBoxSecRole, this.paging_ListBoxSecRole);
 		// set the itemRenderer
-		listBoxSecRole.setItemRenderer(new SecRolegroupRoleListModelItemRenderer());
+		this.listBoxSecRole.setItemRenderer(new SecRolegroupRoleListModelItemRenderer());
 
 		// Before we set the ItemRenderer we select the first Item
 		// for init the rendering of the rights
-		setSelectedRole((SecRole) listBoxSecRole.getModel().getElementAt(0));
-		listBoxSecRole.setSelectedIndex(0);
+		setSelectedRole((SecRole) this.listBoxSecRole.getModel().getElementAt(0));
+		this.listBoxSecRole.setSelectedIndex(0);
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecGroup> soSecRolegroup = new HibernateSearchObject<SecGroup>(SecGroup.class, getCountRowsSecRolegroup());
+		final HibernateSearchObject<SecGroup> soSecRolegroup = new HibernateSearchObject<SecGroup>(SecGroup.class,
+				getCountRowsSecRolegroup());
 		soSecRolegroup.addSort("grpShortdescription", false);
 
 		// Set the ListModel.
-		getPlwSecGroups().init(soSecRolegroup, listBoxSecRolegroup, paging_ListBoxSecRolegroup);
+		getPlwSecGroups().init(soSecRolegroup, this.listBoxSecRolegroup, this.paging_ListBoxSecRolegroup);
 		// set the itemRenderer
-		listBoxSecRolegroup.setItemRenderer(new SecRolegroupGroupListModelItemRenderer(this));
+		this.listBoxSecRolegroup.setItemRenderer(new SecRolegroupGroupListModelItemRenderer(this));
 
 	}
 
@@ -269,8 +267,8 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		Events.postEvent("onCreate", secRolegroupWindow, event);
-		secRolegroupWindow.invalidate();
+		Events.postEvent("onCreate", this.secRolegroupWindow, event);
+		this.secRolegroupWindow.invalidate();
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -294,21 +292,21 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	 */
 	public void doSave() throws InterruptedException {
 
-		List<Listitem> li = listBoxSecRolegroup.getItems();
+		final List<Listitem> li = this.listBoxSecRolegroup.getItems();
 
-		for (Listitem listitem : li) {
+		for (final Listitem listitem : li) {
 
-			Listcell lc = (Listcell) listitem.getFirstChild();
-			Checkbox cb = (Checkbox) lc.getFirstChild();
+			final Listcell lc = (Listcell) listitem.getFirstChild();
+			final Checkbox cb = (Checkbox) lc.getFirstChild();
 
 			if (cb != null) {
 
 				if (cb.isChecked() == true) {
 
 					// Get the group object by casting
-					SecGroup aGroup = (SecGroup) listitem.getAttribute("data");
+					final SecGroup aGroup = (SecGroup) listitem.getAttribute("data");
 					// get the role
-					SecRole aRole = getSelectedRole();
+					final SecRole aRole = getSelectedRole();
 
 					// check if the item is newly checked. If so we cannot found
 					// it in the SecGroupRight-table
@@ -324,10 +322,10 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 					try {
 						// save to DB
 						getSecurityService().saveOrUpdate(aRoleGroup);
-					} catch (DataAccessException e) {
-						String message = e.getMessage();
+					} catch (final DataAccessException e) {
+						final String message = e.getMessage();
 						// String message = e.getCause().getMessage();
-						String title = Labels.getLabel("message.Error");
+						final String title = Labels.getLabel("message.Error");
 						MultiLineMessageBox.doSetTemplate();
 						MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 					}
@@ -335,13 +333,13 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 				} else if (cb.isChecked() == false) {
 
 					// Get the group object by casting
-					SecGroup aGroup = (SecGroup) listitem.getAttribute("data");
+					final SecGroup aGroup = (SecGroup) listitem.getAttribute("data");
 					// get the role
-					SecRole aRole = getSelectedRole();
+					final SecRole aRole = getSelectedRole();
 
 					// check if the item is newly unChecked. If so we must
 					// found it in the SecRolegroup-table
-					SecRolegroup aRoleGroup = getSecurityService().getRolegroupByRoleAndGroup(aRole, aGroup);
+					final SecRolegroup aRoleGroup = getSecurityService().getRolegroupByRoleAndGroup(aRole, aGroup);
 
 					if (aRoleGroup != null) {
 						// delete from DB
@@ -356,18 +354,19 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	public void onSelect$listBoxSecRole(Event event) throws Exception {
 
 		// get the selected object
-		Listitem item = listBoxSecRole.getSelectedItem();
+		final Listitem item = this.listBoxSecRole.getSelectedItem();
 
 		// Casting
-		SecRole aRole = (SecRole) item.getAttribute("data");
+		final SecRole aRole = (SecRole) item.getAttribute("data");
 		setSelectedRole(aRole);
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecGroup> soSecRolegroup = new HibernateSearchObject<SecGroup>(SecGroup.class, getCountRowsSecRolegroup());
+		final HibernateSearchObject<SecGroup> soSecRolegroup = new HibernateSearchObject<SecGroup>(SecGroup.class,
+				getCountRowsSecRolegroup());
 		soSecRolegroup.addSort("grpShortdescription", false);
 
 		// Set the ListModel.
-		getPlwSecGroups().init(soSecRolegroup, listBoxSecRolegroup, paging_ListBoxSecRolegroup);
+		getPlwSecGroups().init(soSecRolegroup, this.listBoxSecRolegroup, this.paging_ListBoxSecRolegroup);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -375,7 +374,7 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	public int getCountRowsSecRole() {
-		return countRowsSecRole;
+		return this.countRowsSecRole;
 	}
 
 	public void setCountRowsSecRole(int countRowsSecRole) {
@@ -383,7 +382,7 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	}
 
 	public int getCountRowsSecRolegroup() {
-		return countRowsSecRolegroup;
+		return this.countRowsSecRolegroup;
 	}
 
 	public void setCountRowsSecRolegroup(int countRowsSecRolegroup) {
@@ -395,11 +394,11 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	}
 
 	public SecRole getSelectedRole() {
-		return selectedRole;
+		return this.selectedRole;
 	}
 
 	public SecurityService getSecurityService() {
-		return securityService;
+		return this.securityService;
 	}
 
 	public void setSecurityService(SecurityService securityService) {
@@ -411,7 +410,7 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	}
 
 	public PagedListWrapper<SecRole> getPlwSecRoles() {
-		return plwSecRoles;
+		return this.plwSecRoles;
 	}
 
 	public void setPlwSecGroups(PagedListWrapper<SecGroup> plwSecGroups) {
@@ -419,7 +418,7 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	}
 
 	public PagedListWrapper<SecGroup> getPlwSecGroups() {
-		return plwSecGroups;
+		return this.plwSecGroups;
 	}
 
 	/*

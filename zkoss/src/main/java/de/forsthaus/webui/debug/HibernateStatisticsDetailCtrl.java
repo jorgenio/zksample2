@@ -49,7 +49,7 @@ import de.forsthaus.webui.debug.model.HibernateStatisticDetailRowRenderer;
 public class HibernateStatisticsDetailCtrl extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(HibernateStatisticsDetailCtrl.class);
+	private static final Logger logger = Logger.getLogger(HibernateStatisticsDetailCtrl.class);
 
 	private transient Groupbox gb;
 
@@ -60,23 +60,23 @@ public class HibernateStatisticsDetailCtrl extends GenericForwardComposer {
 	@SuppressWarnings("unchecked")
 	public void onCreate(Event event) throws Exception {
 
-		gb = (Groupbox) event.getTarget();
+		this.gb = (Groupbox) event.getTarget();
 
 		// System.out.println(ZkossComponentTreeUtil.getZulTree(self));
 
 		// get the params map that are overhanded by creation.
-		CreateEvent ce = (CreateEvent) event;
-		Map<String, Object> args = ce.getArg();
+		final CreateEvent ce = (CreateEvent) event;
+		final Map<String, Object> args = ce.getArg();
 
 		if (args.containsKey("hibernateStatistics")) {
-			HibernateStatistics hs = (HibernateStatistics) args.get("hibernateStatistics");
+			final HibernateStatistics hs = (HibernateStatistics) args.get("hibernateStatistics");
 			setStatistics(hs);
 		} else {
 			setStatistics(null);
 		}
 
 		// Load the related data
-		guiHibernateStatisticsService.initDetails(getStatistics());
+		this.guiHibernateStatisticsService.initDetails(getStatistics());
 
 		// Set the variable for accessing in the zul-file the bean.properties
 		event.getTarget().setVariable("hs", getStatistics(), false);
@@ -96,14 +96,14 @@ public class HibernateStatisticsDetailCtrl extends GenericForwardComposer {
 	@SuppressWarnings("unchecked")
 	private void doCreateEntityGrid(HibernateStatistics hs) {
 
-		Separator sep = new Separator();
+		final Separator sep = new Separator();
 		sep.setOrient("vertical");
-		sep.setParent(gb);
+		sep.setParent(this.gb);
 
-		Grid entityGrid = new Grid();
+		final Grid entityGrid = new Grid();
 		entityGrid.setWidth("90%");
-		entityGrid.setParent(gb);
-		Columns columns = new Columns();
+		entityGrid.setParent(this.gb);
+		final Columns columns = new Columns();
 		columns.setParent(entityGrid);
 
 		Column col;
@@ -136,7 +136,7 @@ public class HibernateStatisticsDetailCtrl extends GenericForwardComposer {
 		col.setLabel("optimisticFailure");
 		col.setParent(columns);
 
-		Rows rows = new Rows();
+		final Rows rows = new Rows();
 		rows.setParent(entityGrid);
 
 		entityGrid.setRowRenderer(new HibernateStatisticDetailRowRenderer());
@@ -148,7 +148,7 @@ public class HibernateStatisticsDetailCtrl extends GenericForwardComposer {
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
 	public GuiHibernateStatisticsService getGuiHibernateStatisticsService() {
-		return guiHibernateStatisticsService;
+		return this.guiHibernateStatisticsService;
 	}
 
 	public void setGuiHibernateStatisticsService(GuiHibernateStatisticsService guiHibernateStatisticsService) {
@@ -156,7 +156,7 @@ public class HibernateStatisticsDetailCtrl extends GenericForwardComposer {
 	}
 
 	private HibernateStatistics getStatistics() {
-		return statistics;
+		return this.statistics;
 	}
 
 	private void setStatistics(HibernateStatistics statistics) {

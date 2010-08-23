@@ -27,6 +27,8 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
+import org.apache.log4j.Logger;
+
 /**
  * Compiling a Jasper Report.
  * 
@@ -44,26 +46,27 @@ public class JRreportCompiler {
 
 		try {
 
-			InputStream inputStream = getClass().getResourceAsStream(aReportName);
+			final InputStream inputStream = getClass().getResourceAsStream(aReportName);
 
-			JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
-			Collection collection = JasperCompileManager.verifyDesign(jasperDesign);
-			for (Object object : collection) {
+			final JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
+			final Collection collection = JasperCompileManager.verifyDesign(jasperDesign);
+			for (final Object object : collection) {
 				object.toString();
 			}
 
-			JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+			final JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
 			if (jasperReport != null) {
 				result = true;
 			}
 
-		} catch (JRException ex) {
-			String connectMsg = "JasperReports: Could not create the report " + ex.getMessage() + " " + ex.getLocalizedMessage();
-			System.out.println(connectMsg);
-		} catch (Exception ex) {
-			String connectMsg = "Could not create the report " + ex.getMessage() + " " + ex.getLocalizedMessage();
-			System.out.println(connectMsg);
+		} catch (final JRException ex) {
+			final String connectMsg = "JasperReports: Could not create the report " + ex.getMessage() + " "
+					+ ex.getLocalizedMessage();
+			Logger.getLogger(getClass()).error(connectMsg, ex);
+		} catch (final Exception ex) {
+			final String connectMsg = "Could not create the report " + ex.getMessage() + " " + ex.getLocalizedMessage();
+			Logger.getLogger(getClass()).error(connectMsg, ex);
 		}
 		return result;
 	}

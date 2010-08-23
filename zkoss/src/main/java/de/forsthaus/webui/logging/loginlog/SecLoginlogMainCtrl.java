@@ -38,7 +38,7 @@ import de.forsthaus.webui.util.GFCBaseCtrl;
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
  * This is the controller class for the
  * /WEB-INF/pages/sec_loginlog/secLoginLogMain.zul file.<br>
- *<br>
+ * <br>
  * This class creates the tabs + panels for the list and statistic panel.
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
  * 
@@ -50,7 +50,7 @@ import de.forsthaus.webui.util.GFCBaseCtrl;
 public class SecLoginlogMainCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -7659364091196012899L;
-	private transient static final Logger logger = Logger.getLogger(SecLoginlogListCtrl.class);
+	private static final Logger logger = Logger.getLogger(SecLoginlogListCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -74,8 +74,6 @@ public class SecLoginlogMainCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public SecLoginlogMainCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -83,28 +81,27 @@ public class SecLoginlogMainCtrl extends GFCBaseCtrl implements Serializable {
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	public void onCreate$secLoginlogMainWindow(Event event) throws Exception {
-		// logger.debug(event.toString());
-
 		int panelHeight = 25;
 		// TODO put the logic for working with panel in the ApplicationWorkspace
-		boolean withPanel = false;
+		final boolean withPanel = false;
 		if (withPanel == false) {
-			panel_SecLoginlogList.setVisible(false);
+			this.panel_SecLoginlogList.setVisible(false);
 		} else {
-			panel_SecLoginlogList.setVisible(true);
+			this.panel_SecLoginlogList.setVisible(true);
 			panelHeight = 0;
 		}
 
 		/**
 		 * We select the list tab and create the components from the zul-file.
 		 */
-		tabLoginList.setSelected(true);
+		this.tabLoginList.setSelected(true);
 
-		Tabpanel listTab = (Tabpanel) Path.getComponent("/outerIndexWindow/secLoginlogMainWindow/tabPanelLoginList");
+		final Tabpanel listTab = (Tabpanel) Path
+				.getComponent("/outerIndexWindow/secLoginlogMainWindow/tabPanelLoginList");
 		listTab.getChildren().clear();
 
-		Panel panel = new Panel();
-		Panelchildren pChildren = new Panelchildren();
+		final Panel panel = new Panel();
+		final Panelchildren pChildren = new Panelchildren();
 		panel.appendChild(pChildren);
 		listTab.appendChild(panel);
 
@@ -122,11 +119,12 @@ public class SecLoginlogMainCtrl extends GFCBaseCtrl implements Serializable {
 	public void onSelect$tabLoginList(Event event) throws IOException {
 		logger.debug(event.toString());
 
-		Tabpanel listTab = (Tabpanel) Path.getComponent("/outerIndexWindow/secLoginlogMainWindow/tabPanelLoginList");
+		final Tabpanel listTab = (Tabpanel) Path
+				.getComponent("/outerIndexWindow/secLoginlogMainWindow/tabPanelLoginList");
 		listTab.getChildren().clear();
 
-		Panel panel = new Panel();
-		Panelchildren pChildren = new Panelchildren();
+		final Panel panel = new Panel();
+		final Panelchildren pChildren = new Panelchildren();
 
 		panel.appendChild(pChildren);
 		listTab.appendChild(panel);
@@ -145,20 +143,21 @@ public class SecLoginlogMainCtrl extends GFCBaseCtrl implements Serializable {
 	public void onSelect$tabLoginStatistic(Event event) throws IOException {
 		logger.debug(event.toString());
 
-//		try {
-//			ZksampleUtils.doShowOutOfOrderMessage();
-//			tabLoginList.setSelected(true);
-//			return;
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		// try {
+		// ZksampleUtils.doShowOutOfOrderMessage();
+		// tabLoginList.setSelected(true);
+		// return;
+		// } catch (InterruptedException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 
-		Tabpanel listTab = (Tabpanel) Path.getComponent("/outerIndexWindow/secLoginlogMainWindow/tabPanelLoginStatistic");
+		final Tabpanel listTab = (Tabpanel) Path
+				.getComponent("/outerIndexWindow/secLoginlogMainWindow/tabPanelLoginStatistic");
 		listTab.getChildren().clear();
 
-		Panel panel = new Panel();
-		Panelchildren pChildren = new Panelchildren();
+		final Panel panel = new Panel();
+		final Panelchildren pChildren = new Panelchildren();
 
 		panel.appendChild(pChildren);
 		listTab.appendChild(panel);
@@ -173,7 +172,7 @@ public class SecLoginlogMainCtrl extends GFCBaseCtrl implements Serializable {
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	public LoginLoggingService getLoginLoggingService() {
-		return loginLoggingService;
+		return this.loginLoggingService;
 	}
 
 	public void setLoginLoggingService(LoginLoggingService loginLoggingService) {

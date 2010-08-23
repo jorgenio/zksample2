@@ -81,7 +81,7 @@ public class PagedBindingListWrapper<E> extends BindingListModelList implements 
 		// clear old data
 		clear();
 
-		SearchResult<E> searchResult = getPagedListService().getSRBySearchObject(getSearchObject());
+		final SearchResult<E> searchResult = getPagedListService().getSRBySearchObject(getSearchObject());
 		getPaging().setTotalSize(searchResult.getTotalCount());
 		addAll(searchResult.getResult());
 	}
@@ -121,19 +121,15 @@ public class PagedBindingListWrapper<E> extends BindingListModelList implements 
 		// Add 'onPaging' listener to the paging component
 		getPaging().addEventListener("onPaging", new OnPagingEventListener());
 
-		Listhead listhead = listBox.getListhead();
-		List<?> list = listhead.getChildren();
+		final Listhead listhead = listBox.getListhead();
+		final List<?> list = listhead.getChildren();
 
-		OnSortEventListener onSortEventListener = new OnSortEventListener();
-		for (Object object : list) {
+		final OnSortEventListener onSortEventListener = new OnSortEventListener();
+		for (final Object object : list) {
 			if (object instanceof Listheader) {
-				Listheader lheader = (Listheader) object;
+				final Listheader lheader = (Listheader) object;
 
 				if (lheader.getSortAscending() != null || lheader.getSortDescending() != null) {
-
-					if (logger.isDebugEnabled()) {
-						logger.debug("--> : " + lheader.getId());
-					}
 					lheader.addEventListener("onSort", onSortEventListener);
 				}
 			}
@@ -156,18 +152,14 @@ public class PagedBindingListWrapper<E> extends BindingListModelList implements 
 			// TODO don't work in expected way
 			// evtl. mittels Reflection den zu uebergebenen selectedItem bean
 			// mit setXXXXX(null) setzen.
-			Listitem li = getListbox().getSelectedItem();
+			final Listitem li = getListbox().getSelectedItem();
 			if (li != null) {
 				li.setSelected(false);
 			}
 
-			PagingEvent pe = (PagingEvent) event;
-			int pageNo = pe.getActivePage();
-			int start = pageNo * getPageSize();
-
-			if (logger.isDebugEnabled()) {
-				logger.debug("--> : " + start + "/" + getPageSize());
-			}
+			final PagingEvent pe = (PagingEvent) event;
+			final int pageNo = pe.getActivePage();
+			final int start = pageNo * getPageSize();
 
 			// refresh the list
 			refreshModel(start);
@@ -201,7 +193,8 @@ public class PagedBindingListWrapper<E> extends BindingListModelList implements 
 					getSearchObject().clearSorts();
 					getSearchObject().addSort(orderBy, true);
 				}
-			} else if ("descending".equals(sortDirection) || "natural".equals(sortDirection) || Strings.isBlank(sortDirection)) {
+			} else if ("descending".equals(sortDirection) || "natural".equals(sortDirection)
+					|| Strings.isBlank(sortDirection)) {
 				final Comparator<?> cmpr = lh.getSortAscending();
 				if (cmpr instanceof FieldComparator) {
 					String orderBy = ((FieldComparator) cmpr).getOrderBy();
@@ -213,11 +206,6 @@ public class PagedBindingListWrapper<E> extends BindingListModelList implements 
 				}
 			}
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("--> : " + lh.getId() + "/" + sortDirection);
-				logger.debug("--> added  getSorts() : " + getSearchObject().getSorts().toString());
-			}
-
 			// refresh the list
 			getPaging().setActivePage(0);
 			refreshModel(0);
@@ -226,7 +214,7 @@ public class PagedBindingListWrapper<E> extends BindingListModelList implements 
 	}
 
 	public PagedListService getPagedListService() {
-		return pagedListService;
+		return this.pagedListService;
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -234,7 +222,7 @@ public class PagedBindingListWrapper<E> extends BindingListModelList implements 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
 	HibernateSearchObject<E> getSearchObject() {
-		return hibernateSearchObject;
+		return this.hibernateSearchObject;
 	}
 
 	public void setSearchObject(HibernateSearchObject<E> hibernateSearchObject1) {
@@ -251,7 +239,7 @@ public class PagedBindingListWrapper<E> extends BindingListModelList implements 
 	}
 
 	Paging getPaging() {
-		return paging;
+		return this.paging;
 	}
 
 	public void setPagedListService(PagedListService pagedListService) {
@@ -263,7 +251,7 @@ public class PagedBindingListWrapper<E> extends BindingListModelList implements 
 	}
 
 	public Listbox getListbox() {
-		return listbox;
+		return this.listbox;
 	}
 
 }

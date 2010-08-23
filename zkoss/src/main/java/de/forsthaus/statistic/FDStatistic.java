@@ -50,15 +50,15 @@ public final class FDStatistic {
 	private final int activeUpdateCount;
 
 	public int getActiveDesktopCount() {
-		return activeDesktopCount;
+		return this.activeDesktopCount;
 	}
 
 	public int getActiveSessionCount() {
-		return activeSessionCount;
+		return this.activeSessionCount;
 	}
 
-	public double getActiveUpdateCount() {
-		return activeUpdateCount;
+	public int getActiveUpdateCount() {
+		return this.activeUpdateCount;
 	}
 
 	public double getAverageDesktopCount() {
@@ -74,23 +74,22 @@ public final class FDStatistic {
 	}
 
 	public double getRuningHours() {
-		final long v = this.currentTime - this.startTime;
-		return v / 3600000d;
+		return (this.currentTime - this.startTime) / 3600000d;
 	}
 
 	public long getStartTime() {
-		return startTime;
+		return this.startTime;
 	}
 
 	public int getTotalDesktopCount() {
-		return totalDesktopCount;
+		return this.totalDesktopCount;
 	}
 
 	public int getTotalSessionCount() {
-		return totalSessionCount;
+		return this.totalSessionCount;
 	}
 
 	public int getTotalUpdateCount() {
-		return totalUpdateCount;
+		return this.totalUpdateCount;
 	}
 }

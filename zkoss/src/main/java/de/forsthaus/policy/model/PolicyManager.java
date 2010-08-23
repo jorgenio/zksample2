@@ -44,7 +44,7 @@ import de.forsthaus.backend.service.UserService;
 public class PolicyManager implements UserDetailsService, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(PolicyManager.class);
+	private static final Logger logger = Logger.getLogger(PolicyManager.class);
 
 	private transient UserService userService;
 	public UserDetails _userDetails;
@@ -70,17 +70,18 @@ public class PolicyManager implements UserDetailsService, Serializable {
 
 			grantedAuthorities = getGrantedAuthority(user);
 
-		} catch (NumberFormatException e) {
-			throw new DataRetrievalFailureException("Cannot loadUserByUsername userId:" + userId + " Exception:" + e.getMessage(), e);
+		} catch (final NumberFormatException e) {
+			throw new DataRetrievalFailureException("Cannot loadUserByUsername userId:" + userId + " Exception:"
+					+ e.getMessage(), e);
 		}
 
 		// Create the UserDetails object for a specified user with
 		// their grantedAuthorities List.
-		UserDetails userDetails = new UserImpl(user, grantedAuthorities);
+		final UserDetails userDetails = new UserImpl(user, grantedAuthorities);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Rechte für '" + user.getUsrLoginname() + "' (ID: " + user.getId() + ") ermittelt. (" + grantedAuthorities + ") ["
-					+ this + "]");
+			logger.debug("Rechte für '" + user.getUsrLoginname() + "' (ID: " + user.getId() + ") ermittelt. [" + this
+					+ "]");
 
 			// for (GrantedAuthority grantedAuthority : grantedAuthorities) {
 			// logger.debug(grantedAuthority.getAuthority());
@@ -88,7 +89,7 @@ public class PolicyManager implements UserDetailsService, Serializable {
 		}
 
 		// neu wegen clustering ?
-		_userDetails = userDetails;
+		this._userDetails = userDetails;
 
 		return userDetails;
 
@@ -116,20 +117,20 @@ public class PolicyManager implements UserDetailsService, Serializable {
 	private Collection<GrantedAuthority> getGrantedAuthority(SecUser user) {
 
 		// get the list of rights for a specified user.
-		Collection<SecRight> rights = getUserService().getRightsByUser(user);
+		final Collection<SecRight> rights = getUserService().getRightsByUser(user);
 
-		ArrayList<GrantedAuthority> rechteGrantedAuthorities = new ArrayList<GrantedAuthority>(rights.size());
+		final ArrayList<GrantedAuthority> rechteGrantedAuthorities = new ArrayList<GrantedAuthority>(rights.size());
 
 		// now create for all rights a GrantedAuthority
 		// and fill the GrantedAuthority List with these authorities.
-		for (SecRight right : rights) {
+		for (final SecRight right : rights) {
 			rechteGrantedAuthorities.add(new GrantedAuthorityImpl(right.getRigName()));
 		}
 		return rechteGrantedAuthorities;
 	}
 
 	public UserService getUserService() {
-		return userService;
+		return this.userService;
 	}
 
 	public void setUserService(UserService userService) {

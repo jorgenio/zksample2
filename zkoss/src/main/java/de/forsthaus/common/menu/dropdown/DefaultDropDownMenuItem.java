@@ -41,7 +41,7 @@ import de.forsthaus.common.menu.util.ILabelElement;
 class DefaultDropDownMenuItem extends Menuitem implements EventListener, Serializable, ILabelElement {
 
 	private static final long serialVersionUID = -2813840859147955432L;
-	private transient static final Logger logger = Logger.getLogger(DefaultDropDownMenuItem.class);
+	private static final Logger logger = Logger.getLogger(DefaultDropDownMenuItem.class);
 
 	private String zulNavigation;
 
@@ -51,36 +51,39 @@ class DefaultDropDownMenuItem extends Menuitem implements EventListener, Seriali
 		try {
 			// TODO get the parameter for working with tabs from the application
 			// params
-			int workWithTabs = 1;
+			final int workWithTabs = 1;
 
 			if (workWithTabs == 1) {
 
 				/* get an instance of the borderlayout defined in the zul-file */
-				Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
+				final Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
 				/* get an instance of the searched CENTER layout area */
-				Center center = bl.getCenter();
+				final Center center = bl.getCenter();
 
-				Tabs tabs = (Tabs) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter");
+				final Tabs tabs = (Tabs) center.getFellow("divCenter").getFellow("tabBoxIndexCenter")
+						.getFellow("tabsIndexCenter");
 
 				// Check if the tab is already open, if not than create them
 				Tab checkTab = null;
 				try {
 					checkTab = (Tab) tabs.getFellow("tab_" + this.getLabel().trim());
 					checkTab.setSelected(true);
-				} catch (ComponentNotFoundException ex) {
+				} catch (final ComponentNotFoundException ex) {
 					// Ignore if can not get tab.
 				}
 
 				if (checkTab == null) {
-					Tab tab = new Tab();
+					final Tab tab = new Tab();
 					tab.setId("tab_" + this.getLabel().trim());
 					tab.setLabel(this.getLabel().trim());
 					tab.setClosable(true);
 
 					tab.setParent(tabs);
 
-					Tabpanels tabpanels = (Tabpanels) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter").getFellow("tabpanelsBoxIndexCenter");
-					Tabpanel tabpanel = new Tabpanel();
+					final Tabpanels tabpanels = (Tabpanels) center.getFellow("divCenter")
+							.getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter")
+							.getFellow("tabpanelsBoxIndexCenter");
+					final Tabpanel tabpanel = new Tabpanel();
 					tabpanel.setHeight("100%");
 					tabpanel.setStyle("padding: 0px;");
 					tabpanel.setParent(tabpanels);
@@ -90,9 +93,9 @@ class DefaultDropDownMenuItem extends Menuitem implements EventListener, Seriali
 				}
 			} else {
 				/* get an instance of the borderlayout defined in the zul-file */
-				Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
+				final Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
 				/* get an instance of the searched CENTER layout area */
-				Center center = bl.getCenter();
+				final Center center = bl.getCenter();
 				/* clear the center child comps */
 				center.getChildren().clear();
 				/*
@@ -104,7 +107,7 @@ class DefaultDropDownMenuItem extends Menuitem implements EventListener, Seriali
 			if (logger.isDebugEnabled()) {
 				logger.debug("-->[" + getId() + "] calling zul-file: " + getZulNavigation());
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			Messagebox.show(e.toString());
 		}
 
@@ -114,6 +117,7 @@ class DefaultDropDownMenuItem extends Menuitem implements EventListener, Seriali
 		return this.zulNavigation;
 	}
 
+	@Override
 	public void setZulNavigation(String zulNavigation) {
 		this.zulNavigation = zulNavigation;
 		if (!StringUtils.isEmpty(zulNavigation)) {

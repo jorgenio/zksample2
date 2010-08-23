@@ -51,7 +51,7 @@ import de.forsthaus.backend.model.Office;
 public class UserWorkspace implements Serializable, DisposableBean {
 
 	private static final long serialVersionUID = -3936210543827830197L;
-	private transient final static Logger logger = Logger.getLogger(UserWorkspace.class);
+	private final static Logger logger = Logger.getLogger(UserWorkspace.class);
 
 	static private Authentication getAuthentication() {
 		return SecurityContextHolder.getContext().getAuthentication();
@@ -113,16 +113,16 @@ public class UserWorkspace implements Serializable, DisposableBean {
 	 */
 	private Set<String> getGrantedAuthoritySet() {
 
-		if (grantedAuthoritySet == null) {
+		if (this.grantedAuthoritySet == null) {
 
-			Collection<GrantedAuthority> list = getAuthentication().getAuthorities();
-			grantedAuthoritySet = new HashSet<String>(list.size());
+			final Collection<GrantedAuthority> list = getAuthentication().getAuthorities();
+			this.grantedAuthoritySet = new HashSet<String>(list.size());
 
-			for (GrantedAuthority grantedAuthority : list) {
-				grantedAuthoritySet.add(grantedAuthority.getAuthority());
+			for (final GrantedAuthority grantedAuthority : list) {
+				this.grantedAuthoritySet.add(grantedAuthority.getAuthority());
 			}
 		}
-		return grantedAuthoritySet;
+		return this.grantedAuthoritySet;
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class UserWorkspace implements Serializable, DisposableBean {
 	}
 
 	public Office getOffice() {
-		return office;
+		return this.office;
 	}
 
 	public void setUserLanguage(String userLanguage) {
@@ -150,7 +150,7 @@ public class UserWorkspace implements Serializable, DisposableBean {
 	}
 
 	public String getUserLanguage() {
-		return userLanguage;
+		return this.userLanguage;
 	}
 
 	public Properties getUserLanguageProperty() {
@@ -168,7 +168,7 @@ public class UserWorkspace implements Serializable, DisposableBean {
 
 	@Override
 	public void destroy() {
-		grantedAuthoritySet = null;
+		this.grantedAuthoritySet = null;
 		SecurityContextHolder.clearContext();
 
 		if (logger.isDebugEnabled()) {

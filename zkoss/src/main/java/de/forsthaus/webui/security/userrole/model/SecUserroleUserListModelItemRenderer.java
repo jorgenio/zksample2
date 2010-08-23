@@ -38,16 +38,12 @@ import de.forsthaus.backend.model.SecUser;
 public class SecUserroleUserListModelItemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(SecUserroleUserListModelItemRenderer.class);
+	private static final Logger logger = Logger.getLogger(SecUserroleUserListModelItemRenderer.class);
 
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		SecUser user = (SecUser) data;
-
-		// if (logger.isDebugEnabled()) {
-		// logger.debug("--> " + user.getUsrLoginname());
-		// }
+		final SecUser user = (SecUser) data;
 
 		Listcell lc;
 

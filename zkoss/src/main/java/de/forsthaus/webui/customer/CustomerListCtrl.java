@@ -68,7 +68,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
 public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Serializable {
 
 	private static final long serialVersionUID = 6787508590585436872L;
-	private transient final static Logger logger = Logger.getLogger(CustomerListCtrl.class);
+	private final static Logger logger = Logger.getLogger(CustomerListCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -112,13 +112,9 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 */
 	public CustomerListCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	public void onCreate$window_customerList(Event event) throws Exception {
-		// logger.debug(event.toString());
-
 		/* autowire comps the vars */
 		// doOnCreateCommon(window_customerList, event);
 
@@ -133,50 +129,50 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 
 		int panelHeight = 25;
 		// TODO put the logic for working with panel in the ApplicationWorkspace
-		boolean withPanel = false;
+		final boolean withPanel = false;
 		if (withPanel == false) {
-			panel_CustomerList.setVisible(false);
+			this.panel_CustomerList.setVisible(false);
 		} else {
-			panel_CustomerList.setVisible(true);
+			this.panel_CustomerList.setVisible(true);
 			panelHeight = 0;
 		}
 
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		height = height + panelHeight;
 
-		int maxListBoxHeight = (height - 135);
+		final int maxListBoxHeight = height - 135;
 		setCountRows(Math.round(maxListBoxHeight / 24));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());
 
-		borderLayout_customerList.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		this.borderLayout_customerList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		// set the paging params
-		pagingCustomerList.setPageSize(getCountRows());
-		pagingCustomerList.setDetailed(true);
+		this.pagingCustomerList.setPageSize(getCountRows());
+		this.pagingCustomerList.setDetailed(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		listheader_CustNo.setSortAscending(new FieldComparator("kunNr", true));
-		listheader_CustNo.setSortDescending(new FieldComparator("kunNr", false));
-		listheader_CustMatchcode.setSortAscending(new FieldComparator("kunMatchcode", true));
-		listheader_CustMatchcode.setSortDescending(new FieldComparator("kunMatchcode", false));
-		listheader_CustName1.setSortAscending(new FieldComparator("kunName1", true));
-		listheader_CustName1.setSortDescending(new FieldComparator("kunName1", false));
-		listheader_CustName2.setSortAscending(new FieldComparator("kunName2", true));
-		listheader_CustName2.setSortDescending(new FieldComparator("kunName2", false));
-		listheader_CustCity.setSortAscending(new FieldComparator("kunOrt", true));
-		listheader_CustCity.setSortDescending(new FieldComparator("kunOrt", false));
+		this.listheader_CustNo.setSortAscending(new FieldComparator("kunNr", true));
+		this.listheader_CustNo.setSortDescending(new FieldComparator("kunNr", false));
+		this.listheader_CustMatchcode.setSortAscending(new FieldComparator("kunMatchcode", true));
+		this.listheader_CustMatchcode.setSortDescending(new FieldComparator("kunMatchcode", false));
+		this.listheader_CustName1.setSortAscending(new FieldComparator("kunName1", true));
+		this.listheader_CustName1.setSortDescending(new FieldComparator("kunName1", false));
+		this.listheader_CustName2.setSortAscending(new FieldComparator("kunName2", true));
+		this.listheader_CustName2.setSortDescending(new FieldComparator("kunName2", false));
+		this.listheader_CustCity.setSortAscending(new FieldComparator("kunOrt", true));
+		this.listheader_CustCity.setSortDescending(new FieldComparator("kunOrt", false));
 
 		// ++ create the searchObject and init sorting ++//
-		searchObj = new HibernateSearchObject<Customer>(Customer.class, getCountRows());
-		searchObj.addSort("kunName1", false);
-		setSearchObj(searchObj);
+		this.searchObj = new HibernateSearchObject<Customer>(Customer.class, getCountRows());
+		this.searchObj.addSort("kunName1", false);
+		setSearchObj(this.searchObj);
 
 		// Set the ListModel for the articles.
-		getPagedListWrapper().init(searchObj, listBoxCustomer, pagingCustomerList);
+		getPagedListWrapper().init(this.searchObj, this.listBoxCustomer, this.pagingCustomerList);
 		// set the itemRenderer
-		listBoxCustomer.setItemRenderer(new CustomerListModelItemRenderer());
+		this.listBoxCustomer.setItemRenderer(new CustomerListModelItemRenderer());
 	}
 
 	/**
@@ -184,13 +180,14 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 */
 	private void doCheckRights() {
 
-		UserWorkspace workspace = getUserWorkspace();
+		final UserWorkspace workspace = getUserWorkspace();
 
-		window_customerList.setVisible(workspace.isAllowed("window_customerList"));
-		btnHelp.setVisible(workspace.isAllowed("button_CustomerList_btnHelp"));
-		button_CustomerList_NewCustomer.setVisible(workspace.isAllowed("button_CustomerList_NewCustomer"));
-		button_CustomerList_CustomerFindDialog.setVisible(workspace.isAllowed("button_CustomerList_CustomerFindDialog"));
-		button_CustomerList_PrintList.setVisible(workspace.isAllowed("button_CustomerList_PrintList"));
+		this.window_customerList.setVisible(workspace.isAllowed("window_customerList"));
+		this.btnHelp.setVisible(workspace.isAllowed("button_CustomerList_btnHelp"));
+		this.button_CustomerList_NewCustomer.setVisible(workspace.isAllowed("button_CustomerList_NewCustomer"));
+		this.button_CustomerList_CustomerFindDialog.setVisible(workspace
+				.isAllowed("button_CustomerList_CustomerFindDialog"));
+		this.button_CustomerList_PrintList.setVisible(workspace.isAllowed("button_CustomerList_PrintList"));
 
 	}
 
@@ -201,20 +198,16 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 * @param event
 	 * @throws Exception
 	 */
-	@Secured( { "CustomerList_listBoxCustomer.onDoubleClick" })
+	@Secured({ "CustomerList_listBoxCustomer.onDoubleClick" })
 	public void onCustomerItemDoubleClicked(Event event) throws Exception {
 		logger.debug(event.toString());
 
 		// get the selected customer object
-		Listitem item = listBoxCustomer.getSelectedItem();
+		final Listitem item = this.listBoxCustomer.getSelectedItem();
 
 		if (item != null) {
 			// CAST AND STORE THE SELECTED OBJECT
-			Customer aCustomer = (Customer) item.getAttribute("data");
-
-			if (logger.isDebugEnabled()) {
-				logger.debug("--> " + aCustomer.getKunMatchcode());
-			}
+			final Customer aCustomer = (Customer) item.getAttribute("data");
 
 			showDetailView(aCustomer);
 		}
@@ -230,7 +223,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		/** !!! DO NOT BREAK THE TIERS !!! */
 		// We don't create a new DomainObject() in the frontend.
 		// We GET it from the backend.
-		Customer aCustomer = getCustomerService().getNewCustomer();
+		final Customer aCustomer = getCustomerService().getNewCustomer();
 
 		aCustomer.setOffice(getUserWorkspace().getOffice()); // init
 		// customer.setBranche(Workspace.getBranche()); // init
@@ -253,7 +246,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		 * with a object of the selected item. For handed over these parameter
 		 * only a Map is accepted. So we put the object in a HashMap.
 		 */
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("customer", aCustomer);
 		/*
 		 * we can additionally handed over the listBox or the controller self,
@@ -266,7 +259,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		// call the zul-file with the parameters packed in a map
 		try {
 			Executions.createComponents("/WEB-INF/pages/customer/customerDialog.zul", null, map);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
 			ZksampleUtils.showErrorMessage(e.toString());
@@ -296,8 +289,8 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
 		// logger.debug(event.toString());
 
-		Events.postEvent("onCreate", window_customerList, event);
-		window_customerList.invalidate();
+		Events.postEvent("onCreate", this.window_customerList, event);
+		this.window_customerList.invalidate();
 	}
 
 	/*
@@ -313,14 +306,14 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		 * these parameter only a Map is accepted. So we put the customer object
 		 * in a HashMap.
 		 */
-		HashMap map = new HashMap();
+		final HashMap map = new HashMap();
 		map.put("customerCtrl", this);
-		map.put("searchObject", searchObj);
+		map.put("searchObject", this.searchObj);
 
 		// call the zul-file with the parameters packed in a map
 		try {
 			Executions.createComponents("/WEB-INF/pages/customer/customerSearchDialog.zul", null, map);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 			ZksampleUtils.showErrorMessage(e.toString());
 		}
@@ -344,7 +337,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
 	public BrancheService getBrancheService() {
-		return brancheService;
+		return this.brancheService;
 	}
 
 	public void setBrancheService(BrancheService brancheService) {
@@ -356,11 +349,11 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	}
 
 	public CustomerService getCustomerService() {
-		return customerService;
+		return this.customerService;
 	}
 
 	public HibernateSearchObject<Customer> getSearchObj() {
-		return searchObj;
+		return this.searchObj;
 	}
 
 	public void setSearchObj(HibernateSearchObject<Customer> searchObj) {
@@ -368,7 +361,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	}
 
 	public int getCountRows() {
-		return countRows;
+		return this.countRows;
 	}
 
 	public void setCountRows(int countRows) {

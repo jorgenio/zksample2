@@ -63,7 +63,7 @@ import de.forsthaus.webui.util.GFCBaseListCtrl;
 public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(BranchListCtrl.class);
+	private static final Logger logger = Logger.getLogger(BranchListCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -98,8 +98,6 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	 */
 	public BranchListCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	@Override
@@ -113,15 +111,15 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 		 * managing more than one zul-file in one page. Otherwise it would be
 		 * overridden and can ends in curious error messages.
 		 */
-		self.setAttribute("controller", this, false);
+		this.self.setAttribute("controller", this, false);
 
 		/**
 		 * 1. Get the overhanded MainController.<br>
 		 * 2. Set this controller in the MainController.<br>
 		 * 3. Check if a 'selectedObject' exists yet in the MainController.<br>
 		 */
-		if (arg.containsKey("ModuleMainController")) {
-			setBranchMainCtrl((BranchMainCtrl) arg.get("ModuleMainController"));
+		if (this.arg.containsKey("ModuleMainController")) {
+			setBranchMainCtrl((BranchMainCtrl) this.arg.get("ModuleMainController"));
 
 			// SET THIS CONTROLLER TO THE MainController
 			getBranchMainCtrl().setBranchListCtrl(this);
@@ -149,13 +147,12 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	 * @throws Exception
 	 */
 	public void onCreate$windowBranchList(Event event) throws Exception {
-		// logger.debug(event.toString());
 
-		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
+		this.binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 
 		doFillListbox();
 
-		binder.loadAll();
+		this.binder.loadAll();
 	}
 
 	public void doFillListbox() {
@@ -163,30 +160,30 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 		doFitSize();
 
 		// set the paging params
-		pagingBranchList.setPageSize(getCountRows());
-		pagingBranchList.setDetailed(true);
+		this.pagingBranchList.setPageSize(getCountRows());
+		this.pagingBranchList.setDetailed(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		listheader_BranchText.setSortAscending(new FieldComparator("text", true));
-		listheader_BranchText.setSortDescending(new FieldComparator("text", false));
+		this.listheader_BranchText.setSortAscending(new FieldComparator("text", true));
+		this.listheader_BranchText.setSortDescending(new FieldComparator("text", false));
 
 		// ++ create the searchObject and init sorting ++//
 		// get customers and only their latest address
-		searchObj = new HibernateSearchObject<Branche>(Branche.class, getCountRows());
-		searchObj.addSort("braBezeichnung", false);
-		setSearchObj(searchObj);
+		this.searchObj = new HibernateSearchObject<Branche>(Branche.class, getCountRows());
+		this.searchObj.addSort("braBezeichnung", false);
+		setSearchObj(this.searchObj);
 
 		// Set the BindingListModel
-		getPagedBindingListWrapper().init(searchObj, getListBoxBranch(), pagingBranchList);
-		BindingListModelList lml = (BindingListModelList) getListBoxBranch().getModel();
+		getPagedBindingListWrapper().init(this.searchObj, getListBoxBranch(), this.pagingBranchList);
+		final BindingListModelList lml = (BindingListModelList) getListBoxBranch().getModel();
 		setBranches(lml);
 
 		// check if first time opened and init databinding for selectedBean
 		if (getSelectedBranche() == null) {
 			// init the bean with the first record in the List
 			if (lml.getSize() > 0) {
-				int rowIndex = 0;
+				final int rowIndex = 0;
 				// only for correct showing after Rendering. No effect as an
 				// Event
 				// yet.
@@ -209,7 +206,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	public void onDoubleClickedBranchItem(Event event) {
 		// logger.debug(event.toString());
 
-		Branche aBranche = getSelectedBranche();
+		final Branche aBranche = getSelectedBranche();
 
 		if (aBranche != null) {
 			setSelectedBranche(aBranche);
@@ -237,7 +234,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	public void onSelect$listBoxBranch(Event event) {
 		// logger.debug(event.toString());
 
-		Branche aBranche = getSelectedBranche();
+		final Branche aBranche = getSelectedBranche();
 
 		if (aBranche == null) {
 			return;
@@ -260,8 +257,9 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 		getBranchMainCtrl().doStoreInitValues();
 
 		// show the objects data in the statusBar
-		String str = Labels.getLabel("common.Branch") + ": " + aBranche.getBraBezeichnung();
-		EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeSelectedObject", null, str));
+		final String str = Labels.getLabel("common.Branch") + ": " + aBranche.getBraBezeichnung();
+		EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(
+				new Event("onChangeSelectedObject", null, str));
 
 	}
 
@@ -282,13 +280,13 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	 */
 	public void doFitSize() {
 		// normally 0 ! Or we have a i.e. a toolBar on top of the listBox.
-		int specialSize = 5;
-		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		int maxListBoxHeight = (height - specialSize - 138);
-		setCountRows((int) Math.round((maxListBoxHeight) / 17.7));
-		borderLayout_branchList.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		final int specialSize = 5;
+		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		final int maxListBoxHeight = height - specialSize - 138;
+		setCountRows((int) Math.round(maxListBoxHeight / 17.7));
+		this.borderLayout_branchList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
-		windowBranchList.invalidate();
+		this.windowBranchList.invalidate();
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -336,7 +334,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	}
 
 	public AnnotateDataBinder getBinder() {
-		return binder;
+		return this.binder;
 	}
 
 	public void setSearchObj(HibernateSearchObject<Branche> searchObj) {
@@ -344,7 +342,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	}
 
 	public HibernateSearchObject<Branche> getSearchObj() {
-		return searchObj;
+		return this.searchObj;
 	}
 
 	public void setCountRows(int countRows) {
@@ -352,7 +350,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	}
 
 	public int getCountRows() {
-		return countRows;
+		return this.countRows;
 	}
 
 	public void setBranchMainCtrl(BranchMainCtrl branchMainCtrl) {
@@ -360,11 +358,11 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	}
 
 	public BranchMainCtrl getBranchMainCtrl() {
-		return branchMainCtrl;
+		return this.branchMainCtrl;
 	}
 
 	public BrancheService getBrancheService() {
-		return brancheService;
+		return this.brancheService;
 	}
 
 	public void setBrancheService(BrancheService brancheService) {
@@ -376,6 +374,6 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	}
 
 	public Listbox getListBoxBranch() {
-		return listBoxBranch;
+		return this.listBoxBranch;
 	}
 }

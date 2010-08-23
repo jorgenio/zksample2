@@ -41,16 +41,16 @@ import de.forsthaus.backend.service.SecurityService;
 public class SecRightListModelItemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(SecRightListModelItemRenderer.class);
+	private static final Logger logger = Logger.getLogger(SecRightListModelItemRenderer.class);
 
 	private transient SecurityService securityService;
 
 	public SecurityService getSecurityService() {
-		if (securityService == null) {
-			securityService = (SecurityService) SpringUtil.getBean("securityService");
-			setSecurityService(securityService);
+		if (this.securityService == null) {
+			this.securityService = (SecurityService) SpringUtil.getBean("securityService");
+			setSecurityService(this.securityService);
 		}
-		return securityService;
+		return this.securityService;
 	}
 
 	public void setSecurityService(SecurityService securityService) {
@@ -60,18 +60,13 @@ public class SecRightListModelItemRenderer implements ListitemRenderer, Serializ
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		SecRight right = (SecRight) data;
-
-		// if (logger.isDebugEnabled()) {
-		// logger.debug("--> " + right.getRigName());
-		// }
-
+		final SecRight right = (SecRight) data;
 		Listcell lc;
 
 		lc = new Listcell(right.getRigName());
 		lc.setParent(item);
 
-		SecTyp typ = getSecurityService().getTypById(right.getRigType().intValue());
+		final SecTyp typ = getSecurityService().getTypById(right.getRigType().intValue());
 
 		lc = new Listcell(String.valueOf(typ.getStpTypname()));
 		lc.setParent(item);

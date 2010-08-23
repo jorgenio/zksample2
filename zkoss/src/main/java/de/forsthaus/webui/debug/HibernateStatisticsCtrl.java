@@ -55,7 +55,7 @@ import de.forsthaus.webui.util.pagging.PagedGridWrapper;
 public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(HibernateStatisticsCtrl.class);
+	private static final Logger logger = Logger.getLogger(HibernateStatisticsCtrl.class);
 
 	protected Window window_HibernateStatisticList; // autowired
 	protected Grid gridHibernateStatisticList; // autowired
@@ -78,25 +78,26 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 		 * filled by onClientInfo() in the indexCtroller
 		 */
 
-		int panelHeight = 5;
+		final int panelHeight = 5;
 
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		height = height + panelHeight;
 
-		int maxListBoxHeight = (height - 220);
+		final int maxListBoxHeight = height - 220;
 		setCountRows((int) Math.round(maxListBoxHeight / 19.2));
 
-		paging_HibernateStatisticList.setPageSize(getCountRows());
-		paging_HibernateStatisticList.setDetailed(true);
+		this.paging_HibernateStatisticList.setPageSize(getCountRows());
+		this.paging_HibernateStatisticList.setDetailed(true);
 
 		// ++ create the searchObject and init sorting ++ //
-		final HibernateSearchObject<HibernateStatistics> searchObj = new HibernateSearchObject<HibernateStatistics>(HibernateStatistics.class, getCountRows());
+		final HibernateSearchObject<HibernateStatistics> searchObj = new HibernateSearchObject<HibernateStatistics>(
+				HibernateStatistics.class, getCountRows());
 		searchObj.addSort("id", true);
 
 		// Set the ListModel for the HibernateStatistics.
-		gridPagedListWrapper.init(searchObj, gridHibernateStatisticList, paging_HibernateStatisticList);
+		this.gridPagedListWrapper.init(searchObj, this.gridHibernateStatisticList, this.paging_HibernateStatisticList);
 		// set the itemRenderer
-		gridHibernateStatisticList.setRowRenderer(new HibernateStatisticListRowRenderer());
+		this.gridHibernateStatisticList.setRowRenderer(new HibernateStatisticListRowRenderer());
 
 		// System.out.println(ZkossComponentTreeUtil.getZulTree(grid.getRoot()));
 	}
@@ -110,26 +111,27 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 
 		// System.out.println(ZkossComponentTreeUtil.getZulTree(self));
 
-		Rows rows = gridHibernateStatisticList.getRows();
-		List<Row> list = rows.getChildren();
+		final Rows rows = this.gridHibernateStatisticList.getRows();
+		final List<Row> list = rows.getChildren();
 
-		for (Row row : list) {
+		for (final Row row : list) {
 			if (row.getDetailChild().isOpen()) {
 
 				// First, Clear old stuff, if exists
 				row.getDetailChild().getChildren().clear();
 
 				// Get and CAST the object from the selected row
-				HibernateStatistics hs = (HibernateStatistics) row.getAttribute("data");
+				final HibernateStatistics hs = (HibernateStatistics) row.getAttribute("data");
 
 				// create a map and store the Object for overhanding to new
 				// Detail zul-file
-				HashMap<String, Object> map = new HashMap<String, Object>();
+				final HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("hibernateStatistics", hs);
 
 				// Get the opened 'Detail' and append the Detail Content.
-				Detail detail = row.getDetailChild();
-				detail.appendChild(Executions.createComponents("/WEB-INF/pages/debug/HibernateStatisticsDetail.zul", detail, map));
+				final Detail detail = row.getDetailChild();
+				detail.appendChild(Executions.createComponents("/WEB-INF/pages/debug/HibernateStatisticsDetail.zul",
+						detail, map));
 			}
 		}
 	}
@@ -146,8 +148,8 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 			logger.debug("--> " + event.toString());
 		}
 
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message.Information");
+		final String message = Labels.getLabel("message.Not_Implemented_Yet");
+		final String title = Labels.getLabel("message.Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 	}
@@ -166,8 +168,8 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 			logger.debug("--> " + event.toString());
 		}
 
-		Events.postEvent("onCreate", window_HibernateStatisticList, event);
-		window_HibernateStatisticList.invalidate();
+		Events.postEvent("onCreate", this.window_HibernateStatisticList, event);
+		this.window_HibernateStatisticList.invalidate();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -175,7 +177,7 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
 	public GuiHibernateStatisticsService getGuiHibernateStatisticsService() {
-		return guiHibernateStatisticsService;
+		return this.guiHibernateStatisticsService;
 	}
 
 	public void setGuiHibernateStatisticsService(GuiHibernateStatisticsService guiHibernateStatisticsService) {
@@ -183,7 +185,7 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 	}
 
 	public PagedGridWrapper<HibernateStatistics> getGridPagedListWrapper() {
-		return gridPagedListWrapper;
+		return this.gridPagedListWrapper;
 	}
 
 	public void setGridPagedListWrapper(PagedGridWrapper<HibernateStatistics> gridPagedListWrapper) {
@@ -195,6 +197,6 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 	}
 
 	public int getCountRows() {
-		return countRows;
+		return this.countRows;
 	}
 }

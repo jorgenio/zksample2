@@ -66,7 +66,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * A simple report implemented with the DynamicJasper framework.<br>
- *<br>
+ * <br>
  * This report shows a list of articles.<br>
  * <br>
  * The report uses the FastReportBuilder that have many parameters defined as
@@ -84,7 +84,7 @@ public class ArticleSimpleDJReport extends Window implements Serializable {
 	private ByteArrayOutputStream output;
 	private InputStream mediais;
 	private AMedia amedia;
-	private String zksample2title = "[Zksample2] DynamicJasper Report Sample";
+	private final String zksample2title = "[Zksample2] DynamicJasper Report Sample";
 
 	public ArticleSimpleDJReport(Component parent) throws InterruptedException {
 		super();
@@ -92,14 +92,14 @@ public class ArticleSimpleDJReport extends Window implements Serializable {
 
 		try {
 			doPrint();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ZksampleUtils.showErrorMessage(e.toString());
 		}
 	}
 
 	public void doPrint() throws JRException, ColumnBuilderException, ClassNotFoundException, IOException {
 
-		FastReportBuilder drb = new FastReportBuilder();
+		final FastReportBuilder drb = new FastReportBuilder();
 		DynamicReport dr;
 
 		/**
@@ -107,44 +107,45 @@ public class ArticleSimpleDJReport extends Window implements Serializable {
 		 * this in an other way.
 		 */
 		// Rows content
-		Style columnStyleNumbers = new Style();
+		final Style columnStyleNumbers = new Style();
 		columnStyleNumbers.setFont(Font.ARIAL_SMALL);
 		columnStyleNumbers.setHorizontalAlign(HorizontalAlign.RIGHT);
 
 		// Header for number row content
-		Style columnStyleNumbersBold = new Style();
+		final Style columnStyleNumbersBold = new Style();
 		columnStyleNumbersBold.setFont(Font.ARIAL_MEDIUM_BOLD);
 		columnStyleNumbersBold.setHorizontalAlign(HorizontalAlign.RIGHT);
 		columnStyleNumbersBold.setBorderBottom(Border.PEN_1_POINT);
 
 		// Rows content
-		Style columnStyleText = new Style();
+		final Style columnStyleText = new Style();
 		columnStyleText.setFont(Font.ARIAL_SMALL);
 		columnStyleText.setHorizontalAlign(HorizontalAlign.LEFT);
 
 		// Header for String row content
-		Style columnStyleTextBold = new Style();
+		final Style columnStyleTextBold = new Style();
 		columnStyleTextBold.setFont(Font.ARIAL_MEDIUM_BOLD);
 		columnStyleTextBold.setHorizontalAlign(HorizontalAlign.LEFT);
 		columnStyleTextBold.setBorderBottom(Border.PEN_1_POINT);
 
 		// Subtitle
-		Style subtitleStyle = new Style();
+		final Style subtitleStyle = new Style();
 		subtitleStyle.setHorizontalAlign(HorizontalAlign.LEFT);
 		subtitleStyle.setFont(Font.ARIAL_MEDIUM_BOLD);
 
 		// Localized column headers
-		String artNo = Labels.getLabel("common.Article.No");
-		String artShortText = Labels.getLabel("common.Description.Short");
-		String artPrice = Labels.getLabel("common.Price");
+		final String artNo = Labels.getLabel("common.Article.No");
+		final String artShortText = Labels.getLabel("common.Description.Short");
+		final String artPrice = Labels.getLabel("common.Price");
 
 		drb.addColumn(artNo, "artNr", String.class.getName(), 20, columnStyleText, columnStyleTextBold);
-		drb.addColumn(artShortText, "artKurzbezeichnung", String.class.getName(), 50, columnStyleText, columnStyleTextBold);
+		drb.addColumn(artShortText, "artKurzbezeichnung", String.class.getName(), 50, columnStyleText,
+				columnStyleTextBold);
 		drb.addColumn(artPrice, "artPreis", BigDecimal.class.getName(), 20, columnStyleNumbers, columnStyleNumbersBold);
 
 		// Sets the Report Columns, header, Title, Groups, Etc Formats
 		// DynamicJasper documentation
-		drb.setTitle(zksample2title);
+		drb.setTitle(this.zksample2title);
 		drb.setSubtitle("Article-List: " + ZksampleDateFormat.getDateFormater().format(new Date()));
 		drb.setSubtitleStyle(subtitleStyle);
 		drb.setPrintBackgroundOnOddRows(true);
@@ -152,14 +153,14 @@ public class ArticleSimpleDJReport extends Window implements Serializable {
 		dr = drb.build();
 
 		// Get information from database
-		ArticleService as = (ArticleService) SpringUtil.getBean("articleService");
-		List<Article> resultList = as.getAllArticles();
+		final ArticleService as = (ArticleService) SpringUtil.getBean("articleService");
+		final List<Article> resultList = as.getAllArticles();
 
 		// Create Datasource and put it in Dynamic Jasper Format
-		List data = new ArrayList(resultList.size());
+		final List data = new ArrayList(resultList.size());
 
-		for (Article obj : resultList) {
-			Map<String, Object> map = new HashMap<String, Object>();
+		for (final Article obj : resultList) {
+			final Map<String, Object> map = new HashMap<String, Object>();
 			map.put("artNr", obj.getArtNr());
 			map.put("artKurzbezeichnung", obj.getArtKurzbezeichnung());
 			map.put("artPreis", obj.getArtPreis());
@@ -167,45 +168,45 @@ public class ArticleSimpleDJReport extends Window implements Serializable {
 		}
 
 		// Generate the Jasper Print Object
-		JRDataSource ds = new JRBeanCollectionDataSource(data);
-		JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
+		final JRDataSource ds = new JRBeanCollectionDataSource(data);
+		final JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
 
-		String outputFormat = "PDF";
+		final String outputFormat = "PDF";
 
-		output = new ByteArrayOutputStream();
+		this.output = new ByteArrayOutputStream();
 
 		if (outputFormat.equalsIgnoreCase("PDF")) {
-			JasperExportManager.exportReportToPdfStream(jp, output);
-			mediais = new ByteArrayInputStream(output.toByteArray());
-			amedia = new AMedia("FirstReport.pdf", "pdf", "application/pdf", mediais);
+			JasperExportManager.exportReportToPdfStream(jp, this.output);
+			this.mediais = new ByteArrayInputStream(this.output.toByteArray());
+			this.amedia = new AMedia("FirstReport.pdf", "pdf", "application/pdf", this.mediais);
 
-			callReportWindow(amedia, "PDF");
+			callReportWindow(this.amedia, "PDF");
 		} else if (outputFormat.equalsIgnoreCase("XLS")) {
-			JExcelApiExporter exporterXLS = new JExcelApiExporter();
+			final JExcelApiExporter exporterXLS = new JExcelApiExporter();
 			exporterXLS.setParameter(JExcelApiExporterParameter.JASPER_PRINT, jp);
-			exporterXLS.setParameter(JExcelApiExporterParameter.OUTPUT_STREAM, output);
+			exporterXLS.setParameter(JExcelApiExporterParameter.OUTPUT_STREAM, this.output);
 			exporterXLS.setParameter(JExcelApiExporterParameter.IS_DETECT_CELL_TYPE, Boolean.TRUE);
 			exporterXLS.setParameter(JExcelApiExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.TRUE);
 			exporterXLS.setParameter(JExcelApiExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
 			exporterXLS.exportReport();
-			mediais = new ByteArrayInputStream(output.toByteArray());
-			amedia = new AMedia("FileFormatExcel", "xls", "application/vnd.ms-excel", mediais);
+			this.mediais = new ByteArrayInputStream(this.output.toByteArray());
+			this.amedia = new AMedia("FileFormatExcel", "xls", "application/vnd.ms-excel", this.mediais);
 
-			callReportWindow(amedia, "XLS");
+			callReportWindow(this.amedia, "XLS");
 		} else if (outputFormat.equalsIgnoreCase("RTF") || outputFormat.equalsIgnoreCase("DOC")) {
-			JRRtfExporter exporterRTF = new JRRtfExporter();
+			final JRRtfExporter exporterRTF = new JRRtfExporter();
 			exporterRTF.setParameter(JRExporterParameter.JASPER_PRINT, jp);
-			exporterRTF.setParameter(JRExporterParameter.OUTPUT_STREAM, output);
+			exporterRTF.setParameter(JRExporterParameter.OUTPUT_STREAM, this.output);
 			exporterRTF.exportReport();
-			mediais = new ByteArrayInputStream(output.toByteArray());
-			amedia = new AMedia("FileFormatRTF", "rtf", "application/rtf", mediais);
+			this.mediais = new ByteArrayInputStream(this.output.toByteArray());
+			this.amedia = new AMedia("FileFormatRTF", "rtf", "application/rtf", this.mediais);
 
-			callReportWindow(amedia, "RTF-DOC");
+			callReportWindow(this.amedia, "RTF-DOC");
 		}
 	}
 
 	private void callReportWindow(AMedia aMedia, String format) {
-		boolean modal = true;
+		final boolean modal = true;
 
 		this.setTitle("Dynamic JasperReports. Sample Report for ZKoss");
 		this.setId("ReportWindow");
@@ -218,21 +219,20 @@ public class ArticleSimpleDJReport extends Window implements Serializable {
 		this.setWidth("80%");
 		this.addEventListener("onClose", new OnCloseReportEventListener());
 
-		iFrame = new Iframe();
-		iFrame.setId("jasperReportId");
-		iFrame.setWidth("100%");
-		iFrame.setHeight("100%");
-		iFrame.setContent(aMedia);
-		iFrame.setParent(this);
+		this.iFrame = new Iframe();
+		this.iFrame.setId("jasperReportId");
+		this.iFrame.setWidth("100%");
+		this.iFrame.setHeight("100%");
+		this.iFrame.setContent(aMedia);
+		this.iFrame.setParent(this);
 
 		if (modal == true) {
 			try {
 				this.doModal();
-			} catch (SuspendNotAllowedException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (final SuspendNotAllowedException e) {
+				throw new RuntimeException(e);
+			} catch (final InterruptedException e) {
+				throw new RuntimeException(e);
 			}
 		}
 
@@ -263,11 +263,10 @@ public class ArticleSimpleDJReport extends Window implements Serializable {
 
 		// TODO check this
 		try {
-			amedia.getStreamData().close();
-			output.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			this.amedia.getStreamData().close();
+			this.output.close();
+		} catch (final Exception e) {
+			throw new RuntimeException(e);
 		}
 
 		this.onClose();

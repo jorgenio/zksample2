@@ -77,7 +77,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
 public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements Serializable {
 
 	private static final long serialVersionUID = -6139454778139881103L;
-	private transient static final Logger logger = Logger.getLogger(SecLoginlogListCtrl.class);
+	private static final Logger logger = Logger.getLogger(SecLoginlogListCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -135,8 +135,6 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 */
 	public SecLoginlogListCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -144,55 +142,56 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	public void onCreate$secLoginlogListWindow(Event event) throws Exception {
-		logger.debug(event.toString());
-
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
 		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
 		 * filled by onClientInfo() in the indexCtroller
 		 */
-		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		int maxListBoxHeight = (height - 140);
+		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		final int maxListBoxHeight = height - 140;
 		setCountRows(Math.round(maxListBoxHeight / 17));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());
 
-		borderLayout_SecUserlogList.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		this.borderLayout_SecUserlogList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		// init, show all rights
-		checkbox_SecLoginlogList_ShowAll.setChecked(true);
+		this.checkbox_SecLoginlogList_ShowAll.setChecked(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		listheader_SecLoginlogList_lglLogtime.setSortAscending(new FieldComparator("lglLogtime", true));
-		listheader_SecLoginlogList_lglLogtime.setSortDescending(new FieldComparator("lglLogtime", false));
-		listheader_SecLoginlogList_lglLogtime.setSortDirection("descending");
-		listheader_SecLoginlogList_lglLoginname.setSortAscending(new FieldComparator("lglLoginname", true));
-		listheader_SecLoginlogList_lglLoginname.setSortDescending(new FieldComparator("lglLoginname", false));
-		listheader_SecLoginlogList_lglStatusid.setSortAscending(new FieldComparator("lglStatusid", true));
-		listheader_SecLoginlogList_lglStatusid.setSortDescending(new FieldComparator("lglStatusid", false));
-		listheader_SecLoginlogList_lglIp.setSortAscending(new FieldComparator("lglIp", true));
-		listheader_SecLoginlogList_lglIp.setSortDescending(new FieldComparator("lglIp", false));
-		listheader_SecLoginlogList_CountryCode2.setSortAscending(new FieldComparator("ip2Country.sysCountryCode.ccdCode2", true));
-		listheader_SecLoginlogList_CountryCode2.setSortDescending(new FieldComparator("ip2Country.sysCountryCode.ccdCode2", false));
-		listheader_SecLoginlogList_lglSessionid.setSortAscending(new FieldComparator("lglSessionid", true));
-		listheader_SecLoginlogList_lglSessionid.setSortDescending(new FieldComparator("lglSessionid", false));
+		this.listheader_SecLoginlogList_lglLogtime.setSortAscending(new FieldComparator("lglLogtime", true));
+		this.listheader_SecLoginlogList_lglLogtime.setSortDescending(new FieldComparator("lglLogtime", false));
+		this.listheader_SecLoginlogList_lglLogtime.setSortDirection("descending");
+		this.listheader_SecLoginlogList_lglLoginname.setSortAscending(new FieldComparator("lglLoginname", true));
+		this.listheader_SecLoginlogList_lglLoginname.setSortDescending(new FieldComparator("lglLoginname", false));
+		this.listheader_SecLoginlogList_lglStatusid.setSortAscending(new FieldComparator("lglStatusid", true));
+		this.listheader_SecLoginlogList_lglStatusid.setSortDescending(new FieldComparator("lglStatusid", false));
+		this.listheader_SecLoginlogList_lglIp.setSortAscending(new FieldComparator("lglIp", true));
+		this.listheader_SecLoginlogList_lglIp.setSortDescending(new FieldComparator("lglIp", false));
+		this.listheader_SecLoginlogList_CountryCode2.setSortAscending(new FieldComparator(
+				"ip2Country.sysCountryCode.ccdCode2", true));
+		this.listheader_SecLoginlogList_CountryCode2.setSortDescending(new FieldComparator(
+				"ip2Country.sysCountryCode.ccdCode2", false));
+		this.listheader_SecLoginlogList_lglSessionid.setSortAscending(new FieldComparator("lglSessionid", true));
+		this.listheader_SecLoginlogList_lglSessionid.setSortDescending(new FieldComparator("lglSessionid", false));
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class);
+		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
+				SecLoginlog.class);
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
 		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
 		soSecLoginlog.addSort("lglLogtime", true);
 
 		// set the paging params
-		paging_SecUserLogList.setPageSize(getCountRows());
-		paging_SecUserLogList.setDetailed(true);
+		this.paging_SecUserLogList.setPageSize(getCountRows());
+		this.paging_SecUserLogList.setDetailed(true);
 
 		// Set the ListModel
-		getPagedListWrapper().init(soSecLoginlog, listBoxSecUserlog, paging_SecUserLogList);
+		getPagedListWrapper().init(soSecLoginlog, this.listBoxSecUserlog, this.paging_SecUserLogList);
 		// set the itemRenderer
-		listBoxSecUserlog.setItemRenderer(new SecLoginlogListModelItemRenderer());
+		this.listBoxSecUserlog.setItemRenderer(new SecLoginlogListModelItemRenderer());
 
 		createServerPushTimer();
 
@@ -203,35 +202,35 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * different DB methods for showing different result sets.
 	 */
 	private void createServerPushTimer() {
-		timer = new Timer();
+		this.timer = new Timer();
 
 		// timer doesn't work without a page as parent
-		timer.setPage(secLoginlogListWindow.getPage());
-		timer.setDelay(4000);
-		timer.setRepeats(true);
-		timer.addEventListener("onTimer", new EventListener() {
+		this.timer.setPage(this.secLoginlogListWindow.getPage());
+		this.timer.setDelay(4000);
+		this.timer.setRepeats(true);
+		this.timer.addEventListener("onTimer", new EventListener() {
 
 			@Override
 			public void onEvent(Event event) throws Exception {
-				callChanger = callChanger + 1;
+				SecLoginlogListCtrl.this.callChanger = SecLoginlogListCtrl.this.callChanger + 1;
 
-				System.out.println(callChanger);
+				// System.out.println(SecLoginlogListCtrl.this.callChanger);
 
-				if (callChanger % 2 == 0) {
+				if (SecLoginlogListCtrl.this.callChanger % 2 == 0) {
 					updateList(); // do something
 				} else {
 					updateList2(); // do something others
 				}
 
-				if (callChanger == 5) {
-					callChanger = 0;
+				if (SecLoginlogListCtrl.this.callChanger == 5) {
+					SecLoginlogListCtrl.this.callChanger = 0;
 					// stop serverPush
-					timer.setRunning(false);
-					checkbox_SecLoginlogList_ServerPush.setChecked(false);
-					checkbox_SecLoginlogList_ShowAll.setChecked(true);
+					SecLoginlogListCtrl.this.timer.setRunning(false);
+					SecLoginlogListCtrl.this.checkbox_SecLoginlogList_ServerPush.setChecked(false);
+					SecLoginlogListCtrl.this.checkbox_SecLoginlogList_ShowAll.setChecked(true);
 
-					String message = Labels.getLabel("message.information.only5timesAllowedBecauseHS");
-					String title = Labels.getLabel("message.Information") + " --> ServerPush-Sample";
+					final String message = Labels.getLabel("message.information.only5timesAllowedBecauseHS");
+					final String title = Labels.getLabel("message.Information") + " --> ServerPush-Sample";
 					MultiLineMessageBox.doSetTemplate();
 					MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 
@@ -239,7 +238,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 				}
 			}
 		});
-		timer.setRunning(false);
+		this.timer.setRunning(false);
 	}
 
 	/**
@@ -251,19 +250,20 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		logger.debug(event.toString());
 
 		// empty the text search boxes
-		tb_SecUserlog_LoginName.setValue(""); // clear
-		checkbox_SecLoginlogList_ShowOnlySuccess.setChecked(false);
-		checkbox_SecLoginlogList_ShowOnlyFailed.setChecked(false);
+		this.tb_SecUserlog_LoginName.setValue(""); // clear
+		this.checkbox_SecLoginlogList_ShowOnlySuccess.setChecked(false);
+		this.checkbox_SecLoginlogList_ShowOnlyFailed.setChecked(false);
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
+		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
+				SecLoginlog.class, getCountRows());
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
 		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
 		soSecLoginlog.addSort("lglLogtime", true);
 
 		// Set the ListModel
-		getPagedListWrapper().init(soSecLoginlog, listBoxSecUserlog, paging_SecUserLogList);
+		getPagedListWrapper().init(soSecLoginlog, this.listBoxSecUserlog, this.paging_SecUserLogList);
 
 	}
 
@@ -276,12 +276,13 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		logger.debug(event.toString());
 
 		// empty the text search boxes
-		tb_SecUserlog_LoginName.setValue(""); // clear
-		checkbox_SecLoginlogList_ShowAll.setChecked(false);
-		checkbox_SecLoginlogList_ShowOnlyFailed.setChecked(false);
+		this.tb_SecUserlog_LoginName.setValue(""); // clear
+		this.checkbox_SecLoginlogList_ShowAll.setChecked(false);
+		this.checkbox_SecLoginlogList_ShowOnlyFailed.setChecked(false);
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
+		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
+				SecLoginlog.class, getCountRows());
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
 		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -290,7 +291,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		soSecLoginlog.addFilter(new Filter("lglStatusid", 1, Filter.OP_EQUAL));
 
 		// Set the ListModel
-		getPagedListWrapper().init(soSecLoginlog, listBoxSecUserlog, paging_SecUserLogList);
+		getPagedListWrapper().init(soSecLoginlog, this.listBoxSecUserlog, this.paging_SecUserLogList);
 
 	}
 
@@ -303,12 +304,13 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		logger.debug(event.toString());
 
 		// empty the text search boxes
-		tb_SecUserlog_LoginName.setValue(""); // clear
-		checkbox_SecLoginlogList_ShowAll.setChecked(false);
-		checkbox_SecLoginlogList_ShowOnlySuccess.setChecked(false);
+		this.tb_SecUserlog_LoginName.setValue(""); // clear
+		this.checkbox_SecLoginlogList_ShowAll.setChecked(false);
+		this.checkbox_SecLoginlogList_ShowOnlySuccess.setChecked(false);
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
+		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
+				SecLoginlog.class, getCountRows());
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
 		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -317,7 +319,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		soSecLoginlog.addFilter(new Filter("lglStatusid", 0, Filter.OP_EQUAL));
 
 		// Set the ListModel
-		getPagedListWrapper().init(soSecLoginlog, listBoxSecUserlog, paging_SecUserLogList);
+		getPagedListWrapper().init(soSecLoginlog, this.listBoxSecUserlog, this.paging_SecUserLogList);
 
 	}
 
@@ -342,20 +344,22 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		logger.debug(event.toString());
 
 		// if not empty
-		if (!tb_SecUserlog_LoginName.getValue().isEmpty()) {
-			checkbox_SecLoginlogList_ShowAll.setChecked(false); // clear
+		if (!this.tb_SecUserlog_LoginName.getValue().isEmpty()) {
+			this.checkbox_SecLoginlogList_ShowAll.setChecked(false); // clear
 
 			// ++ create the searchObject and init sorting ++//
-			HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
+			final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
+					SecLoginlog.class, getCountRows());
 			// deeper loading of the relations to prevent the lazy
 			// loading problem.
 			soSecLoginlog.addFetch("ip2Country.sysCountryCode");
 			soSecLoginlog.addSort("lglLogtime", true);
 
-			soSecLoginlog.addFilter(new Filter("lglLoginname", tb_SecUserlog_LoginName.getValue(), Filter.OP_EQUAL));
+			soSecLoginlog
+					.addFilter(new Filter("lglLoginname", this.tb_SecUserlog_LoginName.getValue(), Filter.OP_EQUAL));
 
 			// Set the ListModel
-			getPagedListWrapper().init(soSecLoginlog, listBoxSecUserlog, paging_SecUserLogList);
+			getPagedListWrapper().init(soSecLoginlog, this.listBoxSecUserlog, this.paging_SecUserLogList);
 		}
 
 	}
@@ -366,7 +370,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	public void onCheck$checkbox_SecLoginlogList_ServerPush(Event event) throws Exception {
 		logger.debug(event.toString());
 
-		if (checkbox_SecLoginlogList_ServerPush.isChecked()) {
+		if (this.checkbox_SecLoginlogList_ServerPush.isChecked()) {
 			doStartServerPush(event);
 		} else {
 			doStopServerPush(event);
@@ -394,8 +398,8 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		// }
 
 		// stops the timer
-		if (timer != null) {
-			timer.setRunning(false);
+		if (this.timer != null) {
+			this.timer.setRunning(false);
 		}
 	}
 
@@ -424,8 +428,8 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		// serverPush.start();
 
 		// start the timer
-		if (timer != null) {
-			timer.setRunning(true);
+		if (this.timer != null) {
+			this.timer.setRunning(true);
 		}
 	}
 
@@ -433,14 +437,14 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * Gets all logins for success.
 	 */
 	public void updateList() {
-		listBoxSecUserlog.setModel(new ListModelList(getLoginLoggingService().getAllLogsServerPushForSuccess()));
+		this.listBoxSecUserlog.setModel(new ListModelList(getLoginLoggingService().getAllLogsServerPushForSuccess()));
 	}
 
 	/**
 	 * Gets all logins for failed.
 	 */
 	public void updateList2() {
-		listBoxSecUserlog.setModel(new ListModelList(getLoginLoggingService().getAllLogsServerPushForFailed()));
+		this.listBoxSecUserlog.setModel(new ListModelList(getLoginLoggingService().getAllLogsServerPushForFailed()));
 	}
 
 	/**
@@ -466,8 +470,8 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		Events.postEvent("onCreate", secLoginlogListWindow, event);
-		secLoginlogListWindow.invalidate();
+		Events.postEvent("onCreate", this.secLoginlogListWindow, event);
+		this.secLoginlogListWindow.invalidate();
 	}
 
 	/**
@@ -481,22 +485,23 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	public void onClick$button_SecLoginlogList_DeleteLocalIPs(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		int recCount = getLoginLoggingService().deleteLocalIPs();
+		final int recCount = getLoginLoggingService().deleteLocalIPs();
 
-		String message = Labels.getLabel("message.Information.CountRecordsDeleted") + " " + recCount;
-		String title = Labels.getLabel("message.Information");
+		final String message = Labels.getLabel("message.Information.CountRecordsDeleted") + " " + recCount;
+		final String title = Labels.getLabel("message.Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
+		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
+				SecLoginlog.class, getCountRows());
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
 		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
 		soSecLoginlog.addSort("lglLogtime", true);
 
 		// Set the ListModel
-		getPagedListWrapper().init(soSecLoginlog, listBoxSecUserlog, paging_SecUserLogList);
+		getPagedListWrapper().init(soSecLoginlog, this.listBoxSecUserlog, this.paging_SecUserLogList);
 
 	}
 
@@ -511,18 +516,19 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	public void onClick$button_SecLoginlogList_ImportIPToCountryCSV(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		String str = InputConfirmBox.show(secLoginlogListWindow, Labels.getLabel("message.Information.InputSupervisorPassword"));
+		final String str = InputConfirmBox.show(this.secLoginlogListWindow,
+				Labels.getLabel("message.Information.InputSupervisorPassword"));
 
 		if (StringUtils.equalsIgnoreCase(str, "yes we can")) {
-			int recCount = getGuiLoginLoggingService().importIP2CountryCSV();
+			final int recCount = getGuiLoginLoggingService().importIP2CountryCSV();
 
-			String message = Labels.getLabel("message.Information.CountRecordsInsertedUpdated") + " " + recCount;
-			String title = Labels.getLabel("message.Information");
+			final String message = Labels.getLabel("message.Information.CountRecordsInsertedUpdated") + " " + recCount;
+			final String title = Labels.getLabel("message.Information");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 		} else {
-			String message = Labels.getLabel("message.error.falsePassword");
-			String title = Labels.getLabel("message.Error");
+			final String message = Labels.getLabel("message.error.falsePassword");
+			final String title = Labels.getLabel("message.Error");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 		}
@@ -540,29 +546,31 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	public void onClick$button_SecLoginlogList_UpdateGeoData(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		String str = InputConfirmBox.show(secLoginlogListWindow, Labels.getLabel("message.Information.InputSupervisorPassword"));
+		final String str = InputConfirmBox.show(this.secLoginlogListWindow,
+				Labels.getLabel("message.Information.InputSupervisorPassword"));
 
 		if (StringUtils.equalsIgnoreCase(str, "yes we can")) {
-			int recCount = getGuiLoginLoggingService().updateFromHostLookUpMain();
+			final int recCount = getGuiLoginLoggingService().updateFromHostLookUpMain();
 
-			String message = Labels.getLabel("message.Information.CountRecordsInsertedUpdated") + " " + recCount;
-			String title = Labels.getLabel("message.Information");
+			final String message = Labels.getLabel("message.Information.CountRecordsInsertedUpdated") + " " + recCount;
+			final String title = Labels.getLabel("message.Information");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 
 			// ++ create the searchObject and init sorting ++//
-			HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
+			final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
+					SecLoginlog.class, getCountRows());
 			// deeper loading of the relations to prevent the lazy
 			// loading problem.
 			soSecLoginlog.addFetch("ip2Country.sysCountryCode");
 			soSecLoginlog.addSort("lglLogtime", true);
 
 			// Set the ListModel
-			getPagedListWrapper().init(soSecLoginlog, listBoxSecUserlog, paging_SecUserLogList);
+			getPagedListWrapper().init(soSecLoginlog, this.listBoxSecUserlog, this.paging_SecUserLogList);
 
 		} else {
-			String message = Labels.getLabel("message.error.falsePassword");
-			String title = Labels.getLabel("message.Error");
+			final String message = Labels.getLabel("message.error.falsePassword");
+			final String title = Labels.getLabel("message.Error");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 		}
@@ -581,7 +589,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	public void onClick$button_SecLoginlogList_bb_SearchClose(Event event) {
 		logger.debug(event.toString());
 
-		bandbox_SecLoginlogList_PeriodSearch.close();
+		this.bandbox_SecLoginlogList_PeriodSearch.close();
 	}
 
 	/**
@@ -594,8 +602,8 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	public void onOpen$bandbox_SecLoginlogList_PeriodSearch(Event event) throws Exception {
 		logger.debug(event.toString());
 
-		dbox_LoginLog_DateFrom.setValue(new Date());
-		dbox_LoginLog_DateTo.setValue(new Date());
+		this.dbox_LoginLog_DateFrom.setValue(new Date());
+		this.dbox_LoginLog_DateTo.setValue(new Date());
 	}
 
 	/**
@@ -607,16 +615,16 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	public void onClick$button_SecLoginlogList_bb_SearchDate(Event event) throws Exception {
 		logger.debug(event.toString());
 
-		if ((!(dbox_LoginLog_DateFrom.getValue() == null)) && (!(dbox_LoginLog_DateTo.getValue() == null))) {
+		if (!(this.dbox_LoginLog_DateFrom.getValue() == null) && !(this.dbox_LoginLog_DateTo.getValue() == null)) {
 
-			if (dbox_LoginLog_DateFrom.getValue().after(dbox_LoginLog_DateTo.getValue())) {
+			if (this.dbox_LoginLog_DateFrom.getValue().after(this.dbox_LoginLog_DateTo.getValue())) {
 				MultiLineMessageBox.doSetTemplate();
 				MultiLineMessageBox.show(Labels.getLabel("message_EndDate_Before_BeginDate"));
 			} else {
-				Date dateFrom = dbox_LoginLog_DateFrom.getValue();
-				Date dateTo = dbox_LoginLog_DateTo.getValue();
+				Date dateFrom = this.dbox_LoginLog_DateFrom.getValue();
+				Date dateTo = this.dbox_LoginLog_DateTo.getValue();
 
-				Calendar calFrom = Calendar.getInstance();
+				final Calendar calFrom = Calendar.getInstance();
 				calFrom.setTime(dateFrom);
 				calFrom.set(Calendar.AM_PM, 0);
 				calFrom.set(Calendar.HOUR, 0);
@@ -624,7 +632,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 				calFrom.set(Calendar.SECOND, 1);
 				dateFrom = calFrom.getTime();
 
-				Calendar calTo = Calendar.getInstance();
+				final Calendar calTo = Calendar.getInstance();
 				calTo.setTime(dateTo);
 				calTo.set(Calendar.AM_PM, 1);
 				calTo.set(Calendar.HOUR, 11);
@@ -633,7 +641,8 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 				dateTo = calTo.getTime();
 
 				// ++ create the searchObject and init sorting ++//
-				HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
+				final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
+						SecLoginlog.class, getCountRows());
 				// deeper loading of the relations to prevent the lazy
 				// loading problem.
 				soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -643,9 +652,9 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 				soSecLoginlog.addFilter(new Filter("lglLogtime", dateTo, Filter.OP_LESS_OR_EQUAL));
 
 				// Set the ListModel
-				getPagedListWrapper().init(soSecLoginlog, listBoxSecUserlog, paging_SecUserLogList);
+				getPagedListWrapper().init(soSecLoginlog, this.listBoxSecUserlog, this.paging_SecUserLogList);
 
-				checkbox_SecLoginlogList_ShowAll.setChecked(false);
+				this.checkbox_SecLoginlogList_ShowAll.setChecked(false);
 
 			}
 		}
@@ -656,7 +665,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	public LoginLoggingService getLoginLoggingService() {
-		return loginLoggingService;
+		return this.loginLoggingService;
 	}
 
 	public void setLoginLoggingService(LoginLoggingService loginLoggingService) {
@@ -668,11 +677,11 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	}
 
 	public GuiLoginLoggingService getGuiLoginLoggingService() {
-		return guiLoginLoggingService;
+		return this.guiLoginLoggingService;
 	}
 
 	public int getCountRows() {
-		return countRows;
+		return this.countRows;
 	}
 
 	public void setCountRows(int countRows) {

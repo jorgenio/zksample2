@@ -33,7 +33,7 @@ import de.forsthaus.policy.UserCounter;
 public class UserCounterImpl implements UserCounter, Serializable {
 
 	private static final long serialVersionUID = -2617461135135795178L;
-	private transient static final Logger logger = Logger.getLogger(UserCounterImpl.class);
+	private static final Logger logger = Logger.getLogger(UserCounterImpl.class);
 
 	public static class SessionListener {
 
@@ -41,15 +41,15 @@ public class UserCounterImpl implements UserCounter, Serializable {
 		private final Log logger = LogFactory.getLog(getClass());
 
 		public void startSession() {
-			logger.warn("start");
+			this.logger.warn("start");
 		}
 
 		public void disposeSession() {
-			logger.warn("ende");
+			this.logger.warn("ende");
 		}
 
 		public UserCounterImpl getUserCounter() {
-			return userCounter;
+			return this.userCounter;
 		}
 
 		public void setUserCounter(UserCounterImpl userCounter) {

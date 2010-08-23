@@ -37,18 +37,14 @@ import de.forsthaus.backend.model.Language;
 public class LanguageListModelItemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(LanguageListModelItemRenderer.class);
+	private static final Logger logger = Logger.getLogger(LanguageListModelItemRenderer.class);
 
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		Language language = (Language) data;
+		final Language language = (Language) data;
 
-//		if (logger.isDebugEnabled()) {
-//			logger.debug("--> " + language.getLanText());
-//		}
-
-		Listcell lc = new Listcell(language.getLanText());
+		final Listcell lc = new Listcell(language.getLanText());
 		lc.setParent(item);
 
 		item.setAttribute("data", data);

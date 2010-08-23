@@ -58,7 +58,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
 public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -546886879998950467L;
-	private transient static final Logger logger = Logger.getLogger(SecGroupDialogCtrl.class);
+	private static final Logger logger = Logger.getLogger(SecGroupDialogCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -100,8 +100,6 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public SecGroupDialogCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	/**
@@ -112,17 +110,16 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$secGroupDialogWindow(Event event) throws Exception {
-		logger.debug(event.toString());
-
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+		this.btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, true, this.btnNew,
+				this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
 
 		// get the params map that are overhanded by creation.
-		Map<String, Object> args = getCreationArgsMap(event);
+		final Map<String, Object> args = getCreationArgsMap(event);
 
 		if (args.containsKey("group")) {
-			group = (SecGroup) args.get("group");
-			setGroup(group);
+			this.group = (SecGroup) args.get("group");
+			setGroup(this.group);
 		} else {
 			setGroup(null);
 		}
@@ -131,9 +128,9 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// to it and can synchronize the shown data when we do insert, edit or
 		// delete users here.
 		if (args.containsKey("listBoxSecGroups")) {
-			listBoxSecGroups = (Listbox) args.get("listBoxSecGroups");
+			this.listBoxSecGroups = (Listbox) args.get("listBoxSecGroups");
 		} else {
-			listBoxSecGroups = null;
+			this.listBoxSecGroups = null;
 		}
 
 		// set Field Properties
@@ -239,9 +236,9 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		try {
 			doClose();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			// close anyway
-			secGroupDialogWindow.onClose();
+			this.secGroupDialogWindow.onClose();
 		}
 	}
 
@@ -261,29 +258,31 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
-			String title = Labels.getLabel("message.Information");
+			final String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
+			final String title = Labels.getLabel("message.Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
-				public void onEvent(Event evt) {
-					switch (((Integer) evt.getData()).intValue()) {
-					case MultiLineMessageBox.YES:
-						try {
-							doSave();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO,
+					MultiLineMessageBox.QUESTION, true, new EventListener() {
+						@Override
+						public void onEvent(Event evt) {
+							switch (((Integer) evt.getData()).intValue()) {
+							case MultiLineMessageBox.YES:
+								try {
+									doSave();
+								} catch (final InterruptedException e) {
+									throw new RuntimeException(e);
+								}
+							case MultiLineMessageBox.NO:
+								break; //
+							}
 						}
-					case MultiLineMessageBox.NO:
-						break; // 
 					}
-				}
-			}
 
 			) == MultiLineMessageBox.YES) {
 			}
 		}
-		secGroupDialogWindow.onClose();
+		this.secGroupDialogWindow.onClose();
 	}
 
 	/**
@@ -295,7 +294,7 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private void doCancel() {
 		doResetInitValues();
 		doReadOnly();
-		btnCtrl.setInitEdit();
+		this.btnCtrl.setInitEdit();
 	}
 
 	/**
@@ -306,8 +305,8 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doWriteBeanToComponents(SecGroup aGroup) {
 
-		grpShortdescription.setValue(aGroup.getGrpShortdescription());
-		grpLongdescription.setValue(aGroup.getGrpLongdescription());
+		this.grpShortdescription.setValue(aGroup.getGrpShortdescription());
+		this.grpLongdescription.setValue(aGroup.getGrpLongdescription());
 
 	}
 
@@ -318,8 +317,8 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doWriteComponentsToBean(SecGroup aGroup) {
 
-		aGroup.setGrpShortdescription(grpShortdescription.getValue());
-		aGroup.setGrpLongdescription(grpLongdescription.getValue());
+		aGroup.setGrpShortdescription(this.grpShortdescription.getValue());
+		aGroup.setGrpLongdescription(this.grpLongdescription.getValue());
 
 	}
 
@@ -346,10 +345,10 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// set Readonly mode accordingly if the object is new or not.
 		if (aGroup.isNew()) {
-			btnCtrl.setInitNew();
+			this.btnCtrl.setInitNew();
 			doEdit();
 		} else {
-			btnCtrl.setInitEdit();
+			this.btnCtrl.setInitEdit();
 			doReadOnly();
 		}
 
@@ -361,8 +360,9 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 			// during user action.
 			doStoreInitValues();
 
-			secGroupDialogWindow.doModal(); // open the dialog in modal mode
-		} catch (Exception e) {
+			this.secGroupDialogWindow.doModal(); // open the dialog in modal
+													// mode
+		} catch (final Exception e) {
 			Messagebox.show(e.toString());
 		}
 	}
@@ -375,24 +375,24 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * Set the properties of the fields, like maxLength.<br>
 	 */
 	private void doSetFieldProperties() {
-		grpShortdescription.setMaxlength(40);
-		grpLongdescription.setMaxlength(1000);
+		this.grpShortdescription.setMaxlength(40);
+		this.grpLongdescription.setMaxlength(1000);
 	}
 
 	/**
 	 * Stores the init values in mem vars. <br>
 	 */
 	private void doStoreInitValues() {
-		oldVar_grpShortdescription = grpShortdescription.getValue();
-		oldVar_grpLongdescription = grpLongdescription.getValue();
+		this.oldVar_grpShortdescription = this.grpShortdescription.getValue();
+		this.oldVar_grpLongdescription = this.grpLongdescription.getValue();
 	}
 
 	/**
 	 * Resets the init values from mem vars. <br>
 	 */
 	private void doResetInitValues() {
-		grpShortdescription.setValue(oldVar_grpShortdescription);
-		grpLongdescription.setValue(oldVar_grpLongdescription);
+		this.grpShortdescription.setValue(this.oldVar_grpShortdescription);
+		this.grpLongdescription.setValue(this.oldVar_grpLongdescription);
 	}
 
 	/**
@@ -404,10 +404,10 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private boolean isDataChanged() {
 		boolean changed = false;
 
-		if (oldVar_grpShortdescription != grpShortdescription.getValue()) {
+		if (this.oldVar_grpShortdescription != this.grpShortdescription.getValue()) {
 			changed = true;
 		}
-		if (oldVar_grpLongdescription != grpLongdescription.getValue()) {
+		if (this.oldVar_grpLongdescription != this.grpLongdescription.getValue()) {
 			changed = true;
 		}
 
@@ -421,7 +421,7 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		setValidationOn(true);
 
-		grpShortdescription.setConstraint("NO EMPTY");
+		this.grpShortdescription.setConstraint("NO EMPTY");
 	}
 
 	/**
@@ -431,7 +431,7 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		setValidationOn(false);
 
-		grpShortdescription.setConstraint("");
+		this.grpShortdescription.setConstraint("");
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -448,39 +448,45 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final SecGroup aGroup = getGroup();
 
 		// Show a confirm box
-		String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> " + aGroup.getGrpShortdescription();
-		String title = Labels.getLabel("message.Deleting.Record");
+		final String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> "
+				+ aGroup.getGrpShortdescription();
+		final String title = Labels.getLabel("message.Deleting.Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
-			public void onEvent(Event evt) {
-				switch (((Integer) evt.getData()).intValue()) {
-				case MultiLineMessageBox.YES:
-					delete();
-				case MultiLineMessageBox.NO:
-					break; // 
+		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO,
+				MultiLineMessageBox.QUESTION, true, new EventListener() {
+					@Override
+					public void onEvent(Event evt) {
+						switch (((Integer) evt.getData()).intValue()) {
+						case MultiLineMessageBox.YES:
+							delete();
+						case MultiLineMessageBox.NO:
+							break; //
+						}
+					}
+
+					private void delete() {
+
+						// delete from database
+						getSecurityService().delete(aGroup);
+
+						// now synchronize the listBox
+						final ListModelList lml = (ListModelList) SecGroupDialogCtrl.this.listBoxSecGroups
+								.getListModel();
+
+						// Check if the object is new or updated
+						// -1 means that the obj is not in the list, so it's
+						// new..
+						if (lml.indexOf(aGroup) == -1) {
+						} else {
+							lml.remove(lml.indexOf(aGroup));
+						}
+
+						SecGroupDialogCtrl.this.secGroupDialogWindow.onClose(); // close
+																				// the
+																				// dialog
+					}
 				}
-			}
-
-			private void delete() {
-
-				// delete from database
-				getSecurityService().delete(aGroup);
-
-				// now synchronize the listBox
-				ListModelList lml = (ListModelList) listBoxSecGroups.getListModel();
-
-				// Check if the object is new or updated
-				// -1 means that the obj is not in the list, so it's
-				// new..
-				if (lml.indexOf(aGroup) == -1) {
-				} else {
-					lml.remove(lml.indexOf(aGroup));
-				}
-
-				secGroupDialogWindow.onClose(); // close the dialog
-			}
-		}
 
 		) == MultiLineMessageBox.YES) {
 		}
@@ -503,7 +509,7 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doClear(); // clear all commponents
 		doEdit(); // edit mode
 
-		btnCtrl.setBtnStatus_New();
+		this.btnCtrl.setBtnStatus_New();
 
 	}
 
@@ -512,10 +518,10 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doEdit() {
 
-		grpShortdescription.setReadonly(false);
-		grpLongdescription.setReadonly(false);
+		this.grpShortdescription.setReadonly(false);
+		this.grpLongdescription.setReadonly(false);
 
-		btnCtrl.setBtnStatus_Edit();
+		this.btnCtrl.setBtnStatus_Edit();
 
 		// remember the old vars
 		doStoreInitValues();
@@ -526,8 +532,8 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doReadOnly() {
 
-		grpShortdescription.setReadonly(true);
-		grpLongdescription.setReadonly(true);
+		this.grpShortdescription.setReadonly(true);
+		this.grpLongdescription.setReadonly(true);
 	}
 
 	/**
@@ -538,8 +544,8 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// temporarely disable the validation to allow the field's clearing
 		doRemoveValidation();
 
-		grpShortdescription.setValue("");
-		grpLongdescription.setValue("");
+		this.grpShortdescription.setValue("");
+		this.grpLongdescription.setValue("");
 	}
 
 	/**
@@ -549,7 +555,7 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doSave() throws InterruptedException {
 
-		SecGroup aGroup = getGroup();
+		final SecGroup aGroup = getGroup();
 
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// force validation, if on, than execute by component.getValue()
@@ -564,9 +570,9 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// save it to database
 		try {
 			getSecurityService().saveOrUpdate(aGroup);
-		} catch (DataAccessException e) {
-			String message = e.getMessage();
-			String title = Labels.getLabel("message.Error");
+		} catch (final DataAccessException e) {
+			final String message = e.getMessage();
+			final String title = Labels.getLabel("message.Error");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 
@@ -574,12 +580,12 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 			doResetInitValues();
 
 			doReadOnly();
-			btnCtrl.setBtnStatus_Save();
+			this.btnCtrl.setBtnStatus_Save();
 			return;
 		}
 
 		// now synchronize the listBox
-		ListModelList lml = (ListModelList) listBoxSecGroups.getListModel();
+		final ListModelList lml = (ListModelList) this.listBoxSecGroups.getListModel();
 
 		// Check if the object is new or updated
 		// -1 means that the obj is not in the list, so it's new.
@@ -590,7 +596,7 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		doReadOnly();
-		btnCtrl.setBtnStatus_Save();
+		this.btnCtrl.setBtnStatus_Save();
 
 		// init the old values vars new
 		doStoreInitValues();
@@ -600,7 +606,7 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	// ++++++++++++++++++ getter / setter +++++++++++++++++++//
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 	public SecGroup getGroup() {
-		return group;
+		return this.group;
 	}
 
 	public void setGroup(SecGroup group) {
@@ -612,11 +618,11 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public boolean isValidationOn() {
-		return validationOn;
+		return this.validationOn;
 	}
 
 	public SecurityService getSecurityService() {
-		return securityService;
+		return this.securityService;
 	}
 
 	public void setSecurityService(SecurityService securityService) {

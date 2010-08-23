@@ -38,16 +38,12 @@ import de.forsthaus.backend.model.Order;
 public class OrderListModelItemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(OrderListModelItemRenderer.class);
+	private static final Logger logger = Logger.getLogger(OrderListModelItemRenderer.class);
 
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		Order order = (Order) data;
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + order.getAufNr() + "|" + order.getAufBezeichnung());
-		}
+		final Order order = (Order) data;
 
 		Listcell lc = new Listcell(order.getAufNr());
 		lc.setParent(item);

@@ -38,16 +38,12 @@ import de.forsthaus.backend.model.SecRole;
 public class AppRolesListModelItemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(AppRolesListModelItemRenderer.class);
+	private static final Logger logger = Logger.getLogger(AppRolesListModelItemRenderer.class);
 
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		SecRole role = (SecRole) data;
-
-		// if (logger.isDebugEnabled()) {
-		// logger.debug("--> " + role.getRolShortdescription());
-		// }
+		final SecRole role = (SecRole) data;
 
 		Listcell lc = new Listcell(String.valueOf(role.getId()));
 		lc.setParent(item);

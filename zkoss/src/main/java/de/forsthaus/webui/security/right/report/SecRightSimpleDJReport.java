@@ -93,7 +93,7 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 	private ByteArrayOutputStream output;
 	private InputStream mediais;
 	private AMedia amedia;
-	private String zksample2title = Labels.getLabel("print.Title.Security_single_rights_list");
+	private final String zksample2title = Labels.getLabel("print.Title.Security_single_rights_list");
 
 	public SecRightSimpleDJReport(Component parent) throws InterruptedException {
 		super();
@@ -101,7 +101,7 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 
 		try {
 			doPrint();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ZksampleUtils.showErrorMessage(e.toString());
 		}
 	}
@@ -109,19 +109,19 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 	public void doPrint() throws JRException, ColumnBuilderException, ClassNotFoundException, IOException {
 
 		// Localized column headers
-		String rigName = Labels.getLabel("listheader_SecRightList_rigName.label");
-		String rigType = Labels.getLabel("listheader_SecRightList_rigType.label");
+		final String rigName = Labels.getLabel("listheader_SecRightList_rigName.label");
+		final String rigType = Labels.getLabel("listheader_SecRightList_rigType.label");
 
 		// Styles: Title
-		Style titleStyle = new Style();
+		final Style titleStyle = new Style();
 		titleStyle.setHorizontalAlign(HorizontalAlign.CENTER);
-		Font titleFont = Font.ARIAL_BIG_BOLD;
+		final Font titleFont = Font.ARIAL_BIG_BOLD;
 		titleFont.setUnderline(true);
 		titleStyle.setFont(titleFont);
 		// titleStyle.setBorderBottom(Border.PEN_1_POINT);
 
 		// Styles: Subtitle
-		Style subtitleStyle = new Style();
+		final Style subtitleStyle = new Style();
 		subtitleStyle.setHorizontalAlign(HorizontalAlign.LEFT);
 		subtitleStyle.setFont(Font.ARIAL_MEDIUM_BOLD);
 
@@ -130,40 +130,40 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		 * this in an other way.
 		 */
 		// ColumnHeader Style Text (left-align)
-		Style columnHeaderStyleText = new Style();
+		final Style columnHeaderStyleText = new Style();
 		columnHeaderStyleText.setFont(Font.ARIAL_MEDIUM_BOLD);
 		columnHeaderStyleText.setHorizontalAlign(HorizontalAlign.LEFT);
 		columnHeaderStyleText.setBorderBottom(Border.PEN_1_POINT);
 
 		// ColumnHeader Style Text (right-align)
-		Style columnHeaderStyleNumber = new Style();
+		final Style columnHeaderStyleNumber = new Style();
 		columnHeaderStyleNumber.setFont(Font.ARIAL_MEDIUM_BOLD);
 		columnHeaderStyleNumber.setHorizontalAlign(HorizontalAlign.RIGHT);
 		columnHeaderStyleNumber.setBorderBottom(Border.PEN_1_POINT);
 
 		// Footer Style (center-align)
-		Style footerStyle = new Style();
+		final Style footerStyle = new Style();
 		footerStyle.setFont(Font.ARIAL_SMALL);
 		footerStyle.getFont().setFontSize(8);
 		footerStyle.setHorizontalAlign(HorizontalAlign.CENTER);
 		footerStyle.setBorderTop(Border.PEN_1_POINT);
 
 		// Rows content Style (left-align)
-		Style columnDetailStyleText = new Style();
+		final Style columnDetailStyleText = new Style();
 		columnDetailStyleText.setFont(Font.ARIAL_SMALL);
 		columnDetailStyleText.setHorizontalAlign(HorizontalAlign.LEFT);
 
 		// Rows content Style (right-align)
-		Style columnDetailStyleNumbers = new Style();
+		final Style columnDetailStyleNumbers = new Style();
 		columnDetailStyleNumbers.setFont(Font.ARIAL_SMALL);
 		columnDetailStyleNumbers.setHorizontalAlign(HorizontalAlign.RIGHT);
 
-		DynamicReportBuilder drb = new DynamicReportBuilder();
+		final DynamicReportBuilder drb = new DynamicReportBuilder();
 		DynamicReport dr;
 
 		// Sets the Report Columns, header, Title, Groups, Etc Formats
 		// DynamicJasper documentation
-		drb.setTitle(zksample2title);
+		drb.setTitle(this.zksample2title);
 		// drb.setSubtitle("DynamicJasper Sample");
 		drb.setSubtitleStyle(subtitleStyle);
 
@@ -179,13 +179,15 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		 * Columns Definitions. A new ColumnBuilder instance for each column.
 		 */
 		// Right name
-		AbstractColumn colRightName = ColumnBuilder.getNew().setColumnProperty("rigName", String.class.getName()).build();
+		final AbstractColumn colRightName = ColumnBuilder.getNew().setColumnProperty("rigName", String.class.getName())
+				.build();
 		colRightName.setTitle(rigName);
 		colRightName.setWidth(60);
 		colRightName.setHeaderStyle(columnHeaderStyleText);
 		colRightName.setStyle(columnDetailStyleText);
 		// Right type
-		AbstractColumn colRightType = ColumnBuilder.getNew().setCustomExpression(getMyRightTypExpression()).build();
+		final AbstractColumn colRightType = ColumnBuilder.getNew().setCustomExpression(getMyRightTypExpression())
+				.build();
 		colRightType.setTitle(rigType);
 		colRightType.setWidth(40);
 		colRightType.setHeaderStyle(columnHeaderStyleText);
@@ -196,33 +198,40 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		drb.addColumn(colRightType);
 
 		// TEST
-		Style atStyle = new StyleBuilder(true).setFont(Font.COMIC_SANS_SMALL).setTextColor(Color.red).build();
+		final Style atStyle = new StyleBuilder(true).setFont(Font.COMIC_SANS_SMALL).setTextColor(Color.red).build();
 		/**
 		 * Adding many autotexts in the same position (header/footer and
 		 * aligment) makes them to be one on top of the other
 		 */
 
-		AutoText created = new AutoText(Labels.getLabel("common.Created") + ": " + ZksampleDateFormat.getDateTimeFormater().format(new Date()), AutoText.POSITION_HEADER, HorizontalBandAlignment.RIGHT);
+		final AutoText created = new AutoText(Labels.getLabel("common.Created") + ": "
+				+ ZksampleDateFormat.getDateTimeFormater().format(new Date()), AutoText.POSITION_HEADER,
+				HorizontalBandAlignment.RIGHT);
 		created.setWidth(new Integer(120));
 		created.setStyle(atStyle);
 		drb.addAutoText(created);
 
-		AutoText autoText = new AutoText(AutoText.AUTOTEXT_PAGE_X_SLASH_Y, AutoText.POSITION_HEADER, HorizontalBandAlignment.RIGHT);
+		final AutoText autoText = new AutoText(AutoText.AUTOTEXT_PAGE_X_SLASH_Y, AutoText.POSITION_HEADER,
+				HorizontalBandAlignment.RIGHT);
 		autoText.setWidth(new Integer(20));
 		autoText.setStyle(atStyle);
 		drb.addAutoText(autoText);
 
-		AutoText name1 = new AutoText("The Zksample2 Ltd.", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		final AutoText name1 = new AutoText("The Zksample2 Ltd.", AutoText.POSITION_HEADER,
+				HorizontalBandAlignment.LEFT);
 		name1.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
-		AutoText name2 = new AutoText("Software Consulting", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		final AutoText name2 = new AutoText("Software Consulting", AutoText.POSITION_HEADER,
+				HorizontalBandAlignment.LEFT);
 		name2.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
-		AutoText street = new AutoText("256, ZK Direct RIA Street ", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		final AutoText street = new AutoText("256, ZK Direct RIA Street ", AutoText.POSITION_HEADER,
+				HorizontalBandAlignment.LEFT);
 		street.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
-		AutoText city = new AutoText("ZKoss City", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		final AutoText city = new AutoText("ZKoss City", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		city.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
 		drb.addAutoText(name1).addAutoText(name2).addAutoText(street).addAutoText(city);
 		// Footer
-		AutoText footerText = new AutoText("Help to prevent the global warming by writing cool software.", AutoText.POSITION_FOOTER, HorizontalBandAlignment.CENTER);
+		final AutoText footerText = new AutoText("Help to prevent the global warming by writing cool software.",
+				AutoText.POSITION_FOOTER, HorizontalBandAlignment.CENTER);
 		footerText.setStyle(footerStyle);
 		drb.addAutoText(footerText);
 
@@ -233,54 +242,54 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		dr = drb.build(); // build the report
 
 		// Get information from database
-		SecurityService sv = (SecurityService) SpringUtil.getBean("securityService");
-		List<SecRight> resultList = sv.getAllRights();
+		final SecurityService sv = (SecurityService) SpringUtil.getBean("securityService");
+		final List<SecRight> resultList = sv.getAllRights();
 
 		// Create Datasource and put it in Dynamic Jasper Format
-		List data = new ArrayList(resultList.size());
+		final List data = new ArrayList(resultList.size());
 
-		for (SecRight obj : resultList) {
-			Map<String, Object> map = new HashMap<String, Object>();
+		for (final SecRight obj : resultList) {
+			final Map<String, Object> map = new HashMap<String, Object>();
 			map.put("rigName", obj.getRigName());
 			map.put("rigType", obj.getRigType());
 			data.add(map);
 		}
 
 		// Generate the Jasper Print Object
-		JRDataSource ds = new JRBeanCollectionDataSource(data);
-		JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
+		final JRDataSource ds = new JRBeanCollectionDataSource(data);
+		final JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
 
-		String outputFormat = "PDF";
+		final String outputFormat = "PDF";
 
-		output = new ByteArrayOutputStream();
+		this.output = new ByteArrayOutputStream();
 
 		if (outputFormat.equalsIgnoreCase("PDF")) {
-			JasperExportManager.exportReportToPdfStream(jp, output);
-			mediais = new ByteArrayInputStream(output.toByteArray());
-			amedia = new AMedia("FirstReport.pdf", "pdf", "application/pdf", mediais);
+			JasperExportManager.exportReportToPdfStream(jp, this.output);
+			this.mediais = new ByteArrayInputStream(this.output.toByteArray());
+			this.amedia = new AMedia("FirstReport.pdf", "pdf", "application/pdf", this.mediais);
 
-			callReportWindow(amedia, "PDF");
+			callReportWindow(this.amedia, "PDF");
 		} else if (outputFormat.equalsIgnoreCase("XLS")) {
-			JExcelApiExporter exporterXLS = new JExcelApiExporter();
+			final JExcelApiExporter exporterXLS = new JExcelApiExporter();
 			exporterXLS.setParameter(JExcelApiExporterParameter.JASPER_PRINT, jp);
-			exporterXLS.setParameter(JExcelApiExporterParameter.OUTPUT_STREAM, output);
+			exporterXLS.setParameter(JExcelApiExporterParameter.OUTPUT_STREAM, this.output);
 			exporterXLS.setParameter(JExcelApiExporterParameter.IS_DETECT_CELL_TYPE, Boolean.TRUE);
 			exporterXLS.setParameter(JExcelApiExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.TRUE);
 			exporterXLS.setParameter(JExcelApiExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
 			exporterXLS.exportReport();
-			mediais = new ByteArrayInputStream(output.toByteArray());
-			amedia = new AMedia("FileFormatExcel", "xls", "application/vnd.ms-excel", mediais);
+			this.mediais = new ByteArrayInputStream(this.output.toByteArray());
+			this.amedia = new AMedia("FileFormatExcel", "xls", "application/vnd.ms-excel", this.mediais);
 
-			callReportWindow(amedia, "XLS");
+			callReportWindow(this.amedia, "XLS");
 		} else if (outputFormat.equalsIgnoreCase("RTF") || outputFormat.equalsIgnoreCase("DOC")) {
-			JRRtfExporter exporterRTF = new JRRtfExporter();
+			final JRRtfExporter exporterRTF = new JRRtfExporter();
 			exporterRTF.setParameter(JRExporterParameter.JASPER_PRINT, jp);
-			exporterRTF.setParameter(JRExporterParameter.OUTPUT_STREAM, output);
+			exporterRTF.setParameter(JRExporterParameter.OUTPUT_STREAM, this.output);
 			exporterRTF.exportReport();
-			mediais = new ByteArrayInputStream(output.toByteArray());
-			amedia = new AMedia("FileFormatRTF", "rtf", "application/rtf", mediais);
+			this.mediais = new ByteArrayInputStream(this.output.toByteArray());
+			this.amedia = new AMedia("FileFormatRTF", "rtf", "application/rtf", this.mediais);
 
-			callReportWindow(amedia, "RTF-DOC");
+			callReportWindow(this.amedia, "RTF-DOC");
 		}
 	}
 
@@ -294,6 +303,7 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 	private CustomExpression getMyRightTypExpression() {
 		return new CustomExpression() {
 
+			@Override
 			public Object evaluate(Map fields, Map variables, Map parameters) {
 
 				String result = "";
@@ -310,7 +320,7 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 				 * 6 | Component <br>
 				 */
 
-				int rigType = (Integer) fields.get("rigType");
+				final int rigType = (Integer) fields.get("rigType");
 
 				if (rigType == 0) {
 					result = "Page";
@@ -330,6 +340,7 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 				return result;
 			}
 
+			@Override
 			public String getClassName() {
 				return String.class.getName();
 			}
@@ -337,7 +348,7 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 	}
 
 	private void callReportWindow(AMedia aMedia, String format) {
-		boolean modal = true;
+		final boolean modal = true;
 
 		this.setTitle("Dynamic JasperReports. Sample Report for the zk framework.");
 		this.setId("ReportWindow");
@@ -350,21 +361,20 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		this.setWidth("80%");
 		this.addEventListener("onClose", new OnCloseReportEventListener());
 
-		iFrame = new Iframe();
-		iFrame.setId("jasperReportId");
-		iFrame.setWidth("100%");
-		iFrame.setHeight("100%");
-		iFrame.setContent(aMedia);
-		iFrame.setParent(this);
+		this.iFrame = new Iframe();
+		this.iFrame.setId("jasperReportId");
+		this.iFrame.setWidth("100%");
+		this.iFrame.setHeight("100%");
+		this.iFrame.setContent(aMedia);
+		this.iFrame.setParent(this);
 
 		if (modal == true) {
 			try {
 				this.doModal();
-			} catch (SuspendNotAllowedException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (final SuspendNotAllowedException e) {
+				throw new RuntimeException(e);
+			} catch (final InterruptedException e) {
+				throw new RuntimeException(e);
 			}
 		}
 
@@ -395,11 +405,10 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 
 		// TODO check this
 		try {
-			amedia.getStreamData().close();
-			output.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			this.amedia.getStreamData().close();
+			this.output.close();
+		} catch (final Exception e) {
+			throw new RuntimeException(e);
 		}
 
 		this.onClose();

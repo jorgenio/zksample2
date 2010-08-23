@@ -20,7 +20,7 @@ public class HelpWindowCtrl extends GenericForwardComposer implements Serializab
 	private Iframe helpMenuIframe;
 	private Iframe helpContentIframe;
 
-	private String helpPagePath = "Http://www.forsthaus.de/zkoss/zksample2/help/pages/";
+	private final String helpPagePath = "Http://www.forsthaus.de/zkoss/zksample2/help/pages/";
 
 	public HelpWindowCtrl() {
 		super();
@@ -31,13 +31,13 @@ public class HelpWindowCtrl extends GenericForwardComposer implements Serializab
 	public void doAfterCompose(Component window) throws Exception {
 		super.doAfterCompose(window);
 
-		if (arg.containsKey("parentComponent")) {
-			parent = (Component) arg.get("parentComponent");
+		if (this.arg.containsKey("parentComponent")) {
+			this.parent = (Component) this.arg.get("parentComponent");
 		}
 
 		loadHelpPage();
 
-		helpWindow.doModal();
+		this.helpWindow.doModal();
 
 	}
 
@@ -46,10 +46,10 @@ public class HelpWindowCtrl extends GenericForwardComposer implements Serializab
 
 	private void loadHelpPage() {
 
-		Locale locale = org.zkoss.util.Locales.getCurrent();
+		final Locale locale = org.zkoss.util.Locales.getCurrent();
 		String loc = locale.getCountry().toUpperCase();
 
-		System.out.println(loc);
+		// System.out.println(loc);
 
 		if (loc != "DE") {
 			loc = "";
@@ -57,8 +57,8 @@ public class HelpWindowCtrl extends GenericForwardComposer implements Serializab
 			loc = "_" + loc;
 		}
 
-		helpMenuIframe.setSrc(helpPagePath + "/" + "index" + loc + ".html");
-		helpContentIframe.setSrc("http://www.forsthaus.de");
+		this.helpMenuIframe.setSrc(this.helpPagePath + "/" + "index" + loc + ".html");
+		this.helpContentIframe.setSrc("http://www.forsthaus.de");
 
 	}
 

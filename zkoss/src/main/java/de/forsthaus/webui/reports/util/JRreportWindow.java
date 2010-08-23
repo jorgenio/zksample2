@@ -42,7 +42,7 @@ import org.zkoss.zul.Window;
 public class JRreportWindow extends Window implements Serializable {
 
 	private static final long serialVersionUID = -5587316458377274805L;
-	private transient static final Logger logger = Logger.getLogger(JRreportWindow.class);
+	private static final Logger logger = Logger.getLogger(JRreportWindow.class);
 
 	private transient JRreportWindow window;
 	private transient Jasperreport report;
@@ -77,7 +77,8 @@ public class JRreportWindow extends Window implements Serializable {
 	 * @param ds
 	 * @param type
 	 */
-	public JRreportWindow(Component parent, boolean modal, HashMap<String, Object> reportParams, String reportPathName, JRDataSource ds, String type) {
+	public JRreportWindow(Component parent, boolean modal, HashMap<String, Object> reportParams, String reportPathName,
+			JRDataSource ds, String type) {
 		super();
 		this.parent = parent;
 		this.modal = modal;
@@ -89,8 +90,8 @@ public class JRreportWindow extends Window implements Serializable {
 
 		try {
 			createReport();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		} catch (final FileNotFoundException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -101,23 +102,23 @@ public class JRreportWindow extends Window implements Serializable {
 	 */
 	private void createReport() throws FileNotFoundException {
 
-		if ((Boolean) modal == null) {
-			modal = true;
+		if ((Boolean) this.modal == null) {
+			this.modal = true;
 		}
 
-		if (reportPathName.isEmpty()) {
-			throw new FileNotFoundException(reportPathName);
+		if (this.reportPathName.isEmpty()) {
+			throw new FileNotFoundException(this.reportPathName);
 		}
 
-		if (ds == null) {
+		if (this.ds == null) {
 			throw new FileNotFoundException("JRDataSource is empty");
 		}
 
-		if (type.isEmpty()) {
-			type = "pdf";
+		if (this.type.isEmpty()) {
+			this.type = "pdf";
 		}
 
-		this.setParent(parent);
+		this.setParent(this.parent);
 
 		this.setTitle("JasperReports Sample Report for ZKoss");
 		this.setVisible(true);
@@ -129,27 +130,23 @@ public class JRreportWindow extends Window implements Serializable {
 		this.setWidth("80%");
 		this.addEventListener("onClose", new OnCloseReportEventListener());
 
-		report = new Jasperreport();
-		report.setId("jasperReportId");
-		report.setSrc(reportPathName);
-		report.setParameters(reportParams);
-		report.setDatasource(ds);
-		report.setType(type);
-		report.setParent(this); // needed ?
+		this.report = new Jasperreport();
+		this.report.setId("jasperReportId");
+		this.report.setSrc(this.reportPathName);
+		this.report.setParameters(this.reportParams);
+		this.report.setDatasource(this.ds);
+		this.report.setType(this.type);
+		this.report.setParent(this); // needed ?
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + report.getId());
-		}
+		this.appendChild(this.report);
 
-		this.appendChild(report);
-
-		if (modal == true) {
+		if (this.modal == true) {
 			try {
 				this.doModal();
-			} catch (SuspendNotAllowedException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			} catch (final SuspendNotAllowedException e) {
+				throw new RuntimeException(e);
+			} catch (final InterruptedException e) {
+				throw new RuntimeException(e);
 			}
 		}
 
@@ -175,15 +172,15 @@ public class JRreportWindow extends Window implements Serializable {
 	private void closeReportWindow() {
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("detach Report and close ReportWindow");
+			logger.debug("detach Report and close ReportWindow [" + this + "]");
 		}
 
-		window.removeEventListener("onClose", new OnCloseReportEventListener());
+		this.window.removeEventListener("onClose", new OnCloseReportEventListener());
 
 		// TODO check this
-		report.detach();
-		window.getChildren().clear();
-		window.onClose();
+		this.report.detach();
+		this.window.getChildren().clear();
+		this.window.onClose();
 
 	}
 }

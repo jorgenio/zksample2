@@ -37,18 +37,14 @@ import de.forsthaus.backend.model.SecTyp;
 public class SecRightSecTypListModelItemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(SecRightSecTypListModelItemRenderer.class);
+	private static final Logger logger = Logger.getLogger(SecRightSecTypListModelItemRenderer.class);
 
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		SecTyp typ = (SecTyp) data;
+		final SecTyp typ = (SecTyp) data;
 
-		// if (logger.isDebugEnabled()) {
-		// logger.debug("--> " + typ.getStpTypname());
-		// }
-
-		Listcell lc = new Listcell(typ.getStpTypname());
+		final Listcell lc = new Listcell(typ.getStpTypname());
 		lc.setParent(item);
 
 		item.setAttribute("data", data);

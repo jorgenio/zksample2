@@ -35,18 +35,14 @@ import org.zkoss.zul.ListitemRenderer;
 public class SearchOperatorListModelItemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(SearchOperatorListModelItemRenderer.class);
+	private static final Logger logger = Logger.getLogger(SearchOperatorListModelItemRenderer.class);
 
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		SearchOperators searchOp = (SearchOperators) data;
+		final SearchOperators searchOp = (SearchOperators) data;
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + searchOp.getSearchOperatorName());
-		}
-
-		Listcell lc = new Listcell(searchOp.getSearchOperatorSign());
+		final Listcell lc = new Listcell(searchOp.getSearchOperatorSign());
 		lc.setParent(item);
 
 		item.setAttribute("data", data);

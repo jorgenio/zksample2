@@ -68,7 +68,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
 
 /**
  * A report implemented with the DynamicJasper framework.<br>
- *<br>
+ * <br>
  * This report shows a list of Users.<br>
  * <br>
  * The report uses the DynamicReportBuilder that allowed more control over the
@@ -88,7 +88,7 @@ public class UserSimpleDJReport extends Window implements Serializable {
 	private ByteArrayOutputStream output;
 	private InputStream mediais;
 	private AMedia amedia;
-	private String zksample2title = "[Zksample2] DynamicJasper Report Sample";
+	private final String zksample2title = "[Zksample2] DynamicJasper Report Sample";
 
 	public UserSimpleDJReport(Component parent) throws InterruptedException {
 		super();
@@ -96,7 +96,7 @@ public class UserSimpleDJReport extends Window implements Serializable {
 
 		try {
 			doPrint();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ZksampleUtils.showErrorMessage(e.toString());
 		}
 	}
@@ -104,19 +104,19 @@ public class UserSimpleDJReport extends Window implements Serializable {
 	public void doPrint() throws JRException, ColumnBuilderException, ClassNotFoundException, IOException {
 
 		// Localized column headers
-		String usrLoginname = Labels.getLabel("common.Loginname");
-		String usrLastname = Labels.getLabel("common.Lastname");
-		String usrFirstname = Labels.getLabel("common.Firstname");
-		String usrEmail = Labels.getLabel("common.Email");
-		String usrEnabled = Labels.getLabel("common.Enabled");
+		final String usrLoginname = Labels.getLabel("common.Loginname");
+		final String usrLastname = Labels.getLabel("common.Lastname");
+		final String usrFirstname = Labels.getLabel("common.Firstname");
+		final String usrEmail = Labels.getLabel("common.Email");
+		final String usrEnabled = Labels.getLabel("common.Enabled");
 
 		// Styles: Title
-		Style titleStyle = new Style();
+		final Style titleStyle = new Style();
 		titleStyle.setHorizontalAlign(HorizontalAlign.CENTER);
 		titleStyle.setFont(Font.ARIAL_BIG_BOLD);
 
 		// Styles: Subtitle
-		Style subtitleStyle = new Style();
+		final Style subtitleStyle = new Style();
 		subtitleStyle.setHorizontalAlign(HorizontalAlign.LEFT);
 		subtitleStyle.setFont(Font.ARIAL_MEDIUM_BOLD);
 
@@ -125,33 +125,33 @@ public class UserSimpleDJReport extends Window implements Serializable {
 		 * this in an other way.
 		 */
 		// Header Style Text (left)
-		Style columnHeaderStyleText = new Style();
+		final Style columnHeaderStyleText = new Style();
 		columnHeaderStyleText.setFont(Font.ARIAL_MEDIUM_BOLD);
 		columnHeaderStyleText.setHorizontalAlign(HorizontalAlign.LEFT);
 		columnHeaderStyleText.setBorderBottom(Border.PEN_1_POINT);
 
 		// Header Style Text (left)
-		Style columnHeaderStyleNumber = new Style();
+		final Style columnHeaderStyleNumber = new Style();
 		columnHeaderStyleNumber.setFont(Font.ARIAL_MEDIUM_BOLD);
 		columnHeaderStyleNumber.setHorizontalAlign(HorizontalAlign.RIGHT);
 		columnHeaderStyleNumber.setBorderBottom(Border.PEN_1_POINT);
 
 		// Rows content
-		Style columnDetailStyleText = new Style();
+		final Style columnDetailStyleText = new Style();
 		columnDetailStyleText.setFont(Font.ARIAL_SMALL);
 		columnDetailStyleText.setHorizontalAlign(HorizontalAlign.LEFT);
 
 		// Rows content
-		Style columnDetailStyleNumbers = new Style();
+		final Style columnDetailStyleNumbers = new Style();
 		columnDetailStyleNumbers.setFont(Font.ARIAL_SMALL);
 		columnDetailStyleNumbers.setHorizontalAlign(HorizontalAlign.RIGHT);
 
-		DynamicReportBuilder drb = new DynamicReportBuilder();
+		final DynamicReportBuilder drb = new DynamicReportBuilder();
 		DynamicReport dr;
 
 		// Sets the Report Columns, header, Title, Groups, Etc Formats
 		// DynamicJasper documentation
-		drb.setTitle(zksample2title);
+		drb.setTitle(this.zksample2title);
 		drb.setSubtitle("List of Users: " + ZksampleDateFormat.getDateFormater().format(new Date()));
 		drb.setSubtitleStyle(subtitleStyle);
 		drb.setDetailHeight(10);
@@ -163,31 +163,35 @@ public class UserSimpleDJReport extends Window implements Serializable {
 		 * Columns Definitions. A new ColumnBuilder instance for each column.
 		 */
 		// Login name
-		AbstractColumn colLoginName = ColumnBuilder.getNew().setColumnProperty("usrLoginname", String.class.getName()).build();
+		final AbstractColumn colLoginName = ColumnBuilder.getNew()
+				.setColumnProperty("usrLoginname", String.class.getName()).build();
 		colLoginName.setTitle(usrLoginname);
 		colLoginName.setWidth(30);
 		colLoginName.setHeaderStyle(columnHeaderStyleText);
 		colLoginName.setStyle(columnDetailStyleText);
 		// Last name
-		AbstractColumn colLastName = ColumnBuilder.getNew().setColumnProperty("usrLastname", String.class.getName()).build();
+		final AbstractColumn colLastName = ColumnBuilder.getNew()
+				.setColumnProperty("usrLastname", String.class.getName()).build();
 		colLastName.setTitle(usrLastname);
 		colLastName.setWidth(50);
 		colLastName.setHeaderStyle(columnHeaderStyleText);
 		colLastName.setStyle(columnDetailStyleText);
 		// First name
-		AbstractColumn colFirstName = ColumnBuilder.getNew().setColumnProperty("usrFirstname", String.class.getName()).build();
+		final AbstractColumn colFirstName = ColumnBuilder.getNew()
+				.setColumnProperty("usrFirstname", String.class.getName()).build();
 		colFirstName.setTitle(usrFirstname);
 		colFirstName.setWidth(50);
 		colFirstName.setHeaderStyle(columnHeaderStyleText);
 		colFirstName.setStyle(columnDetailStyleText);
 		// Email address
-		AbstractColumn colEmail = ColumnBuilder.getNew().setColumnProperty("usrEmail", String.class.getName()).build();
+		final AbstractColumn colEmail = ColumnBuilder.getNew().setColumnProperty("usrEmail", String.class.getName())
+				.build();
 		colEmail.setTitle(usrEmail);
 		colEmail.setWidth(50);
 		colEmail.setHeaderStyle(columnHeaderStyleText);
 		colEmail.setStyle(columnDetailStyleText);
 		// Account enabled
-		AbstractColumn colEnabled = ColumnBuilder.getNew().setCustomExpression(getMyBooleanExpression()).build();
+		final AbstractColumn colEnabled = ColumnBuilder.getNew().setCustomExpression(getMyBooleanExpression()).build();
 		colEnabled.setTitle(usrEnabled);
 		colEnabled.setWidth(10);
 		colEnabled.setHeaderStyle(columnHeaderStyleText);
@@ -207,14 +211,14 @@ public class UserSimpleDJReport extends Window implements Serializable {
 		dr = drb.build(); // build the report
 
 		// Get information from database
-		UserService sv = (UserService) SpringUtil.getBean("userService");
-		List<SecUser> resultList = sv.getAlleUser();
+		final UserService sv = (UserService) SpringUtil.getBean("userService");
+		final List<SecUser> resultList = sv.getAlleUser();
 
 		// Create Datasource and put it in Dynamic Jasper Format
-		List data = new ArrayList(resultList.size());
+		final List data = new ArrayList(resultList.size());
 
-		for (SecUser obj : resultList) {
-			Map<String, Object> map = new HashMap<String, Object>();
+		for (final SecUser obj : resultList) {
+			final Map<String, Object> map = new HashMap<String, Object>();
 			map.put("usrLoginname", obj.getUsrLoginname());
 			map.put("usrLastnusrEnabledame", obj.getUsrLastname());
 			map.put("usrFirstname", String.valueOf(obj.getUsrFirstname()));
@@ -225,40 +229,40 @@ public class UserSimpleDJReport extends Window implements Serializable {
 		}
 
 		// Generate the Jasper Print Object
-		JRDataSource ds = new JRBeanCollectionDataSource(data);
-		JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
+		final JRDataSource ds = new JRBeanCollectionDataSource(data);
+		final JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
 
-		String outputFormat = "PDF";
+		final String outputFormat = "PDF";
 
-		output = new ByteArrayOutputStream();
+		this.output = new ByteArrayOutputStream();
 
 		if (outputFormat.equalsIgnoreCase("PDF")) {
-			JasperExportManager.exportReportToPdfStream(jp, output);
-			mediais = new ByteArrayInputStream(output.toByteArray());
-			amedia = new AMedia("FirstReport.pdf", "pdf", "application/pdf", mediais);
+			JasperExportManager.exportReportToPdfStream(jp, this.output);
+			this.mediais = new ByteArrayInputStream(this.output.toByteArray());
+			this.amedia = new AMedia("FirstReport.pdf", "pdf", "application/pdf", this.mediais);
 
-			callReportWindow(amedia, "PDF");
+			callReportWindow(this.amedia, "PDF");
 		} else if (outputFormat.equalsIgnoreCase("XLS")) {
-			JExcelApiExporter exporterXLS = new JExcelApiExporter();
+			final JExcelApiExporter exporterXLS = new JExcelApiExporter();
 			exporterXLS.setParameter(JExcelApiExporterParameter.JASPER_PRINT, jp);
-			exporterXLS.setParameter(JExcelApiExporterParameter.OUTPUT_STREAM, output);
+			exporterXLS.setParameter(JExcelApiExporterParameter.OUTPUT_STREAM, this.output);
 			exporterXLS.setParameter(JExcelApiExporterParameter.IS_DETECT_CELL_TYPE, Boolean.TRUE);
 			exporterXLS.setParameter(JExcelApiExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.TRUE);
 			exporterXLS.setParameter(JExcelApiExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
 			exporterXLS.exportReport();
-			mediais = new ByteArrayInputStream(output.toByteArray());
-			amedia = new AMedia("FileFormatExcel", "xls", "application/vnd.ms-excel", mediais);
+			this.mediais = new ByteArrayInputStream(this.output.toByteArray());
+			this.amedia = new AMedia("FileFormatExcel", "xls", "application/vnd.ms-excel", this.mediais);
 
-			callReportWindow(amedia, "XLS");
+			callReportWindow(this.amedia, "XLS");
 		} else if (outputFormat.equalsIgnoreCase("RTF") || outputFormat.equalsIgnoreCase("DOC")) {
-			JRRtfExporter exporterRTF = new JRRtfExporter();
+			final JRRtfExporter exporterRTF = new JRRtfExporter();
 			exporterRTF.setParameter(JRExporterParameter.JASPER_PRINT, jp);
-			exporterRTF.setParameter(JRExporterParameter.OUTPUT_STREAM, output);
+			exporterRTF.setParameter(JRExporterParameter.OUTPUT_STREAM, this.output);
 			exporterRTF.exportReport();
-			mediais = new ByteArrayInputStream(output.toByteArray());
-			amedia = new AMedia("FileFormatRTF", "rtf", "application/rtf", mediais);
+			this.mediais = new ByteArrayInputStream(this.output.toByteArray());
+			this.amedia = new AMedia("FileFormatRTF", "rtf", "application/rtf", this.mediais);
 
-			callReportWindow(amedia, "RTF-DOC");
+			callReportWindow(this.amedia, "RTF-DOC");
 		}
 	}
 
@@ -271,10 +275,11 @@ public class UserSimpleDJReport extends Window implements Serializable {
 	private CustomExpression getMyBooleanExpression() {
 		return new CustomExpression() {
 
+			@Override
 			public Object evaluate(Map fields, Map variables, Map parameters) {
 				String result = "";
 
-				boolean enabled = (Boolean) fields.get("usrEnabled");
+				final boolean enabled = (Boolean) fields.get("usrEnabled");
 
 				if (enabled == true) {
 					result = Labels.getLabel("common.Yes");
@@ -284,6 +289,7 @@ public class UserSimpleDJReport extends Window implements Serializable {
 				return result;
 			}
 
+			@Override
 			public String getClassName() {
 				return String.class.getName();
 			}
@@ -291,7 +297,7 @@ public class UserSimpleDJReport extends Window implements Serializable {
 	}
 
 	private void callReportWindow(AMedia aMedia, String format) {
-		boolean modal = true;
+		final boolean modal = true;
 
 		this.setTitle("Dynamic JasperReports. Sample Report for ZKoss");
 		this.setId("ReportWindow");
@@ -304,21 +310,20 @@ public class UserSimpleDJReport extends Window implements Serializable {
 		this.setWidth("80%");
 		this.addEventListener("onClose", new OnCloseReportEventListener());
 
-		iFrame = new Iframe();
-		iFrame.setId("jasperReportId");
-		iFrame.setWidth("100%");
-		iFrame.setHeight("100%");
-		iFrame.setContent(aMedia);
-		iFrame.setParent(this);
+		this.iFrame = new Iframe();
+		this.iFrame.setId("jasperReportId");
+		this.iFrame.setWidth("100%");
+		this.iFrame.setHeight("100%");
+		this.iFrame.setContent(aMedia);
+		this.iFrame.setParent(this);
 
 		if (modal == true) {
 			try {
 				this.doModal();
-			} catch (SuspendNotAllowedException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (final SuspendNotAllowedException e) {
+				throw new RuntimeException(e);
+			} catch (final InterruptedException e) {
+				throw new RuntimeException(e);
 			}
 		}
 
@@ -349,11 +354,10 @@ public class UserSimpleDJReport extends Window implements Serializable {
 
 		// TODO check this
 		try {
-			amedia.getStreamData().close();
-			output.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			this.amedia.getStreamData().close();
+			this.output.close();
+		} catch (final Exception e) {
+			throw new RuntimeException(e);
 		}
 
 		this.onClose();

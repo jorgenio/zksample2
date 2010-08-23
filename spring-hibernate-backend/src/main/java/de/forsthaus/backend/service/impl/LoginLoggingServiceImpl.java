@@ -55,7 +55,7 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 	private SysCountryCodeDAO sysCountryCodeDAO;
 
 	public Ip2CountryDAO getIp2CountryDAO() {
-		return ip2CountryDAO;
+		return this.ip2CountryDAO;
 	}
 
 	public void setIp2CountryDAO(Ip2CountryDAO ip2CountryDAO) {
@@ -67,11 +67,11 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 	}
 
 	public SysCountryCodeDAO getSysCountryCodeDAO() {
-		return sysCountryCodeDAO;
+		return this.sysCountryCodeDAO;
 	}
 
 	public SecLoginlogDAO getSecLoginlogDAO() {
-		return secLoginlogDAO;
+		return this.secLoginlogDAO;
 	}
 
 	public void setSecLoginlogDAO(SecLoginlogDAO secLoginlogDAO) {
@@ -139,15 +139,14 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 	@Override
 	public List<SecLoginlog> getAllLogsNewTest() {
 
-		List<SecLoginlog> listSecLoginLog = getSecLoginlogDAO().getAllLogs();
-		System.out.println("Anzahl records " + listSecLoginLog.size());
-		for (SecLoginlog secLoginlog : listSecLoginLog) {
+		final List<SecLoginlog> listSecLoginLog = getSecLoginlogDAO().getAllLogs();
+		for (final SecLoginlog secLoginlog : listSecLoginLog) {
 
 			// Fill with the related data for Ip2Country
-			Ip2Country ip2 = secLoginlog.getIp2Country();
+			final Ip2Country ip2 = secLoginlog.getIp2Country();
 			if (ip2 != null) {
 				// Fill with the related data for CountryCode
-				SysCountryCode cc = ip2.getSysCountryCode();
+				final SysCountryCode cc = ip2.getSysCountryCode();
 				if (cc != null) {
 				}
 
@@ -159,15 +158,15 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 
 	@Override
 	public List<SecLoginlog> getAllLogsServerPushForSuccess() {
-		List<SecLoginlog> listSecLoginLog = getSecLoginlogDAO().getAllLogsForSuccess();
+		final List<SecLoginlog> listSecLoginLog = getSecLoginlogDAO().getAllLogsForSuccess();
 
-		for (SecLoginlog secLoginlog : listSecLoginLog) {
+		for (final SecLoginlog secLoginlog : listSecLoginLog) {
 
 			// Fill with the related data for Ip2Country
-			Ip2Country ip2 = secLoginlog.getIp2Country();
+			final Ip2Country ip2 = secLoginlog.getIp2Country();
 			if (ip2 != null) {
 				// Fill with the related data for CountryCode
-				SysCountryCode cc = ip2.getSysCountryCode();
+				final SysCountryCode cc = ip2.getSysCountryCode();
 				if (cc != null) {
 				}
 
@@ -179,15 +178,15 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 
 	@Override
 	public List<SecLoginlog> getAllLogsServerPushForFailed() {
-		List<SecLoginlog> listSecLoginLog = getSecLoginlogDAO().getAllLogsForFailed();
+		final List<SecLoginlog> listSecLoginLog = getSecLoginlogDAO().getAllLogsForFailed();
 
-		for (SecLoginlog secLoginlog : listSecLoginLog) {
+		for (final SecLoginlog secLoginlog : listSecLoginLog) {
 
 			// Fill with the related data for Ip2Country
-			Ip2Country ip2 = secLoginlog.getIp2Country();
+			final Ip2Country ip2 = secLoginlog.getIp2Country();
 			if (ip2 != null) {
 				// Fill with the related data for CountryCode
-				SysCountryCode cc = ip2.getSysCountryCode();
+				final SysCountryCode cc = ip2.getSysCountryCode();
 				if (cc != null) {
 				}
 
@@ -206,13 +205,14 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 	 * @param status
 	 * @return
 	 */
+	@Override
 	public SecLoginlog saveLog(String userName, String clientAddress, String sessionId, int status) {
-		return secLoginlogDAO.saveLog(userName, clientAddress, sessionId, status);
+		return this.secLoginlogDAO.saveLog(userName, clientAddress, sessionId, status);
 	}
 
 	@Override
 	public void update(SecLoginlog log) {
-		secLoginlogDAO.update(log);
+		this.secLoginlogDAO.update(log);
 	}
 
 	@Override

@@ -40,12 +40,12 @@ import de.forsthaus.webui.util.ZksampleDateFormat;
 public class HibernateStatisticListRowRenderer implements RowRenderer {
 
 	private static final long serialVersionUID = 1L;
-	private transient final static Logger logger = Logger.getLogger(HibernateStatisticListRowRenderer.class);
+	private final static Logger logger = Logger.getLogger(HibernateStatisticListRowRenderer.class);
 
 	@Override
 	public void render(Row row, Object data) throws Exception {
 
-		HibernateStatistics hs = (HibernateStatistics) data;
+		final HibernateStatistics hs = (HibernateStatistics) data;
 
 		Label label = null;
 		Detail detail = null;

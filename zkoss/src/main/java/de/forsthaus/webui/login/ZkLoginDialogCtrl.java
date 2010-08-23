@@ -46,7 +46,7 @@ import de.forsthaus.webui.util.ZksampleDateFormat;
  */
 public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 
-	private transient final static Logger logger = Logger.getLogger(ZkLoginDialogCtrl.class);
+	private final static Logger logger = Logger.getLogger(ZkLoginDialogCtrl.class);
 	private static final long serialVersionUID = -71422545405325060L;
 
 	/*
@@ -67,31 +67,27 @@ public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 	 */
 	public ZkLoginDialogCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	public void onCreate$loginwin(Event event) throws Exception {
-		logger.debug(event.toString());
-
-		doOnCreateCommon(loginwin); // do the autowire
+		doOnCreateCommon(this.loginwin); // do the autowire
 
 		// only for testing
-		txtbox_Username.setValue("admin");
-		txtbox_Password.setValue("admin");
+		this.txtbox_Username.setValue("admin");
+		this.txtbox_Password.setValue("admin");
 
-		txtbox_Username.focus(); // set the focus on UserName
+		this.txtbox_Username.focus(); // set the focus on UserName
 
-		loginwin.setShadow(false);
-		loginwin.doModal();
+		this.loginwin.setShadow(false);
+		this.loginwin.doModal();
 
 	}
 
 	public void onClick$btnReset(Event event) {
 
-		txtbox_Username.setValue("");
-		txtbox_Password.setValue("");
-		txtbox_Username.focus(); // set the focus on UserName
+		this.txtbox_Username.setValue("");
+		this.txtbox_Password.setValue("");
+		this.txtbox_Username.focus(); // set the focus on UserName
 
 	}
 
@@ -115,14 +111,14 @@ public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 		logger.debug("get the server date/time");
 
 		// TODO get the tomcat servers time, if the TimeServer doesn't answers.
-		long l = getCurrentHttpTokenTime();
+		final long l = getCurrentHttpTokenTime();
 
 		// FIXME Zeitzone wird hier ignoriert! Es ist nicht ersichtig, in
 		// welcher Zeitzone der Server läuft.
-		String dateStr = ZksampleDateFormat.getDateTimeLongFormater().format(l);
+		final String dateStr = ZksampleDateFormat.getDateTimeLongFormater().format(l);
 
-		lbl_ServerTime.setMultiline(true);
-		lbl_ServerTime.setValue("time on synchronization-server:\n" + dateStr);
+		this.lbl_ServerTime.setMultiline(true);
+		this.lbl_ServerTime.setValue("time on synchronization-server:\n" + dateStr);
 	}
 
 	/**
@@ -161,7 +157,7 @@ public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 	 */
 	private long getCurrentHttpTokenTime() {
 
-		String urlString = "http://unixtime.forsthaus.de/time.php";
+		final String urlString = "http://unixtime.forsthaus.de/time.php";
 
 		try {
 			final URL url = new URL(urlString);
@@ -174,15 +170,15 @@ public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 				while ((ch = istream.read()) != -1) {
 					sb.append((char) ch);
 				}
-				long l1 = Long.parseLong(sb.toString());
+				final long l1 = Long.parseLong(sb.toString());
 
 				return l1 * 1000;
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				throw new RuntimeException(e);
 			} finally {
 				istream.close();
 			}
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new RuntimeException(e);
 		}
 

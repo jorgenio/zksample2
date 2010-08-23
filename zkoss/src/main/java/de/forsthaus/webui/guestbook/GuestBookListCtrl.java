@@ -68,7 +68,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
 public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Serializable {
 
 	private static final long serialVersionUID = 2038742641853727975L;
-	private transient final static Logger logger = Logger.getLogger(GuestBookListCtrl.class);
+	private final static Logger logger = Logger.getLogger(GuestBookListCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -100,13 +100,9 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 	 */
 	public GuestBookListCtrl() {
 		super();
-
-		logger.debug("super(");
 	}
 
 	public void onCreate$window_GuestBookList(Event event) throws Exception {
-		// logger.debug("--> " + event.toString());
-
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
 		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
@@ -114,47 +110,48 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 		 */
 		int panelHeight = 25;
 		// TODO put the logic for working with panel in the ApplicationWorkspace
-		boolean withPanel = false;
+		final boolean withPanel = false;
 		if (withPanel == false) {
-			panel_GuestBookList.setVisible(false);
+			this.panel_GuestBookList.setVisible(false);
 		} else {
-			panel_GuestBookList.setVisible(true);
+			this.panel_GuestBookList.setVisible(true);
 			panelHeight = 0;
 		}
 
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		height = height + panelHeight;
-		int maxListBoxHeight = (height - 134);
+		final int maxListBoxHeight = height - 134;
 		setCountRows(Math.round(maxListBoxHeight / 23));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());
 
-		borderLayout_GuestBookList.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		this.borderLayout_GuestBookList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		listheader_GuestBook_gubDate.setSortAscending(new FieldComparator("gubDate", true));
-		listheader_GuestBook_gubDate.setSortDescending(new FieldComparator("gubDate", false));
-		listheader_GuestBook_gubUsrName.setSortAscending(new FieldComparator("gubUsrname", true));
-		listheader_GuestBook_gubUsrName.setSortDescending(new FieldComparator("gubUsrname", false));
-		listheader_GuestBook_gubSubject.setSortAscending(new FieldComparator("gubSubject", true));
-		listheader_GuestBook_gubSubject.setSortDescending(new FieldComparator("gubSubject", false));
+		this.listheader_GuestBook_gubDate.setSortAscending(new FieldComparator("gubDate", true));
+		this.listheader_GuestBook_gubDate.setSortDescending(new FieldComparator("gubDate", false));
+		this.listheader_GuestBook_gubUsrName.setSortAscending(new FieldComparator("gubUsrname", true));
+		this.listheader_GuestBook_gubUsrName.setSortDescending(new FieldComparator("gubUsrname", false));
+		this.listheader_GuestBook_gubSubject.setSortAscending(new FieldComparator("gubSubject", true));
+		this.listheader_GuestBook_gubSubject.setSortDescending(new FieldComparator("gubSubject", false));
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<GuestBook> soGuestBook = new HibernateSearchObject<GuestBook>(GuestBook.class, getCountRows());
+		final HibernateSearchObject<GuestBook> soGuestBook = new HibernateSearchObject<GuestBook>(GuestBook.class,
+				getCountRows());
 		soGuestBook.addSort("gubDate", true);
 
 		// set the paging params
-		paging_GuestBookList.setPageSize(getCountRows());
-		paging_GuestBookList.setDetailed(true);
+		this.paging_GuestBookList.setPageSize(getCountRows());
+		this.paging_GuestBookList.setDetailed(true);
 
 		// Set the ListModel for the articles.
-		getPagedListWrapper().init(soGuestBook, listbox_GuestBookList, paging_GuestBookList);
+		getPagedListWrapper().init(soGuestBook, this.listbox_GuestBookList, this.paging_GuestBookList);
 		// set the itemRenderer
-		listbox_GuestBookList.setItemRenderer(new GuestBookListtemRenderer());
+		this.listbox_GuestBookList.setItemRenderer(new GuestBookListtemRenderer());
 
 		// init the first entry for showing the long text.
-		ListModelList lml = (ListModelList) listbox_GuestBookList.getModel();
+		final ListModelList lml = (ListModelList) this.listbox_GuestBookList.getModel();
 
 		// Now we would select and show the text of the first entry in the list.
 		// We became not the first item FROM the listbox because it's NOT
@@ -162,14 +159,14 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 		// So we take the first entry from the MODEL (ListModelList) and set as
 		// selected.
 		if (lml.getSize() > 0) {
-			int rowIndex = 0;
+			final int rowIndex = 0;
 			// only for correct showing after Rendering. No effect as an Event
 			// yet.
-			listbox_GuestBookList.setSelectedIndex(rowIndex);
+			this.listbox_GuestBookList.setSelectedIndex(rowIndex);
 			// get the first entry and cast them to the needed object
-			GuestBook aGuestBook = (GuestBook) lml.get(rowIndex);
+			final GuestBook aGuestBook = (GuestBook) lml.get(rowIndex);
 			if (aGuestBook != null) {
-				textbox_GuestBook_gubText.setValue(aGuestBook.getGubText());
+				this.textbox_GuestBook_gubText.setValue(aGuestBook.getGubText());
 			}
 		}
 
@@ -181,9 +178,9 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 	@SuppressWarnings("unused")
 	private void doCheckRights() {
 
-		UserWorkspace workspace = getUserWorkspace();
+		final UserWorkspace workspace = getUserWorkspace();
 
-		window_GuestBookList.setVisible(true);
+		this.window_GuestBookList.setVisible(true);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -213,8 +210,8 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
 		// logger.debug("--> " + event.toString());
 
-		Events.postEvent("onCreate", window_GuestBookList, event);
-		window_GuestBookList.invalidate();
+		Events.postEvent("onCreate", this.window_GuestBookList, event);
+		this.window_GuestBookList.invalidate();
 	}
 
 	/**
@@ -227,14 +224,14 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 		// logger.debug("--> " + event.toString());
 
 		// get the selected object
-		Listitem item = listbox_GuestBookList.getSelectedItem();
+		final Listitem item = this.listbox_GuestBookList.getSelectedItem();
 
 		if (item != null) {
 
-			GuestBook aGuestBook = (GuestBook) item.getAttribute("data");
+			final GuestBook aGuestBook = (GuestBook) item.getAttribute("data");
 
 			// CAST AND STORE THE SELECTED OBJECT
-			textbox_GuestBook_gubText.setValue(aGuestBook.getGubText());
+			this.textbox_GuestBook_gubText.setValue(aGuestBook.getGubText());
 		}
 	}
 
@@ -248,7 +245,7 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 		/** !!! DO NOT BREAK THE TIERS !!! */
 		// We don't create a new DomainObject() in the frontend.
 		// We GET it from the backend.
-		GuestBook aGuestBook = getGuestBookService().getNewGuestBook();
+		final GuestBook aGuestBook = getGuestBookService().getNewGuestBook();
 		aGuestBook.setGubDate(new Date());
 
 		showDetailView(aGuestBook);
@@ -266,11 +263,11 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 		// logger.debug("--> " + event.toString());
 
 		// get the selected object
-		Listitem item = listbox_GuestBookList.getSelectedItem();
+		final Listitem item = this.listbox_GuestBookList.getSelectedItem();
 
 		if (item != null) {
 			// CAST AND STORE THE SELECTED OBJECT
-			GuestBook aGuestBook = (GuestBook) item.getAttribute("data");
+			final GuestBook aGuestBook = (GuestBook) item.getAttribute("data");
 
 			showDetailView(aGuestBook);
 		}
@@ -290,7 +287,7 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 		 * with a object of the selected item. For handed over these parameter
 		 * only a Map is accepted. So we put the object in a HashMap.
 		 */
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("guestBook", aGuestBook);
 		/*
 		 * we can additionally handed over the listBox, so we have in the dialog
@@ -298,18 +295,18 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 		 * data in the customerListbox from the dialog when we do a delete, edit
 		 * or insert a customer.
 		 */
-		map.put("listbox_GuestBookList", listbox_GuestBookList);
+		map.put("listbox_GuestBookList", this.listbox_GuestBookList);
 		map.put("resultListCtrl", this);
 
 		// call the zul-file with the parameters packed in a map
 		try {
 			Executions.createComponents("/WEB-INF/pages/guestbook/guestBookDialog.zul", null, map);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
 			// Show a error box
-			String msg = e.getMessage();
-			String title = Labels.getLabel("message.Error");
+			final String msg = e.getMessage();
+			final String title = Labels.getLabel("message.Error");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
 
@@ -322,7 +319,7 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
 	public int getCountRows() {
-		return countRows;
+		return this.countRows;
 	}
 
 	public void setCountRows(int countRows) {
@@ -334,7 +331,7 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 	}
 
 	public GuestBook getGuestBook() {
-		return guestBook;
+		return this.guestBook;
 	}
 
 	public void setGuestBookService(GuestBookService guestBookService) {
@@ -342,7 +339,7 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 	}
 
 	public GuestBookService getGuestBookService() {
-		return guestBookService;
+		return this.guestBookService;
 	}
 
 }

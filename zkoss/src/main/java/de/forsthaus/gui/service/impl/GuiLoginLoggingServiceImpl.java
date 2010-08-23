@@ -58,7 +58,7 @@ import de.forsthaus.gui.service.GuiLoginLoggingService;
  */
 public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 
-	private transient final static Logger logger = Logger.getLogger(GuiLoginLoggingServiceImpl.class);
+	private final static Logger logger = Logger.getLogger(GuiLoginLoggingServiceImpl.class);
 
 	private transient IpToCountryService ipToCountryService;
 	private transient Ip2CountryService ip2CountryService;
@@ -84,17 +84,13 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 	 */
 	private void saveCompleteIPDataFromLookUpHost(SecLoginlog log) {
 
-		Ip2Country ip2c = getIp2CountryService().getNewIp2Country();
-		IpLocator ipl = getIp2CountryService().hostIpLookUpIp(log.getLglIp());
+		final Ip2Country ip2c = getIp2CountryService().getNewIp2Country();
+		final IpLocator ipl = getIp2CountryService().hostIpLookUpIp(log.getLglIp());
 		/** For testing on a local tomcat */
 		// IpLocator ipl =
 		// getIp2CountryService().hostIpLookUpIp("95.111.227.104");
 
 		if (ipl != null) {
-
-			if (logger.isDebugEnabled()) {
-				logger.debug(ipl.getCity() + " / " + getSysCountryCodeService().getCountryCodeByCode2(ipl.getCountryCode()).getCcdName());
-			}
 
 			ip2c.setI2cCity(ipl.getCity());
 			ip2c.setI2cLatitude(ipl.getLatitude());
@@ -113,9 +109,7 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 
 	@Override
 	public void fillIp2CountryOnceForAppUpdate() {
-		List<SecLoginlog> originList = getAllLogs();
-
-		System.out.println("records : " + originList.size());
+		final List<SecLoginlog> originList = getAllLogs();
 
 		int count = 0;
 		int localCount = 0;
@@ -124,7 +118,7 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 		int unknownCount = 0;
 		int unknownsysCCCount = 0;
 
-		for (SecLoginlog secLoginlog : originList) {
+		for (final SecLoginlog secLoginlog : originList) {
 			count++;
 			// check if no entry exists for this login
 			if (secLoginlog.getIp2Country() == null) {
@@ -132,7 +126,7 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 				IpToCountry ipToCountry = null;
 				try {
 					// try to get a ipToCountry for the IP from the table
-					InetAddress inetAddress = InetAddress.getByName(secLoginlog.getLglIp());
+					final InetAddress inetAddress = InetAddress.getByName(secLoginlog.getLglIp());
 
 					// Skip a local ip. Therefore is no country to identify.
 					if (inetAddress.isLoopbackAddress() || inetAddress.isSiteLocalAddress()) {
@@ -147,11 +141,11 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 					// if found than get the CountryCode object for it and save
 					// all
 					if (ipToCountry != null) {
-						String code2 = ipToCountry.getIpcCountryCode2();
-						SysCountryCode sysCC = getSysCountryCodeService().getCountryCodeByCode2(code2);
+						final String code2 = ipToCountry.getIpcCountryCode2();
+						final SysCountryCode sysCC = getSysCountryCodeService().getCountryCodeByCode2(code2);
 
 						if (sysCC != null) {
-							Ip2Country ip2 = getIp2CountryService().getNewIp2Country();
+							final Ip2Country ip2 = getIp2CountryService().getNewIp2Country();
 							ip2.setSysCountryCode(sysCC);
 
 							// save all
@@ -165,14 +159,12 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 						continue;
 					}
 
-				} catch (UnknownHostException e) {
+				} catch (final UnknownHostException e) {
 					try {
-						Messagebox.show(e.toString());
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						Messagebox.show(e.getLocalizedMessage());
+					} catch (final InterruptedException e1) {
+						throw new RuntimeException(e1);
 					}
-					// TODO Auto-generated catch block
 				}
 				unknownCount++;
 			}
@@ -197,24 +189,17 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 	public int updateIp2CountryFromLookUpHost(List<SecLoginlog> list) {
 
 		int countRec = 0;
-		List<SecLoginlog> originList = list;
+		final List<SecLoginlog> originList = list;
 
-		System.out.println("records : " + originList.size());
-
-		for (SecLoginlog secLoginlog : originList) {
+		for (final SecLoginlog secLoginlog : originList) {
 
 			if (secLoginlog.getIp2Country() != null) {
 
-				Ip2Country ip2c = secLoginlog.getIp2Country();
-
-				if (logger.isDebugEnabled()) {
-					// logger.debug("try to get geo data from HostLookUp for IP: "
-					// + secLoginlog.getLglIp());
-				}
+				final Ip2Country ip2c = secLoginlog.getIp2Country();
 
 				try {
 					// try to get a ipToCountry for the IP from the table
-					InetAddress inetAddress = InetAddress.getByName(secLoginlog.getLglIp());
+					final InetAddress inetAddress = InetAddress.getByName(secLoginlog.getLglIp());
 
 					// Skip a local ip. Therefore is no country to identify.
 					if (inetAddress.isLoopbackAddress() || inetAddress.isSiteLocalAddress()) {
@@ -222,7 +207,7 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 					}
 
 					if (StringUtils.isEmpty(ip2c.getI2cCity())) {
-						IpLocator ipl = getIp2CountryService().hostIpLookUpIp(secLoginlog.getLglIp());
+						final IpLocator ipl = getIp2CountryService().hostIpLookUpIp(secLoginlog.getLglIp());
 						// /** For testing on a local tomcat */
 						// IpLocator ipl =
 						// getIp2CountryService().hostIpLookUpIp("95.111.227.104");
@@ -244,30 +229,25 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 							countRec = countRec + 1;
 						}
 					}
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					logger.warn("", e);
 					continue;
 				}
 
 			} else {
 				// create a new entry
-				Ip2Country ip2 = getIp2CountryService().getNewIp2Country();
-
-				if (logger.isDebugEnabled()) {
-					// logger.debug("try to get geo data from HostLookUp for IP: "
-					// + secLoginlog.getLglIp());
-				}
+				final Ip2Country ip2 = getIp2CountryService().getNewIp2Country();
 
 				try {
 					// try to get a ipToCountry for the IP from the table
-					InetAddress inetAddress = InetAddress.getByName(secLoginlog.getLglIp());
+					final InetAddress inetAddress = InetAddress.getByName(secLoginlog.getLglIp());
 
 					// Skip a local ip. Therefore is no country to identify.
 					if (inetAddress.isLoopbackAddress() || inetAddress.isSiteLocalAddress()) {
 						continue;
 					}
 
-					IpLocator ipl = getIp2CountryService().hostIpLookUpIp(secLoginlog.getLglIp());
+					final IpLocator ipl = getIp2CountryService().hostIpLookUpIp(secLoginlog.getLglIp());
 					// /** For testing on a local tomcat */
 					// IpLocator ipl =
 					// getIp2CountryService().hostIpLookUpIp("95.111.227.104");
@@ -278,7 +258,8 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 							logger.debug("hostLookUp resolved for : " + secLoginlog.getLglIp());
 						}
 
-						SysCountryCode sysCC = getSysCountryCodeService().getCountryCodeByCode2(ipl.getCountryCode());
+						final SysCountryCode sysCC = getSysCountryCodeService().getCountryCodeByCode2(
+								ipl.getCountryCode());
 						ip2.setSysCountryCode(sysCC);
 
 						ip2.setI2cCity(ipl.getCity());
@@ -292,7 +273,7 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 						countRec = countRec + 1;
 					}
 
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					logger.warn("", e);
 					continue;
 				}
@@ -305,16 +286,18 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 
 	}
 
+	@Override
 	public int updateFromHostLookUpMain() {
 
 		int countRec = 0;
 
 		int start = 0;
 		int pageNo = 0;
-		int pageSize = 50;
+		final int pageSize = 50;
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class);
+		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
+				SecLoginlog.class);
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
 		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -327,15 +310,16 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 
 			soSecLoginlog.setFirstResult(start);
 
-			List<SecLoginlog> list = getPagedListService().getBySearchObject(soSecLoginlog);
+			final List<SecLoginlog> list = getPagedListService().getBySearchObject(soSecLoginlog);
 
 			pageNo++;
 
 			if (logger.isDebugEnabled()) {
-				logger.debug("PagedList from : " + start + "  to: " + ((pageSize * pageNo) - 1) + "   / List size : " + list.size());
+				logger.debug("PagedList from : " + start + "  to: " + (pageSize * pageNo - 1) + "   / List size : "
+						+ list.size());
 			}
 
-			int recs = updateIp2CountryFromLookUpHost(list);
+			final int recs = updateIp2CountryFromLookUpHost(list);
 			countRec = countRec + recs;
 
 			// if the size of the list < pageSize than these are the last paged
@@ -367,11 +351,11 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 	}
 
 	public PagedListService getPagedListService() {
-		return pagedListService;
+		return this.pagedListService;
 	}
 
 	public SysCountryCodeService getSysCountryCodeService() {
-		return sysCountryCodeService;
+		return this.sysCountryCodeService;
 	}
 
 	public void setSysCountryCodeService(SysCountryCodeService sysCountryCodeService) {
@@ -379,7 +363,7 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 	}
 
 	public Ip2CountryService getIp2CountryService() {
-		return ip2CountryService;
+		return this.ip2CountryService;
 	}
 
 	public void setIp2CountryService(Ip2CountryService ip2CountryService) {
@@ -387,7 +371,7 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 	}
 
 	public LoginLoggingService getLoginLoggingService() {
-		return loginLoggingService;
+		return this.loginLoggingService;
 	}
 
 	public void setLoginLoggingService(LoginLoggingService loginLoggingService) {
@@ -395,7 +379,7 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 	}
 
 	public IpToCountryService getIpToCountryService() {
-		return ipToCountryService;
+		return this.ipToCountryService;
 	}
 
 	public void setIpToCountryService(IpToCountryService ipToCountryService) {
@@ -407,7 +391,7 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 	}
 
 	public Ip4CountryService getIp4CountryService() {
-		return ip4CountryService;
+		return this.ip4CountryService;
 	}
 
 }

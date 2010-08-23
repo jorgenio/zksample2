@@ -47,11 +47,11 @@ public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicServ
 	@Override
 	public void logAuthFail(String userName, String clientAddress, String sessionId) {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("Login failed for: " + userName + " Host:" + clientAddress + " SessionId: " + sessionId);
+		if (logger.isInfoEnabled()) {
+			logger.info("Login failed for: " + userName + " Host:" + clientAddress + " SessionId: " + sessionId);
 		}
 
-		SecLoginlog log = loginLoggingService.saveLog(userName, clientAddress, sessionId, 0);
+		final SecLoginlog log = this.loginLoggingService.saveLog(userName, clientAddress, sessionId, 0);
 		/** For testing on a local tomcat */
 		// log.setLglIp("95.111.227.104");
 		saveSimpleIPDataFromTable(log);
@@ -66,10 +66,11 @@ public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicServ
 	public void logAuthPass(String userName, long userId, String clientAddress, String sessionId) {
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Login ok for: " + userName + " -> UserID: " + userId + " Host:" + clientAddress + " SessionId: " + sessionId);
+			logger.debug("Login ok for: " + userName + " -> UserID: " + userId + " Host:" + clientAddress
+					+ " SessionId: " + sessionId);
 		}
 
-		SecLoginlog log = loginLoggingService.saveLog(userName, clientAddress, sessionId, 1);
+		final SecLoginlog log = this.loginLoggingService.saveLog(userName, clientAddress, sessionId, 1);
 
 		/** For testing on a local tomcat */
 		// log.setLglIp("95.111.227.104");
@@ -82,7 +83,7 @@ public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicServ
 	}
 
 	public LoginLoggingService getLoginLoggingService() {
-		return loginLoggingService;
+		return this.loginLoggingService;
 	}
 
 	public void setLoginLoggingService(LoginLoggingService loginLoggingService) {
@@ -108,25 +109,27 @@ public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicServ
 			if (ipToCountry != null) {
 
 				// Log data for locating ip to country and geo-data
-				Ip2Country ip2c = getIp2CountryService().getNewIp2Country();
+				final Ip2Country ip2c = getIp2CountryService().getNewIp2Country();
 				ip2c.setI2cCity("");
 				// ip2c.setSecLoginlog(log);
-				ip2c.setSysCountryCode(getSysCountryCodeService().getCountryCodeByCode2(ipToCountry.getIpcCountryCode2()));
+				ip2c.setSysCountryCode(getSysCountryCodeService().getCountryCodeByCode2(
+						ipToCountry.getIpcCountryCode2()));
 
 				getIp2CountryService().saveOrUpdate(ip2c);
 
 				// update the LoginLog with a relation to Ip2Country
 				log.setIp2Country(ip2c);
-				loginLoggingService.update(log);
+				this.loginLoggingService.update(log);
 			}
-		} catch (UnknownHostException e) {
-			logger.warn("Update fehlgeschlagen für Country in " + log.getClass().getSimpleName() + " mit ID: " + log.getId() + " [" + e + "]");
+		} catch (final UnknownHostException e) {
+			logger.warn("Update fehlgeschlagen für Country in " + log.getClass().getSimpleName() + " mit ID: "
+					+ log.getId() + " [" + e + "]");
 		}
 
 	}
 
 	public SysCountryCodeService getSysCountryCodeService() {
-		return sysCountryCodeService;
+		return this.sysCountryCodeService;
 	}
 
 	public void setSysCountryCodeService(SysCountryCodeService sysCountryCodeService) {
@@ -134,7 +137,7 @@ public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicServ
 	}
 
 	public Ip2CountryService getIp2CountryService() {
-		return ip2CountryService;
+		return this.ip2CountryService;
 	}
 
 	public void setIp2CountryService(Ip2CountryService ip2CountryService) {
@@ -142,7 +145,7 @@ public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicServ
 	}
 
 	public IpToCountryService getIpToCountryService() {
-		return ipToCountryService;
+		return this.ipToCountryService;
 	}
 
 	public void setIpToCountryService(IpToCountryService ipToCountryService) {

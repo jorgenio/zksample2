@@ -65,7 +65,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
 public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(ArticleMainCtrl.class);
+	private static final Logger logger = Logger.getLogger(ArticleMainCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -127,8 +127,6 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public ArticleMainCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	@Override
@@ -142,7 +140,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		 * managing more than one zul-file in one page. Otherwise it would be
 		 * overridden and can ends in curious error messages.
 		 */
-		self.setAttribute("controller", this, false);
+		this.self.setAttribute("controller", this, false);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -156,10 +154,10 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowArticleMain(Event event) throws Exception {
-		// logger.debug(event.toString());
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrlArticle = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, false, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+		this.btnCtrlArticle = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, false,
+				this.btnNew, this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
 
 		doCheckRights();
 
@@ -167,13 +165,14 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		 * Initiate the first loading by selecting the customerList tab and
 		 * create the components from the zul-file.
 		 */
-		tabArticleList.setSelected(true);
-		if (tabPanelArticleList != null) {
-			ZksampleUtils.createTabPanelContent(tabPanelArticleList, this, "ModuleMainController", "/WEB-INF/pages/article/articleList.zul");
+		this.tabArticleList.setSelected(true);
+		if (this.tabPanelArticleList != null) {
+			ZksampleUtils.createTabPanelContent(this.tabPanelArticleList, this, "ModuleMainController",
+					"/WEB-INF/pages/article/articleList.zul");
 		}
 
 		// Set the buttons for editMode
-		btnCtrlArticle.setInitEdit();
+		this.btnCtrlArticle.setInitEdit();
 	}
 
 	/**
@@ -187,13 +186,14 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// Check if the tabpanel is already loaded
-		if (tabPanelArticleList.getFirstChild() != null) {
-			tabArticleList.setSelected(true);
+		if (this.tabPanelArticleList.getFirstChild() != null) {
+			this.tabArticleList.setSelected(true);
 			return;
 		}
 
-		if (tabPanelArticleList != null) {
-			ZksampleUtils.createTabPanelContent(tabPanelArticleList, this, "ModuleMainController", "/WEB-INF/pages/article/articleList.zul");
+		if (this.tabPanelArticleList != null) {
+			ZksampleUtils.createTabPanelContent(this.tabPanelArticleList, this, "ModuleMainController",
+					"/WEB-INF/pages/article/articleList.zul");
 		}
 	}
 
@@ -208,8 +208,8 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// Check if the tabpanel is already loaded
-		if (tabPanelArticleDetail.getFirstChild() != null) {
-			tabArticleDetail.setSelected(true);
+		if (this.tabPanelArticleDetail.getFirstChild() != null) {
+			this.tabArticleDetail.setSelected(true);
 
 			// refresh the Binding mechanism
 			getArticleDetailCtrl().setArticle(getSelectedArticle());
@@ -217,8 +217,9 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 			return;
 		}
 
-		if (tabPanelArticleDetail != null) {
-			ZksampleUtils.createTabPanelContent(tabPanelArticleDetail, this, "ModuleMainController", "/WEB-INF/pages/article/articleDetail.zul");
+		if (this.tabPanelArticleDetail != null) {
+			ZksampleUtils.createTabPanelContent(this.tabPanelArticleDetail, this, "ModuleMainController",
+					"/WEB-INF/pages/article/articleDetail.zul");
 		}
 	}
 
@@ -229,7 +230,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_ArticleList_PrintList(Event event) throws InterruptedException {
-		Window win = (Window) Path.getComponent("/outerIndexWindow");
+		final Window win = (Window) Path.getComponent("/outerIndexWindow");
 		new ArticleSimpleDJReport(win);
 	}
 
@@ -346,18 +347,18 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// empty the text search boxes
-		tb_Article_ArticleID.setValue(""); // clear
+		this.tb_Article_ArticleID.setValue(""); // clear
 
 		if (getArticleListCtrl().getBinder() != null) {
 			getArticleListCtrl().getPagedBindingListWrapper().clearFilters();
 
 			// get the current Tab for later checking if we must change it
-			Tab currentTab = tabbox_ArticleMain.getSelectedTab();
+			final Tab currentTab = this.tabbox_ArticleMain.getSelectedTab();
 
 			// check if the tab is one of the Detail tabs. If so do not
 			// change the selection of it
-			if (!currentTab.equals(tabArticleList)) {
-				tabArticleList.setSelected(true);
+			if (!currentTab.equals(this.tabArticleList)) {
+				this.tabArticleList.setSelected(true);
 			} else {
 				currentTab.setSelected(true);
 			}
@@ -371,27 +372,28 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// if not empty
-		if (!tb_Article_ArticleID.getValue().isEmpty()) {
-			checkbox_ArticleList_ShowAll.setChecked(false); // unCheck
-			tb_Article_Name.setValue("");
+		if (!this.tb_Article_ArticleID.getValue().isEmpty()) {
+			this.checkbox_ArticleList_ShowAll.setChecked(false); // unCheck
+			this.tb_Article_Name.setValue("");
 
 			if (getArticleListCtrl().getBinder() != null) {
 
 				// ++ create a searchObject and init sorting ++//
-				HibernateSearchObject<Article> so = new HibernateSearchObject<Article>(Article.class, getArticleListCtrl().getCountRows());
-				so.addFilter(new Filter("artNr", "%" + tb_Article_ArticleID.getValue() + "%", Filter.OP_ILIKE));
+				final HibernateSearchObject<Article> so = new HibernateSearchObject<Article>(Article.class,
+						getArticleListCtrl().getCountRows());
+				so.addFilter(new Filter("artNr", "%" + this.tb_Article_ArticleID.getValue() + "%", Filter.OP_ILIKE));
 				so.addSort("artNr", false);
 
 				// Change the BindingListModel.
 				getArticleListCtrl().getPagedBindingListWrapper().setSearchObject(so);
 
 				// get the current Tab for later checking if we must change it
-				Tab currentTab = tabbox_ArticleMain.getSelectedTab();
+				final Tab currentTab = this.tabbox_ArticleMain.getSelectedTab();
 
 				// check if the tab is one of the Detail tabs. If so do not
 				// change the selection of it
-				if (!currentTab.equals(tabArticleList)) {
-					tabArticleList.setSelected(true);
+				if (!currentTab.equals(this.tabArticleList)) {
+					this.tabArticleList.setSelected(true);
 				} else {
 					currentTab.setSelected(true);
 				}
@@ -406,27 +408,29 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// if not empty
-		if (!tb_Article_Name.getValue().isEmpty()) {
-			checkbox_ArticleList_ShowAll.setChecked(false); // unCheck
-			tb_Article_ArticleID.setValue("");
+		if (!this.tb_Article_Name.getValue().isEmpty()) {
+			this.checkbox_ArticleList_ShowAll.setChecked(false); // unCheck
+			this.tb_Article_ArticleID.setValue("");
 
 			if (getArticleListCtrl().getBinder() != null) {
 
 				// ++ create a searchObject and init sorting ++//
-				HibernateSearchObject<Article> so = new HibernateSearchObject<Article>(Article.class, getArticleListCtrl().getCountRows());
-				so.addFilter(new Filter("artKurzbezeichnung", "%" + tb_Article_Name.getValue() + "%", Filter.OP_ILIKE));
+				final HibernateSearchObject<Article> so = new HibernateSearchObject<Article>(Article.class,
+						getArticleListCtrl().getCountRows());
+				so.addFilter(new Filter("artKurzbezeichnung", "%" + this.tb_Article_Name.getValue() + "%",
+						Filter.OP_ILIKE));
 				so.addSort("artKurzbezeichnung", false);
 
 				// Change the BindingListModel.
 				getArticleListCtrl().getPagedBindingListWrapper().setSearchObject(so);
 
 				// get the current Tab for later checking if we must change it
-				Tab currentTab = tabbox_ArticleMain.getSelectedTab();
+				final Tab currentTab = this.tabbox_ArticleMain.getSelectedTab();
 
 				// check if the tab is one of the Detail tabs. If so do not
 				// change the selection of it
-				if (!currentTab.equals(tabArticleList)) {
-					tabArticleList.setSelected(true);
+				if (!currentTab.equals(this.tabArticleList)) {
+					this.tabArticleList.setSelected(true);
 				} else {
 					currentTab.setSelected(true);
 				}
@@ -455,7 +459,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 			// set edit-Mode
 			getArticleDetailCtrl().doReadOnlyMode(true);
 
-			btnCtrlArticle.setInitEdit();
+			this.btnCtrlArticle.setInitEdit();
 		}
 	}
 
@@ -471,21 +475,21 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// get the current Tab for later checking if we must change it
-		Tab currentTab = tabbox_ArticleMain.getSelectedTab();
+		final Tab currentTab = this.tabbox_ArticleMain.getSelectedTab();
 
 		// check first, if the tabs are created, if not than create it
 		if (getArticleDetailCtrl() == null) {
-			Events.sendEvent(new Event("onSelect", tabArticleDetail, null));
+			Events.sendEvent(new Event("onSelect", this.tabArticleDetail, null));
 			// if we work with spring beanCreation than we must check a little
 			// bit deeper, because the Controller are preCreated ?
 		} else if (getArticleDetailCtrl().getBinder() == null) {
-			Events.sendEvent(new Event("onSelect", tabArticleDetail, null));
+			Events.sendEvent(new Event("onSelect", this.tabArticleDetail, null));
 		}
 
 		// check if the tab is one of the Detail tabs. If so do not change the
 		// selection of it
-		if (!currentTab.equals(tabArticleDetail)) {
-			tabArticleDetail.setSelected(true);
+		if (!currentTab.equals(this.tabArticleDetail)) {
+			this.tabArticleDetail.setSelected(true);
 		} else {
 			currentTab.setSelected(true);
 		}
@@ -495,7 +499,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		// remember the old vars
 		doStoreInitValues();
 
-		btnCtrlArticle.setBtnStatus_Edit();
+		this.btnCtrlArticle.setBtnStatus_Edit();
 
 		getArticleDetailCtrl().doReadOnlyMode(false);
 		// set focus
@@ -514,7 +518,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 
 		// check first, if the tabs are created, if not than create them
 		if (getArticleDetailCtrl().getBinder() == null) {
-			Events.sendEvent(new Event("onSelect", tabArticleDetail, null));
+			Events.sendEvent(new Event("onSelect", this.tabArticleDetail, null));
 		}
 
 		// check first, if the tabs are created
@@ -526,34 +530,37 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		if (anArticle != null) {
 
 			// Show a confirm box
-			String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> " + anArticle.getArtKurzbezeichnung();
-			String title = Labels.getLabel("message.Deleting.Record");
+			final String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> "
+					+ anArticle.getArtKurzbezeichnung();
+			final String title = Labels.getLabel("message.Deleting.Record");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, true, new EventListener() {
-				public void onEvent(Event evt) {
-					switch (((Integer) evt.getData()).intValue()) {
-					case MultiLineMessageBox.YES:
-						deleteBean();
-						break; // 
-					case MultiLineMessageBox.NO:
-						break; // 
+			if (MultiLineMessageBox.show(msg, title, Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, true,
+					new EventListener() {
+						@Override
+						public void onEvent(Event evt) {
+							switch (((Integer) evt.getData()).intValue()) {
+							case MultiLineMessageBox.YES:
+								deleteBean();
+								break; //
+							case MultiLineMessageBox.NO:
+								break; //
+							}
+						}
+
+						private void deleteBean() {
+							// delete from database
+							getArticleService().delete(anArticle);
+						}
+
 					}
-				}
-
-				private void deleteBean() {
-					// delete from database
-					getArticleService().delete(anArticle);
-				}
-
-			}
 
 			) == MultiLineMessageBox.YES) {
 			}
 
 		}
 
-		btnCtrlArticle.setInitEdit();
+		this.btnCtrlArticle.setInitEdit();
 
 		setSelectedArticle(null);
 		// refresh the list
@@ -587,12 +594,13 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 			Events.postEvent("onSelect", getArticleListCtrl().getListBoxArticle(), getSelectedArticle());
 
 			// show the objects data in the statusBar
-			String str = getSelectedArticle().getArtKurzbezeichnung();
-			EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeSelectedObject", null, str));
+			final String str = getSelectedArticle().getArtKurzbezeichnung();
+			EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(
+					new Event("onChangeSelectedObject", null, str));
 
-		} catch (DataAccessException e) {
-			String message = e.getMessage();
-			String title = Labels.getLabel("message.Error");
+		} catch (final DataAccessException e) {
+			final String message = e.getMessage();
+			final String title = Labels.getLabel("message.Error");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 
@@ -602,7 +610,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 			return;
 
 		} finally {
-			btnCtrlArticle.setInitEdit();
+			this.btnCtrlArticle.setInitEdit();
 			getArticleDetailCtrl().doReadOnlyMode(true);
 		}
 	}
@@ -619,11 +627,11 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 
 		// check first, if the tabs are created
 		if (getArticleDetailCtrl() == null) {
-			Events.sendEvent(new Event("onSelect", tabArticleDetail, null));
+			Events.sendEvent(new Event("onSelect", this.tabArticleDetail, null));
 			// if we work with spring beanCreation than we must check a little
 			// bit deeper, because the Controller are preCreated ?
 		} else if (getArticleDetailCtrl().getBinder() == null) {
-			Events.sendEvent(new Event("onSelect", tabArticleDetail, null));
+			Events.sendEvent(new Event("onSelect", this.tabArticleDetail, null));
 		}
 
 		// remember the current object
@@ -632,7 +640,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		/** !!! DO NOT BREAK THE TIERS !!! */
 		// We don't create a new DomainObject() in the frontend.
 		// We GET it from the backend.
-		Article anArticle = getArticleService().getNewArticle();
+		final Article anArticle = getArticleService().getNewArticle();
 
 		// set the beans in the related databinded controllers
 		getArticleDetailCtrl().setArticle(anArticle);
@@ -646,9 +654,9 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		getArticleDetailCtrl().doReadOnlyMode(false);
 
 		// set the ButtonStatus to New-Mode
-		btnCtrlArticle.setInitNew();
+		this.btnCtrlArticle.setInitNew();
 
-		tabArticleDetail.setSelected(true);
+		this.tabArticleDetail.setSelected(true);
 		// set focus
 		getArticleDetailCtrl().txtb_artNr.focus();
 
@@ -666,9 +674,9 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	private void doResizeSelectedTab(Event event) {
 		// logger.debug(event.toString());
 
-		if (tabbox_ArticleMain.getSelectedTab() == tabArticleDetail) {
+		if (this.tabbox_ArticleMain.getSelectedTab() == this.tabArticleDetail) {
 			getArticleDetailCtrl().doFitSize(event);
-		} else if (tabbox_ArticleMain.getSelectedTab() == tabArticleList) {
+		} else if (this.tabbox_ArticleMain.getSelectedTab() == this.tabArticleList) {
 			// resize and fill Listbox new
 			getArticleListCtrl().doFillListbox();
 		}
@@ -703,18 +711,14 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 
 			try {
 				setOriginalArticle((Article) org.apache.commons.beanutils.BeanUtils.cloneBean(getSelectedArticle()));
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (final IllegalAccessException e) {
+				throw new RuntimeException(e);
+			} catch (final InstantiationException e) {
+				throw new RuntimeException(e);
+			} catch (final InvocationTargetException e) {
+				throw new RuntimeException(e);
+			} catch (final NoSuchMethodException e) {
+				throw new RuntimeException(e);
 			}
 		}
 	}
@@ -730,24 +734,21 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		if (getOriginalArticle() != null) {
 
 			try {
-				getArticleDetailCtrl().setArticle((Article) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalArticle()));
+				getArticleDetailCtrl().setArticle(
+						(Article) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalArticle()));
 				setSelectedArticle((Article) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalArticle()));
 				// TODO Bug in DataBinder??
-				windowArticleMain.invalidate();
+				this.windowArticleMain.invalidate();
 				getArticleDetailCtrl().windowArticleDetail.invalidate();
 
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (final IllegalAccessException e) {
+				throw new RuntimeException(e);
+			} catch (final InstantiationException e) {
+				throw new RuntimeException(e);
+			} catch (final InvocationTargetException e) {
+				throw new RuntimeException(e);
+			} catch (final NoSuchMethodException e) {
+				throw new RuntimeException(e);
 			}
 		}
 	}
@@ -763,11 +764,11 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	// TODO move it to the zul-file
 	private void doCheckRights() {
 
-		UserWorkspace workspace = getUserWorkspace();
+		final UserWorkspace workspace = getUserWorkspace();
 
-		button_ArticleList_PrintList.setVisible(workspace.isAllowed("button_BranchMain_PrintBranches"));
-		button_ArticleList_SearchArticleID.setVisible(workspace.isAllowed("button_ArticleList_SearchArticleID"));
-		button_ArticleList_SearchName.setVisible(workspace.isAllowed("button_ArticleList_SearchName"));
+		this.button_ArticleList_PrintList.setVisible(workspace.isAllowed("button_BranchMain_PrintBranches"));
+		this.button_ArticleList_SearchArticleID.setVisible(workspace.isAllowed("button_ArticleList_SearchArticleID"));
+		this.button_ArticleList_SearchName.setVisible(workspace.isAllowed("button_ArticleList_SearchName"));
 
 	}
 
@@ -780,7 +781,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public Article getArticle() {
-		return article;
+		return this.article;
 	}
 
 	public void setOriginalArticle(Article originalArticle) {
@@ -788,7 +789,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public Article getOriginalArticle() {
-		return originalArticle;
+		return this.originalArticle;
 	}
 
 	public void setSelectedArticle(Article selectedArticle) {
@@ -796,7 +797,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public Article getSelectedArticle() {
-		return selectedArticle;
+		return this.selectedArticle;
 	}
 
 	public void setArticles(BindingListModelList articles) {
@@ -804,7 +805,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public BindingListModelList getArticles() {
-		return articles;
+		return this.articles;
 	}
 
 	public void setArticleService(ArticleService articleService) {
@@ -812,7 +813,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public ArticleService getArticleService() {
-		return articleService;
+		return this.articleService;
 	}
 
 	public void setArticleListCtrl(ArticleListCtrl articleListCtrl) {
@@ -820,7 +821,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public ArticleListCtrl getArticleListCtrl() {
-		return articleListCtrl;
+		return this.articleListCtrl;
 	}
 
 	public void setArticleDetailCtrl(ArticleDetailCtrl articleDetailCtrl) {
@@ -828,7 +829,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public ArticleDetailCtrl getArticleDetailCtrl() {
-		return articleDetailCtrl;
+		return this.articleDetailCtrl;
 	}
 
 	public void setArticleDialogCtrl(ArticleDialogCtrl articleDialogCtrl) {
@@ -836,7 +837,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public ArticleDialogCtrl getArticleDialogCtrl() {
-		return articleDialogCtrl;
+		return this.articleDialogCtrl;
 	}
 
 }

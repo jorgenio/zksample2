@@ -40,16 +40,16 @@ import de.forsthaus.backend.service.SecurityService;
 public class SecGrouprightListModelItemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(SecGrouprightListModelItemRenderer.class);
+	private static final Logger logger = Logger.getLogger(SecGrouprightListModelItemRenderer.class);
 
 	private transient SecurityService securityService;
 
 	public SecurityService getSecurityService() {
-		if (securityService == null) {
-			securityService = (SecurityService) SpringUtil.getBean("securityService");
-			setSecurityService(securityService);
+		if (this.securityService == null) {
+			this.securityService = (SecurityService) SpringUtil.getBean("securityService");
+			setSecurityService(this.securityService);
 		}
-		return securityService;
+		return this.securityService;
 	}
 
 	public void setSecurityService(SecurityService securityService) {
@@ -59,12 +59,7 @@ public class SecGrouprightListModelItemRenderer implements ListitemRenderer, Ser
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		SecGroupright groupRight = (SecGroupright) data;
-
-		// if (logger.isDebugEnabled()) {
-		// logger.debug("--> " +
-		// groupRight.getSecGroup().getGrpShortdescription());
-		// }
+		final SecGroupright groupRight = (SecGroupright) data;
 
 		Listcell lc = null;
 		lc = new Listcell(groupRight.getSecGroup().getGrpShortdescription());

@@ -64,7 +64,7 @@ import de.forsthaus.webui.util.GFCBaseListCtrl;
 public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Serializable {
 
 	private static final long serialVersionUID = 2038742641853727975L;
-	private transient static final Logger logger = Logger.getLogger(ArticleListCtrl.class);
+	private static final Logger logger = Logger.getLogger(ArticleListCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -104,8 +104,6 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	 */
 	public ArticleListCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	@Override
@@ -119,15 +117,15 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		 * managing more than one zul-file in one page. Otherwise it would be
 		 * overridden and can ends in curious error messages.
 		 */
-		self.setAttribute("controller", this, false);
+		this.self.setAttribute("controller", this, false);
 
 		/**
 		 * 1. Get the overhanded MainController.<br>
 		 * 2. Set this controller in the MainController.<br>
 		 * 3. Check if a 'selectedObject' exists yet in the MainController.<br>
 		 */
-		if (arg.containsKey("ModuleMainController")) {
-			setArticleMainCtrl((ArticleMainCtrl) arg.get("ModuleMainController"));
+		if (this.arg.containsKey("ModuleMainController")) {
+			setArticleMainCtrl((ArticleMainCtrl) this.arg.get("ModuleMainController"));
 
 			// SET THIS CONTROLLER TO THE MainController
 			getArticleMainCtrl().setArticleListCtrl(this);
@@ -149,13 +147,12 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	public void onCreate$windowArticlesList(Event event) throws Exception {
-		// logger.debug(event.toString());
 
-		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
+		this.binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 
 		doFillListbox();
 
-		binder.loadAll();
+		this.binder.loadAll();
 	}
 
 	public void doFillListbox() {
@@ -163,27 +160,27 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		doFitSize();
 
 		// set the paging params
-		paging_ArticleList.setPageSize(getCountRows());
-		paging_ArticleList.setDetailed(true);
+		this.paging_ArticleList.setPageSize(getCountRows());
+		this.paging_ArticleList.setDetailed(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		listheader_ArticleList_No.setSortAscending(new FieldComparator("artNr", true));
-		listheader_ArticleList_No.setSortDescending(new FieldComparator("artNr", false));
-		listheader_ArticleList_ShortDescr.setSortAscending(new FieldComparator("artKurzbezeichnung", true));
-		listheader_ArticleList_ShortDescr.setSortDescending(new FieldComparator("artKurzbezeichnung", false));
-		listheader_ArticleList_SinglePrice.setSortAscending(new FieldComparator("artPreis", true));
-		listheader_ArticleList_SinglePrice.setSortDescending(new FieldComparator("artPreis", false));
+		this.listheader_ArticleList_No.setSortAscending(new FieldComparator("artNr", true));
+		this.listheader_ArticleList_No.setSortDescending(new FieldComparator("artNr", false));
+		this.listheader_ArticleList_ShortDescr.setSortAscending(new FieldComparator("artKurzbezeichnung", true));
+		this.listheader_ArticleList_ShortDescr.setSortDescending(new FieldComparator("artKurzbezeichnung", false));
+		this.listheader_ArticleList_SinglePrice.setSortAscending(new FieldComparator("artPreis", true));
+		this.listheader_ArticleList_SinglePrice.setSortDescending(new FieldComparator("artPreis", false));
 
 		// ++ create the searchObject and init sorting ++//
 		// get customers and only their latest address
-		searchObj = new HibernateSearchObject<Article>(Article.class, getCountRows());
-		searchObj.addSort("artNr", false);
-		setSearchObj(searchObj);
+		this.searchObj = new HibernateSearchObject<Article>(Article.class, getCountRows());
+		this.searchObj.addSort("artNr", false);
+		setSearchObj(this.searchObj);
 
 		// Set the BindingListModel
-		getPagedBindingListWrapper().init(searchObj, getListBoxArticle(), paging_ArticleList);
-		BindingListModelList lml = (BindingListModelList) getListBoxArticle().getModel();
+		getPagedBindingListWrapper().init(this.searchObj, getListBoxArticle(), this.paging_ArticleList);
+		final BindingListModelList lml = (BindingListModelList) getListBoxArticle().getModel();
 		setArticles(lml);
 
 		// Now we would select and show the text of the first entry in the list.
@@ -195,7 +192,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		if (getSelectedArticle() == null) {
 			// init the bean with the first record in the List
 			if (lml.getSize() > 0) {
-				int rowIndex = 0;
+				final int rowIndex = 0;
 				// only for correct showing after Rendering. No effect as an
 				// Event
 				// yet.
@@ -217,7 +214,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	public void onDoubleClickedArticleItem(Event event) {
 		// logger.debug(event.toString());
 
-		Article anArticle = getSelectedArticle();
+		final Article anArticle = getSelectedArticle();
 
 		if (anArticle != null) {
 			setSelectedArticle(anArticle);
@@ -245,7 +242,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	public void onSelect$listBoxArticle(Event event) {
 		// logger.debug(event.toString());
 
-		Article anArticle = getSelectedArticle();
+		final Article anArticle = getSelectedArticle();
 
 		if (anArticle == null) {
 			return;
@@ -268,8 +265,9 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		getArticleMainCtrl().doStoreInitValues();
 
 		// show the objects data in the statusBar
-		String str = Labels.getLabel("common.Article") + ": " + anArticle.getArtKurzbezeichnung();
-		EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeSelectedObject", null, str));
+		final String str = Labels.getLabel("common.Article") + ": " + anArticle.getArtKurzbezeichnung();
+		EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(
+				new Event("onChangeSelectedObject", null, str));
 
 	}
 
@@ -290,13 +288,13 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	 */
 	public void doFitSize() {
 		// normally 0 ! Or we have a i.e. a toolBar on top of the listBox.
-		int specialSize = 0;
-		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		int maxListBoxHeight = (height - specialSize - 142);
-		setCountRows((int) Math.round((maxListBoxHeight) / 18.4));
-		borderLayout_articleList.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		final int specialSize = 0;
+		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		final int maxListBoxHeight = height - specialSize - 142;
+		setCountRows((int) Math.round(maxListBoxHeight / 18.4));
+		this.borderLayout_articleList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
-		windowArticlesList.invalidate();
+		this.windowArticlesList.invalidate();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -344,7 +342,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	}
 
 	public AnnotateDataBinder getBinder() {
-		return binder;
+		return this.binder;
 	}
 
 	public void setArticleService(ArticleService articleService) {
@@ -352,11 +350,11 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	}
 
 	public ArticleService getArticleService() {
-		return articleService;
+		return this.articleService;
 	}
 
 	public int getCountRows() {
-		return countRows;
+		return this.countRows;
 	}
 
 	public void setCountRows(int countRows) {
@@ -368,11 +366,11 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	}
 
 	public ArticleMainCtrl getArticleMainCtrl() {
-		return articleMainCtrl;
+		return this.articleMainCtrl;
 	}
 
 	public HibernateSearchObject<Article> getSearchObj() {
-		return searchObj;
+		return this.searchObj;
 	}
 
 	public void setSearchObj(HibernateSearchObject<Article> searchObj) {
@@ -380,7 +378,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	}
 
 	public Listbox getListBoxArticle() {
-		return listBoxArticle;
+		return this.listBoxArticle;
 	}
 
 	public void setListBoxArticle(Listbox listBoxArticle) {

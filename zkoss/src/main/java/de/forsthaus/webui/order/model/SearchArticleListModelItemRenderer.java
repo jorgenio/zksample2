@@ -38,16 +38,12 @@ import de.forsthaus.backend.model.Article;
 public class SearchArticleListModelItemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(SearchArticleListModelItemRenderer.class);
+	private static final Logger logger = Logger.getLogger(SearchArticleListModelItemRenderer.class);
 
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		Article article = (Article) data;
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + article.getArtKurzbezeichnung());
-		}
+		final Article article = (Article) data;
 
 		Listcell lc = new Listcell(article.getArtNr());
 		lc.setParent(item);

@@ -44,7 +44,7 @@ import de.forsthaus.backend.service.Ip4CountryService;
 public class Ip4CountryServiceImpl implements Ip4CountryService, Serializable {
 
 	private static final long serialVersionUID = 893318843695896685L;
-	private transient final static Logger logger = Logger.getLogger(Ip4CountryServiceImpl.class);
+	private final static Logger logger = Logger.getLogger(Ip4CountryServiceImpl.class);
 
 	final private String updateUrl = "ftp://ftp.wayne.edu/hostip.info/csv/hip_ip4_country.csv";
 
@@ -55,7 +55,7 @@ public class Ip4CountryServiceImpl implements Ip4CountryService, Serializable {
 	}
 
 	public Ip4CountryDAO getIp4CountryDAO() {
-		return ip4CountryDAO;
+		return this.ip4CountryDAO;
 	}
 
 	/**
@@ -67,14 +67,14 @@ public class Ip4CountryServiceImpl implements Ip4CountryService, Serializable {
 	private static long inetAddressToLong(InetAddress address) {
 		if (address.isAnyLocalAddress())
 			return 0l;
-		byte[] bs = address.getAddress();
+		final byte[] bs = address.getAddress();
 		return bs[0] * 16777216l + bs[1] * 65536 + bs[2] * 256 + bs[3];
 	}
 
 	@Override
 	public Ip4Country getIp4Country(InetAddress address) {
-		Long lg = Long.valueOf(inetAddressToLong(address));
-		return ip4CountryDAO.getCountryID(lg);
+		final Long lg = Long.valueOf(inetAddressToLong(address));
+		return this.ip4CountryDAO.getCountryID(lg);
 	}
 
 	public void saveOrUpdate(Ip4Country ip4Country) {
@@ -87,29 +87,28 @@ public class Ip4CountryServiceImpl implements Ip4CountryService, Serializable {
 
 			// first, delete all records in the ip2Country table
 			getIp4CountryDAO().deleteAll();
-			System.out.println("Records after deleting : " + getIp4CountryDAO().getCountAllIp4Country());
 
-			final URL url = new URL(updateUrl);
+			final URL url = new URL(this.updateUrl);
 			final URLConnection conn = url.openConnection();
 			final InputStream istream = conn.getInputStream();
 
 			final BufferedReader in = new BufferedReader(new InputStreamReader(istream));
 			try {
-				Pattern splitterPattern = Pattern.compile(",");
+				final Pattern splitterPattern = Pattern.compile(",");
 				int counter = 0;
 				String aLine = null;
 				while (null != (aLine = in.readLine())) {
-					String[] array = splitterPattern.split(aLine.trim());
-					long ip = Long.parseLong(array[0]);
-					long country = Long.parseLong(array[1]);
+					final String[] array = splitterPattern.split(aLine.trim());
+					final long ip = Long.parseLong(array[0]);
+					final long country = Long.parseLong(array[1]);
 
-					Ip4Country tmp = ip4CountryDAO.getNewIp4Country();
+					final Ip4Country tmp = this.ip4CountryDAO.getNewIp4Country();
 					tmp.setI4coCcdId(country);
 					tmp.setI4coIp(ip);
 
 					getIp4CountryDAO().saveOrUpdate(tmp);
 
-					if (logger.isDebugEnabled() && (++counter % 100) == 0) {
+					if (logger.isDebugEnabled() && ++counter % 100 == 0) {
 						logger.debug("Aktueller Zähler: " + counter);
 					}
 				}
@@ -119,7 +118,7 @@ public class Ip4CountryServiceImpl implements Ip4CountryService, Serializable {
 			}
 			return getIp4CountryDAO().getCountAllIp4Country();
 
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new RuntimeException(e);
 		}
 	}

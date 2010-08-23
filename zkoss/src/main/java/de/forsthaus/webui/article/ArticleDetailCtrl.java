@@ -40,7 +40,7 @@ import de.forsthaus.webui.util.GFCBaseCtrl;
 public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(ArticleDetailCtrl.class);
+	private static final Logger logger = Logger.getLogger(ArticleDetailCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -69,8 +69,6 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public ArticleDetailCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	@Override
@@ -83,15 +81,15 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 		 * managing more than one zul-file in one page. Otherwise it would be
 		 * overridden and can ends in curious error messages.
 		 */
-		self.setAttribute("controller", this, false);
+		this.self.setAttribute("controller", this, false);
 
 		/**
 		 * 1. Get the overhanded MainController.<br>
 		 * 2. Set this controller in the MainController.<br>
 		 * 3. Check if a 'selectedObject' exists yet in the MainController.<br>
 		 */
-		if (arg.containsKey("ModuleMainController")) {
-			setArticleMainCtrl((ArticleMainCtrl) arg.get("ModuleMainController"));
+		if (this.arg.containsKey("ModuleMainController")) {
+			setArticleMainCtrl((ArticleMainCtrl) this.arg.get("ModuleMainController"));
 
 			// SET THIS CONTROLLER TO THE MainController
 			getArticleMainCtrl().setArticleDetailCtrl(this);
@@ -120,11 +118,10 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowArticleDetail(Event event) throws Exception {
-		// logger.debug(event.toString());
 
-		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
+		this.binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 
-		binder.loadAll();
+		this.binder.loadAll();
 
 		doFitSize(event);
 	}
@@ -145,11 +142,11 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 * filled by onClientInfo() in the indexCtroller.
 	 */
 	public void doFitSize(Event event) {
-		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		int maxListBoxHeight = (height - 138);
-		borderLayout_articleDetail.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		final int maxListBoxHeight = height - 138;
+		this.borderLayout_articleDetail.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
-		windowArticleDetail.invalidate();
+		this.windowArticleDetail.invalidate();
 	}
 
 	/**
@@ -161,10 +158,10 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param b
 	 */
 	public void doReadOnlyMode(boolean b) {
-		txtb_artNr.setReadonly(b);
-		txtb_artKurzbezeichnung.setReadonly(b);
-		txtb_artLangbezeichnung.setReadonly(b);
-		decb_artPreis.setReadonly(b);
+		this.txtb_artNr.setReadonly(b);
+		this.txtb_artKurzbezeichnung.setReadonly(b);
+		this.txtb_artLangbezeichnung.setReadonly(b);
+		this.decb_artPreis.setReadonly(b);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -208,7 +205,7 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public AnnotateDataBinder getBinder() {
-		return binder;
+		return this.binder;
 	}
 
 	public void setBinder(AnnotateDataBinder binder) {
@@ -220,11 +217,11 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public ArticleService getArticleService() {
-		return articleService;
+		return this.articleService;
 	}
 
 	public ArticleMainCtrl getArticleMainCtrl() {
-		return articleMainCtrl;
+		return this.articleMainCtrl;
 	}
 
 	public void setArticleMainCtrl(ArticleMainCtrl articleMainCtrl) {

@@ -38,18 +38,15 @@ import de.forsthaus.backend.model.SecGroup;
 public class SecGrouprightDialogGroupListModelItemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(SecGrouprightDialogGroupListModelItemRenderer.class);
+	private transient static final Logger logger = Logger
+			.getLogger(SecGrouprightDialogGroupListModelItemRenderer.class);
 
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		SecGroup group = (SecGroup) data;
+		final SecGroup group = (SecGroup) data;
 
-		// if (logger.isDebugEnabled()) {
-		// logger.debug("--> " + group.getGrpShortdescription());
-		// }
-
-		Listcell lc = new Listcell(group.getGrpShortdescription());
+		final Listcell lc = new Listcell(group.getGrpShortdescription());
 		lc.setParent(item);
 
 		// lc = new Listcell();

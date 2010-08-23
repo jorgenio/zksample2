@@ -87,7 +87,7 @@ import de.forsthaus.webui.util.pagging.PagedListWrapper;
 public class TestCtrl extends GenericForwardComposer implements Serializable {
 
 	private static final long serialVersionUID = 8237296705533772050L;
-	private transient static final Logger logger = Logger.getLogger(TestCtrl.class);
+	private static final Logger logger = Logger.getLogger(TestCtrl.class);
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * All the components that are defined here and have a corresponding
@@ -173,90 +173,91 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	public void onClick$btn_javaListbox(Event event) throws InterruptedException {
 		logger.info(event.getName());
 
-		Listbox listbox = new Listbox();
+		final Listbox listbox = new Listbox();
 		listbox.setWidth("300px");
 		listbox.setHeight("300px");
 		listbox.setVisible(true);
 
-		Listhead lHead = new Listhead();
+		final Listhead lHead = new Listhead();
 		lHead.setParent(listbox);
-		Listheader lHeader1 = new Listheader();
+		final Listheader lHeader1 = new Listheader();
 		lHeader1.setWidth("30%");
 		lHeader1.setLabel("Column 1");
 		lHeader1.setParent(lHead);
 		lHeader1.setVisible(true);
-		Listheader lHeader2 = new Listheader();
+		final Listheader lHeader2 = new Listheader();
 		lHeader2.setWidth("30%");
 		lHeader2.setLabel("Column 2");
 		lHeader2.setParent(lHead);
-		Listheader lHeader3 = new Listheader();
+		final Listheader lHeader3 = new Listheader();
 		lHeader3.setWidth("40%");
 		lHeader3.setLabel("Column 3");
 		lHeader3.setParent(lHead);
 
 		// set the parent where should hold the listbox.
 		// ZK do the rendering
-		listbox.setParent(panelChildJavaListbox);
+		listbox.setParent(this.panelChildJavaListbox);
 	}
 
 	public void onClick$Btn_ResetDatebox(Event event) throws InterruptedException {
 		logger.info(event.getName());
-		DateBox_Sample.setValue(null);
+		this.DateBox_Sample.setValue(null);
 
-		System.out.println(ZkossComponentTreeUtil.getZulTree(window_TestCtrl));
+		System.out.println(ZkossComponentTreeUtil.getZulTree(this.window_TestCtrl));
 
-		TestPanel tp1 = new TestPanel();
-		tp1.setParent(div_DateBox);
-		TestPanel tp2 = new TestPanel();
-		tp2.setParent(div_DateBox);
+		final TestPanel tp1 = new TestPanel();
+		tp1.setParent(this.div_DateBox);
+		final TestPanel tp2 = new TestPanel();
+		tp2.setParent(this.div_DateBox);
 
 	}
 
 	public void onClick$btn_ChangeTheme(Event event) throws InterruptedException {
-		Execution exe = (Execution) Executions.getCurrent().getNativeRequest();
+		final Execution exe = (Execution) Executions.getCurrent().getNativeRequest();
 
 		MyThemeProvider.setSkinCookie(exe, "silvergray");
 	}
 
-	@Secured( { "testSecure" })
+	@Secured({ "testSecure" })
 	public void onClick$btn_Test2(Event event) throws InterruptedException {
 		logger.info(event.getName());
 
 		try {
-			if (Messagebox.CANCEL == Messagebox.show("Question is pressed. Are you sure?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION)) {
+			if (Messagebox.CANCEL == Messagebox.show("Question is pressed. Are you sure?", "Question", Messagebox.OK
+					| Messagebox.CANCEL, Messagebox.QUESTION)) {
 				System.out.println("Messagebox.CANCEL selected!");
 				return;
 			}
 
 			System.out.println("Messagebox.OK selected!");
 			return;
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		} catch (final InterruptedException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
 	public void onClick$btn_getRemoteAddress(Event event) throws InterruptedException {
-		String str = Executions.getCurrent().getRemoteAddr();
+		final String str = Executions.getCurrent().getRemoteAddr();
 		Messagebox.show("Remote Adress: " + str);
 	}
 
 	public void onClick$btn_getRemoteHost(Event event) throws InterruptedException {
-		String str = Executions.getCurrent().getRemoteHost();
+		final String str = Executions.getCurrent().getRemoteHost();
 		Messagebox.show("Remote Host: " + str);
 	}
 
 	public void onClick$btn_getRemoteUser(Event event) throws InterruptedException {
-		String str = Executions.getCurrent().getRemoteUser();
+		final String str = Executions.getCurrent().getRemoteUser();
 		Messagebox.show("Remote User: " + str);
 	}
 
 	public void onClick$btn_getLocalAddress(Event event) throws InterruptedException {
-		String str = Executions.getCurrent().getLocalAddr();
+		final String str = Executions.getCurrent().getLocalAddr();
 		Messagebox.show("Client Local Address: " + str);
 	}
 
 	public void onClick$btn_getLocalName(Event event) throws InterruptedException {
-		String str = Executions.getCurrent().getLocalName();
+		final String str = Executions.getCurrent().getLocalName();
 		Messagebox.show("Client Local Name: " + str);
 	}
 
@@ -269,36 +270,34 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 
 		// Serialize the original class object
 		try {
-			FileOutputStream fo = new FileOutputStream("cde.tmp");
-			ObjectOutputStream so = new ObjectOutputStream(fo);
+			final FileOutputStream fo = new FileOutputStream("cde.tmp");
+			final ObjectOutputStream so = new ObjectOutputStream(fo);
 			so.writeObject(fcOld);
 			so.flush();
 			so.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			// System.exit(1);
+		} catch (final Exception e) {
+			throw new RuntimeException(e);
 		}
 
 		// Deserialize in to new class object
 		try {
-			FileInputStream fi = new FileInputStream("cde.tmp");
-			ObjectInputStream si = new ObjectInputStream(fi);
+			final FileInputStream fi = new FileInputStream("cde.tmp");
+			final ObjectInputStream si = new ObjectInputStream(fi);
 			fcNew = (FieldComparator) si.readObject();
 			System.out.println(fcNew.getOrderBy());
 			si.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			// System.exit(1);
+		} catch (final Exception e) {
+			throw new RuntimeException(e);
 		}
 
-		String longString1 = "Hello. I'm a long string\n\n Hello i'm the second line.\n hjdgf hgjhdgsfhsd jhgjd sfjgj gfdsfg\n\n kjdsds fjk jdsh fjdhfdjsh djsfh jkhjdsf jds jds f ";
-		String longString2 = "Hello. I'm a long string\n\n Hello i'm the second line.\n hjdgf hgjhdgsfhsd jhgjd sfjgj gfdsfg ooiji ojre iorjioj girirjgijr griojgiorjg iorjgir ";
-		String longString3 = "Hello. I'm a long string\n\n Hello i'm the second line.\n hjdgf hgjhdgsfhsd jhgjd sfjgj gfdsfg rok reok kre grigoirejg eopijsj jgioe gjiojg rei re";
-		String longString4 = "Hello. I'm a long string\n\n Hello i'm the second line.\n hjdgf hgjhdgsfhsd jhgjd sfjgj gfdsfg rpokg orkeopkg ok rkropk gpor oprek grekopg kropkpor ";
-		String longString5 = "Hello. I'm a long string\n\n Hello i'm the second line.\n hjdgf hgjhdgsfhsd jhgjd sfjgj gfdsfg röplg reo ropekpo rekerop ok orek oprek porkeop re ";
-		String longString6 = "Hello. I'm a long string\n\n Hello i'm the second line.\n hjdgf hgjhdgsfhsd jhgjd sfjgj gfdsfg pork oprkk opre opkrepok oprek kopre oprekpo rkeop rke ";
-		String message = longString1 + longString2 + longString3 + longString4 + longString5 + longString6;
-		String title = Labels.getLabel("message.Information");
+		final String longString1 = "Hello. I'm a long string\n\n Hello i'm the second line.\n hjdgf hgjhdgsfhsd jhgjd sfjgj gfdsfg\n\n kjdsds fjk jdsh fjdhfdjsh djsfh jkhjdsf jds jds f ";
+		final String longString2 = "Hello. I'm a long string\n\n Hello i'm the second line.\n hjdgf hgjhdgsfhsd jhgjd sfjgj gfdsfg ooiji ojre iorjioj girirjgijr griojgiorjg iorjgir ";
+		final String longString3 = "Hello. I'm a long string\n\n Hello i'm the second line.\n hjdgf hgjhdgsfhsd jhgjd sfjgj gfdsfg rok reok kre grigoirejg eopijsj jgioe gjiojg rei re";
+		final String longString4 = "Hello. I'm a long string\n\n Hello i'm the second line.\n hjdgf hgjhdgsfhsd jhgjd sfjgj gfdsfg rpokg orkeopkg ok rkropk gpor oprek grekopg kropkpor ";
+		final String longString5 = "Hello. I'm a long string\n\n Hello i'm the second line.\n hjdgf hgjhdgsfhsd jhgjd sfjgj gfdsfg röplg reo ropekpo rekerop ok orek oprek porkeop re ";
+		final String longString6 = "Hello. I'm a long string\n\n Hello i'm the second line.\n hjdgf hgjhdgsfhsd jhgjd sfjgj gfdsfg pork oprkk opre opkrepok oprek kopre oprekpo rkeop rke ";
+		final String message = longString1 + longString2 + longString3 + longString4 + longString5 + longString6;
+		final String title = Labels.getLabel("message.Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 
@@ -313,26 +312,24 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 
 		// Serialize the original class object
 		try {
-			FileOutputStream fo = new FileOutputStream("cde.tmp");
-			ObjectOutputStream so = new ObjectOutputStream(fo);
+			final FileOutputStream fo = new FileOutputStream("cde.tmp");
+			final ObjectOutputStream so = new ObjectOutputStream(fo);
 			so.writeObject(fcOld);
 			so.flush();
 			so.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			// System.exit(1);
+		} catch (final Exception e) {
+			throw new RuntimeException(e);
 		}
 
 		// Deserialize in to new class object
 		try {
-			FileInputStream fi = new FileInputStream("cde.tmp");
-			ObjectInputStream si = new ObjectInputStream(fi);
+			final FileInputStream fi = new FileInputStream("cde.tmp");
+			final ObjectInputStream si = new ObjectInputStream(fi);
 			fcNew = (Textbox) si.readObject();
 			System.out.println(fcNew.getValue());
 			si.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			// System.exit(1);
+		} catch (final Exception e) {
+			throw new RuntimeException(e);
 		}
 
 	}
@@ -343,23 +340,23 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 
 	public void onCreate$window_TestCtrl(Event event) throws Exception {
 		// ++ create the searchObject ++//
-		HibernateSearchObject<Branche> so = new HibernateSearchObject<Branche>(Branche.class);
+		final HibernateSearchObject<Branche> so = new HibernateSearchObject<Branche>(Branche.class);
 		// init sorting
 		so.addSort("braBezeichnung", false);
 
 		// set the paging params
 		// pagingBranch.setTotalSize(getBrancheService().getAlleBranche().size());
-		pagingBranch.setDetailed(true);
+		this.pagingBranch.setDetailed(true);
 
-		listheader_Branch_No.setSortAscending(fcBraNr_Asc);
-		listheader_Branch_No.setSortDescending(fcBraNr_Desc);
-		listheader_Branch_Description.setSortAscending(fcBraBezeichnung_Asc);
-		listheader_Branch_Description.setSortDescending(fcBraBezeichnung_Desc);
+		this.listheader_Branch_No.setSortAscending(this.fcBraNr_Asc);
+		this.listheader_Branch_No.setSortDescending(this.fcBraNr_Desc);
+		this.listheader_Branch_Description.setSortAscending(this.fcBraBezeichnung_Asc);
+		this.listheader_Branch_Description.setSortDescending(this.fcBraBezeichnung_Desc);
 
-		listBoxBranch.setItemRenderer(new ListitemRenderer() {
+		this.listBoxBranch.setItemRenderer(new ListitemRenderer() {
 			@Override
 			public void render(Listitem item, Object data) throws Exception {
-				Branche branche = (Branche) data;
+				final Branche branche = (Branche) data;
 				Listcell lc;
 				lc = new Listcell(String.valueOf(branche.getBraBezeichnung()));
 				lc.setStyle("text-align: left; padding-left: 5px;");
@@ -370,41 +367,41 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 			}
 		});
 
-		pagedListWrapperBranche.init(so, listBoxBranch, pagingBranch);
+		this.pagedListWrapperBranche.init(so, this.listBoxBranch, this.pagingBranch);
 
 		// ++ Customer ++//
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<Customer> so2 = new HibernateSearchObject<Customer>(Customer.class);
+		final HibernateSearchObject<Customer> so2 = new HibernateSearchObject<Customer>(Customer.class);
 		so2.addFilterEqual("kunOrt", "Freiburg");
 		so2.addSort("kunName1", false);
 
 		// set the paging params
-		pagingKunde.setDetailed(true);
+		this.pagingKunde.setDetailed(true);
 
-		listheader_CustMatchcode.setSortAscending(fcKunMatchcode_Asc);
-		listheader_CustMatchcode.setSortDescending(fcKunMatchcode_Desc);
-		listheader_CustName1.setSortAscending(fcKunName1_Asc);
-		listheader_CustName1.setSortDescending(fcKunName1_Desc);
-		listheader_CustName2.setSortAscending(fcKunName2_Asc);
-		listheader_CustName2.setSortDescending(fcKunName2_Desc);
-		listheader_CustCity.setSortAscending(fcKunOrt_Asc);
-		listheader_CustCity.setSortDescending(fcKunOrt_Desc);
-		listBoxCustomer.setItemRenderer(new CustomerListModelItemRenderer());
+		this.listheader_CustMatchcode.setSortAscending(this.fcKunMatchcode_Asc);
+		this.listheader_CustMatchcode.setSortDescending(this.fcKunMatchcode_Desc);
+		this.listheader_CustName1.setSortAscending(this.fcKunName1_Asc);
+		this.listheader_CustName1.setSortDescending(this.fcKunName1_Desc);
+		this.listheader_CustName2.setSortAscending(this.fcKunName2_Asc);
+		this.listheader_CustName2.setSortDescending(this.fcKunName2_Desc);
+		this.listheader_CustCity.setSortAscending(this.fcKunOrt_Asc);
+		this.listheader_CustCity.setSortDescending(this.fcKunOrt_Desc);
+		this.listBoxCustomer.setItemRenderer(new CustomerListModelItemRenderer());
 
-		pagedListWrapperCustomer.init(so2, listBoxCustomer, pagingKunde);
+		this.pagedListWrapperCustomer.init(so2, this.listBoxCustomer, this.pagingKunde);
 	}
 
 	public void onClick$button_insertCustomers(Event event) throws InterruptedException {
 
-		Branche branche = getBrancheService().getBrancheById(1000);
-		Office office = getOfficeService().getOfficeByID(Long.valueOf(1));
+		final Branche branche = getBrancheService().getBrancheById(1000);
+		final Office office = getOfficeService().getOfficeByID(Long.valueOf(1));
 
-		int countRecords = 10000;
+		final int countRecords = 10000;
 
-		RandomDataEngine randomDataEngine = new RandomDataEngine();
+		final RandomDataEngine randomDataEngine = new RandomDataEngine();
 
 		for (int j = 0; j < countRecords; j++) {
-			Customer customer = getCustomerService().getNewCustomer();
+			final Customer customer = getCustomerService().getNewCustomer();
 
 			customer.setKunName1(randomDataEngine.getRandomManFirstname());
 			customer.setKunName2(randomDataEngine.getRandomLastname());
@@ -413,10 +410,6 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 			customer.setBranche(branche);
 			customer.setOffice(office);
 			customer.setKunMahnsperre(Boolean.FALSE);
-
-			if (logger.isDebugEnabled()) {
-				logger.debug("--> Customer :" + j + "/" + customer.getKunMatchcode());
-			}
 
 			getCustomerService().saveOrUpdate(customer);
 		}
@@ -433,13 +426,13 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	}
 
 	public void onClick$btn_CountLoginsPerHour(Event event) {
-		hsoLoginLog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class);
-		hsoLoginLog.addFilter(new Filter());
+		this.hsoLoginLog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class);
+		this.hsoLoginLog.addFilter(new Filter());
 
 		// neu
-		List<SecLoginlog> list = getLoginLoggingService().getLoginsPerHour(new Date());
+		final List<SecLoginlog> list = getLoginLoggingService().getLoginsPerHour(new Date());
 		System.out.println("count records : " + list.size());
-		for (SecLoginlog secLoginlog : list) {
+		for (final SecLoginlog secLoginlog : list) {
 			System.out.println(secLoginlog.getLglIp());
 		}
 
@@ -452,13 +445,13 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	public void onClick$btn_updateIp2CountryFromLookUpHost(Event event) {
 
 		try {
-			String message = Labels.getLabel("message.Information.OutOfOrder");
-			String title = Labels.getLabel("message.Information");
+			final String message = Labels.getLabel("message.Information.OutOfOrder");
+			final String title = Labels.getLabel("message.Information");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 			return;
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			// TODO: handle exception
 		}
 
@@ -470,10 +463,10 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	}
 
 	public void onClick$btn_createWindow(Event event) {
-		String width = "800px";
-		String height = "300px";
-		String uri = "/WEB-INF/pages/welcome.zul";
-		Window window = (Window) Executions.createComponents(uri, (Component) getController(), null);
+		final String width = "800px";
+		final String height = "300px";
+		final String uri = "/WEB-INF/pages/welcome.zul";
+		final Window window = (Window) Executions.createComponents(uri, (Component) getController(), null);
 		window.setWidth(width);
 		window.setHeight(height);
 		window.doHighlighted();
@@ -516,21 +509,21 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	}
 
 	public void onClick$btnEditCustomerListbox(Event event) {
-		List<Listitem> lstArr = listBoxCustomer.getItems();
-		logger.debug("Count items :" + listBoxCustomer.getItemCount());
+		final List<Listitem> lstArr = this.listBoxCustomer.getItems();
+		logger.debug("Count items :" + this.listBoxCustomer.getItemCount());
 		// for (Listitem lstItem : lstArr)
-		for (Object item : listBoxCustomer.getItems()) {
+		for (final Object item : this.listBoxCustomer.getItems()) {
 			logger.debug("item :" + item);
 			if (item instanceof Listitem) {
-				Listitem lstItem = (Listitem) item;
-				for (Object cell : (lstItem).getChildren()) {
+				final Listitem lstItem = (Listitem) item;
+				for (final Object cell : lstItem.getChildren()) {
 					logger.debug("cell :" + cell);
 					// CHILDREN COUNT is ALWAYS 1
 					if (cell instanceof Listcell) {
-						Listcell listcell = (Listcell) cell;
+						final Listcell listcell = (Listcell) cell;
 
 						logger.debug("cell :" + listcell.getLabel());
-						for (Object innercell : listcell.getChildren()) {
+						for (final Object innercell : listcell.getChildren()) {
 							// NEVER GET HERE
 							if (innercell instanceof Checkbox) {
 								logger.debug("InnerCell = Checkbox");
@@ -547,9 +540,9 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 
 		logger.info(event.getTarget().getClass().getName());
 
-		Set<Listitem> li = listBoxCustomer.getSelectedItems();
+		final Set<Listitem> li = this.listBoxCustomer.getSelectedItems();
 
-		for (Listitem listitem : li) {
+		for (final Listitem listitem : li) {
 			// li.setCheckable(false);
 			listitem.setStyle("background-color:#f3d973");
 		}
@@ -560,11 +553,11 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 
 		logger.info(event.getTarget().getClass().getName());
 
-		Listitem li = listBoxCustomer.getSelectedItem();
+		final Listitem li = this.listBoxCustomer.getSelectedItem();
 
 		// li.setCheckable(false);
 		li.setStyle("color: black; background-color:#f3d973");
-		listBoxCustomer.invalidate();
+		this.listBoxCustomer.invalidate();
 
 	}
 
@@ -576,31 +569,32 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	public void onClick$btnLoginTest(Event event) {
 		System.out.println(event.getName());
 
-		userNameTest.getValue();
-		passwordTest.getValue();
-		Clients.closeErrorBox(userNameTest);
+		this.userNameTest.getValue();
+		this.passwordTest.getValue();
+		Clients.closeErrorBox(this.userNameTest);
 
-		if (userNameTest.getValue().equalsIgnoreCase("test") && passwordTest.getValue().equalsIgnoreCase("test")) {
+		if (this.userNameTest.getValue().equalsIgnoreCase("test")
+				&& this.passwordTest.getValue().equalsIgnoreCase("test")) {
 
 			System.out.println("&&");
-			userNameTest.getValue();
-			userNameTest.invalidate();
-			userNameTest.focus();
+			this.userNameTest.getValue();
+			this.userNameTest.invalidate();
+			this.userNameTest.focus();
 
 		} else {
-			throw new WrongValueException(userNameTest, "false userName or password. Please retry.");
+			throw new WrongValueException(this.userNameTest, "false userName or password. Please retry.");
 		}
 	}
 
 	public void onFocus$userNameTest(Event event) {
 		System.out.println("onFocus: Textbox userName");
-		Clients.closeErrorBox(userNameTest);
+		Clients.closeErrorBox(this.userNameTest);
 	}
 
 	public void onFocus$passwordTest(Event event) {
 		System.out.println("onFocus: Textbox passWord");
 
-		Clients.closeErrorBox(userNameTest);
+		Clients.closeErrorBox(this.userNameTest);
 		// Component[] comps = { userNameTest, passwordTest };
 		// Clients.closeErrorBox(comps);
 	}
@@ -614,11 +608,11 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	}
 
 	public OfficeService getOfficeService() {
-		if (officeService == null) {
-			officeService = (OfficeService) SpringUtil.getBean("officeService");
-			setOfficeService(officeService);
+		if (this.officeService == null) {
+			this.officeService = (OfficeService) SpringUtil.getBean("officeService");
+			setOfficeService(this.officeService);
 		}
-		return officeService;
+		return this.officeService;
 	}
 
 	private void setBrancheService(BrancheService brancheService) {
@@ -626,11 +620,11 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	}
 
 	public BrancheService getBrancheService() {
-		if (brancheService == null) {
-			brancheService = (BrancheService) SpringUtil.getBean("brancheService");
-			setBrancheService(brancheService);
+		if (this.brancheService == null) {
+			this.brancheService = (BrancheService) SpringUtil.getBean("brancheService");
+			setBrancheService(this.brancheService);
 		}
-		return brancheService;
+		return this.brancheService;
 	}
 
 	public void setCustomerService(CustomerService customerService) {
@@ -638,11 +632,11 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	}
 
 	public CustomerService getCustomerService() {
-		if (customerService == null) {
-			customerService = (CustomerService) SpringUtil.getBean("customerService");
-			setCustomerService(customerService);
+		if (this.customerService == null) {
+			this.customerService = (CustomerService) SpringUtil.getBean("customerService");
+			setCustomerService(this.customerService);
 		}
-		return customerService;
+		return this.customerService;
 	}
 
 	public void setLoginLoggingService(LoginLoggingService loginLoggingService) {
@@ -650,11 +644,11 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	}
 
 	public LoginLoggingService getLoginLoggingService() {
-		if (loginLoggingService == null) {
-			loginLoggingService = (LoginLoggingService) SpringUtil.getBean("loginLoggingService");
-			setLoginLoggingService(loginLoggingService);
+		if (this.loginLoggingService == null) {
+			this.loginLoggingService = (LoginLoggingService) SpringUtil.getBean("loginLoggingService");
+			setLoginLoggingService(this.loginLoggingService);
 		}
-		return loginLoggingService;
+		return this.loginLoggingService;
 	}
 
 	public void setGuiLoginLoggingService(GuiLoginLoggingService guiLoginLoggingService) {
@@ -662,11 +656,11 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	}
 
 	public GuiLoginLoggingService getGuiLoginLoggingService() {
-		if (guiLoginLoggingService == null) {
-			guiLoginLoggingService = (GuiLoginLoggingService) SpringUtil.getBean("guiLoginLoggingService");
-			setGuiLoginLoggingService(guiLoginLoggingService);
+		if (this.guiLoginLoggingService == null) {
+			this.guiLoginLoggingService = (GuiLoginLoggingService) SpringUtil.getBean("guiLoginLoggingService");
+			setGuiLoginLoggingService(this.guiLoginLoggingService);
 		}
-		return guiLoginLoggingService;
+		return this.guiLoginLoggingService;
 	}
 
 	public void setIpToCountryService(IpToCountryService ipToCountryService) {
@@ -674,11 +668,11 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	}
 
 	public IpToCountryService getIpToCountryService() {
-		if (ipToCountryService == null) {
-			ipToCountryService = (IpToCountryService) SpringUtil.getBean("guiLoginLoggingService");
-			setIpToCountryService(ipToCountryService);
+		if (this.ipToCountryService == null) {
+			this.ipToCountryService = (IpToCountryService) SpringUtil.getBean("guiLoginLoggingService");
+			setIpToCountryService(this.ipToCountryService);
 		}
-		return ipToCountryService;
+		return this.ipToCountryService;
 	}
 
 	public void setOrderService(OrderService orderService) {
@@ -686,20 +680,20 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	}
 
 	public OrderService getOrderService() {
-		if (orderService == null) {
-			orderService = (OrderService) SpringUtil.getBean("orderService");
-			setOrderService(orderService);
+		if (this.orderService == null) {
+			this.orderService = (OrderService) SpringUtil.getBean("orderService");
+			setOrderService(this.orderService);
 		}
 
-		return orderService;
+		return this.orderService;
 	}
 
 	public ReportService getReportService() {
-		if (reportService == null) {
-			reportService = (ReportService) SpringUtil.getBean("reportService");
-			setReportService(reportService);
+		if (this.reportService == null) {
+			this.reportService = (ReportService) SpringUtil.getBean("reportService");
+			setReportService(this.reportService);
 		}
-		return reportService;
+		return this.reportService;
 	}
 
 	public void setReportService(ReportService reportService) {
@@ -707,7 +701,7 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	}
 
 	public PagedListWrapper<Customer> getPagedListWrapperCustomer() {
-		return pagedListWrapperCustomer;
+		return this.pagedListWrapperCustomer;
 	}
 
 	public void setPagedListWrapperCustomer(PagedListWrapper<Customer> pagedListWrapperCustomer) {
@@ -715,7 +709,7 @@ public class TestCtrl extends GenericForwardComposer implements Serializable {
 	}
 
 	public PagedListWrapper<Branche> getPagedListWrapperBranche() {
-		return pagedListWrapperBranche;
+		return this.pagedListWrapperBranche;
 	}
 
 	public void setPagedListWrapperBranche(PagedListWrapper<Branche> pagedListWrapperBranche) {

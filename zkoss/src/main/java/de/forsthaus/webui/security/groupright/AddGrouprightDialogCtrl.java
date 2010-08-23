@@ -69,7 +69,7 @@ import de.forsthaus.webui.util.pagging.PagedListWrapper;
 public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = 2146221197789582858L;
-	private transient static final Logger logger = Logger.getLogger(AddGrouprightDialogCtrl.class);
+	private static final Logger logger = Logger.getLogger(AddGrouprightDialogCtrl.class);
 
 	private transient PagedListWrapper<SecRight> plwSecRights;
 	/*
@@ -124,8 +124,6 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	 */
 	public AddGrouprightDialogCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	/**
@@ -134,37 +132,36 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @throws Exception
 	 */
 	public void onCreate$addGrouprightDialogWindow(Event event) throws Exception {
-		logger.debug(event.toString());
-
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+		this.btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, true, this.btnNew,
+				this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
 
 		// get the params map that are overhanded by creation.
-		Map<String, Object> args = getCreationArgsMap(event);
+		final Map<String, Object> args = getCreationArgsMap(event);
 
 		if (args.containsKey("group")) {
-			group = (SecGroup) args.get("group");
-			setGroup(group);
+			this.group = (SecGroup) args.get("group");
+			setGroup(this.group);
 		} else {
 			setGroup(null);
 		}
 
-		countRowsSecRight = 20;
+		this.countRowsSecRight = 20;
 
-		paging_ListBoxSingleRightSearch.setPageSize(countRowsSecRight);
-		paging_ListBoxSingleRightSearch.setDetailed(true);
+		this.paging_ListBoxSingleRightSearch.setPageSize(this.countRowsSecRight);
+		this.paging_ListBoxSingleRightSearch.setDetailed(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		listheader_bbox_AddGroupRightDialog_RightName.setSortAscending(new FieldComparator("rigName", true));
-		listheader_bbox_AddGroupRightDialog_RightName.setSortDescending(new FieldComparator("rigName", false));
-		listheader_bbox_AddGroupRightDialog_RightType.setSortAscending(new FieldComparator("rigType", true));
-		listheader_bbox_AddGroupRightDialog_RightType.setSortDescending(new FieldComparator("rigType", false));
+		this.listheader_bbox_AddGroupRightDialog_RightName.setSortAscending(new FieldComparator("rigName", true));
+		this.listheader_bbox_AddGroupRightDialog_RightName.setSortDescending(new FieldComparator("rigName", false));
+		this.listheader_bbox_AddGroupRightDialog_RightType.setSortAscending(new FieldComparator("rigType", true));
+		this.listheader_bbox_AddGroupRightDialog_RightType.setSortDescending(new FieldComparator("rigType", false));
 
 		// temporary, cause the security is not implemented for this controller
-		btnEdit.setVisible(false);
-		btnCancel.setVisible(false);
-		btnDelete.setVisible(false);
+		this.btnEdit.setVisible(false);
+		this.btnCancel.setVisible(false);
+		this.btnDelete.setVisible(false);
 
 		doShowDialog(getGroup());
 
@@ -179,14 +176,15 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	public void doShowDialog(SecGroup aGroup) throws InterruptedException {
 
 		try {
-			textbox_AddGroupRightDialog_GroupName.setValue(aGroup.getGrpShortdescription());
-			textbox_AddGroupRightDialog_RightName.setValue("");
+			this.textbox_AddGroupRightDialog_GroupName.setValue(aGroup.getGrpShortdescription());
+			this.textbox_AddGroupRightDialog_RightName.setValue("");
 
-			btnCtrl.setInitNew();
+			this.btnCtrl.setInitNew();
 
-			addGrouprightDialogWindow.doModal(); // open the dialog in modal
+			this.addGrouprightDialogWindow.doModal(); // open the dialog in
+														// modal
 			// mode
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			Messagebox.show(e.toString());
 		}
 	}
@@ -270,16 +268,16 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 
 		try {
 			doClose();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			// close anyway
-			addGrouprightDialogWindow.onClose();
+			this.addGrouprightDialogWindow.onClose();
 			// Messagebox.show(e.toString());
 		}
 	}
 
 	private void doClose() {
 
-		addGrouprightDialogWindow.onClose();
+		this.addGrouprightDialogWindow.onClose();
 	}
 
 	/**
@@ -289,37 +287,37 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	 */
 	private void doSave() throws InterruptedException {
 
-		if (textbox_AddGroupRightDialog_GroupName.getValue().isEmpty()) {
+		if (this.textbox_AddGroupRightDialog_GroupName.getValue().isEmpty()) {
 			return;
-		} else if (textbox_AddGroupRightDialog_RightName.getValue().isEmpty()) {
+		} else if (this.textbox_AddGroupRightDialog_RightName.getValue().isEmpty()) {
 			return;
 		}
 
-		SecGroupright groupRight = getSecurityService().getNewSecGroupright();
+		final SecGroupright groupRight = getSecurityService().getNewSecGroupright();
 		groupRight.setSecGroup(getGroup());
 		groupRight.setSecRight(getRight());
 
 		/* check if already in table */
-		SecGroupright gr = getSecurityService().getGroupRightByGroupAndRight(getGroup(), getRight());
+		final SecGroupright gr = getSecurityService().getGroupRightByGroupAndRight(getGroup(), getRight());
 
 		if (gr == null) {
 
 			// save it to database
 			try {
 				getSecurityService().saveOrUpdate(groupRight);
-			} catch (DataAccessException e) {
-				String message = e.getMessage();
+			} catch (final DataAccessException e) {
+				final String message = e.getMessage();
 				// String message = e.getCause().getMessage();
-				String title = Labels.getLabel("message.Error");
+				final String title = Labels.getLabel("message.Error");
 				MultiLineMessageBox.doSetTemplate();
 				MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 
-				btnCtrl.setBtnStatus_Save();
+				this.btnCtrl.setBtnStatus_Save();
 			}
 
 		}
 
-		btnCtrl.setBtnStatus_Save();
+		this.btnCtrl.setBtnStatus_Save();
 
 	}
 
@@ -340,7 +338,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	 */
 	public void onOpen$bpop_AddGroupRightDialog_SearchRight(Event event) throws InterruptedException {
 
-		checkbox_bbox_AddGroupRightDialog_All.setChecked(true);
+		this.checkbox_bbox_AddGroupRightDialog_All.setChecked(true);
 	}
 
 	/**
@@ -374,14 +372,14 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	public void onCheck$checkbox_bbox_AddGroupRightDialog_All(Event event) {
 		logger.debug(event.toString());
 
-		textbox_bboxAddGroupRightDialog_rightName.setValue("");
-		checkbox_bbox_AddGroupRightDialog_Pages.setChecked(false);
-		checkbox_bbox_AddGroupRightDialog_Tabs.setChecked(false);
-		checkbox_bbox_AddGroupRightDialog_MenuCat.setChecked(false);
-		checkbox_bbox_AddGroupRightDialog_MenuItems.setChecked(false);
-		checkbox_bbox_AddGroupRightDialog_Methods.setChecked(false);
-		checkbox_bbox_AddGroupRightDialog_Domain.setChecked(false);
-		checkbox_bbox_AddGroupRightDialog_Components.setChecked(false);
+		this.textbox_bboxAddGroupRightDialog_rightName.setValue("");
+		this.checkbox_bbox_AddGroupRightDialog_Pages.setChecked(false);
+		this.checkbox_bbox_AddGroupRightDialog_Tabs.setChecked(false);
+		this.checkbox_bbox_AddGroupRightDialog_MenuCat.setChecked(false);
+		this.checkbox_bbox_AddGroupRightDialog_MenuItems.setChecked(false);
+		this.checkbox_bbox_AddGroupRightDialog_Methods.setChecked(false);
+		this.checkbox_bbox_AddGroupRightDialog_Domain.setChecked(false);
+		this.checkbox_bbox_AddGroupRightDialog_Components.setChecked(false);
 	}
 
 	/**
@@ -391,7 +389,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onCheck$checkbox_bbox_AddGroupRightDialog_Pages(Event event) {
-		checkbox_bbox_AddGroupRightDialog_All.setChecked(false);
+		this.checkbox_bbox_AddGroupRightDialog_All.setChecked(false);
 	}
 
 	/**
@@ -401,7 +399,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onCheck$checkbox_bbox_AddGroupRightDialog_Tabs(Event event) {
-		checkbox_bbox_AddGroupRightDialog_All.setChecked(false);
+		this.checkbox_bbox_AddGroupRightDialog_All.setChecked(false);
 	}
 
 	/**
@@ -411,7 +409,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onCheck$checkbox_bbox_AddGroupRightDialog_MenuCat(Event event) {
-		checkbox_bbox_AddGroupRightDialog_All.setChecked(false);
+		this.checkbox_bbox_AddGroupRightDialog_All.setChecked(false);
 	}
 
 	/**
@@ -421,7 +419,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onCheck$checkbox_bbox_AddGroupRightDialog_MenuItems(Event event) {
-		checkbox_bbox_AddGroupRightDialog_All.setChecked(false);
+		this.checkbox_bbox_AddGroupRightDialog_All.setChecked(false);
 	}
 
 	/**
@@ -431,7 +429,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onCheck$checkbox_bbox_AddGroupRightDialog_Methods(Event event) {
-		checkbox_bbox_AddGroupRightDialog_All.setChecked(false);
+		this.checkbox_bbox_AddGroupRightDialog_All.setChecked(false);
 	}
 
 	/**
@@ -441,7 +439,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onCheck$checkbox_bbox_AddGroupRightDialog_Domain(Event event) {
-		checkbox_bbox_AddGroupRightDialog_All.setChecked(false);
+		this.checkbox_bbox_AddGroupRightDialog_All.setChecked(false);
 	}
 
 	/**
@@ -451,7 +449,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @param event
 	 */
 	public void onCheck$checkbox_bbox_AddGroupRightDialog_Components(Event event) {
-		checkbox_bbox_AddGroupRightDialog_All.setChecked(false);
+		this.checkbox_bbox_AddGroupRightDialog_All.setChecked(false);
 	}
 
 	/**
@@ -462,61 +460,62 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	private void filterTypeForShowingRights() {
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, countRowsSecRight);
+		final HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class,
+				this.countRowsSecRight);
 		soSecRight.addSort("rigName", false);
 
-		Filter f = Filter.or();
+		final Filter f = Filter.or();
 
-		if (checkbox_bbox_AddGroupRightDialog_All.isChecked()) {
+		if (this.checkbox_bbox_AddGroupRightDialog_All.isChecked()) {
 			// nothing todo
 		}
 
-		if (checkbox_bbox_AddGroupRightDialog_Pages.isChecked()) {
+		if (this.checkbox_bbox_AddGroupRightDialog_Pages.isChecked()) {
 			f.add(Filter.equal("rigType", 0));
 		}
 
-		if (checkbox_bbox_AddGroupRightDialog_Tabs.isChecked()) {
+		if (this.checkbox_bbox_AddGroupRightDialog_Tabs.isChecked()) {
 			f.add(Filter.equal("rigType", 5));
 		}
 
-		if (checkbox_bbox_AddGroupRightDialog_MenuCat.isChecked()) {
+		if (this.checkbox_bbox_AddGroupRightDialog_MenuCat.isChecked()) {
 			f.add(Filter.equal("rigType", 1));
 		}
 
-		if (checkbox_bbox_AddGroupRightDialog_MenuItems.isChecked()) {
+		if (this.checkbox_bbox_AddGroupRightDialog_MenuItems.isChecked()) {
 			f.add(Filter.equal("rigType", 2));
 		}
 
-		if (checkbox_bbox_AddGroupRightDialog_Methods.isChecked()) {
+		if (this.checkbox_bbox_AddGroupRightDialog_Methods.isChecked()) {
 			f.add(Filter.equal("rigType", 3));
 		}
 
-		if (checkbox_bbox_AddGroupRightDialog_Domain.isChecked()) {
+		if (this.checkbox_bbox_AddGroupRightDialog_Domain.isChecked()) {
 			f.add(Filter.equal("rigType", 4));
 		}
 
-		if (checkbox_bbox_AddGroupRightDialog_Components.isChecked()) {
+		if (this.checkbox_bbox_AddGroupRightDialog_Components.isChecked()) {
 			f.add(Filter.equal("rigType", 6));
 		}
 
-		if (textbox_bboxAddGroupRightDialog_rightName.getValue().isEmpty()) {
+		if (this.textbox_bboxAddGroupRightDialog_rightName.getValue().isEmpty()) {
 			soSecRight.addFilter(f);
 
 			// Set the ListModel.
-			getPlwSecRights().init(soSecRight, listBoxSingleRightSearch, paging_ListBoxSingleRightSearch);
-		} else if (!textbox_bboxAddGroupRightDialog_rightName.getValue().isEmpty()) {
+			getPlwSecRights().init(soSecRight, this.listBoxSingleRightSearch, this.paging_ListBoxSingleRightSearch);
+		} else if (!this.textbox_bboxAddGroupRightDialog_rightName.getValue().isEmpty()) {
 			soSecRight.addFilter(f);
 
-			Filter f1 = Filter.and();
+			final Filter f1 = Filter.and();
 
-			f1.add(Filter.ilike("rigName", "%" + textbox_bboxAddGroupRightDialog_rightName.getValue() + "%"));
+			f1.add(Filter.ilike("rigName", "%" + this.textbox_bboxAddGroupRightDialog_rightName.getValue() + "%"));
 			soSecRight.addFilter(f1);
 
 			// Set the ListModel.
-			getPlwSecRights().init(soSecRight, listBoxSingleRightSearch, paging_ListBoxSingleRightSearch);
+			getPlwSecRights().init(soSecRight, this.listBoxSingleRightSearch, this.paging_ListBoxSingleRightSearch);
 		}
 
-		listBoxSingleRightSearch.setItemRenderer(new SecRightListModelItemRenderer());
+		this.listBoxSingleRightSearch.setItemRenderer(new SecRightListModelItemRenderer());
 	}
 
 	/**
@@ -526,15 +525,15 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	 */
 	public void onDoubleClickedRightItem() {
 
-		Listitem item = listBoxSingleRightSearch.getSelectedItem();
+		final Listitem item = this.listBoxSingleRightSearch.getSelectedItem();
 
 		if (item != null) {
-			SecRight right = (SecRight) item.getAttribute("data");
+			final SecRight right = (SecRight) item.getAttribute("data");
 
 			/* store the selected right */
 			setRight(right);
 
-			textbox_AddGroupRightDialog_RightName.setValue(right.getRigName());
+			this.textbox_AddGroupRightDialog_RightName.setValue(right.getRigName());
 		}
 
 		doCloseBandbox();
@@ -542,7 +541,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	}
 
 	private void doCloseBandbox() {
-		bandbox_AddGroupRightDialog_SearchRight.close();
+		this.bandbox_AddGroupRightDialog_SearchRight.close();
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -554,7 +553,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	}
 
 	public SecGroup getGroup() {
-		return group;
+		return this.group;
 	}
 
 	public void setRight(SecRight right) {
@@ -562,11 +561,11 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	}
 
 	public SecRight getRight() {
-		return right;
+		return this.right;
 	}
 
 	public SecurityService getSecurityService() {
-		return securityService;
+		return this.securityService;
 	}
 
 	public void setSecurityService(SecurityService securityService) {
@@ -578,7 +577,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	}
 
 	public PagedListWrapper<SecRight> getPlwSecRights() {
-		return plwSecRights;
+		return this.plwSecRights;
 	}
 
 }

@@ -51,18 +51,18 @@ import de.forsthaus.webui.util.ZksampleDateFormat;
 public class SecLoginlogListModelItemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(SecLoginlogListModelItemRenderer.class);
+	private static final Logger logger = Logger.getLogger(SecLoginlogListModelItemRenderer.class);
 
 	private transient LoginLoggingService loginLoggingService;
 	private transient SecurityService securityService;
 	private transient IpToCountryService ipToCountryService;
 
 	public SecurityService getSecurityService() {
-		if (securityService == null) {
-			securityService = (SecurityService) SpringUtil.getBean("securityService");
-			setSecurityService(securityService);
+		if (this.securityService == null) {
+			this.securityService = (SecurityService) SpringUtil.getBean("securityService");
+			setSecurityService(this.securityService);
 		}
-		return securityService;
+		return this.securityService;
 	}
 
 	public void setSecurityService(SecurityService securityService) {
@@ -70,11 +70,11 @@ public class SecLoginlogListModelItemRenderer implements ListitemRenderer, Seria
 	}
 
 	public LoginLoggingService getLoginLoggingService() {
-		if (loginLoggingService == null) {
-			loginLoggingService = (LoginLoggingService) SpringUtil.getBean("loginLoggingService");
-			setLoginLoggingService(loginLoggingService);
+		if (this.loginLoggingService == null) {
+			this.loginLoggingService = (LoginLoggingService) SpringUtil.getBean("loginLoggingService");
+			setLoginLoggingService(this.loginLoggingService);
 		}
-		return loginLoggingService;
+		return this.loginLoggingService;
 	}
 
 	public void setLoginLoggingService(LoginLoggingService loginLoggingService) {
@@ -86,24 +86,20 @@ public class SecLoginlogListModelItemRenderer implements ListitemRenderer, Seria
 	}
 
 	public IpToCountryService getIpToCountryService() {
-		if (ipToCountryService == null) {
-			ipToCountryService = (IpToCountryService) SpringUtil.getBean("ipToCountryService");
-			setIpToCountryService(ipToCountryService);
+		if (this.ipToCountryService == null) {
+			this.ipToCountryService = (IpToCountryService) SpringUtil.getBean("ipToCountryService");
+			setIpToCountryService(this.ipToCountryService);
 		}
-		return ipToCountryService;
+		return this.ipToCountryService;
 	}
 
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		SecLoginlog log = (SecLoginlog) data;
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + log.getLglLogtime() + "/ " + log.getLglLoginname());
-		}
+		final SecLoginlog log = (SecLoginlog) data;
 
 		Listcell lc;
-		LoginStatus loginStatus = getLoginLoggingService().getTypById(log.getLglStatusid());
+		final LoginStatus loginStatus = getLoginLoggingService().getTypById(log.getLglStatusid());
 
 		lc = new Listcell(getDateTime(log.getLglLogtime()));
 
@@ -133,36 +129,35 @@ public class SecLoginlogListModelItemRenderer implements ListitemRenderer, Seria
 		lc.setParent(item);
 
 		/* Country Code / Flag+Short+Provider-City */
-		String currentIp = log.getLglIp();
-		System.out.println("current-ip: " + currentIp);
-		Ip2Country ip2 = log.getIp2Country();
+		final String currentIp = log.getLglIp();
+		final Ip2Country ip2 = log.getIp2Country();
 
 		if (ip2 != null) {
 			lc = new Listcell();
-			Hbox hbox = new Hbox();
+			final Hbox hbox = new Hbox();
 			hbox.setParent(lc);
 
 			// Fill with the related data for CountryCode
-			SysCountryCode cc = ip2.getSysCountryCode();
+			final SysCountryCode cc = ip2.getSysCountryCode();
 			if (cc != null) {
 				/* Flag-image */
-				Image img = new Image();
-				String path = "/images/countrycode_flags/";
-				String flag = StringUtils.lowerCase(cc.getCcdCode2()) + ".gif";
+				final Image img = new Image();
+				final String path = "/images/countrycode_flags/";
+				final String flag = StringUtils.lowerCase(cc.getCcdCode2()) + ".gif";
 				img.setSrc(path + flag);
 				hbox.appendChild(img);
 
-				Separator sep = new Separator();
+				final Separator sep = new Separator();
 				hbox.appendChild(sep);
 
 				/* Country */
-				Label label = new Label();
+				final Label label = new Label();
 				label.setValue(cc.getCcdCode2());
 				hbox.appendChild(label);
 
 				// show other stuff from the Ip2Country
 				/* Provider-City */
-				Label label2 = new Label();
+				final Label label2 = new Label();
 				if (StringUtils.isNotBlank(ip2.getI2cCity())) {
 					label2.setValue("(" + ip2.getI2cCity() + ")");
 				} else {
@@ -176,16 +171,16 @@ public class SecLoginlogListModelItemRenderer implements ListitemRenderer, Seria
 
 		} else {
 			lc = new Listcell();
-			Hbox hbox = new Hbox();
+			final Hbox hbox = new Hbox();
 			hbox.setParent(lc);
 
 			/* Flag-image */
-			Image img = new Image();
-			String path = "/images/countrycode_flags/";
-			String flag = "xx.gif";
+			final Image img = new Image();
+			final String path = "/images/countrycode_flags/";
+			final String flag = "xx.gif";
 			img.setSrc(path + flag);
 			hbox.appendChild(img);
-			Label label = new Label();
+			final Label label = new Label();
 			label.setValue("Unknown");
 			hbox.appendChild(label);
 

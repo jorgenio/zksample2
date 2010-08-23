@@ -40,12 +40,12 @@ import de.forsthaus.webui.util.ZksampleDateFormat;
 public class GuestBookListtemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient final static Logger logger = Logger.getLogger(GuestBookListtemRenderer.class);
+	private final static Logger logger = Logger.getLogger(GuestBookListtemRenderer.class);
 
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		GuestBook guestBook = (GuestBook) data;
+		final GuestBook guestBook = (GuestBook) data;
 
 		Listcell lc = null;
 

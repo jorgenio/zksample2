@@ -50,11 +50,12 @@ import de.forsthaus.backend.service.IpToCountryService;
 public class IpToCountryServiceImpl implements IpToCountryService, Serializable {
 
 	private static final long serialVersionUID = 893318843695896685L;
-	private transient final static Logger logger = Logger.getLogger(IpToCountryServiceImpl.class);
+	private final static Logger logger = Logger.getLogger(IpToCountryServiceImpl.class);
 
 	final private String updateUrl = "http://ip-to-country.webhosting.info/downloads/ip-to-country.csv.zip";
 
-	final private String[] stringNameMapping = { "ipcIpFrom", "ipcIpTo", "ipcCountryCode2", "ipcCountryCode3", "ipcCountryName" };
+	final private String[] stringNameMapping = { "ipcIpFrom", "ipcIpTo", "ipcCountryCode2", "ipcCountryCode3",
+			"ipcCountryName" };
 
 	private IpToCountryDAO ipToCountryDAO;
 
@@ -63,7 +64,7 @@ public class IpToCountryServiceImpl implements IpToCountryService, Serializable 
 	}
 
 	public IpToCountryDAO getIpToCountryDAO() {
-		return ipToCountryDAO;
+		return this.ipToCountryDAO;
 	}
 
 	/**
@@ -95,8 +96,8 @@ public class IpToCountryServiceImpl implements IpToCountryService, Serializable 
 
 	@Override
 	public IpToCountry getIpToCountry(InetAddress address) {
-		Long lg = Long.valueOf(inetAddressToLong(address));
-		return ipToCountryDAO.getCountry(lg);
+		final Long lg = Long.valueOf(inetAddressToLong(address));
+		return this.ipToCountryDAO.getCountry(lg);
 	}
 
 	public void saveOrUpdate(IpToCountry ipToCountry) {
@@ -109,9 +110,8 @@ public class IpToCountryServiceImpl implements IpToCountryService, Serializable 
 
 			// first, delete all records in the ip2Country table
 			getIpToCountryDAO().deleteAll();
-			System.out.println("Records after deleting : " + getIpToCountryDAO().getCountAllIpToCountry());
 
-			final URL url = new URL(updateUrl);
+			final URL url = new URL(this.updateUrl);
 			final URLConnection conn = url.openConnection();
 			final InputStream istream = conn.getInputStream();
 
@@ -127,12 +127,8 @@ public class IpToCountryServiceImpl implements IpToCountryService, Serializable 
 
 			IpToCountry tmp = null;
 			int id = 1;
-			while (null != (tmp = csvb.read(IpToCountry.class, stringNameMapping))) {
+			while (null != (tmp = csvb.read(IpToCountry.class, this.stringNameMapping))) {
 				tmp.setId(id++);
-
-				if (logger.isDebugEnabled()) {
-					logger.debug(id + " --> " + tmp.getIpcCountryName());
-				}
 				getIpToCountryDAO().saveOrUpdate(tmp);
 
 			}
@@ -141,7 +137,7 @@ public class IpToCountryServiceImpl implements IpToCountryService, Serializable 
 
 			return getIpToCountryDAO().getCountAllIpToCountry();
 
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new RuntimeException(e);
 		}
 	}

@@ -34,9 +34,15 @@ import de.forsthaus.backend.model.SecUser;
 /**
  * DAO methods implementation for the <b>SecRight model</b> class.<br>
  * 
+ * SQL injektion möglich! Überarbeitung notwendig!!!! <a
+ * href="http://de.wikipedia.org/wiki/SQL-Injection#Java_.28JDBC.29"
+ * >SQL-Injection</a>
+ * 
  * @author bbruhns
  * @author sgerth
+ * @deprecated
  */
+@Deprecated
 public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements SecRightDAO {
 
 	@Override
@@ -47,7 +53,7 @@ public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements Sec
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<SecRight> getAllRights() {
-		DetachedCriteria criteria = DetachedCriteria.forClass(SecRight.class);
+		final DetachedCriteria criteria = DetachedCriteria.forClass(SecRight.class);
 		criteria.addOrder(Order.asc("rigName"));
 
 		return getHibernateTemplate().findByCriteria(criteria);
@@ -68,7 +74,7 @@ public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements Sec
 	@Override
 	public List<SecRight> getAllRights(int type) {
 
-		DetachedCriteria criteria = DetachedCriteria.forClass(SecRight.class);
+		final DetachedCriteria criteria = DetachedCriteria.forClass(SecRight.class);
 		criteria.addOrder(Order.asc("rigName"));
 
 		if (type != -1) {
@@ -97,12 +103,12 @@ public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements Sec
 
 		// check if only 1 type
 		if (aListOfRightTyps.size() == 1) {
-			int i = aListOfRightTyps.get(0).intValue();
+			final int i = aListOfRightTyps.get(0).intValue();
 			return getAllRights(i);
 		}
 
 		// if more than one type than construct the hql query
-		String hqlFrom = " from SecRight as secRight where ";
+		final String hqlFrom = " from SecRight as secRight where ";
 		// get the first value
 		String hqlWhere = " secRight.rigType = " + aListOfRightTyps.get(0);
 
@@ -110,7 +116,7 @@ public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements Sec
 			hqlWhere = hqlWhere + " or secRight.rigType = " + aListOfRightTyps.get(i);
 		}
 
-		String hqlQuery = hqlFrom + hqlWhere;
+		final String hqlQuery = hqlFrom + hqlWhere;
 
 		result = getHibernateTemplate().find(hqlQuery);
 
@@ -127,7 +133,7 @@ public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements Sec
 	@Override
 	public List<SecRight> getRightsByGroupright(SecGroupright secGroupright) {
 
-		DetachedCriteria criteria = DetachedCriteria.forClass(SecRight.class);
+		final DetachedCriteria criteria = DetachedCriteria.forClass(SecRight.class);
 		// Aliases only for properties
 		criteria.createAlias("secGrouprights", "gr");
 		criteria.add(Restrictions.eq("gr.id", Long.valueOf(secGroupright.getId())));
@@ -146,7 +152,7 @@ public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements Sec
 	@Override
 	public List<SecRight> getRightsLikeRightName(String aRightName) {
 
-		DetachedCriteria criteria = DetachedCriteria.forClass(SecRight.class);
+		final DetachedCriteria criteria = DetachedCriteria.forClass(SecRight.class);
 		criteria.add(Restrictions.ilike("rigName", aRightName, MatchMode.ANYWHERE));
 
 		return getHibernateTemplate().findByCriteria(criteria);
@@ -162,8 +168,9 @@ public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements Sec
 			return getRightsLikeRightName(aRightName);
 		}
 
-		DetachedCriteria criteria = DetachedCriteria.forClass(SecRight.class);
-		criteria.add(Restrictions.and(Restrictions.ilike("rigName", aRightName, MatchMode.ANYWHERE), Restrictions.eq("rigType", Integer.valueOf(aRightType))));
+		final DetachedCriteria criteria = DetachedCriteria.forClass(SecRight.class);
+		criteria.add(Restrictions.and(Restrictions.ilike("rigName", aRightName, MatchMode.ANYWHERE),
+				Restrictions.eq("rigType", Integer.valueOf(aRightType))));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
@@ -172,7 +179,7 @@ public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements Sec
 	@Override
 	public List<SecRight> getRightsLikeRightNameAndTypes(String aRightName, List<Integer> listOfRightTyps) {
 
-		DetachedCriteria criteria = DetachedCriteria.forClass(SecRight.class);
+		final DetachedCriteria criteria = DetachedCriteria.forClass(SecRight.class);
 		criteria.addOrder(Order.asc("rigName"));
 
 		List<SecRight> result = null; // init
@@ -183,7 +190,7 @@ public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements Sec
 
 		// check if value is '-1'. it means 'all', no filtering
 		// only if value is empty
-		for (Integer integer : listOfRightTyps) {
+		for (final Integer integer : listOfRightTyps) {
 			if (integer.equals(new Integer(-1))) {
 				if (aRightName.isEmpty()) {
 					return getAllRights(integer.intValue());
@@ -191,9 +198,9 @@ public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements Sec
 
 					hqlFrom = " from SecRight as secRight where ";
 					hqlWhere = " secRight.rigName like '%" + aRightName + "%'";
-					String hqlQuery = hqlFrom + hqlWhere;
+					final String hqlQuery = hqlFrom + hqlWhere;
 
-					System.out.println(hqlQuery);
+					// System.out.println(hqlQuery);
 
 					return getHibernateTemplate().find(hqlQuery);
 				}
@@ -202,7 +209,7 @@ public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements Sec
 
 		// check if only 1 type and value is empty
 		if (listOfRightTyps.size() == 1) {
-			int i = listOfRightTyps.get(0).intValue();
+			final int i = listOfRightTyps.get(0).intValue();
 			if (aRightName.isEmpty()) {
 				return getAllRights(i);
 			}
@@ -225,7 +232,7 @@ public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements Sec
 			hqlQuery = hqlQuery + hqlAdd;
 		}
 
-		System.out.println(hqlQuery);
+		// System.out.println(hqlQuery);
 
 		result = getHibernateTemplate().find(hqlQuery);
 

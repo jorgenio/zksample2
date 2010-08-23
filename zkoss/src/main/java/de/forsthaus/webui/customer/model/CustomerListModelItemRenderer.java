@@ -39,16 +39,12 @@ import de.forsthaus.backend.model.Customer;
 public class CustomerListModelItemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1925499383404057064L;
-	private transient final static Logger logger = Logger.getLogger(CustomerListModelItemRenderer.class);
+	private final static Logger logger = Logger.getLogger(CustomerListModelItemRenderer.class);
 
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		Customer customer = (Customer) data;
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + customer.getKunMatchcode() + ", " + customer.getKunOrt());
-		}
+		final Customer customer = (Customer) data;
 
 		Listcell lc = new Listcell(customer.getKunNr());
 		lc.setParent(item);
@@ -62,7 +58,7 @@ public class CustomerListModelItemRenderer implements ListitemRenderer, Serializ
 		lc.setParent(item);
 
 		lc = new Listcell();
-		Checkbox cb = new Checkbox();
+		final Checkbox cb = new Checkbox();
 		cb.setDisabled(true);
 		cb.setChecked(customer.getKunMahnsperre());
 		lc.appendChild(cb);

@@ -42,17 +42,17 @@ import de.forsthaus.webui.util.SelectionCtrl;
 public class SecUserroleRoleListModelItemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(SecUserroleRoleListModelItemRenderer.class);
+	private static final Logger logger = Logger.getLogger(SecUserroleRoleListModelItemRenderer.class);
 
 	private transient final SelectionCtrl<SecUser> parentController;
 	private transient SecurityService securityService;
 
 	public SecurityService getSecurityService() {
-		if (securityService == null) {
-			securityService = (SecurityService) SpringUtil.getBean("securityService");
-			setSecurityService(securityService);
+		if (this.securityService == null) {
+			this.securityService = (SecurityService) SpringUtil.getBean("securityService");
+			setSecurityService(this.securityService);
 		}
-		return securityService;
+		return this.securityService;
 	}
 
 	public void setSecurityService(SecurityService securityService) {
@@ -66,17 +66,13 @@ public class SecUserroleRoleListModelItemRenderer implements ListitemRenderer, S
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		SecRole role = (SecRole) data;
-
-		// if (logger.isDebugEnabled()) {
-		// logger.debug("--> " + role.getRolShortdescription());
-		// }
+		final SecRole role = (SecRole) data;
 
 		Listcell lc = new Listcell();
-		Checkbox cb = new Checkbox();
+		final Checkbox cb = new Checkbox();
 
 		// get the role for which we pull the data
-		SecUser user = parentController.getSelected();
+		final SecUser user = this.parentController.getSelected();
 
 		if (user != null) {
 			if (getSecurityService().isUserInRole(user, role)) {

@@ -42,17 +42,17 @@ import de.forsthaus.webui.util.SelectionCtrl;
 public class SecRolegroupGroupListModelItemRenderer implements ListitemRenderer, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final Logger logger = Logger.getLogger(SecRolegroupGroupListModelItemRenderer.class);
+	private static final Logger logger = Logger.getLogger(SecRolegroupGroupListModelItemRenderer.class);
 
 	private final SelectionCtrl<SecRole> parentController;
 	private transient SecurityService securityService;
 
 	public SecurityService getSecurityService() {
-		if (securityService == null) {
-			securityService = (SecurityService) SpringUtil.getBean("securityService");
-			setSecurityService(securityService);
+		if (this.securityService == null) {
+			this.securityService = (SecurityService) SpringUtil.getBean("securityService");
+			setSecurityService(this.securityService);
 		}
-		return securityService;
+		return this.securityService;
 	}
 
 	public void setSecurityService(SecurityService securityService) {
@@ -66,17 +66,13 @@ public class SecRolegroupGroupListModelItemRenderer implements ListitemRenderer,
 	@Override
 	public void render(Listitem item, Object data) throws Exception {
 
-		SecGroup group = (SecGroup) data;
-
-		// if (logger.isDebugEnabled()) {
-		// logger.debug("--> " + group.getGrpShortdescription());
-		// }
+		final SecGroup group = (SecGroup) data;
 
 		Listcell lc = new Listcell();
-		Checkbox cb = new Checkbox();
+		final Checkbox cb = new Checkbox();
 
 		// get the role for which we pull the data
-		SecRole role = parentController.getSelected();
+		final SecRole role = this.parentController.getSelected();
 
 		//
 		if (role != null) {

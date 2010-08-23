@@ -1,7 +1,8 @@
 package de.forsthaus.webui.util;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.zkoss.util.resource.Labels;
@@ -44,8 +45,8 @@ public class ZksampleUtils implements Serializable {
 	 */
 	public static void doShowNotImplementedMessage() throws InterruptedException {
 
-		String message = Labels.getLabel("message.Not_Implemented_Yet");
-		String title = Labels.getLabel("message.Information");
+		final String message = Labels.getLabel("message.Not_Implemented_Yet");
+		final String title = Labels.getLabel("message.Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 	}
@@ -58,8 +59,8 @@ public class ZksampleUtils implements Serializable {
 	 */
 	public static void doShowNotAllowedInDemoModeMessage() throws InterruptedException {
 
-		String message = Labels.getLabel("message.Not_Allowed_In_Demo_Mode");
-		String title = Labels.getLabel("message.Information");
+		final String message = Labels.getLabel("message.Not_Allowed_In_Demo_Mode");
+		final String title = Labels.getLabel("message.Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 	}
@@ -72,8 +73,8 @@ public class ZksampleUtils implements Serializable {
 	 */
 	public static void doShowNotAllowedForDemoRecords() throws InterruptedException {
 
-		String message = Labels.getLabel("message.Not_Allowed_On_System_Objects");
-		String title = Labels.getLabel("message.Information");
+		final String message = Labels.getLabel("message.Not_Allowed_On_System_Objects");
+		final String title = Labels.getLabel("message.Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 	}
@@ -86,8 +87,8 @@ public class ZksampleUtils implements Serializable {
 	 */
 	public static void doShowOutOfOrderMessage() throws InterruptedException {
 
-		String message = Labels.getLabel("message.Information.OutOfOrder");
-		String title = Labels.getLabel("message.Information");
+		final String message = Labels.getLabel("message.Information.OutOfOrder");
+		final String title = Labels.getLabel("message.Information");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 	}
@@ -103,20 +104,21 @@ public class ZksampleUtils implements Serializable {
 	 * @param mainCtrlName
 	 * @param zulFilePathName
 	 */
-	public static void createTabPanelContent(Tabpanel tabPanelID, Object mainCtrl, String mainCtrlName, String zulFilePathName) {
+	public static void createTabPanelContent(Tabpanel tabPanelID, Object mainCtrl, String mainCtrlName,
+			String zulFilePathName) {
 
-		if (tabPanelID != null && mainCtrl != null && !StringUtils.isEmpty(mainCtrlName) && !StringUtils.isEmpty(zulFilePathName)) {
+		if (tabPanelID != null && mainCtrl != null && !StringUtils.isEmpty(mainCtrlName)
+				&& !StringUtils.isEmpty(zulFilePathName)) {
 
 			// overhanded this controller self in the paramMap
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put(mainCtrlName, mainCtrl);
+			final Map<String, Object> map = Collections.singletonMap(mainCtrlName, mainCtrl);
 
 			// clears the old content
 			tabPanelID.getChildren().clear();
 
 			// TabPanel acepts only a Panel/PanelChildren
-			Panel panel = new Panel();
-			Panelchildren pChildren = new Panelchildren();
+			final Panel panel = new Panel();
+			final Panelchildren pChildren = new Panelchildren();
 
 			panel.appendChild(pChildren);
 			tabPanelID.appendChild(panel);
@@ -134,7 +136,7 @@ public class ZksampleUtils implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public static void showErrorMessage(String e) throws InterruptedException {
-		String title = Labels.getLabel("message.Error");
+		final String title = Labels.getLabel("message.Error");
 		MultiLineMessageBox.doSetTemplate();
 		MultiLineMessageBox.show(e, title, MultiLineMessageBox.OK, "ERROR", true);
 	}

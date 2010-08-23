@@ -61,7 +61,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
 public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -546886879998950467L;
-	private transient static final Logger logger = Logger.getLogger(ArticleDialogCtrl.class);
+	private static final Logger logger = Logger.getLogger(ArticleDialogCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -111,8 +111,6 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public ArticleDialogCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	/**
@@ -126,19 +124,19 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$window_ArticlesDialog(Event event) throws Exception {
-		// logger.debug(event.toString());
 
 		/* set components visible dependent of the users rights */
 		doCheckRights();
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+		this.btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, true, this.btnNew,
+				this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
 
 		// get the params map that are overhanded by creation.
-		Map<String, Object> args = getCreationArgsMap(event);
+		final Map<String, Object> args = getCreationArgsMap(event);
 
 		if (args.containsKey("article")) {
-			Article anArticle = (Article) args.get("article");
+			final Article anArticle = (Article) args.get("article");
 			setArticle(anArticle);
 		} else {
 			setArticle(null);
@@ -148,9 +146,9 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// to it and can synchronize the shown data when we do insert, edit or
 		// delete articles here.
 		if (args.containsKey("articleListCtrl")) {
-			articleListCtrl = (ArticleListCtrl) args.get("articleListCtrl");
+			this.articleListCtrl = (ArticleListCtrl) args.get("articleListCtrl");
 		} else {
-			articleListCtrl = null;
+			this.articleListCtrl = null;
 		}
 
 		// set Field Properties
@@ -165,16 +163,16 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doCheckRights() {
 
-		UserWorkspace workspace = getUserWorkspace();
+		final UserWorkspace workspace = getUserWorkspace();
 
-		window_ArticlesDialog.setVisible(workspace.isAllowed("window_ArticlesDialog"));
+		this.window_ArticlesDialog.setVisible(workspace.isAllowed("window_ArticlesDialog"));
 
-		btnHelp.setVisible(workspace.isAllowed("button_ArticlesDialog_btnHelp"));
-		btnNew.setVisible(workspace.isAllowed("button_ArticlesDialog_btnNew"));
-		btnEdit.setVisible(workspace.isAllowed("button_ArticlesDialog_btnEdit"));
-		btnDelete.setVisible(workspace.isAllowed("button_ArticlesDialog_btnDelete"));
-		btnSave.setVisible(workspace.isAllowed("button_ArticlesDialog_btnSave"));
-		btnClose.setVisible(workspace.isAllowed("button_ArticlesDialog_btnClose"));
+		this.btnHelp.setVisible(workspace.isAllowed("button_ArticlesDialog_btnHelp"));
+		this.btnNew.setVisible(workspace.isAllowed("button_ArticlesDialog_btnNew"));
+		this.btnEdit.setVisible(workspace.isAllowed("button_ArticlesDialog_btnEdit"));
+		this.btnDelete.setVisible(workspace.isAllowed("button_ArticlesDialog_btnDelete"));
+		this.btnSave.setVisible(workspace.isAllowed("button_ArticlesDialog_btnSave"));
+		this.btnClose.setVisible(workspace.isAllowed("button_ArticlesDialog_btnClose"));
 
 	}
 
@@ -274,9 +272,9 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		try {
 			doClose();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			// close anyway
-			window_ArticlesDialog.onClose();
+			this.window_ArticlesDialog.onClose();
 		}
 	}
 
@@ -297,30 +295,32 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			String message = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
-			String title = Labels.getLabel("message.Information");
+			final String message = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
+			final String title = Labels.getLabel("message.Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(message, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
-				public void onEvent(Event evt) {
-					switch (((Integer) evt.getData()).intValue()) {
-					case MultiLineMessageBox.YES:
-						try {
-							doSave();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
+			if (MultiLineMessageBox.show(message, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO,
+					MultiLineMessageBox.QUESTION, true, new EventListener() {
+						@Override
+						public void onEvent(Event evt) {
+							switch (((Integer) evt.getData()).intValue()) {
+							case MultiLineMessageBox.YES:
+								try {
+									doSave();
+								} catch (final InterruptedException e) {
+									throw new RuntimeException(e);
+								}
+							case MultiLineMessageBox.NO:
+								break; //
+							}
 						}
-					case MultiLineMessageBox.NO:
-						break; // 
 					}
-				}
-			}
 
 			) == MultiLineMessageBox.YES) {
 			}
 		}
 
-		window_ArticlesDialog.onClose();
+		this.window_ArticlesDialog.onClose();
 	}
 
 	/**
@@ -340,10 +340,10 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doWriteBeanToComponents(Article anArticle) {
 
-		artNr.setValue(anArticle.getArtNr());
-		artKurzbezeichnung.setValue(anArticle.getArtKurzbezeichnung());
-		artLangbezeichnung.setValue(anArticle.getArtLangbezeichnung());
-		artPreis.setValue(anArticle.getArtPreis());
+		this.artNr.setValue(anArticle.getArtNr());
+		this.artKurzbezeichnung.setValue(anArticle.getArtKurzbezeichnung());
+		this.artLangbezeichnung.setValue(anArticle.getArtLangbezeichnung());
+		this.artPreis.setValue(anArticle.getArtPreis());
 
 	}
 
@@ -354,10 +354,10 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doWriteComponentsToBean(Article anArticle) {
 
-		anArticle.setArtNr(artNr.getValue());
-		anArticle.setArtKurzbezeichnung(artKurzbezeichnung.getValue());
-		anArticle.setArtLangbezeichnung(artLangbezeichnung.getValue());
-		anArticle.setArtPreis(artPreis.getValue());
+		anArticle.setArtNr(this.artNr.getValue());
+		anArticle.setArtKurzbezeichnung(this.artKurzbezeichnung.getValue());
+		anArticle.setArtLangbezeichnung(this.artLangbezeichnung.getValue());
+		anArticle.setArtPreis(this.artPreis.getValue());
 
 	}
 
@@ -383,12 +383,12 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// set Readonly mode accordingly if the object is new or not.
 		if (anArticle.isNew()) {
-			btnCtrl.setInitNew();
+			this.btnCtrl.setInitNew();
 			doEdit();
 			// set Focus
-			artNr.focus();
+			this.artNr.focus();
 		} else {
-			btnCtrl.setInitEdit();
+			this.btnCtrl.setInitEdit();
 			doReadOnly();
 		}
 
@@ -400,8 +400,9 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 			// during user action.
 			doStoreInitValues();
 
-			window_ArticlesDialog.doModal(); // open the dialog in modal mode
-		} catch (Exception e) {
+			this.window_ArticlesDialog.doModal(); // open the dialog in modal
+													// mode
+		} catch (final Exception e) {
 			Messagebox.show(e.toString());
 		}
 	}
@@ -414,28 +415,28 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * Set the properties of the fields, like maxLength.<br>
 	 */
 	private void doSetFieldProperties() {
-		artNr.setMaxlength(20);
-		artKurzbezeichnung.setMaxlength(50);
+		this.artNr.setMaxlength(20);
+		this.artKurzbezeichnung.setMaxlength(50);
 	}
 
 	/**
 	 * Stores the init values in mem vars. <br>
 	 */
 	private void doStoreInitValues() {
-		oldVar_artNr = artNr.getValue();
-		oldVar_artKurzbezeichnung = artKurzbezeichnung.getValue();
-		oldVar_artLangbezeichnung = artLangbezeichnung.getValue();
-		oldVar_artPreis = artPreis.getValue();
+		this.oldVar_artNr = this.artNr.getValue();
+		this.oldVar_artKurzbezeichnung = this.artKurzbezeichnung.getValue();
+		this.oldVar_artLangbezeichnung = this.artLangbezeichnung.getValue();
+		this.oldVar_artPreis = this.artPreis.getValue();
 	}
 
 	/**
 	 * Resets the init values from mem vars. <br>
 	 */
 	private void doResetInitValues() {
-		artNr.setValue(oldVar_artNr);
-		artKurzbezeichnung.setValue(oldVar_artKurzbezeichnung);
-		artLangbezeichnung.setValue(oldVar_artLangbezeichnung);
-		artPreis.setValue(oldVar_artPreis);
+		this.artNr.setValue(this.oldVar_artNr);
+		this.artKurzbezeichnung.setValue(this.oldVar_artKurzbezeichnung);
+		this.artLangbezeichnung.setValue(this.oldVar_artLangbezeichnung);
+		this.artPreis.setValue(this.oldVar_artPreis);
 	}
 
 	/**
@@ -447,16 +448,16 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private boolean isDataChanged() {
 		boolean changed = false;
 
-		if (oldVar_artNr != artNr.getValue()) {
+		if (this.oldVar_artNr != this.artNr.getValue()) {
 			changed = true;
 		}
-		if (oldVar_artKurzbezeichnung != artKurzbezeichnung.getValue()) {
+		if (this.oldVar_artKurzbezeichnung != this.artKurzbezeichnung.getValue()) {
 			changed = true;
 		}
-		if (oldVar_artLangbezeichnung != artLangbezeichnung.getValue()) {
+		if (this.oldVar_artLangbezeichnung != this.artLangbezeichnung.getValue()) {
 			changed = true;
 		}
-		if (oldVar_artPreis != artPreis.getValue()) {
+		if (this.oldVar_artPreis != this.artPreis.getValue()) {
 			changed = true;
 		}
 
@@ -470,9 +471,9 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		setValidationOn(true);
 
-		artNr.setConstraint(new SimpleConstraint("NO EMPTY"));
-		artKurzbezeichnung.setConstraint("NO EMPTY");
-		artPreis.setConstraint("NO EMPTY, NO ZERO");
+		this.artNr.setConstraint(new SimpleConstraint("NO EMPTY"));
+		this.artKurzbezeichnung.setConstraint("NO EMPTY");
+		this.artPreis.setConstraint("NO EMPTY, NO ZERO");
 	}
 
 	/**
@@ -482,9 +483,9 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		setValidationOn(false);
 
-		artNr.setConstraint("");
-		artKurzbezeichnung.setConstraint("");
-		artPreis.setConstraint("");
+		this.artNr.setConstraint("");
+		this.artKurzbezeichnung.setConstraint("");
+		this.artPreis.setConstraint("");
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -501,45 +502,51 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final Article anArticle = getArticle();
 
 		// Show a confirm box
-		String message = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> " + anArticle.getArtKurzbezeichnung();
-		String title = Labels.getLabel("message.Deleting.Record");
+		final String message = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> "
+				+ anArticle.getArtKurzbezeichnung();
+		final String title = Labels.getLabel("message.Deleting.Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(message, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
-			public void onEvent(Event evt) {
-				switch (((Integer) evt.getData()).intValue()) {
-				case MultiLineMessageBox.YES:
-					deleteArticle();
-				case MultiLineMessageBox.NO:
-					break; // 
+		if (MultiLineMessageBox.show(message, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO,
+				MultiLineMessageBox.QUESTION, true, new EventListener() {
+					@Override
+					public void onEvent(Event evt) {
+						switch (((Integer) evt.getData()).intValue()) {
+						case MultiLineMessageBox.YES:
+							deleteArticle();
+						case MultiLineMessageBox.NO:
+							break; //
+						}
+					}
+
+					private void deleteArticle() {
+
+						// delete from database
+						getArticleService().delete(anArticle);
+
+						// ++ create the searchObject and init sorting ++ //
+						final HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(
+								Article.class, getArticleListCtrl().getCountRows());
+						soArticle.addSort("artNr", false);
+						// Set the ListModel for the articles.
+						getArticleListCtrl().getPagedListWrapper().setSearchObject(soArticle);
+
+						// now synchronize the articles listBox
+						final ListModelList lml = (ListModelList) getArticleListCtrl().listBoxArticle.getListModel();
+
+						// Check if the branch object is new or updated
+						// -1 means that the obj is not in the list, so it's
+						// new.
+						if (lml.indexOf(anArticle) == -1) {
+						} else {
+							lml.remove(lml.indexOf(anArticle));
+						}
+
+						ArticleDialogCtrl.this.window_ArticlesDialog.onClose(); // close
+																				// the
+																				// dialog
+					}
 				}
-			}
-
-			private void deleteArticle() {
-
-				// delete from database
-				getArticleService().delete(anArticle);
-
-				// ++ create the searchObject and init sorting ++ //
-				HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, getArticleListCtrl().getCountRows());
-				soArticle.addSort("artNr", false);
-				// Set the ListModel for the articles.
-				getArticleListCtrl().getPagedListWrapper().setSearchObject(soArticle);
-
-				// now synchronize the articles listBox
-				ListModelList lml = (ListModelList) getArticleListCtrl().listBoxArticle.getListModel();
-
-				// Check if the branch object is new or updated
-				// -1 means that the obj is not in the list, so it's
-				// new.
-				if (lml.indexOf(anArticle) == -1) {
-				} else {
-					lml.remove(lml.indexOf(anArticle));
-				}
-
-				window_ArticlesDialog.onClose(); // close the dialog
-			}
-		}
 
 		) == MultiLineMessageBox.YES) {
 		}
@@ -559,12 +566,12 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doClear(); // clear all commponents
 		doEdit(); // edit mode
 
-		btnCtrl.setBtnStatus_New();
+		this.btnCtrl.setBtnStatus_New();
 
 		doStoreInitValues();
 
 		// set Focus
-		artNr.focus();
+		this.artNr.focus();
 	}
 
 	/**
@@ -572,12 +579,12 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doEdit() {
 
-		artNr.setReadonly(false);
-		artKurzbezeichnung.setReadonly(false);
-		artLangbezeichnung.setReadonly(false);
-		artPreis.setReadonly(false);
+		this.artNr.setReadonly(false);
+		this.artKurzbezeichnung.setReadonly(false);
+		this.artLangbezeichnung.setReadonly(false);
+		this.artPreis.setReadonly(false);
 
-		btnCtrl.setBtnStatus_Edit();
+		this.btnCtrl.setBtnStatus_Edit();
 
 		// remember the old vars
 		doStoreInitValues();
@@ -588,10 +595,10 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doReadOnly() {
 
-		artNr.setReadonly(true);
-		artKurzbezeichnung.setReadonly(true);
-		artLangbezeichnung.setReadonly(true);
-		artPreis.setReadonly(true);
+		this.artNr.setReadonly(true);
+		this.artKurzbezeichnung.setReadonly(true);
+		this.artLangbezeichnung.setReadonly(true);
+		this.artPreis.setReadonly(true);
 	}
 
 	/**
@@ -602,10 +609,10 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// remove validation, if there are a save before
 		doRemoveValidation();
 
-		artNr.setValue("");
-		artKurzbezeichnung.setValue("");
-		artLangbezeichnung.setValue("");
-		artPreis.setValue(new BigDecimal(0));
+		this.artNr.setValue("");
+		this.artKurzbezeichnung.setValue("");
+		this.artLangbezeichnung.setValue("");
+		this.artPreis.setValue(new BigDecimal(0));
 	}
 
 	/**
@@ -615,7 +622,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doSave() throws InterruptedException {
 
-		Article anArticle = getArticle();
+		final Article anArticle = getArticle();
 
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// force validation, if on, than execute by component.getValue()
@@ -630,9 +637,9 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// save it to database
 		try {
 			getArticleService().saveOrUpdate(anArticle);
-		} catch (DataAccessException e) {
-			String message = e.getMessage();
-			String title = Labels.getLabel("message.Error");
+		} catch (final DataAccessException e) {
+			final String message = e.getMessage();
+			final String title = Labels.getLabel("message.Error");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 
@@ -640,18 +647,19 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 			doResetInitValues();
 
 			doReadOnly();
-			btnCtrl.setBtnStatus_Save();
+			this.btnCtrl.setBtnStatus_Save();
 			return;
 		}
 
 		// ++ create the searchObject and init sorting ++ //
-		HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class, getArticleListCtrl().getCountRows());
+		final HibernateSearchObject<Article> soArticle = new HibernateSearchObject<Article>(Article.class,
+				getArticleListCtrl().getCountRows());
 		soArticle.addSort("artNr", false);
 		// Set the ListModel for the articles.
 		getArticleListCtrl().getPagedListWrapper().setSearchObject(soArticle);
 
 		// now synchronize the articles listBox
-		ListModelList lml = (ListModelList) getArticleListCtrl().listBoxArticle.getListModel();
+		final ListModelList lml = (ListModelList) getArticleListCtrl().listBoxArticle.getListModel();
 
 		// Check if the branch object is new or updated
 		// -1 means that the obj is not in the list, so its new.
@@ -662,7 +670,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		doReadOnly();
-		btnCtrl.setBtnStatus_Save();
+		this.btnCtrl.setBtnStatus_Save();
 		// init the old values vars new
 		doStoreInitValues();
 	}
@@ -676,7 +684,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public boolean isValidationOn() {
-		return validationOn;
+		return this.validationOn;
 	}
 
 	public void setArticleService(ArticleService articleService) {
@@ -684,11 +692,11 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public ArticleService getArticleService() {
-		return articleService;
+		return this.articleService;
 	}
 
 	public Article getArticle() {
-		return article;
+		return this.article;
 	}
 
 	public void setArticle(Article article) {
@@ -696,7 +704,7 @@ public class ArticleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public ArticleListCtrl getArticleListCtrl() {
-		return articleListCtrl;
+		return this.articleListCtrl;
 	}
 
 	public void setArticleListCtrl(ArticleListCtrl articleListCtrl) {

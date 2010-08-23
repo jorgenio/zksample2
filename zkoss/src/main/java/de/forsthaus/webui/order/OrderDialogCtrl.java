@@ -86,7 +86,7 @@ import de.forsthaus.webui.util.pagging.PagedListWrapper;
 public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = -8352659530536077973L;
-	private transient static final Logger logger = Logger.getLogger(OrderDialogCtrl.class);
+	private static final Logger logger = Logger.getLogger(OrderDialogCtrl.class);
 
 	private transient PagedListWrapper<Orderposition> plwOrderpositions;
 	private transient PagedListWrapper<Customer> plwCustomers;
@@ -169,8 +169,6 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public OrderDialogCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	/**
@@ -181,8 +179,6 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$orderDialogWindow(Event event) throws Exception {
-		// logger.debug(event.toString());
-
 		setPageSizeOrderPosition(10);
 		setPageSizeSearchCustomer(20);
 
@@ -190,13 +186,14 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doCheckRights();
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+		this.btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, true, this.btnNew,
+				this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
 
 		// get the params map that are overhanded by creation.
-		Map<String, Object> args = getCreationArgsMap(event);
+		final Map<String, Object> args = getCreationArgsMap(event);
 
 		if (args.containsKey("order")) {
-			Order anOrder = (Order) args.get("order");
+			final Order anOrder = (Order) args.get("order");
 			setOrder(anOrder);
 			// we must addionally check if there is NO customer object in
 			// the order, so its new.
@@ -211,48 +208,52 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// to it and can synchronize the shown data when we do insert, edit or
 		// delete offices here.
 		if (args.containsKey("listBoxOrder")) {
-			listBoxOrder = (Listbox) args.get("listBoxOrder");
+			this.listBoxOrder = (Listbox) args.get("listBoxOrder");
 		} else {
-			listBoxOrder = null;
+			this.listBoxOrder = null;
 		}
 
 		if (args.containsKey("orderListCtrl")) {
-			orderListCtrl = (OrderListCtrl) args.get("orderListCtrl");
+			this.orderListCtrl = (OrderListCtrl) args.get("orderListCtrl");
 		} else {
-			orderListCtrl = null;
+			this.orderListCtrl = null;
 		}
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		listheader_OrderPosList2_Orderpos_No.setSortAscending(new FieldComparator("aupId", true));
-		listheader_OrderPosList2_Orderpos_No.setSortDescending(new FieldComparator("aupId", false));
-		listheader_OrderPosList2_Shorttext.setSortAscending(new FieldComparator("article.artKurzbezeichnung", true));
-		listheader_OrderPosList2_Shorttext.setSortDescending(new FieldComparator("article.artKurzbezeichnung", false));
-		listheader_OrderPosList2_Count.setSortAscending(new FieldComparator("aupMenge", true));
-		listheader_OrderPosList2_Count.setSortDescending(new FieldComparator("aupMenge", false));
-		listheader_OrderPosList2_SinglePrice.setSortAscending(new FieldComparator("aupEinzelwert", true));
-		listheader_OrderPosList2_SinglePrice.setSortDescending(new FieldComparator("aupEinzelwert", false));
-		listheader_OrderPosList2_WholePrice.setSortAscending(new FieldComparator("aupGesamtwert", true));
-		listheader_OrderPosList2_WholePrice.setSortDescending(new FieldComparator("aupGesamtwert", false));
+		this.listheader_OrderPosList2_Orderpos_No.setSortAscending(new FieldComparator("aupId", true));
+		this.listheader_OrderPosList2_Orderpos_No.setSortDescending(new FieldComparator("aupId", false));
+		this.listheader_OrderPosList2_Shorttext
+				.setSortAscending(new FieldComparator("article.artKurzbezeichnung", true));
+		this.listheader_OrderPosList2_Shorttext.setSortDescending(new FieldComparator("article.artKurzbezeichnung",
+				false));
+		this.listheader_OrderPosList2_Count.setSortAscending(new FieldComparator("aupMenge", true));
+		this.listheader_OrderPosList2_Count.setSortDescending(new FieldComparator("aupMenge", false));
+		this.listheader_OrderPosList2_SinglePrice.setSortAscending(new FieldComparator("aupEinzelwert", true));
+		this.listheader_OrderPosList2_SinglePrice.setSortDescending(new FieldComparator("aupEinzelwert", false));
+		this.listheader_OrderPosList2_WholePrice.setSortAscending(new FieldComparator("aupGesamtwert", true));
+		this.listheader_OrderPosList2_WholePrice.setSortDescending(new FieldComparator("aupGesamtwert", false));
 
-		paging_ListBoxOrderOrderPositions.setPageSize(pageSizeOrderPosition);
-		paging_ListBoxOrderOrderPositions.setDetailed(true);
+		this.paging_ListBoxOrderOrderPositions.setPageSize(this.pageSizeOrderPosition);
+		this.paging_ListBoxOrderOrderPositions.setDetailed(true);
 
 		// Set the ListModel for the orderPositions.
 		if (getOrder() != null) {
 			if (!getOrder().isNew()) {
-				HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(Orderposition.class, pageSizeOrderPosition);
+				final HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(
+						Orderposition.class, this.pageSizeOrderPosition);
 				soOrderPosition.addFilter(new Filter("order", getOrder(), Filter.OP_EQUAL));
 				// deeper loading of the relation to prevent the lazy
 				// loading problem.
 				soOrderPosition.addFetch("article");
 
 				// Set the ListModel.
-				getPlwOrderpositions().init(soOrderPosition, listBoxOrderOrderPositions, paging_ListBoxOrderOrderPositions);
+				getPlwOrderpositions().init(soOrderPosition, this.listBoxOrderOrderPositions,
+						this.paging_ListBoxOrderOrderPositions);
 
 			}
 		}
-		listBoxOrderOrderPositions.setItemRenderer(new OrderpositionListModelItemRenderer());
+		this.listBoxOrderOrderPositions.setItemRenderer(new OrderpositionListModelItemRenderer());
 
 		// set Field Properties
 		doSetFieldProperties();
@@ -266,19 +267,19 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doCheckRights() {
 
-		UserWorkspace workspace = getUserWorkspace();
+		final UserWorkspace workspace = getUserWorkspace();
 
-		orderDialogWindow.setVisible(workspace.isAllowed("orderDialogWindow"));
+		this.orderDialogWindow.setVisible(workspace.isAllowed("orderDialogWindow"));
 
-		btnHelp.setVisible(workspace.isAllowed("button_OrderDialog_btnHelp"));
-		btnNew.setVisible(workspace.isAllowed("button_OrderDialog_btnNew"));
-		btnEdit.setVisible(workspace.isAllowed("button_OrderDialog_btnEdit"));
-		btnDelete.setVisible(workspace.isAllowed("button_OrderDialog_btnDelete"));
-		btnSave.setVisible(workspace.isAllowed("button_OrderDialog_btnSave"));
-		btnClose.setVisible(workspace.isAllowed("button_OrderDialog_btnClose"));
+		this.btnHelp.setVisible(workspace.isAllowed("button_OrderDialog_btnHelp"));
+		this.btnNew.setVisible(workspace.isAllowed("button_OrderDialog_btnNew"));
+		this.btnEdit.setVisible(workspace.isAllowed("button_OrderDialog_btnEdit"));
+		this.btnDelete.setVisible(workspace.isAllowed("button_OrderDialog_btnDelete"));
+		this.btnSave.setVisible(workspace.isAllowed("button_OrderDialog_btnSave"));
+		this.btnClose.setVisible(workspace.isAllowed("button_OrderDialog_btnClose"));
 
-		button_OrderDialog_PrintOrder.setVisible(workspace.isAllowed("button_OrderDialog_PrintOrder"));
-		button_OrderDialog_NewOrderPosition.setVisible(workspace.isAllowed("button_OrderDialog_NewOrderPosition"));
+		this.button_OrderDialog_PrintOrder.setVisible(workspace.isAllowed("button_OrderDialog_PrintOrder"));
+		this.button_OrderDialog_NewOrderPosition.setVisible(workspace.isAllowed("button_OrderDialog_NewOrderPosition"));
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -378,9 +379,9 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		try {
 			doClose();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			// close anyway
-			orderDialogWindow.onClose();
+			this.orderDialogWindow.onClose();
 			// Messagebox.show(e.toString());
 		}
 	}
@@ -400,13 +401,13 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 	private void doPrintOrderReport(Event event) throws InterruptedException {
 
-		Order anOrder = getOrder();
+		final Order anOrder = getOrder();
 
-		Window win = (Window) Path.getComponent("/outerIndexWindow");
+		final Window win = (Window) Path.getComponent("/outerIndexWindow");
 
 		try {
 			new OrderDJReport(win, anOrder);
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			ZksampleUtils.showErrorMessage(e.toString());
 		}
 
@@ -421,18 +422,18 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug("begin with printing");
 
 		// Get the real path for the report
-		String repSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reports/order/Test_Report.jasper");
-		String subDir = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reports/order") + "/";
+		final String repSrc = Sessions.getCurrent().getWebApp()
+				.getRealPath("/WEB-INF/reports/order/Test_Report.jasper");
+		final String subDir = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reports/order") + "/";
 
 		// preparing parameters. The Subreports resolved by path and the
 		// ReportName in the reports self.
-		HashMap<String, Object> repParams = new HashMap<String, Object>();
+		final HashMap<String, Object> repParams = new HashMap<String, Object>();
 		repParams.put("Title", "Sample Order Report");
 		repParams.put("SUBREPORT_DIR", subDir);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("JasperReport : " + repSrc);
-			logger.debug("SubDir : " + subDir);
+			logger.debug("JasperReport : " + repSrc + "  - SubDir : " + subDir);
 		}
 
 		if (getOrder() != null && !getOrder().isNew()) {
@@ -458,8 +459,8 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 			// JRDataSource ds = new
 			// TestReport().getBeanCollectionByAuftrag(getOrder());
-			JRDataSource ds = TestReport.testBeanCollectionDatasource();
-			Component parent = orderListCtrl.getOrderListWindow().getRoot();
+			final JRDataSource ds = TestReport.testBeanCollectionDatasource();
+			final Component parent = this.orderListCtrl.getOrderListWindow().getRoot();
 
 			new JRreportWindow(parent, true, repParams, repSrc, ds, "pdf");
 		}
@@ -475,15 +476,15 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// create a new orderPosition object
-		Orderposition anOrderposition = getOrderService().getNewOrderposition();
+		final Orderposition anOrderposition = getOrderService().getNewOrderposition();
 
 		/*
 		 * We can call our Dialog zul-file with parameters. So we can call them
 		 * with a object of the selected item. For handed over these parameter
 		 * only a Map is accepted. So we put the object in a HashMap.
 		 */
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("orderListCtrl", orderListCtrl);
+		final HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("orderListCtrl", this.orderListCtrl);
 		map.put("order", getOrder());
 		map.put("orderposition", anOrderposition);
 		/*
@@ -492,18 +493,18 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		 * data in the customerListbox from the dialog when we do a delete, edit
 		 * or insert a customer.
 		 */
-		map.put("listBoxOrderOrderPositions", listBoxOrderOrderPositions);
+		map.put("listBoxOrderOrderPositions", this.listBoxOrderOrderPositions);
 		map.put("orderDialogCtrl", this);
 
 		// call the zul-file with the parameters packed in a map
 		try {
 			Executions.createComponents("/WEB-INF/pages/order/orderPositionDialog.zul", null, map);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
 			// Show a error box
-			String msg = e.getMessage();
-			String title = Labels.getLabel("message.Error");
+			final String msg = e.getMessage();
+			final String title = Labels.getLabel("message.Error");
 
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
@@ -523,7 +524,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doCancel() {
 		doResetInitValues();
-		btnCtrl.setInitEdit();
+		this.btnCtrl.setInitEdit();
 	}
 
 	/**
@@ -538,30 +539,32 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
-			String title = Labels.getLabel("message.Information");
+			final String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
+			final String title = Labels.getLabel("message.Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
-				public void onEvent(Event evt) {
-					switch (((Integer) evt.getData()).intValue()) {
-					case MultiLineMessageBox.YES:
-						try {
-							doSave();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO,
+					MultiLineMessageBox.QUESTION, true, new EventListener() {
+						@Override
+						public void onEvent(Event evt) {
+							switch (((Integer) evt.getData()).intValue()) {
+							case MultiLineMessageBox.YES:
+								try {
+									doSave();
+								} catch (final InterruptedException e) {
+									throw new RuntimeException(e);
+								}
+							case MultiLineMessageBox.NO:
+								break; //
+							}
 						}
-					case MultiLineMessageBox.NO:
-						break; // 
 					}
-				}
-			}
 
 			) == MultiLineMessageBox.YES) {
 			}
 		}
 
-		orderDialogWindow.onClose();
+		this.orderDialogWindow.onClose();
 	}
 
 	/**
@@ -586,31 +589,32 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// set Readonly mode accordingly if the object is new or not.
 		if (anOrder.isNew()) {
-			btnCtrl.setInitNew();
+			this.btnCtrl.setInitNew();
 			doEdit();
 		} else {
-			btnCtrl.setInitEdit();
+			this.btnCtrl.setInitEdit();
 			doReadOnly();
 		}
 
 		try {
 			// fill the components with the data
 			if (anOrder.getCustomer() != null) {
-				kunNr.setValue(anOrder.getCustomer().getKunNr());
-				String substr = (anOrder.getCustomer().getKunName1() + " " + anOrder.getCustomer().getKunName2() + ", " + anOrder.getCustomer().getKunOrt());
+				this.kunNr.setValue(anOrder.getCustomer().getKunNr());
+				String substr = anOrder.getCustomer().getKunName1() + " " + anOrder.getCustomer().getKunName2() + ", "
+						+ anOrder.getCustomer().getKunOrt();
 				substr = StringUtils.substring(substr, 0, 49);
-				kunName1.setValue(substr);
+				this.kunName1.setValue(substr);
 
 			}
-			aufNr.setValue(anOrder.getAufNr());
-			aufBezeichnung.setValue(anOrder.getAufBezeichnung());
+			this.aufNr.setValue(anOrder.getAufNr());
+			this.aufBezeichnung.setValue(anOrder.getAufBezeichnung());
 
 			// stores the inital data for comparing if they are changed
 			// during user action.
 			doStoreInitValues();
 
-			orderDialogWindow.doModal(); // open the dialog in modal mode
-		} catch (Exception e) {
+			this.orderDialogWindow.doModal(); // open the dialog in modal mode
+		} catch (final Exception e) {
 			Messagebox.show(e.toString());
 		}
 	}
@@ -623,30 +627,30 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * Set the properties of the fields, like maxLength.<br>
 	 */
 	private void doSetFieldProperties() {
-		kunNr.setMaxlength(20);
-		kunName1.setMaxlength(150);
-		aufNr.setMaxlength(20);
-		aufBezeichnung.setMaxlength(50);
+		this.kunNr.setMaxlength(20);
+		this.kunName1.setMaxlength(150);
+		this.aufNr.setMaxlength(20);
+		this.aufBezeichnung.setMaxlength(50);
 	}
 
 	/**
 	 * Stores the init values in mem vars. <br>
 	 */
 	private void doStoreInitValues() {
-		oldVar_kunNr = kunNr.getValue();
-		oldVar_kunName1 = kunName1.getValue();
-		oldVar_aufNr = aufNr.getValue();
-		oldVar_aufBezeichnung = aufBezeichnung.getValue();
+		this.oldVar_kunNr = this.kunNr.getValue();
+		this.oldVar_kunName1 = this.kunName1.getValue();
+		this.oldVar_aufNr = this.aufNr.getValue();
+		this.oldVar_aufBezeichnung = this.aufBezeichnung.getValue();
 	}
 
 	/**
 	 * Resets the init values from mem vars. <br>
 	 */
 	private void doResetInitValues() {
-		kunNr.setValue(oldVar_kunNr);
-		kunName1.setValue(oldVar_kunName1);
-		aufNr.setValue(oldVar_aufNr);
-		aufBezeichnung.setValue(oldVar_aufBezeichnung);
+		this.kunNr.setValue(this.oldVar_kunNr);
+		this.kunName1.setValue(this.oldVar_kunName1);
+		this.aufNr.setValue(this.oldVar_aufNr);
+		this.aufBezeichnung.setValue(this.oldVar_aufBezeichnung);
 	}
 
 	/**
@@ -658,16 +662,16 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private boolean isDataChanged() {
 		boolean changed = false;
 
-		if (oldVar_kunNr != kunNr.getValue()) {
+		if (this.oldVar_kunNr != this.kunNr.getValue()) {
 			changed = true;
 		}
-		if (oldVar_kunName1 != kunName1.getValue()) {
+		if (this.oldVar_kunName1 != this.kunName1.getValue()) {
 			changed = true;
 		}
-		if (oldVar_aufNr != aufNr.getValue()) {
+		if (this.oldVar_aufNr != this.aufNr.getValue()) {
 			changed = true;
 		}
-		if (oldVar_aufBezeichnung != aufBezeichnung.getValue()) {
+		if (this.oldVar_aufBezeichnung != this.aufBezeichnung.getValue()) {
 			changed = true;
 		}
 
@@ -681,10 +685,10 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		setValidationOn(true);
 
-		kunNr.setConstraint(new SimpleConstraint("NO EMPTY"));
-		kunName1.setConstraint("NO EMPTY");
-		aufNr.setConstraint("NO EMPTY");
-		aufBezeichnung.setConstraint("NO EMPTY");
+		this.kunNr.setConstraint(new SimpleConstraint("NO EMPTY"));
+		this.kunName1.setConstraint("NO EMPTY");
+		this.aufNr.setConstraint("NO EMPTY");
+		this.aufBezeichnung.setConstraint("NO EMPTY");
 	}
 
 	/**
@@ -694,10 +698,10 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		setValidationOn(false);
 
-		kunNr.setConstraint("");
-		kunName1.setConstraint("");
-		aufNr.setConstraint("");
-		aufBezeichnung.setConstraint("");
+		this.kunNr.setConstraint("");
+		this.kunName1.setConstraint("");
+		this.aufNr.setConstraint("");
+		this.aufBezeichnung.setConstraint("");
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -714,39 +718,43 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final Order order = getOrder();
 
 		// Show a confirm box
-		String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record");
-		String title = Labels.getLabel("message.Deleting.Record");
+		final String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record");
+		final String title = Labels.getLabel("message.Deleting.Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
-			public void onEvent(Event evt) {
-				switch (((Integer) evt.getData()).intValue()) {
-				case MultiLineMessageBox.YES:
-					delete();
-				case MultiLineMessageBox.NO:
-					break; // 
+		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO,
+				MultiLineMessageBox.QUESTION, true, new EventListener() {
+					@Override
+					public void onEvent(Event evt) {
+						switch (((Integer) evt.getData()).intValue()) {
+						case MultiLineMessageBox.YES:
+							delete();
+						case MultiLineMessageBox.NO:
+							break; //
+						}
+					}
+
+					private void delete() {
+
+						// delete from database
+						getOrderService().delete(order);
+
+						// now synchronize the listBox in the parent zul-file
+						final ListModelList lml = (ListModelList) OrderDialogCtrl.this.listBoxOrder.getListModel();
+
+						// Check if the branch object is new or updated
+						// -1 means that the obj is not in the list, so it's
+						// new.
+						if (lml.indexOf(order) == -1) {
+						} else {
+							lml.remove(lml.indexOf(order));
+						}
+
+						OrderDialogCtrl.this.orderDialogWindow.onClose(); // close
+																			// the
+																			// dialog
+					}
 				}
-			}
-
-			private void delete() {
-
-				// delete from database
-				getOrderService().delete(order);
-
-				// now synchronize the listBox in the parent zul-file
-				ListModelList lml = (ListModelList) listBoxOrder.getListModel();
-
-				// Check if the branch object is new or updated
-				// -1 means that the obj is not in the list, so it's
-				// new.
-				if (lml.indexOf(order) == -1) {
-				} else {
-					lml.remove(lml.indexOf(order));
-				}
-
-				orderDialogWindow.onClose(); // close the dialog
-			}
-		}
 
 		) == MultiLineMessageBox.YES) {
 		}
@@ -766,7 +774,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doClear(); // clear all commponents
 		doEdit(); // edit mode
 
-		btnCtrl.setBtnStatus_New();
+		this.btnCtrl.setBtnStatus_New();
 
 		// remember the old vars
 		doStoreInitValues();
@@ -778,13 +786,13 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private void doEdit() {
 
 		// kunNr only be filled by searchBandBox
-		kunNr.setReadonly(true);
-		bandbox_OrderDialog_CustomerSearch.setDisabled(false);
+		this.kunNr.setReadonly(true);
+		this.bandbox_OrderDialog_CustomerSearch.setDisabled(false);
 		// kunName1.setReadonly(false);
-		aufNr.setReadonly(false);
-		aufBezeichnung.setReadonly(false);
+		this.aufNr.setReadonly(false);
+		this.aufBezeichnung.setReadonly(false);
 
-		btnCtrl.setBtnStatus_Edit();
+		this.btnCtrl.setBtnStatus_Edit();
 
 		// remember the old vars
 		doStoreInitValues();
@@ -795,11 +803,11 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doReadOnly() {
 
-		kunNr.setReadonly(true);
-		bandbox_OrderDialog_CustomerSearch.setDisabled(true);
-		kunName1.setReadonly(true);
-		aufNr.setReadonly(true);
-		aufBezeichnung.setReadonly(true);
+		this.kunNr.setReadonly(true);
+		this.bandbox_OrderDialog_CustomerSearch.setDisabled(true);
+		this.kunName1.setReadonly(true);
+		this.aufNr.setReadonly(true);
+		this.aufBezeichnung.setReadonly(true);
 	}
 
 	/**
@@ -810,14 +818,14 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// remove validation, if there are a save before
 		doRemoveValidation();
 
-		kunNr.setValue("");
-		bandbox_OrderDialog_CustomerSearch.setValue("");
-		kunName1.setValue("");
-		aufNr.setValue("");
-		aufBezeichnung.setValue("");
+		this.kunNr.setValue("");
+		this.bandbox_OrderDialog_CustomerSearch.setValue("");
+		this.kunName1.setValue("");
+		this.aufNr.setValue("");
+		this.aufBezeichnung.setValue("");
 
 		// clear the listbox
-		ListModelList lml = (ListModelList) listBoxOrderOrderPositions.getModel();
+		final ListModelList lml = (ListModelList) this.listBoxOrderOrderPositions.getModel();
 		lml.clear();
 
 		// doSetValidation();
@@ -830,8 +838,8 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doSave() throws InterruptedException {
 
-		Order anOrder = getOrder();
-		Customer aCustomer = getCustomer();
+		final Order anOrder = getOrder();
+		final Customer aCustomer = getCustomer();
 
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// force validation, if on, than execute by component.getValue()
@@ -840,22 +848,22 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 			doSetValidation();
 		}
 
-		kunNr.getValue();
-		kunName1.getValue();
+		this.kunNr.getValue();
+		this.kunName1.getValue();
 		// bbox_Orders_CustomerSearch.getValue();
 
 		// fill the order object with the components data
 		anOrder.setCustomer(aCustomer);
-		anOrder.setAufNr(aufNr.getValue());
-		anOrder.setAufBezeichnung(aufBezeichnung.getValue());
+		anOrder.setAufNr(this.aufNr.getValue());
+		anOrder.setAufBezeichnung(this.aufBezeichnung.getValue());
 
 		// save it to database
 		try {
 			getOrderService().saveOrUpdate(anOrder);
-		} catch (DataAccessException e) {
-			String message = e.getMessage();
+		} catch (final DataAccessException e) {
+			final String message = e.getMessage();
 			// String message = e.getCause().getMessage();
-			String title = Labels.getLabel("message.Error");
+			final String title = Labels.getLabel("message.Error");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 
@@ -863,12 +871,12 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 			doResetInitValues();
 
 			doReadOnly();
-			btnCtrl.setBtnStatus_Save();
+			this.btnCtrl.setBtnStatus_Save();
 			return;
 		}
 
 		// now synchronize the offices listBox
-		ListModelList lml = (ListModelList) listBoxOrder.getListModel();
+		final ListModelList lml = (ListModelList) this.listBoxOrder.getListModel();
 
 		// Check if the object is new or updated
 		// -1 means that the object is not in the list, so its new.
@@ -882,7 +890,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// officeCtrl.doBindNew();
 
 		doReadOnly();
-		btnCtrl.setBtnStatus_Save();
+		this.btnCtrl.setBtnStatus_Save();
 		// init the old values vars new
 		doStoreInitValues();
 	}
@@ -900,11 +908,11 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		logger.debug(event.toString());
 
 		// get the selected object
-		Listitem item = listBoxOrderOrderPositions.getSelectedItem();
+		final Listitem item = this.listBoxOrderOrderPositions.getSelectedItem();
 
 		if (item != null) {
 			// CAST AND STORE THE SELECTED OBJECT
-			Orderposition anOrderposition = (Orderposition) item.getAttribute("data");
+			final Orderposition anOrderposition = (Orderposition) item.getAttribute("data");
 
 			/*
 			 * We can call our Dialog zul-file with parameters. So we can call
@@ -912,8 +920,8 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 			 * parameter only a Map is accepted. So we put the object in a
 			 * HashMap.
 			 */
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("orderListCtrl", orderListCtrl);
+			final HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("orderListCtrl", this.orderListCtrl);
 			map.put("order", getOrder());
 			map.put("orderposition", anOrderposition);
 			/*
@@ -922,18 +930,18 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 			 * syncronizing the data in the customerListbox from the dialog when
 			 * we do a delete, edit or insert a customer.
 			 */
-			map.put("listBoxOrderOrderPositions", listBoxOrderOrderPositions);
+			map.put("listBoxOrderOrderPositions", this.listBoxOrderOrderPositions);
 			map.put("orderDialogCtrl", this);
 
 			// call the zul-file with the parameters packed in a map
 			try {
 				Executions.createComponents("/WEB-INF/pages/order/orderPositionDialog.zul", null, map);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
 				// Show a error box
-				String msg = e.getMessage();
-				String title = Labels.getLabel("message.Error");
+				final String msg = e.getMessage();
+				final String title = Labels.getLabel("message.Error");
 				MultiLineMessageBox.doSetTemplate();
 				MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
 
@@ -953,7 +961,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$button_bbox_CustomerSearch_Close(Event event) {
 		logger.debug(event.toString());
 
-		bandbox_OrderDialog_CustomerSearch.close();
+		this.bandbox_OrderDialog_CustomerSearch.close();
 	}
 
 	/**
@@ -969,7 +977,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		/** !!! DO NOT BREAK THE TIERS !!! */
 		// We don't create a new DomainObject() in the frontend.
 		// We GET it from the backend.
-		Customer aCustomer = getCustomerService().getNewCustomer();
+		final Customer aCustomer = getCustomerService().getNewCustomer();
 		aCustomer.setOffice(getUserWorkspace().getOffice()); // init
 		// customer.setBranche(Workspace.getBranche()); // init
 		aCustomer.setBranche(getBrancheService().getBrancheById(new Integer(1033).longValue())); // init
@@ -980,7 +988,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		 * with a object of the selected item. For handed over these parameter
 		 * only a Map is accepted. So we put the object in a HashMap.
 		 */
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("customer", aCustomer);
 		/*
 		 * we can additionally handed over the listBox, so we have in the dialog
@@ -1008,17 +1016,17 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		logger.debug(event.toString());
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<Customer> soCustomer = new HibernateSearchObject<Customer>(Customer.class);
+		final HibernateSearchObject<Customer> soCustomer = new HibernateSearchObject<Customer>(Customer.class);
 		soCustomer.addSort("kunName1", false);
 
 		// set the paging params
-		paging_OrderDialog_CustomerSearchList.setPageSize(pageSizeSearchCustomer);
-		paging_OrderDialog_CustomerSearchList.setDetailed(true);
+		this.paging_OrderDialog_CustomerSearchList.setPageSize(this.pageSizeSearchCustomer);
+		this.paging_OrderDialog_CustomerSearchList.setDetailed(true);
 
 		// Set the ListModel.
-		getPlwCustomers().init(soCustomer, listBoxCustomerSearch, paging_OrderDialog_CustomerSearchList);
+		getPlwCustomers().init(soCustomer, this.listBoxCustomerSearch, this.paging_OrderDialog_CustomerSearchList);
 		// set the itemRenderer
-		listBoxCustomerSearch.setItemRenderer(new OrderSearchCustomerListModelItemRenderer());
+		this.listBoxCustomerSearch.setItemRenderer(new OrderSearchCustomerListModelItemRenderer());
 	}
 
 	/**
@@ -1031,30 +1039,33 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private void doSearch() {
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<Customer> soCustomer = new HibernateSearchObject<Customer>(Customer.class);
+		final HibernateSearchObject<Customer> soCustomer = new HibernateSearchObject<Customer>(Customer.class);
 
-		if (StringUtils.isNotEmpty(tb_Orders_SearchCustNo.getValue())) {
-			soCustomer.addFilter(new Filter("kunNr", tb_Orders_SearchCustNo.getValue(), Filter.OP_EQUAL));
+		if (StringUtils.isNotEmpty(this.tb_Orders_SearchCustNo.getValue())) {
+			soCustomer.addFilter(new Filter("kunNr", this.tb_Orders_SearchCustNo.getValue(), Filter.OP_EQUAL));
 		}
-		if (StringUtils.isNotEmpty(tb_Orders_CustSearchMatchcode.getValue())) {
-			soCustomer.addFilter(new Filter("kunMatchcode", "%" + tb_Orders_CustSearchMatchcode.getValue() + "%", Filter.OP_ILIKE));
+		if (StringUtils.isNotEmpty(this.tb_Orders_CustSearchMatchcode.getValue())) {
+			soCustomer.addFilter(new Filter("kunMatchcode", "%" + this.tb_Orders_CustSearchMatchcode.getValue() + "%",
+					Filter.OP_ILIKE));
 		}
-		if (StringUtils.isNotEmpty(tb_Orders_SearchCustName1.getValue())) {
-			soCustomer.addFilter(new Filter("kunName1", "%" + tb_Orders_SearchCustName1.getValue() + "%", Filter.OP_ILIKE));
+		if (StringUtils.isNotEmpty(this.tb_Orders_SearchCustName1.getValue())) {
+			soCustomer.addFilter(new Filter("kunName1", "%" + this.tb_Orders_SearchCustName1.getValue() + "%",
+					Filter.OP_ILIKE));
 		}
-		if (StringUtils.isNotEmpty(tb_Orders_SearchCustCity.getValue())) {
-			soCustomer.addFilter(new Filter("kunOrt", "%" + tb_Orders_SearchCustCity.getValue() + "%", Filter.OP_ILIKE));
+		if (StringUtils.isNotEmpty(this.tb_Orders_SearchCustCity.getValue())) {
+			soCustomer.addFilter(new Filter("kunOrt", "%" + this.tb_Orders_SearchCustCity.getValue() + "%",
+					Filter.OP_ILIKE));
 		}
 		soCustomer.addSort("kunName1", false);
 
 		// set the paging params
-		paging_OrderDialog_CustomerSearchList.setPageSize(pageSizeSearchCustomer);
-		paging_OrderDialog_CustomerSearchList.setDetailed(true);
+		this.paging_OrderDialog_CustomerSearchList.setPageSize(this.pageSizeSearchCustomer);
+		this.paging_OrderDialog_CustomerSearchList.setDetailed(true);
 
 		// Set the ListModel.
-		getPlwCustomers().init(soCustomer, listBoxCustomerSearch, paging_OrderDialog_CustomerSearchList);
+		getPlwCustomers().init(soCustomer, this.listBoxCustomerSearch, this.paging_OrderDialog_CustomerSearchList);
 		// set the itemRenderer
-		listBoxCustomerSearch.setItemRenderer(new OrderSearchCustomerListModelItemRenderer());
+		this.listBoxCustomerSearch.setItemRenderer(new OrderSearchCustomerListModelItemRenderer());
 
 	}
 
@@ -1069,19 +1080,20 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		logger.debug(event.toString());
 
 		// get the customer
-		Listitem item = listBoxCustomerSearch.getSelectedItem();
+		final Listitem item = this.listBoxCustomerSearch.getSelectedItem();
 		if (item != null) {
 
-			Customer aCustomer = (Customer) item.getAttribute("data");
+			final Customer aCustomer = (Customer) item.getAttribute("data");
 			setCustomer(aCustomer);
 
-			kunNr.setValue(getCustomer().getKunNr());
-			bandbox_OrderDialog_CustomerSearch.setValue(getCustomer().getKunNr());
-			kunName1.setValue(getCustomer().getKunName1() + " " + getCustomer().getKunName2() + ", " + getCustomer().getKunOrt());
+			this.kunNr.setValue(getCustomer().getKunNr());
+			this.bandbox_OrderDialog_CustomerSearch.setValue(getCustomer().getKunNr());
+			this.kunName1.setValue(getCustomer().getKunName1() + " " + getCustomer().getKunName2() + ", "
+					+ getCustomer().getKunOrt());
 		}
 
 		// close the bandbox
-		bandbox_OrderDialog_CustomerSearch.close();
+		this.bandbox_OrderDialog_CustomerSearch.close();
 
 	}
 
@@ -1094,7 +1106,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public boolean isValidationOn() {
-		return validationOn;
+		return this.validationOn;
 	}
 
 	public void setCustomer(Customer customer) {
@@ -1102,7 +1114,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public Customer getCustomer() {
-		return customer;
+		return this.customer;
 	}
 
 	public void setOrderService(OrderService orderService) {
@@ -1110,7 +1122,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public OrderService getOrderService() {
-		return orderService;
+		return this.orderService;
 	}
 
 	public void setCustomerService(CustomerService customerService) {
@@ -1118,11 +1130,11 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public CustomerService getCustomerService() {
-		return customerService;
+		return this.customerService;
 	}
 
 	public BrancheService getBrancheService() {
-		return brancheService;
+		return this.brancheService;
 	}
 
 	public void setBrancheService(BrancheService brancheService) {
@@ -1130,7 +1142,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public Order getOrder() {
-		return order;
+		return this.order;
 	}
 
 	public void setOrder(Order order) {
@@ -1138,7 +1150,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public Listbox getListBoxOrderOrderPositions() {
-		return listBoxOrderOrderPositions;
+		return this.listBoxOrderOrderPositions;
 	}
 
 	public void setListBoxOrderOrderPositions(Listbox listBoxOrderOrderPositions) {
@@ -1150,7 +1162,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public PagedListWrapper<Orderposition> getPlwOrderpositions() {
-		return plwOrderpositions;
+		return this.plwOrderpositions;
 	}
 
 	public void setPlwCustomers(PagedListWrapper<Customer> plwCustomers) {
@@ -1158,11 +1170,11 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public PagedListWrapper<Customer> getPlwCustomers() {
-		return plwCustomers;
+		return this.plwCustomers;
 	}
 
 	public int getPageSizeOrderPosition() {
-		return pageSizeOrderPosition;
+		return this.pageSizeOrderPosition;
 	}
 
 	public void setPageSizeOrderPosition(int pageSizeOrderPosition) {
@@ -1170,7 +1182,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public int getPageSizeSearchCustomer() {
-		return pageSizeSearchCustomer;
+		return this.pageSizeSearchCustomer;
 	}
 
 	public void setPageSizeSearchCustomer(int pageSizeSearchCustomer) {

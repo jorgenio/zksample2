@@ -93,7 +93,7 @@ public class PagedGridWrapper<E> extends ListModelList implements Serializable {
 		// clear old data
 		clear();
 
-		SearchResult<E> searchResult = getPagedListService().getSRBySearchObject(getSearchObject());
+		final SearchResult<E> searchResult = getPagedListService().getSRBySearchObject(getSearchObject());
 		getPaging().setTotalSize(searchResult.getTotalCount());
 		addAll(searchResult.getResult());
 	}
@@ -144,13 +144,9 @@ public class PagedGridWrapper<E> extends ListModelList implements Serializable {
 		@Override
 		public void onEvent(Event event) throws Exception {
 
-			PagingEvent pe = (PagingEvent) event;
-			int pageNo = pe.getActivePage();
-			int start = pageNo * getPageSize();
-
-			if (logger.isDebugEnabled()) {
-				logger.debug("--> : " + start + "/" + getPageSize());
-			}
+			final PagingEvent pe = (PagingEvent) event;
+			final int pageNo = pe.getActivePage();
+			final int start = pageNo * getPageSize();
 
 			// refresh the list
 			refreshModel(start);
@@ -158,7 +154,7 @@ public class PagedGridWrapper<E> extends ListModelList implements Serializable {
 	}
 
 	public PagedListService getPagedListService() {
-		return pagedListService;
+		return this.pagedListService;
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -166,7 +162,7 @@ public class PagedGridWrapper<E> extends ListModelList implements Serializable {
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
 	HibernateSearchObject<E> getSearchObject() {
-		return hibernateSearchObject;
+		return this.hibernateSearchObject;
 	}
 
 	public int getPageSize() {
@@ -174,7 +170,7 @@ public class PagedGridWrapper<E> extends ListModelList implements Serializable {
 	}
 
 	Paging getPaging() {
-		return paging;
+		return this.paging;
 	}
 
 	public void setPagedListService(PagedListService pagedListService) {

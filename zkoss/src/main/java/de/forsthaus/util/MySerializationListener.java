@@ -33,10 +33,11 @@ import org.zkoss.zk.ui.util.EventInterceptor;
  * @author sgerth
  * 
  */
-public class MySerializationListener implements EventListener, EventInterceptor, java.io.Serializable, ComponentSerializationListener {
+public class MySerializationListener implements EventListener, EventInterceptor, java.io.Serializable,
+		ComponentSerializationListener {
 
 	private static final long serialVersionUID = 1L;
-	private transient final static Logger logger = Logger.getLogger(MySerializationListener.class);
+	private final static Logger logger = Logger.getLogger(MySerializationListener.class);
 
 	public MySerializationListener() {
 	}
@@ -77,10 +78,10 @@ public class MySerializationListener implements EventListener, EventInterceptor,
 		logger.info("beforePostEvent 2. --> : " + event.toString());
 		logger.info("beforePostEvent 3. --> : " + event.getTarget().getDesktop().getSession().toString());
 
-		Map<String, ?> map = event.getTarget().getDesktop().getSession().getAttributes();
+		final Map<String, ?> map = event.getTarget().getDesktop().getSession().getAttributes();
 
 		int i = 1;
-		for (String str : map.keySet()) {
+		for (final String str : map.keySet()) {
 			logger.info("Object Nr.: " + i++ + " / " + str);
 		}
 		return null;

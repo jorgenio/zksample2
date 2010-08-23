@@ -62,7 +62,8 @@ import org.zkoss.zul.Window;
  * call in java to actualize a columns label:
  * 
  * <pre>
- * EventQueues.lookup(&quot;userNameEventQueue&quot;, EventQueues.DESKTOP, true).publish(new Event(&quot;onChangeSelectedObject&quot;, null, &quot;new Value&quot;));
+ * EventQueues.lookup(&quot;userNameEventQueue&quot;, EventQueues.DESKTOP, true).publish(
+ * 		new Event(&quot;onChangeSelectedObject&quot;, null, &quot;new Value&quot;));
  * </pre>
  * 
  * Spring bean declaration:
@@ -82,7 +83,7 @@ import org.zkoss.zul.Window;
 public class StatusBarCtrl extends GenericForwardComposer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private transient final static Logger logger = Logger.getLogger(StatusBarCtrl.class);
+	private final static Logger logger = Logger.getLogger(StatusBarCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -99,19 +100,15 @@ public class StatusBarCtrl extends GenericForwardComposer implements Serializabl
 	private Column statusBarTableSchema;
 
 	// Localized labels for the columns
-	private String _labelSelectedObject = Labels.getLabel("common.SelectedSign") + " ";
-	private String _labelAppVersion = "";
-	private String _labelTableSchema = Labels.getLabel("common.TableSchema") + ": ";
+	private final String _labelSelectedObject = Labels.getLabel("common.SelectedSign") + " ";
+	private final String _labelAppVersion = "";
+	private final String _labelTableSchema = Labels.getLabel("common.TableSchema") + ": ";
 
 	/**
 	 * Default constructor.
 	 */
 	public StatusBarCtrl() {
 		super();
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> super()");
-		}
 	}
 
 	@Override
@@ -120,25 +117,28 @@ public class StatusBarCtrl extends GenericForwardComposer implements Serializabl
 
 		// Listener for selected Record
 		EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).subscribe(new EventListener() {
+			@Override
 			public void onEvent(Event event) throws Exception {
-				String msg = (String) event.getData();
-				statusBarSelectedObject.setLabel(_labelSelectedObject + msg);
+				final String msg = (String) event.getData();
+				StatusBarCtrl.this.statusBarSelectedObject.setLabel(StatusBarCtrl.this._labelSelectedObject + msg);
 			}
 		});
 
 		// Listener for applicationVersion
 		EventQueues.lookup("appVersionEventQueue", EventQueues.DESKTOP, true).subscribe(new EventListener() {
+			@Override
 			public void onEvent(Event event) throws Exception {
-				String msg = (String) event.getData();
-				statusBarAppVersion.setLabel(_labelAppVersion + msg);
+				final String msg = (String) event.getData();
+				StatusBarCtrl.this.statusBarAppVersion.setLabel(StatusBarCtrl.this._labelAppVersion + msg);
 			}
 		});
 
 		// Listener for TableSchemaName
 		EventQueues.lookup("tableSchemaEventQueue", EventQueues.DESKTOP, true).subscribe(new EventListener() {
+			@Override
 			public void onEvent(Event event) throws Exception {
-				String msg = (String) event.getData();
-				statusBarTableSchema.setLabel(_labelTableSchema + msg);
+				final String msg = (String) event.getData();
+				StatusBarCtrl.this.statusBarTableSchema.setLabel(StatusBarCtrl.this._labelTableSchema + msg);
 			}
 		});
 
@@ -151,32 +151,32 @@ public class StatusBarCtrl extends GenericForwardComposer implements Serializabl
 	 */
 	public void onCreate$winStatusBar(Event event) {
 
-		Grid grid = new Grid();
+		final Grid grid = new Grid();
 		grid.setHeight("100%");
 		grid.setWidth("100%");
-		grid.setParent(winStatusBar);
+		grid.setParent(this.winStatusBar);
 
-		Columns columns = new Columns();
+		final Columns columns = new Columns();
 		columns.setSizable(false);
 		columns.setParent(grid);
 
-		statusBarSelectedObject = new Column();
-		statusBarSelectedObject.setLabel(_labelSelectedObject);
-		statusBarSelectedObject.setWidth("50%");
-		statusBarSelectedObject.setStyle("background-color: #D6DCDE; color: blue;");
-		statusBarSelectedObject.setParent(columns);
+		this.statusBarSelectedObject = new Column();
+		this.statusBarSelectedObject.setLabel(this._labelSelectedObject);
+		this.statusBarSelectedObject.setWidth("50%");
+		this.statusBarSelectedObject.setStyle("background-color: #D6DCDE; color: blue;");
+		this.statusBarSelectedObject.setParent(columns);
 
-		statusBarAppVersion = new Column();
-		statusBarAppVersion.setLabel(_labelAppVersion);
-		statusBarAppVersion.setWidth("35%");
-		statusBarAppVersion.setStyle("background-color: #D6DCDE; color: #FF0000;");
-		statusBarAppVersion.setParent(columns);
+		this.statusBarAppVersion = new Column();
+		this.statusBarAppVersion.setLabel(this._labelAppVersion);
+		this.statusBarAppVersion.setWidth("35%");
+		this.statusBarAppVersion.setStyle("background-color: #D6DCDE; color: #FF0000;");
+		this.statusBarAppVersion.setParent(columns);
 
-		statusBarTableSchema = new Column();
-		statusBarTableSchema.setLabel(_labelTableSchema);
-		statusBarTableSchema.setWidth("15%");
-		statusBarTableSchema.setStyle("background-color: #D6DCDE; color: blue;");
-		statusBarTableSchema.setParent(columns);
+		this.statusBarTableSchema = new Column();
+		this.statusBarTableSchema.setLabel(this._labelTableSchema);
+		this.statusBarTableSchema.setWidth("15%");
+		this.statusBarTableSchema.setStyle("background-color: #D6DCDE; color: blue;");
+		this.statusBarTableSchema.setParent(columns);
 
 	}
 }

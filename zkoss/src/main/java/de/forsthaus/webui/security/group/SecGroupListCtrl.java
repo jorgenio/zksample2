@@ -70,7 +70,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
 public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Serializable {
 
 	private static final long serialVersionUID = -6139454778139881103L;
-	private transient static final Logger logger = Logger.getLogger(SecGroupListCtrl.class);
+	private static final Logger logger = Logger.getLogger(SecGroupListCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -104,13 +104,9 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	 */
 	public SecGroupListCtrl() {
 		super();
-
-		logger.debug("super()");
 	}
 
 	public void onCreate$secGroupListWindow(Event event) throws Exception {
-		logger.debug(event.toString());
-
 		/**
 		 * Calculate how many rows have been place in the listbox. Get the
 		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
@@ -119,45 +115,48 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 
 		int panelHeight = 25;
 		// TODO put the logic for working with panel in the ApplicationWorkspace
-		boolean withPanel = false;
+		final boolean withPanel = false;
 		if (withPanel == false) {
-			panel_SecGroupList.setVisible(false);
+			this.panel_SecGroupList.setVisible(false);
 		} else {
-			panel_SecGroupList.setVisible(true);
+			this.panel_SecGroupList.setVisible(true);
 			panelHeight = 0;
 		}
 
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		height = height + panelHeight;
-		int maxListBoxHeight = (height - 138);
+		final int maxListBoxHeight = height - 138;
 		setCountRows(Math.round(maxListBoxHeight / 17));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());
 
-		borderLayout_secGroupsList.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		this.borderLayout_secGroupsList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		// init, show all rights
-		checkbox_SecGroupList_ShowAll.setChecked(true);
+		this.checkbox_SecGroupList_ShowAll.setChecked(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		listheader_SecGroupList_grpShortdescription.setSortAscending(new FieldComparator("grpShortdescription", true));
-		listheader_SecGroupList_grpShortdescription.setSortDescending(new FieldComparator("grpShortdescription", false));
-		listheader_SecGroupList_grpLongdescription.setSortAscending("");
-		listheader_SecGroupList_grpLongdescription.setSortDescending("");
+		this.listheader_SecGroupList_grpShortdescription.setSortAscending(new FieldComparator("grpShortdescription",
+				true));
+		this.listheader_SecGroupList_grpShortdescription.setSortDescending(new FieldComparator("grpShortdescription",
+				false));
+		this.listheader_SecGroupList_grpLongdescription.setSortAscending("");
+		this.listheader_SecGroupList_grpLongdescription.setSortDescending("");
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class, getCountRows());
+		final HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class,
+				getCountRows());
 		soSecGroup.addSort("grpShortdescription", false);
 
 		// set the paging params
-		paging_SecGroupList.setPageSize(getCountRows());
-		paging_SecGroupList.setDetailed(true);
+		this.paging_SecGroupList.setPageSize(getCountRows());
+		this.paging_SecGroupList.setDetailed(true);
 
 		// Set the ListModel.
-		getPagedListWrapper().init(soSecGroup, listBoxSecGroups, paging_SecGroupList);
+		getPagedListWrapper().init(soSecGroup, this.listBoxSecGroups, this.paging_SecGroupList);
 		// set the itemRenderer
-		listBoxSecGroups.setItemRenderer(new SecGroupListModelItemRenderer());
+		this.listBoxSecGroups.setItemRenderer(new SecGroupListModelItemRenderer());
 
 	}
 
@@ -179,15 +178,11 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	public void onDoubleClicked(Event event) throws Exception {
 
 		// get the selected object
-		Listitem item = listBoxSecGroups.getSelectedItem();
+		final Listitem item = this.listBoxSecGroups.getSelectedItem();
 
 		if (item != null) {
 			// CAST AND STORE THE SELECTED OBJECT
-			SecGroup aGroup = (SecGroup) item.getAttribute("data");
-
-			if (logger.isDebugEnabled()) {
-				logger.debug("--> " + aGroup.getGrpShortdescription());
-			}
+			final SecGroup aGroup = (SecGroup) item.getAttribute("data");
 
 			showDetailView(aGroup);
 		}
@@ -200,7 +195,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 		logger.debug(event.toString());
 
 		// create a new customer object
-		SecGroup aGroup = getSecurityService().getNewSecGroup();
+		final SecGroup aGroup = getSecurityService().getNewSecGroup();
 
 		showDetailView(aGroup);
 
@@ -220,7 +215,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 		 * with a object of the selected item. For handed over these parameter
 		 * only a Map is accepted. So we put the object in a HashMap.
 		 */
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("group", aGroup);
 		/*
 		 * we can additionally handed over the listBox, so we have in the dialog
@@ -228,17 +223,17 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 		 * data in the customerListbox from the dialog when we do a delete, edit
 		 * or insert a customer.
 		 */
-		map.put("listBoxSecGroups", listBoxSecGroups);
+		map.put("listBoxSecGroups", this.listBoxSecGroups);
 
 		// call the zul-file with the parameters packed in a map
 		try {
 			Executions.createComponents("/WEB-INF/pages/sec_group/secGroupDialog.zul", null, map);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
 			// Show a error box
-			String msg = e.getMessage();
-			String title = Labels.getLabel("message.Error");
+			final String msg = e.getMessage();
+			final String title = Labels.getLabel("message.Error");
 
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
@@ -269,8 +264,8 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		Events.postEvent("onCreate", secGroupListWindow, event);
-		secGroupListWindow.invalidate();
+		Events.postEvent("onCreate", this.secGroupListWindow, event);
+		this.secGroupListWindow.invalidate();
 	}
 
 	/**
@@ -282,14 +277,14 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 		logger.debug(event.toString());
 
 		// empty the text search boxes
-		tb_SecGroup_GroupName.setValue(""); // clear
+		this.tb_SecGroup_GroupName.setValue(""); // clear
 
 		// ++ create the searchObject and init sorting ++//
-		HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class);
+		final HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class);
 		soSecGroup.addSort("grpShortdescription", false);
 
 		// Set the ListModel.
-		getPagedListWrapper().init(soSecGroup, listBoxSecGroups, paging_SecGroupList);
+		getPagedListWrapper().init(soSecGroup, this.listBoxSecGroups, this.paging_SecGroupList);
 
 	}
 
@@ -300,7 +295,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecGroupList_PrintGroupList(Event event) throws InterruptedException {
-		Window win = (Window) Path.getComponent("/outerIndexWindow");
+		final Window win = (Window) Path.getComponent("/outerIndexWindow");
 		new SecGroupSimpleDJReport(win);
 	}
 
@@ -311,16 +306,17 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 		logger.debug(event.toString());
 
 		// if not empty
-		if (!tb_SecGroup_GroupName.getValue().isEmpty()) {
-			checkbox_SecGroupList_ShowAll.setChecked(false); // unCheck
+		if (!this.tb_SecGroup_GroupName.getValue().isEmpty()) {
+			this.checkbox_SecGroupList_ShowAll.setChecked(false); // unCheck
 
 			// ++ create the searchObject and init sorting ++//
-			HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class);
-			soSecGroup.addFilter(new Filter("grpShortdescription", "%" + tb_SecGroup_GroupName.getValue() + "%", Filter.OP_ILIKE));
+			final HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class);
+			soSecGroup.addFilter(new Filter("grpShortdescription", "%" + this.tb_SecGroup_GroupName.getValue() + "%",
+					Filter.OP_ILIKE));
 			soSecGroup.addSort("grpShortdescription", false);
 
 			// Set the ListModel.
-			getPagedListWrapper().init(soSecGroup, listBoxSecGroups, paging_SecGroupList);
+			getPagedListWrapper().init(soSecGroup, this.listBoxSecGroups, this.paging_SecGroupList);
 		}
 	}
 
@@ -329,7 +325,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
 	public int getCountRows() {
-		return countRows;
+		return this.countRows;
 	}
 
 	public void setCountRows(int countRows) {
@@ -337,7 +333,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	}
 
 	public SecurityService getSecurityService() {
-		return securityService;
+		return this.securityService;
 	}
 
 	public void setSecurityService(SecurityService securityService) {

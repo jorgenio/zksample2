@@ -56,10 +56,6 @@ public class OrderpositionDAOImpl extends BasisNextidDaoImpl<Orderposition> impl
 
 		result = getHibernateTemplate().findByCriteria(criteria);
 
-		for (Orderposition orderposition : result) {
-			orderposition.getArticle();
-		}
-
 		return result;
 
 	}

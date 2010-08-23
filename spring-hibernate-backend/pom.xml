@@ -62,6 +62,10 @@
 					<groupId>com.lowagie</groupId>
 					<artifactId>itext</artifactId>
 				</exclusion>
+				<exclusion>
+					<artifactId>jfreechart</artifactId>
+					<groupId>jfree</groupId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -172,6 +176,13 @@
 			<artifactId>javassist</artifactId>
 			<version>3.4.GA</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>1.0.13</version>
+			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>

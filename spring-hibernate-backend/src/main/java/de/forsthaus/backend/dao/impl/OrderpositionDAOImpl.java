@@ -27,6 +27,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
 
 import de.forsthaus.backend.dao.OrderpositionDAO;
+import de.forsthaus.backend.model.Customer;
 import de.forsthaus.backend.model.Order;
 import de.forsthaus.backend.model.Orderposition;
 
@@ -45,8 +46,22 @@ public class OrderpositionDAOImpl extends BasisNextidDaoImpl<Orderposition> impl
 
 	@Override
 	public List<Orderposition> getOrderpositionsByOrder(Order order) {
-		/** initialize() lädt die entsprechenden Daten nach. */
-		return new ArrayList<Orderposition>(order.getOrderpositions());
+		// /** initialize() lädt die entsprechenden Daten nach. */
+		// return new ArrayList<Orderposition>(order.getOrderpositions());
+
+		List<Orderposition> result;
+
+		DetachedCriteria criteria = DetachedCriteria.forClass(Orderposition.class);
+		criteria.add(Restrictions.eq("order", order));
+
+		result = getHibernateTemplate().findByCriteria(criteria);
+
+		for (Orderposition orderposition : result) {
+			orderposition.getArticle();
+		}
+
+		return result;
+
 	}
 
 	@Override

@@ -266,8 +266,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 
 		// show the objects data in the statusBar
 		final String str = Labels.getLabel("common.Article") + ": " + anArticle.getArtKurzbezeichnung();
-		EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(
-				new Event("onChangeSelectedObject", null, str));
+		EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeSelectedObject", null, str));
 
 	}
 

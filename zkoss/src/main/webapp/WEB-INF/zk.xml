@@ -112,7 +112,7 @@
 	</session-config>
 
 	<!-- ====================================================== -->
-	<!--   Displays the wait indicator for every user action    -->
+	<!--   Displays the wait indicator on every user action     -->
 	<!-- ====================================================== -->
 	<library-property>
 		<name>org.zkoss.zul.progressbox.position</name>

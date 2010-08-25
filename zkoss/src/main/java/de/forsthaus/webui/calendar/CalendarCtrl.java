@@ -16,6 +16,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.Borderlayout;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Window;
@@ -54,6 +55,17 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	protected Div divCenter; // autowired
 	protected Calendars cal; // autowired
 
+	protected Button btn_Show1Day; // autowired
+	protected Button btn_Show5Days; // autowired
+	protected Button btn_ShowWeek; // autowired
+	protected Button btn_Show2Weeks; // autowired
+	protected Button btn_ShowMonth; // autowired
+
+	// private String btnOriginColor = "background-color: buttonface";
+	// private String btnPressedColor = "background-color: gray";
+	private String btnOriginColor = "color: black; font-weight: normal;";
+	private String btnPressedColor = "color: red; font-weight: bold;";
+
 	private SimpleCalendarModel cm;
 
 	/**
@@ -90,6 +102,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowCalendar(Event event) throws Exception {
+
 		dofillModel();
 
 		doFitSize();
@@ -100,10 +113,17 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		// cal.addTimeZone("Mexico", "GMT-6");
 		this.cal.addTimeZone("Germany", "GMT+1");
 		this.cal.setMold("default");
-		this.cal.setFirstDayOfWeek("sunday");
+		this.cal.setFirstDayOfWeek("monday");
 		this.cal.setDays(7);
 		this.cal.setCurrentDate(new Date());
 		this.cal.setReadonly(true);
+
+		btn_Show1Day.setStyle(btnOriginColor);
+		btn_Show5Days.setStyle(btnOriginColor);
+		btn_ShowWeek.setStyle(btnPressedColor);
+		btn_ShowWeek.focus();
+		btn_Show2Weeks.setStyle(btnOriginColor);
+		btn_ShowMonth.setStyle(btnOriginColor);
 	}
 
 	/**
@@ -154,7 +174,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_Next(Event event) throws InterruptedException {
-		this.cal.previousPage();
+		this.cal.nextPage();
 	}
 
 	/**
@@ -164,6 +184,12 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_Show1Day(Event event) throws InterruptedException {
+		btn_Show1Day.setStyle(btnPressedColor);
+		btn_Show5Days.setStyle(btnOriginColor);
+		btn_ShowWeek.setStyle(btnOriginColor);
+		btn_Show2Weeks.setStyle(btnOriginColor);
+		btn_ShowMonth.setStyle(btnOriginColor);
+
 		this.cal.setDays(1);
 	}
 
@@ -174,7 +200,14 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_Show5Days(Event event) throws InterruptedException {
-		this.cal.setFirstDayOfWeek("SUNDAY");
+
+		btn_Show1Day.setStyle(btnOriginColor);
+		btn_Show5Days.setStyle(btnPressedColor);
+		btn_ShowWeek.setStyle(btnOriginColor);
+		btn_Show2Weeks.setStyle(btnOriginColor);
+		btn_ShowMonth.setStyle(btnOriginColor);
+
+		this.cal.setFirstDayOfWeek("monday");
 		this.cal.setDays(5);
 	}
 
@@ -185,8 +218,32 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_ShowWeek(Event event) throws InterruptedException {
-		this.cal.setFirstDayOfWeek("SUNDAY");
+
+		btn_Show1Day.setStyle(btnOriginColor);
+		btn_Show5Days.setStyle(btnOriginColor);
+		btn_ShowWeek.setStyle(btnPressedColor);
+		btn_Show2Weeks.setStyle(btnOriginColor);
+		btn_ShowMonth.setStyle(btnOriginColor);
+
+		this.cal.setFirstDayOfWeek("monday");
 		this.cal.setDays(7);
+	}
+
+	/**
+	 * when the "show 2 weeks" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btn_Show2Weeks(Event event) throws InterruptedException {
+		btn_Show1Day.setStyle(btnOriginColor);
+		btn_Show5Days.setStyle(btnOriginColor);
+		btn_ShowWeek.setStyle(btnOriginColor);
+		btn_Show2Weeks.setStyle(btnPressedColor);
+		btn_ShowMonth.setStyle(btnOriginColor);
+
+		this.cal.setFirstDayOfWeek("monday");
+		this.cal.setDays(14);
 	}
 
 	/**
@@ -196,7 +253,14 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_ShowMonth(Event event) throws InterruptedException {
-		this.cal.setMold("month");
+		// this.cal.setMold("month");
+		btn_Show1Day.setStyle(btnOriginColor);
+		btn_Show5Days.setStyle(btnOriginColor);
+		btn_ShowWeek.setStyle(btnOriginColor);
+		btn_Show2Weeks.setStyle(btnOriginColor);
+		btn_ShowMonth.setStyle(btnPressedColor);
+
+		this.cal.setDays(30);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -258,7 +322,9 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 				new String[] { date2 + "/23 00:00", date2 + "/25 16:30", "#0D7813", "#4CB052", "Green events: 4" },
 				new String[] { date3 + "/01 08:30", date3 + "/01 19:30", "#0D7813", "#4CB052", "Green events: 5" } };
 		// fill the events' data
-		final SimpleCalendarModel cm = new SimpleCalendarModel();
+		// final SimpleCalendarModel cm = new SimpleCalendarModel();
+		cm = new SimpleCalendarModel();
+
 		for (int i = 0; i < evts.length; i++) {
 			final SimpleCalendarEvent sce = new SimpleCalendarEvent();
 			sce.setBeginDate(dataSDF.parse(evts[i][0]));
@@ -305,7 +371,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		// normally 0 ! Or we have a i.e. a toolBar on top of the listBox.
 		final int specialSize = 0;
 		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		final int maxListBoxHeight = height - specialSize - 103;
+		final int maxListBoxHeight = height - specialSize - 107;
 		// setCountRows((int) Math.round((maxListBoxHeight) / 17.7));
 		this.borderLayout_calendar.setHeight(String.valueOf(maxListBoxHeight) + "px");
 

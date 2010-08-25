@@ -128,18 +128,16 @@ public class DocumentationCtrl extends GFCBaseCtrl implements Serializable {
 	public void onLoadDocument() {
 
 		try {
-			media = new AMedia("zksample2-doc.pdf", "pdf", "application/pdf", new java.net.URL("http://ncu.dl.sourceforge.net/project/zksample2/Documentation/zksample2-doc.pdf"), null);
+			// media = new AMedia("zksample2-doc.pdf", "pdf", "application/pdf",
+			// new
+			// java.net.URL("http://ncu.dl.sourceforge.net/project/zksample2/Documentation/zksample2-doc.pdf"),
+			// null);
+			//
+			// if (media != null) {
+			// iFrameDocumentation.setContent(media);
+			// }
+			iFrameDocumentation.setSrc("http://ncu.dl.sourceforge.net/project/zksample2/Documentation/zksample2-doc.pdf");
 
-			if (media != null) {
-				iFrameDocumentation.setContent(media);
-			}
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			Clients.clearBusy(); // close the message
 		}
@@ -166,13 +164,13 @@ public class DocumentationCtrl extends GFCBaseCtrl implements Serializable {
 
 		borderLayout_documentation.invalidate();
 
-		if (iFrameDocumentation.getContent() != null) {
-			iFrameDocumentation.setContent(null);
-			iFrameDocumentation.setWidth("100%");
-			iFrameDocumentation.setHeight("100%");
-			this.iFrameDocumentation.invalidate();
-			iFrameDocumentation.setContent(media);
-		}
+		// if (iFrameDocumentation.getContent() != null) {
+		// iFrameDocumentation.setContent(null);
+		// iFrameDocumentation.setWidth("100%");
+		// iFrameDocumentation.setHeight("100%");
+		// this.iFrameDocumentation.invalidate();
+		// iFrameDocumentation.setContent(media);
+		// }
 	}
 
 }

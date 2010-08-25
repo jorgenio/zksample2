@@ -13,8 +13,10 @@
 	{
 		lf = "\n";
 		s = "";
-		s = s + "- 18.07.2010 / Added a new report for printing an Order with it's positions. Shows how to add a grandTotal sum. " + lf;
-		s = s + "- 11.07.2010 / Added new reports for printing: User-List / Security: Rights-List; Group-List; Roles-List. Some of these " + lf;
+		s = s + "- 25.08.2010 / Updated the doc for the StatusBarController and begin with DynamicJasper. Some code refactorings. " + lf;
+		s = s + "- 23.08.2010 / Begin of implementing the ZK Calendar component. " + lf;
+		s = s + "- 18.08.2010 / Added a new report for printing an Order with it's positions. Shows how to add a grandTotal sum. " + lf;
+		s = s + "- 11.08.2010 / Added new reports for printing: User-List / Security: Rights-List; Group-List; Roles-List. Some of these " + lf;
 		s = s + "                      report uses the DynamicReportBuilder from DynamicJasper wich allows more control over the report. " + lf;
 		s = s + "                      Additionally we shows in it how to use a CustomExpression. " + lf;
 		s = s + "- 10.07.2010 / Added two more reports ( OfficeList and BranchesList ), every report needs only 10 min. for coding. " + lf;

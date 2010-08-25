@@ -112,6 +112,11 @@
 		parent="basisCtrl" scope="prototype">
 	</bean>
 
+	<!-- Documentation / Dokumentation -->
+	<bean id="documentationCtrl" class="de.forsthaus.webui.documentation.DocumentationCtrl"
+		parent="basisCtrl" scope="prototype">
+	</bean>
+
 	<!-- Offices / Filialstammdaten -->
 	<bean id="officeMainCtrl" class="de.forsthaus.webui.office.OfficeMainCtrl"
 		parent="basisCtrl" scope="prototype">
@@ -299,6 +304,11 @@
 		scope="prototype">
 	</bean>
 
+
+	<!-- ReportStyles -->
+	<bean id="djReportStyles" class="de.forsthaus.webui.reports.template.DJReportStyles"
+		scope="prototype">
+	</bean>
 
 	<!--
 		<bean id="bBruhnsTestBean"

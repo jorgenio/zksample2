@@ -10,6 +10,9 @@
 	<!-- Calendar -->
 	<menuItem id="menu_Item_Calendar" zulNavigation="/WEB-INF/pages/calendar/calendar1.zul"
 		iconName="/images/icons/daysort16x16.gif" />
+	<!-- Calendar -->
+	<menuItem id="menu_Item_Documentation" zulNavigation="/WEB-INF/pages/documentation/documentation.zul"
+		iconName="/images/icons/icon-pdf_16x16.png" />
 
 	<!--
 		<menuItem id="menu_Item_Chat"

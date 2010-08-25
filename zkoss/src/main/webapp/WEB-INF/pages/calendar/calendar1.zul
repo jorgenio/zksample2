@@ -2,7 +2,10 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 
-<?taglib uri="http://www.zkoss.org/zkspring/security" prefix="sec"?>
+
+<!-- 
+	<?taglib uri="http://www.zkoss.org/zkspring/security" prefix="sec"?>
+-->
 
 <zk xmlns="http://www.zkoss.org/2005/zul"
 	xmlns:h="http://www.w3.org/1999/xhtml"
@@ -12,11 +15,9 @@
 
 	<style src="/css/zul/calendar.css" />
 
-	<!-- 
-		<window id="windowCalendar" apply="${calendarCtrl}" border="none"
+
+	<window id="windowCalendar" apply="${calendarCtrl}" border="none"
 		width="100%">
-	-->
-	<window id="windowCalendar" border="none" width="100%">
 
 		<div sclass="z-toolbar" style="padding:0">
 			<hbox pack="stretch" sclass="hboxRemoveWhiteStrips"
@@ -58,6 +59,9 @@
 						<button id="btn_ShowWeek" height="24px"
 							label="${c:l('common.Week')}"
 							tooltiptext="${c:l('common.Week.View')}" />
+						<button id="btn_Show2Weeks" height="24px"
+							label="${c:l('common.Week.2')}"
+							tooltiptext="${c:l('common.Week.2.View')}" />
 						<button id="btn_ShowMonth" height="24px"
 							label="${c:l('common.Month')}"
 							tooltiptext="${c:l('common.Month.View')}" />
@@ -83,10 +87,7 @@
 			<center border="none" flex="true">
 				<div id="divCenter" height="100%" width="100%">
 
-					<!-- 
-						<calendars id="cal" model="${cm}" mold="default"
-						firstDayOfWeek="Sunday" timeZone="Taiwan=GMT+8,Germany=GMT+1" />
-					-->
+					<calendars id="cal" model="${cm}" />
 
 				</div>
 			</center>

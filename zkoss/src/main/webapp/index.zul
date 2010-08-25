@@ -42,9 +42,10 @@
 					style="background-color: #EBEBEB; padding-top: 10px; padding-left: 10px">
 					<div width="600px" align="left"
 						style="background-color: #EBEBEB; padding: 10px">
-
+						
 						<label width="350px" style="font-size: 16px"
 							value="ZKoss sample application.  ( NEW!!! Updated to ZK 5.0.3 )" />
+
 						<separator />
 						<separator />
 
@@ -52,6 +53,9 @@
 							<button id="btn_zkoss" style="border: 0px"
 								image="/images/zkpowered_60x60.png" href="http://www.zkoss.org"
 								target="_blank" tooltiptext="Go to the zk framework site" />
+							<button style="border: 0px" width="88" height="31" 
+								image="http://sourceforge.net/sflogo.php?group_id=297404" href="http://zksample2.sourceforge.net/"
+								target="_blank"/>
 							<separator width="30px" />
 						</hbox>
 					</div>

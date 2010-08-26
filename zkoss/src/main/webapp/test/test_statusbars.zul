@@ -1,0 +1,65 @@
+<zk>
+	<borderlayout>
+
+		<south id="south" border="none" height="22px" flex="true"
+			splittable="false">
+
+			<div id="divSouth" style="padding:0" width="100%">
+				<hbox width="100%">
+
+
+					<!-- The MessageBar. Comps are created in the Controller -->
+					<window id="winMessageBar" apply="${messageBarCtrl}"
+						border="none" width="50px" height="22px">
+						<grid>
+							<columns>
+								<column
+									image="/images/icons/message2_16x16.gif" />
+								<column
+									image="/images/icons/message2_16x16.gif" />
+							</columns>
+						</grid>
+					</window>
+
+
+					<!-- The StatusBar. Comps are created in the Controller -->
+					<window id="winStatusBar" apply="${statusBarCtrl}"
+						border="none" width="100%" height="22px">
+
+						<columnlayout width="100%">
+							<columnchildren width="50%">
+								<panel border="none">
+									<panelchildren>
+										<label value="tewfzffzwf" />
+									</panelchildren>
+								</panel>
+							</columnchildren>
+
+							<columnchildren width="35%">
+								<panel border="none">
+									<panelchildren>
+										<label value="tewfzffzwf" />
+									</panelchildren>
+								</panel>
+							</columnchildren>
+
+							<columnchildren width="15%">
+								<panel border="none">
+									<panelchildren>
+										<label value="tewfzffzwf" />
+									</panelchildren>
+								</panel>
+							</columnchildren>
+
+						</columnlayout>
+
+					</window>
+
+
+				</hbox>
+
+			</div>
+
+		</south>
+	</borderlayout>
+</zk>

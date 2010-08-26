@@ -27,9 +27,14 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.EventQueues;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zkex.zul.Columnchildren;
+import org.zkoss.zkex.zul.Columnlayout;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
 import org.zkoss.zul.Grid;
+import org.zkoss.zul.Label;
+import org.zkoss.zul.Panel;
+import org.zkoss.zul.Panelchildren;
 import org.zkoss.zul.Window;
 
 /**
@@ -62,8 +67,7 @@ import org.zkoss.zul.Window;
  * call in java to actualize a columns label:
  * 
  * <pre>
- * EventQueues.lookup(&quot;userNameEventQueue&quot;, EventQueues.DESKTOP, true).publish(
- * 		new Event(&quot;onChangeSelectedObject&quot;, null, &quot;new Value&quot;));
+ * EventQueues.lookup(&quot;userNameEventQueue&quot;, EventQueues.DESKTOP, true).publish(new Event(&quot;onChangeSelectedObject&quot;, null, &quot;new Value&quot;));
  * </pre>
  * 
  * Spring bean declaration:
@@ -95,9 +99,13 @@ public class StatusBarCtrl extends GenericForwardComposer implements Serializabl
 	protected Window winStatusBar; // autowired
 
 	// Used Columns
-	private Column statusBarSelectedObject;
-	private Column statusBarAppVersion;
-	private Column statusBarTableSchema;
+	// private Column statusBarSelectedObject;
+	// private Column statusBarAppVersion;
+	// private Column statusBarTableSchema;
+
+	private Label statusBarSelectedObject;
+	private Label statusBarAppVersion;
+	private Label statusBarTableSchema;
 
 	// Localized labels for the columns
 	private final String _labelSelectedObject = Labels.getLabel("common.SelectedSign") + " ";
@@ -120,7 +128,7 @@ public class StatusBarCtrl extends GenericForwardComposer implements Serializabl
 			@Override
 			public void onEvent(Event event) throws Exception {
 				final String msg = (String) event.getData();
-				StatusBarCtrl.this.statusBarSelectedObject.setLabel(StatusBarCtrl.this._labelSelectedObject + msg);
+				StatusBarCtrl.this.statusBarSelectedObject.setValue(StatusBarCtrl.this._labelSelectedObject + msg);
 			}
 		});
 
@@ -129,7 +137,7 @@ public class StatusBarCtrl extends GenericForwardComposer implements Serializabl
 			@Override
 			public void onEvent(Event event) throws Exception {
 				final String msg = (String) event.getData();
-				StatusBarCtrl.this.statusBarAppVersion.setLabel(StatusBarCtrl.this._labelAppVersion + msg);
+				StatusBarCtrl.this.statusBarAppVersion.setValue(StatusBarCtrl.this._labelAppVersion + msg);
 			}
 		});
 
@@ -138,7 +146,7 @@ public class StatusBarCtrl extends GenericForwardComposer implements Serializabl
 			@Override
 			public void onEvent(Event event) throws Exception {
 				final String msg = (String) event.getData();
-				StatusBarCtrl.this.statusBarTableSchema.setLabel(StatusBarCtrl.this._labelTableSchema + msg);
+				StatusBarCtrl.this.statusBarTableSchema.setValue(StatusBarCtrl.this._labelTableSchema + msg);
 			}
 		});
 
@@ -151,32 +159,83 @@ public class StatusBarCtrl extends GenericForwardComposer implements Serializabl
 	 */
 	public void onCreate$winStatusBar(Event event) {
 
-		final Grid grid = new Grid();
-		grid.setHeight("100%");
-		grid.setWidth("100%");
-		grid.setParent(this.winStatusBar);
+		Columnlayout collt = new Columnlayout();
+		collt.setWidth("100%");
+		collt.setHflex("min");
+		collt.setParent(this.winStatusBar);
 
-		final Columns columns = new Columns();
-		columns.setSizable(false);
-		columns.setParent(grid);
+		Columnchildren col1 = new Columnchildren();
+		col1.setWidth("50%");
+		col1.setParent(collt);
+		Panel panel1 = new Panel();
+		panel1.setBorder("none");
+		panel1.setParent(col1);
+		Panelchildren pc1 = new Panelchildren();
+		pc1.setParent(panel1);
 
-		this.statusBarSelectedObject = new Column();
-		this.statusBarSelectedObject.setLabel(this._labelSelectedObject);
-		this.statusBarSelectedObject.setWidth("50%");
+		Columnchildren col2 = new Columnchildren();
+		col2.setWidth("35%");
+		col2.setParent(collt);
+		Panel panel2 = new Panel();
+		panel2.setBorder("none");
+		panel2.setParent(col2);
+		Panelchildren pc2 = new Panelchildren();
+		pc2.setParent(panel2);
+
+		Columnchildren col3 = new Columnchildren();
+		col3.setWidth("15%");
+		col3.setParent(collt);
+		Panel panel3 = new Panel();
+		panel3.setBorder("none");
+		panel3.setParent(col3);
+		Panelchildren pc3 = new Panelchildren();
+		pc3.setParent(panel3);
+
+		this.statusBarSelectedObject = new Label();
+		this.statusBarSelectedObject.setValue(this._labelSelectedObject);
+		// this.statusBarSelectedObject.setWidth("50%");
 		this.statusBarSelectedObject.setStyle("background-color: #D6DCDE; color: blue;");
-		this.statusBarSelectedObject.setParent(columns);
+		this.statusBarSelectedObject.setParent(pc1);
 
-		this.statusBarAppVersion = new Column();
-		this.statusBarAppVersion.setLabel(this._labelAppVersion);
-		this.statusBarAppVersion.setWidth("35%");
-		this.statusBarAppVersion.setStyle("background-color: #D6DCDE; color: #FF0000;");
-		this.statusBarAppVersion.setParent(columns);
+		this.statusBarAppVersion = new Label();
+		this.statusBarAppVersion.setValue(this._labelAppVersion);
+		// this.statusBarSelectedObject.setWidth("35%");
+		this.statusBarAppVersion.setStyle("background-color: #D6DCDE; color: blue;");
+		this.statusBarAppVersion.setParent(pc2);
 
-		this.statusBarTableSchema = new Column();
-		this.statusBarTableSchema.setLabel(this._labelTableSchema);
-		this.statusBarTableSchema.setWidth("15%");
+		this.statusBarTableSchema = new Label();
+		this.statusBarTableSchema.setValue(this._labelTableSchema);
+		// this.statusBarSelectedObject.setWidth("15%");
 		this.statusBarTableSchema.setStyle("background-color: #D6DCDE; color: blue;");
-		this.statusBarTableSchema.setParent(columns);
+		this.statusBarTableSchema.setParent(pc3);
+
+		// final Grid grid = new Grid();
+		// grid.setHeight("100%");
+		// // grid.setWidth("100%");
+		// grid.setWidth("500px");
+		// grid.setParent(this.winStatusBar);
+
+		// final Columns columns = new Columns();
+		// columns.setSizable(false);
+		// columns.setParent(collt);
+
+		// this.statusBarSelectedObject = new Column();
+		// this.statusBarSelectedObject.setLabel(this._labelSelectedObject);
+		// this.statusBarSelectedObject.setWidth("50%");
+		// this.statusBarSelectedObject.setStyle("background-color: #D6DCDE; color: blue;");
+		// this.statusBarSelectedObject.setParent(columns);
+		//
+		// this.statusBarAppVersion = new Column();
+		// this.statusBarAppVersion.setLabel(this._labelAppVersion);
+		// this.statusBarAppVersion.setWidth("35%");
+		// this.statusBarAppVersion.setStyle("background-color: #D6DCDE; color: #FF0000;");
+		// this.statusBarAppVersion.setParent(columns);
+		//
+		// this.statusBarTableSchema = new Column();
+		// this.statusBarTableSchema.setLabel(this._labelTableSchema);
+		// this.statusBarTableSchema.setWidth("15%");
+		// this.statusBarTableSchema.setStyle("background-color: #D6DCDE; color: blue;");
+		// this.statusBarTableSchema.setParent(columns);
 
 	}
 }

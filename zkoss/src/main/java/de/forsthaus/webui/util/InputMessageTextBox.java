@@ -80,7 +80,7 @@ public class InputMessageTextBox extends Window {
 	private void createBox() {
 
 		setWidth("350px");
-		setHeight("70px");
+		setHeight("150px");
 		setTitle(Labels.getLabel("message.Information.PleaseInsertText"));
 		setId("confBox");
 		setVisible(true);
@@ -104,6 +104,9 @@ public class InputMessageTextBox extends Window {
 		sp.setParent(this);
 
 		textbox.setWidth("98%");
+		textbox.setHeight("100%");
+		textbox.setMultiline(true);
+		textbox.setRows(5);
 		// textbox.setParent(hbox);
 		textbox.setParent(this);
 

@@ -291,8 +291,12 @@
 		p:pagedListService-ref="pagedListService" scope="prototype">
 	</bean>
 
+	<!-- MessageBarController -->
+	<bean id="messageBarCtrl" class="de.forsthaus.webui.util.MessageBarCtrl"
+		scope="prototype">
+	</bean>
 	<!-- StatusBarController -->
-	<bean id="statusBarCtrl" class="de.forsthaus.webui.util.StatusBarExtendedCtrl"
+	<bean id="statusBarCtrl" class="de.forsthaus.webui.util.StatusBarCtrl"
 		scope="prototype">
 	</bean>
 	<!-- UserBarController -->

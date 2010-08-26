@@ -9,23 +9,25 @@ import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.EventQueues;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Grid;
+import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Toolbarbutton;
 import org.zkoss.zul.Window;
 
 /**
  * =======================================================================<br>
- * Extended StatusBarController. <br>
+ * MessageBarController. <br>
  * =======================================================================<br>
  * Works with the EventQueues mechanism of zk 5.x. ALl needed components are
  * created in this class. In the zul-template declare only this controller with
- * 'apply' to a winStatusBar window component.<br>
- * This extended StatusBarController have an messaging system inside.
- * Declaration in the zul-file:<br>
+ * 'apply' to a winMessageBar window component.<br>
+ * This MessageBarController have an messaging system inside. Declaration in the
+ * zul-file:<br>
  * 
  * <pre>
  * < borderlayout >
@@ -35,19 +37,15 @@ import org.zkoss.zul.Window;
  * 		height="20px" splittable="false" flex="true" >
  * 	      < div id="divSouth" >
  * 
+ *          < !-- The MessageBar. Comps are created in the Controller -- >
+ *          < window id="winMessageBar" apply="${messageBarCtrl}"
+ *                   border="none" width="100%" height="100%" />
  *          < !-- The StatusBar. Comps are created in the Controller -- >
  *          < window id="winStatusBar" apply="${statusBarCtrl}"
  *                   border="none" width="100%" height="100%" />
- * 
  *        < /div >
  *    < /south >
  *  < /borderlayout >
- * </pre>
- * 
- * call in java to actualize a columns label:
- * 
- * <pre>
- * EventQueues.lookup(&quot;userNameEventQueue&quot;, EventQueues.DESKTOP, true).publish(new Event(&quot;onChangeSelectedObject&quot;, null, &quot;new Value&quot;));
  * </pre>
  * 
  * call for the message system:
@@ -60,8 +58,8 @@ import org.zkoss.zul.Window;
  * Spring bean declaration:
  * 
  * <pre>
- * < !-- StatusBarExtendedCtrl -->
- * < bean id="statusBarCtrl" class="de.forsthaus.webui.util.StatusBarExtendedCtrl"
+ * < !-- MessageBarCtrl -->
+ * < bean id="messageBarCtrl" class="de.forsthaus.webui.util.MessageBarCtrl"
  *    scope="prototype">
  * < /bean>
  * </pre>
@@ -71,7 +69,7 @@ import org.zkoss.zul.Window;
  * @author sgerth
  * 
  */
-public class StatusBarExtendedCtrl extends GenericForwardComposer implements Serializable {
+public class MessageBarCtrl extends GenericForwardComposer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private final static Logger logger = Logger.getLogger(StatusBarCtrl.class);
@@ -83,27 +81,20 @@ public class StatusBarExtendedCtrl extends GenericForwardComposer implements Ser
 	 * 'extends GFCBaseCtrl' GenericForwardComposer.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	protected Window winStatusBar; // autowired
+	protected Window winMessageBar; // autowired
 
 	// Indicator column for message buttons
 	private Column statusBarMessageIndicator;
 	private Toolbarbutton btnOpenMsg;
 	private Toolbarbutton btnSendMsg;
 
-	// Used Columns
-	private Column statusBarSelectedObject;
-	private Column statusBarAppVersion;
-	private Column statusBarTableSchema;
-
-	// Localized labels for the columns
-	private final String _labelSelectedObject = Labels.getLabel("common.SelectedSign") + " ";
-	private final String _labelAppVersion = "";
-	private final String _labelTableSchema = Labels.getLabel("common.TableSchema") + ": ";
+	private Window msgWindow = null;
+	private String msg = "";
 
 	/**
 	 * Default constructor.
 	 */
-	public StatusBarExtendedCtrl() {
+	public MessageBarCtrl() {
 		super();
 	}
 
@@ -111,40 +102,18 @@ public class StatusBarExtendedCtrl extends GenericForwardComposer implements Ser
 	public void doAfterCompose(Component window) throws Exception {
 		super.doAfterCompose(window);
 
-		// Listener for selected Record
-		EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).subscribe(new EventListener() {
-			@Override
-			public void onEvent(Event event) throws Exception {
-				final String msg = (String) event.getData();
-				StatusBarExtendedCtrl.this.statusBarSelectedObject.setLabel(StatusBarExtendedCtrl.this._labelSelectedObject + msg);
-			}
-		});
-
-		// Listener for applicationVersion
-		EventQueues.lookup("appVersionEventQueue", EventQueues.DESKTOP, true).subscribe(new EventListener() {
-			@Override
-			public void onEvent(Event event) throws Exception {
-				final String msg = (String) event.getData();
-				StatusBarExtendedCtrl.this.statusBarAppVersion.setLabel(StatusBarExtendedCtrl.this._labelAppVersion + msg);
-			}
-		});
-
-		// Listener for TableSchemaName
-		EventQueues.lookup("tableSchemaEventQueue", EventQueues.DESKTOP, true).subscribe(new EventListener() {
-			@Override
-			public void onEvent(Event event) throws Exception {
-				final String msg = (String) event.getData();
-				StatusBarExtendedCtrl.this.statusBarTableSchema.setLabel(StatusBarExtendedCtrl.this._labelTableSchema + msg);
-			}
-		});
-
 		// Listener for incoming messages ( scope=APPLICATION )
 		EventQueues.lookup("testEventQueue", EventQueues.APPLICATION, true).subscribe(new EventListener() {
 			@Override
 			public void onEvent(Event event) throws Exception {
 				final String msg = (String) event.getData();
-				StatusBarExtendedCtrl.this.statusBarSelectedObject.setLabel(StatusBarExtendedCtrl.this._labelSelectedObject + msg);
-				StatusBarExtendedCtrl.this.btnOpenMsg.setImage("/images/icons/incoming_message1_16x16.gif");
+
+				setMsg(msg);
+				if (msgWindow == null) {
+					MessageBarCtrl.this.btnOpenMsg.setImage("/images/icons/incoming_message1_16x16.gif");
+				} else {
+					((Textbox) getMsgWindow().getFellow("tb")).setValue(getMsg());
+				}
 			}
 		});
 
@@ -155,12 +124,12 @@ public class StatusBarExtendedCtrl extends GenericForwardComposer implements Ser
 	 * 
 	 * @param event
 	 */
-	public void onCreate$winStatusBar(Event event) {
+	public void onCreate$winMessageBar(Event event) {
 
 		final Grid grid = new Grid();
 		grid.setHeight("100%");
-		grid.setWidth("100%");
-		grid.setParent(this.winStatusBar);
+		grid.setWidth("50px");
+		grid.setParent(this.winMessageBar);
 
 		final Columns columns = new Columns();
 		columns.setSizable(false);
@@ -186,19 +155,16 @@ public class StatusBarExtendedCtrl extends GenericForwardComposer implements Ser
 
 			@Override
 			public void onEvent(Event event) throws Exception {
-				// 1. Reset the image
+				// 1. Reset to normal image
 				btnOpenMsg.setImage("/images/icons/message2_16x16.gif");
 				// 2. open the message window
-				Window windowMsg = new Window();
-				windowMsg.setTitle("Messages");
-				windowMsg.setSizable(true);
-				windowMsg.setClosable(true);
-				windowMsg.setWidth("400px");
-				windowMsg.setHeight("250px");
-				windowMsg.setParent(winStatusBar);
-				windowMsg.setPosition("bottom, left");
-				// windowMsg.doPopup();
-				windowMsg.doOverlapped();
+				Window win = getMsgWindow();
+				System.out.println(win.getClass().toString() + " / " + win.getId());
+				Component comp = win.getFellow("tb");
+				System.out.println(comp.getClass().toString() + " / " + comp.getId());
+				Textbox t = (Textbox) comp;
+				t.setValue(getMsg());
+				Clients.scrollIntoView(t);
 
 			}
 		});
@@ -221,24 +187,56 @@ public class StatusBarExtendedCtrl extends GenericForwardComposer implements Ser
 			}
 		});
 
-		this.statusBarSelectedObject = new Column();
-		this.statusBarSelectedObject.setLabel(this._labelSelectedObject);
-		this.statusBarSelectedObject.setWidth("50%");
-		this.statusBarSelectedObject.setStyle("background-color: #D6DCDE; color: blue;");
-		this.statusBarSelectedObject.setParent(columns);
-
-		this.statusBarAppVersion = new Column();
-		this.statusBarAppVersion.setLabel(this._labelAppVersion);
-		this.statusBarAppVersion.setWidth("35%");
-		this.statusBarAppVersion.setStyle("background-color: #D6DCDE; color: #FF0000;");
-		this.statusBarAppVersion.setParent(columns);
-
-		this.statusBarTableSchema = new Column();
-		this.statusBarTableSchema.setLabel(this._labelTableSchema);
-		this.statusBarTableSchema.setWidth("15%");
-		this.statusBarTableSchema.setStyle("background-color: #D6DCDE; color: blue;");
-		this.statusBarTableSchema.setParent(columns);
-
 	}
 
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
+	public void setMsg(String msg) {
+		this.msg = this.msg + "\n" + msg + "\n--------------------------------------------------";
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsgWindow(Window msgWindow) {
+		this.msgWindow = msgWindow;
+	}
+
+	public Window getMsgWindow() {
+
+		if (msgWindow == null) {
+			msgWindow = new Window();
+			msgWindow.setId("msgWindow");
+			msgWindow.setTitle("Messages");
+			msgWindow.setSizable(true);
+			msgWindow.setClosable(true);
+			msgWindow.setWidth("400px");
+			msgWindow.setHeight("250px");
+			msgWindow.setParent(winMessageBar);
+			msgWindow.addEventListener("onClose", new EventListener() {
+
+				@Override
+				public void onEvent(Event event) throws Exception {
+					msgWindow.detach();
+					msgWindow = null;
+				}
+			});
+			msgWindow.setPosition("bottom, left");
+			Textbox tb = new Textbox();
+			tb.setId("tb");
+			tb.setMultiline(true);
+			tb.setRows(10);
+			tb.setHeight("100%");
+			tb.setWidth("100%");
+			tb.setParent(msgWindow);
+
+			msgWindow.doOverlapped();
+
+		}
+
+		return msgWindow;
+	}
 }

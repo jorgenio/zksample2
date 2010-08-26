@@ -21,9 +21,9 @@ import org.zkoss.zul.Window;
  * =======================================================================<br>
  * Extended StatusBarController. <br>
  * =======================================================================<br>
- * Works with the EventQueues mechanism of zk. ALl needed components are created
- * in this class. In the zul-template declare only this controller with 'apply'
- * to a winStatusBar window component.<br>
+ * Works with the EventQueues mechanism of zk 5.x. ALl needed components are
+ * created in this class. In the zul-template declare only this controller with
+ * 'apply' to a winStatusBar window component.<br>
  * This extended StatusBarController have an messaging system inside.
  * Declaration in the zul-file:<br>
  * 
@@ -49,6 +49,13 @@ import org.zkoss.zul.Window;
  * <pre>
  * EventQueues.lookup(&quot;userNameEventQueue&quot;, EventQueues.DESKTOP, true).publish(new Event(&quot;onChangeSelectedObject&quot;, null, &quot;new Value&quot;));
  * </pre>
+ * 
+ * call for the message system:
+ * 
+ * <pre>
+ * EventQueues.lookup(&quot;userNameEventQueue&quot;, EventQueues.APPLICATION, true).publish(new Event(&quot;onChangeSelectedObject&quot;, null, &quot;new Value&quot;));
+ * </pre>
+ * 
  * 
  * Spring bean declaration:
  * 
@@ -131,8 +138,7 @@ public class StatusBarExtendedCtrl extends GenericForwardComposer implements Ser
 			}
 		});
 
-		// test
-		// Listener for scope.APPLICATION wide
+		// Listener for incoming messages ( scope=APPLICATION )
 		EventQueues.lookup("testEventQueue", EventQueues.APPLICATION, true).subscribe(new EventListener() {
 			@Override
 			public void onEvent(Event event) throws Exception {

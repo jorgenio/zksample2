@@ -164,7 +164,7 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 				System.out.println(comp.getClass().toString() + " / " + comp.getId());
 				Textbox t = (Textbox) comp;
 				t.setValue(getMsg());
-				Clients.scrollIntoView(t);
+				// Clients.scrollIntoView(t);
 
 			}
 		});
@@ -224,7 +224,7 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 					msgWindow = null;
 				}
 			});
-			msgWindow.setPosition("bottom, left");
+			msgWindow.setPosition("bottom +25, left");
 			Textbox tb = new Textbox();
 			tb.setId("tb");
 			tb.setMultiline(true);

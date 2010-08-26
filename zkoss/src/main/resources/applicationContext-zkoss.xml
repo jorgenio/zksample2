@@ -292,7 +292,7 @@
 	</bean>
 
 	<!-- StatusBarController -->
-	<bean id="statusBarCtrl" class="de.forsthaus.webui.util.StatusBarCtrl"
+	<bean id="statusBarCtrl" class="de.forsthaus.webui.util.StatusBarExtendedCtrl"
 		scope="prototype">
 	</bean>
 	<!-- UserBarController -->

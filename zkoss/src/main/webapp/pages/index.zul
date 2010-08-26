@@ -144,7 +144,7 @@
 
 			<!-- STATUS BAR AREA -->
 			<south id="south" border="none" margins="1,0,0,0"
-				height="20px" splittable="false" flex="true">
+				height="22px" splittable="false">
 				<div id="divSouth">
 
 					<!-- The StatusBar. Comps are created in the Controller -->

@@ -22,6 +22,8 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 
+import javax.security.auth.callback.ConfirmationCallback;
+
 import org.apache.log4j.Logger;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
@@ -30,6 +32,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.event.EventQueues;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Center;
@@ -37,6 +40,7 @@ import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Hbox;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Menubar;
 import org.zkoss.zul.Menuitem;
 import org.zkoss.zul.Messagebox;
@@ -55,6 +59,8 @@ import org.zkoss.zul.Window;
 
 import de.forsthaus.common.menu.dropdown.ZkossDropDownMenuFactory;
 import de.forsthaus.common.menu.tree.ZkossTreeMenuFactory;
+import de.forsthaus.webui.util.InputConfirmBox;
+import de.forsthaus.webui.util.InputMessageTextBox;
 import de.forsthaus.webui.util.WindowBaseCtrl;
 
 /**
@@ -126,7 +132,6 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		toolbarbutton = new Toolbarbutton();
 		hbox.appendChild(toolbarbutton);
 		toolbarbutton.setId("btnMainMenuCollapseAll");
-
 		toolbarbutton.setImage("/images/icons/folder_closed2_16x16.gif");
 		toolbarbutton.setTooltiptext(Labels.getLabel("btnFolderCollapse.tooltiptext"));
 		toolbarbutton.addEventListener("onClick", new EventListener() {
@@ -153,7 +158,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		// toolbarbutton = new Toolbarbutton();
 		// hbox.appendChild(toolbarbutton);
 		// toolbarbutton.setId("btnMainMenuDocumentation");
-		//
+		//		
 		// toolbarbutton.setImage("/images/icons/icon-pdf_16x16.png");
 		// toolbarbutton.setTooltiptext(Labels.getLabel("btnMainMenuDocumentation.tooltiptext"));
 		// toolbarbutton.addEventListener("onClick", new EventListener() {
@@ -164,7 +169,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		// //
 		// Executions.getCurrent().sendRedirect("http://sunet.dl.sourceforge.net/project/zksample2/Documentation/zksample2-doc.pdf",
 		// // "_blank");
-		//
+		//		
 		// final String url1 =
 		// "http://sunet.dl.sourceforge.net/project/zksample2/Documentation/zksample2-doc.pdf";
 		// Clients.evalJavaScript("window.open('" + url1
@@ -261,8 +266,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 				/* get an instance of the searched CENTER layout area */
 				final Center center = bl.getCenter();
 				// get the tabs component
-				final Tabs tabs = (Tabs) center.getFellow("divCenter").getFellow("tabBoxIndexCenter")
-						.getFellow("tabsIndexCenter");
+				final Tabs tabs = (Tabs) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter");
 
 				/**
 				 * Check if the tab is already opened than select them and<br>
@@ -287,9 +291,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 
 					tab.setParent(tabs);
 
-					final Tabpanels tabpanels = (Tabpanels) center.getFellow("divCenter")
-							.getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter")
-							.getFellow("tabpanelsBoxIndexCenter");
+					final Tabpanels tabpanels = (Tabpanels) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter").getFellow("tabpanelsBoxIndexCenter");
 					final Tabpanel tabpanel = new Tabpanel();
 					tabpanel.setHeight("100%");
 					tabpanel.setStyle("padding: 0px;");

@@ -1,8 +1,11 @@
 package de.forsthaus.webui.util;
 
 import java.io.Serializable;
+import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
@@ -108,8 +111,21 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 			public void onEvent(Event event) throws Exception {
 				final String msg = (String) event.getData();
 
+				if (StringUtils.isEmpty(msg)) {
+					return;
+				}
+
 				setMsg(msg);
+
 				if (msgWindow == null) {
+
+					/**
+					 * If you whish to popup the incoming message than uncomment
+					 * these lines.
+					 */
+					// getMsgWindow();
+					// ((Textbox)
+					// getMsgWindow().getFellow("tb")).setValue(getMsg());
 					MessageBarCtrl.this.btnOpenMsg.setImage("/images/icons/incoming_message1_16x16.gif");
 				} else {
 					((Textbox) getMsgWindow().getFellow("tb")).setValue(getMsg());
@@ -159,11 +175,8 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 				btnOpenMsg.setImage("/images/icons/message2_16x16.gif");
 				// 2. open the message window
 				Window win = getMsgWindow();
-				System.out.println(win.getClass().toString() + " / " + win.getId());
-				Component comp = win.getFellow("tb");
-				System.out.println(comp.getClass().toString() + " / " + comp.getId());
-				Textbox t = (Textbox) comp;
-				t.setValue(getMsg());
+				Textbox t = (Textbox) win.getFellow("tb");
+				t.setText(getMsg());
 				// Clients.scrollIntoView(t);
 
 			}
@@ -194,7 +207,11 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	public void setMsg(String msg) {
-		this.msg = this.msg + "\n" + msg + "\n--------------------------------------------------";
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		this.msg = this.msg + ZksampleDateFormat.getDateTimeLongFormater().format(new Date()) + " / "+Labels.getLabel("common.Message.From") +" " + userName + ":";
+
+		this.msg = this.msg + "\n" + msg;
+		this.msg = this.msg + "\n" + "_______________________________________________________";
 	}
 
 	public String getMsg() {
@@ -224,13 +241,14 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 					msgWindow = null;
 				}
 			});
-			msgWindow.setPosition("bottom +25, left");
+			msgWindow.setPosition("bottom, left");
 			Textbox tb = new Textbox();
 			tb.setId("tb");
 			tb.setMultiline(true);
 			tb.setRows(10);
+			tb.setReadonly(true);
 			tb.setHeight("100%");
-			tb.setWidth("100%");
+			tb.setWidth("98%");
 			tb.setParent(msgWindow);
 
 			msgWindow.doOverlapped();

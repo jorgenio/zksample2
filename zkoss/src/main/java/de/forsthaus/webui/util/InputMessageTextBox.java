@@ -24,6 +24,9 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Separator;
@@ -46,6 +49,7 @@ public class InputMessageTextBox extends Window {
 	private static final Logger logger = Logger.getLogger(InputMessageTextBox.class);
 
 	private final Textbox textbox;
+	private String msg;
 
 	/**
 	 * The Call method.
@@ -57,7 +61,8 @@ public class InputMessageTextBox extends Window {
 	 * @return String from the input textbox.
 	 */
 	public static String show(Component parent) {
-		return new InputMessageTextBox(parent).textbox.getText();
+		// return new InputMessageTextBox(parent).textbox.getText();
+		return new InputMessageTextBox(parent).getMsg();
 	}
 
 	/**
@@ -80,25 +85,19 @@ public class InputMessageTextBox extends Window {
 	private void createBox() {
 
 		setWidth("350px");
-		setHeight("150px");
+		setHeight("142px");
 		setTitle(Labels.getLabel("message.Information.PleaseInsertText"));
 		setId("confBox");
 		setVisible(true);
 		setClosable(true);
 		addEventListener("onOK", new OnCloseListener());
 
-		// Vbox vbox = new Vbox();
-		// vbox.setParent(this);
-		//
-		// Separator sp = new Separator();
-		// sp.setBar(true);
-		// sp.setParent(vbox);
-		//
 		// Hbox hbox = new Hbox();
-		// hbox.setParent(vbox);
-		//
-		// Separator sep = new Separator();
-		// sep.setParent(hbox);
+		// hbox.setWidth("100%");
+		// hbox.setParent(this);
+		// Checkbox cb = new Checkbox();
+		// cb.setLabel(Labels.getLabel("common.All"));
+		// cb.setChecked(true);
 
 		Separator sp = new Separator();
 		sp.setParent(this);
@@ -109,6 +108,23 @@ public class InputMessageTextBox extends Window {
 		textbox.setRows(5);
 		// textbox.setParent(hbox);
 		textbox.setParent(this);
+
+		Separator sp2 = new Separator();
+		sp2.setBar(true);
+		sp2.setParent(this);
+
+		Button btnSend = new Button();
+		btnSend.setLabel(Labels.getLabel("common.Send"));
+		btnSend.setParent(this);
+		btnSend.addEventListener("onClick", new EventListener() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+				msg = textbox.getText();
+				System.out.println("sendButton pressed");
+				onClose();
+			}
+		});
 
 		try {
 			doModal();
@@ -124,6 +140,18 @@ public class InputMessageTextBox extends Window {
 		public void onEvent(Event event) throws Exception {
 			onClose();
 		}
+	}
+
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public String getMsg() {
+		return msg;
 	}
 
 }

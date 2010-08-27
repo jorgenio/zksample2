@@ -18,7 +18,10 @@
  */
 package de.forsthaus.webui.util;
 
+import java.util.Date;
+
 import org.apache.log4j.Logger;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.SuspendNotAllowedException;
@@ -33,6 +36,8 @@ import org.zkoss.zul.Separator;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
+
+import de.forsthaus.policy.model.UserImpl;
 
 /**
  * This class creates a modal window as a dialog in which the user <br>
@@ -50,6 +55,7 @@ public class InputMessageTextBox extends Window {
 
 	private final Textbox textbox;
 	private String msg;
+	private String userName;
 
 	/**
 	 * The Call method.
@@ -79,13 +85,19 @@ public class InputMessageTextBox extends Window {
 
 		setParent(parent);
 
+		try {
+			userName = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		createBox();
 	}
 
 	private void createBox() {
 
 		setWidth("350px");
-		setHeight("142px");
+		setHeight("150px");
 		setTitle(Labels.getLabel("message.Information.PleaseInsertText"));
 		setId("confBox");
 		setVisible(true);
@@ -103,7 +115,7 @@ public class InputMessageTextBox extends Window {
 		sp.setParent(this);
 
 		textbox.setWidth("98%");
-		textbox.setHeight("100%");
+		textbox.setHeight("80px");
 		textbox.setMultiline(true);
 		textbox.setRows(5);
 		// textbox.setParent(hbox);
@@ -120,8 +132,11 @@ public class InputMessageTextBox extends Window {
 
 			@Override
 			public void onEvent(Event event) throws Exception {
-				msg = textbox.getText();
-				System.out.println("sendButton pressed");
+
+				msg = msg + ZksampleDateFormat.getDateTimeLongFormater().format(new Date()) + " / " + Labels.getLabel("common.Message.From") + " " + userName + ":" + "\n";
+				msg = msg + textbox.getText();
+				msg = msg + "\n" + "_____________________________________________________" + "\n";
+
 				onClose();
 			}
 		});

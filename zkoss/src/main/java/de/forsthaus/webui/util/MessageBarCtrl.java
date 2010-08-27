@@ -3,17 +3,15 @@ package de.forsthaus.webui.util;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.zkoss.spring.security.config.ZkSecurityContextListener;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.EventQueues;
-import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
 import org.zkoss.zul.Div;
@@ -21,6 +19,8 @@ import org.zkoss.zul.Grid;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Toolbarbutton;
 import org.zkoss.zul.Window;
+
+import de.forsthaus.policy.model.UserImpl;
 
 /**
  * =======================================================================<br>
@@ -72,7 +72,7 @@ import org.zkoss.zul.Window;
  * @author sgerth
  * 
  */
-public class MessageBarCtrl extends GenericForwardComposer implements Serializable {
+public class MessageBarCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private final static Logger logger = Logger.getLogger(StatusBarCtrl.class);
@@ -93,6 +93,7 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 
 	private Window msgWindow = null;
 	private String msg = "";
+	private String userName;
 
 	/**
 	 * Default constructor.
@@ -105,15 +106,22 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 	public void doAfterCompose(Component window) throws Exception {
 		super.doAfterCompose(window);
 
+		try {
+			userName = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		// Listener for incoming messages ( scope=APPLICATION )
 		EventQueues.lookup("testEventQueue", EventQueues.APPLICATION, true).subscribe(new EventListener() {
+
 			@Override
 			public void onEvent(Event event) throws Exception {
 				final String msg = (String) event.getData();
 
-				if (StringUtils.isEmpty(msg)) {
-					return;
-				}
+				// if (StringUtils.isEmpty(msg)) {
+				// return;
+				// }
 
 				setMsg(msg);
 
@@ -207,11 +215,9 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	public void setMsg(String msg) {
-		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-		this.msg = this.msg + ZksampleDateFormat.getDateTimeLongFormater().format(new Date()) + " / "+Labels.getLabel("common.Message.From") +" " + userName + ":";
-
 		this.msg = this.msg + "\n" + msg;
-		this.msg = this.msg + "\n" + "_______________________________________________________";
+		// this.msg = this.msg + "\n" +
+		// "_____________________________________________________" + "\n";
 	}
 
 	public String getMsg() {

@@ -20,6 +20,7 @@ package de.forsthaus.webui.util;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.util.resource.Labels;
@@ -54,7 +55,7 @@ public class InputMessageTextBox extends Window {
 	private static final Logger logger = Logger.getLogger(InputMessageTextBox.class);
 
 	private final Textbox textbox;
-	private String msg;
+	private String msg = "";
 	private String userName;
 
 	/**
@@ -132,6 +133,12 @@ public class InputMessageTextBox extends Window {
 
 			@Override
 			public void onEvent(Event event) throws Exception {
+
+				// Check if empty, than do not send
+				if (StringUtils.isEmpty(StringUtils.trim(textbox.getText()))) {
+					onClose();
+					return;
+				}
 
 				msg = msg + ZksampleDateFormat.getDateTimeLongFormater().format(new Date()) + " / " + Labels.getLabel("common.Message.From") + " " + userName + ":" + "\n";
 				msg = msg + textbox.getText();

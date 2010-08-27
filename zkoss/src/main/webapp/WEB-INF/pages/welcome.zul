@@ -13,6 +13,8 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 27.08.2010 / Implemented a first simple messaging system. You can system wide send messages. Incoming messages " + lf;
+		s = s + "                      are visualized with a blinking icon in the left bottom corner. " + lf;
 		s = s + "- 25.08.2010 / Updated the doc for the StatusBarController and begin with DynamicJasper. Some code refactorings. " + lf;
 		s = s + "- 23.08.2010 / Begin of implementing the ZK Calendar component. " + lf;
 		s = s + "- 18.08.2010 / Added a new report for printing an Order with it's positions. Shows how to add a grandTotal sum. " + lf;

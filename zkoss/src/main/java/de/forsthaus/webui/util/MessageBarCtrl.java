@@ -3,6 +3,7 @@ package de.forsthaus.webui.util;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.spring.security.config.ZkSecurityContextListener;
@@ -119,9 +120,10 @@ public class MessageBarCtrl extends GFCBaseCtrl implements Serializable {
 			public void onEvent(Event event) throws Exception {
 				final String msg = (String) event.getData();
 
-				// if (StringUtils.isEmpty(msg)) {
-				// return;
-				// }
+				// Check if empty, than do not show incoming message
+				if (StringUtils.isEmpty(msg)) {
+					return;
+				}
 
 				setMsg(msg);
 

@@ -99,35 +99,28 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 		this.label_AppName.setValue(this.appName);
 
 		final Date date = new Date();
-		date.setDate(18);
+		date.setDate(27);
 		date.setMonth(7);
 		date.setYear(110);
 
 		final String zkVersion = doGetZkVersion();
-		final String appVersion = this.appName + " v5.0.324 / build: "
-				+ ZksampleDateFormat.getDateFormater().format(date);
+		final String appVersion = this.appName + " v5.0.325 / build: " + ZksampleDateFormat.getDateFormater().format(date);
 
-		final String userName = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-				.getUsername();
+		final String userName = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
 		final String version = zkVersion + " | " + appVersion;
 		final String tenantId = "4711";
 		final String officeID = "39";
 		final String tableSchemaName = "public";
 
-		EventQueues.lookup("userNameEventQueue", EventQueues.DESKTOP, true).publish(
-				new Event("onChangeUser", null, userName));
+		EventQueues.lookup("userNameEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeUser", null, userName));
 
-		EventQueues.lookup("tenantIdEventQueue", EventQueues.DESKTOP, true).publish(
-				new Event("onChangeTenant", null, tenantId));
+		EventQueues.lookup("tenantIdEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeTenant", null, tenantId));
 
-		EventQueues.lookup("officeIdEventQueue", EventQueues.DESKTOP, true).publish(
-				new Event("onChangeOfficeId", null, officeID));
+		EventQueues.lookup("officeIdEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeOfficeId", null, officeID));
 
-		EventQueues.lookup("appVersionEventQueue", EventQueues.DESKTOP, true).publish(
-				new Event("onChangeAppVersion", null, version));
+		EventQueues.lookup("appVersionEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeAppVersion", null, version));
 
-		EventQueues.lookup("tableSchemaEventQueue", EventQueues.DESKTOP, true).publish(
-				new Event("onChangeTableSchema", null, tableSchemaName));
+		EventQueues.lookup("tableSchemaEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeTableSchema", null, tableSchemaName));
 
 	}
 
@@ -142,8 +135,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClientInfo(ClientInfoEvent event) throws Exception {
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Current desktop height :" + event.getDesktopHeight() + "  - width  :"
-					+ event.getDesktopWidth());
+			logger.debug("Current desktop height :" + event.getDesktopHeight() + "  - width  :" + event.getDesktopWidth());
 		}
 
 		setCurrentDesktopHeight(event.getDesktopHeight() - this.centerAreaHeightOffset);
@@ -273,8 +265,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 				/* get an instance of the searched CENTER layout area */
 				final Center center = bl.getCenter();
 				// get the tabs component
-				final Tabs tabs = (Tabs) center.getFellow("divCenter").getFellow("tabBoxIndexCenter")
-						.getFellow("tabsIndexCenter");
+				final Tabs tabs = (Tabs) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter");
 
 				/**
 				 * Check if the tab is already opened than select them and<br>
@@ -299,9 +290,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 					tab.setParent(tabs);
 
-					final Tabpanels tabpanels = (Tabpanels) center.getFellow("divCenter")
-							.getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter")
-							.getFellow("tabpanelsBoxIndexCenter");
+					final Tabpanels tabpanels = (Tabpanels) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter").getFellow("tabpanelsBoxIndexCenter");
 					final Tabpanel tabpanel = new Tabpanel();
 					tabpanel.setHeight("100%");
 					tabpanel.setStyle("padding: 0px;");

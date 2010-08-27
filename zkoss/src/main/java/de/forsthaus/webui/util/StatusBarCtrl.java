@@ -30,6 +30,7 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
 import org.zkoss.zul.Grid;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Window;
 
 /**
@@ -152,8 +153,7 @@ public class StatusBarCtrl extends GenericForwardComposer implements Serializabl
 
 		final Grid grid = new Grid();
 		grid.setHeight("22px");
-		//grid.setWidth("100%");
-		grid.setStyle("padding :0px;");
+		grid.setStyle("padding: 0px;");
 		grid.setParent(this.winStatusBar);
 
 		final Columns columns = new Columns();

@@ -14,9 +14,11 @@
 
 		<style>
 			body { padding: 0 0; /* 0 padding on top and bottom and 0
-			padding on right and left */ } .z-loading { top: 50%
-			!important; left: 45% !important; align: center;
-			vertical-align: middle; }
+			padding on right and left */ }
+
+			.z-loading { top: 50% !important; left: 45% !important;
+			align: center; vertical-align: middle; }
+
 			<!-- groupbox inner content area, NO padding -->
 			.myGroupBoxContentArea .z-groupbox-cnt{ background-color:
 			white; padding: 0px }
@@ -148,23 +150,25 @@
 
 				<div id="divSouth" align="left"
 					style="float: left; padding: 0px" width="100%">
-					<hbox style="padding: 0px" width="100%">
 
-						<div align="left" style="float: left">
+					<borderlayout width="100%" height="22px">
+
+						<west border="none" width="50px">
 							<!-- The MessageBar. Comps are created in the Controller -->
 							<window id="winMessageBar"
 								apply="${messageBarCtrl}" border="none" width="50px"
 								height="22px" />
-						</div>
+						</west>
 
-						<div align="right" style="float: left">
+						<center style="padding: 0px;">
 							<!-- The StatusBar. Comps are created in the Controller -->
 							<window id="winStatusBar"
 								apply="${statusBarCtrl}" border="none" width="100%"
 								height="22px" />
-						</div>
+						</center>
 
-					</hbox>
+					</borderlayout>
+
 				</div>
 
 			</south>

@@ -160,7 +160,7 @@
 								height="22px" />
 						</west>
 
-						<center style="padding: 0px;">
+						<center border="none">
 							<!-- The StatusBar. Comps are created in the Controller -->
 							<window id="winStatusBar"
 								apply="${statusBarCtrl}" border="none" width="100%"

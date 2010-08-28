@@ -156,8 +156,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 		lml.add(0, SecTyp.EMPTY_SECTYP);
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class,
-				getCountRows());
+		final HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRows());
 		soSecRight.addSort("rigName", false);
 
 		// set the paging params
@@ -181,7 +180,6 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * @throws Exception
 	 */
 	public void onDoubleClickedRightItem(Event event) throws Exception {
-		logger.debug(event.toString());
 
 		// get the selected object
 		final Listitem item = this.listBoxSecRights.getSelectedItem();
@@ -198,7 +196,6 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * Call the SecRight dialog with a new empty entry. <br>
 	 */
 	public void onClick$button_SecRightList_NewRight(Event event) throws Exception {
-		logger.debug(event.toString());
 
 		// create a new right object
 		/** !!! DO NOT BREAK THE TIERS !!! */
@@ -259,8 +256,6 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		logger.debug(event.toString());
-
 		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
@@ -273,7 +268,6 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-		logger.debug(event.toString());
 
 		Events.postEvent("onCreate", this.secRightListWindow, event);
 		this.secRightListWindow.invalidate();
@@ -285,15 +279,13 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * @param event
 	 */
 	public void onCheck$checkbox_SecRightList_ShowAll(Event event) {
-		logger.debug(event.toString());
 
 		// empty the text search boxes
 		this.tb_SecRightList_rigName.setValue(""); // clear
 		this.lb_secRight_RightType.clearSelection(); // clear
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class,
-				getCountRows());
+		final HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRows());
 		soSecRight.addSort("rigName", false);
 
 		// Set the ListModel.
@@ -318,19 +310,16 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * for including in the search statement.<br>
 	 */
 	public void onClick$button_SecRightList_SearchRightName(Event event) throws Exception {
-		logger.debug(event.toString());
-
-		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class,
-				getCountRows());
-		soSecRight.addSort("rigName", false);
 
 		// if not empty
 		if (!this.tb_SecRightList_rigName.getValue().isEmpty()) {
 			this.checkbox_SecRightList_ShowAll.setChecked(false); // clear
 
-			soSecRight.addFilter(new Filter("rigName", "%" + this.tb_SecRightList_rigName.getValue() + "%",
-					Filter.OP_ILIKE));
+			// ++ create the searchObject and init sorting ++//
+			final HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRows());
+			soSecRight.addSort("rigName", false);
+
+			soSecRight.addFilter(new Filter("rigName", "%" + this.tb_SecRightList_rigName.getValue() + "%", Filter.OP_ILIKE));
 
 			// check if we must include a selected RightType item
 			final Listitem item = this.lb_secRight_RightType.getSelectedItem();
@@ -362,12 +351,9 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * for including in the search statement.
 	 */
 	public void onClick$button_SecRightList_SearchRightType(Event event) throws Exception {
-		logger.debug(event.toString());
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class,
-				getCountRows());
-		soSecRight.addSort("rigName", false);
+		HibernateSearchObject<SecRight> soSecRight = null;
 
 		// get the selected item
 		final Listitem item = this.lb_secRight_RightType.getSelectedItem();
@@ -379,22 +365,22 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 
 			if (type.getStpId() > -1) {
 
+				soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRows());
+				soSecRight.addSort("rigName", false);
+
 				soSecRight.addFilter(new Filter("rigType", type.getStpId(), Filter.OP_EQUAL));
 
 				if (!this.tb_SecRightList_rigName.getValue().isEmpty()) {
 
 					// mixed search statement -> like RightName + RightType
-					soSecRight.addFilter(new Filter("rigName", "%" + this.tb_SecRightList_rigName.getValue() + "%",
-							Filter.OP_ILIKE));
+					soSecRight.addFilter(new Filter("rigName", "%" + this.tb_SecRightList_rigName.getValue() + "%", Filter.OP_ILIKE));
 				}
 				// Set the ListModel.
 				getPagedListWrapper().init(soSecRight, this.listBoxSecRights, this.paging_SecRightList);
 			}
 
-		} else {
-			// Set the ListModel.
-			getPagedListWrapper().init(soSecRight, this.listBoxSecRights, this.paging_SecRightList);
 		}
+
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

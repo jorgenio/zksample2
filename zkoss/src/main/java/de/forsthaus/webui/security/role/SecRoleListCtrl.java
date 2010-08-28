@@ -132,16 +132,13 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		this.listheader_SecRoleList_rolShortdescription.setSortAscending(new FieldComparator("rolShortdescription",
-				true));
-		this.listheader_SecRoleList_rolShortdescription.setSortDescending(new FieldComparator("rolShortdescription",
-				false));
+		this.listheader_SecRoleList_rolShortdescription.setSortAscending(new FieldComparator("rolShortdescription", true));
+		this.listheader_SecRoleList_rolShortdescription.setSortDescending(new FieldComparator("rolShortdescription", false));
 		this.listheader_SecRoleList_rolLongdescription.setSortAscending("");
 		this.listheader_SecRoleList_rolLongdescription.setSortDescending("");
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class,
-				getCountRows());
+		final HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRows());
 		soSecRole.addSort("rolShortdescription", false);
 
 		// set the paging params
@@ -166,7 +163,6 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	 * @throws Exception
 	 */
 	public void onRoleItemDoubleClicked(Event event) throws Exception {
-		logger.debug(event.toString());
 
 		// get the selected object
 		final Listitem item = this.listBoxSecRoles.getSelectedItem();
@@ -183,7 +179,6 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	 * Call the SecRole dialog with a new empty entry. <br>
 	 */
 	public void onClick$button_SecRoleList_NewSecRole(Event event) throws Exception {
-		logger.debug(event.toString());
 
 		// create a new branch object
 		/** !!! DO NOT BREAK THE TIERS !!! */
@@ -236,8 +231,6 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		logger.debug(event.toString());
-
 		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
@@ -250,7 +243,6 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-		logger.debug(event.toString());
 
 		Events.postEvent("onCreate", this.secRoleListWindow, event);
 		this.secRoleListWindow.invalidate();
@@ -262,14 +254,12 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	 * @param event
 	 */
 	public void onCheck$checkbox_SecRoleList_ShowAll(Event event) {
-		logger.debug(event.toString());
 
 		// empty the text search boxes
 		this.tb_SecRole_RoleName.setValue(""); // clear
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class,
-				getCountRows());
+		final HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRows());
 		soSecRole.addSort("rolShortdescription", false);
 
 		// Set the ListModel.
@@ -292,19 +282,16 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	 * Filter the role list with 'like RoleName'. <br>
 	 */
 	public void onClick$button_SecRoleList_rolShortdescription(Event event) throws Exception {
-		logger.debug(event.toString());
 
 		// if not empty
 		if (!this.tb_SecRole_RoleName.getValue().isEmpty()) {
 			this.checkbox_SecRoleList_ShowAll.setChecked(false); // unCheck
 
 			// ++ create the searchObject and init sorting ++//
-			final HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class,
-					getCountRows());
+			final HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRows());
 			soSecRole.addSort("rolShortdescription", false);
 
-			soSecRole.addFilter(new Filter("rolShortdescription", "%" + this.tb_SecRole_RoleName.getValue() + "%",
-					Filter.OP_ILIKE));
+			soSecRole.addFilter(new Filter("rolShortdescription", "%" + this.tb_SecRole_RoleName.getValue() + "%", Filter.OP_ILIKE));
 
 			// Set the ListModel.
 			getPagedListWrapper().init(soSecRole, this.listBoxSecRoles, this.paging_SecRoleList);

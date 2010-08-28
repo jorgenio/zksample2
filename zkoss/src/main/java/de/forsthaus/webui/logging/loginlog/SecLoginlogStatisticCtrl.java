@@ -167,8 +167,6 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 * @throws InterruptedException
 	 */
 	public void onClick$buttonSecLoginListStatisticTotalCountByCountries(Event event) throws InterruptedException {
-		logger.debug(event.toString());
-
 		doRefreshTotalCount();
 	}
 
@@ -179,7 +177,6 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 * @throws InterruptedException
 	 */
 	public void onClick$buttonSecLoginListStatisticMonthlyCountByCountries(Event event) throws InterruptedException {
-		logger.debug(event.toString());
 
 		final Calendar aDate = Calendar.getInstance();
 		aDate.setTime(new Date());
@@ -196,8 +193,6 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 * @throws InterruptedException
 	 */
 	public void onClick$buttonSecLoginListStatisticDailyCountByCountries(Event event) throws InterruptedException {
-		logger.debug(event.toString());
-
 		doRefreshDailyCount(new Date());
 	}
 
@@ -253,8 +248,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		lh2.setSortAscending(new FieldComparator("countryName", true));
 		lh2.setSortDescending(new FieldComparator("countryName", false));
 		lh2.setParent(listhead);
-		final Listheader lh3 = new Listheader(
-				Labels.getLabel("ListheaderStatisticTotalCountByCountries.TotalCount.Label"));
+		final Listheader lh3 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.TotalCount.Label"));
 		lh3.setSclass("FDListBoxHeader1");
 		lh3.setWidth("");
 		lh3.setSortAscending(new FieldComparator("totalCount", true));
@@ -318,8 +312,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 */
 	private Div doGetMonthlyCountByCountries(int aMonth, int aYear) {
 
-		final ListLongSumBean<DummyBean> listIntegerSumBean = getLoginLoggingService().getMonthlyCountByCountries(
-				aMonth, aYear);
+		final ListLongSumBean<DummyBean> listIntegerSumBean = getLoginLoggingService().getMonthlyCountByCountries(aMonth, aYear);
 
 		final List<DummyBean> list = listIntegerSumBean.getList();
 		final long recCount = listIntegerSumBean.getSum();
@@ -367,8 +360,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		lh2.setSortAscending(new FieldComparator("countryName", true));
 		lh2.setSortDescending(new FieldComparator("countryName", false));
 		lh2.setParent(listhead);
-		final Listheader lh3 = new Listheader(
-				Labels.getLabel("ListheaderStatisticTotalCountByCountries.TotalCount.Label"));
+		final Listheader lh3 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.TotalCount.Label"));
 		lh3.setSclass("FDListBoxHeader1");
 		lh3.setWidth("");
 		lh3.setSortAscending(new FieldComparator("totalCount", true));
@@ -407,14 +399,11 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 
 	private void doRefreshMonthlyCount(int aMonth, int aYear) {
 
-		final ListLongSumBean<DummyBean> listIntegerSumBean = getLoginLoggingService().getMonthlyCountByCountries(
-				aMonth, aYear);
+		final ListLongSumBean<DummyBean> listIntegerSumBean = getLoginLoggingService().getMonthlyCountByCountries(aMonth, aYear);
 
 		final List<DummyBean> list = listIntegerSumBean.getList();
 		final long recCount = listIntegerSumBean.getSum();
 
-		// lbMonthlyCount.setItemRenderer(new
-		// SecLoginlogStatisticTotalListModelItemRenderer());
 		this.lbMonthlyCount.setModel(new ListModelList(list));
 
 		/** +++ get the SUM of all logs for the ListFooter +++ */
@@ -478,8 +467,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		lh2.setSortAscending(new FieldComparator("countryName", true));
 		lh2.setSortDescending(new FieldComparator("countryName", false));
 		lh2.setParent(listhead);
-		final Listheader lh3 = new Listheader(
-				Labels.getLabel("ListheaderStatisticTotalCountByCountries.TotalCount.Label"));
+		final Listheader lh3 = new Listheader(Labels.getLabel("ListheaderStatisticTotalCountByCountries.TotalCount.Label"));
 		lh3.setSclass("FDListBoxHeader1");
 		lh3.setWidth("");
 		lh3.setSortAscending(new FieldComparator("totalCount", true));

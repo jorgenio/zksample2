@@ -137,16 +137,13 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		this.listheader_SecGroupList_grpShortdescription.setSortAscending(new FieldComparator("grpShortdescription",
-				true));
-		this.listheader_SecGroupList_grpShortdescription.setSortDescending(new FieldComparator("grpShortdescription",
-				false));
+		this.listheader_SecGroupList_grpShortdescription.setSortAscending(new FieldComparator("grpShortdescription", true));
+		this.listheader_SecGroupList_grpShortdescription.setSortDescending(new FieldComparator("grpShortdescription", false));
 		this.listheader_SecGroupList_grpLongdescription.setSortAscending("");
 		this.listheader_SecGroupList_grpLongdescription.setSortDescending("");
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class,
-				getCountRows());
+		final HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class, getCountRows());
 		soSecGroup.addSort("grpShortdescription", false);
 
 		// set the paging params
@@ -192,7 +189,6 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	 * Call the SecGroup dialog with a new empty entry. <br>
 	 */
 	public void onClick$button_SecGroupList_NewGroup(Event event) throws Exception {
-		logger.debug(event.toString());
 
 		// create a new customer object
 		final SecGroup aGroup = getSecurityService().getNewSecGroup();
@@ -248,8 +244,6 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		logger.debug(event.toString());
-
 		ZksampleUtils.doShowNotAllowedInDemoModeMessage();
 	}
 
@@ -262,7 +256,6 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-		logger.debug(event.toString());
 
 		Events.postEvent("onCreate", this.secGroupListWindow, event);
 		this.secGroupListWindow.invalidate();
@@ -274,7 +267,6 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	 * @param event
 	 */
 	public void onCheck$checkbox_SecGroupList_ShowAll(Event event) {
-		logger.debug(event.toString());
 
 		// empty the text search boxes
 		this.tb_SecGroup_GroupName.setValue(""); // clear
@@ -303,7 +295,6 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	 * Filter the group list with 'like GroupName'. <br>
 	 */
 	public void onClick$button_SecGroupList_SearchGroupName(Event event) throws Exception {
-		logger.debug(event.toString());
 
 		// if not empty
 		if (!this.tb_SecGroup_GroupName.getValue().isEmpty()) {
@@ -311,8 +302,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 
 			// ++ create the searchObject and init sorting ++//
 			final HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class);
-			soSecGroup.addFilter(new Filter("grpShortdescription", "%" + this.tb_SecGroup_GroupName.getValue() + "%",
-					Filter.OP_ILIKE));
+			soSecGroup.addFilter(new Filter("grpShortdescription", "%" + this.tb_SecGroup_GroupName.getValue() + "%", Filter.OP_ILIKE));
 			soSecGroup.addSort("grpShortdescription", false);
 
 			// Set the ListModel.

@@ -125,7 +125,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	}
 
 	public void onCreate$userListWindow(Event event) throws Exception {
-		/* set comps cisible dependent of the users rights */
+		/* set comps visible dependent of the users rights */
 		doCheckRights();
 
 		/**
@@ -164,17 +164,12 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 		this.listheader_UserList_usrEmail.setSortDescending(new FieldComparator("usrEmail", false));
 		this.listheader_UserList_usrEnabled.setSortAscending(new FieldComparator("usrEnabled", true));
 		this.listheader_UserList_usrEnabled.setSortDescending(new FieldComparator("usrEnabled", false));
-		this.listheader_UserList_usrAccountnonexpired
-				.setSortAscending(new FieldComparator("usrAccountnonexpired", true));
-		this.listheader_UserList_usrAccountnonexpired.setSortDescending(new FieldComparator("usrAccountnonexpired",
-				false));
-		this.listheader_UserList_usrCredentialsnonexpired.setSortAscending(new FieldComparator(
-				"usrCredentialsnonexpired", true));
-		this.listheader_UserList_usrCredentialsnonexpired.setSortDescending(new FieldComparator(
-				"usrCredentialsnonexpired", false));
+		this.listheader_UserList_usrAccountnonexpired.setSortAscending(new FieldComparator("usrAccountnonexpired", true));
+		this.listheader_UserList_usrAccountnonexpired.setSortDescending(new FieldComparator("usrAccountnonexpired", false));
+		this.listheader_UserList_usrCredentialsnonexpired.setSortAscending(new FieldComparator("usrCredentialsnonexpired", true));
+		this.listheader_UserList_usrCredentialsnonexpired.setSortDescending(new FieldComparator("usrCredentialsnonexpired", false));
 		this.listheader_UserList_usrAccountnonlocked.setSortAscending(new FieldComparator("usrAccountnonlocked", true));
-		this.listheader_UserList_usrAccountnonlocked
-				.setSortDescending(new FieldComparator("usrAccountnonlocked", false));
+		this.listheader_UserList_usrAccountnonlocked.setSortDescending(new FieldComparator("usrAccountnonlocked", false));
 
 		// set the paging params
 		this.paging_UserList.setPageSize(getCountRows());
@@ -235,7 +230,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * @param event
 	 * @throws Exception
 	 */
-	@Secured({ "UserList_listBoxUser.onDoubleClick" })
+	@Secured( { "UserList_listBoxUser.onDoubleClick" })
 	public void onUserListItemDoubleClicked(Event event) throws Exception {
 
 		// UserWorkspace workspace = getUserWorkspace();
@@ -258,7 +253,6 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * Call the SecUser dialog with a new empty entry. <br>
 	 */
 	public void onClick$button_UserList_NewUser(Event event) throws Exception {
-		logger.debug(event.toString());
 
 		// create a new SecUser object
 		/** !!! DO NOT BREAK THE TIERS !!! */
@@ -307,9 +301,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
-
 		}
-
 	}
 
 	/**
@@ -319,8 +311,6 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		logger.debug(event.toString());
-
 		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
@@ -333,7 +323,6 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-		logger.debug(event.toString());
 
 		Events.postEvent("onCreate", this.userListWindow, event);
 		this.userListWindow.invalidate();
@@ -354,7 +343,6 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * Filter the user list with 'like Loginname'
 	 */
 	public void onClick$button_UserList_SearchLoginname(Event event) throws Exception {
-		logger.debug(event.toString());
 
 		// if not empty
 		if (!this.tb_SecUser_Loginname.getValue().isEmpty()) {
@@ -362,10 +350,8 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 			this.tb_SecUser_Lastname.setValue("");
 			this.tb_SecUser_Email.setValue("");
 
-			final HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class,
-					getCountRows());
-			soUser.addFilter(new Filter("usrLoginname", "%" + this.tb_SecUser_Loginname.getValue() + "%",
-					Filter.OP_ILIKE));
+			final HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
+			soUser.addFilter(new Filter("usrLoginname", "%" + this.tb_SecUser_Loginname.getValue() + "%", Filter.OP_ILIKE));
 			soUser.addSort("usrLoginname", false);
 
 			/*
@@ -395,7 +381,6 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * Filter the user list with 'like Lastname'
 	 */
 	public void onClick$button_UserList_SearchLastname(Event event) throws Exception {
-		logger.debug(event.toString());
 
 		// if not empty
 		if (!this.tb_SecUser_Lastname.getValue().isEmpty()) {
@@ -403,8 +388,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 			this.tb_SecUser_Loginname.setValue("");
 			this.tb_SecUser_Email.setValue("");
 
-			final HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class,
-					getCountRows());
+			final HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
 			soUser.addFilter(new Filter("usrLastname", "%" + this.tb_SecUser_Lastname.getValue() + "%", Filter.OP_ILIKE));
 			soUser.addSort("usrLoginname", false);
 
@@ -436,7 +420,6 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * Filter the user list with 'like Email'
 	 */
 	public void onClick$button_UserList_SearchEmail(Event event) throws Exception {
-		logger.debug(event.toString());
 
 		// if not empty
 		if (!this.tb_SecUser_Email.getValue().isEmpty()) {
@@ -444,8 +427,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 			this.tb_SecUser_Loginname.setValue("");
 			this.tb_SecUser_Lastname.setValue("");
 
-			final HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class,
-					getCountRows());
+			final HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
 			soUser.addFilter(new Filter("usrEmail", "%" + this.tb_SecUser_Email.getValue() + "%", Filter.OP_ILIKE));
 			soUser.addSort("usrLoginname", false);
 
@@ -479,7 +461,6 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * @param event
 	 */
 	public void onCheck$checkbox_UserList_ShowAll(Event event) {
-		logger.debug(event.toString());
 
 		// empty the text search boxes
 		this.tb_SecUser_Loginname.setValue("");

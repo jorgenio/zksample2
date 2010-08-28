@@ -169,16 +169,13 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		this.listheader_SecLoginlogList_lglStatusid.setSortDescending(new FieldComparator("lglStatusid", false));
 		this.listheader_SecLoginlogList_lglIp.setSortAscending(new FieldComparator("lglIp", true));
 		this.listheader_SecLoginlogList_lglIp.setSortDescending(new FieldComparator("lglIp", false));
-		this.listheader_SecLoginlogList_CountryCode2.setSortAscending(new FieldComparator(
-				"ip2Country.sysCountryCode.ccdCode2", true));
-		this.listheader_SecLoginlogList_CountryCode2.setSortDescending(new FieldComparator(
-				"ip2Country.sysCountryCode.ccdCode2", false));
+		this.listheader_SecLoginlogList_CountryCode2.setSortAscending(new FieldComparator("ip2Country.sysCountryCode.ccdCode2", true));
+		this.listheader_SecLoginlogList_CountryCode2.setSortDescending(new FieldComparator("ip2Country.sysCountryCode.ccdCode2", false));
 		this.listheader_SecLoginlogList_lglSessionid.setSortAscending(new FieldComparator("lglSessionid", true));
 		this.listheader_SecLoginlogList_lglSessionid.setSortDescending(new FieldComparator("lglSessionid", false));
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
-				SecLoginlog.class);
+		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class);
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
 		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -247,7 +244,6 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @param event
 	 */
 	public void onCheck$checkbox_SecLoginlogList_ShowAll(Event event) {
-		logger.debug(event.toString());
 
 		// empty the text search boxes
 		this.tb_SecUserlog_LoginName.setValue(""); // clear
@@ -255,8 +251,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		this.checkbox_SecLoginlogList_ShowOnlyFailed.setChecked(false);
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
-				SecLoginlog.class, getCountRows());
+		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
 		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -273,7 +268,6 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @param event
 	 */
 	public void onCheck$checkbox_SecLoginlogList_ShowOnlySuccess(Event event) {
-		logger.debug(event.toString());
 
 		// empty the text search boxes
 		this.tb_SecUserlog_LoginName.setValue(""); // clear
@@ -281,8 +275,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		this.checkbox_SecLoginlogList_ShowOnlyFailed.setChecked(false);
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
-				SecLoginlog.class, getCountRows());
+		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
 		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -301,7 +294,6 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @param event
 	 */
 	public void onCheck$checkbox_SecLoginlogList_ShowOnlyFailed(Event event) {
-		logger.debug(event.toString());
 
 		// empty the text search boxes
 		this.tb_SecUserlog_LoginName.setValue(""); // clear
@@ -309,8 +301,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		this.checkbox_SecLoginlogList_ShowOnlySuccess.setChecked(false);
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
-				SecLoginlog.class, getCountRows());
+		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
 		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -330,8 +321,6 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecLoginlogList_PrintLoginList(Event event) throws InterruptedException {
-		logger.debug(event.toString());
-
 		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
@@ -341,22 +330,19 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * for including in the search statement.<br>
 	 */
 	public void onClick$button_SecLoginlogList_SearchLoginName(Event event) throws Exception {
-		logger.debug(event.toString());
 
 		// if not empty
 		if (!this.tb_SecUserlog_LoginName.getValue().isEmpty()) {
 			this.checkbox_SecLoginlogList_ShowAll.setChecked(false); // clear
 
 			// ++ create the searchObject and init sorting ++//
-			final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
-					SecLoginlog.class, getCountRows());
+			final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 			// deeper loading of the relations to prevent the lazy
 			// loading problem.
 			soSecLoginlog.addFetch("ip2Country.sysCountryCode");
 			soSecLoginlog.addSort("lglLogtime", true);
 
-			soSecLoginlog
-					.addFilter(new Filter("lglLoginname", this.tb_SecUserlog_LoginName.getValue(), Filter.OP_EQUAL));
+			soSecLoginlog.addFilter(new Filter("lglLoginname", this.tb_SecUserlog_LoginName.getValue(), Filter.OP_EQUAL));
 
 			// Set the ListModel
 			getPagedListWrapper().init(soSecLoginlog, this.listBoxSecUserlog, this.paging_SecUserLogList);
@@ -368,7 +354,6 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * Start the server push mechanism to refresh the login list. <br>
 	 */
 	public void onCheck$checkbox_SecLoginlogList_ServerPush(Event event) throws Exception {
-		logger.debug(event.toString());
 
 		if (this.checkbox_SecLoginlogList_ServerPush.isChecked()) {
 			doStartServerPush(event);
@@ -454,8 +439,6 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		logger.debug(event.toString());
-
 		ZksampleUtils.doShowNotImplementedMessage();
 	}
 
@@ -468,7 +451,6 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-		logger.debug(event.toString());
 
 		Events.postEvent("onCreate", this.secLoginlogListWindow, event);
 		this.secLoginlogListWindow.invalidate();
@@ -483,7 +465,6 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecLoginlogList_DeleteLocalIPs(Event event) throws InterruptedException {
-		logger.debug(event.toString());
 
 		final int recCount = getLoginLoggingService().deleteLocalIPs();
 
@@ -493,8 +474,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
-				SecLoginlog.class, getCountRows());
+		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
 		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -514,10 +494,8 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecLoginlogList_ImportIPToCountryCSV(Event event) throws InterruptedException {
-		logger.debug(event.toString());
 
-		final String str = InputConfirmBox.show(this.secLoginlogListWindow,
-				Labels.getLabel("message.Information.InputSupervisorPassword"));
+		final String str = InputConfirmBox.show(this.secLoginlogListWindow, Labels.getLabel("message.Information.InputSupervisorPassword"));
 
 		if (StringUtils.equalsIgnoreCase(str, "yes we can")) {
 			final int recCount = getGuiLoginLoggingService().importIP2CountryCSV();
@@ -544,10 +522,8 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecLoginlogList_UpdateGeoData(Event event) throws InterruptedException {
-		logger.debug(event.toString());
 
-		final String str = InputConfirmBox.show(this.secLoginlogListWindow,
-				Labels.getLabel("message.Information.InputSupervisorPassword"));
+		final String str = InputConfirmBox.show(this.secLoginlogListWindow, Labels.getLabel("message.Information.InputSupervisorPassword"));
 
 		if (StringUtils.equalsIgnoreCase(str, "yes we can")) {
 			final int recCount = getGuiLoginLoggingService().updateFromHostLookUpMain();
@@ -558,8 +534,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);
 
 			// ++ create the searchObject and init sorting ++//
-			final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
-					SecLoginlog.class, getCountRows());
+			final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 			// deeper loading of the relations to prevent the lazy
 			// loading problem.
 			soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -587,8 +562,6 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @param event
 	 */
 	public void onClick$button_SecLoginlogList_bb_SearchClose(Event event) {
-		logger.debug(event.toString());
-
 		this.bandbox_SecLoginlogList_PeriodSearch.close();
 	}
 
@@ -600,8 +573,6 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @throws Exception
 	 */
 	public void onOpen$bandbox_SecLoginlogList_PeriodSearch(Event event) throws Exception {
-		logger.debug(event.toString());
-
 		this.dbox_LoginLog_DateFrom.setValue(new Date());
 		this.dbox_LoginLog_DateTo.setValue(new Date());
 	}
@@ -613,7 +584,6 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @param event
 	 */
 	public void onClick$button_SecLoginlogList_bb_SearchDate(Event event) throws Exception {
-		logger.debug(event.toString());
 
 		if (!(this.dbox_LoginLog_DateFrom.getValue() == null) && !(this.dbox_LoginLog_DateTo.getValue() == null)) {
 
@@ -641,8 +611,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 				dateTo = calTo.getTime();
 
 				// ++ create the searchObject and init sorting ++//
-				final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
-						SecLoginlog.class, getCountRows());
+				final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 				// deeper loading of the relations to prevent the lazy
 				// loading problem.
 				soSecLoginlog.addFetch("ip2Country.sysCountryCode");
@@ -655,7 +624,6 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 				getPagedListWrapper().init(soSecLoginlog, this.listBoxSecUserlog, this.paging_SecUserLogList);
 
 				this.checkbox_SecLoginlogList_ShowAll.setChecked(false);
-
 			}
 		}
 	}

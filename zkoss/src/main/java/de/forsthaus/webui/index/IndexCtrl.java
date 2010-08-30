@@ -23,6 +23,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
+import org.jfree.data.time.Day;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.zk.ui.ComponentNotFoundException;
 import org.zkoss.zk.ui.Executions;
@@ -98,10 +99,18 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 		this.label_AppName.setValue(this.appName);
 
-		final Date date = new Date();
-		date.setDate(27);
-		date.setMonth(7);
-		date.setYear(110);
+		/*
+		 * public Day(int day,
+		 *   int month,
+		 *   int year)
+		 *Constructs a new one day time period.
+		 *
+		 *Parameters:
+		 *day - the day-of-the-month.
+		 *month - the month (1 to 12).
+		 *year - the year (1900 <= year <= 9999).
+		 */
+		final Date date = new Day(27, 8, 2010).getStart();
 
 		final String zkVersion = doGetZkVersion();
 		final String appVersion = this.appName + " v5.0.325 / build: " + ZksampleDateFormat.getDateFormater().format(date);

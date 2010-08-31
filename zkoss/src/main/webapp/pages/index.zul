@@ -48,20 +48,20 @@
 							<image src="/images/zkpowered_34x34.png" />
 						</div>
 
+
+						<div align="left" style="padding: 0px;">
+							<image src="/images/ZKHeader2_176x38.jpg" />
+						</div>
+
+
 						<!--
-							<div align="left" style="padding: 0px;">
-							<image src="/images/logo.jpg" />
-							</div>
-						-->
-
-
-						<div
+							<div
 							style="background-color:silver; background-image:url(${c:encodeURL('/images/ZKHeader_2x38.png')});  background-repeat:repeat-x; float:left; border: 'none';  padding-left: 5px; padding-bottom: 4px;"
 							align="left">
 							<label id="label_AppName"
-								style="font-size:24px; font-weight:bold; color: #D70303" />
-						</div>
-
+							style="font-size:24px; font-weight:bold; color: #D70303" />
+							</div>
+						-->
 						<div align="right" style="float: right">
 
 							<!-- Monitor Background pic -->

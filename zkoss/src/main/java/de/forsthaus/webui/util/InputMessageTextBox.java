@@ -28,22 +28,17 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Checkbox;
-import org.zkoss.zul.Hbox;
-import org.zkoss.zul.Label;
 import org.zkoss.zul.Separator;
 import org.zkoss.zul.Textbox;
-import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
 
 import de.forsthaus.policy.model.UserImpl;
 
 /**
  * This class creates a modal window as a dialog in which the user <br>
- * can input some text. By onClosing with <RETURN> or OK this InputConfirmBox
- * can return a value. <br>
+ * can input some text. By onClosing with <RETURN> or Button <send> this
+ * InputConfirmBox can return the message as a String value if not empty. <br>
  * In this useCase the returnValue is the same as the inputValue.<br>
  * 
  * @author bbruhns
@@ -68,13 +63,12 @@ public class InputMessageTextBox extends Window {
 	 * @return String from the input textbox.
 	 */
 	public static String show(Component parent) {
-		// return new InputMessageTextBox(parent).textbox.getText();
 		return new InputMessageTextBox(parent).getMsg();
 	}
 
 	/**
 	 * private constructor. So it can only be created with the static show()
-	 * method
+	 * method.
 	 * 
 	 * @param parent
 	 * @param anQuestion
@@ -119,7 +113,6 @@ public class InputMessageTextBox extends Window {
 		textbox.setHeight("80px");
 		textbox.setMultiline(true);
 		textbox.setRows(5);
-		// textbox.setParent(hbox);
 		textbox.setParent(this);
 
 		Separator sp2 = new Separator();

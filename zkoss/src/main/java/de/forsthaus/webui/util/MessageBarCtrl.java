@@ -1,12 +1,10 @@
 package de.forsthaus.webui.util;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.zkoss.spring.security.config.ZkSecurityContextListener;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;

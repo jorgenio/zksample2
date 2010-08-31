@@ -31,6 +31,9 @@ import de.forsthaus.policy.model.UserImpl;
  * This MessageBarController is for sending and receiving messages from other
  * users.<br>
  * 
+ * The message text we do input with a special helper window that is called
+ * InputMessageTextBox.java
+ * 
  * <pre>
  * < borderlayout >
  *   . . .

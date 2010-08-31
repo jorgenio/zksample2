@@ -3,7 +3,6 @@ package de.forsthaus.webui.util;
 import java.io.Serializable;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
@@ -11,6 +10,7 @@ import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.EventQueues;
+import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
 import org.zkoss.zul.Div;
@@ -28,8 +28,8 @@ import de.forsthaus.policy.model.UserImpl;
  * Works with the EventQueues mechanism of zk 5.x. ALl needed components are
  * created in this class. In the zul-template declare only this controller with
  * 'apply' to a winMessageBar window component.<br>
- * This MessageBarController have an messaging system inside. Declaration in the
- * zul-file:<br>
+ * This MessageBarController is for sending and receiving messages from other
+ * users.<br>
  * 
  * <pre>
  * < borderlayout >
@@ -71,11 +71,9 @@ import de.forsthaus.policy.model.UserImpl;
  * @author sgerth
  * 
  */
-public class MessageBarCtrl extends GFCBaseCtrl implements Serializable {
+public class MessageBarCtrl extends GenericForwardComposer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private final static Logger logger = Logger.getLogger(StatusBarCtrl.class);
-
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * All the components that are defined here and have a corresponding

@@ -97,23 +97,19 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 		doDemoMode();
 
-		this.label_AppName.setValue(this.appName);
+		// this.label_AppName.setValue(this.appName);
 
 		/*
-		 * public Day(int day,
-		 *   int month,
-		 *   int year)
-		 *Constructs a new one day time period.
-		 *
-		 *Parameters:
-		 *day - the day-of-the-month.
-		 *month - the month (1 to 12).
-		 *year - the year (1900 <= year <= 9999).
+		 * public Day(int day, int month, int year)Constructs a new one day time
+		 * period.
+		 * 
+		 * Parameters:day - the day-of-the-month.month - the month (1 to 12).
+		 * year - the year (1900 <= year <= 9999).
 		 */
-		final Date date = new Day(27, 8, 2010).getStart();
+		final Date date = new Day(31, 8, 2010).getStart();
 
 		final String zkVersion = doGetZkVersion();
-		final String appVersion = this.appName + " v5.0.325 / build: " + ZksampleDateFormat.getDateFormater().format(date);
+		final String appVersion = this.appName + " v5.0.326 / build: " + ZksampleDateFormat.getDateFormater().format(date);
 
 		final String userName = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
 		final String version = zkVersion + " | " + appVersion;

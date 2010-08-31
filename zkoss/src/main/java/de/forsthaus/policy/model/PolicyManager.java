@@ -62,17 +62,10 @@ public class PolicyManager implements UserDetailsService, Serializable {
 				throw new UsernameNotFoundException("Invalid User");
 			}
 
-			// TEST
-			// String context = user.getUsrLocale(); // i.e. 'en_EN' or 'de_DE'
-			// if (!StringUtils.isEmpty(context)) {
-			// Labels.register(new GeneralLabelLocator(context));
-			// }
-
 			grantedAuthorities = getGrantedAuthority(user);
 
 		} catch (final NumberFormatException e) {
-			throw new DataRetrievalFailureException("Cannot loadUserByUsername userId:" + userId + " Exception:"
-					+ e.getMessage(), e);
+			throw new DataRetrievalFailureException("Cannot loadUserByUsername userId:" + userId + " Exception:" + e.getMessage(), e);
 		}
 
 		// Create the UserDetails object for a specified user with
@@ -80,12 +73,7 @@ public class PolicyManager implements UserDetailsService, Serializable {
 		final UserDetails userDetails = new UserImpl(user, grantedAuthorities);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Rechte für '" + user.getUsrLoginname() + "' (ID: " + user.getId() + ") ermittelt. [" + this
-					+ "]");
-
-			// for (GrantedAuthority grantedAuthority : grantedAuthorities) {
-			// logger.debug(grantedAuthority.getAuthority());
-			// }
+			logger.debug("Rights for '" + user.getUsrLoginname() + "' (ID: " + user.getId() + ") evaluated. [" + this + "]");
 		}
 
 		// neu wegen clustering ?

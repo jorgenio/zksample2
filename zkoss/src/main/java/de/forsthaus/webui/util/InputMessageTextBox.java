@@ -39,7 +39,7 @@ import de.forsthaus.policy.model.UserImpl;
  * This class creates a modal window as a dialog in which the user <br>
  * can input some text. By onClosing with <RETURN> or Button <send> this
  * InputConfirmBox can return the message as a String value if not empty. <br>
- * In this useCase the returnValue is the same as the inputValue.<br>
+ * In this case the returnValue is the same as the inputValue.<br>
  * 
  * @author bbruhns
  * @author sgerth

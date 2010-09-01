@@ -13,6 +13,8 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 01.09.2010 / Added a modified script file for runing zksample2 with a mySQL 5.1 database. Thanks to 'andyx' " + lf;
+		s = s + "                      Read about needed modifications in project zkoss ~/db/mySQL.readme. " + lf;
 		s = s + "- 27.08.2010 / Implemented a first simple messaging system. You can system wide send messages. Incoming messages " + lf;
 		s = s + "                      are visualized with a blinking icon in the left bottom corner. " + lf;
 		s = s + "- 25.08.2010 / Updated the doc for the StatusBarController and begin with DynamicJasper. Some code refactorings. " + lf;

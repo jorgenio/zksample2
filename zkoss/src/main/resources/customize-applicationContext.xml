@@ -10,7 +10,7 @@
 
 	<!-- ====================================================== -->
 	<!-- ====================================================== -->
-	<!--       CONFIG-FILE FOR CONNECTING TO A DATABASE         -->
+	<!-- =     CONFIG-FILE FOR CONNECTING TO A DATABASE       = -->
 	<!-- ====================================================== -->
 	<!-- ====================================================== -->
 
@@ -28,10 +28,14 @@
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
+	
+	<!-- comment out this bean if you don't use the the default internally -->
+	<!-- H2 database with the automatic filled demo data by startup -->
 	<bean class="de.forsthaus.h2.My_H2_SampleDataFiller">
 		<property name="dataSource" ref="dataSource">
 		</property>
 	</bean>
+	
 	<util:properties id="hibernateProperties">
 		<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 		<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
@@ -55,12 +59,13 @@
 	-->
 
 
-	<!-- ============================================================= -->
-	<!--            BEAN FOR GENERATING THE PRIMARY KEYS               -->
-	<!--   for DEMO Database H2 we use a special implementation !!!    -->
-	<!-- H2:         " ~.backend.dao.impl.NextIdViewH2DAOImpl"         -->
-	<!-- PostgreSQL: " ~.backend.dao.impl.NextIdViewPostgresDaoImpl    -->
-	<!-- ============================================================= -->
+	<!-- ============================================================ -->
+	<!--            BEAN FOR GENERATING THE PRIMARY KEYS              -->
+	<!--   for DEMO Database H2 we use a special implementation !!!   -->
+	<!-- H2:         " ~.backend.dao.impl.NextIdViewH2DAOImpl"        -->
+	<!-- PostgreSQL: " ~.backend.dao.impl.NextIdViewPostgresDaoImpl   -->
+	<!-- MySQL     : " ~.backend.dao.impl.NextIdViewMySQLDaoImpl      -->
+	<!-- ============================================================ -->
 	<bean id="nextidviewDAO" class="de.forsthaus.backend.dao.impl.NextIdViewH2DAOImpl"
 		parent="basisDAO" />
 

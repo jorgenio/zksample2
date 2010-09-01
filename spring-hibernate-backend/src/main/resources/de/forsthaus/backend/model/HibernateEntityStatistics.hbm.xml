@@ -8,6 +8,10 @@
 		<id name="id" type="long" column="id">
 			<generator class="sequence">
 				<param name="sequence">hibernate_statistic_sequence</param>
+				
+				<!-- for mySQL use generator class="native"
+				<generator class="native" />
+				 -->
 			</generator>
 		</id>
 		<property name="entityName" column="entityname" type="text"

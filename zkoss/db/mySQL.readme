@@ -1,0 +1,18 @@
+Thanks to andyx. 
+
+He makes the modifications that zksample2 runs with a mySQL 5.1 database.
+
+Involved files where you must do uncomment lines.
+
+Project: spring-hibernate-backend:
+src/main/resources/
+--> de/forsthaus/backend/model/HibernateEntityStatistics.hbm.xml
+--> de/forsthaus/backend/model/HibernateStatistics.hbm.xml
+
+Project: zkoss:
+src/main/resources/
+--> customize-applicationContext.xml
+--> jdbc-properties
+
+/db
+CreateTestTablesWithDataMySQL_5_1.sql ( run these script in your mySQL admin tool )

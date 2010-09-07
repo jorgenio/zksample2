@@ -17,8 +17,8 @@
 			<url>http://mavensync.zkoss.org/maven2</url>
 		</repository>
 		<repository>
-			<id>zk ee evalualtion repository</id>
-			<url>http://mavensync.zkoss.org/eval-ee/</url>
+			<id>zk ee evaluation repository</id>
+			<url>http://mavensync.zkoss.org/zk/ee-eval/</url>
 		</repository>
 	</repositories>
 	<dependencies>
@@ -278,6 +278,6 @@
 		<zkosslibs>${basedir}/src/main/webapp/WEB-INF/lib/</zkosslibs>
 		<spring.version>3.0.1.RELEASE</spring.version>
 		<springsecurity.version>3.0.2.RELEASE</springsecurity.version>
-		<zkoss.version>5.0.3</zkoss.version>
+		<zkoss.version>5.0.4</zkoss.version>
 	</properties>
 </project>

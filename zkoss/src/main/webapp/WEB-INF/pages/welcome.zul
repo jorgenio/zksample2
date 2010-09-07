@@ -13,6 +13,7 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 07.09.2010 / Updated to zk version 5.0.4 " + lf;
 		s = s + "- 01.09.2010 / Added a modified script file for runing zksample2 with a mySQL 5.1 database. Thanks to 'Andyx' " + lf;
 		s = s + "                      Read about needed modifications in project zkoss ~/db/mySQL.readme. " + lf;
 		s = s + "- 27.08.2010 / Implemented a first simple messaging system. You can system wide send messages. Incoming messages " + lf;
@@ -205,7 +206,7 @@
 							<caption
 								style="color: #000000; font-weight:bold;"
 								image="/images/icons/new_icons_10.gif"
-								label="NEW !!!  Updated to ZK v5.0.3. !!!  Please read the actual documentation." />
+								label="NEW !!!  Updated to ZK v5.0.4. !!!  Please read the actual documentation." />
 
 							<textbox height="100%" width="99.5%"
 								multiline="true" rows="17" readonly="true"

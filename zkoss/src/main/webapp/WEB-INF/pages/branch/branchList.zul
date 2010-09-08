@@ -35,7 +35,7 @@
 						<listheader id="listheader_BranchText"
 							sclass="FDListBoxHeader1"
 							image="/images/icons/create_doc_16x16.gif"
-							label="${c:l('common.Description')}" sort="auto" width="15%" />
+							label="${c:l('common.Description')}" sort="auto" width="100%" />
 					</listhead>
 
 					<listitem self="@{each='branche'}"

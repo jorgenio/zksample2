@@ -69,11 +69,12 @@
 					<listhead sizable="true">
 						<listheader id="listheader_CustNo"
 							sclass="FDListBoxHeader1" image="/images/icons/builder.gif"
-							label="${c:l('listheader_CustNo.label')}" sort="auto" width="5%" />
+							label="${c:l('listheader_CustNo.label')}" sort="auto"
+							width="10%" />
 						<listheader id="listheader_CustMatchcode"
 							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_CustMatchcode.label')}" sort="auto"
-							width="15%" />
+							width="20%" />
 						<listheader id="listheader_CustName1"
 							sclass="FDListBoxHeader1" image="/images/icons/create_doc.gif"
 							label="${c:l('listheader_CustName1.label')}" sort="auto"

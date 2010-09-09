@@ -10,11 +10,13 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.zkoss.calendar.Calendars;
+import org.zkoss.calendar.event.CalendarsEvent;
 import org.zkoss.calendar.impl.SimpleCalendarEvent;
 import org.zkoss.calendar.impl.SimpleCalendarModel;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Div;
@@ -85,6 +87,22 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		 * overridden and can ends in curious error messages.
 		 */
 		this.self.setAttribute("controller", this, false);
+
+		cal.addEventListener("onEventCreate", new EventListener() {
+			public void onEvent(Event e) throws InterruptedException {
+				System.out.println("onEventCreate");
+			}
+		});
+		cal.addEventListener("onEventEdit", new EventListener() {
+			public void onEvent(Event e) throws InterruptedException {
+				System.out.println("onEventEdit");
+			}
+		});
+		cal.addEventListener("onEventUpdate", new EventListener() {
+			public void onEvent(Event e) throws InterruptedException {
+				System.out.println("onEventUpdate");
+			}
+		});
 
 		init();
 		dofillModel();
@@ -335,6 +353,22 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		// set the model
 		setCalModel(calModel);
 		cal.setModel(getCalModel());
+	}
+
+	public void onClick$cal(Event event) {
+		System.out.println("onClick$cal");
+	}
+
+	public void onEventCreate$cal(CalendarsEvent event) {
+		System.out.println("onEventCreate$cal");
+	}
+
+	public void onEventUpdate$cal(Event event) {
+		System.out.println("onEventUpdate$cal");
+	}
+
+	public void onEventEdit$cal(Event event) {
+		System.out.println("onEventEdit$cal");
 	}
 
 	/**

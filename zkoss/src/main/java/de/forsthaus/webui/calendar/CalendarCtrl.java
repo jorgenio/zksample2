@@ -61,12 +61,10 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	protected Button btn_Show2Weeks; // autowired
 	protected Button btn_ShowMonth; // autowired
 
-	// private String btnOriginColor = "background-color: buttonface";
-	// private String btnPressedColor = "background-color: gray";
 	private String btnOriginColor = "color: black; font-weight: normal;";
 	private String btnPressedColor = "color: red; font-weight: bold;";
 
-	private SimpleCalendarModel cm;
+	private SimpleCalendarModel calModel;
 
 	/**
 	 * default constructor.<br>
@@ -89,6 +87,8 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		this.self.setAttribute("controller", this, false);
 
 		init();
+		dofillModel();
+
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -103,10 +103,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void onCreate$windowCalendar(Event event) throws Exception {
 
-		dofillModel();
-
 		doFitSize();
-
 	}
 
 	public void init() {
@@ -323,7 +320,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 				new String[] { date3 + "/01 08:30", date3 + "/01 19:30", "#0D7813", "#4CB052", "Green events: 5" } };
 		// fill the events' data
 		// final SimpleCalendarModel cm = new SimpleCalendarModel();
-		cm = new SimpleCalendarModel();
+		calModel = new SimpleCalendarModel();
 
 		for (int i = 0; i < evts.length; i++) {
 			final SimpleCalendarEvent sce = new SimpleCalendarEvent();
@@ -333,10 +330,11 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 			sce.setContentColor(evts[i][3]);
 			// ce.setTitle() if any, otherwise, the time stamp is assumed.
 			sce.setContent(evts[i][4]);
-			cm.add(sce);
+			calModel.add(sce);
 		}
 		// set the model
-		setCm(cm);
+		setCalModel(calModel);
+		cal.setModel(getCalModel());
 	}
 
 	/**
@@ -382,12 +380,12 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
-	public void setCm(SimpleCalendarModel cm) {
-		this.cm = cm;
+	public void setCalModel(SimpleCalendarModel calModel) {
+		this.calModel = calModel;
 	}
 
-	public SimpleCalendarModel getCm() {
-		return this.cm;
+	public SimpleCalendarModel getCalModel() {
+		return calModel;
 	}
 
 }

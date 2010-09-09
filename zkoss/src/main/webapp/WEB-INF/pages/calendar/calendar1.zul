@@ -87,7 +87,7 @@
 			<center border="none" flex="true">
 				<div id="divCenter" height="100%" width="100%">
 
-					<calendars id="cal" model="${cm}" />
+					<calendars id="cal" model="${calModel}" />
 
 				</div>
 			</center>

@@ -55,7 +55,7 @@
 					<columns>
 						<column
 							label="${c:l('gridHibernateStatisticDetail2.column.label.type')}"
-							width="80px" />
+							width="90px" />
 						<column
 							label="${c:l('gridHibernateStatisticDetail2.column.label.entity')}"
 							width="80px" />
@@ -64,8 +64,8 @@
 							width="60px" />
 					</columns>
 					<rows>
-						<row>
-							<label
+						<row >
+							<label 
 								value="${c:l('gridHibernateStatisticDetail2.row.label.load')}" />
 							<label value="${hs.entityLoadCount}" />
 							<label value="${hs.collectionLoadCount}" />

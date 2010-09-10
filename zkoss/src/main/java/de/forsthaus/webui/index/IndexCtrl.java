@@ -99,17 +99,17 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 		// this.label_AppName.setValue(this.appName);
 
-		/*
+		/**
 		 * public Day(int day, int month, int year)Constructs a new one day time
 		 * period.
 		 * 
 		 * Parameters:day - the day-of-the-month.month - the month (1 to 12).
 		 * year - the year (1900 <= year <= 9999).
 		 */
-		final Date date = new Day(7, 9, 2010).getStart();
+		final Date date = new Day(10, 9, 2010).getStart();
 
 		final String zkVersion = doGetZkVersion();
-		final String appVersion = this.appName + " v5.0.401 / build: " + ZksampleDateFormat.getDateFormater().format(date);
+		final String appVersion = this.appName + " v5.0.402 / build: " + ZksampleDateFormat.getDateFormater().format(date);
 
 		final String userName = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
 		final String version = zkVersion + " | " + appVersion;

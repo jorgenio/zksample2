@@ -80,7 +80,7 @@ public class HibernateStatisticsDetailCtrl extends GenericForwardComposer {
 
 		// Set the variable for accessing in the zul-file the bean.properties
 		event.getTarget().setVariable("hs", getStatistics(), false);
-		event.getTarget().invalidate();
+		// event.getTarget().invalidate();
 
 		// create the entity listBox
 		doCreateEntityGrid(getStatistics());
@@ -101,38 +101,38 @@ public class HibernateStatisticsDetailCtrl extends GenericForwardComposer {
 		sep.setParent(this.gb);
 
 		final Grid entityGrid = new Grid();
-		entityGrid.setWidth("90%");
+		entityGrid.setWidth("100%");
 		entityGrid.setParent(this.gb);
 		final Columns columns = new Columns();
 		columns.setParent(entityGrid);
 
 		Column col;
 		col = new Column();
-		col.setWidth("150px");
+		col.setWidth("40%");
 		col.setLabel("Entity");
 		col.setParent(columns);
 		col = new Column();
-		col.setWidth("50px");
+		col.setWidth("10%");
 		col.setLabel("load");
 		col.setParent(columns);
 		col = new Column();
-		col.setWidth("50px");
+		col.setWidth("10%");
 		col.setLabel("update");
 		col.setParent(columns);
 		col = new Column();
-		col.setWidth("50px");
+		col.setWidth("10%");
 		col.setLabel("insert");
 		col.setParent(columns);
 		col = new Column();
-		col.setWidth("50px");
+		col.setWidth("10%");
 		col.setLabel("delete");
 		col.setParent(columns);
 		col = new Column();
-		col.setWidth("50px");
+		col.setWidth("10%");
 		col.setLabel("fetch");
 		col.setParent(columns);
 		col = new Column();
-		col.setWidth("80px");
+		col.setWidth("10%");
 		col.setLabel("optimisticFailure");
 		col.setParent(columns);
 

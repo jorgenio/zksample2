@@ -401,11 +401,12 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		// normally 0 ! Or we have a i.e. a toolBar on top of the listBox.
 		final int specialSize = 0;
 		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		final int maxListBoxHeight = height - specialSize - 107;
+		final int maxListBoxHeight = height - specialSize - 109;
 		// setCountRows((int) Math.round((maxListBoxHeight) / 17.7));
 		this.borderLayout_calendar.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
-		// cals.invalidate();
+		cal.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		cal.invalidate();
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //

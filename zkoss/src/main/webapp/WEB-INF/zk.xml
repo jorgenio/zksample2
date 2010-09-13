@@ -107,7 +107,7 @@
 	<!--   Maximal count of desktops which a session can hold   -->
 	<!-- ====================================================== -->
 	<session-config>
-		<max-desktops-per-session>15</max-desktops-per-session>
+		<max-desktops-per-session>10</max-desktops-per-session>
 		<timer-keep-alive>true</timer-keep-alive>
 	</session-config>
 

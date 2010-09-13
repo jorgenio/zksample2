@@ -103,40 +103,8 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		 */
 		this.self.setAttribute("controller", this, false);
 
-		// cal.addEventListener("onEventCreate", new EventListener() {
-		// public void onEvent(Event e) throws InterruptedException {
-		// System.out.println("onEventCreate");
-		// }
-		// });
-		// cal.addEventListener("onEventEdit", new EventListener() {
-		// public void onEvent(Event e) throws InterruptedException {
-		// System.out.println("onEventEdit");
-		// }
-		// });
-		// cal.addEventListener("onEventUpdate", new EventListener() {
-		// public void onEvent(Event e) throws InterruptedException {
-		// System.out.println("onEventUpdate");
-		// }
-		// });
-
 		init();
-		// dofillModel();
-	}
-
-	// public void onClick$cal(Event event) {
-	// System.out.println("onClick$cal");
-	// }
-
-	public void onEventCreate$cal(CalendarsEvent event) {
-		System.out.println("onEventCreate$cal");
-	}
-
-	public void onEventUpdate$cal(CalendarsEvent event) {
-		System.out.println("onEventUpdate$cal");
-	}
-
-	public void onEventEdit$cal(CalendarsEvent event) {
-		System.out.println("onEventEdit$cal");
+		dofillModel();
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -161,7 +129,6 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		this.cal.setFirstDayOfWeek("monday");
 		this.cal.setDays(7);
 		this.cal.setCurrentDate(new Date());
-		this.cal.setReadonly(true);
 
 		btn_Show1Day.setStyle(btnOriginColor);
 		btn_Show5Days.setStyle(btnOriginColor);
@@ -169,6 +136,18 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		btn_ShowWeek.focus();
 		btn_Show2Weeks.setStyle(btnOriginColor);
 		btn_ShowMonth.setStyle(btnOriginColor);
+	}
+
+	public void onEventCreate$cal(CalendarsEvent event) {
+		System.out.println("onEventCreate$cal");
+	}
+
+	public void onEventUpdate$cal(CalendarsEvent event) {
+		System.out.println("onEventUpdate$cal");
+	}
+
+	public void onEventEdit$cal(CalendarsEvent event) {
+		System.out.println("onEventEdit$cal");
 	}
 
 	/**
@@ -229,6 +208,8 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_Show1Day(Event event) throws InterruptedException {
+		this.cal.setMold("default");
+
 		btn_Show1Day.setStyle(btnPressedColor);
 		btn_Show5Days.setStyle(btnOriginColor);
 		btn_ShowWeek.setStyle(btnOriginColor);
@@ -245,6 +226,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_Show5Days(Event event) throws InterruptedException {
+		this.cal.setMold("default");
 
 		btn_Show1Day.setStyle(btnOriginColor);
 		btn_Show5Days.setStyle(btnPressedColor);
@@ -263,6 +245,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_ShowWeek(Event event) throws InterruptedException {
+		this.cal.setMold("default");
 
 		btn_Show1Day.setStyle(btnOriginColor);
 		btn_Show5Days.setStyle(btnOriginColor);
@@ -281,6 +264,8 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_Show2Weeks(Event event) throws InterruptedException {
+		this.cal.setMold("default");
+
 		btn_Show1Day.setStyle(btnOriginColor);
 		btn_Show5Days.setStyle(btnOriginColor);
 		btn_ShowWeek.setStyle(btnOriginColor);
@@ -298,14 +283,13 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_ShowMonth(Event event) throws InterruptedException {
-		// this.cal.setMold("month");
+		this.cal.setMold("month");
+
 		btn_Show1Day.setStyle(btnOriginColor);
 		btn_Show5Days.setStyle(btnOriginColor);
 		btn_ShowWeek.setStyle(btnOriginColor);
 		btn_Show2Weeks.setStyle(btnOriginColor);
 		btn_ShowMonth.setStyle(btnPressedColor);
-
-		this.cal.setDays(30);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //

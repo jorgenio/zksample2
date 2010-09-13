@@ -17,6 +17,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Div;
@@ -40,6 +41,8 @@ import de.forsthaus.webui.util.ZksampleUtils;
  * @author sgerth
  */
 public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
+	// public class CalendarCtrl extends GenericForwardComposer implements
+	// Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(CalendarCtrl.class);
@@ -79,6 +82,18 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	public void doAfterCompose(Component window) throws Exception {
 		super.doAfterCompose(window);
 
+		// super.doAfterCompose(comp);
+		SimpleCalendarModel cm = new SimpleCalendarModel();
+		SimpleCalendarEvent sce = new SimpleCalendarEvent();
+		sce.setBeginDate(new Date());
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.HOUR, 4);
+		sce.setEndDate(calendar.getTime());
+		sce.setContent("event");
+		cm.add(sce);
+		setCalModel(cm);
+		cal.setModel(getCalModel());
+
 		/**
 		 * 1. Set an 'alias' for this composer name to access it in the
 		 * zul-file.<br>
@@ -88,25 +103,40 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		 */
 		this.self.setAttribute("controller", this, false);
 
-		cal.addEventListener("onEventCreate", new EventListener() {
-			public void onEvent(Event e) throws InterruptedException {
-				System.out.println("onEventCreate");
-			}
-		});
-		cal.addEventListener("onEventEdit", new EventListener() {
-			public void onEvent(Event e) throws InterruptedException {
-				System.out.println("onEventEdit");
-			}
-		});
-		cal.addEventListener("onEventUpdate", new EventListener() {
-			public void onEvent(Event e) throws InterruptedException {
-				System.out.println("onEventUpdate");
-			}
-		});
+		// cal.addEventListener("onEventCreate", new EventListener() {
+		// public void onEvent(Event e) throws InterruptedException {
+		// System.out.println("onEventCreate");
+		// }
+		// });
+		// cal.addEventListener("onEventEdit", new EventListener() {
+		// public void onEvent(Event e) throws InterruptedException {
+		// System.out.println("onEventEdit");
+		// }
+		// });
+		// cal.addEventListener("onEventUpdate", new EventListener() {
+		// public void onEvent(Event e) throws InterruptedException {
+		// System.out.println("onEventUpdate");
+		// }
+		// });
 
 		init();
-		dofillModel();
+		// dofillModel();
+	}
 
+	// public void onClick$cal(Event event) {
+	// System.out.println("onClick$cal");
+	// }
+
+	public void onEventCreate$cal(CalendarsEvent event) {
+		System.out.println("onEventCreate$cal");
+	}
+
+	public void onEventUpdate$cal(CalendarsEvent event) {
+		System.out.println("onEventUpdate$cal");
+	}
+
+	public void onEventEdit$cal(CalendarsEvent event) {
+		System.out.println("onEventEdit$cal");
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -353,22 +383,6 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		// set the model
 		setCalModel(calModel);
 		cal.setModel(getCalModel());
-	}
-
-	public void onClick$cal(Event event) {
-		System.out.println("onClick$cal");
-	}
-
-	public void onEventCreate$cal(CalendarsEvent event) {
-		System.out.println("onEventCreate$cal");
-	}
-
-	public void onEventUpdate$cal(Event event) {
-		System.out.println("onEventUpdate$cal");
-	}
-
-	public void onEventEdit$cal(Event event) {
-		System.out.println("onEventEdit$cal");
 	}
 
 	/**

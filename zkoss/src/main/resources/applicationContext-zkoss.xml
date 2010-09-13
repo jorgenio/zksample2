@@ -109,7 +109,7 @@
 
 	<!-- Calendar / Kalender -->
 	<bean id="calendarCtrl" class="de.forsthaus.webui.calendar.CalendarCtrl"
-		parent="basisCtrl" scope="prototype">
+	parent="basisCtrl" scope="prototype">
 	</bean>
 
 	<!-- Documentation / Dokumentation -->

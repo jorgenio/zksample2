@@ -102,9 +102,15 @@
 						<separator bar="true" />
 
 						<hbox>
-							<h:input type="submit" value="Login" />
-							<button id="btnReset" mold="trendy"
-								height="20px" label="Reset" />
+							<!-- 
+								<h:input type="submit" value="Login" />
+								changes 5.0.4: mold="trendy" not longer needed because 
+								the new types submit/reset
+							-->
+							<button id="btnLogin" type="submit"
+								height="22px" label="Login" />
+							<button id="btnReset" type="reset"
+								height="22px" label="Reset" />
 						</hbox>
 
 					</h:form>

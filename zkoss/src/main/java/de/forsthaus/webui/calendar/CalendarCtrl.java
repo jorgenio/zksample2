@@ -95,7 +95,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		cm.add(sce);
 		setCalModel(cm);
 
-		cal.setDateFormatter(new CalendarDateFormatter());
+		// cal.setDateFormatter(new CalendarDateFormatter());
 
 		cal.setModel(getCalModel());
 

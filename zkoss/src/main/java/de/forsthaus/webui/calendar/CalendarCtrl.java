@@ -8,12 +8,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 
 import org.apache.log4j.Logger;
 import org.zkoss.calendar.Calendars;
-import org.zkoss.calendar.api.DateFormatter;
 import org.zkoss.calendar.event.CalendarsEvent;
 import org.zkoss.calendar.impl.SimpleCalendarEvent;
 import org.zkoss.calendar.impl.SimpleCalendarModel;

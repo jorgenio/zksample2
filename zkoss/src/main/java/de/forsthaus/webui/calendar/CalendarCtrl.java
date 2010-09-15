@@ -17,6 +17,7 @@ import org.zkoss.calendar.impl.SimpleCalendarModel;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;
@@ -87,7 +88,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		SimpleCalendarModel cm = new SimpleCalendarModel();
 		SimpleCalendarEvent sce = new SimpleCalendarEvent();
 		sce.setBeginDate(new Date());
-		Calendar calendar = Calendar.getInstance();
+		Calendar calendar = Calendar.getInstance().getInstance(org.zkoss.util.Locales.getCurrent());
 		calendar.add(Calendar.HOUR, 4);
 		sce.setEndDate(calendar.getTime());
 		sce.setContent("event");

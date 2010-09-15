@@ -48,12 +48,12 @@ public class CalendarDateFormatter implements DateFormatter, Serializable {
 
 	@Override
 	public String getCaptionByTimeOfDay(Date date, Locale locale, TimeZone timezone) {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		cal.add(Calendar.HOUR, -1);
-
-		Date correctDate = cal.getTime();
-		String s = ZksampleDateFormat.getTimeFormater().format(correctDate);
+		// Calendar cal = Calendar.getInstance();
+		// cal.setTime(date);
+		// cal.add(Calendar.HOUR, -1);
+		//
+		// Date correctDate = cal.getTime();
+		String s = ZksampleDateFormat.getTimeFormater().format(date);
 		return s;
 	}
 

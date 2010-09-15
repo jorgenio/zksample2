@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.zkoss.calendar.event.CalendarsEvent;
 import org.zkoss.calendar.impl.SimpleCalendarEvent;
 import org.zkoss.calendar.impl.SimpleCalendarModel;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -140,14 +142,59 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 
 	public void onEventCreate$cal(CalendarsEvent event) {
 		System.out.println("onEventCreate$cal");
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("calendarController", this);
+		map.put("calendarEvent", event);
+
+		try {
+			Executions.createComponents("/WEB-INF/pages/calendar/cal_createEvent.zul", windowCalendar, map);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	public void onEventUpdate$cal(CalendarsEvent event) {
 		System.out.println("onEventUpdate$cal");
+		
+		CalendarsEvent evt = (CalendarsEvent) event;
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/d");
+		sdf1.setTimeZone(cal.getDefaultTimeZone());
+//		StringBuffer sb = new StringBuffer("Update... from ");
+//		sb.append(sdf1.format(evt.getCalendarEvent().getBeginDate()));
+//		sb.append(" to ");
+//		sb.append(sdf1.format(evt.getBeginDate()));
+//		updateMsg.getFirstChild().getNextSibling().setValue(sb.toString());
+		int left = evt.getX();
+		int top = evt.getY();
+		if (top + 100 > evt.getDesktopHeight())
+			top = evt.getDesktopHeight() - 100;
+		if (left + 330 > evt.getDesktopWidth())
+			left = evt.getDesktopWidth() - 330;
+//		updateMsg.open(left, top);
+//		timer.start();
+//		org.zkoss.calendar.Calendars cal = (org.zkoss.calendar.Calendars) evt.getTarget();
+		
+		org.zkoss.calendar.Calendars cal = getCal();
+		SimpleCalendarModel m = (SimpleCalendarModel) cal.getModel();
+		SimpleCalendarEvent sce = (SimpleCalendarEvent) evt.getCalendarEvent();
+		sce.setBeginDate(evt.getBeginDate());
+		sce.setEndDate(evt.getEndDate());
+		m.update(sce);
 	}
 
 	public void onEventEdit$cal(CalendarsEvent event) {
 		System.out.println("onEventEdit$cal");
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("calendarController", this);
+		map.put("calendarEvent", event);
+
+		try {
+			Executions.createComponents("/WEB-INF/pages/calendar/cal_editEvent.zul", windowCalendar, map);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	/**
@@ -419,6 +466,14 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 
 	public SimpleCalendarModel getCalModel() {
 		return calModel;
+	}
+
+	public Calendars getCal() {
+		return cal;
+	}
+
+	public void setCal(Calendars cal) {
+		this.cal = cal;
 	}
 
 }

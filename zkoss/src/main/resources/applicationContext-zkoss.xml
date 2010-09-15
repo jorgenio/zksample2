@@ -109,8 +109,17 @@
 
 	<!-- Calendar / Kalender -->
 	<bean id="calendarCtrl" class="de.forsthaus.webui.calendar.CalendarCtrl"
-	parent="basisCtrl" scope="prototype">
+		parent="basisCtrl" scope="prototype">
 	</bean>
+	<!-- create event / Termin anlegen -->
+	<bean id="createEventCtrl" class="de.forsthaus.webui.calendar.CalendarCreateEventCtrl"
+		parent="basisCtrl" scope="prototype">
+	</bean>
+	<!-- edit event / Termin aendern -->
+	<bean id="editEventCtrl" class="de.forsthaus.webui.calendar.CalendarEditEventCtrl"
+		parent="basisCtrl" scope="prototype">
+	</bean>
+
 
 	<!-- Documentation / Dokumentation -->
 	<bean id="documentationCtrl" class="de.forsthaus.webui.documentation.DocumentationCtrl"

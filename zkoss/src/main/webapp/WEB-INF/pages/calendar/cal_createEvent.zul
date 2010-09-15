@@ -8,11 +8,12 @@
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 	<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 
-	<window width="400px" title="Create Event" border="normal"
+	<window width="400px" title="Create Event" border="none"
 		id="createEventWindow" apply="${createEventCtrl}" mode="modal"
 		visible="false" closable="true">
 
-		<grid fixedLayout="true">
+		<grid sclass="GridLayoutNoBorder" fixedLayout="true"
+			style="border:0px">
 			<columns>
 				<column width="100px" />
 				<column />
@@ -90,16 +91,14 @@
 					Unmodifiable:
 					<checkbox id="pplocked" />
 				</row>
-				<row>
-					Submit:
-					<div>
-						<button id="btnOK" mold="os" label="OK" />
 
-						<button id="btnCancel" mold="os" label="Cancel" />
-
-					</div>
-				</row>
 			</rows>
 		</grid>
+
+		<separator bar="true" />
+		<hlayout hflex="1">
+			<button id="btnOK" mold="os" label="OK" />
+			<button id="btnCancel" mold="os" label="Cancel" />
+		</hlayout>
 	</window>
 </zk>

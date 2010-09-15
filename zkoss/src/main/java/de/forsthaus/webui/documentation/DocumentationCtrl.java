@@ -1,27 +1,20 @@
 package de.forsthaus.webui.documentation;
 
-import java.io.FileNotFoundException;
 import java.io.Serializable;
-import java.net.MalformedURLException;
 
 import org.apache.log4j.Logger;
 import org.zkoss.util.media.AMedia;
-import org.zkoss.util.media.Media;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Iframe;
 import org.zkoss.zul.Intbox;
-import org.zkoss.zul.Paging;
 import org.zkoss.zul.Window;
 
-import de.forsthaus.webui.InitApplicationCtrl;
-import de.forsthaus.webui.branch.BranchMainCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 
 /**

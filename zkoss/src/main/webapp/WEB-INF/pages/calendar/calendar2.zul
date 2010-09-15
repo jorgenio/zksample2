@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
-
-<window id="windowCalendar" border="normal" width="800px" height="600px"
-	mode="modal">
-
-	<calendars />
-
-</window>

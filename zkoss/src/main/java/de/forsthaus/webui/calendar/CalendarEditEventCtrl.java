@@ -13,6 +13,7 @@ import org.zkoss.calendar.api.CalendarEvent;
 import org.zkoss.calendar.event.CalendarsEvent;
 import org.zkoss.calendar.impl.SimpleCalendarEvent;
 import org.zkoss.calendar.impl.SimpleCalendarModel;
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -27,6 +28,7 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import de.forsthaus.webui.util.GFCBaseCtrl;
+import de.forsthaus.webui.util.MultiLineMessageBox;
 
 /**
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -193,8 +195,9 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 
 	public void onClose$editEventWindow(Event event) {
 
+		getEditEvent().clearGhost();
+
 		event.stopPropagation();
-		((CalendarsEvent) event).clearGhost();
 
 		editEventWindow.onClose();
 	}
@@ -263,18 +266,37 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 
 	public void onClick$btnDelete(Event event) throws InterruptedException {
 
-		Messagebox.show("Are you sure to delete the event!", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new EventListener() {
-			public void onEvent(Event evt) {
-				if (((Integer) evt.getData()).intValue() != Messagebox.OK)
-					return;
+		// Show a confirm box
+		final String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record");
+		final String title = Labels.getLabel("message.Deleting.Record");
 
+		MultiLineMessageBox.doSetTemplate();
+		if (MultiLineMessageBox.show(msg, title, Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, true, new EventListener() {
+			@Override
+			public void onEvent(Event evt) {
+				switch (((Integer) evt.getData()).intValue()) {
+				case MultiLineMessageBox.YES:
+					deleteBean();
+					break; //
+				case MultiLineMessageBox.NO:
+					break; //
+				}
+			}
+
+			private void deleteBean() {
+				// TODO delete from database
 				Calendars cals = getCalendarCtrl().getCal();
 				SimpleCalendarEvent ce = (SimpleCalendarEvent) editEventWindow.getAttribute("ce");
 				((SimpleCalendarModel) cals.getModel()).remove(ce);
 
 				syncModel();
 			}
-		});
+
+		}
+
+		) == MultiLineMessageBox.YES) {
+		}
+
 		editEventWindow.onClose();
 	}
 

@@ -154,10 +154,10 @@ public class CalendarCreateEventCtrl extends GFCBaseCtrl implements Serializable
 	}
 
 	public void onClose$createEventWindow(Event event) {
-		logger.debug(event.toString());
+
+		getNewEvent().clearGhost();
 
 		event.stopPropagation();
-		((CalendarsEvent) event).clearGhost();
 
 		createEventWindow.onClose();
 	}

@@ -8,9 +8,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import org.apache.log4j.Logger;
 import org.zkoss.calendar.Calendars;
+import org.zkoss.calendar.api.DateFormatter;
 import org.zkoss.calendar.event.CalendarsEvent;
 import org.zkoss.calendar.impl.SimpleCalendarEvent;
 import org.zkoss.calendar.impl.SimpleCalendarModel;
@@ -18,12 +21,11 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.West;
 import org.zkoss.zul.Window;
 
 import de.forsthaus.webui.util.GFCBaseCtrl;
@@ -94,6 +96,9 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		sce.setContent("event");
 		cm.add(sce);
 		setCalModel(cm);
+
+		cal.setDateFormatter(new CalendarDateFormatter());
+
 		cal.setModel(getCalModel());
 
 		/**
@@ -125,6 +130,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public void init() {
+
 		// cal.addTimeZone("Mexico", "GMT-6");
 		this.cal.addTimeZone("Germany", "GMT+1");
 		this.cal.setMold("default");
@@ -141,7 +147,6 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public void onEventCreate$cal(CalendarsEvent event) {
-		System.out.println("onEventCreate$cal");
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("calendarController", this);
@@ -155,26 +160,26 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public void onEventUpdate$cal(CalendarsEvent event) {
-		System.out.println("onEventUpdate$cal");
-		
+
 		CalendarsEvent evt = (CalendarsEvent) event;
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/d");
 		sdf1.setTimeZone(cal.getDefaultTimeZone());
-//		StringBuffer sb = new StringBuffer("Update... from ");
-//		sb.append(sdf1.format(evt.getCalendarEvent().getBeginDate()));
-//		sb.append(" to ");
-//		sb.append(sdf1.format(evt.getBeginDate()));
-//		updateMsg.getFirstChild().getNextSibling().setValue(sb.toString());
+		// StringBuffer sb = new StringBuffer("Update... from ");
+		// sb.append(sdf1.format(evt.getCalendarEvent().getBeginDate()));
+		// sb.append(" to ");
+		// sb.append(sdf1.format(evt.getBeginDate()));
+		// updateMsg.getFirstChild().getNextSibling().setValue(sb.toString());
 		int left = evt.getX();
 		int top = evt.getY();
 		if (top + 100 > evt.getDesktopHeight())
 			top = evt.getDesktopHeight() - 100;
 		if (left + 330 > evt.getDesktopWidth())
 			left = evt.getDesktopWidth() - 330;
-//		updateMsg.open(left, top);
-//		timer.start();
-//		org.zkoss.calendar.Calendars cal = (org.zkoss.calendar.Calendars) evt.getTarget();
-		
+		// updateMsg.open(left, top);
+		// timer.start();
+		// org.zkoss.calendar.Calendars cal = (org.zkoss.calendar.Calendars)
+		// evt.getTarget();
+
 		org.zkoss.calendar.Calendars cal = getCal();
 		SimpleCalendarModel m = (SimpleCalendarModel) cal.getModel();
 		SimpleCalendarEvent sce = (SimpleCalendarEvent) evt.getCalendarEvent();
@@ -184,7 +189,6 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	public void onEventEdit$cal(CalendarsEvent event) {
-		System.out.println("onEventEdit$cal");
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("calendarController", this);
@@ -226,6 +230,30 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void onClick$btn_Calendar_PrintCalendar(Event event) throws InterruptedException {
 		ZksampleUtils.doShowNotImplementedMessage();
+	}
+
+	/**
+	 * when the "resize to full screen" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnFullScreen(Event event) throws InterruptedException {
+
+		final Borderlayout bl = ((Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain"));
+		final West west = bl.getWest();
+
+		if (west != null) {
+			try {
+				if (west.isOpen()) {
+					west.setOpen(false);
+				} else
+					west.setOpen(true);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+
 	}
 
 	/**

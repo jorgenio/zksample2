@@ -22,12 +22,28 @@ import org.apache.commons.lang.time.FastDateFormat;
 import org.zkoss.util.resource.Labels;
 
 /**
+ * DateFormatter for working with the i3labels.properties file.<br>
+ * 
  * @author bbruhns
+ * @author sgerth
  * 
  */
 final public class ZksampleDateFormat {
+
+	static public FastDateFormat getDayNumberFormater() {
+		return FastDateFormat.getInstance(Labels.getLabel("format.dayNumber", "dd"));
+	}
+
+	static public FastDateFormat getDaynameFormater() {
+		return FastDateFormat.getInstance(Labels.getLabel("format.dayName", "EEE"));
+	}
+
 	static public FastDateFormat getDateFormater() {
-		return FastDateFormat.getInstance(Labels.getLabel("format.date", "dd.MM.yyyy"));
+		return FastDateFormat.getInstance(Labels.getLabel("format.date", "MM.dd.yyyy"));
+	}
+
+	static public FastDateFormat getMonth3DigitsFormater() {
+		return FastDateFormat.getInstance(Labels.getLabel("format.month3digits", "MMM"));
 	}
 
 	static public FastDateFormat getTimeFormater() {
@@ -39,10 +55,14 @@ final public class ZksampleDateFormat {
 	}
 
 	static public FastDateFormat getDateTimeFormater() {
-		return FastDateFormat.getInstance(Labels.getLabel("format.datetime", "dd.MM.yyyy HH:mm"));
+		return FastDateFormat.getInstance(Labels.getLabel("format.datetime", "MM.dd.yyyy HH:mm"));
 	}
 
 	static public FastDateFormat getDateTimeLongFormater() {
-		return FastDateFormat.getInstance(Labels.getLabel("format.datetimelong", "dd.MM.yyyy HH:mm:ss"));
+		return FastDateFormat.getInstance(Labels.getLabel("format.datetimelong", "MM.dd.yyyy HH:mm:ss"));
+	}
+
+	static public FastDateFormat getDaynameDateMonthFormater() {
+		return FastDateFormat.getInstance(Labels.getLabel("format.dayNameDateMonth", "EE MM.dd"));
 	}
 }

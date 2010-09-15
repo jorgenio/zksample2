@@ -111,7 +111,7 @@
 			</north>
 
 			<!-- MAIN MENU AREA -->
-			<west border="none" margins="0,0,0,0" size="230px"
+			<west id="west" border="none" margins="0,0,0,0" size="230px"
 				collapsible="true" style="background-color: #D6DCDE; padding: 5px"
 				flex="true" minsize="100" splittable="true" autoscroll="false">
 				<div id="divWest">WEST</div>

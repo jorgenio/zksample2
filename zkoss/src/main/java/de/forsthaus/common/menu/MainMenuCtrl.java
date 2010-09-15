@@ -22,8 +22,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 
-import javax.security.auth.callback.ConfirmationCallback;
-
 import org.apache.log4j.Logger;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
@@ -32,15 +30,12 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zk.ui.event.EventQueues;
-import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Center;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Hbox;
-import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Menubar;
 import org.zkoss.zul.Menuitem;
 import org.zkoss.zul.Messagebox;
@@ -59,8 +54,6 @@ import org.zkoss.zul.Window;
 
 import de.forsthaus.common.menu.dropdown.ZkossDropDownMenuFactory;
 import de.forsthaus.common.menu.tree.ZkossTreeMenuFactory;
-import de.forsthaus.webui.util.InputConfirmBox;
-import de.forsthaus.webui.util.InputMessageTextBox;
 import de.forsthaus.webui.util.WindowBaseCtrl;
 
 /**

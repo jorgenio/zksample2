@@ -69,6 +69,7 @@ DROP TABLE IF EXISTS artikel cascade;
 DROP TABLE IF EXISTS auftrag cascade;
 DROP TABLE IF EXISTS auftragposition cascade;
 DROP TABLE IF EXISTS branche cascade;
+DROP TABLE IF EXISTS calendar_event cascade;
 
 DROP TABLE IF EXISTS sec_user cascade;
 DROP TABLE IF EXISTS sec_userrole cascade;
@@ -296,6 +297,33 @@ aup_id
 );
 
 /*==============================================================*/
+/* Table: calendar_event                                        */
+/*==============================================================*/
+create table calendar_event (
+   cle_id               INT8                 not null,
+   cle_title            VARCHAR(20)          not null,
+   cle_content          VARCHAR(300)         null,
+   cle_begin_date       TIMESTAMP            not null,
+   cle_end_date         TIMESTAMP            null,
+   cle_title_color      VARCHAR(10)          null,
+   cle_content_color    VARCHAR(10)          null,
+   cle_usr_id           INT8                 not null,
+   version              INT4                 not null default 0,
+   constraint PK_CALENDAR_EVENT primary key (cle_id)
+)
+without oids;
+
+-- set table ownership
+alter table calendar_event owner to toledo
+;
+/*==============================================================*/
+/* Index: idx_cle_id                                            */
+/*==============================================================*/
+create unique index idx_cle_id on calendar_event (
+cle_id
+);
+
+/*==============================================================*/
 /* Table: filiale                                               */
 /*==============================================================*/
 create table filiale (
@@ -343,7 +371,7 @@ create table guestbook (
    gub_date             TIMESTAMP            not null,
    gub_usr_name         VARCHAR(40)          not null,
    gub_text             TEXT                 null,
-   version              INT4                 null,
+   version              INT4                 not null default 0,
    constraint PK_GUESTBOOK primary key (gub_id)
 )
 without oids;
@@ -811,6 +839,44 @@ ccd_code2
 );
 
 /*==============================================================*/
+/* Table: sys_ip4city                                           */
+/*==============================================================*/
+create table sys_ip4city (
+   i4ci_id              INT8                 not null,
+   i4ci_ip              INT8                 null,
+   i4ci_city            VARCHAR(50)          null,
+   i4ci_latitude        FLOAT4               null,
+   i4ci_longitude       FLOAT4               null,
+   version              INT4                 null default 0,
+   constraint PK_SYS_IP4CITY primary key (i4ci_id)
+)
+without oids;
+
+-- set table ownership
+alter table sys_ip4city owner to toledo
+;
+/*==============================================================*/
+/* Index: idx_i4c_id                                            */
+/*==============================================================*/
+create unique index idx_i4c_id on sys_ip4city (
+i4ci_id
+);
+
+/*==============================================================*/
+/* Index: idx_i4c_ip                                            */
+/*==============================================================*/
+create  index idx_i4c_ip on sys_ip4city (
+i4ci_ip
+);
+
+/*==============================================================*/
+/* Index: idx_i4c_city                                          */
+/*==============================================================*/
+create  index idx_i4c_city on sys_ip4city (
+i4ci_city
+);
+
+/*==============================================================*/
 /* Table: sys_ip4country                                        */
 /*==============================================================*/
 create table sys_ip4country (
@@ -846,7 +912,6 @@ create  index idx_i4co_ccd_id on sys_ip4country (
 i4co_ccd_id
 );
 
-
 alter table auftrag
    add constraint ref_auf_to_kun foreign key (auf_kun_id)
       references kunde (kun_id)
@@ -861,6 +926,11 @@ alter table auftragposition
    add constraint ref_aup_to_auf foreign key (aup_auf_id)
       references auftrag (auf_id)
       on delete cascade on update cascade;
+
+alter table calendar_event
+   add constraint ref_USR_to_CLE foreign key (cle_usr_id)
+      references sec_user (usr_id)
+      on delete restrict on update restrict;
 
 alter table kunde
    add constraint ref_kun_to_bra foreign key (kun_bra_id)
@@ -911,7 +981,6 @@ alter table sec_userrole
    add constraint ref_aut_to_usr foreign key (usr_id)
       references sec_user (usr_id)
       on delete restrict on update restrict;
-
       
       
       

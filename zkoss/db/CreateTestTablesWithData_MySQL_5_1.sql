@@ -13,6 +13,7 @@ drop table if exists branche;
 drop table if exists artikel;
 drop table if exists auftragposition;
 drop table if exists filiale;
+DROP TABLE IF EXISTS calendar_event;
 
 drop table if exists sec_user;
 drop table if exists sec_group;
@@ -195,6 +196,31 @@ create unique index ix_aup_id on auftragposition
 (
    aup_id
 );
+
+
+/*==============================================================*/
+/* Table: calendar_event                                        */
+/*==============================================================*/
+create table calendar_event (
+   cle_id               bigint                 not null,
+   cle_title            VARCHAR(20)          not null,
+   cle_content          VARCHAR(300)         null,
+   cle_begin_date       TIMESTAMP            not null,
+   cle_end_date         TIMESTAMP            null,
+   cle_title_color      VARCHAR(10)          null,
+   cle_content_color    VARCHAR(10)          null,
+   cle_usr_id           bigint                 not null,
+   version              int                 not null default 0,
+   primary key (cle_id)
+);
+
+/*==============================================================*/
+/* Index: idx_cle_id                                            */
+/*==============================================================*/
+create unique index idx_cle_id on calendar_event (
+cle_id
+);
+
 
 /*==============================================================*/
 /* Table: filiale                                               */
@@ -575,8 +601,8 @@ create table guestbook (
    gub_subject          VARCHAR(40)          not null,
    gub_date             TIMESTAMP            not null,
    gub_usr_name         VARCHAR(40)          not null,
-   gub_text             TEXT                 ,
-   version              INT                 ,
+   gub_text             TEXT                 null,
+   version              INT                 not null default 0,
    constraint PK_GUESTBOOK primary key (gub_id)
 );
 

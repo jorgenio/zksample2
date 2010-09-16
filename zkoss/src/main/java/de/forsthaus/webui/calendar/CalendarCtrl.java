@@ -95,7 +95,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		cm.add(sce);
 		setCalModel(cm);
 
-		// cal.setDateFormatter(new CalendarDateFormatter());
+		cal.setDateFormatter(new CalendarDateFormatter());
 
 		cal.setModel(getCalModel());
 
@@ -130,8 +130,8 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	public void init() {
 
 		// cal.addTimeZone("Mexico", "GMT-6");
-		this.cal.addTimeZone("Germany", "GMT+1");
-		this.cal.setTimeZone("Germany=GMT+1");
+		// this.cal.addTimeZone("Germany", "GMT+1");
+		// this.cal.setTimeZone("Germany=GMT+1");
 		this.cal.setMold("default");
 		this.cal.setFirstDayOfWeek("monday");
 		this.cal.setDays(7);

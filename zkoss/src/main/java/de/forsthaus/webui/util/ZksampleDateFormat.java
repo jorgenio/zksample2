@@ -38,6 +38,10 @@ final public class ZksampleDateFormat {
 		return FastDateFormat.getInstance(Labels.getLabel("format.dayName", "EEE"));
 	}
 
+	static public FastDateFormat getDayMonthFormater() {
+		return FastDateFormat.getInstance(Labels.getLabel("format.DayMonth", "MM/dd"));
+	}
+
 	static public FastDateFormat getDateFormater() {
 		return FastDateFormat.getInstance(Labels.getLabel("format.date", "MM.dd.yyyy"));
 	}

@@ -278,7 +278,6 @@ public class CalendarCreateEventCtrl extends GFCBaseCtrl implements Serializable
 		ppet.setSelectedIndex(0);
 
 		final SecUser user = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSecUser();
-		System.out.println(user.toString());
 
 		// prepare the backend Bean
 		MyCalendarEvent calEvt = getCalendarEventService().getNewCalendarEvent();

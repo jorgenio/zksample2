@@ -25,7 +25,7 @@ import de.forsthaus.backend.model.Article;
 import de.forsthaus.backend.service.ArticleService;
 
 /**
- * Service implementation for methods that depends on <b>Order model</b> class.<br>
+ * Service implementation for methods that depends on <b>Orders</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

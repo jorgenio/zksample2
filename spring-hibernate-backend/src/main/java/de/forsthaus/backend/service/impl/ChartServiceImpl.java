@@ -25,8 +25,7 @@ import de.forsthaus.backend.model.ChartData;
 import de.forsthaus.backend.service.ChartService;
 
 /**
- * Service implementation for methods that depends on <b>ChartData model</b>
- * class.<br>
+ * Service implementation for methods that depends on <b>Charts</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

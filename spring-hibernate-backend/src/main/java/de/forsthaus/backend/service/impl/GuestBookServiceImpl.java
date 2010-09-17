@@ -23,8 +23,7 @@ import de.forsthaus.backend.model.GuestBook;
 import de.forsthaus.backend.service.GuestBookService;
 
 /**
- * Service implementation for methods that depends on <b>Guestbook model</b>
- * class.<br>
+ * Service implementation for methods that depends on the <b>Guestbook</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

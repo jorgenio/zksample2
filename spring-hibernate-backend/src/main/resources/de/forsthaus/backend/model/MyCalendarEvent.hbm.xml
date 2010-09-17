@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	<!-- Generated 16.06.2009 15:36:35 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+	<class name="de.forsthaus.backend.model.MyCalendarEvent" table="calendar_event">
+
+		<id name="id" type="long">
+			<column name="cle_id" />
+			<generator class="assigned" />
+		</id>
+
+		<version name="version" column="VERSION" type="integer" />
+
+		<property name="title" type="string">
+			<column name="cle_title" length="20" />
+		</property>
+		<property name="content" type="string">
+			<column name="cle_content" length="300" not-null="true" />
+		</property>
+		<property name="beginDate" type="timestamp">
+			<column name="cle_begin_date" length="29" not-null="true" />
+		</property>
+		<property name="endDate" type="timestamp">
+			<column name="cle_end_date" length="29" not-null="true" />
+		</property>
+		<property name="headerColor" type="string">
+			<column name="cle_header_color" length="10" />
+		</property>
+		<property name="contentColor" type="string">
+			<column name="cle_content_color" length="10" />
+		</property>
+		<property name="locked" type="java.lang.Boolean">
+			<column name="cle_locked" />
+		</property>
+
+		<many-to-one name="secUser" class="de.forsthaus.backend.model.SecUser"
+			fetch="select">
+			<column name="cle_usr_id" />
+		</many-to-one>
+
+	</class>
+</hibernate-mapping>

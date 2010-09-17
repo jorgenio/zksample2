@@ -28,8 +28,7 @@ import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.service.CustomerService;
 
 /**
- * Service implementation for methods that depends on <b>Customer model</b>
- * class.<br>
+ * Service implementation for methods that depends on <b>Customers</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

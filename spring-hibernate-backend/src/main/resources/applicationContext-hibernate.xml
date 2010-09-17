@@ -53,6 +53,8 @@
 				</value>
 				<value>de/forsthaus/backend/model/SysCountryCode.hbm.xml
 				</value>
+				<value>de/forsthaus/backend/model/MyCalendarEvent.hbm.xml
+				</value>
 				<value>de/forsthaus/backend/model/HibernateEntityStatistics.hbm.xml
 				</value>
 				<value>de/forsthaus/backend/model/HibernateStatistics.hbm.xml
@@ -147,6 +149,9 @@
 	<bean id="ip4CountryDAO" class="de.forsthaus.backend.dao.impl.Ip4CountryDAOImpl"
 		parent="basisNextidDao" />
 	<bean id="sysCountryCodeDAO" class="de.forsthaus.backend.dao.impl.SysCountryCodeDAOImpl"
+		parent="basisNextidDao" />
+
+	<bean id="calendarEventDAO" class="de.forsthaus.backend.dao.impl.MyCalendarEventDAOImpl"
 		parent="basisNextidDao" />
 
 	<bean id="hibernateStatisticsDao"
@@ -246,6 +251,11 @@
 		<property name="sysCountryCodeDAO" ref="sysCountryCodeDAO" />
 	</bean>
 
+	<bean name="calendarEventService"
+		class="de.forsthaus.backend.service.impl.MyCalendarEventServiceImpl">
+		<property name="calendarEventDAO" ref="calendarEventDAO" />
+	</bean>
+
 	<bean name="hibernateStatisticsService"
 		class="de.forsthaus.backend.service.impl.HibernateStatisticsServiceImpl">
 		<property name="hibernateStatisticsDao" ref="hibernateStatisticsDao" />
@@ -269,6 +279,7 @@
 		<property name="secLoginlogDAO" ref="secLoginlogDAO" />
 		<property name="sysCountryCodeDAO" ref="sysCountryCodeDAO" />
 		<property name="ipToCountryDAO" ref="ipToCountryDAO" />
+		<property name="calendarEventDAO" ref="calendarEventDAO" />
 	</bean>
 
 </beans>

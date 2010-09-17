@@ -26,7 +26,7 @@ import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.service.BrancheService;
 
 /**
- * Service implementation for methods that depends on <b>Branch model</b> class.<br>
+ * Service implementation for methods that depends on <b>Branches</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

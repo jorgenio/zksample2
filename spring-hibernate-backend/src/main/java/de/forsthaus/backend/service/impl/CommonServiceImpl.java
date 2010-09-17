@@ -5,6 +5,7 @@ import java.util.Map;
 
 import de.forsthaus.backend.dao.ArticleDAO;
 import de.forsthaus.backend.dao.BrancheDAO;
+import de.forsthaus.backend.dao.MyCalendarEventDAO;
 import de.forsthaus.backend.dao.CustomerDAO;
 import de.forsthaus.backend.dao.GuestBookDAO;
 import de.forsthaus.backend.dao.IpToCountryDAO;
@@ -25,6 +26,7 @@ import de.forsthaus.backend.service.CommonService;
 
 /**
  * Service implementation for methods that depends on <b>all DAO methods</b>.<br>
+ * Mainly used for get back the size for every table.
  * 
  * @author bbruhns
  * @author sgerth
@@ -49,6 +51,7 @@ public class CommonServiceImpl implements CommonService {
 	private SecTypDAO secTypDAO;
 	private SecLoginlogDAO secLoginlogDAO;
 	private SysCountryCodeDAO sysCountryCodeDAO;
+	private MyCalendarEventDAO calendarEventDAO;
 
 	public ArticleDAO getArticleDAO() {
 		return articleDAO;
@@ -194,6 +197,14 @@ public class CommonServiceImpl implements CommonService {
 		return sysCountryCodeDAO;
 	}
 
+	public void setCalendarEventDAO(MyCalendarEventDAO calendarEventDAO) {
+		this.calendarEventDAO = calendarEventDAO;
+	}
+
+	public MyCalendarEventDAO getCalendarEventDAO() {
+		return calendarEventDAO;
+	}
+
 	@Override
 	public Map<String, Object> getAllTablesRecordCounts() {
 
@@ -216,7 +227,7 @@ public class CommonServiceImpl implements CommonService {
 		map.put("SecLoginlog", getSecLoginlogDAO().getCountAllSecLoginlog());
 		map.put("SysCountryCode", getSysCountryCodeDAO().getCountAllSysCountrycode());
 		map.put("IpToCountry", getIpToCountryDAO().getCountAllIpToCountry());
+		map.put("CalendarEvents", getCalendarEventDAO().getCountAllCalendarEvents());
 		return map;
 	}
-
 }

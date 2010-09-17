@@ -301,13 +301,14 @@ aup_id
 /*==============================================================*/
 create table calendar_event (
    cle_id               INT8                 not null,
-   cle_title            VARCHAR(20)          not null,
-   cle_content          VARCHAR(300)         null,
+   cle_title            VARCHAR(20)          null,
+   cle_content          VARCHAR(300)         not null,
    cle_begin_date       TIMESTAMP            not null,
-   cle_end_date         TIMESTAMP            null,
-   cle_title_color      VARCHAR(10)          null,
+   cle_end_date         TIMESTAMP            not null,
+   cle_header_color     VARCHAR(10)          null,
    cle_content_color    VARCHAR(10)          null,
    cle_usr_id           INT8                 not null,
+   cle_locked           BOOL                 null default false,
    version              INT4                 not null default 0,
    constraint PK_CALENDAR_EVENT primary key (cle_id)
 )

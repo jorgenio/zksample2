@@ -1,6 +1,25 @@
+/**
+ * Copyright 2010 the original author or authors.
+ * 
+ * This file is part of Zksample2. http://zksample2.sourceforge.net/
+ *
+ * Zksample2 is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Zksample2 is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zksample2.  If not, see <http://www.gnu.org/licenses/gpl.html>.
+ */
 package de.forsthaus.webui.calendar;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -11,7 +30,6 @@ import org.apache.log4j.Logger;
 import org.zkoss.calendar.Calendars;
 import org.zkoss.calendar.api.CalendarEvent;
 import org.zkoss.calendar.event.CalendarsEvent;
-import org.zkoss.calendar.impl.SimpleCalendarEvent;
 import org.zkoss.calendar.impl.SimpleCalendarModel;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
@@ -27,12 +45,15 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
+import de.forsthaus.backend.model.MyCalendarEvent;
+import de.forsthaus.backend.service.MyCalendarEventService;
+import de.forsthaus.webui.calendar.model.MySimpleCalendarEvent;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 
 /**
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
- * Controller for the calendar create event module.<br>
+ * Controller for the calendar edit event module.<br>
  * <br>
  * zul-file: /WEB-INF/pages/calendar/cal_createEvent.zul.<br>
  * <br>
@@ -73,6 +94,9 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 	private CalendarCtrl calendarCtrl;
 	private CalendarsEvent editEvent;
 
+	// ServiceDAOs / Domain Classes
+	MyCalendarEventService calendarEventService;
+
 	/**
 	 * default constructor.<br>
 	 */
@@ -91,12 +115,22 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 		if (this.arg.containsKey("calendarController")) {
 			setCalendarCtrl((CalendarCtrl) this.arg.get("calendarController"));
 		}
-		if (this.arg.containsKey("calendarEvent")) {
-			setEditEvent(((CalendarsEvent) this.arg.get("calendarEvent")));
+		if (this.arg.containsKey("calendarsEvent")) {
+			setEditEvent(((CalendarsEvent) this.arg.get("calendarsEvent")));
 		} else
 			setEditEvent(null);
 	}
 
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// +++++++++++++++ Component Events ++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
+	/**
+	 * Automatically called method from zk.
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	public void onCreate$editEventWindow(Event event) {
 
 		List dateTime = new LinkedList();
@@ -126,7 +160,6 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 		editEventWindow.setLeft(left + "px");
 		editEventWindow.setTop(top + "px");
 
-		// CalendarEvent ce = evt.getCalendarEvent();
 		CalendarEvent ce = evt.getCalendarEvent();
 
 		SimpleDateFormat edit_sdf = new SimpleDateFormat("HH:mm");
@@ -193,6 +226,11 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 		editEventWindow.setAttribute("calendars", getCalendarCtrl().getCal());
 	}
 
+	/**
+	 * Called if this window is closed.
+	 * 
+	 * @param event
+	 */
 	public void onClose$editEventWindow(Event event) {
 
 		getEditEvent().clearGhost();
@@ -202,11 +240,49 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 		editEventWindow.onClose();
 	}
 
+	/**
+	 * If the button 'OK' is clicked.
+	 * 
+	 * @param event
+	 */
 	public void onClick$btnOK(Event event) {
+		doSave(event);
+	}
+
+	/**
+	 * If the button 'Delete' is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnDelete(Event event) throws InterruptedException {
+		doDelete(event);
+	}
+
+	/**
+	 * If the button 'Cancel' is clicked.
+	 * 
+	 * @param event
+	 */
+	public void onClick$btnCancel(Event event) {
+		doCancel(event);
+	}
+
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// +++++++++++++++++ Business Logic ++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
+	/**
+	 * Saves the current edited CalendarEvent and closes the window.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void doSave(Event event) {
 
 		org.zkoss.calendar.Calendars cals = getCalendarCtrl().getCal();
 
-		SimpleCalendarEvent ce = (SimpleCalendarEvent) editEventWindow.getAttribute("ce");
+		MySimpleCalendarEvent ce = (MySimpleCalendarEvent) editEventWindow.getAttribute("ce");
 		Calendar cal = Calendar.getInstance(cals.getDefaultTimeZone());
 		Date beginDate = ppbegin.getValue();
 		Date endDate = ppend.getValue();
@@ -257,14 +333,37 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 		ce.setContent(ppcnt.getValue());
 		ce.setLocked(pplocked.isChecked());
 
-		// update the model
-		getCalendarCtrl().getCalModel().update(ce);
+		// prepare the backend Bean
+		MyCalendarEvent calEvt = getCalendarEventService().getNewCalendarEvent();
+		calEvt.setId(ce.getId());
+		calEvt.setSecUser(ce.getUser());
+		calEvt.setVersion(ce.getVersion());
+		calEvt.setTitle(ce.getTitle());
+		calEvt.setContent(ce.getContent());
+		calEvt.setBeginDate(ce.getBeginDate());
+		calEvt.setEndDate(ce.getEndDate());
+		calEvt.setHeaderColor(ce.getHeaderColor());
+		calEvt.setContentColor(ce.getContentColor());
 
-		syncModel();
+		// Save the calendar event to database
+		try {
+
+			getCalendarEventService().saveOrUpdate(calEvt);
+			getCalendarCtrl().synchronizeModel();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 		editEventWindow.onClose();
 	}
 
-	public void onClick$btnDelete(Event event) throws InterruptedException {
+	/**
+	 * Deletes the current opened CalendarEvent and closes the window.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void doDelete(Event event) throws InterruptedException {
 
 		// Show a confirm box
 		final String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record");
@@ -284,12 +383,33 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 			}
 
 			private void deleteBean() {
-				// TODO delete from database
+				// delete from modell
 				Calendars cals = getCalendarCtrl().getCal();
-				SimpleCalendarEvent ce = (SimpleCalendarEvent) editEventWindow.getAttribute("ce");
+				MySimpleCalendarEvent ce = (MySimpleCalendarEvent) editEventWindow.getAttribute("ce");
 				((SimpleCalendarModel) cals.getModel()).remove(ce);
 
-				syncModel();
+				// prepare the backend Bean
+				MyCalendarEvent calEvt = getCalendarEventService().getNewCalendarEvent();
+				calEvt.setId(ce.getId());
+				calEvt.setTitle(ce.getTitle());
+				calEvt.setContent(ce.getContent());
+				calEvt.setBeginDate(ce.getBeginDate());
+				calEvt.setEndDate(ce.getEndDate());
+				calEvt.setContentColor(ce.getContentColor());
+
+				// delete from db
+				try {
+					getCalendarEventService().delete(calEvt);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				try {
+					syncModel();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
 		}
@@ -298,15 +418,16 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		editEventWindow.onClose();
-	}
-
-	private void syncModel() {
-		// TODO Auto-generated method stub
 
 	}
 
-	public void onClick$btnCancel(Event event) {
-		logger.debug(event.toString());
+	/**
+	 * Cancels the editing of an CalendarEvent and closes the window.
+	 * 
+	 * @param event
+	 */
+	public void doCancel(Event event) {
+		// logger.debug(event.toString());
 
 		ppcnt.setRawValue("");
 		ppbt.setSelectedIndex(0);
@@ -314,6 +435,16 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 
 		((CalendarsEvent) getEditEvent()).clearGhost();
 		editEventWindow.onClose();
+	}
+
+	/**
+	 * Calls the method for synchronizing the view with the data that are stored
+	 * in the db.
+	 * 
+	 * @throws ParseException
+	 */
+	private void syncModel() throws ParseException {
+		getCalendarCtrl().synchronizeModel();
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -334,5 +465,13 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 
 	public CalendarsEvent getEditEvent() {
 		return editEvent;
+	}
+
+	public MyCalendarEventService getCalendarEventService() {
+		return calendarEventService;
+	}
+
+	public void setCalendarEventService(MyCalendarEventService calendarEventService) {
+		this.calendarEventService = calendarEventService;
 	}
 }

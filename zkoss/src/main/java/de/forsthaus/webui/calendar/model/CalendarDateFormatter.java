@@ -1,4 +1,22 @@
-package de.forsthaus.webui.calendar;
+/**
+ * Copyright 2010 the original author or authors.
+ * 
+ * This file is part of Zksample2. http://zksample2.sourceforge.net/
+ *
+ * Zksample2 is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Zksample2 is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Zksample2.  If not, see <http://www.gnu.org/licenses/gpl.html>.
+ */
+package de.forsthaus.webui.calendar.model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,6 +29,14 @@ import org.zkoss.util.resource.Labels;
 
 import de.forsthaus.webui.util.ZksampleDateFormat;
 
+/**
+ * Implementation of the DateFormatter class for the calender component. Used
+ * for displaying different date formats in the several views and areas of the
+ * calendar.
+ * 
+ * @author sge
+ * 
+ */
 public class CalendarDateFormatter implements DateFormatter, Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -95,6 +121,11 @@ public class CalendarDateFormatter implements DateFormatter, Serializable {
 		return day;
 	}
 
+	/**
+	 * Don't know for what this is.<br>
+	 * EN: ? <br>
+	 * DE: ? <br>
+	 */
 	@Override
 	public String getCaptionByPopup(Date date, Locale locale, TimeZone timezone) {
 		// TODO Auto-generated method stub
@@ -103,6 +134,8 @@ public class CalendarDateFormatter implements DateFormatter, Serializable {
 
 	/**
 	 * This is the time that is shown on top of an event.<br>
+	 * EN: From - To time on top of the event.<br>
+	 * DE: von - bis Zeitangabe oben beim Termin.<br>
 	 */
 	@Override
 	public String getCaptionByTimeOfDay(Date date, Locale locale, TimeZone timezone) {

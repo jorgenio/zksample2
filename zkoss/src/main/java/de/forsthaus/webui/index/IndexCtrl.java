@@ -139,9 +139,8 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void onClientInfo(ClientInfoEvent event) throws Exception {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("Current desktop height :" + event.getDesktopHeight() + "  - width  :" + event.getDesktopWidth());
-		}
+		// logger.debug("Current desktop height :" + event.getDesktopHeight() +
+		// "  - width  :" + event.getDesktopWidth());
 
 		setCurrentDesktopHeight(event.getDesktopHeight() - this.centerAreaHeightOffset);
 		setCurrentDesktopWidth(event.getDesktopWidth());
@@ -320,7 +319,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 				final Center center = bl.getCenter();
 				/* clear the center child comps */
 				center.getChildren().clear();
-				/*
+				/**
 				 * create the page and put it in the center layout area
 				 */
 				Executions.createComponents(zulFilePathName, center, null);

@@ -202,15 +202,16 @@ create unique index ix_aup_id on auftragposition
 /* Table: calendar_event                                        */
 /*==============================================================*/
 create table calendar_event (
-   cle_id               bigint                 not null,
-   cle_title            VARCHAR(20)          not null,
-   cle_content          VARCHAR(300)         null,
+   cle_id               bigint               not null,
+   cle_title            VARCHAR(20)          null,
+   cle_content          VARCHAR(300)         not null,
    cle_begin_date       TIMESTAMP            not null,
-   cle_end_date         TIMESTAMP            null,
-   cle_title_color      VARCHAR(10)          null,
+   cle_end_date         TIMESTAMP            not null,
+   cle_header_color     VARCHAR(10)          null,
    cle_content_color    VARCHAR(10)          null,
-   cle_usr_id           bigint                 not null,
-   version              int                 not null default 0,
+   cle_usr_id           bigint               not null,
+   cle_locked           BOOL                 null default false,
+   version              int                  not null default 0,
    primary key (cle_id)
 );
 

@@ -22,7 +22,8 @@ import org.apache.commons.lang.time.FastDateFormat;
 import org.zkoss.util.resource.Labels;
 
 /**
- * DateFormatter for working with the i3labels.properties file.<br>
+ * DateFormatter for working with format strings from our i3labels.properties
+ * files.<br>
  * 
  * @author bbruhns
  * @author sgerth

@@ -13,6 +13,7 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 17.09.2010 / Adding the backend classes for the calendar. Calendar is now Database driven. " + lf;
 		s = s + "- 15.09.2010 / Preparing the calender for create/edit/update events and implemented a DateFormatter for this. " + lf;
 		s = s + "- 12.09.2010 / Updated libs to zk calender 2.1 (Freshly 12.09.2010) because a init problem. " + lf;
 		s = s + "- 07.09.2010 / Updated to zk version 5.0.4 " + lf;
@@ -208,7 +209,7 @@
 							<caption
 								style="color: #000000; font-weight:bold;"
 								image="/images/icons/new_icons_10.gif"
-								label="NEW !!!  Updated to ZK v5.0.4. !!!  Please read the actual documentation." />
+								label="NEW !!!  Database driven calendar." />
 
 							<textbox height="100%" width="99.5%"
 								multiline="true" rows="17" readonly="true"

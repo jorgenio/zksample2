@@ -88,11 +88,9 @@
 		<borderlayout id="borderLayout_calendar">
 
 			<center border="none" flex="true">
-				<div id="divCenter" height="100%" width="100%">
 
-					<calendars id="cal" model="${calModel}" />
+				<calendars id="cal" model="${calModel}" />
 
-				</div>
 			</center>
 
 		</borderlayout>

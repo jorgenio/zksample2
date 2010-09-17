@@ -32,21 +32,26 @@ import de.forsthaus.backend.model.SecUser;
  * The user implementation of spring-security framework user class. <br>
  * Extends for our simulation of a one-time-password .<br>
  * <br>
- * Great thanks to Bjoern. <br>
- * Good work. <br>
- * Extends for a user-id (type long). <br>
- * <br>
+ * Extended for usrToken, our simulation of a one-time-password .<br>
+ * Extended for a usrId, userID (type long). <br>
+ * Extended for SecUser. <br>
  * 
  * @author bbruhns
+ * @author sgerth
  * 
  */
 public class UserImpl extends User implements Serializable, de.forsthaus.policy.User {
 
 	private static final long serialVersionUID = 7682359879431168931L;
 
+	// Token for En-/decrypting the users password
 	final private String usrToken;
 
+	// The user ID
 	final private long userId;
+
+	// The user object
+	private SecUser secUser;
 
 	/**
 	 * Constructor
@@ -62,11 +67,11 @@ public class UserImpl extends User implements Serializable, de.forsthaus.policy.
 	 */
 	public UserImpl(SecUser user, Collection<GrantedAuthority> grantedAuthorities) throws IllegalArgumentException {
 
-		super(user.getUsrLoginname(), user.getUsrPassword(), user.isUsrEnabled(), user.isUsrAccountnonexpired(), user.isUsrCredentialsnonexpired(),
-				user.isUsrAccountnonlocked(), grantedAuthorities);
+		super(user.getUsrLoginname(), user.getUsrPassword(), user.isUsrEnabled(), user.isUsrAccountnonexpired(), user.isUsrCredentialsnonexpired(), user.isUsrAccountnonlocked(), grantedAuthorities);
 
 		this.usrToken = user.getUsrToken();
 		this.userId = user.getId();
+		this.secUser = user;
 	}
 
 	/*
@@ -86,6 +91,11 @@ public class UserImpl extends User implements Serializable, de.forsthaus.policy.
 	@Override
 	public long getUserId() {
 		return this.userId;
+	}
+
+	@Override
+	public SecUser getSecUser() {
+		return this.secUser;
 	}
 
 }

@@ -18,8 +18,11 @@
  */
 package de.forsthaus.policy;
 
+import de.forsthaus.backend.model.SecUser;
+
 /**
  * @author bbruhns
+ * @author sgerth
  * 
  */
 public interface User {
@@ -27,6 +30,11 @@ public interface User {
 	/**
 	 * @return
 	 */
-	long getUserId();
+	public long getUserId();
+
+	/**
+	 * @return
+	 */
+	public SecUser getSecUser();
 
 }

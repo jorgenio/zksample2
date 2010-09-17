@@ -21,15 +21,9 @@
 		.z-window-modal-cl-noborder {background: none}
 
 		.outerGroupBox .z-groupbox-cnt {padding: 0px;}
-
-		<!-- Make Plain Grid -->
-		.GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row
-		.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-		background: white; border-top: none; border-left: none;
-		border-right: none; border-bottom: none; }
 	</style>
 
-	<window id="loginwin" border="none" width="350px"
+	<window id="loginwin" border="none" width="320px"
 		use="de.forsthaus.webui.login.ZkLoginDialogCtrl">
 
 		<groupbox mold="3d" closable="false" sclass="outerGroupBox"

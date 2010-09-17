@@ -345,9 +345,11 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		if (map.containsKey("SysCountryCode")) {
 			addNewRow(rows, "SysCountryCode", map.get("SysCountryCode"));
 		}
-
 		if (map.containsKey("IpToCountry")) {
 			addNewRow(rows, "IpToCountry", map.get("IpToCountry"));
+		}
+		if (map.containsKey("CalendarEvents")) {
+			addNewRow(rows, "CalendarEvents", map.get("CalendarEvents"));
 		}
 
 	}
@@ -423,8 +425,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		addNewRow(rows, "Count of total Updates since start", String.valueOf(stat.getTotalUpdateCount()));
 
 		// Get the free Memory of the JAVA VM
-		final double value = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) * 100.0
-				/ Runtime.getRuntime().maxMemory();
+		final double value = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) * 100.0 / Runtime.getRuntime().maxMemory();
 		addNewRow(rows, "current free memory on the JAVA VM", getRoundedDouble(value) + " MB", "red");
 		// Get the number of processors that are available for the JAVA VM
 		final int countCPU = Runtime.getRuntime().availableProcessors();
@@ -611,8 +612,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	 * @param bkgrColor
 	 * @return
 	 */
-	private Separator createNewSeparator(Component parent, String orientation, boolean isBarVisible, String spacing,
-			String bkgrColor) {
+	private Separator createNewSeparator(Component parent, String orientation, boolean isBarVisible, String spacing, String bkgrColor) {
 
 		final Separator sep = new Separator();
 

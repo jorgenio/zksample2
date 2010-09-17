@@ -80,6 +80,7 @@ DROP TABLE IF EXISTS artikel cascade;
 DROP TABLE IF EXISTS auftrag cascade;
 DROP TABLE IF EXISTS auftragposition cascade;
 DROP TABLE IF EXISTS branche cascade;
+DROP TABLE IF EXISTS calendar_event cascade;
 
 DROP TABLE IF EXISTS sec_user cascade;
 DROP TABLE IF EXISTS sec_userrole cascade;
@@ -217,6 +218,31 @@ aup_auf_id
 create unique index ix_aup_id on auftragposition (
 aup_id
 );
+
+/*==============================================================*/
+/* Table: calendar_event                                        */
+/*==============================================================*/
+create table calendar_event (
+   cle_id               INT8                 not null,
+   cle_title            VARCHAR(20)          null,
+   cle_content          VARCHAR(300)         not null,
+   cle_begin_date       TIMESTAMP            not null,
+   cle_end_date         TIMESTAMP            not null,
+   cle_header_color     VARCHAR(10)          null,
+   cle_content_color    VARCHAR(10)          null,
+   cle_usr_id           INT8                 not null,
+   cle_locked           BOOL                 null default false,
+   version              INT4                 not null default 0,
+   constraint PK_CALENDAR_EVENT primary key (cle_id)
+)
+;
+/*==============================================================*/
+/* Index: idx_cle_id                                            */
+/*==============================================================*/
+create unique index idx_cle_id on calendar_event (
+cle_id
+);
+
 
 /*==============================================================*/
 /* Table: filiale                                               */

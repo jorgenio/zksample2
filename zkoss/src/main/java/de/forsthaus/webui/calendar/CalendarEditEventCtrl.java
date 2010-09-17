@@ -403,10 +403,7 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-
-			
 			}
-
 		}
 
 		) == MultiLineMessageBox.YES) {

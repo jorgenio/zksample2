@@ -384,9 +384,7 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 
 			private void deleteBean() {
 				// delete from modell
-				Calendars cals = getCalendarCtrl().getCal();
 				MySimpleCalendarEvent ce = (MySimpleCalendarEvent) editEventWindow.getAttribute("ce");
-				((SimpleCalendarModel) cals.getModel()).remove(ce);
 
 				// prepare the backend Bean
 				MyCalendarEvent calEvt = getCalendarEventService().getNewCalendarEvent();
@@ -396,20 +394,17 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 				calEvt.setBeginDate(ce.getBeginDate());
 				calEvt.setEndDate(ce.getEndDate());
 				calEvt.setContentColor(ce.getContentColor());
+				calEvt.setVersion(ce.getVersion());
 
 				// delete from db
 				try {
 					getCalendarEventService().delete(calEvt);
+					syncModel();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 
-				try {
-					syncModel();
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			
 			}
 
 		}

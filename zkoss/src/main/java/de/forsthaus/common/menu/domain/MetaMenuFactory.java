@@ -39,10 +39,11 @@ public class MetaMenuFactory {
 				Unmarshaller unmarshaller = JAXBContext.newInstance(RootMenuDomain.class).createUnmarshaller();
 				rootMenuDomain = (RootMenuDomain) unmarshaller.unmarshal(MetaMenuFactory.class.getResource(menuXMLRootPath + "mainmenu.xml"));
 				referenceRootMenuDomain = new SoftReference<RootMenuDomain>(rootMenuDomain);
-				final Log LOGGER = LogFactory.getLog(MetaMenuFactory.class);
-				if (LOGGER.isDebugEnabled()) {
-					LOGGER.debug("Menu-Metamodel is successfully loaded. ");
-				}
+
+//				final Log LOGGER = LogFactory.getLog(MetaMenuFactory.class);
+//				if (LOGGER.isDebugEnabled()) {
+//					LOGGER.debug("Menu-Metamodel is successfully loaded. ");
+//				}
 
 			} catch (JAXBException e) {
 				throw new RuntimeException(e);

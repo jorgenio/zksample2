@@ -84,6 +84,7 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 	protected Listbox ppbt; // autowired
 	protected Listbox ppet; // autowired
 	protected Combobox ppcolor; // autowired
+	protected Textbox txtb_title; // autowired
 	protected Textbox ppcnt; // autowired
 	protected Checkbox pplocked; // autowired
 
@@ -189,6 +190,7 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 		pplocked.setChecked(ce.isLocked());
 		ppbt.setVisible(!isAllday);
 		ppet.setVisible(!isAllday);
+		txtb_title.setValue(ce.getTitle());
 		ppcnt.setValue(ce.getContent());
 		String colors = ce.getHeaderColor() + "," + ce.getContentColor();
 		int index = 0;
@@ -330,6 +332,7 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 		ce.setContentColor(colors[1]);
 		ce.setBeginDate(beginDate);
 		ce.setEndDate(endDate);
+		ce.setTitle(txtb_title.getValue());
 		ce.setContent(ppcnt.getValue());
 		ce.setLocked(pplocked.isChecked());
 
@@ -421,6 +424,7 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 	public void doCancel(Event event) {
 		// logger.debug(event.toString());
 
+		txtb_title.setRawValue("");
 		ppcnt.setRawValue("");
 		ppbt.setSelectedIndex(0);
 		ppet.setSelectedIndex(0);

@@ -81,6 +81,7 @@ public class CalendarCreateEventCtrl extends GFCBaseCtrl implements Serializable
 	protected Listbox ppbt; // autowired
 	protected Listbox ppet; // autowired
 	protected Combobox ppcolor; // autowired
+	protected Textbox txtb_title; // autowired
 	protected Textbox ppcnt; // autowired
 	protected Checkbox pplocked; // autowired
 
@@ -269,6 +270,7 @@ public class CalendarCreateEventCtrl extends GFCBaseCtrl implements Serializable
 		ce.setContentColor(colors[1]);
 		ce.setBeginDate(beginDate);
 		ce.setEndDate(endDate);
+		ce.setTitle(txtb_title.getValue());
 		ce.setContent(ppcnt.getValue());
 		ce.setLocked(pplocked.isChecked());
 		getCalendarCtrl().getCalModel().add(ce);

@@ -106,6 +106,8 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 
 		setCal(cal);
 		cal.setHflex("true");
+		cal.setWeekOfYear(true);
+		// cal.setEventRender(render)
 		cal.setDateFormatter(new CalendarDateFormatter());
 
 		/**

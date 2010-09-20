@@ -19,12 +19,14 @@
 package de.forsthaus.webui.calendar.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
 import org.apache.commons.lang.StringUtils;
 import org.zkoss.calendar.api.DateFormatter;
+import org.zkoss.calendar.impl.SimpleDateFormatter;
 import org.zkoss.util.resource.Labels;
 
 import de.forsthaus.webui.util.ZksampleDateFormat;
@@ -37,9 +39,10 @@ import de.forsthaus.webui.util.ZksampleDateFormat;
  * @author sge
  * 
  */
-public class CalendarDateFormatter implements DateFormatter, Serializable {
+public class CalendarDateFormatter extends SimpleDateFormatter implements DateFormatter, Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private int count = 0;
 
 	/**
 	 * This is for the day/week view, means mold="default" .<br>
@@ -122,14 +125,17 @@ public class CalendarDateFormatter implements DateFormatter, Serializable {
 	}
 
 	/**
-	 * Don't know for what this is.<br>
+	 * Returns the caption of the popup title.<br>
 	 * EN: ? <br>
 	 * DE: ? <br>
 	 */
 	@Override
 	public String getCaptionByPopup(Date date, Locale locale, TimeZone timezone) {
-		// TODO Auto-generated method stub
-		return null;
+		count = count + 1;
+		System.out.println("getCaptionByPopup " + String.valueOf(count));
+
+		return "TTT";
+		// return null;
 	}
 
 	/**
@@ -139,19 +145,20 @@ public class CalendarDateFormatter implements DateFormatter, Serializable {
 	 */
 	@Override
 	public String getCaptionByTimeOfDay(Date date, Locale locale, TimeZone timezone) {
-		// Calendar cal = Calendar.getInstance();
-		// cal.setTime(date);
-		// cal.add(Calendar.HOUR, -1);
-		//
-		// Date correctDate = cal.getTime();
+
 		String s = ZksampleDateFormat.getTimeFormater().format(date);
 		return s;
 	}
 
+	/**
+	 * Returns the number of week of the year in month mold .<br>
+	 * EN: .<br>
+	 * DE: .<br>
+	 */
 	@Override
 	public String getCaptionByWeekOfYear(Date date, Locale locale, TimeZone timezone) {
-		// TODO Auto-generated method stub
-		String s = "KKKK";
-		return s;
+		Calendar cal = Calendar.getInstance(timezone, locale);
+		cal.setTime(date);
+		return String.valueOf(cal.get(Calendar.WEEK_OF_YEAR));
 	}
 }

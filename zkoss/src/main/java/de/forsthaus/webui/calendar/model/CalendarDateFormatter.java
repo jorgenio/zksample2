@@ -37,6 +37,8 @@ import de.forsthaus.webui.util.ZksampleDateFormat;
  * for displaying different date formats in the several views and areas of the
  * calendar.
  * 
+ * THIS CLASS IS IN WORK !!!
+ * 
  * @author sge
  * 
  */

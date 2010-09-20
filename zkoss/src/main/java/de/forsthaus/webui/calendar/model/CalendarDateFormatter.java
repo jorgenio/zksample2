@@ -19,6 +19,7 @@
 package de.forsthaus.webui.calendar.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -42,7 +43,9 @@ import de.forsthaus.webui.util.ZksampleDateFormat;
 public class CalendarDateFormatter extends SimpleDateFormatter implements DateFormatter, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private int count = 0;
+
+	private String _ppFormat = "EEE, MMM/d";
+	private SimpleDateFormat _df, _wf, _tf, _pf;
 
 	/**
 	 * This is for the day/week view, means mold="default" .<br>
@@ -131,11 +134,11 @@ public class CalendarDateFormatter extends SimpleDateFormatter implements DateFo
 	 */
 	@Override
 	public String getCaptionByPopup(Date date, Locale locale, TimeZone timezone) {
-		count = count + 1;
-		System.out.println("getCaptionByPopup " + String.valueOf(count));
-
-		return "TTT";
-		// return null;
+		if (_pf == null) {
+			_pf = new SimpleDateFormat(_ppFormat, locale);
+		}
+		_pf.setTimeZone(timezone);
+		return _pf.format(date);
 	}
 
 	/**

@@ -10,6 +10,7 @@ import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.EventQueues;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
@@ -171,6 +172,7 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 
 		// open message button
 		this.btnOpenMsg = new Toolbarbutton();
+		this.btnOpenMsg.setId("btnOpenMsg");
 		this.btnOpenMsg.setWidth("20px");
 		this.btnOpenMsg.setHeight("20px");
 		this.btnOpenMsg.setImage("/images/icons/message2_16x16.gif");
@@ -187,6 +189,10 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 				Textbox t = (Textbox) win.getFellow("tb");
 				t.setText(getMsg());
 				// Clients.scrollIntoView(t);
+
+				// String js =
+				// "zAu.send(new zk.Event(zk.Widget.$('$msgWindow'), 'onUser',[jq(zk.Widget.$('$msgWindow')).position().top,jq(zk.Widget.$('$msgWindow')).position().left]));";
+				// Clients.evalJavaScript(js);
 
 			}
 		});
@@ -231,6 +237,7 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 
 	public Window getMsgWindow() {
 
+		// if null, create the MessageWindow
 		if (msgWindow == null) {
 			msgWindow = new Window();
 			msgWindow.setId("msgWindow");
@@ -238,7 +245,6 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 			msgWindow.setSizable(true);
 			msgWindow.setClosable(true);
 			msgWindow.setWidth("400px");
-			msgWindow.setHeight("250px");
 			msgWindow.setParent(winMessageBar);
 			msgWindow.addEventListener("onClose", new EventListener() {
 
@@ -252,9 +258,8 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 			Textbox tb = new Textbox();
 			tb.setId("tb");
 			tb.setMultiline(true);
-			tb.setRows(10);
+			tb.setRows(20);
 			tb.setReadonly(true);
-			tb.setHeight("100%");
 			tb.setWidth("98%");
 			tb.setParent(msgWindow);
 

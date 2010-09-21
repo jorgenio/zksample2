@@ -16,6 +16,7 @@ import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Grid;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Toolbarbutton;
 import org.zkoss.zul.Window;
@@ -188,11 +189,8 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 				Window win = getMsgWindow();
 				Textbox t = (Textbox) win.getFellow("tb");
 				t.setText(getMsg());
+				// TODO scroll to latest message
 				// Clients.scrollIntoView(t);
-
-				// String js =
-				// "zAu.send(new zk.Event(zk.Widget.$('$msgWindow'), 'onUser',[jq(zk.Widget.$('$msgWindow')).position().top,jq(zk.Widget.$('$msgWindow')).position().left]));";
-				// Clients.evalJavaScript(js);
 
 			}
 		});
@@ -237,6 +235,8 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 
 	public Window getMsgWindow() {
 
+		int msgHeight = 260;
+
 		// if null, create the MessageWindow
 		if (msgWindow == null) {
 			msgWindow = new Window();
@@ -245,7 +245,9 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 			msgWindow.setSizable(true);
 			msgWindow.setClosable(true);
 			msgWindow.setWidth("400px");
+			msgWindow.setHeight(String.valueOf(msgHeight) + "px");
 			msgWindow.setParent(winMessageBar);
+			msgWindow.setStyle("padding: 3px");
 			msgWindow.addEventListener("onClose", new EventListener() {
 
 				@Override
@@ -254,14 +256,23 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 					msgWindow = null;
 				}
 			});
-			msgWindow.setPosition("bottom, left");
+
 			Textbox tb = new Textbox();
 			tb.setId("tb");
 			tb.setMultiline(true);
-			tb.setRows(20);
+			tb.setRows(17);
 			tb.setReadonly(true);
 			tb.setWidth("98%");
 			tb.setParent(msgWindow);
+
+			/**
+			 * set the bottom of the msgWindow, so that we can see and reach the
+			 * messageBar buttons.
+			 */
+			final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+			final int h = height + 15 - msgHeight;
+			msgWindow.setLeft("3px");
+			msgWindow.setTop(String.valueOf(h) + "px");
 
 			msgWindow.doOverlapped();
 

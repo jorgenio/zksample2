@@ -10,9 +10,16 @@
 	<!-- Calendar -->
 	<menuItem id="menu_Item_Calendar" zulNavigation="/WEB-INF/pages/calendar/calendar.zul"
 		iconName="/images/icons/calendar1_16x16.gif" />
-	<!-- Calendar -->
-	<menuItem id="menu_Item_Documentation" zulNavigation="/WEB-INF/pages/documentation/documentation.zul"
-		iconName="/images/icons/icon-pdf_16x16.png" />
+
+	<!-- Old OfficeDataMenuTree -->
+	<menu id="menu_Category_ReadMe" rightName="">
+		<!-- Documentation -->
+		<menuItem id="menu_Item_Documentation" zulNavigation="/WEB-INF/pages/documentation/documentation.zul"
+			iconName="/images/icons/icon-pdf_16x16.png" />
+		<!-- Blog -->
+		<menuItem id="menu_Item_Blog" zulNavigation="/WEB-INF/pages/blog/blog.zul"
+			iconName="/images/icons/wpmini-blue_16x16.png" />
+	</menu>
 
 	<!--
 		<menuItem id="menu_Item_Chat"

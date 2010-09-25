@@ -42,9 +42,10 @@
 		</div>
 
 		<borderlayout id="borderLayout_blog">
-			<center border="none">
+			<center border="none" flex="true">
 
-				<iframe id="iFrameBlog" width="100%" height="100%">
+				<iframe id="iFrameBlog" scrolling="auto" width="100%"
+					height="100%">
 
 				</iframe>
 

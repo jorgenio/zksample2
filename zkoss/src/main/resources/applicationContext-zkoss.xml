@@ -36,22 +36,30 @@
 	<!-- Articles / Artikelstammdaten -->
 	<bean id="articleMainCtrl" class="de.forsthaus.webui.article.ArticleMainCtrl"
 		parent="basisCtrl" scope="prototype">
+		<!-- 
 		<property name="articleService" ref="articleService" />
+		 -->
 		<property name="articleListCtrl" ref="articleListCtrl" />
 		<property name="articleDetailCtrl" ref="articleDetailCtrl" />
 		<property name="articleDialogCtrl" ref="articleDialogCtrl" />
 	</bean>
 	<bean id="articleListCtrl" class="de.forsthaus.webui.article.ArticleListCtrl"
 		parent="basisListCtrl" scope="prototype">
+		<!-- 
 		<property name="articleService" ref="articleService" />
+		 -->
 	</bean>
 	<bean id="articleDetailCtrl" class="de.forsthaus.webui.article.ArticleDetailCtrl"
 		parent="basisCtrl" scope="prototype">
+		<!-- 
 		<property name="articleService" ref="articleService" />
+		 -->
 	</bean>
 	<bean id="articleDialogCtrl" class="de.forsthaus.webui.article.ArticleDialogCtrl"
 		parent="basisCtrl" scope="prototype">
+		<!-- 
 		<property name="articleService" ref="articleService" />
+		 -->
 	</bean>
 
 	<!-- Branch / Branchenstammdaten -->

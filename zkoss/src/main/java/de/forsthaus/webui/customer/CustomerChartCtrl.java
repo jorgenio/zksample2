@@ -200,8 +200,7 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 			final JFreeChart chart = ChartFactory.createPieChart(title, pieDataset, true, true, true);
 			final PiePlot plot = (PiePlot) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight,
-					BufferedImage.TRANSLUCENT, null);
+			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
 			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
 			final AImage chartImage = new AImage("Pie Chart", bytes);
@@ -263,8 +262,7 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 			final JFreeChart chart = ChartFactory.createPieChart3D(title, pieDataset, true, true, true);
 			final PiePlot3D plot = (PiePlot3D) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight,
-					BufferedImage.TRANSLUCENT, null);
+			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
 			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
 			final AImage chartImage = new AImage("Pie Chart", bytes);
@@ -326,8 +324,7 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 			final JFreeChart chart = ChartFactory.createRingChart(title, pieDataset, true, true, true);
 			final RingPlot plot = (RingPlot) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight,
-					BufferedImage.TRANSLUCENT, null);
+			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
 			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
 			final AImage chartImage = new AImage("Ring Chart", bytes);
@@ -382,19 +379,17 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 				final String amount = String.valueOf(bd.doubleValue());
 
 				// fill the data
-				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), key + " " + amount,
-						key + " " + amount);
+				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), key + " " + amount, key + " " + amount);
 			}
 
 			final String title = "Monthly amount for year 2009";
 			final PlotOrientation po = PlotOrientation.VERTICAL;
-			final JFreeChart chart = ChartFactory.createBarChart(title, "Month", "Amount", dataset, po, true, true,
-					true);
+			final JFreeChart chart = ChartFactory.createBarChart(title, "Month", "Amount", dataset, po, true, true, true);
 
 			final CategoryPlot plot = (CategoryPlot) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight,
-					BufferedImage.TRANSLUCENT, null);
+
+			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
 			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
 			final AImage chartImage = new AImage("Bar Chart", bytes);
@@ -449,19 +444,16 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 				final String amount = String.valueOf(bd.doubleValue());
 
 				// fill the data
-				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), key + " " + amount,
-						key + " " + amount);
+				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), key + " " + amount, key + " " + amount);
 			}
 
 			final String title = "Monthly amount for year 2009";
 			final PlotOrientation po = PlotOrientation.VERTICAL;
-			final JFreeChart chart = ChartFactory.createBarChart3D(title, "Month", "Amount", dataset, po, true, true,
-					true);
+			final JFreeChart chart = ChartFactory.createBarChart3D(title, "Month", "Amount", dataset, po, true, true, true);
 
 			final CategoryPlot plot = (CategoryPlot) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight,
-					BufferedImage.TRANSLUCENT, null);
+			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
 			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
 			final AImage chartImage = new AImage("Bar Chart 3D", bytes);
@@ -515,19 +507,16 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 				final String amount = String.valueOf(bd.doubleValue());
 
 				// fill the data
-				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), key + " " + amount,
-						key + " " + amount);
+				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), key + " " + amount, key + " " + amount);
 			}
 
 			final String title = "Monthly amount for year 2009";
 			final PlotOrientation po = PlotOrientation.VERTICAL;
-			final JFreeChart chart = ChartFactory.createStackedBarChart(title, "Month", "Amount", dataset, po, true,
-					true, true);
+			final JFreeChart chart = ChartFactory.createStackedBarChart(title, "Month", "Amount", dataset, po, true, true, true);
 
 			final CategoryPlot plot = (CategoryPlot) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight,
-					BufferedImage.TRANSLUCENT, null);
+			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
 			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
 			final AImage chartImage = new AImage("Stacked Bar Chart", bytes);
@@ -582,19 +571,16 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 				final String amount = String.valueOf(bd.doubleValue());
 
 				// fill the data
-				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), key + " " + amount,
-						key + " " + amount);
+				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), key + " " + amount, key + " " + amount);
 			}
 
 			final String title = "Monthly amount for year 2009";
 			final PlotOrientation po = PlotOrientation.VERTICAL;
-			final JFreeChart chart = ChartFactory.createStackedBarChart3D(title, "Month", "Amount", dataset, po, true,
-					true, true);
+			final JFreeChart chart = ChartFactory.createStackedBarChart3D(title, "Month", "Amount", dataset, po, true, true, true);
 
 			final CategoryPlot plot = (CategoryPlot) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight,
-					BufferedImage.TRANSLUCENT, null);
+			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
 			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
 			final AImage chartImage = new AImage("Stacked Bar Chart 3D", bytes);
@@ -649,19 +635,16 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 				final String amount = String.valueOf(bd.doubleValue());
 
 				// fill the data
-				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), "2009", key + " "
-						+ amount);
+				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), "2009", key + " " + amount);
 			}
 
 			final String title = "Monthly amount for year 2009";
 			final PlotOrientation po = PlotOrientation.VERTICAL;
-			final JFreeChart chart = ChartFactory.createLineChart(title, "Month", "Amount", dataset, po, true, true,
-					true);
+			final JFreeChart chart = ChartFactory.createLineChart(title, "Month", "Amount", dataset, po, true, true, true);
 
 			final CategoryPlot plot = (CategoryPlot) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight,
-					BufferedImage.TRANSLUCENT, null);
+			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
 			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
 			final AImage chartImage = new AImage("Line Bar Chart", bytes);
@@ -716,19 +699,16 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 				final String amount = String.valueOf(bd.doubleValue());
 
 				// fill the data
-				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), "2009", key + " "
-						+ amount);
+				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), "2009", key + " " + amount);
 			}
 
 			final String title = "Monthly amount for year 2009";
 			final PlotOrientation po = PlotOrientation.VERTICAL;
-			final JFreeChart chart = ChartFactory.createLineChart3D(title, "Month", "Amount", dataset, po, true, true,
-					true);
+			final JFreeChart chart = ChartFactory.createLineChart3D(title, "Month", "Amount", dataset, po, true, true, true);
 
 			final CategoryPlot plot = (CategoryPlot) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight,
-					BufferedImage.TRANSLUCENT, null);
+			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
 			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
 			final AImage chartImage = new AImage("Line Bar Chart 3D", bytes);

@@ -13,7 +13,6 @@ import org.zkoss.zul.Window;
 public class ControllerTestWinModal extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 1L;
-
 	/**
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * 1. All the components that are defined here and have a corresponding

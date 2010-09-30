@@ -13,7 +13,7 @@
 	{
 		lf = "\n";
 		s = "";
-		s = s + "- 25.09.2010 / Adding a new menu entry for openening our blog. " + lf;
+		s = s + "- 25.09.2010 / Adding a new menu entry for opening our blog. " + lf;
 		s = s + "- 17.09.2010 / Adding the backend classes for the calendar. Calendar is now Database driven. " + lf;
 		s = s + "- 15.09.2010 / Preparing the calender for create/edit/update events and implemented a DateFormatter for this. " + lf;
 		s = s + "- 12.09.2010 / Updated libs to zk calender 2.1 (Freshly 12.09.2010) because a init problem. " + lf;

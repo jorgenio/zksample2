@@ -258,8 +258,7 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 							logger.debug("hostLookUp resolved for : " + secLoginlog.getLglIp());
 						}
 
-						final SysCountryCode sysCC = getSysCountryCodeService().getCountryCodeByCode2(
-								ipl.getCountryCode());
+						final SysCountryCode sysCC = getSysCountryCodeService().getCountryCodeByCode2(ipl.getCountryCode());
 						ip2.setSysCountryCode(sysCC);
 
 						ip2.setI2cCity(ipl.getCity());
@@ -296,34 +295,37 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 		final int pageSize = 50;
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(
-				SecLoginlog.class);
+		final HibernateSearchObject<SecLoginlog> so = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class);
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
-		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
-		soSecLoginlog.addSort("id", false);
-		soSecLoginlog.setMaxResults(pageSize);
+
+		so.addFetch("ip2Country.sysCountryCode");
+		// so.addFetch("ip2Country");
+		// so.addFilterEqual("ip2Country.i2cLatitude", new Float(-1));
+		// so.addFilterEqual("ip2Country.i2cLatitude", -1);
+		so.addSort("id", false);
+
+		so.setMaxResults(pageSize);
 
 		for (;;) {
 
 			start = pageNo * pageSize;
 
-			soSecLoginlog.setFirstResult(start);
+			so.setFirstResult(start);
 
-			final List<SecLoginlog> list = getPagedListService().getBySearchObject(soSecLoginlog);
+			final List<SecLoginlog> list = getPagedListService().getBySearchObject(so);
 
 			pageNo++;
 
 			if (logger.isDebugEnabled()) {
-				logger.debug("PagedList from : " + start + "  to: " + (pageSize * pageNo - 1) + "   / List size : "
-						+ list.size());
+				logger.debug("PagedList from : " + start + "  to: " + (pageSize * pageNo - 1) + "   / List size : " + list.size());
 			}
 
 			final int recs = updateIp2CountryFromLookUpHost(list);
 			countRec = countRec + recs;
 
-			// if the size of the list < pageSize than these are the last paged
-			// records of the table
+			// if the size of the list < pageSize than these are the last few
+			// paged records of the table
 			if (list.size() < pageSize) {
 				break;
 			}

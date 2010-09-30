@@ -24,6 +24,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
+import org.springframework.transaction.config.TxNamespaceHandler;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -164,8 +165,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doCheckRights();
 
 		// create the Button Controller. Disable not used buttons during working
-		this.btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, true, this.btnNew,
-				this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
+		this.btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, true, this.btnNew, this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
 
 		// get the params map that are overhanded by creation.
 		final Map<String, Object> args = getCreationArgsMap(event);
@@ -356,22 +356,21 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 			final String title = Labels.getLabel("message.Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO,
-					MultiLineMessageBox.QUESTION, true, new EventListener() {
-						@Override
-						public void onEvent(Event evt) {
-							switch (((Integer) evt.getData()).intValue()) {
-							case MultiLineMessageBox.YES:
-								try {
-									doSave();
-								} catch (final InterruptedException e) {
-									throw new RuntimeException(e);
-								}
-							case MultiLineMessageBox.NO:
-								break; //
-							}
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
+				@Override
+				public void onEvent(Event evt) {
+					switch (((Integer) evt.getData()).intValue()) {
+					case MultiLineMessageBox.YES:
+						try {
+							doSave();
+						} catch (final InterruptedException e) {
+							throw new RuntimeException(e);
 						}
+					case MultiLineMessageBox.NO:
+						break; //
 					}
+				}
+			}
 
 			) == MultiLineMessageBox.YES) {
 			}
@@ -491,6 +490,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 			// stores the inital data for comparing if they are changed
 			// during user action.
 			doStoreInitValues();
+			usrLoginname.setFocus(true);
 
 			this.userDialogWindow.doModal(); // open the dialog in modal mode
 		} catch (final Exception e) {
@@ -704,58 +704,56 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final SecUser anUser = getUser();
 
 		// Show a confirm box
-		final String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> "
-				+ anUser.getUsrLoginname() + " | " + anUser.getUsrFirstname() + " ," + anUser.getUsrLastname();
+		final String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> " + anUser.getUsrLoginname() + " | " + anUser.getUsrFirstname() + " ,"
+				+ anUser.getUsrLastname();
 		final String title = Labels.getLabel("message.Deleting.Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO,
-				MultiLineMessageBox.QUESTION, true, new EventListener() {
-					@Override
-					public void onEvent(Event evt) {
-						switch (((Integer) evt.getData()).intValue()) {
-						case MultiLineMessageBox.YES:
-							deleteUser();
-						case MultiLineMessageBox.NO:
-							break; //
-						}
-					}
-
-					private void deleteUser() {
-
-						/**
-						 * Prevent the deleting of the demo users
-						 */
-						try {
-							if (anUser.getId() <= 14 && anUser.getId() >= 10) {
-								ZksampleUtils.doShowNotAllowedForDemoRecords();
-								return;
-							} else {
-								// delete from database
-								getUserService().delete(anUser);
-
-								// now synchronize the listBox
-								final ListModelList lml = (ListModelList) UserDialogCtrl.this.listBoxUser
-										.getListModel();
-
-								// Check if the object is new or updated
-								// -1 means that the obj is not in the list, so
-								// it's
-								// new..
-								if (lml.indexOf(anUser) == -1) {
-								} else {
-									lml.remove(lml.indexOf(anUser));
-								}
-							}
-						} catch (final Exception e) {
-							// TODO: handle exception
-						}
-
-						UserDialogCtrl.this.userDialogWindow.onClose(); // close
-																		// the
-																		// dialog
-					}
+		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
+			@Override
+			public void onEvent(Event evt) {
+				switch (((Integer) evt.getData()).intValue()) {
+				case MultiLineMessageBox.YES:
+					deleteUser();
+				case MultiLineMessageBox.NO:
+					break; //
 				}
+			}
+
+			private void deleteUser() {
+
+				/**
+				 * Prevent the deleting of the demo users
+				 */
+				try {
+					if (anUser.getId() <= 14 && anUser.getId() >= 10) {
+						ZksampleUtils.doShowNotAllowedForDemoRecords();
+						return;
+					} else {
+						// delete from database
+						getUserService().delete(anUser);
+
+						// now synchronize the listBox
+						final ListModelList lml = (ListModelList) UserDialogCtrl.this.listBoxUser.getListModel();
+
+						// Check if the object is new or updated
+						// -1 means that the obj is not in the list, so
+						// it's
+						// new..
+						if (lml.indexOf(anUser) == -1) {
+						} else {
+							lml.remove(lml.indexOf(anUser));
+						}
+					}
+				} catch (final Exception e) {
+					// TODO: handle exception
+				}
+
+				UserDialogCtrl.this.userDialogWindow.onClose(); // close
+				// the
+				// dialog
+			}
+		}
 
 		) == MultiLineMessageBox.YES) {
 		}

@@ -150,8 +150,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		this.windowOfficeMain.setContentStyle("padding:0px;");
 
 		// create the Button Controller. Disable not used buttons during working
-		this.btnCtrlOffice = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, false, this.btnNew,
-				this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
+		this.btnCtrlOffice = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, false, this.btnNew, this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
 
 		doCheckRights();
 
@@ -162,8 +161,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		this.tabOfficeList.setSelected(true);
 
 		if (this.tabPanelOfficeList != null) {
-			ZksampleUtils.createTabPanelContent(this.tabPanelOfficeList, this, "ModuleMainController",
-					"/WEB-INF/pages/office/officeList.zul");
+			ZksampleUtils.createTabPanelContent(this.tabPanelOfficeList, this, "ModuleMainController", "/WEB-INF/pages/office/officeList.zul");
 		}
 
 		// init the buttons for editMode
@@ -188,8 +186,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (this.tabPanelOfficeList != null) {
-			ZksampleUtils.createTabPanelContent(this.tabPanelOfficeList, this, "ModuleMainController",
-					"/WEB-INF/pages/office/officeList.zul");
+			ZksampleUtils.createTabPanelContent(this.tabPanelOfficeList, this, "ModuleMainController", "/WEB-INF/pages/office/officeList.zul");
 		}
 
 	}
@@ -215,8 +212,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (this.tabPanelOfficeDetail != null) {
-			ZksampleUtils.createTabPanelContent(this.tabPanelOfficeDetail, this, "ModuleMainController",
-					"/WEB-INF/pages/office/officeDetail.zul");
+			ZksampleUtils.createTabPanelContent(this.tabPanelOfficeDetail, this, "ModuleMainController", "/WEB-INF/pages/office/officeDetail.zul");
 		}
 	}
 
@@ -245,8 +241,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		this.txtb_Office_City.setValue(""); // clear
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class,
-				getOfficeListCtrl().getCountRows());
+		final HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getOfficeListCtrl().getCountRows());
 		soOffice.addSort("filName1", false);
 
 		// Change the BindingListModel.
@@ -280,8 +275,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 			this.txtb_Office_City.setValue(""); // clear
 
 			// ++ create the searchObject and init sorting ++//
-			final HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class,
-					getOfficeListCtrl().getCountRows());
+			final HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getOfficeListCtrl().getCountRows());
 			soOffice.addFilter(new Filter("filNr", "%" + this.txtb_Office_No.getValue() + "%", Filter.OP_ILIKE));
 			soOffice.addSort("filNr", false);
 
@@ -316,8 +310,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 			this.txtb_Office_No.setValue(""); // clear
 
 			// ++ create the searchObject and init sorting ++//
-			final HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class,
-					getOfficeListCtrl().getCountRows());
+			final HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getOfficeListCtrl().getCountRows());
 			soOffice.addFilter(new Filter("filName1", "%" + this.txtb_Office_Name.getValue() + "%", Filter.OP_ILIKE));
 			soOffice.addSort("filName1", false);
 
@@ -352,8 +345,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 			this.txtb_Office_No.setValue(""); // clear
 
 			// ++ create the searchObject and init sorting ++//
-			final HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class,
-					getOfficeListCtrl().getCountRows());
+			final HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getOfficeListCtrl().getCountRows());
 			soOffice.addFilter(new Filter("filOrt", "%" + this.txtb_Office_City.getValue() + "%", Filter.OP_ILIKE));
 			soOffice.addSort("filOrt", false);
 
@@ -543,43 +535,41 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		if (anOffice != null) {
 
 			// Show a confirm box
-			final String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> "
-					+ anOffice.getFilBezeichnung();
+			final String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> " + anOffice.getFilBezeichnung();
 			final String title = Labels.getLabel("message.Deleting.Record");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, true,
-					new EventListener() {
-						@Override
-						public void onEvent(Event evt) {
-							switch (((Integer) evt.getData()).intValue()) {
-							case MultiLineMessageBox.YES:
-								deleteBean();
-								break; //
-							case MultiLineMessageBox.NO:
-								break; //
-							}
-						}
-
-						private void deleteBean() {
-
-							/**
-							 * Do not allow to modify the demo offices
-							 */
-							if (getOfficeDetailCtrl().getOffice().getId() <= 2) {
-								try {
-									ZksampleUtils.doShowNotAllowedForDemoRecords();
-									return;
-								} catch (final InterruptedException e) {
-									throw new RuntimeException(e);
-								}
-
-							} else {
-								getOfficeService().delete(anOffice);
-							}
-						}
-
+			if (MultiLineMessageBox.show(msg, title, Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, true, new EventListener() {
+				@Override
+				public void onEvent(Event evt) {
+					switch (((Integer) evt.getData()).intValue()) {
+					case MultiLineMessageBox.YES:
+						deleteBean();
+						break; //
+					case MultiLineMessageBox.NO:
+						break; //
 					}
+				}
+
+				private void deleteBean() {
+
+					/**
+					 * Do not allow to modify the demo offices
+					 */
+					if (getOfficeDetailCtrl().getOffice().getId() <= 2) {
+						try {
+							ZksampleUtils.doShowNotAllowedForDemoRecords();
+							return;
+						} catch (final InterruptedException e) {
+							throw new RuntimeException(e);
+						}
+
+					} else {
+						getOfficeService().delete(anOffice);
+					}
+				}
+
+			}
 
 			) == MultiLineMessageBox.YES) {
 			}
@@ -615,6 +605,9 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 			 */
 			if (getOfficeDetailCtrl().getOffice().getId() <= 2) {
 				ZksampleUtils.doShowNotAllowedForDemoRecords();
+
+				doResetToInitValues();
+				getOfficeDetailCtrl().getBinder().loadAll();
 				return;
 			}
 
@@ -630,8 +623,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 
 			// show the objects data in the statusBar
 			final String str = getSelectedOffice().getFilBezeichnung();
-			EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(
-					new Event("onChangeSelectedObject", null, str));
+			EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeSelectedObject", null, str));
 
 		} catch (final DataAccessException e) {
 			final String message = e.getMessage();
@@ -769,8 +761,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		if (getOriginalOffice() != null) {
 
 			try {
-				getOfficeDetailCtrl().setOffice(
-						(Office) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalOffice()));
+				getOfficeDetailCtrl().setOffice((Office) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalOffice()));
 				setSelectedOffice((Office) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalOffice()));
 				// TODO Bug in DataBinder??
 				this.windowOfficeMain.invalidate();

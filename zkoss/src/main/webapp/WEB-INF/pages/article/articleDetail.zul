@@ -37,8 +37,12 @@
 										</columns>
 										<rows>
 											<row>
-												<label
-													value="${c:l('label_ArticleDialog_artNr.value')}" />
+												<hbox>
+													<label
+														value="${c:l('label_ArticleDialog_artNr.value')}" />
+													<label value="*"
+														style="color:red;font-size:10px" />
+												</hbox>
 												<textbox id="txtb_artNr"
 													value="@{controller.article.artNr}" readonly="true"
 													constraint="no empty" maxlength="20" width="150px" />
@@ -48,8 +52,12 @@
 												<separator bar="true"></separator>
 											</row>
 											<row>
-												<label
-													value="${c:l('label_ArticleDialog_artKurzbezeichnung.value')}" />
+												<hbox>
+													<label
+														value="${c:l('label_ArticleDialog_artKurzbezeichnung.value')}" />
+													<label value="*"
+														style="color:red;font-size:10px" />
+												</hbox>
 												<textbox
 													id="txtb_artKurzbezeichnung"
 													value="@{controller.article.artKurzbezeichnung}"
@@ -65,12 +73,16 @@
 													readonly="true" multiline="true" rows="10" width="98%" />
 											</row>
 											<row>
-												<label
-													value="${c:l('label_ArticleDialog_artPreis.value')}" />
+												<hbox>
+													<label
+														value="${c:l('label_ArticleDialog_artPreis.value')}" />
+													<label value="*"
+														style="color:red;font-size:10px" />
+												</hbox>
 												<decimalbox
 													id="decb_artPreis" value="@{controller.article.artPreis}"
-													readonly="true" format="#,##0.00" style="text-align: right"
-													width="100px" />
+													readonly="true" format="#,##0.00" constraint="no empty"
+													style="text-align: right" width="100px" />
 											</row>
 										</rows>
 									</grid>

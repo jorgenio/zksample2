@@ -37,8 +37,12 @@
 										</columns>
 										<rows>
 											<row>
-												<label
-													value="${c:l('common.Description')}" />
+												<hbox>
+													<label
+														value="${c:l('common.Description')}" />
+													<label value="*"
+														style="color:red;font-size:10px" />
+												</hbox>
 												<textbox
 													id="txtb_BranchText"
 													value="@{controller.branche.braBezeichnung}"

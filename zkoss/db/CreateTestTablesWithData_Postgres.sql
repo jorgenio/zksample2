@@ -60,8 +60,6 @@ GRANT DELETE, INSERT, REFERENCES, SELECT, UPDATE
 ALTER TABLE nextidView owner to toledo;
 
 
-
-
 /* Kaskadiertes Loeschen der Tables, wenn sie schon existieren */
 DROP TABLE IF EXISTS filiale cascade;
 DROP TABLE IF EXISTS kunde cascade;
@@ -164,7 +162,6 @@ CREATE INDEX fki_
 /*==============================================================*/
 create table Branche (
    bra_id               INT8                 not null,
-   bra_nr               VARCHAR(20)          null,
    bra_bezeichnung      VARCHAR(30)          not null,
    version              INT4                 not null default 0,
    constraint PK_BRANCHE primary key (bra_id)
@@ -1807,44 +1804,44 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14626, 13072, 15776, 0);
 
 /******************** Branche Daten ********************/
-INSERT INTO BRANCHE (BRA_ID, BRA_NR, BRA_BEZEICHNUNG, VERSION) VALUES
-(1000, '100', 'Elektro',0),
-(1001, '101', 'Maler',0),
-(1002, '102', 'Holzverabeitung',0),
-(1003, '103', 'Kaufmaennisch',0),
-(1004, '104', 'Versicherung',0),
-(1005, '105', 'Mess- und Regeltechnik',0),
-(1006, '106', 'Industriemontagen',0),
-(1007, '107', 'KFZ',0),
-(1008, '108', 'Banken',0),
-(1009, '109', 'Grosshandel',0),
-(1010, '110', 'Einzelhandel',0),
-(1011, '111', 'Werbung',0),
-(1012, '112', 'Gastronomie',0),
-(1014, '114', 'Pflegedienste',0),
-(1015, '115', 'Transportwesen',0),
-(1016, '116', 'Metallverarbeitung',0),
-(1017, '117', 'Schlosserei',0),
-(1018, '118', 'Sanitaer',0),
-(1019, '119', 'Heizungsbau',0),
-(1020, '120', 'Wasserwirtschaft',0),
-(1021, '121', 'Schiffsbau',0),
-(1022, '122', 'Laermschutz',0),
-(1023, '123', 'Geruestbau',0),
-(1024, '124', 'Fassadenbau',0),
-(1025, '125', 'Farbherstellung',0),
-(1026, '126', 'Kieswerk',0),
-(1027, '127', 'Blechnerei',0),
-(1028, '128', 'Geruestverleih',0),
-(1029, '129', 'Pflasterarbeiten',0),
-(1030, '130', 'Trockenbau',0),
-(1031, '131', 'Trockenbau- und Sanierung',0),
-(1032, '132', 'Huehnerfarm',0),
-(1033, '000', '.',0),
-(1034, '134', 'Transportwesen allgemein',0),
-(1035, '135', 'Schwertransport',0),
-(1036, '136', 'Gefahrgut Transport',0),
-(1037, '137', 'Spedition',0);
+INSERT INTO BRANCHE (BRA_ID,BRA_BEZEICHNUNG, VERSION) VALUES
+(1000,  'Elektro',0),
+(1001,  'Maler',0),
+(1002,  'Holzverabeitung',0),
+(1003,  'Kaufmaennisch',0),
+(1004,  'Versicherung',0),
+(1005,  'Mess- und Regeltechnik',0),
+(1006,  'Industriemontagen',0),
+(1007,  'KFZ',0),
+(1008,  'Banken',0),
+(1009,  'Grosshandel',0),
+(1010,  'Einzelhandel',0),
+(1011,  'Werbung',0),
+(1012,  'Gastronomie',0),
+(1014,  'Pflegedienste',0),
+(1015,  'Transportwesen',0),
+(1016,  'Metallverarbeitung',0),
+(1017,  'Schlosserei',0),
+(1018,  'Sanitaer',0),
+(1019,  'Heizungsbau',0),
+(1020,  'Wasserwirtschaft',0),
+(1021,  'Schiffsbau',0),
+(1022,  'Laermschutz',0),
+(1023,  'Geruestbau',0),
+(1024,  'Fassadenbau',0),
+(1025,  'Farbherstellung',0),
+(1026,  'Kieswerk',0),
+(1027,  'Blechnerei',0),
+(1028,  'Geruestverleih',0),
+(1029,  'Pflasterarbeiten',0),
+(1030,  'Trockenbau',0),
+(1031,  'Trockenbau- und Sanierung',0),
+(1032,  'Huehnerfarm',0),
+(1033,  '.',0),
+(1034,  'Transportwesen allgemein',0),
+(1035,  'Schwertransport',0),
+(1036,  'Gefahrgut Transport',0),
+(1037,  'Spedition',0);
 
 /******************** Kunden Daten ********************/
 INSERT INTO KUNDE (KUN_ID,KUN_FIL_ID,KUN_BRA_ID, KUN_NR, KUN_MATCHCODE,KUN_NAME1,KUN_NAME2,KUN_ORT,KUN_MAHNSPERRE,VERSION) VALUES 

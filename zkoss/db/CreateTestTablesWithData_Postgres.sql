@@ -69,7 +69,6 @@ DROP TABLE IF EXISTS artikel cascade;
 DROP TABLE IF EXISTS auftrag cascade;
 DROP TABLE IF EXISTS auftragposition cascade;
 DROP TABLE IF EXISTS branche cascade;
-DROP TABLE IF EXISTS calendar_event cascade;
 
 DROP TABLE IF EXISTS sec_user cascade;
 DROP TABLE IF EXISTS sec_userrole cascade;
@@ -89,6 +88,7 @@ DROP TABLE IF EXISTS sys_ip4country cascade;
  DROP TABLE IF EXISTS sec_loginlog cascade;
  DROP TABLE IF EXISTS log_ip2country cascade;
  DROP TABLE IF EXISTS guestbook cascade;
+ DROP TABLE IF EXISTS calendar_event cascade;
  */
 DROP TABLE IF EXISTS hibernate_entity_statistics cascade;
 DROP TABLE IF EXISTS hibernate_statistics cascade;

@@ -26,22 +26,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This class represents the types of securing. <br>
- * <br>
- * This domain model have no corresponding table in a database and has a fixed
- * length of records that should see as the types of what to secure. <br>
- * It's only for a better overview in the security managing tools. <br>
- * <br>
- * Int | Type <br>
- * --------------------------<br>
- * 0 | Page <br>
- * 1 | Menu Category <br>
- * 2 | Menu Item <br>
- * 3 | Method/Event <br>
- * 4 | DomainObject/Property <br>
- * 5 | Tab <br>
- * 6 | Component <br>
- * 
+This class represents the types of securing. <br>
+ <br>
+This domain model have no corresponding table in a database and has a fixed
+ length of records that should see as the types of what to secure. <br>
+ It's only for a better overview in the security managing tools. <br>
+<p>
+ <table border=0 cellspacing=3 cellpadding=0>
+
+     <tr bgcolor="#ccccff">
+         <th align=left>Int
+         <th align=left>Type
+     <tr>
+         <td><code>0</code>
+         <td>Page
+     <tr bgcolor="#eeeeff">
+         <td><code>1</code>
+         <td>Menu Category
+     <tr>
+         <td><code>2</code>
+         <td>Menu Item
+     <tr bgcolor="#eeeeff">
+         <td><code>3</code>
+         <td>Method/Event
+     <tr>
+         <td><code>4</code>
+         <td>DomainObject/Property
+     <tr bgcolor="#eeeeff">
+
+         <td><code>5</code>
+         <td>Tab
+     <tr>
+         <td><code>6</code>
+         <td>Component
+ </table>
+ *
  * @author bbruhns
  * @author sgerth
  */

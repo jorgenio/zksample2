@@ -5,6 +5,7 @@ import java.io.Serializable;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.zkoss.zk.ui.Executions;
 
 import de.forsthaus.gui.service.GuiLoginLoggingPolicService;
 
@@ -31,6 +32,7 @@ public class LoginLoggingPolicyService implements Serializable {
 		final long userId = ((User) authentication.getPrincipal()).getUserId();
 		final String clientAddress = convertClientAddress(authentication);
 		final String sessionId = convertClientSessionId(authentication);
+
 		getGuiLoginLoggingPolicService().logAuthPass(user, userId, clientAddress, sessionId);
 	}
 
@@ -38,6 +40,7 @@ public class LoginLoggingPolicyService implements Serializable {
 		final String user = authentication.getName();
 		final String clientAddress = convertClientAddress(authentication);
 		final String sessionId = convertClientSessionId(authentication);
+
 		getGuiLoginLoggingPolicService().logAuthFail(user, clientAddress, sessionId);
 	}
 

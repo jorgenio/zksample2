@@ -111,7 +111,8 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	protected Listheader listheader_SecLoginlogList_lglLoginname; // autowired
 	protected Listheader listheader_SecLoginlogList_lglStatusid; // autowired
 	protected Listheader listheader_SecLoginlogList_lglIp; // autowired
-	protected Listheader listheader_SecLoginlogList_CountryCode2;
+	protected Listheader listheader_SecLoginlogList_CountryCode2; // autowired
+	protected Listheader listheader_SecLoginlogList_browserType; // autowired
 	protected Listheader listheader_SecLoginlogList_lglSessionid; // autowired
 
 	// Server push -OLD-
@@ -171,6 +172,8 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		this.listheader_SecLoginlogList_lglIp.setSortDescending(new FieldComparator("lglIp", false));
 		this.listheader_SecLoginlogList_CountryCode2.setSortAscending(new FieldComparator("ip2Country.sysCountryCode.ccdCode2", true));
 		this.listheader_SecLoginlogList_CountryCode2.setSortDescending(new FieldComparator("ip2Country.sysCountryCode.ccdCode2", false));
+		this.listheader_SecLoginlogList_browserType.setSortAscending(new FieldComparator("browserType", true));
+		this.listheader_SecLoginlogList_browserType.setSortDescending(new FieldComparator("browserType", false));
 		this.listheader_SecLoginlogList_lglSessionid.setSortAscending(new FieldComparator("lglSessionid", true));
 		this.listheader_SecLoginlogList_lglSessionid.setSortDescending(new FieldComparator("lglSessionid", false));
 

@@ -162,6 +162,7 @@ CREATE INDEX fki_
 /*==============================================================*/
 create table Branche (
    bra_id               INT8                 not null,
+   bra_nr               VARCHAR(20)          null,
    bra_bezeichnung      VARCHAR(30)          not null,
    version              INT4                 not null default 0,
    constraint PK_BRANCHE primary key (bra_id)
@@ -606,6 +607,7 @@ create table sec_loginlog (
    lgl_loginname        VARCHAR(50)          not null,
    lgl_logtime          TIMESTAMP            not null,
    lgl_ip               VARCHAR(19)          null,
+   lgl_browsertype      VARCHAR(40)          null,
    lgl_status_id        INT4                 not null,
    lgl_sessionid        VARCHAR(50)          null,
    version              INT4                 not null default 0,

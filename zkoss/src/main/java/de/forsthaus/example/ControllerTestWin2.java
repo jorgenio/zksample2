@@ -33,7 +33,7 @@ public class ControllerTestWin2 extends GenericForwardComposer {
 	}// end method
 
 	/** currDateLabel onCreate event-handler */
-	public void onCreate$currDateLabel(Event event) throws Exception {
+	public void onCreateDateLabel(Event event) throws Exception {
 		System.out.println("this is Label onCreate");
 
 		System.out.println("Count of components: " + testWin.getChildren().size());

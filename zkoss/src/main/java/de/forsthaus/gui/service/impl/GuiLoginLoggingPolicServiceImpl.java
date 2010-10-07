@@ -22,6 +22,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import org.apache.log4j.Logger;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Sessions;
 
 import de.forsthaus.backend.model.Ip2Country;
 import de.forsthaus.backend.model.IpToCountry;
@@ -33,8 +35,12 @@ import de.forsthaus.backend.service.SysCountryCodeService;
 import de.forsthaus.gui.service.GuiLoginLoggingPolicService;
 
 /**
- * @author bbruhns
+ * Implementation of the login tries. Failed and successfully logins are saved
+ * in database.
  * 
+ * @changes: 10/07/2010: sge added the users browserType.
+ * @author bbruhns
+ * @author sgerth
  */
 public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicService {
 
@@ -51,7 +57,14 @@ public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicServ
 			logger.info("Login failed for: " + userName + " Host:" + clientAddress + " SessionId: " + sessionId);
 		}
 
-		final SecLoginlog log = this.loginLoggingService.saveLog(userName, clientAddress, sessionId, 0);
+		// Get the users BrowserType
+		String browserType = "";
+
+		// if (Executions.getCurrent().getUserAgent() != null) {
+		// browserType = Executions.getCurrent().getUserAgent();
+		// }
+
+		final SecLoginlog log = this.loginLoggingService.saveLog(userName, clientAddress, sessionId, browserType, 0);
 		/** For testing on a local tomcat */
 		// log.setLglIp("95.111.227.104");
 		saveSimpleIPDataFromTable(log);
@@ -66,11 +79,17 @@ public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicServ
 	public void logAuthPass(String userName, long userId, String clientAddress, String sessionId) {
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("Login ok for: " + userName + " -> UserID: " + userId + " Host:" + clientAddress
-					+ " SessionId: " + sessionId);
+			logger.debug("Login ok for: " + userName + " -> UserID: " + userId + " Host:" + clientAddress + " SessionId: " + sessionId);
 		}
 
-		final SecLoginlog log = this.loginLoggingService.saveLog(userName, clientAddress, sessionId, 1);
+		// Get the users BrowserType
+		String browserType = "";
+
+//		if (Executions.getCurrent().getUserAgent() != null) {
+//			browserType = Executions.getCurrent().getUserAgent();
+//		}
+
+		final SecLoginlog log = this.loginLoggingService.saveLog(userName, clientAddress, sessionId, browserType, 1);
 
 		/** For testing on a local tomcat */
 		// log.setLglIp("95.111.227.104");
@@ -112,8 +131,7 @@ public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicServ
 				final Ip2Country ip2c = getIp2CountryService().getNewIp2Country();
 				ip2c.setI2cCity("");
 				// ip2c.setSecLoginlog(log);
-				ip2c.setSysCountryCode(getSysCountryCodeService().getCountryCodeByCode2(
-						ipToCountry.getIpcCountryCode2()));
+				ip2c.setSysCountryCode(getSysCountryCodeService().getCountryCodeByCode2(ipToCountry.getIpcCountryCode2()));
 
 				getIp2CountryService().saveOrUpdate(ip2c);
 
@@ -122,11 +140,14 @@ public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicServ
 				this.loginLoggingService.update(log);
 			}
 		} catch (final UnknownHostException e) {
-			logger.warn("Update fehlgeschlagen für Country in " + log.getClass().getSimpleName() + " mit ID: "
-					+ log.getId() + " [" + e + "]");
+			logger.warn("Update fehlgeschlagen für Country in " + log.getClass().getSimpleName() + " mit ID: " + log.getId() + " [" + e + "]");
 		}
 
 	}
+
+	// #########################################################################
+	// ############################# Getter / Setter ###########################
+	// #########################################################################
 
 	public SysCountryCodeService getSysCountryCodeService() {
 		return this.sysCountryCodeService;

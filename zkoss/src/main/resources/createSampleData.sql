@@ -501,6 +501,7 @@ create table sec_loginlog (
    lgl_loginname        VARCHAR(50)          not null,
    lgl_logtime          TIMESTAMP            not null,
    lgl_ip               VARCHAR(19)          null,
+   lgl_browsertype      VARCHAR(40)          null,
    lgl_status_id        INT4                 not null,
    lgl_sessionid        VARCHAR(50)          null,
    version              INT4                 not null default 0,

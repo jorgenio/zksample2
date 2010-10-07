@@ -70,6 +70,7 @@ public class UserWorkspace implements Serializable, DisposableBean {
 	}
 
 	private String userLanguage;
+	private String browserType;
 
 	private Office office;
 
@@ -174,6 +175,14 @@ public class UserWorkspace implements Serializable, DisposableBean {
 		if (logger.isDebugEnabled()) {
 			logger.debug("destroy Workspace [" + this + "]");
 		}
+	}
+
+	public void setBrowserType(String browserType) {
+		this.browserType = browserType;
+	}
+
+	public String getBrowserType() {
+		return browserType;
 	}
 
 }

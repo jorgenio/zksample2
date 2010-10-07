@@ -14,7 +14,7 @@
 			value='Just a quick test on the order of method execution...' />
 		<h:br />
 		<label id='currDateLabel' value="Label_currDateLabel"
-			forward='onCreate=onCreate$currDateLabel' />
+			forward='onCreate=onCreateDateLabel' />
 
 	</window>
 </zk>

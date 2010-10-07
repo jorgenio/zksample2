@@ -292,13 +292,14 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 
 		int start = 0;
 		int pageNo = 0;
-		final int pageSize = 50;
+		final int pageSize = 200;
 
 		// ++ create the searchObject and init sorting ++//
 		final HibernateSearchObject<SecLoginlog> so = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class);
 
 //		so.addFetch("ip2Country");
-//		so.addFilterEqual("ip2Country.i2cLatitude", Float.valueOf(-1f));
+//		// so.addFilterEqual("ip2Country.i2cLatitude", Float.valueOf(-1f));
+//		so.addFilterEqual("ip2Country.i2cLatitude", -1);
 //		so.addSort("id", false);
 
 		so.setMaxResults(pageSize);

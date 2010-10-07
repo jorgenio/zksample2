@@ -307,6 +307,7 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 
 		so.setMaxResults(pageSize);
 
+		// do it endless until break
 		for (;;) {
 
 			start = pageNo * pageSize;

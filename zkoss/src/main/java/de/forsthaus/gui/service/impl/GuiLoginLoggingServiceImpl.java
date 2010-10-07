@@ -297,9 +297,9 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 		// ++ create the searchObject and init sorting ++//
 		final HibernateSearchObject<SecLoginlog> so = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class);
 
-		so.addFetch("ip2Country");
-		so.addFilterEqual("ip2Country.i2cLatitude", Float.valueOf(-1f));
-		so.addSort("id", false);
+//		so.addFetch("ip2Country");
+//		so.addFilterEqual("ip2Country.i2cLatitude", Float.valueOf(-1f));
+//		so.addSort("id", false);
 
 		so.setMaxResults(pageSize);
 

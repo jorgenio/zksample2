@@ -299,10 +299,10 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
 
-		so.addFetch("ip2Country.sysCountryCode");
-		// so.addFetch("ip2Country");
-		// so.addFilterEqual("ip2Country.i2cLatitude", new Float(-1));
-		// so.addFilterEqual("ip2Country.i2cLatitude", -1);
+		//		so.addFetch("ip2Country.sysCountryCode");
+		so.addFetch("ip2Country");
+		so.addFilterEqual("ip2Country.i2cLatitude", Float.valueOf(-1f));
+		//so.addFilterEqual("ip2Country.i2cLatitude", -1f);
 		so.addSort("id", false);
 
 		so.setMaxResults(pageSize);

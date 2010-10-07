@@ -36,9 +36,11 @@ public class SecLoginlog implements java.io.Serializable, Entity {
 	private Date lglLogtime;
 	private String lglSessionid;
 	private String lglIp;
+	private String browserType;
 	private int lglStatusid;
 	private int version;
 
+	@Override
 	public boolean isNew() {
 		return (getId() == Long.MIN_VALUE);
 	}
@@ -53,21 +55,32 @@ public class SecLoginlog implements java.io.Serializable, Entity {
 		this.lglStatusid = lglStatusid;
 	}
 
-	public SecLoginlog(long id, String lglLoginname, Date lglLogtime, String lglSessionid, String lglIp, int lglStatusid) {
+	public SecLoginlog(long id, String lglLoginname, Date lglLogtime, String lglSessionid, String lglIp, int lglStatusid, String browserType) {
 		this.setId(id);
 		this.lglLoginname = lglLoginname;
 		this.lglLogtime = lglLogtime;
 		this.lglSessionid = lglSessionid;
 		this.lglIp = lglIp;
 		this.lglStatusid = lglStatusid;
+		this.browserType = browserType;
 	}
 
+	@Override
 	public void setId(long id) {
 		this.id = id;
 	}
 
+	@Override
 	public long getId() {
 		return id;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public int getVersion() {
+		return version;
 	}
 
 	public void setIp2Country(Ip2Country ip2Country) {
@@ -118,12 +131,12 @@ public class SecLoginlog implements java.io.Serializable, Entity {
 		this.lglStatusid = lglStatusid;
 	}
 
-	public void setVersion(int version) {
-		this.version = version;
+	public void setBrowserType(String browserType) {
+		this.browserType = browserType;
 	}
 
-	public int getVersion() {
-		return version;
+	public String getBrowserType() {
+		return browserType;
 	}
 
 	@Override

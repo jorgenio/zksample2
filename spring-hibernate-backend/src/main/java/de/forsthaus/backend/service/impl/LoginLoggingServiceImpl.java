@@ -206,8 +206,8 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 	 * @return
 	 */
 	@Override
-	public SecLoginlog saveLog(String userName, String clientAddress, String sessionId, int status) {
-		return this.secLoginlogDAO.saveLog(userName, clientAddress, sessionId, status);
+	public SecLoginlog saveLog(String userName, String clientAddress, String sessionId, String browserType, int status) {
+		return this.secLoginlogDAO.saveLog(userName, clientAddress, sessionId, browserType, status);
 	}
 
 	@Override

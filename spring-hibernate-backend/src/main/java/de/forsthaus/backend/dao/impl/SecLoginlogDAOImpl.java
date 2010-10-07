@@ -143,12 +143,13 @@ public class SecLoginlogDAOImpl extends BasisNextidDaoImpl<SecLoginlog> implemen
 	 * @param status
 	 * @return
 	 */
-	public SecLoginlog saveLog(String userName, String clientAddress, String sessionId, int status) {
+	public SecLoginlog saveLog(String userName, String clientAddress, String sessionId, String browserType, int status) {
 
 		SecLoginlog log = getNewSecLoginlog();
 
 		log.setLglLoginname(userName);
 		log.setLglSessionid(sessionId);
+		log.setBrowserType(browserType);
 		log.setLglIp(clientAddress);
 		log.setLglLogtime(new Date());
 		log.setLglStatusid(status);

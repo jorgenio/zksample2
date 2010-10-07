@@ -31,7 +31,7 @@ public interface LoginLoggingService {
 	public int getCountAllSecLoginlog();
 
 	/* +++++ Security: Userlog +++++++ */
-	public SecLoginlog saveLog(String userName, String clientAddress, String sessionId, int status);
+	public SecLoginlog saveLog(String userName, String clientAddress, String sessionId, String browserType, int status);
 
 	public void update(SecLoginlog log);
 

@@ -32,7 +32,9 @@
 		<property name="lglStatusid" type="java.lang.Integer">
 			<column name="lgl_status_id" not-null="true" />
 		</property>
-
+		<property name="browserType" type="string">
+			<column name="lgl_browsertype" length="40" />
+		</property>
 
 	</class>
 </hibernate-mapping>

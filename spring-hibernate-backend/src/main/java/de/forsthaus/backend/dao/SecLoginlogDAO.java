@@ -125,10 +125,11 @@ public interface SecLoginlogDAO {
 	 * @param userName
 	 * @param clientAddress
 	 * @param sessionId
+	 * @param browserType
 	 * @param status
 	 * @return SecLoginlog
 	 */
-	public SecLoginlog saveLog(String userName, String clientAddress, String sessionId, int status);
+	public SecLoginlog saveLog(String userName, String clientAddress, String sessionId, String browserType, int status);
 
 	/**
 	 * EN: Saves or updates a SecLoginlog in the DB.<br>

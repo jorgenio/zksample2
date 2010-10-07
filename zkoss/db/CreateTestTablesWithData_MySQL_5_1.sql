@@ -387,6 +387,7 @@ create table sec_loginlog
    lgl_loginname        varchar(50) not null,
    lgl_logtime          timestamp not null,
    lgl_ip               varchar(19),
+   lgl_browsertype      VARCHAR(40)          null,
    lgl_status_id        int not null,
    lgl_sessionid        varchar(50),
    version              INT not null default 0,

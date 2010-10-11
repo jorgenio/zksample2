@@ -297,10 +297,13 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 		// ++ create the searchObject and init sorting ++//
 		final HibernateSearchObject<SecLoginlog> so = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class);
 
-//		so.addFetch("ip2Country");
-//		// so.addFilterEqual("ip2Country.i2cLatitude", Float.valueOf(-1f));
-//		so.addFilterEqual("ip2Country.i2cLatitude", -1);
-//		so.addSort("id", false);
+		so.addFetch("ip2Country");
+		// // // so.addFilterEqual("ip2Country.i2cLatitude",
+		// Float.valueOf(-1f));
+		// // so.addFilterEqual("ip2Country.i2cLatitude", -1);
+
+		// so.addFilterNotEmpty("ip2Country");
+		so.addSort("id", false);
 
 		so.setMaxResults(pageSize);
 
@@ -312,6 +315,7 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 			so.setFirstResult(start);
 
 			final List<SecLoginlog> list = getPagedListService().getBySearchObject(so);
+			System.out.println("count of records: " + list.size());
 
 			pageNo++;
 

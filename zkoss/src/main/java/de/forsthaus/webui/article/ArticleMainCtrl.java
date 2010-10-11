@@ -558,6 +558,8 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 
 		// refresh all dataBinder related controllers
 		getArticleDetailCtrl().getBinder().loadAll();
+		// the listController only because we have a textbox in it.
+		getArticleListCtrl().getBinder().loadAll();
 	}
 
 	/**

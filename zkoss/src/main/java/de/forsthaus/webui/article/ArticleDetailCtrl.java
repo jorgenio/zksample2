@@ -120,7 +120,6 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 	public void onCreate$windowArticleDetail(Event event) throws Exception {
 
 		this.binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
-
 		this.binder.loadAll();
 
 		doFitSize(event);

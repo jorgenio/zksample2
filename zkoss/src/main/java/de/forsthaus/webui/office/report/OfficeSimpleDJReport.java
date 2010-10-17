@@ -22,7 +22,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -43,11 +42,6 @@ import org.zkoss.spring.SpringUtil;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.SuspendNotAllowedException;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zul.Iframe;
-import org.zkoss.zul.Window;
 
 import ar.com.fdvs.dj.core.DynamicJasperHelper;
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
@@ -61,7 +55,7 @@ import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
 import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.service.OfficeService;
 import de.forsthaus.webui.util.ZksampleDateFormat;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.report.AbstractSimpleDJReport;
 
 /**
  * A simple report implemented with the DynamicJasper framework.<br>
@@ -75,28 +69,21 @@ import de.forsthaus.webui.util.ZksampleUtils;
  * @author sge
  * 
  */
-public class OfficeSimpleDJReport extends Window implements Serializable {
+public class OfficeSimpleDJReport extends AbstractSimpleDJReport {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8214417874418197186L;
 
-	private Iframe iFrame;
 	private ByteArrayOutputStream output;
 	private InputStream mediais;
 	private AMedia amedia;
 	private final String zksample2title = "[Zksample2] DynamicJasper Report Sample";
 
 	public OfficeSimpleDJReport(Component parent) throws InterruptedException {
-		super();
-		this.setParent(parent);
-
-		try {
-			doPrint();
-		} catch (final Exception e) {
-			ZksampleUtils.showErrorMessage(e.toString());
-		}
+		super(parent, "Dynamic JasperReports. Sample Report for ZKoss");
 	}
 
-	public void doPrint() throws JRException, ColumnBuilderException, ClassNotFoundException, IOException {
+	@Override
+	protected void doPrint() throws JRException, ColumnBuilderException, ClassNotFoundException, IOException {
 
 		final FastReportBuilder drb = new FastReportBuilder();
 		DynamicReport dr;
@@ -140,8 +127,7 @@ public class OfficeSimpleDJReport extends Window implements Serializable {
 		final String filOrt = Labels.getLabel("common.City");
 
 		drb.addColumn(filNr, "filNr", String.class.getName(), 20, columnStyleText, columnStyleTextBold);
-		drb.addColumn(filBezeichnung, "filBezeichnung", String.class.getName(), 50, columnStyleText,
-				columnStyleTextBold);
+		drb.addColumn(filBezeichnung, "filBezeichnung", String.class.getName(), 50, columnStyleText, columnStyleTextBold);
 		drb.addColumn(filName1, "filName1", String.class.getName(), 50, columnStyleText, columnStyleTextBold);
 		drb.addColumn(filName2, "filName2", String.class.getName(), 50, columnStyleText, columnStyleTextBold);
 		drb.addColumn(filOrt, "filOrt", String.class.getName(), 50, columnStyleText, columnStyleTextBold);
@@ -210,61 +196,16 @@ public class OfficeSimpleDJReport extends Window implements Serializable {
 		}
 	}
 
-	private void callReportWindow(AMedia aMedia, String format) {
-		final boolean modal = true;
-
-		this.setTitle("Dynamic JasperReports. Sample Report for ZKoss");
-		this.setId("ReportWindow");
-		this.setVisible(true);
-		this.setMaximizable(true);
-		this.setMinimizable(true);
-		this.setSizable(true);
-		this.setClosable(true);
-		this.setHeight("100%");
-		this.setWidth("80%");
-		this.addEventListener("onClose", new OnCloseReportEventListener());
-
-		this.iFrame = new Iframe();
-		this.iFrame.setId("jasperReportId");
-		this.iFrame.setWidth("100%");
-		this.iFrame.setHeight("100%");
-		this.iFrame.setContent(aMedia);
-		this.iFrame.setParent(this);
-
-		if (modal == true) {
-			try {
-				this.doModal();
-			} catch (final SuspendNotAllowedException e) {
-				throw new RuntimeException(e);
-			} catch (final InterruptedException e) {
-				throw new RuntimeException(e);
-			}
-		}
-
-	}
-
-	/**
-	 * EventListener for closing the Report Window.<br>
-	 * 
-	 * @author sge
-	 * 
-	 */
-	public final class OnCloseReportEventListener implements EventListener {
-		@Override
-		public void onEvent(Event event) throws Exception {
-			closeReportWindow();
-		}
-	}
-
 	/**
 	 * We must clear something to prevent errors or problems <br>
 	 * by opening the report a few times. <br>
 	 * 
 	 * @throws IOException
 	 */
-	private void closeReportWindow() throws IOException {
+	@Override
+	protected void closeReportWindow() throws IOException {
 
-		this.removeEventListener("onClose", new OnCloseReportEventListener());
+		//this.removeEventListener("onClose", new OnCloseReportEventListener());
 
 		// TODO check this
 		try {

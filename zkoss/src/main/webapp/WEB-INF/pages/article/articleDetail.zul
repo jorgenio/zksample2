@@ -3,6 +3,7 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 
 <zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:w="http://www.zkoss.org/2005/zk/client"
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
@@ -92,8 +93,7 @@
 
 					</columnchildren>
 
-					<columnchildren width="50%" style="padding: 5px">
-					</columnchildren>
+					<columnchildren width="50%" style="padding: 5px"></columnchildren>
 
 				</columnlayout>
 
@@ -103,3 +103,12 @@
 	</window>
 </zk>
 
+
+<!-- 
+	<label id="label" value=" Please click me "
+	w:onClick="jq(this.$f('label'))
+	.animate({'':''}, 500, function() {$(this).css({color: '#ff0000'})
+	.animate({'':''}, 500, function() {$(this).css({color: '#00ff00'})
+	.animate({'':''}, 500, function() {$(this).css({color: '#000000'})
+	})})});" />
+-->

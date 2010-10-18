@@ -150,8 +150,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// create the Button Controller. Disable not used buttons during working
-		this.btnCtrlBranch = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, false, this.btnNew,
-				this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
+		this.btnCtrlBranch = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, false, this.btnNew, this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
 
 		doCheckRights();
 
@@ -161,8 +160,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		 */
 		this.tabBranchList.setSelected(true);
 		if (this.tabPanelBranchList != null) {
-			ZksampleUtils.createTabPanelContent(this.tabPanelBranchList, this, "ModuleMainController",
-					"/WEB-INF/pages/branch/branchList.zul");
+			ZksampleUtils.createTabPanelContent(this.tabPanelBranchList, this, "ModuleMainController", "/WEB-INF/pages/branch/branchList.zul");
 		}
 
 		// Set the buttons for editMode
@@ -186,8 +184,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (this.tabPanelBranchList != null) {
-			ZksampleUtils.createTabPanelContent(this.tabPanelBranchList, this, "ModuleMainController",
-					"/WEB-INF/pages/branch/branchList.zul");
+			ZksampleUtils.createTabPanelContent(this.tabPanelBranchList, this, "ModuleMainController", "/WEB-INF/pages/branch/branchList.zul");
 		}
 	}
 
@@ -212,8 +209,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (this.tabPanelBranchDetail != null) {
-			ZksampleUtils.createTabPanelContent(this.tabPanelBranchDetail, this, "ModuleMainController",
-					"/WEB-INF/pages/branch/branchDetail.zul");
+			ZksampleUtils.createTabPanelContent(this.tabPanelBranchDetail, this, "ModuleMainController", "/WEB-INF/pages/branch/branchDetail.zul");
 		}
 	}
 
@@ -335,10 +331,8 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 			if (getBranchListCtrl().getBinder() != null) {
 
 				// ++ create a searchObject and init sorting ++//
-				final HibernateSearchObject<Branche> searchObjBranch = new HibernateSearchObject<Branche>(
-						Branche.class, getBranchListCtrl().getCountRows());
-				searchObjBranch.addFilter(new Filter("braBezeichnung", "%" + this.tb_Branch_Name.getValue() + "%",
-						Filter.OP_ILIKE));
+				final HibernateSearchObject<Branche> searchObjBranch = new HibernateSearchObject<Branche>(Branche.class, getBranchListCtrl().getCountRows());
+				searchObjBranch.addFilter(new Filter("braBezeichnung", "%" + this.tb_Branch_Name.getValue() + "%", Filter.OP_ILIKE));
 				searchObjBranch.addSort("braBezeichnung", false);
 
 				// Change the BindingListModel.
@@ -386,7 +380,10 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	}
 
 	/**
-	 * Cancels the current action and resets the values and buttons.
+	 * 1. Cancel the current action.<br>
+	 * 2. Reset the values to its origin.<br>
+	 * 3. Set UI components back to readonly/disable mode.<br>
+	 * 4. Set the buttons in edit mode.<br>
 	 * 
 	 * @param event
 	 * @throws InterruptedException
@@ -412,8 +409,8 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 
 	/**
 	 * Sets all UI-components to writable-mode. Sets the buttons to edit-Mode.
-	 * Checks, first if the needed tabs are created. If not, than create it by a
-	 * Events.sendEvent()
+	 * Checks first, if the NEEDED TABS with its contents are created. If not,
+	 * than create it by simulate an onSelect() with calling Events.sendEvent()
 	 * 
 	 * @param event
 	 * @throws InterruptedException
@@ -477,30 +474,28 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		if (aBranche != null) {
 
 			// Show a confirm box
-			final String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> "
-					+ aBranche.getBraBezeichnung();
+			final String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> " + aBranche.getBraBezeichnung();
 			final String title = Labels.getLabel("message.Deleting.Record");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, true,
-					new EventListener() {
-						@Override
-						public void onEvent(Event evt) {
-							switch (((Integer) evt.getData()).intValue()) {
-							case MultiLineMessageBox.YES:
-								deleteBean();
-								break; //
-							case MultiLineMessageBox.NO:
-								break; //
-							}
-						}
-
-						private void deleteBean() {
-							// delete from database
-							getBrancheService().delete(aBranche);
-						}
-
+			if (MultiLineMessageBox.show(msg, title, Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, true, new EventListener() {
+				@Override
+				public void onEvent(Event evt) {
+					switch (((Integer) evt.getData()).intValue()) {
+					case MultiLineMessageBox.YES:
+						deleteBean();
+						break; //
+					case MultiLineMessageBox.NO:
+						break; //
 					}
+				}
+
+				private void deleteBean() {
+					// delete from database
+					getBrancheService().delete(aBranche);
+				}
+
+			}
 
 			) == MultiLineMessageBox.YES) {
 			}
@@ -542,8 +537,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 
 			// show the objects data in the statusBar
 			final String str = getSelectedBranche().getBraBezeichnung();
-			EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(
-					new Event("onChangeSelectedObject", null, str));
+			EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeSelectedObject", null, str));
 
 		} catch (final DataAccessException e) {
 			final String message = e.getMessage();
@@ -689,8 +683,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		if (getOriginalBranche() != null) {
 
 			try {
-				getBranchDetailCtrl().setBranche(
-						(Branche) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalBranche()));
+				getBranchDetailCtrl().setBranche((Branche) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalBranche()));
 				setSelectedBranche((Branche) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalBranche()));
 				// TODO Bug in DataBinder??
 				this.windowBranchMain.invalidate();

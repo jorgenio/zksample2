@@ -444,7 +444,10 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	/**
-	 * Cancels the current action and resets the values and buttons.
+	 * 1. Cancel the current action.<br>
+	 * 2. Reset the values to its origin.<br>
+	 * 3. Set UI components back to readonly/disable mode.<br>
+	 * 4. Set the buttons in edit mode.<br>
 	 * 
 	 * @param event
 	 * @throws InterruptedException
@@ -470,8 +473,8 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 
 	/**
 	 * Sets all UI-components to writable-mode. Sets the buttons to edit-Mode.
-	 * Checks, first if the needed tabs are created. If not, than create it by a
-	 * Events.sendEvent()
+	 * Checks first, if the NEEDED TABS with its contents are created. If not,
+	 * than create it by simulate an onSelect() with calling Events.sendEvent()
 	 * 
 	 * @param event
 	 * @throws InterruptedException

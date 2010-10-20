@@ -44,6 +44,7 @@ public class DocumentationCtrl extends GFCBaseCtrl implements Serializable {
 
 	private Iframe iFrameDocumentation; // autowired
 	private AMedia media = null;
+	private final String docURL = "http://mesh.dl.sourceforge.net/project/zksample2/Documentation/zksample2-doc.pdf";
 
 	/**
 	 * default constructor.<br>
@@ -129,7 +130,7 @@ public class DocumentationCtrl extends GFCBaseCtrl implements Serializable {
 			// if (media != null) {
 			// iFrameDocumentation.setContent(media);
 			// }
-			iFrameDocumentation.setSrc("http://ncu.dl.sourceforge.net/project/zksample2/Documentation/zksample2-doc.pdf");
+			iFrameDocumentation.setSrc(docURL);
 
 		} finally {
 			Clients.clearBusy(); // close the message

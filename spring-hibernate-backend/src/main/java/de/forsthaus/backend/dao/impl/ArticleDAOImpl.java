@@ -24,6 +24,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.support.DataAccessUtils;
 
@@ -36,7 +37,7 @@ import de.forsthaus.backend.model.Article;
  * @author bbruhns
  * @author sgerth
  */
-public class ArticleDAOImpl extends BasisNextidDaoImpl<Article> implements ArticleDAO {
+public class ArticleDAOImpl extends BasisNextidDaoImpl<Article> implements ArticleDAO, InitializingBean {
 
 	@Override
 	public Article getNewArticle() {
@@ -96,6 +97,13 @@ public class ArticleDAOImpl extends BasisNextidDaoImpl<Article> implements Artic
 	@Override
 	public void delete(Article entity) throws DataAccessException {
 		super.delete(entity);
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("afterPropertiesSet" + this.toString());
+
 	}
 
 }

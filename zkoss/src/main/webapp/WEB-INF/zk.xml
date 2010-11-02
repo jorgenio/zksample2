@@ -50,6 +50,8 @@
 	<!--                 Device configurations                  -->
 	<!--          1. Type of server push                        -->
 	<!--          2. Page for showing the Session timeout       -->
+	<!--			 An empty URL can cause the browser to      -->
+	<!--             reload the same URL                        -->
 	<!-- ====================================================== -->
 	<device-config>
 		<device-type>ajax</device-type>
@@ -120,6 +122,15 @@
 	</library-property>
 	<client-config>
 		<processing-prompt-delay>1</processing-prompt-delay>
+	</client-config>
+
+	<!--
+		Turn on if you want to ignore the consecutive click events, if it
+		happens too close to the previous one, or the server is still serving
+		the previous click.
+	-->
+	<client-config>
+		<click-filter-delay>390</click-filter-delay>
 	</client-config>
 
 	<!-- ========================================================== -->

@@ -13,6 +13,8 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 02.11.2010 / Informing the users, that loading the documentation in an iFrame is in progress. " + lf;
+		s = s + "            	      Thanks to Tomek. http://www.zkoss.org/forum/listComment/13738. " + lf;
 		s = s + "- 20.10.2010 / SourceForge have changed the documentation address. " + lf;
 		s = s + "- 25.09.2010 / Adding a new menu entry for opening our blog. " + lf;
 		s = s + "- 17.09.2010 / Adding the backend classes for the calendar. Calendar is now Database driven. " + lf;

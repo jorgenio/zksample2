@@ -87,7 +87,6 @@ public class DocumentationCtrl extends GFCBaseCtrl implements Serializable {
 		 * event message if ready.
 		 */
 		loadDocument(event);
-
 	}
 
 	/**

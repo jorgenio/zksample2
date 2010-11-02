@@ -5,11 +5,35 @@
 <zk xmlns="http://www.zkoss.org/2005/zul"
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ca="http://www.zkoss.org/2005/zk/client/attribute"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
 
 	<window id="windowDocumentation" apply="${documentationCtrl}"
 		border="none" width="100%">
+
+		<label id="l1" visible="false"
+			value="${c:l('message.Information.LoadingDocumentPleaseWait')}" />
+
+		<zscript>
+	String message = l1.getValue();
+</zscript>
+
+
+		<script type="text/javascript">
+
+
+
+			
+			<![CDATA[ function documentLoaded(obj) { zAu.send(new
+			zk.Event(zk.Widget.$(obj), "onDocumentationLoaded")); }
+
+
+			]]>
+			
+			
+			
+       </script>
 
 		<div sclass="z-toolbar" style="padding:0">
 			<hbox pack="stretch" sclass="hboxRemoveWhiteStrips"
@@ -41,11 +65,19 @@
 			</hbox>
 		</div>
 
+
 		<borderlayout id="borderLayout_documentation">
 			<center border="none">
 
+
 				<iframe id="iFrameDocumentation" width="100%"
-					height="100%">
+					height="100%" ca:onload="documentLoaded(this)">
+					<attribute name="onCreate">
+	Clients.showBusy(self, message);
+</attribute>
+					<attribute name="onDocumentationLoaded">
+	Clients.clearBusy(self);
+</attribute>
 
 				</iframe>
 

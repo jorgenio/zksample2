@@ -6,15 +6,12 @@ import org.hibernate.TransactionException;
 import org.hibernate.stat.Statistics;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.transaction.AfterTransaction;
 import org.springframework.test.context.transaction.BeforeTransaction;
-import org.springframework.web.context.request.RequestScope;
-import org.springframework.web.context.request.SessionScope;
 
 @ContextConfiguration(locations = {
 		"classpath:applicationContext-hibernate.xml",

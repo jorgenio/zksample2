@@ -22,8 +22,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import org.apache.log4j.Logger;
-import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Sessions;
 
 import de.forsthaus.backend.model.Ip2Country;
 import de.forsthaus.backend.model.IpToCountry;

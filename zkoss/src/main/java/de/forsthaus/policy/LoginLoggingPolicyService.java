@@ -5,7 +5,6 @@ import java.io.Serializable;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
-import org.zkoss.zk.ui.Executions;
 
 import de.forsthaus.gui.service.GuiLoginLoggingPolicService;
 

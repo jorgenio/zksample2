@@ -18,68 +18,63 @@
  */
 package test.webui.reports;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
 import junit.framework.TestCase;
-import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JasperViewer;
-import de.forsthaus.webui.reports.order.TestReport;
 
 public class Test_TestReport extends TestCase {
 
 	public void test_TestReport() {
 
-		JRDataSource datasource = new TestReport().testBeanCollectionDatasource();
-
-		// preparing parameters
-		Map repParams = new HashMap();
-		repParams.put("Title", "Sample Order Report");
-		repParams.put("SUBREPORT_DIR", "D:/Entwicklung2/workspace_34_web/zkoss/WebContent/WEB-INF/reports/");
-
-		try {
-
-			String repDir = "D:/Entwicklung2/workspace_34_web/zkoss/WebContent/WEB-INF/reports/Test_Report.jrxml";
-			String subDir = "D:/Entwicklung2/workspace_34_web/zkoss/WebContent/WEB-INF/reports/";
-
-			File file = null;
-
-			try {
-				file = new File(repDir);
-				System.out.println("print filename : " + file.getAbsolutePath());
-
-			} catch (Exception e) {
-				System.out.println("print filename : " + file.getAbsolutePath());
-			}
-
-			String str1 = "D:/Entwicklung2/workspace_34_web/zkoss/WebContent/WEB-INF/reports/Test_Report.jrxml";
-			// InputStream inputStream1 = getClass().getResourceAsStream(path1);
-			JasperDesign jasperDesign1 = JRXmlLoader.load(file);
-			// JasperDesign jasperDesign1 = JRXmlLoader.load(str1);
-			JasperReport jasperReport1 = JasperCompileManager.compileReport(jasperDesign1);
-
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport1, repParams, datasource);
-
-			// JasperPrint jasperPrint =
-			// JasperFillManager.fillReport(jasperReport1, repParams,
-			// datasource);
-			JasperViewer.viewReport(jasperPrint, false);
-
-		} catch (JRException ex) {
-			String connectMsg = "JasperReports: Could not create the report " + ex.getMessage() + " " + ex.getLocalizedMessage();
-			System.out.println(connectMsg);
-		} catch (Exception ex) {
-			String connectMsg = "Could not create the report " + ex.getMessage() + " " + ex.getLocalizedMessage();
-			System.out.println(connectMsg);
-		}
+		// JRDataSource datasource = new
+		// TestReport().testBeanCollectionDatasource();
+		//
+		// // preparing parameters
+		// Map repParams = new HashMap();
+		// repParams.put("Title", "Sample Order Report");
+		// repParams.put("SUBREPORT_DIR",
+		// "D:/Entwicklung2/workspace_34_web/zkoss/WebContent/WEB-INF/reports/");
+		//
+		// try {
+		//
+		// String repDir =
+		// "D:/Entwicklung2/workspace_34_web/zkoss/WebContent/WEB-INF/reports/Test_Report.jrxml";
+		// String subDir =
+		// "D:/Entwicklung2/workspace_34_web/zkoss/WebContent/WEB-INF/reports/";
+		//
+		// File file = null;
+		//
+		// try {
+		// file = new File(repDir);
+		// System.out.println("print filename : " + file.getAbsolutePath());
+		//
+		// } catch (Exception e) {
+		// System.out.println("print filename : " + file.getAbsolutePath());
+		// }
+		//
+		// String str1 =
+		// "D:/Entwicklung2/workspace_34_web/zkoss/WebContent/WEB-INF/reports/Test_Report.jrxml";
+		// // InputStream inputStream1 = getClass().getResourceAsStream(path1);
+		// JasperDesign jasperDesign1 = JRXmlLoader.load(file);
+		// // JasperDesign jasperDesign1 = JRXmlLoader.load(str1);
+		// JasperReport jasperReport1 =
+		// JasperCompileManager.compileReport(jasperDesign1);
+		//
+		// JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport1,
+		// repParams, datasource);
+		//
+		// // JasperPrint jasperPrint =
+		// // JasperFillManager.fillReport(jasperReport1, repParams,
+		// // datasource);
+		// JasperViewer.viewReport(jasperPrint, false);
+		//
+		// } catch (JRException ex) {
+		// String connectMsg = "JasperReports: Could not create the report " +
+		// ex.getMessage() + " " + ex.getLocalizedMessage();
+		// System.out.println(connectMsg);
+		// } catch (Exception ex) {
+		// String connectMsg = "Could not create the report " + ex.getMessage()
+		// + " " + ex.getLocalizedMessage();
+		// System.out.println(connectMsg);
+		// }
 
 	}
 }

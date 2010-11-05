@@ -20,6 +20,10 @@
 			<id>zk ee evaluation repository</id>
 			<url>http://mavensync.zkoss.org/zk/ee-eval/</url>
 		</repository>
+		<repository>
+			<id>Jasper Reorts</id>
+			<url>http://jasperreports.sourceforge.net</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>

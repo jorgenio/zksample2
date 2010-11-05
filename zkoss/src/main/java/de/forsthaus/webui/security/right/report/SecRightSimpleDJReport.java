@@ -179,15 +179,13 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		 * Columns Definitions. A new ColumnBuilder instance for each column.
 		 */
 		// Right name
-		final AbstractColumn colRightName = ColumnBuilder.getNew().setColumnProperty("rigName", String.class.getName())
-				.build();
+		final AbstractColumn colRightName = ColumnBuilder.getNew().setColumnProperty("rigName", String.class.getName()).build();
 		colRightName.setTitle(rigName);
 		colRightName.setWidth(60);
 		colRightName.setHeaderStyle(columnHeaderStyleText);
 		colRightName.setStyle(columnDetailStyleText);
 		// Right type
-		final AbstractColumn colRightType = ColumnBuilder.getNew().setCustomExpression(getMyRightTypExpression())
-				.build();
+		final AbstractColumn colRightType = ColumnBuilder.getNew().setCustomExpression(getMyRightTypExpression()).build();
 		colRightType.setTitle(rigType);
 		colRightType.setWidth(40);
 		colRightType.setHeaderStyle(columnHeaderStyleText);
@@ -204,38 +202,35 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		 * aligment) makes them to be one on top of the other
 		 */
 
-		final AutoText created = new AutoText(Labels.getLabel("common.Created") + ": "
-				+ ZksampleDateFormat.getDateTimeFormater().format(new Date()), AutoText.POSITION_HEADER,
+		final AutoText created = new AutoText(Labels.getLabel("common.Created") + ": " + ZksampleDateFormat.getDateTimeFormater().format(new Date()), AutoText.POSITION_HEADER,
 				HorizontalBandAlignment.RIGHT);
 		created.setWidth(new Integer(120));
 		created.setStyle(atStyle);
 		drb.addAutoText(created);
 
-		final AutoText autoText = new AutoText(AutoText.AUTOTEXT_PAGE_X_SLASH_Y, AutoText.POSITION_HEADER,
-				HorizontalBandAlignment.RIGHT);
+		final AutoText autoText = new AutoText(AutoText.AUTOTEXT_PAGE_X_SLASH_Y, AutoText.POSITION_HEADER, HorizontalBandAlignment.RIGHT);
 		autoText.setWidth(new Integer(20));
 		autoText.setStyle(atStyle);
 		drb.addAutoText(autoText);
 
-		final AutoText name1 = new AutoText("The Zksample2 Ltd.", AutoText.POSITION_HEADER,
-				HorizontalBandAlignment.LEFT);
+		final AutoText name1 = new AutoText("The Zksample2 Ltd.", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		name1.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
-		final AutoText name2 = new AutoText("Software Consulting", AutoText.POSITION_HEADER,
-				HorizontalBandAlignment.LEFT);
+		final AutoText name2 = new AutoText("Software Consulting", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		name2.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
-		final AutoText street = new AutoText("256, ZK Direct RIA Street ", AutoText.POSITION_HEADER,
-				HorizontalBandAlignment.LEFT);
+		final AutoText street = new AutoText("256, ZK Direct RIA Street ", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		street.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
 		final AutoText city = new AutoText("ZKoss City", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		city.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
 		drb.addAutoText(name1).addAutoText(name2).addAutoText(street).addAutoText(city);
 		// Footer
-		final AutoText footerText = new AutoText("Help to prevent the global warming by writing cool software.",
-				AutoText.POSITION_FOOTER, HorizontalBandAlignment.CENTER);
+		final AutoText footerText = new AutoText("Help to prevent the global warming by writing cool software.", AutoText.POSITION_FOOTER, HorizontalBandAlignment.CENTER);
 		footerText.setStyle(footerStyle);
 		drb.addAutoText(footerText);
 
-		// ADD ALL USED FIELDS to the report.
+		/**
+		 * ADD ALL USED BUT NOT DIRECT PRINTED FIELDS to the report. We replace
+		 * the field 'rigType' with a customExpression
+		 */
 		drb.addField("rigType", Integer.class.getName());
 
 		drb.setUseFullPageWidth(true); // use full width of the page
@@ -294,8 +289,8 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 	}
 
 	/**
-	 * A CustomExpression that checks a boolean value and writes a 'T' as true
-	 * and a 'F' as false.<br>
+	 * A CustomExpression that checks an integer and writes a´the corresponding
+	 * names.<br>
 	 * 
 	 * @return
 	 */

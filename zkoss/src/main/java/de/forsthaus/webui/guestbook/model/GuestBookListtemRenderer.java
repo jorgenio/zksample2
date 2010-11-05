@@ -49,7 +49,7 @@ public class GuestBookListtemRenderer implements ListitemRenderer, Serializable 
 
 		Listcell lc = null;
 
-		lc = new Listcell(getDateTime(guestBook.getGubDate()));
+		lc = new Listcell(getFormattedDateTime(guestBook.getGubDate()));
 		lc.setParent(item);
 		lc = new Listcell(guestBook.getGubUsrname());
 		lc.setParent(item);
@@ -65,7 +65,7 @@ public class GuestBookListtemRenderer implements ListitemRenderer, Serializable 
 	 * 
 	 * @return String of date/time
 	 */
-	private String getDateTime(Date date) {
+	private String getFormattedDateTime(Date date) {
 		if (date != null) {
 			return ZksampleDateFormat.getDateTimeLongFormater().format(date);
 		}

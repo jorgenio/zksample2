@@ -13,6 +13,7 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 05.11.2010 / Added a YouTube video iFrame where we would stream weekely our most loved music. " + lf;
 		s = s + "- 02.11.2010 / Informing the users, that loading the documentation in an iFrame is in progress. " + lf;
 		s = s + "            	      Thanks to Tomek. http://www.zkoss.org/forum/listComment/13738. " + lf;
 		s = s + "- 20.10.2010 / SourceForge have changed the documentation address. " + lf;
@@ -216,7 +217,7 @@
 								label="NEW !!!  Database driven calendar." />
 
 							<textbox height="100%" width="99.5%"
-								multiline="true" rows="17" readonly="true"
+								multiline="true" rows="28" readonly="true"
 								style="font-family: verdana; border: none; background-color: white;"
 								value="${s}" />
 						</groupbox>
@@ -251,6 +252,28 @@
 						<groupbox mold="3d">
 							<caption
 								style="color: #000000; font-weight:bold;"
+								image="/images/youtube_40x16.jpg"
+								label="This week is Terry's favorite song:"
+								tooltiptext="Music:  Loquat - Swing Set Chain" />
+
+							<h:iframe title="YouTube video player"
+								class="youtube-player" type="text/html" width="100%"
+								height="198" src="http://www.youtube.com/embed/51G24IVfcaI"
+								frameborder="0">
+							</h:iframe>
+
+						</groupbox>
+					</panelchildren>
+				</panel>
+			</tablechildren>
+
+
+			<tablechildren width="30%">
+				<panel border="none">
+					<panelchildren>
+						<groupbox mold="3d">
+							<caption
+								style="color: #000000; font-weight:bold;"
 								image="/images/hibernate_icon_16x16.png"
 								label="Hibernate-Generic-DAO" />
 
@@ -263,29 +286,10 @@
 					</panelchildren>
 				</panel>
 			</tablechildren>
-
-			<tablechildren width="30%">
-				<panel border="none">
-					<panelchildren>
-						<groupbox mold="3d">
-							<caption
-								style="color: #000000; font-weight:bold;"
-								image="/images/spring_source_x16.png"
-								label="Spring Integration (Backend) + (Frontend)" />
-
-							<textbox width="98%"
-								value="Integration of the spring-framework with spring managed Services and DAOs in the backend and managed controllers/composers in the frontend. Used version = 3.0.1"
-								rows="4" multiline="true" readonly="true"
-								style="font-family: verdana; border: none; background-color: white;">
-							</textbox>
-						</groupbox>
-					</panelchildren>
-				</panel>
-			</tablechildren>
 		</tablelayout>
 
 		<tablelayout columns="2" width="100%">
-			<tablechildren rowspan="3" width="70%">
+			<tablechildren rowspan="4" width="70%">
 				<panel border="none">
 					<panelchildren>
 						<groupbox mold="3d">
@@ -450,6 +454,25 @@
 				</panel>
 			</tablechildren>
 
+
+			<tablechildren width="30%">
+				<panel border="none">
+					<panelchildren>
+						<groupbox mold="3d">
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/spring_source_x16.png"
+								label="Spring Integration (Backend) + (Frontend)" />
+
+							<textbox width="98%"
+								value="Integration of the spring-framework with spring managed Services and DAOs in the backend and managed controllers/composers in the frontend. Used version = 3.0.1"
+								rows="4" multiline="true" readonly="true"
+								style="font-family: verdana; border: none; background-color: white;">
+							</textbox>
+						</groupbox>
+					</panelchildren>
+				</panel>
+			</tablechildren>
 
 			<tablechildren width="30%">
 				<panel border="none">

@@ -78,8 +78,7 @@ import de.forsthaus.webui.util.ZksampleUtils;
  * This report shows an Order with its orderPositions.<br>
  * <br>
  * The report uses the DynamicReportBuilder that allowed more control over the
- * columns. Additionally the report uses a CustomExpression for showing how to
- * work with it. <br>
+ * columns. <br>
  * This report have a GrandTotal sum displayed at the end.<br>
  * Uses a money Pattern for all money fields.<br>
  * 
@@ -211,40 +210,32 @@ public class OrderDJReport extends Window implements Serializable {
 		 */
 		final Style atStyle = new StyleBuilder(true).setFont(Font.COMIC_SANS_SMALL).setTextColor(Color.red).build();
 
-		final AutoText created = new AutoText(Labels.getLabel("common.Created") + ": "
-				+ ZksampleDateFormat.getDateTimeFormater().format(new Date()), AutoText.POSITION_HEADER,
+		final AutoText created = new AutoText(Labels.getLabel("common.Created") + ": " + ZksampleDateFormat.getDateTimeFormater().format(new Date()), AutoText.POSITION_HEADER,
 				HorizontalBandAlignment.RIGHT);
 		created.setWidth(new Integer(120));
 		created.setStyle(atStyle);
 		drb.addAutoText(created);
 
-		final AutoText autoText = new AutoText(AutoText.AUTOTEXT_PAGE_X_SLASH_Y, AutoText.POSITION_HEADER,
-				HorizontalBandAlignment.RIGHT);
+		final AutoText autoText = new AutoText(AutoText.AUTOTEXT_PAGE_X_SLASH_Y, AutoText.POSITION_HEADER, HorizontalBandAlignment.RIGHT);
 		autoText.setWidth(new Integer(20));
 		autoText.setStyle(atStyle);
 		drb.addAutoText(autoText);
 
-		final AutoText atCustomerHeader = new AutoText(Labels.getLabel("orderDialogWindow.title") + " :  "
-				+ getOrder().getAufBezeichnung(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		final AutoText atCustomerHeader = new AutoText(Labels.getLabel("orderDialogWindow.title") + " :  " + getOrder().getAufBezeichnung(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		atCustomerHeader.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
 		atCustomerHeader.setStyle(subtitleStyleUL);
-		final AutoText name1 = new AutoText(getCustomer().getKunName1(), AutoText.POSITION_HEADER,
-				HorizontalBandAlignment.LEFT);
+		final AutoText name1 = new AutoText(getCustomer().getKunName1(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		name1.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
-		final AutoText name2 = new AutoText(getCustomer().getKunName2(), AutoText.POSITION_HEADER,
-				HorizontalBandAlignment.LEFT);
+		final AutoText name2 = new AutoText(getCustomer().getKunName2(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		name2.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
-		final AutoText city = new AutoText(getCustomer().getKunOrt(), AutoText.POSITION_HEADER,
-				HorizontalBandAlignment.LEFT);
+		final AutoText city = new AutoText(getCustomer().getKunOrt(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		city.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
 		final AutoText emptyLine = new AutoText("", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		emptyLine.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
-		drb.addAutoText(atCustomerHeader).addAutoText(emptyLine).addAutoText(name1).addAutoText(name2)
-				.addAutoText(city).addAutoText(emptyLine);
+		drb.addAutoText(atCustomerHeader).addAutoText(emptyLine).addAutoText(name1).addAutoText(name2).addAutoText(city).addAutoText(emptyLine);
 
 		// Footer
-		final AutoText footerText = new AutoText("Help to prevent the global warming by writing cool software.",
-				AutoText.POSITION_FOOTER, HorizontalBandAlignment.CENTER);
+		final AutoText footerText = new AutoText("Help to prevent the global warming by writing cool software.", AutoText.POSITION_FOOTER, HorizontalBandAlignment.CENTER);
 		footerText.setStyle(footerStyle);
 		drb.addAutoText(footerText);
 
@@ -252,8 +243,7 @@ public class OrderDJReport extends Window implements Serializable {
 		 * Columns Definitions. A new ColumnBuilder instance for each column.
 		 */
 		// Quantity
-		final AbstractColumn colQuantity = ColumnBuilder.getNew()
-				.setColumnProperty("aupMenge", BigDecimal.class.getName()).build();
+		final AbstractColumn colQuantity = ColumnBuilder.getNew().setColumnProperty("aupMenge", BigDecimal.class.getName()).build();
 		colQuantity.setTitle(quantity);
 		colQuantity.setWidth(40);
 		colQuantity.setPattern("#,##0.00");
@@ -261,16 +251,14 @@ public class OrderDJReport extends Window implements Serializable {
 		colQuantity.setStyle(columnDetailStyleNumbers);
 
 		// Article Text
-		final AbstractColumn colArticleText = ColumnBuilder.getNew()
-				.setColumnProperty("article.artKurzbezeichnung", String.class.getName()).build();
+		final AbstractColumn colArticleText = ColumnBuilder.getNew().setColumnProperty("article.artKurzbezeichnung", String.class.getName()).build();
 		colArticleText.setTitle(articleText);
 		colArticleText.setWidth(100);
 		colArticleText.setHeaderStyle(columnHeaderStyleText);
 		colArticleText.setStyle(columnDetailStyleText);
 
 		// Single Price
-		final AbstractColumn colSinglePrice = ColumnBuilder.getNew()
-				.setColumnProperty("aupEinzelwert", BigDecimal.class.getName()).build();
+		final AbstractColumn colSinglePrice = ColumnBuilder.getNew().setColumnProperty("aupEinzelwert", BigDecimal.class.getName()).build();
 		colSinglePrice.setTitle(singlePrice);
 		colSinglePrice.setWidth(40);
 		colSinglePrice.setPattern("#,##0.00");
@@ -278,8 +266,7 @@ public class OrderDJReport extends Window implements Serializable {
 		colSinglePrice.setStyle(columnDetailStyleNumbers);
 
 		// Line Sum
-		final AbstractColumn colLineSum = ColumnBuilder.getNew()
-				.setColumnProperty("aupGesamtwert", BigDecimal.class.getName()).build();
+		final AbstractColumn colLineSum = ColumnBuilder.getNew().setColumnProperty("aupGesamtwert", BigDecimal.class.getName()).build();
 		colLineSum.setTitle(lineSum);
 		colLineSum.setWidth(40);
 		// #,##0. €00

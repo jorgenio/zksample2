@@ -38,13 +38,18 @@
 			<north id="bl_north" border="none"
 				style="background-color: #EBEBEB" flex="true">
 
-				<div width="500px" height="190px"
+				<div width="500px" height="210px"
 					style="background-color: #EBEBEB; padding-top: 10px; padding-left: 10px">
 					<div width="600px" align="left"
 						style="background-color: #EBEBEB; padding: 10px">
-						
-						<label width="350px" style="font-size: 16px"
-							value="ZKoss sample application.  ( NEW!!! Updated to ZK 5.0.4 )" />
+
+						<vlayout>
+							<label width="100%" style="font-size: 16px"
+								value="ZKoss sample application.  ( NEW!!! Updated to ZK 5.0.4 )" />
+							<label width="100%" style="font-size: 10px"
+								multiline="true"
+								value="Zksample2 is a demo application that shows the integration of the zk AJAX web framework with several common used frameworks for database access, middle ware, security and reporting. Read more after loggin in." />
+						</vlayout>
 
 						<separator />
 						<separator />
@@ -53,9 +58,10 @@
 							<button id="btn_zkoss" style="border: 0px"
 								image="/images/zkpowered_60x60.png" href="http://www.zkoss.org"
 								target="_blank" tooltiptext="Go to the zk framework site" />
-							<button style="border: 0px" width="88" height="31" 
-								image="http://sourceforge.net/sflogo.php?group_id=297404" href="http://zksample2.sourceforge.net/"
-								target="_blank"/>
+							<button style="border: 0px" width="88"
+								height="31"
+								image="http://sourceforge.net/sflogo.php?group_id=297404"
+								href="http://zksample2.sourceforge.net/" target="_blank" />
 							<separator width="30px" />
 						</hbox>
 					</div>

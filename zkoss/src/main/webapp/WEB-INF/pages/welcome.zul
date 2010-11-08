@@ -16,7 +16,7 @@
 		s = s + "- 08.11.2010 / For guys who would build this app from source, we have added a workaround for the " + lf;
 		s = s + "            	      JasperReport failure if maven build for this project.  " + lf;
 		s = s + "            	      See /src/test/resources/readme.txt. Seems this failure comes from the   " + lf;
-		s = s + "            	      maven3 conversion of JasperReports. Hope the guys found the failure." + lf;
+		s = s + "            	      maven3 conversion of JasperReports. Hope the guys repair the corrupt file expressly." + lf;
 		s = s + "- 05.11.2010 / Added a YouTube video iFrame where we would stream weekely our most loved music. " + lf;
 		s = s + "- 02.11.2010 / Informing the users, that loading the documentation in an iFrame is in progress. " + lf;
 		s = s + "            	      Thanks to Tomek. http://www.zkoss.org/forum/listComment/13738. " + lf;

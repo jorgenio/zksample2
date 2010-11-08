@@ -257,7 +257,7 @@
 							<caption
 								style="color: #000000; font-weight:bold;"
 								image="/images/youtube_40x16.jpg"
-								label="This week is Terry's favorite song:"
+								label="weekly Terry's favorite song:"
 								tooltiptext="Music:  Loquat - Swing Set Chain" />
 
 							<h:iframe title="YouTube video player"

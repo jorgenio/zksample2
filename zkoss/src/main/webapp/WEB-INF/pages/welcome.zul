@@ -14,7 +14,7 @@
 		lf = "\n";
 		s = "";
 		s = s + "- 08.11.2010 / For guys who would build this app from source, we have added a workaround for the " + lf;
-		s = s + "            	      JasperReport failure if maven build for this project.  " + lf;
+		s = s + "            	      JasperReport failure by the maven-build process for this project.  " + lf;
 		s = s + "            	      See /src/test/resources/readme.txt. Seems this failure comes from the   " + lf;
 		s = s + "            	      maven3 conversion of JasperReports. Hope the guys repair the corrupt file expressly." + lf;
 		s = s + "- 05.11.2010 / Added a YouTube video iFrame where we would stream weekely our most loved music. " + lf;

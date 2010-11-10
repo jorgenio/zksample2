@@ -26,8 +26,13 @@ import org.zkoss.zul.Textbox;
 
 /**
  * Constraint for comparing the value from a textbox with a string.<br>
- * Throws an error message if not equals. Used in the userDialog for checking
- * that the reTyped password is same as first written password.<br>
+ * Throws an error message if not equals or is empty. Used in the userDialog for
+ * checking that the reTyped password is same as first written password.<br>
+ * 
+ * <pre>
+ * call from java: usrPasswordRetype.setConstraint(new
+ * NoEmptyAndEqualStringsConstraint(this.usrPassword));
+ * </pre>
  * 
  * @author sgerth
  * 

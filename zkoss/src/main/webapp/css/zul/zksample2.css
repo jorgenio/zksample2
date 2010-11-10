@@ -1,14 +1,15 @@
 <?
-taglib uri                                ="http: //www.zkoss.org
+taglib uri                                       ="http: //www.zkoss.org
 	/dsp/web/core" prefix       
-	                        ="c   
-	                           "?> <style type 
-	                               ="text /css"> /* body Bereich */ body {
+	                               ="c   
+	                                  "?> <style type 
+	                                      ="text /css"> /* body Bereich */
+	body {
 	padding: 0 0;
 	/* 0 padding on top and bottom and 0 padding on right and left */
 }
 
-/********************************/ /* ------ L I S T B O X ------- */
+/*********************** L I S T B O X *********************/
 	/* Listbox Header 1 */
 .FDListBoxHeader1 {
 	background-color: #E6B9CD;
@@ -119,10 +120,14 @@ tr.z-row td.z-row-inner {
 .z-slider-sphere-hor,.z-slider-scale,.z-slider-hor,.z-slider-sphere-hor-center,.z-slider-scale-center,.z-slider-hor-center
 	{
 	background: transparent no-repeat 0 top;
-	background-image: url(${                                                       c :
+	background-image: url(${
+		                                                                  
+		 c :   
+		
+		  
 		         
 		                             
-		              encodeURL('~./zul/img/slider/slider-bg.png')
+		                     encodeURL('~./zul/img/slider/slider-bg.png')
 }
 
 .z-tabs-header {

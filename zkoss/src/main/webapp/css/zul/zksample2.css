@@ -1,16 +1,15 @@
 <?
-taglib uri                                       ="http: //www.zkoss.org
-	/dsp/web/core" prefix       
-	                               ="c   
-	                                  "?> <style type 
-	                                      ="text /css"> /* body Bereich */
+taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?> 
+<style type="text /css"> 
+
+/* body Bereich */
 	body {
 	padding: 0 0;
 	/* 0 padding on top and bottom and 0 padding on right and left */
 }
 
 /*********************** L I S T B O X *********************/
-	/* Listbox Header 1 */
+/* Listbox Header 1 */
 .FDListBoxHeader1 {
 	background-color: #E6B9CD;
 }

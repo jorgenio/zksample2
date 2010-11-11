@@ -48,7 +48,7 @@ import de.forsthaus.webui.security.group.model.SecGroupListModelItemRenderer;
 import de.forsthaus.webui.security.group.report.SecGroupSimpleDJReport;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -244,7 +244,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		ZksampleUtils.doShowNotAllowedInDemoModeMessage();
+		ZksampleMessageUtils.doShowNotAllowedInDemoModeMessage();
 	}
 
 	/**

@@ -48,7 +48,7 @@ import de.forsthaus.webui.security.right.model.SecRightListModelItemRenderer;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 import de.forsthaus.webui.util.pagging.PagedListWrapper;
 
 /**
@@ -244,7 +244,7 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**

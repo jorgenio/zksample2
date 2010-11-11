@@ -38,7 +38,7 @@ import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -188,7 +188,7 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**

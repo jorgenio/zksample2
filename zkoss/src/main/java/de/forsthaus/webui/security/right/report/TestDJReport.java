@@ -62,7 +62,7 @@ import de.forsthaus.backend.model.SecRight;
 import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.webui.reports.template.DJLetterHead;
 import de.forsthaus.webui.reports.template.DJReportStyles;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * A simple report implemented with the DynamicJasper framework.<br>
@@ -98,7 +98,7 @@ public class TestDJReport extends Window implements Serializable {
 		try {
 			doPrint();
 		} catch (Exception e) {
-			ZksampleUtils.showErrorMessage(e.toString());
+			ZksampleMessageUtils.showErrorMessage(e.toString());
 		}
 	}
 

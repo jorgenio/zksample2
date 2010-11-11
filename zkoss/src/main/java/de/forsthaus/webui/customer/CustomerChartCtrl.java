@@ -52,7 +52,7 @@ import de.forsthaus.backend.model.ChartData;
 import de.forsthaus.backend.model.Customer;
 import de.forsthaus.backend.service.ChartService;
 import de.forsthaus.webui.util.GFCBaseCtrl;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -156,7 +156,7 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**

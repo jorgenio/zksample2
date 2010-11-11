@@ -53,7 +53,7 @@ import de.forsthaus.webui.order.model.OrderListModelItemRenderer;
 import de.forsthaus.webui.order.model.OrderSearchCustomerListModelItemRenderer;
 import de.forsthaus.webui.orderposition.model.OrderpositionListModelItemRenderer;
 import de.forsthaus.webui.util.GFCBaseCtrl;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 import de.forsthaus.webui.util.pagging.PagedListWrapper;
 
 /**
@@ -398,7 +398,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 		} catch (final Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
-			ZksampleUtils.showErrorMessage(e.toString());
+			ZksampleMessageUtils.showErrorMessage(e.toString());
 		}
 
 	}
@@ -412,7 +412,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$button_OrderList_OrderNameSearch(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -424,7 +424,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**

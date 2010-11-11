@@ -52,7 +52,7 @@ import de.forsthaus.backend.service.LoginLoggingService;
 import de.forsthaus.webui.logging.loginlog.model.SecLoginlogStatisticTotalListModelItemRenderer;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.ZksampleDateFormat;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -131,7 +131,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 			final StringWriter sw = new StringWriter();
 			final PrintWriter pw = new PrintWriter(sw);
 			e.printStackTrace(pw);
-			ZksampleUtils.showErrorMessage(pw.toString());
+			ZksampleMessageUtils.showErrorMessage(pw.toString());
 
 			Logger.getLogger(getClass()).error("", e);
 		}
@@ -147,7 +147,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecLoginlogList_PrintLoginList(Event event) throws InterruptedException {
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**

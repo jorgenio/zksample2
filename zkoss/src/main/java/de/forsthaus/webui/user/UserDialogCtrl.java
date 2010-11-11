@@ -50,7 +50,7 @@ import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.NoEmptyAndEqualStringsConstraint;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -280,7 +280,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -726,7 +726,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 				 */
 				try {
 					if (anUser.getId() <= 14 && anUser.getId() >= 10) {
-						ZksampleUtils.doShowNotAllowedForDemoRecords();
+						ZksampleMessageUtils.doShowNotAllowedForDemoRecords();
 						return;
 					} else {
 						// delete from database

@@ -26,11 +26,11 @@ import org.zkoss.zul.Tabpanel;
  * @author sge
  * 
  */
-public class ZksampleUtils implements Serializable {
+public class ZksampleMessageUtils implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public ZksampleUtils() {
+	public ZksampleMessageUtils() {
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //

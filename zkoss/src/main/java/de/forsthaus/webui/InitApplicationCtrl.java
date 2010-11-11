@@ -151,6 +151,10 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		doOnCreateCommon(this.startWindow); // do the autowire stuff
 
+		// test ZksampleCookieUtils.getAllCookies();
+		// test System.out.println("Used Theme = " +
+		// ZksampleCookieUtils.getCookie("Theme"));
+
 		createMainGrid();
 
 		countDemoData();
@@ -712,7 +716,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	public void onCreate1000Customers(Event event) throws Exception {
 
 		createDemoCustomers(1000); // the long running process
-		Clients.clearBusy(); //showBusy("", false); // close the message
+		Clients.clearBusy(); // showBusy("", false); // close the message
 	}
 
 	/**
@@ -740,7 +744,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	public void onCreate100Customers(Event event) throws Exception {
 
 		createDemoCustomers(100);
-		Clients.clearBusy(); //showBusy("", false); // close the message
+		Clients.clearBusy(); // showBusy("", false); // close the message
 	}
 
 	/**

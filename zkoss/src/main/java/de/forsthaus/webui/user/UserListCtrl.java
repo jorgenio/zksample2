@@ -53,7 +53,7 @@ import de.forsthaus.webui.user.model.UserListModelItemRenderer;
 import de.forsthaus.webui.user.report.UserSimpleDJReport;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -311,7 +311,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**

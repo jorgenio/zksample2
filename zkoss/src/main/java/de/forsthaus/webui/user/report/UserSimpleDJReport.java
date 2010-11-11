@@ -64,7 +64,7 @@ import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
 import de.forsthaus.backend.model.SecUser;
 import de.forsthaus.backend.service.UserService;
 import de.forsthaus.webui.util.ZksampleDateFormat;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * A report implemented with the DynamicJasper framework.<br>
@@ -97,7 +97,7 @@ public class UserSimpleDJReport extends Window implements Serializable {
 		try {
 			doPrint();
 		} catch (final Exception e) {
-			ZksampleUtils.showErrorMessage(e.toString());
+			ZksampleMessageUtils.showErrorMessage(e.toString());
 		}
 	}
 

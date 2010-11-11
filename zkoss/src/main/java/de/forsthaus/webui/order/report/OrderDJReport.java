@@ -70,7 +70,7 @@ import de.forsthaus.backend.model.Order;
 import de.forsthaus.backend.model.Orderposition;
 import de.forsthaus.backend.service.OrderService;
 import de.forsthaus.webui.util.ZksampleDateFormat;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * A report implemented with the DynamicJasper framework.<br>
@@ -117,7 +117,7 @@ public class OrderDJReport extends Window implements Serializable {
 		try {
 			doPrint();
 		} catch (final Exception e) {
-			ZksampleUtils.showErrorMessage(e.getLocalizedMessage());
+			ZksampleMessageUtils.showErrorMessage(e.getLocalizedMessage());
 			Logger.getLogger(getClass()).error("", e);
 		}
 	}

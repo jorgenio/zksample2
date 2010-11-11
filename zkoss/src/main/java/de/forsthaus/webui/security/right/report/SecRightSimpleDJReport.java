@@ -69,7 +69,7 @@ import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
 import de.forsthaus.backend.model.SecRight;
 import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.webui.util.ZksampleDateFormat;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * A simple report implemented with the DynamicJasper framework.<br>
@@ -102,7 +102,7 @@ public class SecRightSimpleDJReport extends Window implements Serializable {
 		try {
 			doPrint();
 		} catch (final Exception e) {
-			ZksampleUtils.showErrorMessage(e.toString());
+			ZksampleMessageUtils.showErrorMessage(e.toString());
 		}
 	}
 

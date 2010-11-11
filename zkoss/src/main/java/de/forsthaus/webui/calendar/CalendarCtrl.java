@@ -47,7 +47,7 @@ import de.forsthaus.policy.model.UserImpl;
 import de.forsthaus.webui.calendar.model.CalendarDateFormatter;
 import de.forsthaus.webui.calendar.model.MySimpleCalendarEvent;
 import de.forsthaus.webui.util.GFCBaseCtrl;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -276,7 +276,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btn_Calendar_PrintCalendar(Event event) throws InterruptedException {
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -548,7 +548,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doHelp(Event event) throws InterruptedException {
 
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 
 		// we stop the propagation of the event, because zk will call ALL events
 		// with the same name in the namespace and 'btnHelp' is a standard

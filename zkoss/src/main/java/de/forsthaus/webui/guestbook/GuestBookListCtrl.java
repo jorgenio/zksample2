@@ -47,7 +47,7 @@ import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.guestbook.model.GuestBookListtemRenderer;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -196,7 +196,7 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		// logger.debug("--> " + event.toString());
 
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**

@@ -62,7 +62,7 @@ import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
 import de.forsthaus.backend.model.Article;
 import de.forsthaus.backend.service.ArticleService;
 import de.forsthaus.webui.util.ZksampleDateFormat;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * A simple report implemented with the DynamicJasper framework.<br>
@@ -93,7 +93,7 @@ public class ArticleSimpleDJReport extends Window implements Serializable {
 		try {
 			doPrint();
 		} catch (final Exception e) {
-			ZksampleUtils.showErrorMessage(e.toString());
+			ZksampleMessageUtils.showErrorMessage(e.toString());
 		}
 	}
 

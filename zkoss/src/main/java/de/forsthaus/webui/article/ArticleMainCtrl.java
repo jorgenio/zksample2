@@ -33,7 +33,7 @@ import de.forsthaus.webui.article.report.ArticleSimpleDJReport;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -165,7 +165,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		 */
 		this.tabArticleList.setSelected(true);
 		if (this.tabPanelArticleList != null) {
-			ZksampleUtils.createTabPanelContent(this.tabPanelArticleList, this, "ModuleMainController", "/WEB-INF/pages/article/articleList.zul");
+			ZksampleMessageUtils.createTabPanelContent(this.tabPanelArticleList, this, "ModuleMainController", "/WEB-INF/pages/article/articleList.zul");
 		}
 
 		// Set the buttons for editMode
@@ -189,7 +189,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (this.tabPanelArticleList != null) {
-			ZksampleUtils.createTabPanelContent(this.tabPanelArticleList, this, "ModuleMainController", "/WEB-INF/pages/article/articleList.zul");
+			ZksampleMessageUtils.createTabPanelContent(this.tabPanelArticleList, this, "ModuleMainController", "/WEB-INF/pages/article/articleList.zul");
 		}
 	}
 
@@ -214,7 +214,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (this.tabPanelArticleDetail != null) {
-			ZksampleUtils.createTabPanelContent(this.tabPanelArticleDetail, this, "ModuleMainController", "/WEB-INF/pages/article/articleDetail.zul");
+			ZksampleMessageUtils.createTabPanelContent(this.tabPanelArticleDetail, this, "ModuleMainController", "/WEB-INF/pages/article/articleDetail.zul");
 		}
 	}
 
@@ -684,7 +684,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doHelp(Event event) throws InterruptedException {
 
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 
 		// we stop the propagation of the event, because zk will call ALL events
 		// with the same name in the namespace and 'btnHelp' is a standard

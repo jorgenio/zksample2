@@ -52,7 +52,7 @@ import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 import de.forsthaus.webui.util.searchdialogs.BranchAdvancedSearchListBox;
 import de.forsthaus.webui.util.searchdialogs.BranchExtendedSearchListBox;
 import de.forsthaus.webui.util.searchdialogs.BranchSimpleSearchListBox;
@@ -395,7 +395,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		logger.debug(event.toString());
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**

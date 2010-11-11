@@ -45,7 +45,7 @@ import de.forsthaus.backend.service.CustomerService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.customer.model.CustomerListModelItemRenderer;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -262,7 +262,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		} catch (final Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
-			ZksampleUtils.showErrorMessage(e.toString());
+			ZksampleMessageUtils.showErrorMessage(e.toString());
 		}
 	}
 
@@ -275,7 +275,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		// logger.debug(event.toString());
 
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -315,7 +315,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 			Executions.createComponents("/WEB-INF/pages/customer/customerSearchDialog.zul", null, map);
 		} catch (final Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
-			ZksampleUtils.showErrorMessage(e.toString());
+			ZksampleMessageUtils.showErrorMessage(e.toString());
 		}
 
 	}
@@ -329,7 +329,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	public void onClick$button_CustomerList_PrintList(Event event) throws InterruptedException {
 		// logger.debug(event.toString());
 
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

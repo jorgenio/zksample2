@@ -61,7 +61,7 @@ import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
 import de.forsthaus.backend.model.SecGroup;
 import de.forsthaus.backend.service.SecurityService;
 import de.forsthaus.webui.util.ZksampleDateFormat;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * A simple report implemented with the DynamicJasper framework.<br>
@@ -92,7 +92,7 @@ public class SecGroupSimpleDJReport extends Window implements Serializable {
 		try {
 			doPrint();
 		} catch (final Exception e) {
-			ZksampleUtils.showErrorMessage(e.toString());
+			ZksampleMessageUtils.showErrorMessage(e.toString());
 		}
 	}
 

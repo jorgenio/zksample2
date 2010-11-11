@@ -33,7 +33,7 @@ import de.forsthaus.webui.branch.report.BranchSimpleDJReport;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -160,7 +160,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		 */
 		this.tabBranchList.setSelected(true);
 		if (this.tabPanelBranchList != null) {
-			ZksampleUtils.createTabPanelContent(this.tabPanelBranchList, this, "ModuleMainController", "/WEB-INF/pages/branch/branchList.zul");
+			ZksampleMessageUtils.createTabPanelContent(this.tabPanelBranchList, this, "ModuleMainController", "/WEB-INF/pages/branch/branchList.zul");
 		}
 
 		// Set the buttons for editMode
@@ -184,7 +184,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (this.tabPanelBranchList != null) {
-			ZksampleUtils.createTabPanelContent(this.tabPanelBranchList, this, "ModuleMainController", "/WEB-INF/pages/branch/branchList.zul");
+			ZksampleMessageUtils.createTabPanelContent(this.tabPanelBranchList, this, "ModuleMainController", "/WEB-INF/pages/branch/branchList.zul");
 		}
 	}
 
@@ -209,7 +209,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (this.tabPanelBranchDetail != null) {
-			ZksampleUtils.createTabPanelContent(this.tabPanelBranchDetail, this, "ModuleMainController", "/WEB-INF/pages/branch/branchDetail.zul");
+			ZksampleMessageUtils.createTabPanelContent(this.tabPanelBranchDetail, this, "ModuleMainController", "/WEB-INF/pages/branch/branchDetail.zul");
 		}
 	}
 
@@ -638,7 +638,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		// Executions.createComponents("/WEB-INF/pages/util/helpWindow.zul",
 		// windowBranchMain, map);
 
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 
 		// we stop the propagation of the event, because zk will call ALL events
 		// with the same name in the namespace and 'btnHelp' is a standard

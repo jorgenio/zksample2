@@ -52,7 +52,7 @@ import de.forsthaus.webui.security.userrole.model.SecUserroleUserListModelItemRe
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.SelectionCtrl;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 import de.forsthaus.webui.util.pagging.PagedListWrapper;
 
 /**
@@ -259,7 +259,7 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		logger.debug(event.toString());
 
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**

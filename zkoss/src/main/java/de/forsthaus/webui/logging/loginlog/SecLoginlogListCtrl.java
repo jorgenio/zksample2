@@ -56,7 +56,7 @@ import de.forsthaus.webui.logging.loginlog.model.WorkingThreadLoginList;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.InputConfirmBox;
 import de.forsthaus.webui.util.MultiLineMessageBox;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -324,7 +324,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_SecLoginlogList_PrintLoginList(Event event) throws InterruptedException {
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**
@@ -442,7 +442,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**

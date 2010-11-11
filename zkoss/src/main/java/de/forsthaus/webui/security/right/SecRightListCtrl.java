@@ -51,7 +51,7 @@ import de.forsthaus.webui.security.right.model.SecRightSecTypListModelItemRender
 import de.forsthaus.webui.security.right.report.SecRightSimpleDJReport;
 import de.forsthaus.webui.util.GFCBaseListCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
-import de.forsthaus.webui.util.ZksampleUtils;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -256,7 +256,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		ZksampleUtils.doShowNotImplementedMessage();
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**

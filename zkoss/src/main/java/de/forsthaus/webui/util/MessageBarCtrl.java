@@ -131,12 +131,19 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 
 					/**
 					 * If you whish to popup the incoming message than uncomment
-					 * these lines.
+					 * these next 3 lines.
 					 */
+					// START Popup
 					getMsgWindow();
 					((Textbox) getMsgWindow().getFellow("tb")).setValue(getMsg());
+					MessageBarCtrl.this.btnOpenMsg.setImage("/images/icons/message2_16x16.gif");
+					// END Popup
 
-					MessageBarCtrl.this.btnOpenMsg.setImage("/images/icons/incoming_message1_16x16.gif");
+					/**
+					 * If you whish to inform smartly of incoming message than
+					 * uncomment the next line for a only blinking Icon.
+					 */
+					// MessageBarCtrl.this.btnOpenMsg.setImage("/images/icons/incoming_message1_16x16.gif");
 				} else {
 					((Textbox) getMsgWindow().getFellow("tb")).setValue(getMsg());
 				}

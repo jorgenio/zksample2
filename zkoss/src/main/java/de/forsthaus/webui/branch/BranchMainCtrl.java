@@ -33,6 +33,7 @@ import de.forsthaus.webui.branch.report.BranchSimpleDJReport;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.ZksampleCommonUtils;
 import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
@@ -160,7 +161,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		 */
 		this.tabBranchList.setSelected(true);
 		if (this.tabPanelBranchList != null) {
-			ZksampleMessageUtils.createTabPanelContent(this.tabPanelBranchList, this, "ModuleMainController", "/WEB-INF/pages/branch/branchList.zul");
+			ZksampleCommonUtils.createTabPanelContent(this.tabPanelBranchList, this, "ModuleMainController", "/WEB-INF/pages/branch/branchList.zul");
 		}
 
 		// Set the buttons for editMode
@@ -184,7 +185,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (this.tabPanelBranchList != null) {
-			ZksampleMessageUtils.createTabPanelContent(this.tabPanelBranchList, this, "ModuleMainController", "/WEB-INF/pages/branch/branchList.zul");
+			ZksampleCommonUtils.createTabPanelContent(this.tabPanelBranchList, this, "ModuleMainController", "/WEB-INF/pages/branch/branchList.zul");
 		}
 	}
 
@@ -209,7 +210,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (this.tabPanelBranchDetail != null) {
-			ZksampleMessageUtils.createTabPanelContent(this.tabPanelBranchDetail, this, "ModuleMainController", "/WEB-INF/pages/branch/branchDetail.zul");
+			ZksampleCommonUtils.createTabPanelContent(this.tabPanelBranchDetail, this, "ModuleMainController", "/WEB-INF/pages/branch/branchDetail.zul");
 		}
 	}
 

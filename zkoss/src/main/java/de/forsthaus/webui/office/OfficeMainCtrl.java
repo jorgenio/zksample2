@@ -33,6 +33,7 @@ import de.forsthaus.webui.office.report.OfficeSimpleDJReport;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.ZksampleCommonUtils;
 import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
@@ -161,7 +162,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		this.tabOfficeList.setSelected(true);
 
 		if (this.tabPanelOfficeList != null) {
-			ZksampleMessageUtils.createTabPanelContent(this.tabPanelOfficeList, this, "ModuleMainController", "/WEB-INF/pages/office/officeList.zul");
+			ZksampleCommonUtils.createTabPanelContent(this.tabPanelOfficeList, this, "ModuleMainController", "/WEB-INF/pages/office/officeList.zul");
 		}
 
 		// init the buttons for editMode
@@ -186,7 +187,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (this.tabPanelOfficeList != null) {
-			ZksampleMessageUtils.createTabPanelContent(this.tabPanelOfficeList, this, "ModuleMainController", "/WEB-INF/pages/office/officeList.zul");
+			ZksampleCommonUtils.createTabPanelContent(this.tabPanelOfficeList, this, "ModuleMainController", "/WEB-INF/pages/office/officeList.zul");
 		}
 
 	}
@@ -212,7 +213,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (this.tabPanelOfficeDetail != null) {
-			ZksampleMessageUtils.createTabPanelContent(this.tabPanelOfficeDetail, this, "ModuleMainController", "/WEB-INF/pages/office/officeDetail.zul");
+			ZksampleCommonUtils.createTabPanelContent(this.tabPanelOfficeDetail, this, "ModuleMainController", "/WEB-INF/pages/office/officeDetail.zul");
 		}
 	}
 

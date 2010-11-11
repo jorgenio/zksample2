@@ -33,6 +33,7 @@ import de.forsthaus.webui.article.report.ArticleSimpleDJReport;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
+import de.forsthaus.webui.util.ZksampleCommonUtils;
 import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
@@ -165,7 +166,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		 */
 		this.tabArticleList.setSelected(true);
 		if (this.tabPanelArticleList != null) {
-			ZksampleMessageUtils.createTabPanelContent(this.tabPanelArticleList, this, "ModuleMainController", "/WEB-INF/pages/article/articleList.zul");
+			ZksampleCommonUtils.createTabPanelContent(this.tabPanelArticleList, this, "ModuleMainController", "/WEB-INF/pages/article/articleList.zul");
 		}
 
 		// Set the buttons for editMode
@@ -189,7 +190,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (this.tabPanelArticleList != null) {
-			ZksampleMessageUtils.createTabPanelContent(this.tabPanelArticleList, this, "ModuleMainController", "/WEB-INF/pages/article/articleList.zul");
+			ZksampleCommonUtils.createTabPanelContent(this.tabPanelArticleList, this, "ModuleMainController", "/WEB-INF/pages/article/articleList.zul");
 		}
 	}
 
@@ -214,7 +215,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (this.tabPanelArticleDetail != null) {
-			ZksampleMessageUtils.createTabPanelContent(this.tabPanelArticleDetail, this, "ModuleMainController", "/WEB-INF/pages/article/articleDetail.zul");
+			ZksampleCommonUtils.createTabPanelContent(this.tabPanelArticleDetail, this, "ModuleMainController", "/WEB-INF/pages/article/articleDetail.zul");
 		}
 	}
 

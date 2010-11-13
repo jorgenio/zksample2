@@ -107,6 +107,9 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 	public void doAfterCompose(Component window) throws Exception {
 		super.doAfterCompose(window);
 
+		// !!! not used at time. Here we can get the User for filtering the
+		// incoming
+		// messages.
 		try {
 			userName = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
 		} catch (Exception e) {

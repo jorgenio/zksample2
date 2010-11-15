@@ -300,6 +300,7 @@ public class CalendarCreateEventCtrl extends GFCBaseCtrl implements Serializable
 		}
 
 		createEventWindow.onClose();
+
 	}
 
 	/**

@@ -258,11 +258,11 @@
 								style="color: #000000; font-weight:bold;"
 								image="/images/youtube_40x16.jpg"
 								label="weekly Terry's favorite song:"
-								tooltiptext="Music:  Loquat - Swing Set Chain" />
+								tooltiptext="Music: Dedicated to Phil Lynnot:  Gary Moore with Phil Lynnot - Parisienne Walkways (live)" />
 
 							<h:iframe title="YouTube video player"
 								class="youtube-player" type="text/html" width="100%"
-								height="198" src="http://www.youtube.com/embed/Tj_Nlm0871E"
+								height="198" src="http://www.youtube.com/embed/18FgnFVm5k0"
 								frameborder="0">
 							</h:iframe>
 
@@ -543,3 +543,8 @@
 
 <!-- Music: Loquat - Swing Set Chain  src="http://www.youtube.com/embed/51G24IVfcaI" -->
 <!-- Music: Empire of the Sun - We Are The People  src="http://www.youtube.com/embed/Tj_Nlm0871E" -->
+<!-- Music: Loquat - Harder Hit src="http://www.youtube.com/watch?v=aoHUb2r8q-g&feature=rec-LGOUT-exp_fresh+div-1r-3-HM" -->
+<!-- Music: THIN LIZZY - Still in Love With You  src="http://www.youtube.com/watch?v=oHUWXjNU0aM" -->
+<!-- Music: Gary Moore with Phil Lynnot - Parisienne Walkways (live)  src="http://www.youtube.com/embed/18FgnFVm5k0" -->
+
+

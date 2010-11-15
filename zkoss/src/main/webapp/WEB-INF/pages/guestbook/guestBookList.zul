@@ -27,6 +27,10 @@
 					<button id="btnRefresh" height="24px"
 						image="/images/icons/refresh2_yellow_16x16.gif"
 						tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
+
+					<button id="btnTest" height="24px" image=""
+						tooltiptext="only for testing" />
+
 					<separator orient="vertical" />
 				</toolbar>
 

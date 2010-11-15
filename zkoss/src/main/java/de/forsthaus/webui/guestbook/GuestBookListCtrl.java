@@ -26,6 +26,7 @@ import org.apache.log4j.Logger;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
+import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Borderlayout;
@@ -137,8 +138,7 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 		this.listheader_GuestBook_gubSubject.setSortDescending(new FieldComparator("gubSubject", false));
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<GuestBook> soGuestBook = new HibernateSearchObject<GuestBook>(GuestBook.class,
-				getCountRows());
+		final HibernateSearchObject<GuestBook> soGuestBook = new HibernateSearchObject<GuestBook>(GuestBook.class, getCountRows());
 		soGuestBook.addSort("gubDate", true);
 
 		// set the paging params
@@ -312,6 +312,23 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 
 		}
 
+	}
+
+	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+	// +++++++++++++++++ only for Testing +++++++++++++++++++//
+	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
+	public void onClick$btnTest(Event event) {
+		// Window win = (Window)
+		// Executions.createComponents("/WEB-INF/pages/test/google_OrganizationalChart.zul",
+		// window_GuestBookList, null);
+		// try {
+		// // win.doModal();
+		// win.doHighlighted();
+		// } catch (SuspendNotAllowedException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

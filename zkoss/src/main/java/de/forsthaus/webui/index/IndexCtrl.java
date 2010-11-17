@@ -106,7 +106,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 		 * Parameters:day - the day-of-the-month.month - the month (1 to 12).
 		 * year - the year (1900 <= year <= 9999).
 		 */
-		final Date date = new Day(8, 11, 2010).getStart();
+		final Date date = new Day(17, 11, 2010).getStart();
 
 		final String zkVersion = doGetZkVersion();
 		final String appVersion = this.appName + " v5.0.409 / " + ZksampleDateFormat.getDateFormater().format(date);

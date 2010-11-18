@@ -239,7 +239,7 @@
 								style="color: #000000; font-weight:bold;"
 								image="/images/youtube_40x16.jpg"
 								label="weekly Terry's favorite song:"
-								tooltiptext="Music: Brian Eno, John Cale - Spinning away" />
+								tooltiptext="Music: John Cale and Brian Eno  - Spinning away" />
 
 							<h:iframe title="YouTube video player"
 								class="youtube-player" type="text/html" width="100%"
@@ -547,7 +547,7 @@
 <!-- Music: THIN LIZZY - Still in Love With You  src="http://www.youtube.com/watch?v=oHUWXjNU0aM" -->
 <!-- Music: Gary Moore with Phil Lynnot - Parisienne Walkways (live)  src="http://www.youtube.com/embed/18FgnFVm5k0" -->
 <!-- Music: Talking Heads - This must be the place   src="http://www.youtube.com/embed/pVrVY540xdc" -->
-<!-- Music: Brian Eno, John Cale - Spinning away   src="http://www.youtube.com/embed/-INeMspNSQ0" -->
+<!-- Music: John Cale and Brian Eno - Spinning away   src="http://www.youtube.com/embed/-INeMspNSQ0" -->
 
 
 

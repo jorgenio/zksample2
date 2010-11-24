@@ -28,12 +28,12 @@ import de.forsthaus.backend.model.SecUser;
  * DB oriented Implementation of the calendarEvent for rendering the events
  * data.
  * 
- * @author sge
+ * @author sge 
  * 
  */
 public class MySimpleCalendarEvent implements CalendarEvent {
 
-	// The Id from the DB
+	// The id from the DB
 	private long _id;
 
 	// The logged in user

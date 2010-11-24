@@ -124,8 +124,8 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		 * 2. Set this controller in the MainController.<br>
 		 * 3. Check if a 'selectedObject' exists yet in the MainController.<br>
 		 */
-		if (this.arg.containsKey("ModuleMainController")) {
-			setArticleMainCtrl((ArticleMainCtrl) this.arg.get("ModuleMainController"));
+		if (arg.containsKey("ModuleMainController")) {
+			setArticleMainCtrl((ArticleMainCtrl) arg.get("ModuleMainController"));
 
 			// SET THIS CONTROLLER TO THE MainController
 			getArticleMainCtrl().setArticleListCtrl(this);
@@ -148,11 +148,11 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 
 	public void onCreate$windowArticlesList(Event event) throws Exception {
 
-		this.binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
+		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 
 		doFillListbox();
 
-		this.binder.loadAll();
+		binder.loadAll();
 	}
 
 	public void doFillListbox() {
@@ -160,27 +160,27 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		doFitSize();
 
 		// set the paging params
-		this.paging_ArticleList.setPageSize(getCountRows());
-		this.paging_ArticleList.setDetailed(true);
+		paging_ArticleList.setPageSize(getCountRows());
+		paging_ArticleList.setDetailed(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		this.listheader_ArticleList_No.setSortAscending(new FieldComparator("artNr", true));
-		this.listheader_ArticleList_No.setSortDescending(new FieldComparator("artNr", false));
-		this.listheader_ArticleList_ShortDescr.setSortAscending(new FieldComparator("artKurzbezeichnung", true));
-		this.listheader_ArticleList_ShortDescr.setSortDescending(new FieldComparator("artKurzbezeichnung", false));
-		this.listheader_ArticleList_SinglePrice.setSortAscending(new FieldComparator("artPreis", true));
-		this.listheader_ArticleList_SinglePrice.setSortDescending(new FieldComparator("artPreis", false));
+		listheader_ArticleList_No.setSortAscending(new FieldComparator("artNr", true));
+		listheader_ArticleList_No.setSortDescending(new FieldComparator("artNr", false));
+		listheader_ArticleList_ShortDescr.setSortAscending(new FieldComparator("artKurzbezeichnung", true));
+		listheader_ArticleList_ShortDescr.setSortDescending(new FieldComparator("artKurzbezeichnung", false));
+		listheader_ArticleList_SinglePrice.setSortAscending(new FieldComparator("artPreis", true));
+		listheader_ArticleList_SinglePrice.setSortDescending(new FieldComparator("artPreis", false));
 
 		// ++ create the searchObject and init sorting ++//
 		// get customers and only their latest address
-		this.searchObj = new HibernateSearchObject<Article>(Article.class, getCountRows());
-		this.searchObj.addSort("artNr", false);
+		searchObj = new HibernateSearchObject<Article>(Article.class, getCountRows());
+		searchObj.addSort("artNr", false);
 		setSearchObj(this.searchObj);
 
 		// Set the BindingListModel
-		getPagedBindingListWrapper().init(this.searchObj, getListBoxArticle(), this.paging_ArticleList);
-		final BindingListModelList lml = (BindingListModelList) getListBoxArticle().getModel();
+		getPagedBindingListWrapper().init(searchObj, getListBoxArticle(), paging_ArticleList);
+		BindingListModelList lml = (BindingListModelList) getListBoxArticle().getModel();
 		setArticles(lml);
 
 		// Now we would select and show the text of the first entry in the list.
@@ -214,7 +214,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	public void onDoubleClickedArticleItem(Event event) {
 		// logger.debug(event.toString());
 
-		final Article anArticle = getSelectedArticle();
+		Article anArticle = getSelectedArticle();
 
 		if (anArticle != null) {
 			setSelectedArticle(anArticle);
@@ -242,7 +242,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	public void onSelect$listBoxArticle(Event event) {
 		// logger.debug(event.toString());
 
-		final Article anArticle = getSelectedArticle();
+		Article anArticle = getSelectedArticle();
 
 		if (anArticle == null) {
 			return;
@@ -291,9 +291,9 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		final int maxListBoxHeight = height - specialSize - 142;
 		setCountRows((int) Math.round(maxListBoxHeight / 18.4));
-		this.borderLayout_articleList.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		borderLayout_articleList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
-		this.windowArticlesList.invalidate();
+		windowArticlesList.invalidate();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

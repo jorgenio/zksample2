@@ -164,14 +164,14 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doCheckRights();
 
 		// create the Button Controller. Disable not used buttons during working
-		this.btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, true, this.btnNew, this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
-		final Map<String, Object> args = getCreationArgsMap(event);
+		Map<String, Object> args = getCreationArgsMap(event);
 
 		if (args.containsKey("user")) {
-			this.user = (SecUser) args.get("user");
-			setUser(this.user);
+			user = (SecUser) args.get("user");
+			setUser(user);
 		} else {
 			setUser(null);
 		}
@@ -180,29 +180,29 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// to it and can synchronize the shown data when we do insert, edit or
 		// delete users here.
 		if (args.containsKey("listBoxUser")) {
-			this.listBoxUser = (Listbox) args.get("listBoxUser");
+			listBoxUser = (Listbox) args.get("listBoxUser");
 		} else {
-			this.listBoxUser = null;
+			listBoxUser = null;
 		}
 
 		// Set the ListModel and the itemRenderer.
-		this.listBoxDetails_UserRoles.setModel(new ListModelList(getUserService().getRolesByUser(this.user)));
-		this.listBoxDetails_UserRoles.setItemRenderer(new UserRolesListModelItemRenderer());
+		listBoxDetails_UserRoles.setModel(new ListModelList(getUserService().getRolesByUser(this.user)));
+		listBoxDetails_UserRoles.setItemRenderer(new UserRolesListModelItemRenderer());
 
 		// +++++++++ DropDown ListBox
 		// set listModel and itemRenderer for the dropdown listbox
-		this.lbox_usrLocale.setModel(new ListModelList(getUserService().getAllLanguages()));
-		this.lbox_usrLocale.setItemRenderer(new LanguageListModelItemRenderer());
+		lbox_usrLocale.setModel(new ListModelList(getUserService().getAllLanguages()));
+		lbox_usrLocale.setItemRenderer(new LanguageListModelItemRenderer());
 
 		// if available, select the object
-		final ListModelList lml = (ListModelList) this.lbox_usrLocale.getModel();
+		ListModelList lml = (ListModelList) lbox_usrLocale.getModel();
 
-		if (this.user.isNew()) {
-			this.lbox_usrLocale.setSelectedIndex(-1);
+		if (user.isNew()) {
+			lbox_usrLocale.setSelectedIndex(-1);
 		} else {
-			if (!StringUtils.isEmpty(this.user.getUsrLocale())) {
-				final Language lang = getUserService().getLanguageByLocale(this.user.getUsrLocale());
-				this.lbox_usrLocale.setSelectedIndex(lml.indexOf(lang));
+			if (!StringUtils.isEmpty(user.getUsrLocale())) {
+				Language lang = getUserService().getLanguageByLocale(user.getUsrLocale());
+				lbox_usrLocale.setSelectedIndex(lml.indexOf(lang));
 			}
 		}
 
@@ -216,20 +216,20 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		final UserWorkspace workspace = getUserWorkspace();
 
-		this.userDialogWindow.setVisible(workspace.isAllowed("userDialogWindow"));
+		userDialogWindow.setVisible(workspace.isAllowed("userDialogWindow"));
 
-		this.tab_UserDialog_Details.setVisible(workspace.isAllowed("tab_UserDialog_Details"));
-		this.tabpanel_UserDialog_Details.setVisible(workspace.isAllowed("tab_UserDialog_Details"));
+		tab_UserDialog_Details.setVisible(workspace.isAllowed("tab_UserDialog_Details"));
+		tabpanel_UserDialog_Details.setVisible(workspace.isAllowed("tab_UserDialog_Details"));
 
-		this.btnHelp.setVisible(workspace.isAllowed("button_UserDialog_btnHelp"));
-		this.btnNew.setVisible(workspace.isAllowed("button_UserDialog_btnNew"));
-		this.btnEdit.setVisible(workspace.isAllowed("button_UserDialog_btnEdit"));
-		this.btnDelete.setVisible(workspace.isAllowed("button_UserDialog_btnDelete"));
-		this.btnSave.setVisible(workspace.isAllowed("button_UserDialog_btnSave"));
-		this.btnClose.setVisible(workspace.isAllowed("button_UserDialog_btnClose"));
+		btnHelp.setVisible(workspace.isAllowed("button_UserDialog_btnHelp"));
+		btnNew.setVisible(workspace.isAllowed("button_UserDialog_btnNew"));
+		btnEdit.setVisible(workspace.isAllowed("button_UserDialog_btnEdit"));
+		btnDelete.setVisible(workspace.isAllowed("button_UserDialog_btnDelete"));
+		btnSave.setVisible(workspace.isAllowed("button_UserDialog_btnSave"));
+		btnClose.setVisible(workspace.isAllowed("button_UserDialog_btnClose"));
 
-		this.panel_UserDialog_Status.setVisible(workspace.isAllowed("panel_UserDialog_Status"));
-		this.panel_UserDialog_SecurityToken.setVisible(workspace.isAllowed("panel_UserDialog_SecurityToken"));
+		panel_UserDialog_Status.setVisible(workspace.isAllowed("panel_UserDialog_Status"));
+		panel_UserDialog_SecurityToken.setVisible(workspace.isAllowed("panel_UserDialog_SecurityToken"));
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -243,7 +243,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onClose$userDialogWindow(Event event) throws Exception {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doClose();
 	}
@@ -255,7 +255,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnSave(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doSave();
 	}
@@ -266,7 +266,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnEdit(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doEdit();
 	}
@@ -278,7 +278,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
@@ -289,7 +289,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnNew(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doNew();
 	}
@@ -301,7 +301,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnDelete(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doDelete();
 	}
@@ -312,7 +312,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnCancel(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doCancel();
 	}
@@ -324,13 +324,13 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnClose(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		try {
 			doClose();
 		} catch (final Exception e) {
 			// close anyway
-			this.userDialogWindow.onClose();
+			userDialogWindow.onClose();
 			// Messagebox.show(e.toString());
 		}
 	}
@@ -351,8 +351,8 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			final String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
-			final String title = Labels.getLabel("message.Information");
+			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
+			String title = Labels.getLabel("message.Information");
 
 			MultiLineMessageBox.doSetTemplate();
 			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
@@ -374,7 +374,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 			) == MultiLineMessageBox.YES) {
 			}
 		}
-		this.userDialogWindow.onClose();
+		userDialogWindow.onClose();
 	}
 
 	/**
@@ -386,7 +386,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private void doCancel() {
 		doResetInitValues();
 		doReadOnly();
-		this.btnCtrl.setInitEdit();
+		btnCtrl.setInitEdit();
 	}
 
 	/**
@@ -396,19 +396,19 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doWriteBeanToComponents(SecUser anUser) {
 
-		this.usrLoginname.setValue(anUser.getUsrLoginname());
-		this.usrPassword.setValue(anUser.getUsrPassword());
-		this.usrPasswordRetype.setValue(anUser.getUsrPassword());
-		this.usrFirstname.setValue(anUser.getUsrFirstname());
-		this.usrLastname.setValue(anUser.getUsrLastname());
-		this.usrEmail.setValue(anUser.getUsrEmail());
+		usrLoginname.setValue(anUser.getUsrLoginname());
+		usrPassword.setValue(anUser.getUsrPassword());
+		usrPasswordRetype.setValue(anUser.getUsrPassword());
+		usrFirstname.setValue(anUser.getUsrFirstname());
+		usrLastname.setValue(anUser.getUsrLastname());
+		usrEmail.setValue(anUser.getUsrEmail());
 
-		this.usrEnabled.setChecked(anUser.isUsrEnabled());
-		this.usrAccountnonexpired.setChecked(anUser.isUsrAccountnonexpired());
-		this.usrAccountnonlocked.setChecked(anUser.isUsrAccountnonlocked());
-		this.usrCredentialsnonexpired.setChecked(anUser.isUsrCredentialsnonexpired());
+		usrEnabled.setChecked(anUser.isUsrEnabled());
+		usrAccountnonexpired.setChecked(anUser.isUsrAccountnonexpired());
+		usrAccountnonlocked.setChecked(anUser.isUsrAccountnonlocked());
+		usrCredentialsnonexpired.setChecked(anUser.isUsrCredentialsnonexpired());
 
-		this.usrToken.setValue(anUser.getUsrToken());
+		usrToken.setValue(anUser.getUsrToken());
 
 	}
 
@@ -419,37 +419,37 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doWriteComponentsToBean(SecUser anUser) {
 
-		anUser.setUsrLoginname(this.usrLoginname.getValue());
-		anUser.setUsrPassword(this.usrPassword.getValue());
-		anUser.setUsrFirstname(this.usrFirstname.getValue());
-		anUser.setUsrLastname(this.usrLastname.getValue());
-		anUser.setUsrEmail(this.usrEmail.getValue());
+		anUser.setUsrLoginname(usrLoginname.getValue());
+		anUser.setUsrPassword(usrPassword.getValue());
+		anUser.setUsrFirstname(usrFirstname.getValue());
+		anUser.setUsrLastname(usrLastname.getValue());
+		anUser.setUsrEmail(usrEmail.getValue());
 
-		if (this.usrEnabled.isChecked() == true) {
+		if (usrEnabled.isChecked() == true) {
 			anUser.setUsrEnabled(true);
 		} else {
 			anUser.setUsrEnabled(false);
 		}
 
-		if (this.usrAccountnonexpired.isChecked() == true) {
+		if (usrAccountnonexpired.isChecked() == true) {
 			anUser.setUsrAccountnonexpired(true);
 		} else {
 			anUser.setUsrAccountnonexpired(false);
 		}
 
-		if (this.usrAccountnonlocked.isChecked() == true) {
+		if (usrAccountnonlocked.isChecked() == true) {
 			anUser.setUsrAccountnonlocked(true);
 		} else {
 			anUser.setUsrAccountnonlocked(false);
 		}
 
-		if (this.usrCredentialsnonexpired.isChecked() == true) {
+		if (usrCredentialsnonexpired.isChecked() == true) {
 			anUser.setUsrCredentialsnonexpired(true);
 		} else {
 			anUser.setUsrCredentialsnonexpired(false);
 		}
 
-		anUser.setUsrToken(this.usrToken.getValue());
+		anUser.setUsrToken(usrToken.getValue());
 
 	}
 
@@ -475,10 +475,10 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// set Readonly mode accordingly if the object is new or not.
 		if (anUser.isNew()) {
-			this.btnCtrl.setInitNew();
+			btnCtrl.setInitNew();
 			doEdit();
 		} else {
-			this.btnCtrl.setInitEdit();
+			btnCtrl.setInitEdit();
 			doReadOnly();
 		}
 
@@ -491,7 +491,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 			doStoreInitValues();
 			usrLoginname.setFocus(true);
 
-			this.userDialogWindow.doModal(); // open the dialog in modal mode
+			userDialogWindow.doModal(); // open the dialog in modal mode
 		} catch (final Exception e) {
 			Messagebox.show(e.toString());
 		}
@@ -505,36 +505,36 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * Stores the init values in mem vars. <br>
 	 */
 	private void doStoreInitValues() {
-		this.oldVar_usrLoginname = this.usrLoginname.getValue();
-		this.oldVar_usrPassword = this.usrPassword.getValue();
-		this.oldVar_usrPasswordRetype = this.usrPasswordRetype.getValue();
-		this.oldVar_usrFirstname = this.usrFirstname.getValue();
-		this.oldVar_usrLastname = this.usrLastname.getValue();
-		this.oldVar_usrEmail = this.usrEmail.getValue();
-		this.oldVar_usrLangauge = this.lbox_usrLocale.getSelectedItem();
-		this.oldVar_usrEnabled = this.usrEnabled.isChecked();
-		this.oldVar_usrAccountnonexpired = this.usrAccountnonexpired.isChecked();
-		this.oldVar_usrCredentialsnonexpired = this.usrCredentialsnonexpired.isChecked();
-		this.oldVar_usrAccountnonlocked = this.usrAccountnonlocked.isChecked();
-		this.oldVar_usrToken = this.usrToken.getValue();
+		oldVar_usrLoginname = usrLoginname.getValue();
+		oldVar_usrPassword = usrPassword.getValue();
+		oldVar_usrPasswordRetype = usrPasswordRetype.getValue();
+		oldVar_usrFirstname = usrFirstname.getValue();
+		oldVar_usrLastname = usrLastname.getValue();
+		oldVar_usrEmail = usrEmail.getValue();
+		oldVar_usrLangauge = lbox_usrLocale.getSelectedItem();
+		oldVar_usrEnabled = usrEnabled.isChecked();
+		oldVar_usrAccountnonexpired = usrAccountnonexpired.isChecked();
+		oldVar_usrCredentialsnonexpired = usrCredentialsnonexpired.isChecked();
+		oldVar_usrAccountnonlocked = usrAccountnonlocked.isChecked();
+		oldVar_usrToken = usrToken.getValue();
 	}
 
 	/**
 	 * Resets the init values from mem vars. <br>
 	 */
 	private void doResetInitValues() {
-		this.usrLoginname.setValue(this.oldVar_usrLoginname);
-		this.usrPassword.setValue(this.oldVar_usrPassword);
-		this.usrPasswordRetype.setValue(this.oldVar_usrPasswordRetype);
-		this.usrFirstname.setValue(this.oldVar_usrFirstname);
-		this.usrLastname.setValue(this.oldVar_usrLastname);
-		this.usrEmail.setValue(this.oldVar_usrEmail);
-		this.lbox_usrLocale.setSelectedItem(this.oldVar_usrLangauge);
-		this.usrEnabled.setChecked(this.oldVar_usrEnabled);
-		this.usrAccountnonexpired.setChecked(this.oldVar_usrAccountnonexpired);
-		this.usrCredentialsnonexpired.setChecked(this.oldVar_usrCredentialsnonexpired);
-		this.usrAccountnonlocked.setChecked(this.oldVar_usrAccountnonlocked);
-		this.usrToken.setValue(this.oldVar_usrToken);
+		usrLoginname.setValue(oldVar_usrLoginname);
+		usrPassword.setValue(oldVar_usrPassword);
+		usrPasswordRetype.setValue(oldVar_usrPasswordRetype);
+		usrFirstname.setValue(oldVar_usrFirstname);
+		usrLastname.setValue(oldVar_usrLastname);
+		usrEmail.setValue(oldVar_usrEmail);
+		lbox_usrLocale.setSelectedItem(oldVar_usrLangauge);
+		usrEnabled.setChecked(oldVar_usrEnabled);
+		usrAccountnonexpired.setChecked(oldVar_usrAccountnonexpired);
+		usrCredentialsnonexpired.setChecked(oldVar_usrCredentialsnonexpired);
+		usrAccountnonlocked.setChecked(oldVar_usrAccountnonlocked);
+		usrToken.setValue(oldVar_usrToken);
 	}
 
 	/**
@@ -546,40 +546,40 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private boolean isDataChanged() {
 		boolean changed = false;
 
-		if (this.oldVar_usrLoginname != this.usrLoginname.getValue()) {
+		if (oldVar_usrLoginname != usrLoginname.getValue()) {
 			changed = true;
 		}
-		if (this.oldVar_usrPassword != this.usrPassword.getValue()) {
+		if (oldVar_usrPassword != usrPassword.getValue()) {
 			changed = true;
 		}
-		if (this.oldVar_usrPasswordRetype != this.usrPasswordRetype.getValue()) {
+		if (oldVar_usrPasswordRetype != usrPasswordRetype.getValue()) {
 			changed = true;
 		}
-		if (this.oldVar_usrFirstname != this.usrFirstname.getValue()) {
+		if (oldVar_usrFirstname != usrFirstname.getValue()) {
 			changed = true;
 		}
-		if (this.oldVar_usrLastname != this.usrLastname.getValue()) {
+		if (oldVar_usrLastname != usrLastname.getValue()) {
 			changed = true;
 		}
-		if (this.oldVar_usrEmail != this.usrEmail.getValue()) {
+		if (oldVar_usrEmail != usrEmail.getValue()) {
 			changed = true;
 		}
-		if (this.oldVar_usrLangauge != this.lbox_usrLocale.getSelectedItem()) {
+		if (oldVar_usrLangauge != lbox_usrLocale.getSelectedItem()) {
 			changed = true;
 		}
-		if (this.oldVar_usrEnabled != this.usrEnabled.isChecked()) {
+		if (oldVar_usrEnabled != usrEnabled.isChecked()) {
 			changed = true;
 		}
-		if (this.oldVar_usrAccountnonexpired != this.usrAccountnonexpired.isChecked()) {
+		if (oldVar_usrAccountnonexpired != usrAccountnonexpired.isChecked()) {
 			changed = true;
 		}
-		if (this.oldVar_usrCredentialsnonexpired != this.usrCredentialsnonexpired.isChecked()) {
+		if (oldVar_usrCredentialsnonexpired != usrCredentialsnonexpired.isChecked()) {
 			changed = true;
 		}
-		if (this.oldVar_usrAccountnonlocked != this.usrAccountnonlocked.isChecked()) {
+		if (oldVar_usrAccountnonlocked != usrAccountnonlocked.isChecked()) {
 			changed = true;
 		}
-		if (this.oldVar_usrToken != this.usrToken.getValue()) {
+		if (oldVar_usrToken != usrToken.getValue()) {
 			changed = true;
 		}
 
@@ -593,11 +593,11 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		setValidationOn(true);
 
-		this.usrLoginname.setConstraint("NO EMPTY");
-		this.usrPassword.setConstraint("NO EMPTY");
-		this.usrPasswordRetype.setConstraint(new NoEmptyAndEqualStringsConstraint(this.usrPassword));
-		this.usrFirstname.setConstraint("NO EMPTY");
-		this.usrLastname.setConstraint("NO EMPTY");
+		usrLoginname.setConstraint("NO EMPTY");
+		usrPassword.setConstraint("NO EMPTY");
+		usrPasswordRetype.setConstraint(new NoEmptyAndEqualStringsConstraint(this.usrPassword));
+		usrFirstname.setConstraint("NO EMPTY");
+		usrLastname.setConstraint("NO EMPTY");
 
 	}
 
@@ -608,11 +608,11 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		setValidationOn(false);
 
-		this.usrLoginname.setConstraint("");
-		this.usrPassword.setConstraint("");
-		this.usrPasswordRetype.setConstraint("");
-		this.usrFirstname.setConstraint("");
-		this.usrLastname.setConstraint("");
+		usrLoginname.setConstraint("");
+		usrPassword.setConstraint("");
+		usrPasswordRetype.setConstraint("");
+		usrFirstname.setConstraint("");
+		usrLastname.setConstraint("");
 
 		// TODO helper textbox for selectedItem ?????
 		// rigType.getSelectedItem()) {
@@ -624,22 +624,22 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doEdit() {
 
-		this.usrLoginname.setReadonly(false);
-		this.usrPassword.setReadonly(false);
-		this.usrPasswordRetype.setReadonly(false);
-		this.usrFirstname.setReadonly(false);
-		this.usrLastname.setReadonly(false);
-		this.usrEmail.setReadonly(false);
-		this.lbox_usrLocale.setDisabled(false);
+		usrLoginname.setReadonly(false);
+		usrPassword.setReadonly(false);
+		usrPasswordRetype.setReadonly(false);
+		usrFirstname.setReadonly(false);
+		usrLastname.setReadonly(false);
+		usrEmail.setReadonly(false);
+		lbox_usrLocale.setDisabled(false);
 
-		this.usrEnabled.setDisabled(false);
-		this.usrAccountnonexpired.setDisabled(false);
-		this.usrAccountnonlocked.setDisabled(false);
-		this.usrCredentialsnonexpired.setDisabled(false);
+		usrEnabled.setDisabled(false);
+		usrAccountnonexpired.setDisabled(false);
+		usrAccountnonlocked.setDisabled(false);
+		usrCredentialsnonexpired.setDisabled(false);
 
-		this.usrToken.setReadonly(false);
+		usrToken.setReadonly(false);
 
-		this.btnCtrl.setBtnStatus_Edit();
+		btnCtrl.setBtnStatus_Edit();
 
 		// remember the old vars
 		doStoreInitValues();
@@ -650,20 +650,20 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doReadOnly() {
 
-		this.usrLoginname.setReadonly(true);
-		this.usrPassword.setReadonly(true);
-		this.usrPasswordRetype.setReadonly(true);
-		this.usrFirstname.setReadonly(true);
-		this.usrLastname.setReadonly(true);
-		this.usrEmail.setReadonly(true);
-		this.lbox_usrLocale.setDisabled(true);
+		usrLoginname.setReadonly(true);
+		usrPassword.setReadonly(true);
+		usrPasswordRetype.setReadonly(true);
+		usrFirstname.setReadonly(true);
+		usrLastname.setReadonly(true);
+		usrEmail.setReadonly(true);
+		lbox_usrLocale.setDisabled(true);
 
-		this.usrEnabled.setDisabled(true);
-		this.usrAccountnonexpired.setDisabled(true);
-		this.usrAccountnonlocked.setDisabled(true);
-		this.usrCredentialsnonexpired.setDisabled(true);
+		usrEnabled.setDisabled(true);
+		usrAccountnonexpired.setDisabled(true);
+		usrAccountnonlocked.setDisabled(true);
+		usrCredentialsnonexpired.setDisabled(true);
 
-		this.usrToken.setReadonly(true);
+		usrToken.setReadonly(true);
 	}
 
 	/**
@@ -674,19 +674,19 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// temporarely disable the validation to allow the field's clearing
 		doRemoveValidation();
 
-		this.usrLoginname.setValue("");
-		this.usrPassword.setValue("");
-		this.usrPasswordRetype.setValue("");
-		this.usrFirstname.setValue("");
-		this.usrLastname.setValue("");
-		this.usrEmail.setValue("");
+		usrLoginname.setValue("");
+		usrPassword.setValue("");
+		usrPasswordRetype.setValue("");
+		usrFirstname.setValue("");
+		usrLastname.setValue("");
+		usrEmail.setValue("");
 
-		this.usrEnabled.setChecked(false);
-		this.usrAccountnonexpired.setChecked(true);
-		this.usrAccountnonlocked.setChecked(true);
-		this.usrCredentialsnonexpired.setChecked(true);
+		usrEnabled.setChecked(false);
+		usrAccountnonexpired.setChecked(true);
+		usrAccountnonlocked.setChecked(true);
+		usrCredentialsnonexpired.setChecked(true);
 
-		this.usrToken.setValue("");
+		usrToken.setValue("");
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -703,9 +703,9 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final SecUser anUser = getUser();
 
 		// Show a confirm box
-		final String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> " + anUser.getUsrLoginname() + " | " + anUser.getUsrFirstname() + " ,"
+		String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> " + anUser.getUsrLoginname() + " | " + anUser.getUsrFirstname() + " ,"
 				+ anUser.getUsrLastname();
-		final String title = Labels.getLabel("message.Deleting.Record");
+		String title = Labels.getLabel("message.Deleting.Record");
 
 		MultiLineMessageBox.doSetTemplate();
 		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
@@ -733,7 +733,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 						getUserService().delete(anUser);
 
 						// now synchronize the listBox
-						final ListModelList lml = (ListModelList) UserDialogCtrl.this.listBoxUser.getListModel();
+						final ListModelList lml = (ListModelList) listBoxUser.getListModel();
 
 						// Check if the object is new or updated
 						// -1 means that the obj is not in the list, so
@@ -748,9 +748,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 					// TODO: handle exception
 				}
 
-				UserDialogCtrl.this.userDialogWindow.onClose(); // close
-				// the
-				// dialog
+				userDialogWindow.onClose(); // close
 			}
 		}
 
@@ -773,15 +771,15 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		setUser(getUserService().getNewUser());
 
 		// these comps needed to be init
-		this.usrEnabled.setChecked(false);
-		this.usrAccountnonexpired.setChecked(true);
-		this.usrAccountnonlocked.setChecked(true);
-		this.usrCredentialsnonexpired.setChecked(true);
+		usrEnabled.setChecked(false);
+		usrAccountnonexpired.setChecked(true);
+		usrAccountnonlocked.setChecked(true);
+		usrCredentialsnonexpired.setChecked(true);
 
 		doClear(); // clear all commponents
 		doEdit(); // edit mode
 
-		this.btnCtrl.setBtnStatus_New();
+		btnCtrl.setBtnStatus_New();
 
 	}
 
@@ -805,15 +803,15 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doWriteComponentsToBean(anUser);
 
 		// validate password again
-		this.usrPassword.getValue();
-		this.usrPasswordRetype.getValue();
+		usrPassword.getValue();
+		usrPasswordRetype.getValue();
 
 		/* if a language is selected get the object from the listbox */
-		final Listitem item = this.lbox_usrLocale.getSelectedItem();
+		Listitem item = lbox_usrLocale.getSelectedItem();
 
 		if (item != null) {
-			final ListModelList lml1 = (ListModelList) this.lbox_usrLocale.getListModel();
-			final Language lang = (Language) lml1.get(item.getIndex());
+			ListModelList lml1 = (ListModelList) lbox_usrLocale.getListModel();
+			Language lang = (Language) lml1.get(item.getIndex());
 			anUser.setUsrLocale(lang.getLanLocale());
 		}
 
@@ -821,9 +819,9 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		try {
 			getUserService().saveOrUpdate(anUser);
 		} catch (final DataAccessException e) {
-			final String message = e.getMessage();
+			String message = e.getMessage();
 			// String message = e.getCause().getMessage();
-			final String title = Labels.getLabel("message.Error");
+			String title = Labels.getLabel("message.Error");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 
@@ -831,12 +829,12 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 			doResetInitValues();
 
 			doReadOnly();
-			this.btnCtrl.setBtnStatus_Save();
+			btnCtrl.setBtnStatus_Save();
 			return;
 		}
 
 		// now synchronize the listBox
-		final ListModelList lml = (ListModelList) this.listBoxUser.getListModel();
+		ListModelList lml = (ListModelList) listBoxUser.getListModel();
 
 		// Check if the object is new or updated
 		// -1 means that the obj is not in the list, so it's new.
@@ -847,7 +845,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		doReadOnly();
-		this.btnCtrl.setBtnStatus_Save();
+		btnCtrl.setBtnStatus_Save();
 		// init the old values vars new
 		doStoreInitValues();
 	}

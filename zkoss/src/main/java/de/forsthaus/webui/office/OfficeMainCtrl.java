@@ -148,10 +148,10 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowOfficeMain(Event event) throws Exception {
-		this.windowOfficeMain.setContentStyle("padding:0px;");
+		windowOfficeMain.setContentStyle("padding:0px;");
 
 		// create the Button Controller. Disable not used buttons during working
-		this.btnCtrlOffice = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, false, this.btnNew, this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
+		btnCtrlOffice = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, false, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
 		doCheckRights();
 
@@ -159,14 +159,14 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		 * Initiate the first loading by selecting the customerList tab and
 		 * create the components from the zul-file.
 		 */
-		this.tabOfficeList.setSelected(true);
+		tabOfficeList.setSelected(true);
 
-		if (this.tabPanelOfficeList != null) {
-			ZksampleCommonUtils.createTabPanelContent(this.tabPanelOfficeList, this, "ModuleMainController", "/WEB-INF/pages/office/officeList.zul");
+		if (tabPanelOfficeList != null) {
+			ZksampleCommonUtils.createTabPanelContent(tabPanelOfficeList, this, "ModuleMainController", "/WEB-INF/pages/office/officeList.zul");
 		}
 
 		// init the buttons for editMode
-		this.btnCtrlOffice.setInitEdit();
+		btnCtrlOffice.setInitEdit();
 	}
 
 	/**
@@ -180,14 +180,14 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		logger.debug(event.toString());
 
 		// Check if the tabpanel is already loaded
-		if (this.tabPanelOfficeList.getFirstChild() != null) {
-			this.tabOfficeList.setSelected(true);
+		if (tabPanelOfficeList.getFirstChild() != null) {
+			tabOfficeList.setSelected(true);
 
 			return;
 		}
 
-		if (this.tabPanelOfficeList != null) {
-			ZksampleCommonUtils.createTabPanelContent(this.tabPanelOfficeList, this, "ModuleMainController", "/WEB-INF/pages/office/officeList.zul");
+		if (tabPanelOfficeList != null) {
+			ZksampleCommonUtils.createTabPanelContent(tabPanelOfficeList, this, "ModuleMainController", "/WEB-INF/pages/office/officeList.zul");
 		}
 
 	}
@@ -200,11 +200,11 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onSelect$tabOfficeDetail(Event event) throws IOException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		// Check if the tabpanel is already loaded
-		if (this.tabPanelOfficeDetail.getFirstChild() != null) {
-			this.tabOfficeDetail.setSelected(true);
+		if (tabPanelOfficeDetail.getFirstChild() != null) {
+			tabOfficeDetail.setSelected(true);
 
 			// refresh the Binding mechanism
 			getOfficeDetailCtrl().setOffice(getSelectedOffice());
@@ -212,8 +212,8 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 			return;
 		}
 
-		if (this.tabPanelOfficeDetail != null) {
-			ZksampleCommonUtils.createTabPanelContent(this.tabPanelOfficeDetail, this, "ModuleMainController", "/WEB-INF/pages/office/officeDetail.zul");
+		if (tabPanelOfficeDetail != null) {
+			ZksampleCommonUtils.createTabPanelContent(tabPanelOfficeDetail, this, "ModuleMainController", "/WEB-INF/pages/office/officeDetail.zul");
 		}
 	}
 
@@ -234,15 +234,15 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onCheck$checkbox_OfficeList_ShowAll(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		// empty the text search boxes
-		this.txtb_Office_No.setValue(""); // clear
-		this.txtb_Office_Name.setValue(""); // clear
-		this.txtb_Office_City.setValue(""); // clear
+		txtb_Office_No.setValue(""); // clear
+		txtb_Office_Name.setValue(""); // clear
+		txtb_Office_City.setValue(""); // clear
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getOfficeListCtrl().getCountRows());
+		HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getOfficeListCtrl().getCountRows());
 		soOffice.addSort("filName1", false);
 
 		// Change the BindingListModel.
@@ -250,12 +250,12 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 			getOfficeListCtrl().getPagedBindingListWrapper().setSearchObject(soOffice);
 
 			// get the current Tab for later checking if we must change it
-			final Tab currentTab = this.tabbox_OfficeMain.getSelectedTab();
+			Tab currentTab = tabbox_OfficeMain.getSelectedTab();
 
 			// check if the tab is one of the Detail tabs. If so do not
 			// change the selection of it
-			if (!currentTab.equals(this.tabOfficeList)) {
-				this.tabOfficeList.setSelected(true);
+			if (!currentTab.equals(tabOfficeList)) {
+				tabOfficeList.setSelected(true);
 			} else {
 				currentTab.setSelected(true);
 			}
@@ -267,17 +267,17 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * Filter the office list with 'like office number'. <br>
 	 */
 	public void onClick$button_OfficeList_SearchNo(Event event) throws Exception {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		// if not empty
-		if (!this.txtb_Office_No.getValue().isEmpty()) {
-			this.checkbox_OfficeList_ShowAll.setChecked(false); // unCheck
-			this.txtb_Office_Name.setValue(""); // clear
-			this.txtb_Office_City.setValue(""); // clear
+		if (!txtb_Office_No.getValue().isEmpty()) {
+			checkbox_OfficeList_ShowAll.setChecked(false); // unCheck
+			txtb_Office_Name.setValue(""); // clear
+			txtb_Office_City.setValue(""); // clear
 
 			// ++ create the searchObject and init sorting ++//
-			final HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getOfficeListCtrl().getCountRows());
-			soOffice.addFilter(new Filter("filNr", "%" + this.txtb_Office_No.getValue() + "%", Filter.OP_ILIKE));
+			HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getOfficeListCtrl().getCountRows());
+			soOffice.addFilter(new Filter("filNr", "%" + txtb_Office_No.getValue() + "%", Filter.OP_ILIKE));
 			soOffice.addSort("filNr", false);
 
 			// Change the BindingListModel.
@@ -285,12 +285,12 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 				getOfficeListCtrl().getPagedBindingListWrapper().setSearchObject(soOffice);
 
 				// get the current Tab for later checking if we must change it
-				final Tab currentTab = this.tabbox_OfficeMain.getSelectedTab();
+				Tab currentTab = tabbox_OfficeMain.getSelectedTab();
 
 				// check if the tab is one of the Detail tabs. If so do not
 				// change the selection of it
-				if (!currentTab.equals(this.tabOfficeList)) {
-					this.tabOfficeList.setSelected(true);
+				if (!currentTab.equals(tabOfficeList)) {
+					tabOfficeList.setSelected(true);
 				} else {
 					currentTab.setSelected(true);
 				}
@@ -302,17 +302,17 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * Filter the office list with 'like office name'. <br>
 	 */
 	public void onClick$button_OfficeList_SearchName(Event event) throws Exception {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		// if not empty
-		if (!this.txtb_Office_Name.getValue().isEmpty()) {
-			this.checkbox_OfficeList_ShowAll.setChecked(false); // unCheck
-			this.txtb_Office_City.setValue(""); // clear
-			this.txtb_Office_No.setValue(""); // clear
+		if (!txtb_Office_Name.getValue().isEmpty()) {
+			checkbox_OfficeList_ShowAll.setChecked(false); // unCheck
+			txtb_Office_City.setValue(""); // clear
+			txtb_Office_No.setValue(""); // clear
 
 			// ++ create the searchObject and init sorting ++//
-			final HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getOfficeListCtrl().getCountRows());
-			soOffice.addFilter(new Filter("filName1", "%" + this.txtb_Office_Name.getValue() + "%", Filter.OP_ILIKE));
+			HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getOfficeListCtrl().getCountRows());
+			soOffice.addFilter(new Filter("filName1", "%" + txtb_Office_Name.getValue() + "%", Filter.OP_ILIKE));
 			soOffice.addSort("filName1", false);
 
 			// Change the BindingListModel.
@@ -320,12 +320,12 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 				getOfficeListCtrl().getPagedBindingListWrapper().setSearchObject(soOffice);
 
 				// get the current Tab for later checking if we must change it
-				final Tab currentTab = this.tabbox_OfficeMain.getSelectedTab();
+				Tab currentTab = tabbox_OfficeMain.getSelectedTab();
 
 				// check if the tab is one of the Detail tabs. If so do not
 				// change the selection of it
-				if (!currentTab.equals(this.tabOfficeList)) {
-					this.tabOfficeList.setSelected(true);
+				if (!currentTab.equals(tabOfficeList)) {
+					tabOfficeList.setSelected(true);
 				} else {
 					currentTab.setSelected(true);
 				}
@@ -337,17 +337,17 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * Filter the office list with 'like office city'. <br>
 	 */
 	public void onClick$button_OfficeList_SearchCity(Event event) throws Exception {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		// if not empty
-		if (!this.txtb_Office_City.getValue().isEmpty()) {
-			this.checkbox_OfficeList_ShowAll.setChecked(false); // unCheck
-			this.txtb_Office_Name.setValue(""); // clear
-			this.txtb_Office_No.setValue(""); // clear
+		if (!txtb_Office_City.getValue().isEmpty()) {
+			checkbox_OfficeList_ShowAll.setChecked(false); // unCheck
+			txtb_Office_Name.setValue(""); // clear
+			txtb_Office_No.setValue(""); // clear
 
 			// ++ create the searchObject and init sorting ++//
-			final HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getOfficeListCtrl().getCountRows());
-			soOffice.addFilter(new Filter("filOrt", "%" + this.txtb_Office_City.getValue() + "%", Filter.OP_ILIKE));
+			HibernateSearchObject<Office> soOffice = new HibernateSearchObject<Office>(Office.class, getOfficeListCtrl().getCountRows());
+			soOffice.addFilter(new Filter("filOrt", "%" + txtb_Office_City.getValue() + "%", Filter.OP_ILIKE));
 			soOffice.addSort("filOrt", false);
 
 			// Change the BindingListModel.
@@ -355,12 +355,12 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 				getOfficeListCtrl().getPagedBindingListWrapper().setSearchObject(soOffice);
 
 				// get the current Tab for later checking if we must change it
-				final Tab currentTab = this.tabbox_OfficeMain.getSelectedTab();
+				Tab currentTab = tabbox_OfficeMain.getSelectedTab();
 
 				// check if the tab is one of the Detail tabs. If so do not
 				// change the selection of it
-				if (!currentTab.equals(this.tabOfficeList)) {
-					this.tabOfficeList.setSelected(true);
+				if (!currentTab.equals(tabOfficeList)) {
+					tabOfficeList.setSelected(true);
 				} else {
 					currentTab.setSelected(true);
 				}
@@ -454,7 +454,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doCancel(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		// reset to the original object
 		doResetToInitValues();
@@ -468,7 +468,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 			// set edit-Mode
 			getOfficeDetailCtrl().doReadOnlyMode(true);
 
-			this.btnCtrlOffice.setInitEdit();
+			btnCtrlOffice.setInitEdit();
 		}
 	}
 
@@ -481,24 +481,24 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doEdit(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		// get the current Tab for later checking if we must change it
-		final Tab currentTab = this.tabbox_OfficeMain.getSelectedTab();
+		Tab currentTab = tabbox_OfficeMain.getSelectedTab();
 
 		// check first, if the tabs are created, if not than create it
 		if (getOfficeDetailCtrl() == null) {
-			Events.sendEvent(new Event("onSelect", this.tabOfficeDetail, null));
+			Events.sendEvent(new Event("onSelect", tabOfficeDetail, null));
 			// if we work with spring beanCreation than we must check a little
 			// bit deeper, because the Controller are preCreated ?
 		} else if (getOfficeDetailCtrl().getBinder() == null) {
-			Events.sendEvent(new Event("onSelect", this.tabOfficeDetail, null));
+			Events.sendEvent(new Event("onSelect", tabOfficeDetail, null));
 		}
 
 		// check if the tab is one of the Detail tabs. If so do not change the
 		// selection of it
-		if (!currentTab.equals(this.tabOfficeDetail)) {
-			this.tabOfficeDetail.setSelected(true);
+		if (!currentTab.equals(tabOfficeDetail)) {
+			tabOfficeDetail.setSelected(true);
 		} else {
 			currentTab.setSelected(true);
 		}
@@ -508,7 +508,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		// remember the old vars
 		doStoreInitValues();
 
-		this.btnCtrlOffice.setBtnStatus_Edit();
+		btnCtrlOffice.setBtnStatus_Edit();
 
 		getOfficeDetailCtrl().doReadOnlyMode(false);
 		// set focus
@@ -523,11 +523,11 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doDelete(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		// check first, if the tabs are created, if not than create them
 		if (getOfficeDetailCtrl().getBinder() == null) {
-			Events.sendEvent(new Event("onSelect", this.tabOfficeDetail, null));
+			Events.sendEvent(new Event("onSelect", tabOfficeDetail, null));
 		}
 
 		// check first, if the tabs are created
@@ -580,7 +580,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 
 		}
 
-		this.btnCtrlOffice.setInitEdit();
+		btnCtrlOffice.setInitEdit();
 
 		setSelectedOffice(null);
 		// refresh the list
@@ -597,7 +597,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doSave(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		// save all components data in the several tabs to the bean
 		getOfficeDetailCtrl().getBinder().saveAll();
@@ -626,12 +626,12 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 			Events.postEvent("onSelect", getOfficeListCtrl().getListBoxOffice(), getSelectedOffice());
 
 			// show the objects data in the statusBar
-			final String str = getSelectedOffice().getFilBezeichnung();
+			String str = getSelectedOffice().getFilBezeichnung();
 			EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeSelectedObject", null, str));
 
 		} catch (final DataAccessException e) {
-			final String message = e.getMessage();
-			final String title = Labels.getLabel("message.Error");
+			String message = e.getMessage();
+			String title = Labels.getLabel("message.Error");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 
@@ -641,7 +641,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 			return;
 
 		} finally {
-			this.btnCtrlOffice.setInitEdit();
+			btnCtrlOffice.setInitEdit();
 			getOfficeDetailCtrl().doReadOnlyMode(true);
 		}
 	}
@@ -654,15 +654,15 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	private void doNew(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		// check first, if the tabs are created
 		if (getOfficeDetailCtrl() == null) {
-			Events.sendEvent(new Event("onSelect", this.tabOfficeDetail, null));
+			Events.sendEvent(new Event("onSelect", tabOfficeDetail, null));
 			// if we work with spring beanCreation than we must check a little
 			// bit deeper, because the Controller are preCreated ?
 		} else if (getOfficeDetailCtrl().getBinder() == null) {
-			Events.sendEvent(new Event("onSelect", this.tabOfficeDetail, null));
+			Events.sendEvent(new Event("onSelect", tabOfficeDetail, null));
 		}
 
 		// remember the current object
@@ -671,7 +671,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		/** !!! DO NOT BREAK THE TIERS !!! */
 		// We don't create a new DomainObject() in the frontend.
 		// We GET it from the backend.
-		final Office anOffice = getOfficeService().getNewOffice();
+		Office anOffice = getOfficeService().getNewOffice();
 
 		// set the beans in the related databinded controllers
 		getOfficeDetailCtrl().setOffice(anOffice);
@@ -685,9 +685,9 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		getOfficeDetailCtrl().doReadOnlyMode(false);
 
 		// set the ButtonStatus to New-Mode
-		this.btnCtrlOffice.setInitNew();
+		btnCtrlOffice.setInitNew();
 
-		this.tabOfficeDetail.setSelected(true);
+		tabOfficeDetail.setSelected(true);
 		// set focus
 		getOfficeDetailCtrl().txtb_filNr.focus();
 
@@ -703,11 +703,11 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	private void doResizeSelectedTab(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
-		if (this.tabbox_OfficeMain.getSelectedTab() == this.tabOfficeDetail) {
+		if (tabbox_OfficeMain.getSelectedTab() == tabOfficeDetail) {
 			getOfficeDetailCtrl().doFitSize(event);
-		} else if (this.tabbox_OfficeMain.getSelectedTab() == this.tabOfficeList) {
+		} else if (tabbox_OfficeMain.getSelectedTab() == tabOfficeList) {
 			// resize and fill Listbox new
 			getOfficeListCtrl().doFillListbox();
 		}
@@ -768,7 +768,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 				getOfficeDetailCtrl().setOffice((Office) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalOffice()));
 				setSelectedOffice((Office) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalOffice()));
 				// TODO Bug in DataBinder??
-				this.windowOfficeMain.invalidate();
+				windowOfficeMain.invalidate();
 				getOfficeDetailCtrl().windowOfficeDetail.invalidate();
 
 			} catch (final IllegalAccessException e) {
@@ -797,17 +797,17 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		final UserWorkspace workspace = getUserWorkspace();
 
 		// window_OfficeList.setVisible(workspace.isAllowed("window_OfficeList"));
-		this.button_OfficeList_PrintList.setVisible(workspace.isAllowed("button_OfficeList_PrintList"));
-		this.button_OfficeList_SearchNo.setVisible(workspace.isAllowed("button_OfficeList_SearchNo"));
-		this.button_OfficeList_SearchName.setVisible(workspace.isAllowed("button_OfficeList_SearchName"));
-		this.button_OfficeList_SearchCity.setVisible(workspace.isAllowed("button_OfficeList_SearchCity"));
+		button_OfficeList_PrintList.setVisible(workspace.isAllowed("button_OfficeList_PrintList"));
+		button_OfficeList_SearchNo.setVisible(workspace.isAllowed("button_OfficeList_SearchNo"));
+		button_OfficeList_SearchName.setVisible(workspace.isAllowed("button_OfficeList_SearchName"));
+		button_OfficeList_SearchCity.setVisible(workspace.isAllowed("button_OfficeList_SearchCity"));
 
-		this.btnHelp.setVisible(workspace.isAllowed("button_OfficeMain_btnHelp"));
-		this.btnNew.setVisible(workspace.isAllowed("button_OfficeMain_btnNew"));
-		this.btnEdit.setVisible(workspace.isAllowed("button_OfficeMain_btnEdit"));
-		this.btnDelete.setVisible(workspace.isAllowed("button_OfficeMain_btnDelete"));
-		this.btnSave.setVisible(workspace.isAllowed("button_OfficeMain_btnSave"));
-		this.btnClose.setVisible(workspace.isAllowed("button_OfficeMain_btnClose"));
+		btnHelp.setVisible(workspace.isAllowed("button_OfficeMain_btnHelp"));
+		btnNew.setVisible(workspace.isAllowed("button_OfficeMain_btnNew"));
+		btnEdit.setVisible(workspace.isAllowed("button_OfficeMain_btnEdit"));
+		btnDelete.setVisible(workspace.isAllowed("button_OfficeMain_btnDelete"));
+		btnSave.setVisible(workspace.isAllowed("button_OfficeMain_btnSave"));
+		btnClose.setVisible(workspace.isAllowed("button_OfficeMain_btnClose"));
 
 	}
 

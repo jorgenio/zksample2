@@ -188,16 +188,15 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		/* set components visible dependent of the users rights */
 		doCheckRights();
 		/* create the Button Controller. Disable not used buttons during working */
-		this.btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, true, this.btnNew,
-				this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
-		final Map<String, Object> args = getCreationArgsMap(event);
+		Map<String, Object> args = getCreationArgsMap(event);
 
 		// READ OVERHANDED params !
 		if (args.containsKey("customer")) {
-			this.customer = (Customer) args.get("customer");
-			setCustomer(this.customer);
+			customer = (Customer) args.get("customer");
+			setCustomer(customer);
 		} else {
 			setCustomer(null);
 		}
@@ -239,11 +238,11 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * Set the properties of the fields, like maxLength.<br>
 	 */
 	private void doSetFieldProperties() {
-		this.kunNr.setMaxlength(20);
-		this.kunMatchcode.setMaxlength(20);
-		this.kunName1.setMaxlength(50);
-		this.kunName2.setMaxlength(50);
-		this.kunOrt.setMaxlength(50);
+		kunNr.setMaxlength(20);
+		kunMatchcode.setMaxlength(20);
+		kunName1.setMaxlength(50);
+		kunName2.setMaxlength(50);
+		kunOrt.setMaxlength(50);
 	}
 
 	/**
@@ -258,26 +257,26 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		final UserWorkspace workspace = getUserWorkspace();
 
-		this.window_customerDialog.setVisible(workspace.isAllowed("window_customerDialog"));
+		window_customerDialog.setVisible(workspace.isAllowed("window_customerDialog"));
 
-		this.tabCustomerDialogAddress.setVisible(workspace.isAllowed("tab_CustomerDialog_Address"));
-		this.tabPanelCustomerAddress.setVisible(workspace.isAllowed("tab_CustomerDialog_Address"));
+		tabCustomerDialogAddress.setVisible(workspace.isAllowed("tab_CustomerDialog_Address"));
+		tabPanelCustomerAddress.setVisible(workspace.isAllowed("tab_CustomerDialog_Address"));
 
-		this.tabCustomerDialogChart.setVisible(workspace.isAllowed("tab_CustomerDialog_Chart"));
-		this.tabPanelCustomerDialogChart.setVisible(workspace.isAllowed("tab_CustomerDialog_Chart"));
+		tabCustomerDialogChart.setVisible(workspace.isAllowed("tab_CustomerDialog_Chart"));
+		tabPanelCustomerDialogChart.setVisible(workspace.isAllowed("tab_CustomerDialog_Chart"));
 
-		this.tabCustomerDialogOrders.setVisible(workspace.isAllowed("tab_CustomerDialog_Orders"));
-		this.tabPanelCustomerOrders.setVisible(workspace.isAllowed("tab_CustomerDialog_Orders"));
+		tabCustomerDialogOrders.setVisible(workspace.isAllowed("tab_CustomerDialog_Orders"));
+		tabPanelCustomerOrders.setVisible(workspace.isAllowed("tab_CustomerDialog_Orders"));
 
-		this.tabCustomerDialogMemos.setVisible(workspace.isAllowed("tab_CustomerDialog_Memos"));
-		this.tabPanelCustomerMemos.setVisible(workspace.isAllowed("tab_CustomerDialog_Memos"));
+		tabCustomerDialogMemos.setVisible(workspace.isAllowed("tab_CustomerDialog_Memos"));
+		tabPanelCustomerMemos.setVisible(workspace.isAllowed("tab_CustomerDialog_Memos"));
 
-		this.btnHelp.setVisible(workspace.isAllowed("button_CustomerDialog_btnHelp"));
-		this.btnNew.setVisible(workspace.isAllowed("button_CustomerDialog_btnNew"));
-		this.btnEdit.setVisible(workspace.isAllowed("button_CustomerDialog_btnEdit"));
-		this.btnDelete.setVisible(workspace.isAllowed("button_CustomerDialog_btnDelete"));
-		this.btnSave.setVisible(workspace.isAllowed("button_CustomerDialog_btnSave"));
-		this.btnClose.setVisible(workspace.isAllowed("button_CustomerDialog_btnClose"));
+		btnHelp.setVisible(workspace.isAllowed("button_CustomerDialog_btnHelp"));
+		btnNew.setVisible(workspace.isAllowed("button_CustomerDialog_btnNew"));
+		btnEdit.setVisible(workspace.isAllowed("button_CustomerDialog_btnEdit"));
+		btnDelete.setVisible(workspace.isAllowed("button_CustomerDialog_btnDelete"));
+		btnSave.setVisible(workspace.isAllowed("button_CustomerDialog_btnSave"));
+		btnClose.setVisible(workspace.isAllowed("button_CustomerDialog_btnClose"));
 
 	}
 
@@ -326,7 +325,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final Customer aCustomer = getCustomer();
 
 		/* overhanded params to the zul file */
-		final HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("customer", aCustomer);
 		map.put("customerDialogCtrl", this);
 
@@ -334,11 +333,11 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		map.put("rowSizeOrders", new Integer(10));
 		map.put("rowSizeOrderPositions", new Integer(10));
 
-		final Tabpanel chartTab = (Tabpanel) Path.getComponent("/window_customerDialog/tabPanelCustomerDialogChart");
+		Tabpanel chartTab = (Tabpanel) Path.getComponent("/window_customerDialog/tabPanelCustomerDialogChart");
 		chartTab.getChildren().clear();
 
-		final Panel panel = new Panel();
-		final Panelchildren pChildren = new Panelchildren();
+		Panel panel = new Panel();
+		Panelchildren pChildren = new Panelchildren();
 
 		panel.appendChild(pChildren);
 		chartTab.appendChild(panel);
@@ -491,31 +490,30 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 
 	 */
 	private void doClose() throws InterruptedException {
-		logger.debug("DataIsChanged :" + isDataChanged());
+		// logger.debug("DataIsChanged :" + isDataChanged());
 
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			final String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
-			final String title = Labels.getLabel("message.Information");
+			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
+			String title = Labels.getLabel("message.Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO,
-					MultiLineMessageBox.QUESTION, true, new EventListener() {
-						@Override
-						public void onEvent(Event evt) {
-							switch (((Integer) evt.getData()).intValue()) {
-							case MultiLineMessageBox.YES:
-								try {
-									doSave();
-								} catch (final InterruptedException e) {
-									throw new RuntimeException(e);
-								}
-							case MultiLineMessageBox.NO:
-								break; //
-							}
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
+				@Override
+				public void onEvent(Event evt) {
+					switch (((Integer) evt.getData()).intValue()) {
+					case MultiLineMessageBox.YES:
+						try {
+							doSave();
+						} catch (final InterruptedException e) {
+							throw new RuntimeException(e);
 						}
+					case MultiLineMessageBox.NO:
+						break; //
 					}
+				}
+			}
 
 			) == MultiLineMessageBox.YES) {
 			}
@@ -532,7 +530,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private void doCancel() {
 		doResetInitValues();
 		doReadOnly();
-		this.btnCtrl.setInitEdit();
+		btnCtrl.setInitEdit();
 	}
 
 	/**
@@ -543,14 +541,14 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doWriteBeanToComponents(Customer aCustomer) {
 
-		this.kunNr.setValue(aCustomer.getKunNr());
-		this.kunMatchcode.setValue(aCustomer.getKunMatchcode().toUpperCase());
-		this.kunName1.setValue(aCustomer.getKunName1());
-		this.kunName2.setValue(aCustomer.getKunName2());
-		this.kunOrt.setValue(aCustomer.getKunOrt());
-		this.kunMahnsperre.setChecked(aCustomer.getKunMahnsperre());
+		kunNr.setValue(aCustomer.getKunNr());
+		kunMatchcode.setValue(aCustomer.getKunMatchcode().toUpperCase());
+		kunName1.setValue(aCustomer.getKunName1());
+		kunName2.setValue(aCustomer.getKunName2());
+		kunOrt.setValue(aCustomer.getKunOrt());
+		kunMahnsperre.setChecked(aCustomer.getKunMahnsperre());
 
-		this.kunBranche.setValue(aCustomer.getBranche().getBraBezeichnung());
+		kunBranche.setValue(aCustomer.getBranche().getBraBezeichnung());
 
 	}
 
@@ -561,11 +559,11 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doWriteComponentsToBean(Customer aCustomer) {
 
-		aCustomer.setKunNr(this.kunNr.getValue());
-		aCustomer.setKunMatchcode(this.kunMatchcode.getValue().toUpperCase());
-		aCustomer.setKunName1(this.kunName1.getValue());
-		aCustomer.setKunName2(this.kunName2.getValue());
-		aCustomer.setKunOrt(this.kunOrt.getValue());
+		aCustomer.setKunNr(kunNr.getValue());
+		aCustomer.setKunMatchcode(kunMatchcode.getValue().toUpperCase());
+		aCustomer.setKunName1(kunName1.getValue());
+		aCustomer.setKunName2(kunName2.getValue());
+		aCustomer.setKunOrt(kunOrt.getValue());
 
 	}
 
@@ -594,13 +592,13 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// set Readonly mode accordingly if the object is new or not.
 		if (aCustomer.isNew()) {
-			this.btnCtrl.setInitNew();
+			btnCtrl.setInitNew();
 			doEdit();
 			// setFocus
-			this.kunNr.focus();
+			kunNr.focus();
 
 		} else {
-			this.btnCtrl.setInitEdit();
+			btnCtrl.setInitEdit();
 			doReadOnly();
 		}
 
@@ -612,8 +610,8 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 			// during user action.
 			doStoreInitValues();
 
-			this.window_customerDialog.doModal(); // open the dialog in modal
-													// mode
+			window_customerDialog.doModal(); // open the dialog in modal
+			// mode
 		} catch (final Exception e) {
 			Messagebox.show(e.toString());
 		}
@@ -627,11 +625,11 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doSearchBranchSimple(Event event) {
 
-		final Branche branche = BranchSimpleSearchListBox.show(this.window_customerDialog);
+		final Branche branche = BranchSimpleSearchListBox.show(window_customerDialog);
 
 		if (branche != null) {
-			this.kunBranche.setValue(branche.getBraBezeichnung());
-			final Customer aCustomer = getCustomer();
+			kunBranche.setValue(branche.getBraBezeichnung());
+			Customer aCustomer = getCustomer();
 			aCustomer.setBranche(branche);
 			setCustomer(aCustomer);
 		}
@@ -645,11 +643,11 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doSearchBranchAdvanced(Event event) {
 
-		final Branche branche = BranchAdvancedSearchListBox.show(this.window_customerDialog);
+		Branche branche = BranchAdvancedSearchListBox.show(window_customerDialog);
 
 		if (branche != null) {
-			this.kunBranche.setValue(branche.getBraBezeichnung());
-			final Customer aCustomer = getCustomer();
+			kunBranche.setValue(branche.getBraBezeichnung());
+			Customer aCustomer = getCustomer();
 			aCustomer.setBranche(branche);
 			setCustomer(aCustomer);
 		}
@@ -663,11 +661,11 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doSearchBranchExtended(Event event) {
 
-		final Branche branche = BranchExtendedSearchListBox.show(this.window_customerDialog);
+		Branche branche = BranchExtendedSearchListBox.show(window_customerDialog);
 
 		if (branche != null) {
-			this.kunBranche.setValue(branche.getBraBezeichnung());
-			final Customer aCustomer = getCustomer();
+			kunBranche.setValue(branche.getBraBezeichnung());
+			Customer aCustomer = getCustomer();
 			aCustomer.setBranche(branche);
 			setCustomer(aCustomer);
 		}
@@ -681,28 +679,28 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * Stores the init values in mem vars. <br>
 	 */
 	private void doStoreInitValues() {
-		this.oldVar_kunNr = this.kunNr.getValue();
-		this.oldVar_kunMatchcode = this.kunMatchcode.getValue();
-		this.oldVar_kunName1 = this.kunName1.getValue();
-		this.oldVar_kunName2 = this.kunName2.getValue();
-		this.oldVar_kunOrt = this.kunOrt.getValue();
+		oldVar_kunNr = kunNr.getValue();
+		oldVar_kunMatchcode = kunMatchcode.getValue();
+		oldVar_kunName1 = kunName1.getValue();
+		oldVar_kunName2 = kunName2.getValue();
+		oldVar_kunOrt = kunOrt.getValue();
 
-		this.oldVar_kunBranche = this.kunBranche.getValue();
-		this.oldVar_kunMahnsperre = this.kunMahnsperre.isChecked();
+		oldVar_kunBranche = kunBranche.getValue();
+		oldVar_kunMahnsperre = kunMahnsperre.isChecked();
 	}
 
 	/**
 	 * Resets the init values from mem vars. <br>
 	 */
 	private void doResetInitValues() {
-		this.kunNr.setValue(this.oldVar_kunNr);
-		this.kunMatchcode.setValue(this.oldVar_kunMatchcode);
-		this.kunName1.setValue(this.oldVar_kunName1);
-		this.kunName2.setValue(this.oldVar_kunName2);
-		this.kunOrt.setValue(this.oldVar_kunOrt);
+		kunNr.setValue(oldVar_kunNr);
+		kunMatchcode.setValue(oldVar_kunMatchcode);
+		kunName1.setValue(oldVar_kunName1);
+		kunName2.setValue(oldVar_kunName2);
+		kunOrt.setValue(oldVar_kunOrt);
 
-		this.kunBranche.setValue(this.oldVar_kunBranche);
-		this.kunMahnsperre.setChecked(this.oldVar_kunMahnsperre);
+		kunBranche.setValue(oldVar_kunBranche);
+		kunMahnsperre.setChecked(oldVar_kunMahnsperre);
 	}
 
 	/**
@@ -714,25 +712,25 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private boolean isDataChanged() {
 		boolean changed = false;
 
-		if (this.oldVar_kunNr != this.kunNr.getValue()) {
+		if (oldVar_kunNr != kunNr.getValue()) {
 			changed = true;
 		}
-		if (this.oldVar_kunMatchcode != this.kunMatchcode.getValue()) {
+		if (oldVar_kunMatchcode != kunMatchcode.getValue()) {
 			changed = true;
 		}
-		if (this.oldVar_kunName1 != this.kunName1.getValue()) {
+		if (oldVar_kunName1 != kunName1.getValue()) {
 			changed = true;
 		}
-		if (this.oldVar_kunName2 != this.kunName2.getValue()) {
+		if (oldVar_kunName2 != kunName2.getValue()) {
 			changed = true;
 		}
-		if (this.oldVar_kunOrt != this.kunOrt.getValue()) {
+		if (oldVar_kunOrt != kunOrt.getValue()) {
 			changed = true;
 		}
-		if (this.oldVar_kunBranche != this.kunBranche.getValue()) {
+		if (oldVar_kunBranche != kunBranche.getValue()) {
 			changed = true;
 		}
-		if (this.oldVar_kunMahnsperre != this.kunMahnsperre.isChecked()) {
+		if (oldVar_kunMahnsperre != kunMahnsperre.isChecked()) {
 			changed = true;
 		}
 
@@ -746,10 +744,10 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		setValidationOn(true);
 
-		this.kunNr.setConstraint("NO EMPTY");
-		this.kunMatchcode.setConstraint("NO EMPTY");
-		this.kunName1.setConstraint("NO EMPTY");
-		this.kunOrt.setConstraint("NO EMPTY");
+		kunNr.setConstraint("NO EMPTY");
+		kunMatchcode.setConstraint("NO EMPTY");
+		kunName1.setConstraint("NO EMPTY");
+		kunOrt.setConstraint("NO EMPTY");
 		// TODO helper textbox for selectedItem ?????
 		// kunBranche.setConstraint(new SimpleConstraint("NO EMPTY"));
 	}
@@ -761,10 +759,10 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		setValidationOn(false);
 
-		this.kunNr.setConstraint("");
-		this.kunMatchcode.setConstraint("");
-		this.kunName1.setConstraint("");
-		this.kunOrt.setConstraint("");
+		kunNr.setConstraint("");
+		kunMatchcode.setConstraint("");
+		kunName1.setConstraint("");
+		kunOrt.setConstraint("");
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -781,51 +779,48 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final Customer aCustomer = getCustomer();
 
 		// Show a confirm box
-		final String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> "
-				+ aCustomer.getKunName1() + " " + aCustomer.getKunName2() + " ," + aCustomer.getKunOrt();
-		final String title = Labels.getLabel("message.Deleting.Record");
+		String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> " + aCustomer.getKunName1() + " " + aCustomer.getKunName2() + " ," + aCustomer.getKunOrt();
+		String title = Labels.getLabel("message.Deleting.Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, Messagebox.QUESTION,
-				true, new EventListener() {
-					@Override
-					public void onEvent(Event evt) {
-						switch (((Integer) evt.getData()).intValue()) {
-						case MultiLineMessageBox.YES:
-							deleteCustomer();
-						case MultiLineMessageBox.NO:
-							break; //
-						}
-					}
-
-					private void deleteCustomer() {
-
-						// delete from database
-						getCustomerService().delete(aCustomer);
-
-						// ++ create the searchObject and init sorting ++ //
-						final HibernateSearchObject<Customer> soCustomer = new HibernateSearchObject<Customer>(
-								Customer.class, getCustomerListCtrl().getCountRows());
-						soCustomer.addSort("kunName1", false);
-						// Set the ListModel
-						getCustomerListCtrl().getPagedListWrapper().setSearchObject(soCustomer);
-
-						// now synchronize the customers listBox
-						final ListModelList lml = (ListModelList) getCustomerListCtrl().listBoxCustomer.getListModel();
-
-						// Check if the customer object is new or updated
-						// -1 means that the obj is not in the list, so it's
-						// new..
-						if (lml.indexOf(aCustomer) == -1) {
-						} else {
-							lml.remove(lml.indexOf(aCustomer));
-						}
-
-						CustomerDialogCtrl.this.window_customerDialog.onClose(); // close
-																					// the
-																					// dialog
-					}
+		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, Messagebox.QUESTION, true, new EventListener() {
+			@Override
+			public void onEvent(Event evt) {
+				switch (((Integer) evt.getData()).intValue()) {
+				case MultiLineMessageBox.YES:
+					deleteCustomer();
+				case MultiLineMessageBox.NO:
+					break; //
 				}
+			}
+
+			private void deleteCustomer() {
+
+				// delete from database
+				getCustomerService().delete(aCustomer);
+
+				// ++ create the searchObject and init sorting ++ //
+				final HibernateSearchObject<Customer> soCustomer = new HibernateSearchObject<Customer>(Customer.class, getCustomerListCtrl().getCountRows());
+				soCustomer.addSort("kunName1", false);
+				// Set the ListModel
+				getCustomerListCtrl().getPagedListWrapper().setSearchObject(soCustomer);
+
+				// now synchronize the customers listBox
+				final ListModelList lml = (ListModelList) getCustomerListCtrl().listBoxCustomer.getListModel();
+
+				// Check if the customer object is new or updated
+				// -1 means that the obj is not in the list, so it's
+				// new..
+				if (lml.indexOf(aCustomer) == -1) {
+				} else {
+					lml.remove(lml.indexOf(aCustomer));
+				}
+
+				CustomerDialogCtrl.this.window_customerDialog.onClose(); // close
+				// the
+				// dialog
+			}
+		}
 
 		) == MultiLineMessageBox.YES) {
 		}
@@ -850,13 +845,13 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doClear(); // clear all commponents
 		doEdit(); // edit mode
 
-		this.btnCtrl.setBtnStatus_New();
+		btnCtrl.setBtnStatus_New();
 
 		// remember the old vars
 		doStoreInitValues();
 
 		// setFocus
-		this.kunNr.focus();
+		kunNr.focus();
 
 	}
 
@@ -865,19 +860,19 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doEdit() {
 
-		this.kunNr.setReadonly(false);
-		this.kunMatchcode.setReadonly(false);
-		this.kunName1.setReadonly(false);
-		this.kunName2.setReadonly(false);
-		this.kunOrt.setReadonly(false);
-		this.kunMahnsperre.setDisabled(false);
+		kunNr.setReadonly(false);
+		kunMatchcode.setReadonly(false);
+		kunName1.setReadonly(false);
+		kunName2.setReadonly(false);
+		kunOrt.setReadonly(false);
+		kunMahnsperre.setDisabled(false);
 
-		this.kunBranche.setReadonly(false);
-		this.btnSearchBranchSimple.setDisabled(false);
-		this.btnSearchBranchAdvanced.setDisabled(false);
-		this.btnSearchBranchExtended.setDisabled(false);
+		kunBranche.setReadonly(false);
+		btnSearchBranchSimple.setDisabled(false);
+		btnSearchBranchAdvanced.setDisabled(false);
+		btnSearchBranchExtended.setDisabled(false);
 
-		this.btnCtrl.setBtnStatus_Edit();
+		btnCtrl.setBtnStatus_Edit();
 
 		// remember the old vars
 		doStoreInitValues();
@@ -888,17 +883,17 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doReadOnly() {
 
-		this.kunNr.setReadonly(true);
-		this.kunMatchcode.setReadonly(true);
-		this.kunName1.setReadonly(true);
-		this.kunName2.setReadonly(true);
-		this.kunOrt.setReadonly(true);
-		this.kunMahnsperre.setDisabled(true);
+		kunNr.setReadonly(true);
+		kunMatchcode.setReadonly(true);
+		kunName1.setReadonly(true);
+		kunName2.setReadonly(true);
+		kunOrt.setReadonly(true);
+		kunMahnsperre.setDisabled(true);
 
-		this.kunBranche.setReadonly(true);
-		this.btnSearchBranchSimple.setDisabled(true);
-		this.btnSearchBranchAdvanced.setDisabled(true);
-		this.btnSearchBranchExtended.setDisabled(true);
+		kunBranche.setReadonly(true);
+		btnSearchBranchSimple.setDisabled(true);
+		btnSearchBranchAdvanced.setDisabled(true);
+		btnSearchBranchExtended.setDisabled(true);
 	}
 
 	/**
@@ -909,15 +904,15 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// remove validation, if there are a save before
 		doRemoveValidation();
 
-		this.kunNr.setValue("");
-		this.kunMatchcode.setValue("");
-		this.kunName1.setValue("");
-		this.kunName2.setValue("");
-		this.kunOrt.setValue("");
-		this.kunMahnsperre.setChecked(false);
+		kunNr.setValue("");
+		kunMatchcode.setValue("");
+		kunName1.setValue("");
+		kunName2.setValue("");
+		kunOrt.setValue("");
+		kunMahnsperre.setChecked(false);
 
 		// unselect the last customers branch
-		this.kunBranche.setValue("");
+		kunBranche.setValue("");
 	}
 
 	/**
@@ -942,7 +937,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// get the selected branch object from the listbox
 		// Listitem item = kunBranche.getSelectedItem();
 
-		if (StringUtils.isEmpty(this.kunBranche.getValue())) {
+		if (StringUtils.isEmpty(kunBranche.getValue())) {
 			try {
 				Messagebox.show("Please select a branch !");
 			} catch (final InterruptedException e) {
@@ -955,7 +950,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// Branche branche = (Branche) lml1.get(item.getIndex());
 		// aCustomer.setBranche(branche);
 
-		if (this.kunMahnsperre.isChecked() == true) {
+		if (kunMahnsperre.isChecked() == true) {
 			aCustomer.setKunMahnsperre(true);
 		} else {
 			aCustomer.setKunMahnsperre(false);
@@ -979,13 +974,12 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 			doResetInitValues();
 
 			doReadOnly();
-			this.btnCtrl.setBtnStatus_Save();
+			btnCtrl.setBtnStatus_Save();
 			return;
 		}
 
 		// ++ create the searchObject and init sorting ++ //
-		final HibernateSearchObject<Customer> soCustomer = new HibernateSearchObject<Customer>(Customer.class,
-				getCustomerListCtrl().getCountRows());
+		final HibernateSearchObject<Customer> soCustomer = new HibernateSearchObject<Customer>(Customer.class, getCustomerListCtrl().getCountRows());
 		soCustomer.addSort("kunName1", false);
 		// Set the ListModel
 		getCustomerListCtrl().getPagedListWrapper().setSearchObject(soCustomer);
@@ -1007,7 +1001,7 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		doReadOnly();
-		this.btnCtrl.setBtnStatus_Save();
+		btnCtrl.setBtnStatus_Save();
 		// init the old values vars new
 		doStoreInitValues();
 

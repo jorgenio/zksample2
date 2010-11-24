@@ -98,7 +98,7 @@ public class SecGroupSimpleDJReport extends Window implements Serializable {
 
 	public void doPrint() throws JRException, ColumnBuilderException, ClassNotFoundException, IOException {
 
-		final FastReportBuilder drb = new FastReportBuilder();
+		FastReportBuilder drb = new FastReportBuilder();
 		DynamicReport dr;
 
 		/**
@@ -106,40 +106,38 @@ public class SecGroupSimpleDJReport extends Window implements Serializable {
 		 * this in an other way.
 		 */
 		// Rows content
-		final Style columnStyleNumbers = new Style();
+		Style columnStyleNumbers = new Style();
 		columnStyleNumbers.setFont(Font.ARIAL_SMALL);
 		columnStyleNumbers.setHorizontalAlign(HorizontalAlign.RIGHT);
 
 		// Header for number row content
-		final Style columnStyleNumbersBold = new Style();
+		Style columnStyleNumbersBold = new Style();
 		columnStyleNumbersBold.setFont(Font.ARIAL_MEDIUM_BOLD);
 		columnStyleNumbersBold.setHorizontalAlign(HorizontalAlign.RIGHT);
 		columnStyleNumbersBold.setBorderBottom(Border.PEN_1_POINT);
 
 		// Rows content
-		final Style columnStyleText = new Style();
+		Style columnStyleText = new Style();
 		columnStyleText.setFont(Font.ARIAL_SMALL);
 		columnStyleText.setHorizontalAlign(HorizontalAlign.LEFT);
 
 		// Header for String row content
-		final Style columnStyleTextBold = new Style();
+		Style columnStyleTextBold = new Style();
 		columnStyleTextBold.setFont(Font.ARIAL_MEDIUM_BOLD);
 		columnStyleTextBold.setHorizontalAlign(HorizontalAlign.LEFT);
 		columnStyleTextBold.setBorderBottom(Border.PEN_1_POINT);
 
 		// Subtitle
-		final Style subtitleStyle = new Style();
+		Style subtitleStyle = new Style();
 		subtitleStyle.setHorizontalAlign(HorizontalAlign.LEFT);
 		subtitleStyle.setFont(Font.ARIAL_MEDIUM_BOLD);
 
 		// Localized column headers
-		final String grpShortdescription = Labels.getLabel("listheader_SecGroupList_grpShortdescription.label");
-		final String grpLongdescription = Labels.getLabel("listheader_SecGroupList_grpLongdescription.label");
+		String grpShortdescription = Labels.getLabel("listheader_SecGroupList_grpShortdescription.label");
+		String grpLongdescription = Labels.getLabel("listheader_SecGroupList_grpLongdescription.label");
 
-		drb.addColumn(grpShortdescription, "grpShortdescription", String.class.getName(), 40, columnStyleText,
-				columnStyleTextBold);
-		drb.addColumn(grpLongdescription, "grpLongdescription", String.class.getName(), 100, columnStyleText,
-				columnStyleTextBold);
+		drb.addColumn(grpShortdescription, "grpShortdescription", String.class.getName(), 40, columnStyleText, columnStyleTextBold);
+		drb.addColumn(grpLongdescription, "grpLongdescription", String.class.getName(), 100, columnStyleText, columnStyleTextBold);
 
 		// Sets the Report Columns, header, Title, Groups, Etc Formats
 		// DynamicJasper documentation
@@ -151,52 +149,52 @@ public class SecGroupSimpleDJReport extends Window implements Serializable {
 		dr = drb.build();
 
 		// Get information from database
-		final SecurityService as = (SecurityService) SpringUtil.getBean("securityService");
-		final List<SecGroup> resultList = as.getAllGroups();
+		SecurityService as = (SecurityService) SpringUtil.getBean("securityService");
+		List<SecGroup> resultList = as.getAllGroups();
 
 		// Create Datasource and put it in Dynamic Jasper Format
-		final List data = new ArrayList(resultList.size());
+		List data = new ArrayList(resultList.size());
 
-		for (final SecGroup obj : resultList) {
-			final Map<String, Object> map = new HashMap<String, Object>();
+		for (SecGroup obj : resultList) {
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("grpShortdescription", obj.getGrpShortdescription());
 			map.put("grpLongdescription", obj.getGrpLongdescription());
 			data.add(map);
 		}
 
 		// Generate the Jasper Print Object
-		final JRDataSource ds = new JRBeanCollectionDataSource(data);
-		final JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
+		JRDataSource ds = new JRBeanCollectionDataSource(data);
+		JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
 
-		final String outputFormat = "PDF";
+		String outputFormat = "PDF";
 
-		this.output = new ByteArrayOutputStream();
+		output = new ByteArrayOutputStream();
 
 		if (outputFormat.equalsIgnoreCase("PDF")) {
-			JasperExportManager.exportReportToPdfStream(jp, this.output);
-			this.mediais = new ByteArrayInputStream(this.output.toByteArray());
-			this.amedia = new AMedia("FirstReport.pdf", "pdf", "application/pdf", this.mediais);
+			JasperExportManager.exportReportToPdfStream(jp, output);
+			mediais = new ByteArrayInputStream(output.toByteArray());
+			amedia = new AMedia("FirstReport.pdf", "pdf", "application/pdf", mediais);
 
-			callReportWindow(this.amedia, "PDF");
+			callReportWindow(amedia, "PDF");
 		} else if (outputFormat.equalsIgnoreCase("XLS")) {
-			final JExcelApiExporter exporterXLS = new JExcelApiExporter();
+			JExcelApiExporter exporterXLS = new JExcelApiExporter();
 			exporterXLS.setParameter(JExcelApiExporterParameter.JASPER_PRINT, jp);
-			exporterXLS.setParameter(JExcelApiExporterParameter.OUTPUT_STREAM, this.output);
+			exporterXLS.setParameter(JExcelApiExporterParameter.OUTPUT_STREAM, output);
 			exporterXLS.setParameter(JExcelApiExporterParameter.IS_DETECT_CELL_TYPE, Boolean.TRUE);
 			exporterXLS.setParameter(JExcelApiExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.TRUE);
 			exporterXLS.setParameter(JExcelApiExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
 			exporterXLS.exportReport();
-			this.mediais = new ByteArrayInputStream(this.output.toByteArray());
-			this.amedia = new AMedia("FileFormatExcel", "xls", "application/vnd.ms-excel", this.mediais);
+			mediais = new ByteArrayInputStream(output.toByteArray());
+			amedia = new AMedia("FileFormatExcel", "xls", "application/vnd.ms-excel", mediais);
 
-			callReportWindow(this.amedia, "XLS");
+			callReportWindow(amedia, "XLS");
 		} else if (outputFormat.equalsIgnoreCase("RTF") || outputFormat.equalsIgnoreCase("DOC")) {
-			final JRRtfExporter exporterRTF = new JRRtfExporter();
+			JRRtfExporter exporterRTF = new JRRtfExporter();
 			exporterRTF.setParameter(JRExporterParameter.JASPER_PRINT, jp);
-			exporterRTF.setParameter(JRExporterParameter.OUTPUT_STREAM, this.output);
+			exporterRTF.setParameter(JRExporterParameter.OUTPUT_STREAM, output);
 			exporterRTF.exportReport();
-			this.mediais = new ByteArrayInputStream(this.output.toByteArray());
-			this.amedia = new AMedia("FileFormatRTF", "rtf", "application/rtf", this.mediais);
+			mediais = new ByteArrayInputStream(output.toByteArray());
+			amedia = new AMedia("FileFormatRTF", "rtf", "application/rtf", mediais);
 
 			callReportWindow(this.amedia, "RTF-DOC");
 		}
@@ -205,23 +203,23 @@ public class SecGroupSimpleDJReport extends Window implements Serializable {
 	private void callReportWindow(AMedia aMedia, String format) {
 		final boolean modal = true;
 
-		this.setTitle("Dynamic JasperReports. Sample Report for ZKoss");
-		this.setId("ReportWindow");
-		this.setVisible(true);
-		this.setMaximizable(true);
-		this.setMinimizable(true);
-		this.setSizable(true);
-		this.setClosable(true);
-		this.setHeight("100%");
-		this.setWidth("80%");
-		this.addEventListener("onClose", new OnCloseReportEventListener());
+		setTitle("Dynamic JasperReports. Sample Report for ZKoss");
+		setId("ReportWindow");
+		setVisible(true);
+		setMaximizable(true);
+		setMinimizable(true);
+		setSizable(true);
+		setClosable(true);
+		setHeight("100%");
+		setWidth("80%");
+		addEventListener("onClose", new OnCloseReportEventListener());
 
-		this.iFrame = new Iframe();
-		this.iFrame.setId("jasperReportId");
-		this.iFrame.setWidth("100%");
-		this.iFrame.setHeight("100%");
-		this.iFrame.setContent(aMedia);
-		this.iFrame.setParent(this);
+		iFrame = new Iframe();
+		iFrame.setId("jasperReportId");
+		iFrame.setWidth("100%");
+		iFrame.setHeight("100%");
+		iFrame.setContent(aMedia);
+		iFrame.setParent(this);
 
 		if (modal == true) {
 			try {
@@ -256,17 +254,15 @@ public class SecGroupSimpleDJReport extends Window implements Serializable {
 	 */
 	private void closeReportWindow() throws IOException {
 
-		this.removeEventListener("onClose", new OnCloseReportEventListener());
-
 		// TODO check this
 		try {
-			this.amedia.getStreamData().close();
-			this.output.close();
+			amedia.getStreamData().close();
+			output.close();
 		} catch (final Exception e) {
 			throw new RuntimeException(e);
 		}
 
-		this.onClose();
+		onClose();
 
 	}
 

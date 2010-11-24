@@ -117,9 +117,9 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 		// TODO put the logic for working with panel in the ApplicationWorkspace
 		final boolean withPanel = false;
 		if (withPanel == false) {
-			this.panel_SecGroupList.setVisible(false);
+			panel_SecGroupList.setVisible(false);
 		} else {
-			this.panel_SecGroupList.setVisible(true);
+			panel_SecGroupList.setVisible(true);
 			panelHeight = 0;
 		}
 
@@ -130,30 +130,30 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());
 
-		this.borderLayout_secGroupsList.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		borderLayout_secGroupsList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		// init, show all rights
-		this.checkbox_SecGroupList_ShowAll.setChecked(true);
+		checkbox_SecGroupList_ShowAll.setChecked(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		this.listheader_SecGroupList_grpShortdescription.setSortAscending(new FieldComparator("grpShortdescription", true));
-		this.listheader_SecGroupList_grpShortdescription.setSortDescending(new FieldComparator("grpShortdescription", false));
-		this.listheader_SecGroupList_grpLongdescription.setSortAscending("");
-		this.listheader_SecGroupList_grpLongdescription.setSortDescending("");
+		listheader_SecGroupList_grpShortdescription.setSortAscending(new FieldComparator("grpShortdescription", true));
+		listheader_SecGroupList_grpShortdescription.setSortDescending(new FieldComparator("grpShortdescription", false));
+		listheader_SecGroupList_grpLongdescription.setSortAscending("");
+		listheader_SecGroupList_grpLongdescription.setSortDescending("");
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class, getCountRows());
+		HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class, getCountRows());
 		soSecGroup.addSort("grpShortdescription", false);
 
 		// set the paging params
-		this.paging_SecGroupList.setPageSize(getCountRows());
-		this.paging_SecGroupList.setDetailed(true);
+		paging_SecGroupList.setPageSize(getCountRows());
+		paging_SecGroupList.setDetailed(true);
 
 		// Set the ListModel.
-		getPagedListWrapper().init(soSecGroup, this.listBoxSecGroups, this.paging_SecGroupList);
+		getPagedListWrapper().init(soSecGroup, listBoxSecGroups, paging_SecGroupList);
 		// set the itemRenderer
-		this.listBoxSecGroups.setItemRenderer(new SecGroupListModelItemRenderer());
+		listBoxSecGroups.setItemRenderer(new SecGroupListModelItemRenderer());
 
 	}
 
@@ -175,11 +175,11 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	public void onDoubleClicked(Event event) throws Exception {
 
 		// get the selected object
-		final Listitem item = this.listBoxSecGroups.getSelectedItem();
+		Listitem item = listBoxSecGroups.getSelectedItem();
 
 		if (item != null) {
 			// CAST AND STORE THE SELECTED OBJECT
-			final SecGroup aGroup = (SecGroup) item.getAttribute("data");
+			SecGroup aGroup = (SecGroup) item.getAttribute("data");
 
 			showDetailView(aGroup);
 		}
@@ -191,7 +191,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	public void onClick$button_SecGroupList_NewGroup(Event event) throws Exception {
 
 		// create a new customer object
-		final SecGroup aGroup = getSecurityService().getNewSecGroup();
+		SecGroup aGroup = getSecurityService().getNewSecGroup();
 
 		showDetailView(aGroup);
 
@@ -211,7 +211,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 		 * with a object of the selected item. For handed over these parameter
 		 * only a Map is accepted. So we put the object in a HashMap.
 		 */
-		final HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("group", aGroup);
 		/*
 		 * we can additionally handed over the listBox, so we have in the dialog
@@ -219,7 +219,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 		 * data in the customerListbox from the dialog when we do a delete, edit
 		 * or insert a customer.
 		 */
-		map.put("listBoxSecGroups", this.listBoxSecGroups);
+		map.put("listBoxSecGroups", listBoxSecGroups);
 
 		// call the zul-file with the parameters packed in a map
 		try {
@@ -228,8 +228,8 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
 			// Show a error box
-			final String msg = e.getMessage();
-			final String title = Labels.getLabel("message.Error");
+			String msg = e.getMessage();
+			String title = Labels.getLabel("message.Error");
 
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
@@ -257,8 +257,8 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
 
-		Events.postEvent("onCreate", this.secGroupListWindow, event);
-		this.secGroupListWindow.invalidate();
+		Events.postEvent("onCreate", secGroupListWindow, event);
+		secGroupListWindow.invalidate();
 	}
 
 	/**
@@ -269,14 +269,14 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	public void onCheck$checkbox_SecGroupList_ShowAll(Event event) {
 
 		// empty the text search boxes
-		this.tb_SecGroup_GroupName.setValue(""); // clear
+		tb_SecGroup_GroupName.setValue(""); // clear
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class);
+		HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class);
 		soSecGroup.addSort("grpShortdescription", false);
 
 		// Set the ListModel.
-		getPagedListWrapper().init(soSecGroup, this.listBoxSecGroups, this.paging_SecGroupList);
+		getPagedListWrapper().init(soSecGroup, listBoxSecGroups, paging_SecGroupList);
 
 	}
 
@@ -297,16 +297,16 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 	public void onClick$button_SecGroupList_SearchGroupName(Event event) throws Exception {
 
 		// if not empty
-		if (!this.tb_SecGroup_GroupName.getValue().isEmpty()) {
-			this.checkbox_SecGroupList_ShowAll.setChecked(false); // unCheck
+		if (!tb_SecGroup_GroupName.getValue().isEmpty()) {
+			checkbox_SecGroupList_ShowAll.setChecked(false); // unCheck
 
 			// ++ create the searchObject and init sorting ++//
-			final HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class);
-			soSecGroup.addFilter(new Filter("grpShortdescription", "%" + this.tb_SecGroup_GroupName.getValue() + "%", Filter.OP_ILIKE));
+			HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class);
+			soSecGroup.addFilter(new Filter("grpShortdescription", "%" + tb_SecGroup_GroupName.getValue() + "%", Filter.OP_ILIKE));
 			soSecGroup.addSort("grpShortdescription", false);
 
 			// Set the ListModel.
-			getPagedListWrapper().init(soSecGroup, this.listBoxSecGroups, this.paging_SecGroupList);
+			getPagedListWrapper().init(soSecGroup, listBoxSecGroups, paging_SecGroupList);
 		}
 	}
 

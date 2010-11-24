@@ -138,9 +138,9 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 		// TODO put the logic for working with panel in the ApplicationWorkspace
 		final boolean withPanel = false;
 		if (withPanel == false) {
-			this.panel_UserList.setVisible(false);
+			panel_UserList.setVisible(false);
 		} else {
-			this.panel_UserList.setVisible(true);
+			panel_UserList.setVisible(true);
 			panelHeight = 0;
 		}
 
@@ -151,56 +151,56 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());
 
-		this.borderLayout_secUserList.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		borderLayout_secUserList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		this.listheader_UserList_usrLoginname.setSortAscending(new FieldComparator("usrLoginname", true));
-		this.listheader_UserList_usrLoginname.setSortDescending(new FieldComparator("usrLoginname", false));
-		this.listheader_UserList_usrLoginname.setSortDirection("ascending");
-		this.listheader_UserList_usrLastname.setSortAscending(new FieldComparator("usrLastname", true));
-		this.listheader_UserList_usrLastname.setSortDescending(new FieldComparator("usrLastname", false));
-		this.listheader_UserList_usrEmail.setSortAscending(new FieldComparator("usrEmail", true));
-		this.listheader_UserList_usrEmail.setSortDescending(new FieldComparator("usrEmail", false));
-		this.listheader_UserList_usrEnabled.setSortAscending(new FieldComparator("usrEnabled", true));
-		this.listheader_UserList_usrEnabled.setSortDescending(new FieldComparator("usrEnabled", false));
-		this.listheader_UserList_usrAccountnonexpired.setSortAscending(new FieldComparator("usrAccountnonexpired", true));
-		this.listheader_UserList_usrAccountnonexpired.setSortDescending(new FieldComparator("usrAccountnonexpired", false));
-		this.listheader_UserList_usrCredentialsnonexpired.setSortAscending(new FieldComparator("usrCredentialsnonexpired", true));
-		this.listheader_UserList_usrCredentialsnonexpired.setSortDescending(new FieldComparator("usrCredentialsnonexpired", false));
-		this.listheader_UserList_usrAccountnonlocked.setSortAscending(new FieldComparator("usrAccountnonlocked", true));
-		this.listheader_UserList_usrAccountnonlocked.setSortDescending(new FieldComparator("usrAccountnonlocked", false));
+		listheader_UserList_usrLoginname.setSortAscending(new FieldComparator("usrLoginname", true));
+		listheader_UserList_usrLoginname.setSortDescending(new FieldComparator("usrLoginname", false));
+		listheader_UserList_usrLoginname.setSortDirection("ascending");
+		listheader_UserList_usrLastname.setSortAscending(new FieldComparator("usrLastname", true));
+		listheader_UserList_usrLastname.setSortDescending(new FieldComparator("usrLastname", false));
+		listheader_UserList_usrEmail.setSortAscending(new FieldComparator("usrEmail", true));
+		listheader_UserList_usrEmail.setSortDescending(new FieldComparator("usrEmail", false));
+		listheader_UserList_usrEnabled.setSortAscending(new FieldComparator("usrEnabled", true));
+		listheader_UserList_usrEnabled.setSortDescending(new FieldComparator("usrEnabled", false));
+		listheader_UserList_usrAccountnonexpired.setSortAscending(new FieldComparator("usrAccountnonexpired", true));
+		listheader_UserList_usrAccountnonexpired.setSortDescending(new FieldComparator("usrAccountnonexpired", false));
+		listheader_UserList_usrCredentialsnonexpired.setSortAscending(new FieldComparator("usrCredentialsnonexpired", true));
+		listheader_UserList_usrCredentialsnonexpired.setSortDescending(new FieldComparator("usrCredentialsnonexpired", false));
+		listheader_UserList_usrAccountnonlocked.setSortAscending(new FieldComparator("usrAccountnonlocked", true));
+		listheader_UserList_usrAccountnonlocked.setSortDescending(new FieldComparator("usrAccountnonlocked", false));
 
 		// set the paging params
-		this.paging_UserList.setPageSize(getCountRows());
-		this.paging_UserList.setDetailed(true);
+		paging_UserList.setPageSize(getCountRows());
+		paging_UserList.setDetailed(true);
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
+		HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
 		soUser.addSort("usrLoginname", false);
 
 		/* New check the rights. If UserOnly mode than show only the users data */
-		final UserWorkspace workspace = getUserWorkspace();
+		UserWorkspace workspace = getUserWorkspace();
 
 		// special right for see all other users
 		if (workspace.isAllowed("data_SeeAllUserData")) {
 			// show all users
-			this.checkbox_UserList_ShowAll.setChecked(true);
+			checkbox_UserList_ShowAll.setChecked(true);
 
 			// Set the ListModel.
-			getPagedListWrapper().init(soUser, this.listBoxUser, this.paging_UserList);
+			getPagedListWrapper().init(soUser, listBoxUser, paging_UserList);
 
 		} else {
 			// show only logged in users data
-			final String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+			String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 
 			soUser.addFilter(new Filter("usrLoginname", userName, Filter.OP_EQUAL));
 
 			// Set the ListModel.
-			getPagedListWrapper().init(soUser, this.listBoxUser, this.paging_UserList);
+			getPagedListWrapper().init(soUser, listBoxUser, paging_UserList);
 		}
 		// set the itemRenderer
-		this.listBoxUser.setItemRenderer(new UserListModelItemRenderer());
+		listBoxUser.setItemRenderer(new UserListModelItemRenderer());
 
 	}
 
@@ -211,13 +211,13 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 
 		final UserWorkspace workspace = getUserWorkspace();
 
-		this.userListWindow.setVisible(workspace.isAllowed("userListWindow"));
+		userListWindow.setVisible(workspace.isAllowed("userListWindow"));
 
-		this.btnHelp.setVisible(workspace.isAllowed("button_UserList_btnHelp"));
-		this.button_UserList_NewUser.setVisible(workspace.isAllowed("button_UserList_NewUser"));
-		this.button_UserList_PrintUserList.setVisible(workspace.isAllowed("button_UserList_PrintUserList"));
+		btnHelp.setVisible(workspace.isAllowed("button_UserList_btnHelp"));
+		button_UserList_NewUser.setVisible(workspace.isAllowed("button_UserList_NewUser"));
+		button_UserList_PrintUserList.setVisible(workspace.isAllowed("button_UserList_PrintUserList"));
 
-		this.hbox_UserList_SearchUsers.setVisible(workspace.isAllowed("hbox_UserList_SearchUsers"));
+		hbox_UserList_SearchUsers.setVisible(workspace.isAllowed("hbox_UserList_SearchUsers"));
 
 	}
 
@@ -239,11 +239,11 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 		// }
 
 		// get the selected object
-		final Listitem item = this.listBoxUser.getSelectedItem();
+		Listitem item = listBoxUser.getSelectedItem();
 
 		if (item != null) {
 			// CAST AND STORE THE SELECTED OBJECT
-			final SecUser anUser = (SecUser) item.getAttribute("data");
+			SecUser anUser = (SecUser) item.getAttribute("data");
 
 			showDetailView(anUser);
 		}
@@ -259,7 +259,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 		// We don't create a new DomainObject() in the frontend.
 		// We GET it from the backend.
 
-		final SecUser anUser = getUserService().getNewUser();
+		SecUser anUser = getUserService().getNewUser();
 
 		showDetailView(anUser);
 
@@ -279,7 +279,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 		 * with a object of the selected item. For handed over these parameter
 		 * only a Map is accepted. So we put the object in a HashMap.
 		 */
-		final HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("user", anUser);
 		/*
 		 * we can additionally handed over the listBox, so we have in the dialog
@@ -287,7 +287,7 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 		 * data in the userListbox from the dialog when we do a delete, edit or
 		 * insert a user.
 		 */
-		map.put("listBoxUser", this.listBoxUser);
+		map.put("listBoxUser", listBoxUser);
 
 		// call the zul-file with the parameters packed in a map
 		try {
@@ -296,8 +296,8 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
 			// Show a error box
-			final String msg = e.getMessage();
-			final String title = Labels.getLabel("messag.Error");
+			String msg = e.getMessage();
+			String title = Labels.getLabel("messag.Error");
 
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
@@ -324,8 +324,8 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
 
-		Events.postEvent("onCreate", this.userListWindow, event);
-		this.userListWindow.invalidate();
+		Events.postEvent("onCreate", userListWindow, event);
+		userListWindow.invalidate();
 	}
 
 	/**
@@ -345,13 +345,13 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	public void onClick$button_UserList_SearchLoginname(Event event) throws Exception {
 
 		// if not empty
-		if (!this.tb_SecUser_Loginname.getValue().isEmpty()) {
-			this.checkbox_UserList_ShowAll.setChecked(false);
-			this.tb_SecUser_Lastname.setValue("");
-			this.tb_SecUser_Email.setValue("");
+		if (!tb_SecUser_Loginname.getValue().isEmpty()) {
+			checkbox_UserList_ShowAll.setChecked(false);
+			tb_SecUser_Lastname.setValue("");
+			tb_SecUser_Email.setValue("");
 
-			final HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
-			soUser.addFilter(new Filter("usrLoginname", "%" + this.tb_SecUser_Loginname.getValue() + "%", Filter.OP_ILIKE));
+			HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
+			soUser.addFilter(new Filter("usrLoginname", "%" + tb_SecUser_Loginname.getValue() + "%", Filter.OP_ILIKE));
 			soUser.addSort("usrLoginname", false);
 
 			/*
@@ -364,15 +364,15 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 			if (workspace.isAllowed("data_SeeAllUserData")) {
 				// show all users
 				// Set the ListModel.
-				getPagedListWrapper().init(soUser, this.listBoxUser, this.paging_UserList);
+				getPagedListWrapper().init(soUser, listBoxUser, paging_UserList);
 			} else {
 				// show only logged in users data
-				final String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+				String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 
 				soUser.addFilter(new Filter("usrLoginname", userName, Filter.OP_EQUAL));
 
 				// Set the ListModel.
-				getPagedListWrapper().init(soUser, this.listBoxUser, this.paging_UserList);
+				getPagedListWrapper().init(soUser, listBoxUser, paging_UserList);
 			}
 		}
 	}
@@ -383,13 +383,13 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	public void onClick$button_UserList_SearchLastname(Event event) throws Exception {
 
 		// if not empty
-		if (!this.tb_SecUser_Lastname.getValue().isEmpty()) {
-			this.checkbox_UserList_ShowAll.setChecked(false);
-			this.tb_SecUser_Loginname.setValue("");
-			this.tb_SecUser_Email.setValue("");
+		if (!tb_SecUser_Lastname.getValue().isEmpty()) {
+			checkbox_UserList_ShowAll.setChecked(false);
+			tb_SecUser_Loginname.setValue("");
+			tb_SecUser_Email.setValue("");
 
-			final HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
-			soUser.addFilter(new Filter("usrLastname", "%" + this.tb_SecUser_Lastname.getValue() + "%", Filter.OP_ILIKE));
+			HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
+			soUser.addFilter(new Filter("usrLastname", "%" + tb_SecUser_Lastname.getValue() + "%", Filter.OP_ILIKE));
 			soUser.addSort("usrLoginname", false);
 
 			/*
@@ -403,15 +403,15 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 				// show all users
 
 				// Set the ListModel.
-				getPagedListWrapper().init(soUser, this.listBoxUser, this.paging_UserList);
+				getPagedListWrapper().init(soUser, listBoxUser, paging_UserList);
 			} else {
 				// show only logged in users data
-				final String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+				String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 
 				soUser.addFilter(new Filter("usrLoginname", userName, Filter.OP_EQUAL));
 
 				// Set the ListModel.
-				getPagedListWrapper().init(soUser, this.listBoxUser, this.paging_UserList);
+				getPagedListWrapper().init(soUser, listBoxUser, paging_UserList);
 			}
 		}
 	}
@@ -422,13 +422,13 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	public void onClick$button_UserList_SearchEmail(Event event) throws Exception {
 
 		// if not empty
-		if (!this.tb_SecUser_Email.getValue().isEmpty()) {
-			this.checkbox_UserList_ShowAll.setChecked(false);
-			this.tb_SecUser_Loginname.setValue("");
-			this.tb_SecUser_Lastname.setValue("");
+		if (!tb_SecUser_Email.getValue().isEmpty()) {
+			checkbox_UserList_ShowAll.setChecked(false);
+			tb_SecUser_Loginname.setValue("");
+			tb_SecUser_Lastname.setValue("");
 
-			final HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
-			soUser.addFilter(new Filter("usrEmail", "%" + this.tb_SecUser_Email.getValue() + "%", Filter.OP_ILIKE));
+			HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
+			soUser.addFilter(new Filter("usrEmail", "%" + tb_SecUser_Email.getValue() + "%", Filter.OP_ILIKE));
 			soUser.addSort("usrLoginname", false);
 
 			/*
@@ -442,15 +442,15 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 				// show all users
 
 				// Set the ListModel.
-				getPagedListWrapper().init(soUser, this.listBoxUser, this.paging_UserList);
+				getPagedListWrapper().init(soUser, listBoxUser, paging_UserList);
 			} else {
 				// show only logged in users data
-				final String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+				String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 
 				soUser.addFilter(new Filter("usrLoginname", userName, Filter.OP_EQUAL));
 
 				// Set the ListModel.
-				getPagedListWrapper().init(soUser, this.listBoxUser, this.paging_UserList);
+				getPagedListWrapper().init(soUser, listBoxUser, paging_UserList);
 			}
 		}
 	}
@@ -463,11 +463,11 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 	public void onCheck$checkbox_UserList_ShowAll(Event event) {
 
 		// empty the text search boxes
-		this.tb_SecUser_Loginname.setValue("");
-		this.tb_SecUser_Lastname.setValue("");
-		this.tb_SecUser_Email.setValue("");
+		tb_SecUser_Loginname.setValue("");
+		tb_SecUser_Lastname.setValue("");
+		tb_SecUser_Email.setValue("");
 
-		final HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
+		HibernateSearchObject<SecUser> soUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRows());
 		soUser.addSort("usrLoginname", false);
 
 		/* New check the rights. If UserOnly mode than show only the users data */
@@ -476,18 +476,18 @@ public class UserListCtrl extends GFCBaseListCtrl<SecUser> implements Serializab
 		// special right for see all other users
 		if (workspace.isAllowed("data_SeeAllUserData")) {
 			// show all users
-			this.checkbox_UserList_ShowAll.setChecked(true);
+			checkbox_UserList_ShowAll.setChecked(true);
 
 			// Set the ListModel.
-			getPagedListWrapper().init(soUser, this.listBoxUser, this.paging_UserList);
+			getPagedListWrapper().init(soUser, listBoxUser, paging_UserList);
 		} else {
 			// show only logged in users data
-			final String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+			String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 
 			soUser.addFilter(new Filter("usrLoginname", userName, Filter.OP_EQUAL));
 
 			// Set the ListModel.
-			getPagedListWrapper().init(soUser, this.listBoxUser, this.paging_UserList);
+			getPagedListWrapper().init(soUser, listBoxUser, paging_UserList);
 		}
 	}
 

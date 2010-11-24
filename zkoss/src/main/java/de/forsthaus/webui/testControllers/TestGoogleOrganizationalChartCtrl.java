@@ -2,7 +2,6 @@ package de.forsthaus.webui.testControllers;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Window;
 
 import de.forsthaus.webui.util.GFCBaseCtrl;

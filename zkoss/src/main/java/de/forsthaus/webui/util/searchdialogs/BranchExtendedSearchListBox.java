@@ -97,8 +97,7 @@ public class BranchExtendedSearchListBox extends Window implements Serializable 
 	private ListModelList listModelList;
 
 	// the windows title
-	private final String _title = Labels.getLabel("message.Information.ExtendedSearch") + " / "
-			+ Labels.getLabel("common.Branch");
+	private final String _title = Labels.getLabel("message.Information.ExtendedSearch") + " / " + Labels.getLabel("common.Branch");
 
 	// 1. Listheader
 	private final String _listHeader1 = Labels.getLabel("common.Description");
@@ -154,23 +153,23 @@ public class BranchExtendedSearchListBox extends Window implements Serializable 
 		this.setClosable(true);
 
 		// Borderlayout
-		final Borderlayout bl = new Borderlayout();
+		Borderlayout bl = new Borderlayout();
 		bl.setHeight("100%");
 		bl.setWidth("100%");
 		bl.setParent(this);
 
-		final Center center = new Center();
+		Center center = new Center();
 		center.setBorder("none");
 		center.setFlex(true);
 		center.setParent(bl);
 
 		// Borderlayout
-		final Borderlayout bl2 = new Borderlayout();
+		Borderlayout bl2 = new Borderlayout();
 		bl2.setHeight("100%");
 		bl2.setWidth("100%");
 		bl2.setParent(center);
 
-		final North north2 = new North();
+		North north2 = new North();
 		north2.setBorder("none");
 		north2.setHeight("26px");
 		north2.setParent(bl2);
@@ -181,12 +180,12 @@ public class BranchExtendedSearchListBox extends Window implements Serializable 
 		this._paging.setPageSize(getPageSize());
 		this._paging.setParent(north2);
 
-		final Center center2 = new Center();
+		Center center2 = new Center();
 		center2.setBorder("none");
 		center2.setFlex(true);
 		center2.setParent(bl2);
 		// Div Center area
-		final Div divCenter2 = new Div();
+		Div divCenter2 = new Div();
 		divCenter2.setWidth("100%");
 		divCenter2.setHeight("100%");
 		divCenter2.setParent(center2);
@@ -199,19 +198,19 @@ public class BranchExtendedSearchListBox extends Window implements Serializable 
 		this.listbox.setParent(divCenter2);
 		this.listbox.setItemRenderer(new SearchBoxItemRenderer());
 
-		final Listhead listhead = new Listhead();
+		Listhead listhead = new Listhead();
 		listhead.setParent(this.listbox);
-		final Listheader listheader = new Listheader();
+		Listheader listheader = new Listheader();
 		listheader.setSclass("FDListBoxHeader1");
 		listheader.setParent(listhead);
 		listheader.setLabel(this._listHeader1);
 
-		final South south2 = new South();
+		South south2 = new South();
 		south2.setBorder("none");
 		south2.setHeight("26px");
 		south2.setParent(bl2);
 		// hbox for holding the Textbox + SearchButton
-		final Hbox hbox = new Hbox();
+		Hbox hbox = new Hbox();
 		hbox.setPack("stretch");
 		hbox.setStyle("padding-left: 5px");
 		hbox.setWidth("100%");
@@ -228,23 +227,23 @@ public class BranchExtendedSearchListBox extends Window implements Serializable 
 		this._searchButton.addEventListener("onClick", new OnSearchListener());
 		this._searchButton.setParent(hbox);
 
-		final South south = new South();
+		South south = new South();
 		south.setBorder("none");
 		south.setHeight("30px");
 		south.setParent(bl);
 
-		final Div divSouth = new Div();
+		Div divSouth = new Div();
 		divSouth.setWidth("100%");
 		divSouth.setHeight("100%");
 		divSouth.setParent(south);
 
-		final Separator sep = new Separator();
+		Separator sep = new Separator();
 		sep.setBar(true);
 		sep.setOrient("horizontal");
 		sep.setParent(divSouth);
 
 		// Button
-		final Button btnOK = new Button();
+		Button btnOK = new Button();
 		btnOK.setStyle("padding-left: 5px");
 		btnOK.setLabel("OK");
 		btnOK.addEventListener("onClick", new OnCloseListener());
@@ -255,8 +254,8 @@ public class BranchExtendedSearchListBox extends Window implements Serializable 
 		 * The ResultObject is a helper class that holds the generic list and
 		 * the totalRecord count as int value.
 		 */
-		final ResultObject ro = getBrancheService().getAllBranchesLikeText("", 0, getPageSize());
-		final List<Branche> resultList = (List<Branche>) ro.getList();
+		ResultObject ro = getBrancheService().getAllBranchesLikeText("", 0, getPageSize());
+		List<Branche> resultList = (List<Branche>) ro.getList();
 		this._paging.setTotalSize(ro.getTotalCount());
 
 		// set the model
@@ -282,9 +281,9 @@ public class BranchExtendedSearchListBox extends Window implements Serializable 
 		@Override
 		public void render(Listitem item, Object data) throws Exception {
 
-			final Branche branche = (Branche) data;
+			Branche branche = (Branche) data;
 
-			final Listcell lc = new Listcell(branche.getBraBezeichnung());
+			Listcell lc = new Listcell(branche.getBraBezeichnung());
 			lc.setParent(item);
 
 			item.setAttribute("data", data);
@@ -301,8 +300,8 @@ public class BranchExtendedSearchListBox extends Window implements Serializable 
 	public void onDoubleClicked(Event event) {
 
 		if (this.listbox.getSelectedItem() != null) {
-			final Listitem li = this.listbox.getSelectedItem();
-			final Branche branche = (Branche) li.getAttribute("data");
+			Listitem li = this.listbox.getSelectedItem();
+			Branche branche = (Branche) li.getAttribute("data");
 
 			setBranche(branche);
 			this.onClose();
@@ -320,11 +319,11 @@ public class BranchExtendedSearchListBox extends Window implements Serializable 
 		@Override
 		public void onEvent(Event event) throws Exception {
 
-			final PagingEvent pe = (PagingEvent) event;
-			final int pageNo = pe.getActivePage();
-			final int start = pageNo * getPageSize();
+			PagingEvent pe = (PagingEvent) event;
+			int pageNo = pe.getActivePage();
+			int start = pageNo * getPageSize();
 
-			final String searchText = BranchExtendedSearchListBox.this._textbox.getValue();
+			String searchText = BranchExtendedSearchListBox.this._textbox.getValue();
 			// refresh the list
 			refreshModel(searchText, start);
 		}
@@ -346,8 +345,8 @@ public class BranchExtendedSearchListBox extends Window implements Serializable 
 		getListModelList().clear();
 
 		// init the model
-		final ResultObject ro = getBrancheService().getAllBranchesLikeText(searchText, start, getPageSize());
-		final List<Branche> resultList = (List<Branche>) ro.getList();
+		ResultObject ro = getBrancheService().getAllBranchesLikeText(searchText, start, getPageSize());
+		List<Branche> resultList = (List<Branche>) ro.getList();
 		this._paging.setTotalSize(ro.getTotalCount());
 
 		// set the model
@@ -362,7 +361,7 @@ public class BranchExtendedSearchListBox extends Window implements Serializable 
 		@Override
 		public void onEvent(Event event) throws Exception {
 
-			final String searchText = BranchExtendedSearchListBox.this._textbox.getValue();
+			String searchText = BranchExtendedSearchListBox.this._textbox.getValue();
 
 			// we start new
 			refreshModel(searchText, 0);
@@ -377,8 +376,8 @@ public class BranchExtendedSearchListBox extends Window implements Serializable 
 		public void onEvent(Event event) throws Exception {
 
 			if (BranchExtendedSearchListBox.this.listbox.getSelectedItem() != null) {
-				final Listitem li = BranchExtendedSearchListBox.this.listbox.getSelectedItem();
-				final Branche branche = (Branche) li.getAttribute("data");
+				Listitem li = BranchExtendedSearchListBox.this.listbox.getSelectedItem();
+				Branche branche = (Branche) li.getAttribute("data");
 
 				setBranche(branche);
 			}

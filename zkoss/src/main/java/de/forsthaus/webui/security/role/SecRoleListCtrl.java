@@ -112,9 +112,9 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 		// TODO put the logic for working with panel in the ApplicationWorkspace
 		final boolean withPanel = false;
 		if (withPanel == false) {
-			this.panel_SecRoleList.setVisible(false);
+			panel_SecRoleList.setVisible(false);
 		} else {
-			this.panel_SecRoleList.setVisible(true);
+			panel_SecRoleList.setVisible(true);
 			panelHeight = 0;
 		}
 
@@ -125,30 +125,30 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());
 
-		this.borderLayout_secRolesList.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		borderLayout_secRolesList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		// init, show all rights
-		this.checkbox_SecRoleList_ShowAll.setChecked(true);
+		checkbox_SecRoleList_ShowAll.setChecked(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		this.listheader_SecRoleList_rolShortdescription.setSortAscending(new FieldComparator("rolShortdescription", true));
-		this.listheader_SecRoleList_rolShortdescription.setSortDescending(new FieldComparator("rolShortdescription", false));
-		this.listheader_SecRoleList_rolLongdescription.setSortAscending("");
-		this.listheader_SecRoleList_rolLongdescription.setSortDescending("");
+		listheader_SecRoleList_rolShortdescription.setSortAscending(new FieldComparator("rolShortdescription", true));
+		listheader_SecRoleList_rolShortdescription.setSortDescending(new FieldComparator("rolShortdescription", false));
+		listheader_SecRoleList_rolLongdescription.setSortAscending("");
+		listheader_SecRoleList_rolLongdescription.setSortDescending("");
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRows());
+		HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRows());
 		soSecRole.addSort("rolShortdescription", false);
 
 		// set the paging params
-		this.paging_SecRoleList.setPageSize(getCountRows());
-		this.paging_SecRoleList.setDetailed(true);
+		paging_SecRoleList.setPageSize(getCountRows());
+		paging_SecRoleList.setDetailed(true);
 
 		// Set the ListModel.
-		getPagedListWrapper().init(soSecRole, this.listBoxSecRoles, this.paging_SecRoleList);
+		getPagedListWrapper().init(soSecRole, listBoxSecRoles, paging_SecRoleList);
 		// set the itemRenderer
-		this.listBoxSecRoles.setItemRenderer(new SecRoleListModelItemRenderer());
+		listBoxSecRoles.setItemRenderer(new SecRoleListModelItemRenderer());
 
 	}
 
@@ -165,11 +165,11 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	public void onRoleItemDoubleClicked(Event event) throws Exception {
 
 		// get the selected object
-		final Listitem item = this.listBoxSecRoles.getSelectedItem();
+		Listitem item = listBoxSecRoles.getSelectedItem();
 
 		if (item != null) {
 			// CAST AND STORE THE SELECTED OBJECT
-			final SecRole aRole = (SecRole) item.getAttribute("data");
+			SecRole aRole = (SecRole) item.getAttribute("data");
 
 			showDetailView(aRole);
 		}
@@ -184,7 +184,7 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 		/** !!! DO NOT BREAK THE TIERS !!! */
 		// We don't create a new DomainObject() in the frontend.
 		// We GET it from the backend.
-		final SecRole aRole = getSecurityService().getNewSecRole();
+		SecRole aRole = getSecurityService().getNewSecRole();
 
 		showDetailView(aRole);
 
@@ -204,7 +204,7 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 		 * with a object of the selected item. For handed over these parameter
 		 * only a Map is accepted. So we put the object in a HashMap.
 		 */
-		final HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("role", aRole);
 		/*
 		 * we can additionally handed over the listBox, so we have in the dialog
@@ -212,7 +212,7 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 		 * data in the customerListbox from the dialog when we do a delete, edit
 		 * or insert a customer.
 		 */
-		map.put("listBoxSecRoles", this.listBoxSecRoles);
+		map.put("listBoxSecRoles", listBoxSecRoles);
 
 		// call the zul-file with the parameters packed in a map
 		try {
@@ -244,8 +244,8 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
 
-		Events.postEvent("onCreate", this.secRoleListWindow, event);
-		this.secRoleListWindow.invalidate();
+		Events.postEvent("onCreate", secRoleListWindow, event);
+		secRoleListWindow.invalidate();
 	}
 
 	/**
@@ -256,14 +256,14 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	public void onCheck$checkbox_SecRoleList_ShowAll(Event event) {
 
 		// empty the text search boxes
-		this.tb_SecRole_RoleName.setValue(""); // clear
+		tb_SecRole_RoleName.setValue(""); // clear
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRows());
+		HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRows());
 		soSecRole.addSort("rolShortdescription", false);
 
 		// Set the ListModel.
-		getPagedListWrapper().init(soSecRole, this.listBoxSecRoles, this.paging_SecRoleList);
+		getPagedListWrapper().init(soSecRole, listBoxSecRoles, paging_SecRoleList);
 
 	}
 
@@ -284,17 +284,17 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 	public void onClick$button_SecRoleList_rolShortdescription(Event event) throws Exception {
 
 		// if not empty
-		if (!this.tb_SecRole_RoleName.getValue().isEmpty()) {
-			this.checkbox_SecRoleList_ShowAll.setChecked(false); // unCheck
+		if (!tb_SecRole_RoleName.getValue().isEmpty()) {
+			checkbox_SecRoleList_ShowAll.setChecked(false); // unCheck
 
 			// ++ create the searchObject and init sorting ++//
-			final HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRows());
+			HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRows());
 			soSecRole.addSort("rolShortdescription", false);
 
-			soSecRole.addFilter(new Filter("rolShortdescription", "%" + this.tb_SecRole_RoleName.getValue() + "%", Filter.OP_ILIKE));
+			soSecRole.addFilter(new Filter("rolShortdescription", "%" + tb_SecRole_RoleName.getValue() + "%", Filter.OP_ILIKE));
 
 			// Set the ListModel.
-			getPagedListWrapper().init(soSecRole, this.listBoxSecRoles, this.paging_SecRoleList);
+			getPagedListWrapper().init(soSecRole, listBoxSecRoles, paging_SecRoleList);
 		}
 
 	}

@@ -163,9 +163,9 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 		// TODO put the logic for working with panel in the ApplicationWorkspace
 		final boolean withPanel = false;
 		if (withPanel == false) {
-			this.panel_SecUserRole.setVisible(false);
+			panel_SecUserRole.setVisible(false);
 		} else {
-			this.panel_SecUserRole.setVisible(true);
+			panel_SecUserRole.setVisible(true);
 			panelHeight = 0;
 		}
 
@@ -181,56 +181,54 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 		// secUserroleWindow.setHeight((height - topHeader) + "px");
 
 		// main borderlayout height = window.height - (Panels Top)
-		this.borderlayoutSecUserrole.setHeight(String.valueOf(maxListBoxHeight) + "px");
-		this.borderLayout_Users.setHeight(String.valueOf(maxListBoxHeight - 5) + "px");
-		this.borderLayout_Roles.setHeight(String.valueOf(maxListBoxHeight - 5) + "px");
+		borderlayoutSecUserrole.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		borderLayout_Users.setHeight(String.valueOf(maxListBoxHeight - 5) + "px");
+		borderLayout_Roles.setHeight(String.valueOf(maxListBoxHeight - 5) + "px");
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		this.listheader_SecUserRole_usrLoginname.setSortAscending(new FieldComparator("usrLoginname", true));
-		this.listheader_SecUserRole_usrLoginname.setSortDescending(new FieldComparator("usrLoginname", false));
+		listheader_SecUserRole_usrLoginname.setSortAscending(new FieldComparator("usrLoginname", true));
+		listheader_SecUserRole_usrLoginname.setSortDescending(new FieldComparator("usrLoginname", false));
 
 		// Assign the Comparator for sorting listbox secUserRolesList
-		this.listheader_SecUserRole_RoleName.setSortAscending(new FieldComparator("rolShortdescription", true));
-		this.listheader_SecUserRole_RoleName.setSortDescending(new FieldComparator("rolShortdescription", false));
+		listheader_SecUserRole_RoleName.setSortAscending(new FieldComparator("rolShortdescription", true));
+		listheader_SecUserRole_RoleName.setSortDescending(new FieldComparator("rolShortdescription", false));
 
 		/* set the PageSize */
-		this.paging_ListBoxSecUser.setPageSize(getCountRowsSecUser());
-		this.paging_ListBoxSecUser.setDetailed(true);
+		paging_ListBoxSecUser.setPageSize(getCountRowsSecUser());
+		paging_ListBoxSecUser.setDetailed(true);
 
-		this.paging_ListBoxSecRoles.setPageSize(getCountRowsSecRole());
-		this.paging_ListBoxSecRoles.setDetailed(true);
+		paging_ListBoxSecRoles.setPageSize(getCountRowsSecRole());
+		paging_ListBoxSecRoles.setDetailed(true);
 
-		this.listBoxSecUser.setHeight(String.valueOf(maxListBoxHeight - 150) + "px");
-		this.listBoxSecRoles.setHeight(String.valueOf(maxListBoxHeight - 150) + "px");
+		listBoxSecUser.setHeight(String.valueOf(maxListBoxHeight - 150) + "px");
+		listBoxSecRoles.setHeight(String.valueOf(maxListBoxHeight - 150) + "px");
 		/* Tab Details */
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecUser> soSecUser = new HibernateSearchObject<SecUser>(SecUser.class,
-				getCountRowsSecUser());
+		HibernateSearchObject<SecUser> soSecUser = new HibernateSearchObject<SecUser>(SecUser.class, getCountRowsSecUser());
 		soSecUser.addSort("usrLoginname", false);
 
 		// Set the ListModel.
-		getPlwSecUsers().init(soSecUser, this.listBoxSecUser, this.paging_ListBoxSecUser);
+		getPlwSecUsers().init(soSecUser, listBoxSecUser, paging_ListBoxSecUser);
 		// set the itemRenderer
-		this.listBoxSecUser.setItemRenderer(new SecUserroleUserListModelItemRenderer());
+		listBoxSecUser.setItemRenderer(new SecUserroleUserListModelItemRenderer());
 
 		// Before we set the ItemRenderer we select the first Item
 		// for init the rendering of the rights
 		setSelectedUser((SecUser) this.listBoxSecUser.getModel().getElementAt(0));
-		this.listBoxSecUser.setSelectedIndex(0);
+		listBoxSecUser.setSelectedIndex(0);
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class,
-				getCountRowsSecRole());
+		HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRowsSecRole());
 		soSecRole.addSort("rolShortdescription", false);
 
 		// Set the ListModel.
-		getPlwSecRoles().init(soSecRole, this.listBoxSecRoles, this.paging_ListBoxSecRoles);
+		getPlwSecRoles().init(soSecRole, listBoxSecRoles, paging_ListBoxSecRoles);
 
 		// listBoxSecRoles.setModel(new
 		// ListModelList(getSecurityService().getAllRoles()));
 		// set the itemRenderer
-		this.listBoxSecRoles.setItemRenderer(new SecUserroleRoleListModelItemRenderer(this));
+		listBoxSecRoles.setItemRenderer(new SecUserroleRoleListModelItemRenderer(this));
 
 	}
 
@@ -245,7 +243,7 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnSave(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doSave();
 	}
@@ -257,7 +255,7 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
@@ -271,10 +269,10 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		Events.postEvent("onCreate", this.secUserroleWindow, event);
-		this.secUserroleWindow.invalidate();
+		secUserroleWindow.invalidate();
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -299,21 +297,21 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 	@SuppressWarnings("unchecked")
 	public void doSave() throws InterruptedException {
 
-		final List<Listitem> li = this.listBoxSecRoles.getItems();
+		List<Listitem> li = this.listBoxSecRoles.getItems();
 
-		for (final Listitem listitem : li) {
+		for (Listitem listitem : li) {
 
-			final Listcell lc = (Listcell) listitem.getFirstChild();
-			final Checkbox cb = (Checkbox) lc.getFirstChild();
+			Listcell lc = (Listcell) listitem.getFirstChild();
+			Checkbox cb = (Checkbox) lc.getFirstChild();
 
 			if (cb != null) {
 
 				if (cb.isChecked() == true) {
 
 					// Get the role object by casting
-					final SecRole aRole = (SecRole) listitem.getAttribute("data");
+					SecRole aRole = (SecRole) listitem.getAttribute("data");
 					// get the user
-					final SecUser anUser = getSelectedUser();
+					SecUser anUser = getSelectedUser();
 
 					// check if the item is newly checked. If so we cannot
 					// found it in the SecUserrole-table
@@ -330,9 +328,9 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 						// save to DB
 						getSecurityService().saveOrUpdate(anUserRole);
 					} catch (final DataAccessException e) {
-						final String message = e.getMessage();
+						String message = e.getMessage();
 						// String message = e.getCause().getMessage();
-						final String title = Labels.getLabel("message.Error");
+						String title = Labels.getLabel("message.Error");
 						MultiLineMessageBox.doSetTemplate();
 						MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 					}
@@ -340,13 +338,13 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 				} else if (cb.isChecked() == false) {
 
 					// Get the role object by casting
-					final SecRole aRole = (SecRole) listitem.getAttribute("data");
+					SecRole aRole = (SecRole) listitem.getAttribute("data");
 					// get the user
-					final SecUser anUser = getSelectedUser();
+					SecUser anUser = getSelectedUser();
 
 					// check if the item is newly checked. If so we cannot
 					// found it in the SecUserrole-table
-					final SecUserrole anUserRole = getSecurityService().getUserroleByUserAndRole(anUser, aRole);
+					SecUserrole anUserRole = getSecurityService().getUserroleByUserAndRole(anUser, aRole);
 
 					if (anUserRole != null) {
 						// delete from DB
@@ -367,19 +365,18 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 	public void onSelect$listBoxSecUser(Event event) throws Exception {
 
 		// get the selected object
-		final Listitem item = this.listBoxSecUser.getSelectedItem();
+		Listitem item = listBoxSecUser.getSelectedItem();
 
 		// Casting
-		final SecUser anUser = (SecUser) item.getAttribute("data");
+		SecUser anUser = (SecUser) item.getAttribute("data");
 		setSelectedUser(anUser);
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class,
-				getCountRowsSecRole());
+		HibernateSearchObject<SecRole> soSecRole = new HibernateSearchObject<SecRole>(SecRole.class, getCountRowsSecRole());
 		soSecRole.addSort("rolShortdescription", false);
 
 		// Set the ListModel.
-		getPlwSecRoles().init(soSecRole, this.listBoxSecRoles, this.paging_ListBoxSecRoles);
+		getPlwSecRoles().init(soSecRole, listBoxSecRoles, paging_ListBoxSecRoles);
 
 	}
 

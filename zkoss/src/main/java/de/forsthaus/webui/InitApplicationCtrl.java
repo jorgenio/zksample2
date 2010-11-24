@@ -77,7 +77,6 @@ import de.forsthaus.example.RandomDataEngine;
 import de.forsthaus.statistic.FDStatistic;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.WindowBaseCtrl;
-import de.forsthaus.webui.util.ZksampleCookieUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>

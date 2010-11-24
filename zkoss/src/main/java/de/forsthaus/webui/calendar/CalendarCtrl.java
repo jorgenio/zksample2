@@ -142,10 +142,10 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		// cal.addTimeZone("Mexico", "GMT-6");
 		// this.cal.addTimeZone("Germany", "GMT+1");
 		// this.cal.setTimeZone("Germany=GMT+1");
-		this.cal.setMold("default");
-		this.cal.setFirstDayOfWeek("monday");
-		this.cal.setDays(7);
-		this.cal.setCurrentDate(new Date());
+		cal.setMold("default");
+		cal.setFirstDayOfWeek("monday");
+		cal.setDays(7);
+		cal.setCurrentDate(new Date());
 
 		btn_Show1Day.setStyle(btnOriginColor);
 		btn_Show5Days.setStyle(btnOriginColor);

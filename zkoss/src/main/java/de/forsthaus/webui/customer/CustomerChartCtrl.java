@@ -119,12 +119,12 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 		doCheckRights();
 
 		// get the params map that are overhanded by creation.
-		final Map<String, Object> args = getCreationArgsMap(event);
+		Map<String, Object> args = getCreationArgsMap(event);
 
 		// READ OVERHANDED params !
 		if (args.containsKey("customer")) {
-			this.customer = (Customer) args.get("customer");
-			setCustomer(this.customer);
+			customer = (Customer) args.get("customer");
+			setCustomer(customer);
 		} else {
 			setCustomer(null);
 		}
@@ -168,55 +168,55 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$button_CustomerChart_PieChart(Event event) throws InterruptedException, IOException {
 		// logger.debug(event.toString());
 
-		this.div_chartArea.getChildren().clear();
+		div_chartArea.getChildren().clear();
 
 		// get the customer ID for which we want show a chart
-		final long kunId = getCustomer().getId();
+		long kunId = getCustomer().getId();
 
 		// get a list of data
-		final List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
+		List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
 
 		if (kunAmountList.size() > 0) {
 
-			final DefaultPieDataset pieDataset = new DefaultPieDataset();
+			DefaultPieDataset pieDataset = new DefaultPieDataset();
 
-			for (final ChartData chartData : kunAmountList) {
+			for (ChartData chartData : kunAmountList) {
 
-				final Calendar calendar = new GregorianCalendar();
+				Calendar calendar = new GregorianCalendar();
 				calendar.setTime(chartData.getChartKunInvoiceDate());
 
-				final int month = calendar.get(Calendar.MONTH) + 1;
-				final int year = calendar.get(Calendar.YEAR);
-				final String key = String.valueOf(month) + "/" + String.valueOf(year);
+				int month = calendar.get(Calendar.MONTH) + 1;
+				int year = calendar.get(Calendar.YEAR);
+				String key = String.valueOf(month) + "/" + String.valueOf(year);
 
-				final BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
-				final String amount = String.valueOf(bd.doubleValue());
+				BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
+				String amount = String.valueOf(bd.doubleValue());
 
 				// fill the data
 				pieDataset.setValue(key + " " + amount, new Double(chartData.getChartKunInvoiceAmount().doubleValue()));
 			}
 
-			final String title = "Monthly amount for year 2009";
-			final JFreeChart chart = ChartFactory.createPieChart(title, pieDataset, true, true, true);
-			final PiePlot plot = (PiePlot) chart.getPlot();
+			String title = "Monthly amount for year 2009";
+			JFreeChart chart = ChartFactory.createPieChart(title, pieDataset, true, true, true);
+			PiePlot plot = (PiePlot) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
-			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
+			BufferedImage bi = chart.createBufferedImage(chartWidth, chartHeight, BufferedImage.TRANSLUCENT, null);
+			byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
-			final AImage chartImage = new AImage("Pie Chart", bytes);
+			AImage chartImage = new AImage("Pie Chart", bytes);
 
-			final Image img = new Image();
+			Image img = new Image();
 			img.setContent(chartImage);
-			img.setParent(this.div_chartArea);
+			img.setParent(div_chartArea);
 
 		} else {
 
-			this.div_chartArea.getChildren().clear();
+			div_chartArea.getChildren().clear();
 
-			final Label label = new Label();
+			Label label = new Label();
 			label.setValue("This customer have no data for showing in a chart!");
 
-			label.setParent(this.div_chartArea);
+			label.setParent(div_chartArea);
 
 		}
 	}
@@ -230,55 +230,55 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$button_CustomerChart_PieChart3D(Event event) throws InterruptedException, IOException {
 		// logger.debug(event.toString());
 
-		this.div_chartArea.getChildren().clear();
+		div_chartArea.getChildren().clear();
 
 		// get the customer ID for which we want show a chart
-		final long kunId = getCustomer().getId();
+		long kunId = getCustomer().getId();
 
 		// get a list of data
-		final List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
+		List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
 
 		if (kunAmountList.size() > 0) {
 
-			final DefaultPieDataset pieDataset = new DefaultPieDataset();
+			DefaultPieDataset pieDataset = new DefaultPieDataset();
 
-			for (final ChartData chartData : kunAmountList) {
+			for (ChartData chartData : kunAmountList) {
 
-				final Calendar calendar = new GregorianCalendar();
+				Calendar calendar = new GregorianCalendar();
 				calendar.setTime(chartData.getChartKunInvoiceDate());
 
-				final int month = calendar.get(Calendar.MONTH) + 1;
-				final int year = calendar.get(Calendar.YEAR);
-				final String key = String.valueOf(month) + "/" + String.valueOf(year);
+				int month = calendar.get(Calendar.MONTH) + 1;
+				int year = calendar.get(Calendar.YEAR);
+				String key = String.valueOf(month) + "/" + String.valueOf(year);
 
-				final BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
-				final String amount = String.valueOf(bd.doubleValue());
+				BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
+				String amount = String.valueOf(bd.doubleValue());
 
 				// fill the data
 				pieDataset.setValue(key + " " + amount, new Double(chartData.getChartKunInvoiceAmount().doubleValue()));
 			}
 
-			final String title = "Monthly amount for year 2009";
-			final JFreeChart chart = ChartFactory.createPieChart3D(title, pieDataset, true, true, true);
-			final PiePlot3D plot = (PiePlot3D) chart.getPlot();
+			String title = "Monthly amount for year 2009";
+			JFreeChart chart = ChartFactory.createPieChart3D(title, pieDataset, true, true, true);
+			PiePlot3D plot = (PiePlot3D) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
-			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
+			BufferedImage bi = chart.createBufferedImage(chartWidth, chartHeight, BufferedImage.TRANSLUCENT, null);
+			byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
-			final AImage chartImage = new AImage("Pie Chart", bytes);
+			AImage chartImage = new AImage("Pie Chart", bytes);
 
-			final Image img = new Image();
+			Image img = new Image();
 			img.setContent(chartImage);
 			img.setParent(this.div_chartArea);
 
 		} else {
 
-			this.div_chartArea.getChildren().clear();
+			div_chartArea.getChildren().clear();
 
-			final Label label = new Label();
+			Label label = new Label();
 			label.setValue("This customer have no data for showing in a chart!");
 
-			label.setParent(this.div_chartArea);
+			label.setParent(div_chartArea);
 
 		}
 	}
@@ -292,55 +292,55 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$button_CustomerChart_RingChart(Event event) throws InterruptedException, IOException {
 		// logger.debug(event.toString());
 
-		this.div_chartArea.getChildren().clear();
+		div_chartArea.getChildren().clear();
 
 		// get the customer ID for which we want show a chart
-		final long kunId = getCustomer().getId();
+		long kunId = getCustomer().getId();
 
 		// get a list of data
-		final List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
+		List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
 
 		if (kunAmountList.size() > 0) {
 
-			final DefaultPieDataset pieDataset = new DefaultPieDataset();
+			DefaultPieDataset pieDataset = new DefaultPieDataset();
 
-			for (final ChartData chartData : kunAmountList) {
+			for (ChartData chartData : kunAmountList) {
 
-				final Calendar calendar = new GregorianCalendar();
+				Calendar calendar = new GregorianCalendar();
 				calendar.setTime(chartData.getChartKunInvoiceDate());
 
-				final int month = calendar.get(Calendar.MONTH) + 1;
-				final int year = calendar.get(Calendar.YEAR);
-				final String key = String.valueOf(month) + "/" + String.valueOf(year);
+				int month = calendar.get(Calendar.MONTH) + 1;
+				int year = calendar.get(Calendar.YEAR);
+				String key = String.valueOf(month) + "/" + String.valueOf(year);
 
-				final BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
-				final String amount = String.valueOf(bd.doubleValue());
+				BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
+				String amount = String.valueOf(bd.doubleValue());
 
 				// fill the data
 				pieDataset.setValue(key + " " + amount, new Double(chartData.getChartKunInvoiceAmount().doubleValue()));
 			}
 
-			final String title = "Monthly amount for year 2009";
-			final JFreeChart chart = ChartFactory.createRingChart(title, pieDataset, true, true, true);
-			final RingPlot plot = (RingPlot) chart.getPlot();
+			String title = "Monthly amount for year 2009";
+			JFreeChart chart = ChartFactory.createRingChart(title, pieDataset, true, true, true);
+			RingPlot plot = (RingPlot) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
-			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
+			BufferedImage bi = chart.createBufferedImage(chartWidth, chartHeight, BufferedImage.TRANSLUCENT, null);
+			byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
-			final AImage chartImage = new AImage("Ring Chart", bytes);
+			AImage chartImage = new AImage("Ring Chart", bytes);
 
-			final Image img = new Image();
+			Image img = new Image();
 			img.setContent(chartImage);
 			img.setParent(this.div_chartArea);
 
 		} else {
 
-			this.div_chartArea.getChildren().clear();
+			div_chartArea.getChildren().clear();
 
 			final Label label = new Label();
 			label.setValue("This customer have no data for showing in a chart!");
 
-			label.setParent(this.div_chartArea);
+			label.setParent(div_chartArea);
 
 		}
 	}
@@ -354,58 +354,58 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$button_CustomerChart_BarChart(Event event) throws InterruptedException, IOException {
 		// logger.debug(event.toString());
 
-		this.div_chartArea.getChildren().clear();
+		div_chartArea.getChildren().clear();
 
 		// get the customer ID for which we want show a chart
-		final long kunId = getCustomer().getId();
+		long kunId = getCustomer().getId();
 
 		// get a list of data
-		final List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
+		List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
 
 		if (kunAmountList.size() > 0) {
 
-			final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+			DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-			for (final ChartData chartData : kunAmountList) {
+			for (ChartData chartData : kunAmountList) {
 
-				final Calendar calendar = new GregorianCalendar();
+				Calendar calendar = new GregorianCalendar();
 				calendar.setTime(chartData.getChartKunInvoiceDate());
 
-				final int month = calendar.get(Calendar.MONTH) + 1;
-				final int year = calendar.get(Calendar.YEAR);
-				final String key = String.valueOf(month) + "/" + String.valueOf(year);
+				int month = calendar.get(Calendar.MONTH) + 1;
+				int year = calendar.get(Calendar.YEAR);
+				String key = String.valueOf(month) + "/" + String.valueOf(year);
 
-				final BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
-				final String amount = String.valueOf(bd.doubleValue());
+				BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
+				String amount = String.valueOf(bd.doubleValue());
 
 				// fill the data
 				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), key + " " + amount, key + " " + amount);
 			}
 
-			final String title = "Monthly amount for year 2009";
-			final PlotOrientation po = PlotOrientation.VERTICAL;
-			final JFreeChart chart = ChartFactory.createBarChart(title, "Month", "Amount", dataset, po, true, true, true);
+			String title = "Monthly amount for year 2009";
+			PlotOrientation po = PlotOrientation.VERTICAL;
+			JFreeChart chart = ChartFactory.createBarChart(title, "Month", "Amount", dataset, po, true, true, true);
 
-			final CategoryPlot plot = (CategoryPlot) chart.getPlot();
+			CategoryPlot plot = (CategoryPlot) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
 
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
-			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
+			BufferedImage bi = chart.createBufferedImage(chartWidth, chartHeight, BufferedImage.TRANSLUCENT, null);
+			byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
-			final AImage chartImage = new AImage("Bar Chart", bytes);
+			AImage chartImage = new AImage("Bar Chart", bytes);
 
-			final Image img = new Image();
+			Image img = new Image();
 			img.setContent(chartImage);
-			img.setParent(this.div_chartArea);
+			img.setParent(div_chartArea);
 
 		} else {
 
-			this.div_chartArea.getChildren().clear();
+			div_chartArea.getChildren().clear();
 
-			final Label label = new Label();
+			Label label = new Label();
 			label.setValue("This customer have no data for showing in a chart!");
 
-			label.setParent(this.div_chartArea);
+			label.setParent(div_chartArea);
 
 		}
 	}
@@ -419,57 +419,57 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$button_CustomerChart_BarChart3D(Event event) throws InterruptedException, IOException {
 		// logger.debug(event.toString());
 
-		this.div_chartArea.getChildren().clear();
+		div_chartArea.getChildren().clear();
 
 		// get the customer ID for which we want show a chart
-		final long kunId = getCustomer().getId();
+		long kunId = getCustomer().getId();
 
 		// get a list of data
-		final List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
+		List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
 
 		if (kunAmountList.size() > 0) {
 
-			final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+			DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-			for (final ChartData chartData : kunAmountList) {
+			for (ChartData chartData : kunAmountList) {
 
-				final Calendar calendar = new GregorianCalendar();
+				Calendar calendar = new GregorianCalendar();
 				calendar.setTime(chartData.getChartKunInvoiceDate());
 
-				final int month = calendar.get(Calendar.MONTH) + 1;
-				final int year = calendar.get(Calendar.YEAR);
-				final String key = String.valueOf(month) + "/" + String.valueOf(year);
+				int month = calendar.get(Calendar.MONTH) + 1;
+				int year = calendar.get(Calendar.YEAR);
+				String key = String.valueOf(month) + "/" + String.valueOf(year);
 
-				final BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
-				final String amount = String.valueOf(bd.doubleValue());
+				BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
+				String amount = String.valueOf(bd.doubleValue());
 
 				// fill the data
 				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), key + " " + amount, key + " " + amount);
 			}
 
-			final String title = "Monthly amount for year 2009";
-			final PlotOrientation po = PlotOrientation.VERTICAL;
-			final JFreeChart chart = ChartFactory.createBarChart3D(title, "Month", "Amount", dataset, po, true, true, true);
+			String title = "Monthly amount for year 2009";
+			PlotOrientation po = PlotOrientation.VERTICAL;
+			JFreeChart chart = ChartFactory.createBarChart3D(title, "Month", "Amount", dataset, po, true, true, true);
 
-			final CategoryPlot plot = (CategoryPlot) chart.getPlot();
+			CategoryPlot plot = (CategoryPlot) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
-			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
+			BufferedImage bi = chart.createBufferedImage(chartWidth, chartHeight, BufferedImage.TRANSLUCENT, null);
+			byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
-			final AImage chartImage = new AImage("Bar Chart 3D", bytes);
+			AImage chartImage = new AImage("Bar Chart 3D", bytes);
 
-			final Image img = new Image();
+			Image img = new Image();
 			img.setContent(chartImage);
-			img.setParent(this.div_chartArea);
+			img.setParent(div_chartArea);
 
 		} else {
 
-			this.div_chartArea.getChildren().clear();
+			div_chartArea.getChildren().clear();
 
-			final Label label = new Label();
+			Label label = new Label();
 			label.setValue("This customer have no data for showing in a chart!");
 
-			label.setParent(this.div_chartArea);
+			label.setParent(div_chartArea);
 		}
 	}
 
@@ -482,57 +482,57 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$button_CustomerChart_StackedBar(Event event) throws InterruptedException, IOException {
 		// logger.debug(event.toString());
 
-		this.div_chartArea.getChildren().clear();
+		div_chartArea.getChildren().clear();
 
 		// get the customer ID for which we want show a chart
-		final long kunId = getCustomer().getId();
+		long kunId = getCustomer().getId();
 
 		// get a list of data
-		final List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
+		List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
 
 		if (kunAmountList.size() > 0) {
 
-			final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+			DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-			for (final ChartData chartData : kunAmountList) {
+			for (ChartData chartData : kunAmountList) {
 
-				final Calendar calendar = new GregorianCalendar();
+				Calendar calendar = new GregorianCalendar();
 				calendar.setTime(chartData.getChartKunInvoiceDate());
 
-				final int month = calendar.get(Calendar.MONTH) + 1;
-				final int year = calendar.get(Calendar.YEAR);
-				final String key = String.valueOf(month) + "/" + String.valueOf(year);
+				int month = calendar.get(Calendar.MONTH) + 1;
+				int year = calendar.get(Calendar.YEAR);
+				String key = String.valueOf(month) + "/" + String.valueOf(year);
 
-				final BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
-				final String amount = String.valueOf(bd.doubleValue());
+				BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
+				String amount = String.valueOf(bd.doubleValue());
 
 				// fill the data
 				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), key + " " + amount, key + " " + amount);
 			}
 
-			final String title = "Monthly amount for year 2009";
-			final PlotOrientation po = PlotOrientation.VERTICAL;
-			final JFreeChart chart = ChartFactory.createStackedBarChart(title, "Month", "Amount", dataset, po, true, true, true);
+			String title = "Monthly amount for year 2009";
+			PlotOrientation po = PlotOrientation.VERTICAL;
+			JFreeChart chart = ChartFactory.createStackedBarChart(title, "Month", "Amount", dataset, po, true, true, true);
 
-			final CategoryPlot plot = (CategoryPlot) chart.getPlot();
+			CategoryPlot plot = (CategoryPlot) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
-			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
+			BufferedImage bi = chart.createBufferedImage(chartWidth, chartHeight, BufferedImage.TRANSLUCENT, null);
+			byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
-			final AImage chartImage = new AImage("Stacked Bar Chart", bytes);
+			AImage chartImage = new AImage("Stacked Bar Chart", bytes);
 
-			final Image img = new Image();
+			Image img = new Image();
 			img.setContent(chartImage);
-			img.setParent(this.div_chartArea);
+			img.setParent(div_chartArea);
 
 		} else {
 
-			this.div_chartArea.getChildren().clear();
+			div_chartArea.getChildren().clear();
 
-			final Label label = new Label();
+			Label label = new Label();
 			label.setValue("This customer have no data for showing in a chart!");
 
-			label.setParent(this.div_chartArea);
+			label.setParent(div_chartArea);
 
 		}
 	}
@@ -546,57 +546,57 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$button_CustomerChart_StackedBar3D(Event event) throws InterruptedException, IOException {
 		// logger.debug(event.toString());
 
-		this.div_chartArea.getChildren().clear();
+		div_chartArea.getChildren().clear();
 
 		// get the customer ID for which we want show a chart
-		final long kunId = getCustomer().getId();
+		long kunId = getCustomer().getId();
 
 		// get a list of data
-		final List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
+		List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
 
 		if (kunAmountList.size() > 0) {
 
-			final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+			DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-			for (final ChartData chartData : kunAmountList) {
+			for (ChartData chartData : kunAmountList) {
 
-				final Calendar calendar = new GregorianCalendar();
+				Calendar calendar = new GregorianCalendar();
 				calendar.setTime(chartData.getChartKunInvoiceDate());
 
-				final int month = calendar.get(Calendar.MONTH) + 1;
-				final int year = calendar.get(Calendar.YEAR);
-				final String key = String.valueOf(month) + "/" + String.valueOf(year);
+				int month = calendar.get(Calendar.MONTH) + 1;
+				int year = calendar.get(Calendar.YEAR);
+				String key = String.valueOf(month) + "/" + String.valueOf(year);
 
-				final BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
-				final String amount = String.valueOf(bd.doubleValue());
+				BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
+				String amount = String.valueOf(bd.doubleValue());
 
 				// fill the data
 				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), key + " " + amount, key + " " + amount);
 			}
 
-			final String title = "Monthly amount for year 2009";
-			final PlotOrientation po = PlotOrientation.VERTICAL;
-			final JFreeChart chart = ChartFactory.createStackedBarChart3D(title, "Month", "Amount", dataset, po, true, true, true);
+			String title = "Monthly amount for year 2009";
+			PlotOrientation po = PlotOrientation.VERTICAL;
+			JFreeChart chart = ChartFactory.createStackedBarChart3D(title, "Month", "Amount", dataset, po, true, true, true);
 
-			final CategoryPlot plot = (CategoryPlot) chart.getPlot();
+			CategoryPlot plot = (CategoryPlot) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
-			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
+			BufferedImage bi = chart.createBufferedImage(chartWidth, chartHeight, BufferedImage.TRANSLUCENT, null);
+			byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
-			final AImage chartImage = new AImage("Stacked Bar Chart 3D", bytes);
+			AImage chartImage = new AImage("Stacked Bar Chart 3D", bytes);
 
-			final Image img = new Image();
+			Image img = new Image();
 			img.setContent(chartImage);
-			img.setParent(this.div_chartArea);
+			img.setParent(div_chartArea);
 
 		} else {
 
-			this.div_chartArea.getChildren().clear();
+			div_chartArea.getChildren().clear();
 
-			final Label label = new Label();
+			Label label = new Label();
 			label.setValue("This customer have no data for showing in a chart!");
 
-			label.setParent(this.div_chartArea);
+			label.setParent(div_chartArea);
 
 		}
 	}
@@ -610,57 +610,57 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$button_CustomerChart_LineBar(Event event) throws InterruptedException, IOException {
 		// logger.debug(event.toString());
 
-		this.div_chartArea.getChildren().clear();
+		div_chartArea.getChildren().clear();
 
 		// get the customer ID for which we want show a chart
-		final long kunId = getCustomer().getId();
+		long kunId = getCustomer().getId();
 
 		// get a list of data
-		final List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
+		List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
 
 		if (kunAmountList.size() > 0) {
 
-			final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+			DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-			for (final ChartData chartData : kunAmountList) {
+			for (ChartData chartData : kunAmountList) {
 
-				final Calendar calendar = new GregorianCalendar();
+				Calendar calendar = new GregorianCalendar();
 				calendar.setTime(chartData.getChartKunInvoiceDate());
 
-				final int month = calendar.get(Calendar.MONTH) + 1;
-				final int year = calendar.get(Calendar.YEAR);
-				final String key = String.valueOf(month) + "/" + String.valueOf(year);
+				int month = calendar.get(Calendar.MONTH) + 1;
+				int year = calendar.get(Calendar.YEAR);
+				String key = String.valueOf(month) + "/" + String.valueOf(year);
 
-				final BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
-				final String amount = String.valueOf(bd.doubleValue());
+				BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
+				String amount = String.valueOf(bd.doubleValue());
 
 				// fill the data
 				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), "2009", key + " " + amount);
 			}
 
-			final String title = "Monthly amount for year 2009";
-			final PlotOrientation po = PlotOrientation.VERTICAL;
-			final JFreeChart chart = ChartFactory.createLineChart(title, "Month", "Amount", dataset, po, true, true, true);
+			String title = "Monthly amount for year 2009";
+			PlotOrientation po = PlotOrientation.VERTICAL;
+			JFreeChart chart = ChartFactory.createLineChart(title, "Month", "Amount", dataset, po, true, true, true);
 
-			final CategoryPlot plot = (CategoryPlot) chart.getPlot();
+			CategoryPlot plot = (CategoryPlot) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
-			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
+			BufferedImage bi = chart.createBufferedImage(chartWidth, chartHeight, BufferedImage.TRANSLUCENT, null);
+			byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
-			final AImage chartImage = new AImage("Line Bar Chart", bytes);
+			AImage chartImage = new AImage("Line Bar Chart", bytes);
 
-			final Image img = new Image();
+			Image img = new Image();
 			img.setContent(chartImage);
-			img.setParent(this.div_chartArea);
+			img.setParent(div_chartArea);
 
 		} else {
 
-			this.div_chartArea.getChildren().clear();
+			div_chartArea.getChildren().clear();
 
-			final Label label = new Label();
+			Label label = new Label();
 			label.setValue("This customer have no data for showing in a chart!");
 
-			label.setParent(this.div_chartArea);
+			label.setParent(div_chartArea);
 
 		}
 	}
@@ -674,57 +674,57 @@ public class CustomerChartCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClick$button_CustomerChart_LineBar3D(Event event) throws InterruptedException, IOException {
 		// logger.debug(event.toString());
 
-		this.div_chartArea.getChildren().clear();
+		div_chartArea.getChildren().clear();
 
 		// get the customer ID for which we want show a chart
-		final long kunId = getCustomer().getId();
+		long kunId = getCustomer().getId();
 
 		// get a list of data
-		final List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
+		List<ChartData> kunAmountList = getChartService().getChartDataForCustomer(kunId);
 
 		if (kunAmountList.size() > 0) {
 
-			final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+			DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-			for (final ChartData chartData : kunAmountList) {
+			for (ChartData chartData : kunAmountList) {
 
-				final Calendar calendar = new GregorianCalendar();
+				Calendar calendar = new GregorianCalendar();
 				calendar.setTime(chartData.getChartKunInvoiceDate());
 
-				final int month = calendar.get(Calendar.MONTH) + 1;
-				final int year = calendar.get(Calendar.YEAR);
-				final String key = String.valueOf(month) + "/" + String.valueOf(year);
+				int month = calendar.get(Calendar.MONTH) + 1;
+				int year = calendar.get(Calendar.YEAR);
+				String key = String.valueOf(month) + "/" + String.valueOf(year);
 
-				final BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
-				final String amount = String.valueOf(bd.doubleValue());
+				BigDecimal bd = chartData.getChartKunInvoiceAmount().setScale(15, 3);
+				String amount = String.valueOf(bd.doubleValue());
 
 				// fill the data
 				dataset.setValue(new Double(chartData.getChartKunInvoiceAmount().doubleValue()), "2009", key + " " + amount);
 			}
 
-			final String title = "Monthly amount for year 2009";
-			final PlotOrientation po = PlotOrientation.VERTICAL;
-			final JFreeChart chart = ChartFactory.createLineChart3D(title, "Month", "Amount", dataset, po, true, true, true);
+			String title = "Monthly amount for year 2009";
+			PlotOrientation po = PlotOrientation.VERTICAL;
+			JFreeChart chart = ChartFactory.createLineChart3D(title, "Month", "Amount", dataset, po, true, true, true);
 
-			final CategoryPlot plot = (CategoryPlot) chart.getPlot();
+			CategoryPlot plot = (CategoryPlot) chart.getPlot();
 			plot.setForegroundAlpha(0.5f);
-			final BufferedImage bi = chart.createBufferedImage(this.chartWidth, this.chartHeight, BufferedImage.TRANSLUCENT, null);
-			final byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
+			BufferedImage bi = chart.createBufferedImage(chartWidth, chartHeight, BufferedImage.TRANSLUCENT, null);
+			byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 
-			final AImage chartImage = new AImage("Line Bar Chart 3D", bytes);
+			AImage chartImage = new AImage("Line Bar Chart 3D", bytes);
 
-			final Image img = new Image();
+			Image img = new Image();
 			img.setContent(chartImage);
-			img.setParent(this.div_chartArea);
+			img.setParent(div_chartArea);
 
 		} else {
 
-			this.div_chartArea.getChildren().clear();
+			div_chartArea.getChildren().clear();
 
-			final Label label = new Label();
+			Label label = new Label();
 			label.setValue("This customer have no data for showing in a chart!");
 
-			label.setParent(this.div_chartArea);
+			label.setParent(div_chartArea);
 
 		}
 	}

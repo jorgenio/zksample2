@@ -125,30 +125,30 @@ public class OrderDJReport extends Window implements Serializable {
 	public void doPrint() throws JRException, ColumnBuilderException, ClassNotFoundException, IOException {
 
 		// Localized column headers
-		final String quantity = Labels.getLabel("listheader_OrderPosList2_Count.label");
-		final String articleText = Labels.getLabel("listheader_OrderPosList2_Shorttext.label");
-		final String singlePrice = Labels.getLabel("listheader_OrderPosList2_SinglePrice.label");
-		final String lineSum = Labels.getLabel("listheader_OrderPosList2_WholePrice.label");
+		String quantity = Labels.getLabel("listheader_OrderPosList2_Count.label");
+		String articleText = Labels.getLabel("listheader_OrderPosList2_Shorttext.label");
+		String singlePrice = Labels.getLabel("listheader_OrderPosList2_SinglePrice.label");
+		String lineSum = Labels.getLabel("listheader_OrderPosList2_WholePrice.label");
 
 		/**
 		 * STYLES
 		 */
 		// Styles: Title
-		final Style titleStyle = new Style();
+		Style titleStyle = new Style();
 		titleStyle.setHorizontalAlign(HorizontalAlign.CENTER);
-		final Font titleFont = Font.ARIAL_BIG_BOLD;
+		Font titleFont = Font.ARIAL_BIG_BOLD;
 		titleFont.setUnderline(true);
 		titleStyle.setFont(titleFont);
 
 		// Styles: Subtitle
-		final Style subtitleStyle = new Style();
+		Style subtitleStyle = new Style();
 		subtitleStyle.setHorizontalAlign(HorizontalAlign.LEFT);
 		subtitleStyle.setFont(Font.ARIAL_MEDIUM_BOLD);
 
 		// Styles: Subtitle underlined
-		final Style subtitleStyleUL = new Style();
+		Style subtitleStyleUL = new Style();
 		subtitleStyleUL.setHorizontalAlign(HorizontalAlign.LEFT);
-		final Font subtitleULFont = Font.ARIAL_MEDIUM_BOLD;
+		Font subtitleULFont = Font.ARIAL_MEDIUM_BOLD;
 		subtitleULFont.setUnderline(true);
 		subtitleStyleUL.setFont(titleFont);
 
@@ -159,13 +159,13 @@ public class OrderDJReport extends Window implements Serializable {
 		columnHeaderStyleText.setBorderBottom(Border.PEN_1_POINT);
 
 		// ColumnHeader Style Text (right-align)
-		final Style columnHeaderStyleNumber = new Style();
+		Style columnHeaderStyleNumber = new Style();
 		columnHeaderStyleNumber.setFont(Font.ARIAL_MEDIUM_BOLD);
 		columnHeaderStyleNumber.setHorizontalAlign(HorizontalAlign.RIGHT);
 		columnHeaderStyleNumber.setBorderBottom(Border.PEN_1_POINT);
 
 		// Footer Style (center-align)
-		final Style footerStyle = new Style();
+		Style footerStyle = new Style();
 		footerStyle.setFont(Font.ARIAL_SMALL);
 		footerStyle.getFont().setFontSize(8);
 		footerStyle.setHorizontalAlign(HorizontalAlign.CENTER);
@@ -177,17 +177,17 @@ public class OrderDJReport extends Window implements Serializable {
 		columnDetailStyleText.setHorizontalAlign(HorizontalAlign.LEFT);
 
 		// Rows content Style (right-align)
-		final Style columnDetailStyleNumbers = new Style();
+		Style columnDetailStyleNumbers = new Style();
 		columnDetailStyleNumbers.setFont(Font.ARIAL_SMALL);
 		columnDetailStyleNumbers.setHorizontalAlign(HorizontalAlign.RIGHT);
 
 		// TotalSum (left-right)
-		final Style footerStyleTotalSumValue = new Style();
+		Style footerStyleTotalSumValue = new Style();
 		footerStyleTotalSumValue.setFont(Font.ARIAL_MEDIUM_BOLD);
 		footerStyleTotalSumValue.setHorizontalAlign(HorizontalAlign.RIGHT);
 		footerStyleTotalSumValue.setBorderTop(Border.PEN_1_POINT);
 
-		final DynamicReportBuilder drb = new DynamicReportBuilder();
+		DynamicReportBuilder drb = new DynamicReportBuilder();
 		DynamicReport dr;
 
 		// Sets the Report Columns, header, Title, Groups, Etc Formats
@@ -208,34 +208,33 @@ public class OrderDJReport extends Window implements Serializable {
 		 * Adding many autotexts in the same position (header/footer and
 		 * aligment) makes them to be one on top of the other
 		 */
-		final Style atStyle = new StyleBuilder(true).setFont(Font.COMIC_SANS_SMALL).setTextColor(Color.red).build();
+		Style atStyle = new StyleBuilder(true).setFont(Font.COMIC_SANS_SMALL).setTextColor(Color.red).build();
 
-		final AutoText created = new AutoText(Labels.getLabel("common.Created") + ": " + ZksampleDateFormat.getDateTimeFormater().format(new Date()), AutoText.POSITION_HEADER,
-				HorizontalBandAlignment.RIGHT);
+		AutoText created = new AutoText(Labels.getLabel("common.Created") + ": " + ZksampleDateFormat.getDateTimeFormater().format(new Date()), AutoText.POSITION_HEADER, HorizontalBandAlignment.RIGHT);
 		created.setWidth(new Integer(120));
 		created.setStyle(atStyle);
 		drb.addAutoText(created);
 
-		final AutoText autoText = new AutoText(AutoText.AUTOTEXT_PAGE_X_SLASH_Y, AutoText.POSITION_HEADER, HorizontalBandAlignment.RIGHT);
+		AutoText autoText = new AutoText(AutoText.AUTOTEXT_PAGE_X_SLASH_Y, AutoText.POSITION_HEADER, HorizontalBandAlignment.RIGHT);
 		autoText.setWidth(new Integer(20));
 		autoText.setStyle(atStyle);
 		drb.addAutoText(autoText);
 
-		final AutoText atCustomerHeader = new AutoText(Labels.getLabel("orderDialogWindow.title") + " :  " + getOrder().getAufBezeichnung(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		AutoText atCustomerHeader = new AutoText(Labels.getLabel("orderDialogWindow.title") + " :  " + getOrder().getAufBezeichnung(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		atCustomerHeader.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
 		atCustomerHeader.setStyle(subtitleStyleUL);
-		final AutoText name1 = new AutoText(getCustomer().getKunName1(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		AutoText name1 = new AutoText(getCustomer().getKunName1(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		name1.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
-		final AutoText name2 = new AutoText(getCustomer().getKunName2(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		AutoText name2 = new AutoText(getCustomer().getKunName2(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		name2.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
-		final AutoText city = new AutoText(getCustomer().getKunOrt(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		AutoText city = new AutoText(getCustomer().getKunOrt(), AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		city.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
-		final AutoText emptyLine = new AutoText("", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
+		AutoText emptyLine = new AutoText("", AutoText.POSITION_HEADER, HorizontalBandAlignment.LEFT);
 		emptyLine.setPrintWhenExpression(ExpressionHelper.printInFirstPage());
 		drb.addAutoText(atCustomerHeader).addAutoText(emptyLine).addAutoText(name1).addAutoText(name2).addAutoText(city).addAutoText(emptyLine);
 
 		// Footer
-		final AutoText footerText = new AutoText("Help to prevent the global warming by writing cool software.", AutoText.POSITION_FOOTER, HorizontalBandAlignment.CENTER);
+		AutoText footerText = new AutoText("Help to prevent the global warming by writing cool software.", AutoText.POSITION_FOOTER, HorizontalBandAlignment.CENTER);
 		footerText.setStyle(footerStyle);
 		drb.addAutoText(footerText);
 
@@ -243,7 +242,7 @@ public class OrderDJReport extends Window implements Serializable {
 		 * Columns Definitions. A new ColumnBuilder instance for each column.
 		 */
 		// Quantity
-		final AbstractColumn colQuantity = ColumnBuilder.getNew().setColumnProperty("aupMenge", BigDecimal.class.getName()).build();
+		AbstractColumn colQuantity = ColumnBuilder.getNew().setColumnProperty("aupMenge", BigDecimal.class.getName()).build();
 		colQuantity.setTitle(quantity);
 		colQuantity.setWidth(40);
 		colQuantity.setPattern("#,##0.00");
@@ -251,14 +250,14 @@ public class OrderDJReport extends Window implements Serializable {
 		colQuantity.setStyle(columnDetailStyleNumbers);
 
 		// Article Text
-		final AbstractColumn colArticleText = ColumnBuilder.getNew().setColumnProperty("article.artKurzbezeichnung", String.class.getName()).build();
+		AbstractColumn colArticleText = ColumnBuilder.getNew().setColumnProperty("article.artKurzbezeichnung", String.class.getName()).build();
 		colArticleText.setTitle(articleText);
 		colArticleText.setWidth(100);
 		colArticleText.setHeaderStyle(columnHeaderStyleText);
 		colArticleText.setStyle(columnDetailStyleText);
 
 		// Single Price
-		final AbstractColumn colSinglePrice = ColumnBuilder.getNew().setColumnProperty("aupEinzelwert", BigDecimal.class.getName()).build();
+		AbstractColumn colSinglePrice = ColumnBuilder.getNew().setColumnProperty("aupEinzelwert", BigDecimal.class.getName()).build();
 		colSinglePrice.setTitle(singlePrice);
 		colSinglePrice.setWidth(40);
 		colSinglePrice.setPattern("#,##0.00");
@@ -266,7 +265,7 @@ public class OrderDJReport extends Window implements Serializable {
 		colSinglePrice.setStyle(columnDetailStyleNumbers);
 
 		// Line Sum
-		final AbstractColumn colLineSum = ColumnBuilder.getNew().setColumnProperty("aupGesamtwert", BigDecimal.class.getName()).build();
+		AbstractColumn colLineSum = ColumnBuilder.getNew().setColumnProperty("aupGesamtwert", BigDecimal.class.getName()).build();
 		colLineSum.setTitle(lineSum);
 		colLineSum.setWidth(40);
 		// #,##0. €00
@@ -294,71 +293,71 @@ public class OrderDJReport extends Window implements Serializable {
 		dr = drb.build(); // build the report
 
 		// Get information from database
-		final OrderService sv = (OrderService) SpringUtil.getBean("orderService");
-		final List<Orderposition> resultList = sv.getOrderpositionsByOrder(getOrder());
+		OrderService sv = (OrderService) SpringUtil.getBean("orderService");
+		List<Orderposition> resultList = sv.getOrderpositionsByOrder(getOrder());
 
 		// Generate the Jasper Print Object
-		final JRDataSource ds = new JRBeanCollectionDataSource(resultList);
-		final JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
+		JRDataSource ds = new JRBeanCollectionDataSource(resultList);
+		JasperPrint jp = DynamicJasperHelper.generateJasperPrint(dr, new ClassicLayoutManager(), ds);
 
-		final String outputFormat = "PDF";
+		String outputFormat = "PDF";
 
-		this.output = new ByteArrayOutputStream();
+		output = new ByteArrayOutputStream();
 
 		if (outputFormat.equalsIgnoreCase("PDF")) {
-			JasperExportManager.exportReportToPdfStream(jp, this.output);
-			this.mediais = new ByteArrayInputStream(this.output.toByteArray());
-			this.amedia = new AMedia("FirstReport.pdf", "pdf", "application/pdf", this.mediais);
+			JasperExportManager.exportReportToPdfStream(jp, output);
+			mediais = new ByteArrayInputStream(output.toByteArray());
+			amedia = new AMedia("FirstReport.pdf", "pdf", "application/pdf", mediais);
 
-			callReportWindow(this.amedia, "PDF");
+			callReportWindow(amedia, "PDF");
 		} else if (outputFormat.equalsIgnoreCase("XLS")) {
-			final JExcelApiExporter exporterXLS = new JExcelApiExporter();
+			JExcelApiExporter exporterXLS = new JExcelApiExporter();
 			exporterXLS.setParameter(JExcelApiExporterParameter.JASPER_PRINT, jp);
-			exporterXLS.setParameter(JExcelApiExporterParameter.OUTPUT_STREAM, this.output);
+			exporterXLS.setParameter(JExcelApiExporterParameter.OUTPUT_STREAM, output);
 			exporterXLS.setParameter(JExcelApiExporterParameter.IS_DETECT_CELL_TYPE, Boolean.TRUE);
 			exporterXLS.setParameter(JExcelApiExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.TRUE);
 			exporterXLS.setParameter(JExcelApiExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
 			exporterXLS.exportReport();
-			this.mediais = new ByteArrayInputStream(this.output.toByteArray());
-			this.amedia = new AMedia("FileFormatExcel", "xls", "application/vnd.ms-excel", this.mediais);
+			mediais = new ByteArrayInputStream(output.toByteArray());
+			amedia = new AMedia("FileFormatExcel", "xls", "application/vnd.ms-excel", mediais);
 
-			callReportWindow(this.amedia, "XLS");
+			callReportWindow(amedia, "XLS");
 		} else if (outputFormat.equalsIgnoreCase("RTF") || outputFormat.equalsIgnoreCase("DOC")) {
-			final JRRtfExporter exporterRTF = new JRRtfExporter();
+			JRRtfExporter exporterRTF = new JRRtfExporter();
 			exporterRTF.setParameter(JRExporterParameter.JASPER_PRINT, jp);
-			exporterRTF.setParameter(JRExporterParameter.OUTPUT_STREAM, this.output);
+			exporterRTF.setParameter(JRExporterParameter.OUTPUT_STREAM, output);
 			exporterRTF.exportReport();
-			this.mediais = new ByteArrayInputStream(this.output.toByteArray());
-			this.amedia = new AMedia("FileFormatRTF", "rtf", "application/rtf", this.mediais);
+			mediais = new ByteArrayInputStream(output.toByteArray());
+			amedia = new AMedia("FileFormatRTF", "rtf", "application/rtf", mediais);
 
-			callReportWindow(this.amedia, "RTF-DOC");
+			callReportWindow(amedia, "RTF-DOC");
 		}
 	}
 
 	private void callReportWindow(AMedia aMedia, String format) {
 		final boolean modal = true;
 
-		this.setTitle("Dynamic JasperReports. Sample Report for the zk framework.");
-		this.setId("ReportWindow");
-		this.setVisible(true);
-		this.setMaximizable(true);
-		this.setMinimizable(true);
-		this.setSizable(true);
-		this.setClosable(true);
-		this.setHeight("100%");
-		this.setWidth("80%");
-		this.addEventListener("onClose", new OnCloseReportEventListener());
+		setTitle("Dynamic JasperReports. Sample Report for the zk framework.");
+		setId("ReportWindow");
+		setVisible(true);
+		setMaximizable(true);
+		setMinimizable(true);
+		setSizable(true);
+		setClosable(true);
+		setHeight("100%");
+		setWidth("80%");
+		addEventListener("onClose", new OnCloseReportEventListener());
 
-		this.iFrame = new Iframe();
-		this.iFrame.setId("jasperReportId");
-		this.iFrame.setWidth("100%");
-		this.iFrame.setHeight("100%");
-		this.iFrame.setContent(aMedia);
-		this.iFrame.setParent(this);
+		iFrame = new Iframe();
+		iFrame.setId("jasperReportId");
+		iFrame.setWidth("100%");
+		iFrame.setHeight("100%");
+		iFrame.setContent(aMedia);
+		iFrame.setParent(this);
 
 		if (modal == true) {
 			try {
-				this.doModal();
+				doModal();
 			} catch (final SuspendNotAllowedException e) {
 				throw new RuntimeException(e);
 			} catch (final InterruptedException e) {
@@ -389,17 +388,15 @@ public class OrderDJReport extends Window implements Serializable {
 	 */
 	private void closeReportWindow() throws IOException {
 
-		this.removeEventListener("onClose", new OnCloseReportEventListener());
-
 		// TODO check this
 		try {
-			this.amedia.getStreamData().close();
-			this.output.close();
+			amedia.getStreamData().close();
+			output.close();
 		} catch (final Exception e) {
 			throw new RuntimeException(e);
 		}
 
-		this.onClose();
+		onClose();
 
 	}
 

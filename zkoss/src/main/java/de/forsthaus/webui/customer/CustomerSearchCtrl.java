@@ -112,40 +112,39 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 		// doOnCreateCommon(customerSearchWindow, event); // autowire the vars
 
 		// get the params map that are overhanded by creation.
-		final Map<String, Object> args = getCreationArgsMap(event);
+		Map<String, Object> args = getCreationArgsMap(event);
 
 		if (args.containsKey("customerCtrl")) {
-			this.customerCtrl = (CustomerListCtrl) args.get("customerCtrl");
+			customerCtrl = (CustomerListCtrl) args.get("customerCtrl");
 		} else {
-			this.customerCtrl = null;
+			customerCtrl = null;
 		}
 
 		// TODO chnagwed to ListPagedWrapper
 		// +++++++++++++++++++++++ DropDown ListBox ++++++++++++++++++++++ //
 		// set listModel and itemRenderer for the Branch dropdown listbox
-		this.kunBranche.setModel(new ListModelList(getBrancheService().getAlleBranche()));
-		this.kunBranche.setItemRenderer(new CustomerBrancheListModelItemRenderer());
+		kunBranche.setModel(new ListModelList(getBrancheService().getAlleBranche()));
+		kunBranche.setItemRenderer(new CustomerBrancheListModelItemRenderer());
 
 		// +++++++++++++++++++++++ DropDown ListBox ++++++++++++++++++++++ //
 		// set listModel and itemRenderer for the search operator type listboxes
-		this.sortOperator_kunNr.setModel(new ListModelList(new SearchOperators().getAllOperators(), true));
-		this.sortOperator_kunNr.setItemRenderer(new SearchOperatorListModelItemRenderer());
-		this.sortOperator_kunMatchcode.setModel(new ListModelList(new SearchOperators().getAllOperators()));
-		this.sortOperator_kunMatchcode.setItemRenderer(new SearchOperatorListModelItemRenderer());
-		this.sortOperator_kunName1.setModel(new ListModelList(new SearchOperators().getAllOperators()));
-		this.sortOperator_kunName1.setItemRenderer(new SearchOperatorListModelItemRenderer());
-		this.sortOperator_kunName2.setModel(new ListModelList(new SearchOperators().getAllOperators()));
-		this.sortOperator_kunName2.setItemRenderer(new SearchOperatorListModelItemRenderer());
-		this.sortOperator_kunOrt.setModel(new ListModelList(new SearchOperators().getAllOperators()));
-		this.sortOperator_kunOrt.setItemRenderer(new SearchOperatorListModelItemRenderer());
-		this.sortOperator_kunBranch.setModel(new ListModelList(new SearchOperators().getAllOperators()));
-		this.sortOperator_kunBranch.setItemRenderer(new SearchOperatorListModelItemRenderer());
+		sortOperator_kunNr.setModel(new ListModelList(new SearchOperators().getAllOperators(), true));
+		sortOperator_kunNr.setItemRenderer(new SearchOperatorListModelItemRenderer());
+		sortOperator_kunMatchcode.setModel(new ListModelList(new SearchOperators().getAllOperators()));
+		sortOperator_kunMatchcode.setItemRenderer(new SearchOperatorListModelItemRenderer());
+		sortOperator_kunName1.setModel(new ListModelList(new SearchOperators().getAllOperators()));
+		sortOperator_kunName1.setItemRenderer(new SearchOperatorListModelItemRenderer());
+		sortOperator_kunName2.setModel(new ListModelList(new SearchOperators().getAllOperators()));
+		sortOperator_kunName2.setItemRenderer(new SearchOperatorListModelItemRenderer());
+		sortOperator_kunOrt.setModel(new ListModelList(new SearchOperators().getAllOperators()));
+		sortOperator_kunOrt.setItemRenderer(new SearchOperatorListModelItemRenderer());
+		sortOperator_kunBranch.setModel(new ListModelList(new SearchOperators().getAllOperators()));
+		sortOperator_kunBranch.setItemRenderer(new SearchOperatorListModelItemRenderer());
 
 		// ++++ Restore the search mask input definition ++++ //
 		// if exists a searchObject than show formerly inputs of filter values
 		if (args.containsKey("searchObject")) {
-			final HibernateSearchObject<Customer> searchObj = (HibernateSearchObject<Customer>) args
-					.get("searchObject");
+			final HibernateSearchObject<Customer> searchObj = (HibernateSearchObject<Customer>) args.get("searchObject");
 
 			// get the filters from the searchObject
 			final List<Filter> ft = searchObj.getFilters();
@@ -154,26 +153,26 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 
 				// restore founded properties
 				if (filter.getProperty().equals("kunNr")) {
-					restoreOperator(this.sortOperator_kunNr, filter);
-					this.kunNr.setValue(filter.getValue().toString());
+					restoreOperator(sortOperator_kunNr, filter);
+					kunNr.setValue(filter.getValue().toString());
 				} else if (filter.getProperty().equals("kunMatchcode")) {
-					restoreOperator(this.sortOperator_kunMatchcode, filter);
-					this.kunMatchcode.setValue(filter.getValue().toString());
+					restoreOperator(sortOperator_kunMatchcode, filter);
+					kunMatchcode.setValue(filter.getValue().toString());
 				} else if (filter.getProperty().equals("kunName1")) {
-					restoreOperator(this.sortOperator_kunName1, filter);
-					this.kunName1.setValue(filter.getValue().toString());
+					restoreOperator(sortOperator_kunName1, filter);
+					kunName1.setValue(filter.getValue().toString());
 				} else if (filter.getProperty().equals("kunName2")) {
-					restoreOperator(this.sortOperator_kunName2, filter);
-					this.kunName2.setValue(filter.getValue().toString());
+					restoreOperator(sortOperator_kunName2, filter);
+					kunName2.setValue(filter.getValue().toString());
 				} else if (filter.getProperty().equals("kunOrt")) {
-					restoreOperator(this.sortOperator_kunOrt, filter);
-					this.kunOrt.setValue(filter.getValue().toString());
+					restoreOperator(sortOperator_kunOrt, filter);
+					kunOrt.setValue(filter.getValue().toString());
 				} else if (filter.getProperty().equals("branche")) {
-					restoreOperator(this.sortOperator_kunBranch, filter);
-					final ListModelList lml = (ListModelList) this.kunBranche.getModel();
+					restoreOperator(sortOperator_kunBranch, filter);
+					ListModelList lml = (ListModelList) this.kunBranche.getModel();
 					// get and select the customers branch
-					final Branche branche = (Branche) filter.getValue();
-					this.kunBranche.setSelectedIndex(lml.indexOf(branche));
+					Branche branche = (Branche) filter.getValue();
+					kunBranche.setSelectedIndex(lml.indexOf(branche));
 				}
 			}
 		}
@@ -206,7 +205,7 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 			listbox.setSelectedIndex(6);
 		} else if (filter.getOperator() == Filter.OP_ILIKE) {
 			// Delete used '%' signs if the operator is like or iLike
-			final String str = StringUtils.replaceChars(filter.getValue().toString(), "%", "");
+			String str = StringUtils.replaceChars(filter.getValue().toString(), "%", "");
 			filter.setValue(str);
 			listbox.setSelectedIndex(7);
 		}
@@ -246,7 +245,7 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 	 * closes the dialog window
 	 */
 	private void doClose() {
-		this.customerSearchWindow.onClose();
+		customerSearchWindow.onClose();
 	}
 
 	/**
@@ -256,7 +255,7 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 
 		try {
 			// open the dialog in modal mode
-			this.customerSearchWindow.doModal();
+			customerSearchWindow.doModal();
 		} catch (final Exception e) {
 			Messagebox.show(e.toString());
 		}
@@ -277,59 +276,58 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void doSearch() {
 
-		final HibernateSearchObject<Customer> so = new HibernateSearchObject(Customer.class);
+		HibernateSearchObject<Customer> so = new HibernateSearchObject(Customer.class);
 
-		if (StringUtils.isNotEmpty(this.kunNr.getValue())) {
+		if (StringUtils.isNotEmpty(kunNr.getValue())) {
 
 			// get the search operator
-			final Listitem item = this.sortOperator_kunNr.getSelectedItem();
+			Listitem item = this.sortOperator_kunNr.getSelectedItem();
 
 			if (item != null) {
-				final int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
+				int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
 
 				if (searchOpId == Filter.OP_ILIKE) {
-					so.addFilter(new Filter("kunNr", "%" + this.kunNr.getValue().toUpperCase() + "%", searchOpId));
+					so.addFilter(new Filter("kunNr", "%" + kunNr.getValue().toUpperCase() + "%", searchOpId));
 				} else if (searchOpId == -1) {
 					// do nothing
 				} else {
-					so.addFilter(new Filter("kunNr", this.kunNr.getValue(), searchOpId));
+					so.addFilter(new Filter("kunNr", kunNr.getValue(), searchOpId));
 				}
 			}
 		}
 
-		if (StringUtils.isNotEmpty(this.kunMatchcode.getValue())) {
+		if (StringUtils.isNotEmpty(kunMatchcode.getValue())) {
 
 			// get the search operator
-			final Listitem item = this.sortOperator_kunMatchcode.getSelectedItem();
+			Listitem item = sortOperator_kunMatchcode.getSelectedItem();
 
 			if (item != null) {
-				final int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
+				int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
 
 				if (searchOpId == Filter.OP_ILIKE) {
-					so.addFilter(new Filter("kunMatchcode", "%" + this.kunMatchcode.getValue().toUpperCase() + "%",
-							searchOpId));
+					so.addFilter(new Filter("kunMatchcode", "%" + kunMatchcode.getValue().toUpperCase() + "%", searchOpId));
 				} else if (searchOpId == -1) {
 					// do nothing
 				} else {
-					so.addFilter(new Filter("kunMatchcode", this.kunMatchcode.getValue(), searchOpId));
+					so.addFilter(new Filter("kunMatchcode", kunMatchcode.getValue(), searchOpId));
 				}
 			}
 		}
 
-		if (StringUtils.isNotEmpty(this.kunName1.getValue())) {
+		if (StringUtils.isNotEmpty(kunName1.getValue())) {
 
 			// get the search operator
-			final Listitem item = this.sortOperator_kunName1.getSelectedItem();
+			Listitem item = sortOperator_kunName1.getSelectedItem();
 
 			if (item != null) {
-				final int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
+				int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
 
 				if (searchOpId == Filter.OP_ILIKE) {
-					so.addFilter(new Filter("kunName1", "%" + this.kunName1.getValue().toUpperCase() + "%", searchOpId));
+					so.addFilter(new Filter("kunName1", "%" + kunName1.getValue().toUpperCase() + "%", searchOpId));
 				} else if (searchOpId == -1) {
 					// do nothing
 				} else {
-					so.addFilter(new Filter("kunName1", this.kunName1.getValue(), searchOpId));
+					so.addFilter(new Filter("kunName1", kunName1.getValue(), searchOpId));
 				}
 			}
 		}
@@ -337,17 +335,17 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 		if (StringUtils.isNotEmpty(this.kunName2.getValue())) {
 
 			// get the search operator
-			final Listitem item = this.sortOperator_kunName2.getSelectedItem();
+			Listitem item = sortOperator_kunName2.getSelectedItem();
 
 			if (item != null) {
-				final int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
+				int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
 
 				if (searchOpId == Filter.OP_ILIKE) {
-					so.addFilter(new Filter("kunName2", "%" + this.kunName2.getValue().toUpperCase() + "%", searchOpId));
+					so.addFilter(new Filter("kunName2", "%" + kunName2.getValue().toUpperCase() + "%", searchOpId));
 				} else if (searchOpId == -1) {
 					// do nothing
 				} else {
-					so.addFilter(new Filter("kunName2", this.kunName2.getValue(), searchOpId));
+					so.addFilter(new Filter("kunName2", kunName2.getValue(), searchOpId));
 				}
 			}
 		}
@@ -355,17 +353,17 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 		if (StringUtils.isNotEmpty(this.kunOrt.getValue())) {
 
 			// get the search operator
-			final Listitem item = this.sortOperator_kunOrt.getSelectedItem();
+			Listitem item = sortOperator_kunOrt.getSelectedItem();
 
 			if (item != null) {
-				final int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
+				int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
 
 				if (searchOpId == Filter.OP_ILIKE) {
-					so.addFilter(new Filter("kunOrt", "%" + this.kunOrt.getValue().toUpperCase() + "%", searchOpId));
+					so.addFilter(new Filter("kunOrt", "%" + kunOrt.getValue().toUpperCase() + "%", searchOpId));
 				} else if (searchOpId == -1) {
 					// do nothing
 				} else {
-					so.addFilter(new Filter("kunOrt", this.kunOrt.getValue(), searchOpId));
+					so.addFilter(new Filter("kunOrt", kunOrt.getValue(), searchOpId));
 				}
 			}
 		}
@@ -373,16 +371,16 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 		if (this.kunBranche.getSelectedCount() > 0) {
 
 			// check if it the default empty item
-			final Listitem itemB = this.kunBranche.getSelectedItem();
-			final Branche branche = (Branche) itemB.getAttribute("data");
+			Listitem itemB = kunBranche.getSelectedItem();
+			Branche branche = (Branche) itemB.getAttribute("data");
 
 			if (!StringUtils.isEmpty(branche.getBraBezeichnung())) {
 
 				// get the search operator
-				final Listitem item = this.sortOperator_kunBranch.getSelectedItem();
+				Listitem item = this.sortOperator_kunBranch.getSelectedItem();
 
 				if (item != null) {
-					final int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
+					int searchOpId = ((SearchOperators) item.getAttribute("data")).getSearchOperatorId();
 
 					if (searchOpId == Filter.OP_ILIKE) {
 						so.addFilter(new Filter("branche", branche, searchOpId));
@@ -396,8 +394,8 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		if (logger.isDebugEnabled()) {
-			final List<Filter> lf = so.getFilters();
-			for (final Filter filter : lf) {
+			List<Filter> lf = so.getFilters();
+			for (Filter filter : lf) {
 				logger.debug(filter.getProperty().toString() + " / " + filter.getValue().toString());
 
 				if (Filter.OP_ILIKE == filter.getOperator()) {
@@ -407,18 +405,17 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		// store the searchObject for reReading
-		this.customerCtrl.setSearchObj(so);
+		customerCtrl.setSearchObj(so);
 
-		final Listbox listBox = this.customerCtrl.listBoxCustomer;
-		final Paging paging = this.customerCtrl.pagingCustomerList;
-		final int ps = this.customerCtrl.pagingCustomerList.getPageSize();
+		Listbox listBox = customerCtrl.listBoxCustomer;
+		Paging paging = customerCtrl.pagingCustomerList;
+		int ps = customerCtrl.pagingCustomerList.getPageSize();
 
 		// set the model to the listbox with the initial resultset get by the
 		// DAO method.
 		((PagedListWrapper<Customer>) listBox.getModel()).init(so, listBox, paging);
 
-		this.labelCustomerSearchResult.setValue(Labels.getLabel("labelCustomerSearchResult.value") + " "
-				+ String.valueOf(paging.getTotalSize()));
+		labelCustomerSearchResult.setValue(Labels.getLabel("labelCustomerSearchResult.value") + " " + String.valueOf(paging.getTotalSize()));
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

@@ -108,8 +108,8 @@ public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 		 * 2. Set this controller in the MainController.<br>
 		 * 3. Check if a 'selectedObject' exists yet in the MainController.<br>
 		 */
-		if (this.arg.containsKey("ModuleMainController")) {
-			setOfficeMainCtrl((OfficeMainCtrl) this.arg.get("ModuleMainController"));
+		if (arg.containsKey("ModuleMainController")) {
+			setOfficeMainCtrl((OfficeMainCtrl) arg.get("ModuleMainController"));
 
 			// SET THIS CONTROLLER TO THE MainController
 			getOfficeMainCtrl().setOfficeDetailCtrl(this);
@@ -138,9 +138,9 @@ public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowOfficeDetail(Event event) throws Exception {
-		this.binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
+		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 
-		this.binder.loadAll();
+		binder.loadAll();
 
 		doFitSize(event);
 	}
@@ -163,9 +163,9 @@ public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 	public void doFitSize(Event event) {
 		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		final int maxListBoxHeight = height - 138;
-		this.borderlayout_OfficeDetail.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		borderlayout_OfficeDetail.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
-		this.windowOfficeDetail.invalidate();
+		windowOfficeDetail.invalidate();
 	}
 
 	/**
@@ -177,11 +177,11 @@ public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param b
 	 */
 	public void doReadOnlyMode(boolean b) {
-		this.txtb_filNr.setReadonly(b);
-		this.txtb_filBezeichnung.setReadonly(b);
-		this.txtb_filName1.setReadonly(b);
-		this.txtb_filName2.setReadonly(b);
-		this.txtb_filOrt.setReadonly(b);
+		txtb_filNr.setReadonly(b);
+		txtb_filBezeichnung.setReadonly(b);
+		txtb_filName1.setReadonly(b);
+		txtb_filName2.setReadonly(b);
+		txtb_filOrt.setReadonly(b);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //

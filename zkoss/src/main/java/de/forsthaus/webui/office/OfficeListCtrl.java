@@ -123,8 +123,8 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 		 * 2. Set this controller in the MainController.<br>
 		 * 3. Check if a 'selectedObject' exists yet in the MainController.<br>
 		 */
-		if (this.arg.containsKey("ModuleMainController")) {
-			setOfficeMainCtrl((OfficeMainCtrl) this.arg.get("ModuleMainController"));
+		if (arg.containsKey("ModuleMainController")) {
+			setOfficeMainCtrl((OfficeMainCtrl) arg.get("ModuleMainController"));
 
 			// SET THIS CONTROLLER TO THE MainController
 			getOfficeMainCtrl().setOfficeListCtrl(this);
@@ -153,11 +153,11 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 	 */
 
 	public void onCreate$windowOfficeList(Event event) throws Exception {
-		this.binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
+		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
 
 		doFillListbox();
 
-		this.binder.loadAll();
+		binder.loadAll();
 	}
 
 	public void doFillListbox() {
@@ -165,29 +165,29 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 		doFitSize();
 
 		// set the paging params
-		this.paging_OfficeList.setPageSize(getCountRows());
-		this.paging_OfficeList.setDetailed(true);
+		paging_OfficeList.setPageSize(getCountRows());
+		paging_OfficeList.setDetailed(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		this.listheader_OfficeList_No.setSortAscending(new FieldComparator("filNr", true));
-		this.listheader_OfficeList_No.setSortDescending(new FieldComparator("filNr", false));
-		this.listheader_OfficeList_Name1.setSortAscending(new FieldComparator("filName1", true));
-		this.listheader_OfficeList_Name1.setSortDescending(new FieldComparator("filName1", false));
-		this.listheader_OfficeList_Name2.setSortAscending(new FieldComparator("filName2", true));
-		this.listheader_OfficeList_Name2.setSortDescending(new FieldComparator("filName2", false));
-		this.listheader_OfficeList_City.setSortAscending(new FieldComparator("filOrt", true));
-		this.listheader_OfficeList_City.setSortDescending(new FieldComparator("filOrt", false));
+		listheader_OfficeList_No.setSortAscending(new FieldComparator("filNr", true));
+		listheader_OfficeList_No.setSortDescending(new FieldComparator("filNr", false));
+		listheader_OfficeList_Name1.setSortAscending(new FieldComparator("filName1", true));
+		listheader_OfficeList_Name1.setSortDescending(new FieldComparator("filName1", false));
+		listheader_OfficeList_Name2.setSortAscending(new FieldComparator("filName2", true));
+		listheader_OfficeList_Name2.setSortDescending(new FieldComparator("filName2", false));
+		listheader_OfficeList_City.setSortAscending(new FieldComparator("filOrt", true));
+		listheader_OfficeList_City.setSortDescending(new FieldComparator("filOrt", false));
 
 		// ++ create the searchObject and init sorting ++//
 		// ++ create the searchObject and init sorting ++//
-		this.searchObj = new HibernateSearchObject<Office>(Office.class, getCountRows());
-		this.searchObj.addSort("filName1", false);
-		setSearchObj(this.searchObj);
+		searchObj = new HibernateSearchObject<Office>(Office.class, getCountRows());
+		searchObj.addSort("filName1", false);
+		setSearchObj(searchObj);
 
 		// Set the BindingListModel
-		getPagedBindingListWrapper().init(this.searchObj, getListBoxOffice(), this.paging_OfficeList);
-		final BindingListModelList lml = (BindingListModelList) getListBoxOffice().getModel();
+		getPagedBindingListWrapper().init(searchObj, getListBoxOffice(), paging_OfficeList);
+		BindingListModelList lml = (BindingListModelList) getListBoxOffice().getModel();
 		setOffices(lml);
 
 		// check if first time opened and init databinding for selectedBean
@@ -215,9 +215,9 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 	 * Event is forwarded in the corresponding listbox.
 	 */
 	public void onDoubleClickedOfficeItem(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
-		final Office anOffice = getSelectedOffice();
+		Office anOffice = getSelectedOffice();
 
 		if (anOffice != null) {
 			setSelectedOffice(anOffice);
@@ -243,9 +243,9 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 	 * @param event
 	 */
 	public void onSelect$listBoxOffice(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
-		final Office anOffice = getSelectedOffice();
+		Office anOffice = getSelectedOffice();
 
 		if (anOffice == null) {
 			return;
@@ -268,9 +268,8 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 		getOfficeMainCtrl().doStoreInitValues();
 
 		// show the objects data in the statusBar
-		final String str = Labels.getLabel("common.Office") + ": " + anOffice.getFilBezeichnung();
-		EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(
-				new Event("onChangeSelectedObject", null, str));
+		String str = Labels.getLabel("common.Office") + ": " + anOffice.getFilBezeichnung();
+		EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeSelectedObject", null, str));
 
 	}
 
@@ -295,9 +294,9 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		final int maxListBoxHeight = height - specialSize - 138;
 		setCountRows((int) Math.round(maxListBoxHeight / 17.7));
-		this.borderLayout_officeList.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		borderLayout_officeList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
-		this.windowOfficeList.invalidate();
+		windowOfficeList.invalidate();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

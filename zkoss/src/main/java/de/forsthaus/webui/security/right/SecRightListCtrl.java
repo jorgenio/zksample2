@@ -121,9 +121,9 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 		// TODO put the logic for working with panel in the ApplicationWorkspace
 		final boolean withPanel = false;
 		if (withPanel == false) {
-			this.panel_SecRightList.setVisible(false);
+			panel_SecRightList.setVisible(false);
 		} else {
-			this.panel_SecRightList.setVisible(true);
+			panel_SecRightList.setVisible(true);
 			panelHeight = 0;
 		}
 
@@ -134,39 +134,39 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());
 
-		this.borderLayout_secRightsList.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		borderLayout_secRightsList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		// init, show all rights
-		this.checkbox_SecRightList_ShowAll.setChecked(true);
+		checkbox_SecRightList_ShowAll.setChecked(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		this.listheader_SecRightList_rigName.setSortAscending(new FieldComparator("rigName", true));
-		this.listheader_SecRightList_rigName.setSortDescending(new FieldComparator("rigName", false));
-		this.listheader_SecRightList_rigType.setSortAscending(new FieldComparator("rigType", true));
-		this.listheader_SecRightList_rigType.setSortDescending(new FieldComparator("rigType", false));
+		listheader_SecRightList_rigName.setSortAscending(new FieldComparator("rigName", true));
+		listheader_SecRightList_rigName.setSortDescending(new FieldComparator("rigName", false));
+		listheader_SecRightList_rigType.setSortAscending(new FieldComparator("rigType", true));
+		listheader_SecRightList_rigType.setSortDescending(new FieldComparator("rigType", false));
 
 		// ++++++++++++++ DropDown ListBox ++++++++++++++++++ //
 		// set listModel and itemRenderer for the dropdown listbox
-		this.lb_secRight_RightType.setModel(new ListModelList(getSecurityService().getAllTypes()));
-		this.lb_secRight_RightType.setItemRenderer(new SecRightSecTypListModelItemRenderer());
+		lb_secRight_RightType.setModel(new ListModelList(getSecurityService().getAllTypes()));
+		lb_secRight_RightType.setItemRenderer(new SecRightSecTypListModelItemRenderer());
 
-		final ListModelList lml = (ListModelList) this.lb_secRight_RightType.getModel();
+		ListModelList lml = (ListModelList) lb_secRight_RightType.getModel();
 		// we added an empty SecType simulated the (-1) for showing all records.
 		lml.add(0, SecTyp.EMPTY_SECTYP);
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRows());
+		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRows());
 		soSecRight.addSort("rigName", false);
 
 		// set the paging params
-		this.paging_SecRightList.setPageSize(getCountRows());
-		this.paging_SecRightList.setDetailed(true);
+		paging_SecRightList.setPageSize(getCountRows());
+		paging_SecRightList.setDetailed(true);
 
 		// Set the ListModel.
-		getPagedListWrapper().init(soSecRight, this.listBoxSecRights, this.paging_SecRightList);
+		getPagedListWrapper().init(soSecRight, listBoxSecRights, paging_SecRightList);
 		// set the itemRenderer
-		this.listBoxSecRights.setItemRenderer(new SecRightListModelItemRenderer());
+		listBoxSecRights.setItemRenderer(new SecRightListModelItemRenderer());
 
 	}
 
@@ -182,11 +182,11 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	public void onDoubleClickedRightItem(Event event) throws Exception {
 
 		// get the selected object
-		final Listitem item = this.listBoxSecRights.getSelectedItem();
+		Listitem item = this.listBoxSecRights.getSelectedItem();
 
 		if (item != null) {
 			// CAST AND STORE THE SELECTED OBJECT
-			final SecRight aRight = (SecRight) item.getAttribute("data");
+			SecRight aRight = (SecRight) item.getAttribute("data");
 
 			showDetailView(aRight);
 		}
@@ -201,7 +201,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 		/** !!! DO NOT BREAK THE TIERS !!! */
 		// We don't create a new DomainObject() in the frontend.
 		// We GET it from the backend.
-		final SecRight aRight = getSecurityService().getNewSecRight();
+		SecRight aRight = getSecurityService().getNewSecRight();
 		aRight.setRigType(1);
 
 		showDetailView(aRight);
@@ -222,7 +222,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 		 * with a object of the selected item. For handed over these parameter
 		 * only a Map is accepted. So we put the object in a HashMap.
 		 */
-		final HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("right", aRight);
 		/*
 		 * we can additionally handed over the listBox, so we have in the dialog
@@ -230,7 +230,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 		 * data in the customerListbox from the dialog when we do a delete, edit
 		 * or insert a customer.
 		 */
-		map.put("listBoxSecRights", this.listBoxSecRights);
+		map.put("listBoxSecRights", listBoxSecRights);
 
 		// call the zul-file with the parameters packed in a map
 		try {
@@ -239,8 +239,8 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
 			// Show a error box
-			final String msg = e.getMessage();
-			final String title = Labels.getLabel("message.Error");
+			String msg = e.getMessage();
+			String title = Labels.getLabel("message.Error");
 
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);
@@ -269,8 +269,8 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
 
-		Events.postEvent("onCreate", this.secRightListWindow, event);
-		this.secRightListWindow.invalidate();
+		Events.postEvent("onCreate", secRightListWindow, event);
+		secRightListWindow.invalidate();
 	}
 
 	/**
@@ -281,15 +281,15 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	public void onCheck$checkbox_SecRightList_ShowAll(Event event) {
 
 		// empty the text search boxes
-		this.tb_SecRightList_rigName.setValue(""); // clear
-		this.lb_secRight_RightType.clearSelection(); // clear
+		tb_SecRightList_rigName.setValue(""); // clear
+		lb_secRight_RightType.clearSelection(); // clear
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRows());
+		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRows());
 		soSecRight.addSort("rigName", false);
 
 		// Set the ListModel.
-		getPagedListWrapper().init(soSecRight, this.listBoxSecRights, this.paging_SecRightList);
+		getPagedListWrapper().init(soSecRight, listBoxSecRights, paging_SecRightList);
 
 	}
 
@@ -312,33 +312,33 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 	public void onClick$button_SecRightList_SearchRightName(Event event) throws Exception {
 
 		// if not empty
-		if (!this.tb_SecRightList_rigName.getValue().isEmpty()) {
-			this.checkbox_SecRightList_ShowAll.setChecked(false); // clear
+		if (!tb_SecRightList_rigName.getValue().isEmpty()) {
+			checkbox_SecRightList_ShowAll.setChecked(false); // clear
 
 			// ++ create the searchObject and init sorting ++//
 			final HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRows());
 			soSecRight.addSort("rigName", false);
 
-			soSecRight.addFilter(new Filter("rigName", "%" + this.tb_SecRightList_rigName.getValue() + "%", Filter.OP_ILIKE));
+			soSecRight.addFilter(new Filter("rigName", "%" + tb_SecRightList_rigName.getValue() + "%", Filter.OP_ILIKE));
 
 			// check if we must include a selected RightType item
-			final Listitem item = this.lb_secRight_RightType.getSelectedItem();
+			Listitem item = lb_secRight_RightType.getSelectedItem();
 
 			if (item != null) {
 
 				// casting to the needed object
-				final SecTyp type = (SecTyp) item.getAttribute("data");
+				SecTyp type = (SecTyp) item.getAttribute("data");
 
 				if (type.getStpId() > -1) {
 					soSecRight.addFilter(new Filter("rigType", type.getStpId(), Filter.OP_EQUAL));
 				}
 
 				// Set the ListModel.
-				getPagedListWrapper().init(soSecRight, this.listBoxSecRights, this.paging_SecRightList);
+				getPagedListWrapper().init(soSecRight, listBoxSecRights, paging_SecRightList);
 
 			} else {
 				// Set the ListModel.
-				getPagedListWrapper().init(soSecRight, this.listBoxSecRights, this.paging_SecRightList);
+				getPagedListWrapper().init(soSecRight, listBoxSecRights, paging_SecRightList);
 			}
 
 		}
@@ -356,12 +356,12 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 		HibernateSearchObject<SecRight> soSecRight = null;
 
 		// get the selected item
-		final Listitem item = this.lb_secRight_RightType.getSelectedItem();
+		Listitem item = lb_secRight_RightType.getSelectedItem();
 
 		if (item != null) {
-			this.checkbox_SecRightList_ShowAll.setChecked(false); // clear
+			checkbox_SecRightList_ShowAll.setChecked(false); // clear
 			// casting to the needed object
-			final SecTyp type = (SecTyp) item.getAttribute("data");
+			SecTyp type = (SecTyp) item.getAttribute("data");
 
 			if (type.getStpId() > -1) {
 
@@ -370,13 +370,13 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 
 				soSecRight.addFilter(new Filter("rigType", type.getStpId(), Filter.OP_EQUAL));
 
-				if (!this.tb_SecRightList_rigName.getValue().isEmpty()) {
+				if (!tb_SecRightList_rigName.getValue().isEmpty()) {
 
 					// mixed search statement -> like RightName + RightType
-					soSecRight.addFilter(new Filter("rigName", "%" + this.tb_SecRightList_rigName.getValue() + "%", Filter.OP_ILIKE));
+					soSecRight.addFilter(new Filter("rigName", "%" + tb_SecRightList_rigName.getValue() + "%", Filter.OP_ILIKE));
 				}
 				// Set the ListModel.
-				getPagedListWrapper().init(soSecRight, this.listBoxSecRights, this.paging_SecRightList);
+				getPagedListWrapper().init(soSecRight, listBoxSecRights, paging_SecRightList);
 			}
 
 		}

@@ -131,9 +131,9 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		// TODO put the logic for working with panel in the ApplicationWorkspace
 		final boolean withPanel = false;
 		if (withPanel == false) {
-			this.panel_CustomerList.setVisible(false);
+			panel_CustomerList.setVisible(false);
 		} else {
-			this.panel_CustomerList.setVisible(true);
+			panel_CustomerList.setVisible(true);
 			panelHeight = 0;
 		}
 
@@ -145,34 +145,34 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());
 
-		this.borderLayout_customerList.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		borderLayout_customerList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		// set the paging params
-		this.pagingCustomerList.setPageSize(getCountRows());
-		this.pagingCustomerList.setDetailed(true);
+		pagingCustomerList.setPageSize(getCountRows());
+		pagingCustomerList.setDetailed(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		this.listheader_CustNo.setSortAscending(new FieldComparator("kunNr", true));
-		this.listheader_CustNo.setSortDescending(new FieldComparator("kunNr", false));
-		this.listheader_CustMatchcode.setSortAscending(new FieldComparator("kunMatchcode", true));
-		this.listheader_CustMatchcode.setSortDescending(new FieldComparator("kunMatchcode", false));
-		this.listheader_CustName1.setSortAscending(new FieldComparator("kunName1", true));
-		this.listheader_CustName1.setSortDescending(new FieldComparator("kunName1", false));
-		this.listheader_CustName2.setSortAscending(new FieldComparator("kunName2", true));
-		this.listheader_CustName2.setSortDescending(new FieldComparator("kunName2", false));
-		this.listheader_CustCity.setSortAscending(new FieldComparator("kunOrt", true));
-		this.listheader_CustCity.setSortDescending(new FieldComparator("kunOrt", false));
+		listheader_CustNo.setSortAscending(new FieldComparator("kunNr", true));
+		listheader_CustNo.setSortDescending(new FieldComparator("kunNr", false));
+		listheader_CustMatchcode.setSortAscending(new FieldComparator("kunMatchcode", true));
+		listheader_CustMatchcode.setSortDescending(new FieldComparator("kunMatchcode", false));
+		listheader_CustName1.setSortAscending(new FieldComparator("kunName1", true));
+		listheader_CustName1.setSortDescending(new FieldComparator("kunName1", false));
+		listheader_CustName2.setSortAscending(new FieldComparator("kunName2", true));
+		listheader_CustName2.setSortDescending(new FieldComparator("kunName2", false));
+		listheader_CustCity.setSortAscending(new FieldComparator("kunOrt", true));
+		listheader_CustCity.setSortDescending(new FieldComparator("kunOrt", false));
 
 		// ++ create the searchObject and init sorting ++//
-		this.searchObj = new HibernateSearchObject<Customer>(Customer.class, getCountRows());
-		this.searchObj.addSort("kunName1", false);
+		searchObj = new HibernateSearchObject<Customer>(Customer.class, getCountRows());
+		searchObj.addSort("kunName1", false);
 		setSearchObj(this.searchObj);
 
 		// Set the ListModel for the articles.
-		getPagedListWrapper().init(this.searchObj, this.listBoxCustomer, this.pagingCustomerList);
+		getPagedListWrapper().init(searchObj, listBoxCustomer, pagingCustomerList);
 		// set the itemRenderer
-		this.listBoxCustomer.setItemRenderer(new CustomerListModelItemRenderer());
+		listBoxCustomer.setItemRenderer(new CustomerListModelItemRenderer());
 	}
 
 	/**
@@ -182,12 +182,11 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 
 		final UserWorkspace workspace = getUserWorkspace();
 
-		this.window_customerList.setVisible(workspace.isAllowed("window_customerList"));
-		this.btnHelp.setVisible(workspace.isAllowed("button_CustomerList_btnHelp"));
-		this.button_CustomerList_NewCustomer.setVisible(workspace.isAllowed("button_CustomerList_NewCustomer"));
-		this.button_CustomerList_CustomerFindDialog.setVisible(workspace
-				.isAllowed("button_CustomerList_CustomerFindDialog"));
-		this.button_CustomerList_PrintList.setVisible(workspace.isAllowed("button_CustomerList_PrintList"));
+		window_customerList.setVisible(workspace.isAllowed("window_customerList"));
+		btnHelp.setVisible(workspace.isAllowed("button_CustomerList_btnHelp"));
+		button_CustomerList_NewCustomer.setVisible(workspace.isAllowed("button_CustomerList_NewCustomer"));
+		button_CustomerList_CustomerFindDialog.setVisible(workspace.isAllowed("button_CustomerList_CustomerFindDialog"));
+		button_CustomerList_PrintList.setVisible(workspace.isAllowed("button_CustomerList_PrintList"));
 
 	}
 
@@ -198,16 +197,16 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 * @param event
 	 * @throws Exception
 	 */
-	@Secured({ "CustomerList_listBoxCustomer.onDoubleClick" })
+	@Secured( { "CustomerList_listBoxCustomer.onDoubleClick" })
 	public void onCustomerItemDoubleClicked(Event event) throws Exception {
 		logger.debug(event.toString());
 
 		// get the selected customer object
-		final Listitem item = this.listBoxCustomer.getSelectedItem();
+		Listitem item = this.listBoxCustomer.getSelectedItem();
 
 		if (item != null) {
 			// CAST AND STORE THE SELECTED OBJECT
-			final Customer aCustomer = (Customer) item.getAttribute("data");
+			Customer aCustomer = (Customer) item.getAttribute("data");
 
 			showDetailView(aCustomer);
 		}
@@ -223,7 +222,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		/** !!! DO NOT BREAK THE TIERS !!! */
 		// We don't create a new DomainObject() in the frontend.
 		// We GET it from the backend.
-		final Customer aCustomer = getCustomerService().getNewCustomer();
+		Customer aCustomer = getCustomerService().getNewCustomer();
 
 		aCustomer.setOffice(getUserWorkspace().getOffice()); // init
 		// customer.setBranche(Workspace.getBranche()); // init
@@ -290,7 +289,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		// logger.debug(event.toString());
 
 		Events.postEvent("onCreate", this.window_customerList, event);
-		this.window_customerList.invalidate();
+		window_customerList.invalidate();
 	}
 
 	/*

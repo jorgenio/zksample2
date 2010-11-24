@@ -153,19 +153,18 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 		doCheckRights();
 
 		// get the params map that are overhanded by creation.
-		final Map<String, Object> args = getCreationArgsMap(event);
+		Map<String, Object> args = getCreationArgsMap(event);
 
 		// check if the orderList is called with a customer param
 		if (args.containsKey("customerDialogCtrl")) {
-			this.hBoxCustomerSearch.setVisible(false);
+			hBoxCustomerSearch.setVisible(false);
 		} else {
-			this.hBoxCustomerSearch.setVisible(true);
+			hBoxCustomerSearch.setVisible(true);
 		}
 
 		// check if the orderList is called with a customer param
 		if (args.containsKey("customer")) {
-			this.customer = (Customer) args.get("customer");
-			setCustomer(this.customer);
+			setCustomer((Customer) args.get("customer"));
 		} else {
 			setCustomer(null);
 		}
@@ -173,13 +172,13 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 		// check if the orderList is called from the Customer Dialog
 		// and set the pageSizes
 		if (args.containsKey("rowSizeOrders")) {
-			final int rowSize = (Integer) args.get("rowSizeOrders");
+			int rowSize = (Integer) args.get("rowSizeOrders");
 			setPageSizeOrders(rowSize);
 		} else {
 			setPageSizeOrders(15);
 		}
 		if (args.containsKey("rowSizeOrderPositions")) {
-			final int rowSize = (Integer) args.get("rowSizeOrderPositions");
+			int rowSize = (Integer) args.get("rowSizeOrderPositions");
 			setPageSizeOrderPositions(rowSize);
 		} else {
 			setPageSizeOrderPositions(15);
@@ -191,58 +190,56 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 
 	private void paintComponents() {
 		// set the bandbox to readonly
-		this.bandbox_OrderList_CustomerSearch.setReadonly(true);
+		bandbox_OrderList_CustomerSearch.setReadonly(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		this.listheader_OrderList_OrderNo.setSortAscending(new FieldComparator("aufNr", true));
-		this.listheader_OrderList_OrderNo.setSortDescending(new FieldComparator("aufNr", false));
-		this.listheader_OrderList_OderDescr.setSortAscending(new FieldComparator("aufBezeichnung", true));
-		this.listheader_OrderList_OderDescr.setSortDescending(new FieldComparator("aufBezeichnung", false));
+		listheader_OrderList_OrderNo.setSortAscending(new FieldComparator("aufNr", true));
+		listheader_OrderList_OrderNo.setSortDescending(new FieldComparator("aufNr", false));
+		listheader_OrderList_OderDescr.setSortAscending(new FieldComparator("aufBezeichnung", true));
+		listheader_OrderList_OderDescr.setSortDescending(new FieldComparator("aufBezeichnung", false));
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		this.listheader_OrderPosList_Orderpos_No.setSortAscending(new FieldComparator("aupPosition", true));
-		this.listheader_OrderPosList_Orderpos_No.setSortDescending(new FieldComparator("aupPosition", false));
-		this.listheader_OrderPosList_Shorttext
-				.setSortAscending(new FieldComparator("article.artKurzbezeichnung", true));
-		this.listheader_OrderPosList_Shorttext.setSortDescending(new FieldComparator("article.artKurzbezeichnung",
-				false));
-		this.listheader_OrderPosList_Count.setSortAscending(new FieldComparator("aupMenge", true));
-		this.listheader_OrderPosList_Count.setSortDescending(new FieldComparator("aupMenge", false));
-		this.listheader_OrderPosList_SinglePrice.setSortAscending(new FieldComparator("aupEinzelwert", true));
-		this.listheader_OrderPosList_SinglePrice.setSortDescending(new FieldComparator("aupEinzelwert", false));
-		this.listheader_OrderPosList_WholePrice.setSortAscending(new FieldComparator("aupGesamtwert", true));
-		this.listheader_OrderPosList_WholePrice.setSortDescending(new FieldComparator("aupGesamtwert", false));
+		listheader_OrderPosList_Orderpos_No.setSortAscending(new FieldComparator("aupPosition", true));
+		listheader_OrderPosList_Orderpos_No.setSortDescending(new FieldComparator("aupPosition", false));
+		listheader_OrderPosList_Shorttext.setSortAscending(new FieldComparator("article.artKurzbezeichnung", true));
+		listheader_OrderPosList_Shorttext.setSortDescending(new FieldComparator("article.artKurzbezeichnung", false));
+		listheader_OrderPosList_Count.setSortAscending(new FieldComparator("aupMenge", true));
+		listheader_OrderPosList_Count.setSortDescending(new FieldComparator("aupMenge", false));
+		listheader_OrderPosList_SinglePrice.setSortAscending(new FieldComparator("aupEinzelwert", true));
+		listheader_OrderPosList_SinglePrice.setSortDescending(new FieldComparator("aupEinzelwert", false));
+		listheader_OrderPosList_WholePrice.setSortAscending(new FieldComparator("aupGesamtwert", true));
+		listheader_OrderPosList_WholePrice.setSortDescending(new FieldComparator("aupGesamtwert", false));
 
 		// ++ create the searchObject and init sorting ++//
 		// only in sample app init with all orders
-		final HibernateSearchObject<Order> soOrder = new HibernateSearchObject<Order>(Order.class, getPageSizeOrders());
+		HibernateSearchObject<Order> soOrder = new HibernateSearchObject<Order>(Order.class, getPageSizeOrders());
 		soOrder.addSort("aufNr", false);
 
 		// set the paging params
-		this.paging_OrderList.setPageSize(getPageSizeOrders());
-		this.paging_OrderList.setDetailed(true);
+		paging_OrderList.setPageSize(getPageSizeOrders());
+		paging_OrderList.setDetailed(true);
 
-		this.paging_OrderArticleList.setPageSize(getPageSizeOrderPositions());
-		this.paging_OrderArticleList.setDetailed(true);
+		paging_OrderArticleList.setPageSize(getPageSizeOrderPositions());
+		paging_OrderArticleList.setDetailed(true);
 
 		// Set the ListModel for the orders.
-		if (this.customer == null) {
+		if (customer == null) {
 			// Set the ListModel.
-			getPlwOrders().init(soOrder, this.listBoxOrder, this.paging_OrderList);
+			getPlwOrders().init(soOrder, listBoxOrder, paging_OrderList);
 		} else {
-			soOrder.addFilter(new Filter("customer", this.customer, Filter.OP_EQUAL));
+			soOrder.addFilter(new Filter("customer", customer, Filter.OP_EQUAL));
 
 			// Set the ListModel.
-			getPlwOrders().init(soOrder, this.listBoxOrder, this.paging_OrderList);
+			getPlwOrders().init(soOrder, listBoxOrder, paging_OrderList);
 		}
-		this.listBoxOrder.setItemRenderer(new OrderListModelItemRenderer());
+		listBoxOrder.setItemRenderer(new OrderListModelItemRenderer());
 
-		this.listBoxOrderArticle.setItemRenderer(new OrderpositionListModelItemRenderer());
+		listBoxOrderArticle.setItemRenderer(new OrderpositionListModelItemRenderer());
 
 		// init the first entry
-		final ListModelList lml = (ListModelList) this.listBoxOrder.getModel();
+		ListModelList lml = (ListModelList) listBoxOrder.getModel();
 
 		// Now we would show the corresponding detail list of the first
 		// selected entry of the MASTER Table
@@ -251,29 +248,28 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 		// So we take the first entry in the ListModelList and set as
 		// selected.
 		if (lml.getSize() > 0) {
-			final int rowIndex = 0;
-			this.listBoxOrder.setSelectedIndex(rowIndex);
+			int rowIndex = 0;
+			listBoxOrder.setSelectedIndex(rowIndex);
 			// get the first entry and cast them to the needed object
-			final Order anOrder = (Order) lml.get(rowIndex);
+			Order anOrder = (Order) lml.get(rowIndex);
 			if (anOrder != null) {
 				// get the related order positions
-				final HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(
-						Orderposition.class, getPageSizeOrderPositions());
+				HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(Orderposition.class, getPageSizeOrderPositions());
 				soOrderPosition.addFilter(new Filter("order", anOrder, Filter.OP_EQUAL));
 				// deeper loading of the relation to prevent the lazy
 				// loading problem.
 				soOrderPosition.addFetch("article");
 
 				// Set the ListModel.
-				getPlwOrderpositions().init(soOrderPosition, this.listBoxOrderArticle, this.paging_OrderArticleList);
+				getPlwOrderpositions().init(soOrderPosition, listBoxOrderArticle, paging_OrderArticleList);
 
 				/** +++ get the SUM of the orderpositions for the ListFooter +++ */
-				final String s = String.valueOf(getOrderService().getOrderSum(anOrder));
+				String s = String.valueOf(getOrderService().getOrderSum(anOrder));
 				if (s != "null") {
-					this.listfooter_OrderPosList_WholePrice.setLabel(s);
+					listfooter_OrderPosList_WholePrice.setLabel(s);
 					// listfooter_OrderPosList_WholePrice.setLabel(String.valueOf(getOrderService().getOrderSum(anOrder)));
 				} else
-					this.listfooter_OrderPosList_WholePrice.setLabel("0.00");
+					listfooter_OrderPosList_WholePrice.setLabel("0.00");
 
 			}
 		}
@@ -286,43 +282,41 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 
 		final UserWorkspace workspace = getUserWorkspace();
 
-		this.orderListWindow.setVisible(workspace.isAllowed("orderListWindow"));
+		orderListWindow.setVisible(workspace.isAllowed("orderListWindow"));
 
-		this.btnHelp.setVisible(workspace.isAllowed("button_OrderList_btnHelp"));
-		this.button_OrderList_NewOrder.setVisible(workspace.isAllowed("button_OrderList_NewOrder"));
+		btnHelp.setVisible(workspace.isAllowed("button_OrderList_btnHelp"));
+		button_OrderList_NewOrder.setVisible(workspace.isAllowed("button_OrderList_NewOrder"));
 
 	}
 
 	public void onSelect$listBoxOrder(Event event) throws Exception {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
-		final Listitem item = this.listBoxOrder.getSelectedItem();
+		Listitem item = this.listBoxOrder.getSelectedItem();
 
 		if (item != null) {
 			// CAST AND STORE THE SELECTED OBJECT
-			final Order order = (Order) item.getAttribute("data");
+			Order order = (Order) item.getAttribute("data");
 
 			if (order != null) {
 				// Set the ListModel and the itemRenderer for the order
 				// articles.g
 
-				final HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(
-						Orderposition.class, getPageSizeOrderPositions());
+				HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(Orderposition.class, getPageSizeOrderPositions());
 				soOrderPosition.addFilter(new Filter("order", order, Filter.OP_EQUAL));
 				// deeper loading of the relation to prevent the lazy loading
 				// problem.
 				soOrderPosition.addFetch("article");
 
 				// Set the ListModel.
-				getPlwOrderpositions().init(soOrderPosition, this.listBoxOrderArticle, this.paging_OrderArticleList);
+				getPlwOrderpositions().init(soOrderPosition, listBoxOrderArticle, paging_OrderArticleList);
 
 				// +++ get the SUM of the orderpositions +++ //
-				final String s = String.valueOf(getOrderService().getOrderSum(order));
+				String s = String.valueOf(getOrderService().getOrderSum(order));
 				if (s != "null") {
-					this.listfooter_OrderPosList_WholePrice.setLabel(String.valueOf(getOrderService()
-							.getOrderSum(order)));
+					listfooter_OrderPosList_WholePrice.setLabel(String.valueOf(getOrderService().getOrderSum(order)));
 				} else
-					this.listfooter_OrderPosList_WholePrice.setLabel("0.00");
+					listfooter_OrderPosList_WholePrice.setLabel("0.00");
 
 			}
 
@@ -342,11 +336,11 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	public void onDoubleClickedOrderItem(Event event) throws Exception {
 
 		// get the selected object
-		final Listitem item = this.listBoxOrder.getSelectedItem();
+		Listitem item = listBoxOrder.getSelectedItem();
 
 		if (item != null) {
 			// CAST AND STORE THE SELECTED OBJECT
-			final Order anOrder = (Order) item.getAttribute("data");
+			Order anOrder = (Order) item.getAttribute("data");
 
 			showDetailView(anOrder);
 
@@ -357,13 +351,13 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	 * Call the order dialog with a new empty entry. <br>
 	 */
 	public void onClick$button_OrderList_NewOrder(Event event) throws Exception {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		// create a new order object
 		/** !!! DO NOT BREAK THE TIERS !!! */
 		// We don't create a new DomainObject() in the frontend.
 		// We GET it from the backend.
-		final Order anOrder = getOrderService().getNewOrder();
+		Order anOrder = getOrderService().getNewOrder();
 
 		showDetailView(anOrder);
 	}
@@ -381,7 +375,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 		 * with a object of the selected item. For handed over these parameter
 		 * only a Map is accepted. So we put the object in a HashMap.
 		 */
-		final HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("order", anOrder);
 		/*
 		 * we can additionally handed over the listBox, so we have in the dialog
@@ -389,7 +383,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 		 * data in the customerListbox from the dialog when we do a delete, edit
 		 * or insert a customer.
 		 */
-		map.put("listBoxOrder", this.listBoxOrder);
+		map.put("listBoxOrder", listBoxOrder);
 		map.put("orderListCtrl", this);
 
 		// call the zul-file with the parameters packed in a map
@@ -410,7 +404,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$button_OrderList_OrderNameSearch(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
@@ -422,7 +416,7 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
@@ -436,10 +430,10 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		paintComponents();
-		this.orderListWindow.invalidate();
+		orderListWindow.invalidate();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -452,9 +446,9 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$button_bbox_CustomerSearch_Close(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
-		this.bandbox_OrderList_CustomerSearch.close();
+		bandbox_OrderList_CustomerSearch.close();
 	}
 
 	/**
@@ -463,41 +457,40 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$button_bbox_CustomerSearch_Search(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doSearch();
 	}
 
 	public void onOpen$bandbox_OrderList_CustomerSearch(Event event) throws Exception {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		this.listheader_CustNo.setSortAscending(new FieldComparator("kunNr", true));
-		this.listheader_CustNo.setSortDescending(new FieldComparator("kunNr", false));
-		this.listheader_CustMatchcode.setSortAscending(new FieldComparator("kunMatchcode", true));
-		this.listheader_CustMatchcode.setSortDescending(new FieldComparator("kunMatchcode", false));
-		this.listheader_CustName1.setSortAscending(new FieldComparator("kunName1", true));
-		this.listheader_CustName1.setSortDescending(new FieldComparator("kunName1", false));
-		this.listheader_CustCity.setSortAscending(new FieldComparator("kunOrt", true));
-		this.listheader_CustCity.setSortDescending(new FieldComparator("kunOrt", false));
+		listheader_CustNo.setSortAscending(new FieldComparator("kunNr", true));
+		listheader_CustNo.setSortDescending(new FieldComparator("kunNr", false));
+		listheader_CustMatchcode.setSortAscending(new FieldComparator("kunMatchcode", true));
+		listheader_CustMatchcode.setSortDescending(new FieldComparator("kunMatchcode", false));
+		listheader_CustName1.setSortAscending(new FieldComparator("kunName1", true));
+		listheader_CustName1.setSortDescending(new FieldComparator("kunName1", false));
+		listheader_CustCity.setSortAscending(new FieldComparator("kunOrt", true));
+		listheader_CustCity.setSortDescending(new FieldComparator("kunOrt", false));
 
 		// set the paging params
-		this.paging_OrderList_CustomerSearchList.setPageSize(this.pageSizeSearchCustomers);
-		this.paging_OrderList_CustomerSearchList.setDetailed(true);
+		paging_OrderList_CustomerSearchList.setPageSize(pageSizeSearchCustomers);
+		paging_OrderList_CustomerSearchList.setDetailed(true);
 
 		// ++ create the searchObject and init sorting ++ //
 		if (getSearchObjCustomer() == null) {
-			setSearchObjCustomer(new HibernateSearchObject<Customer>(Customer.class, this.pageSizeSearchCustomers));
+			setSearchObjCustomer(new HibernateSearchObject<Customer>(Customer.class, pageSizeSearchCustomers));
 			getSearchObjCustomer().addSort("kunMatchcode", false);
-			setSearchObjCustomer(this.searchObjCustomer);
+			setSearchObjCustomer(searchObjCustomer);
 		}
 
 		// Set the ListModel.
-		getPlwCustomers().init(getSearchObjCustomer(), this.listBoxCustomerSearch,
-				this.paging_OrderList_CustomerSearchList);
+		getPlwCustomers().init(getSearchObjCustomer(), listBoxCustomerSearch, paging_OrderList_CustomerSearchList);
 		// set the itemRenderer
-		this.listBoxCustomerSearch.setItemRenderer(new OrderSearchCustomerListModelItemRenderer());
+		listBoxCustomerSearch.setItemRenderer(new OrderSearchCustomerListModelItemRenderer());
 	}
 
 	/**
@@ -510,34 +503,29 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doSearch() {
 
-		this.searchObjCustomer = new HibernateSearchObject<Customer>(Customer.class, this.pageSizeSearchCustomers);
+		searchObjCustomer = new HibernateSearchObject<Customer>(Customer.class, pageSizeSearchCustomers);
 
 		// check which field have input
-		if (StringUtils.isNotEmpty(this.tb_Orders_SearchCustNo.getValue())) {
-			this.searchObjCustomer.addFilter(new Filter("kunNr", this.tb_Orders_SearchCustNo.getValue(),
-					Filter.OP_EQUAL));
+		if (StringUtils.isNotEmpty(tb_Orders_SearchCustNo.getValue())) {
+			searchObjCustomer.addFilter(new Filter("kunNr", tb_Orders_SearchCustNo.getValue(), Filter.OP_EQUAL));
 		}
 
-		if (StringUtils.isNotEmpty(this.tb_Orders_CustSearchMatchcode.getValue())) {
-			this.searchObjCustomer.addFilter(new Filter("kunMatchcode", "%"
-					+ this.tb_Orders_CustSearchMatchcode.getValue().toUpperCase() + "%", Filter.OP_ILIKE));
+		if (StringUtils.isNotEmpty(tb_Orders_CustSearchMatchcode.getValue())) {
+			searchObjCustomer.addFilter(new Filter("kunMatchcode", "%" + tb_Orders_CustSearchMatchcode.getValue().toUpperCase() + "%", Filter.OP_ILIKE));
 		}
 
-		if (StringUtils.isNotEmpty(this.tb_Orders_SearchCustName1.getValue())) {
-			this.searchObjCustomer.addFilter(new Filter("kunName1", "%" + this.tb_Orders_SearchCustName1.getValue()
-					+ "%", Filter.OP_ILIKE));
+		if (StringUtils.isNotEmpty(tb_Orders_SearchCustName1.getValue())) {
+			searchObjCustomer.addFilter(new Filter("kunName1", "%" + tb_Orders_SearchCustName1.getValue() + "%", Filter.OP_ILIKE));
 		}
 
-		if (StringUtils.isNotEmpty(this.tb_Orders_SearchCustCity.getValue())) {
-			this.searchObjCustomer.addFilter(new Filter("kunOrt", "%" + this.tb_Orders_SearchCustCity.getValue() + "%",
-					Filter.OP_ILIKE));
+		if (StringUtils.isNotEmpty(tb_Orders_SearchCustCity.getValue())) {
+			searchObjCustomer.addFilter(new Filter("kunOrt", "%" + tb_Orders_SearchCustCity.getValue() + "%", Filter.OP_ILIKE));
 		}
 
 		setSearchObjCustomer(this.searchObjCustomer);
 
 		// Set the ListModel.
-		getPlwCustomers().init(getSearchObjCustomer(), this.listBoxCustomerSearch,
-				this.paging_OrderList_CustomerSearchList);
+		getPlwCustomers().init(getSearchObjCustomer(), listBoxCustomerSearch, paging_OrderList_CustomerSearchList);
 
 	}
 
@@ -549,67 +537,63 @@ public class OrderListCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onDoubleClickedCustomerItem(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		// get the customer
-		final Listitem item = this.listBoxCustomerSearch.getSelectedItem();
+		Listitem item = this.listBoxCustomerSearch.getSelectedItem();
 		if (item != null) {
 
 			/* clear the listboxes from older stuff */
-			if ((ListModelList) this.listBoxOrder.getModel() != null) {
-				((ListModelList) this.listBoxOrder.getModel()).clear();
+			if ((ListModelList) listBoxOrder.getModel() != null) {
+				((ListModelList) listBoxOrder.getModel()).clear();
 			}
-			if ((ListModelList) this.listBoxOrderArticle.getModel() != null) {
-				((ListModelList) this.listBoxOrderArticle.getModel()).clear();
+			if ((ListModelList) listBoxOrderArticle.getModel() != null) {
+				((ListModelList) listBoxOrderArticle.getModel()).clear();
 			}
 
-			final Customer customer = (Customer) item.getAttribute("data");
+			Customer customer = (Customer) item.getAttribute("data");
 
-			this.bandbox_OrderList_CustomerSearch.setValue(customer.getKunName1() + ", " + customer.getKunOrt());
+			bandbox_OrderList_CustomerSearch.setValue(customer.getKunName1() + ", " + customer.getKunOrt());
 
 			// get all orders for the selected customer
-			final HibernateSearchObject<Order> soOrder = new HibernateSearchObject<Order>(Order.class,
-					getPageSizeOrders());
+			HibernateSearchObject<Order> soOrder = new HibernateSearchObject<Order>(Order.class, getPageSizeOrders());
 			soOrder.addSort("aufNr", false);
 			soOrder.addFilter(new Filter("customer", customer, Filter.OP_EQUAL));
 
 			// Set the ListModel.
-			getPlwOrders().init(soOrder, this.listBoxOrder, this.paging_OrderList);
+			getPlwOrders().init(soOrder, listBoxOrder, paging_OrderList);
 
 			// get the first object and poll and show the orderpositions
-			final ListModelList lml = (ListModelList) this.listBoxOrder.getModel();
+			ListModelList lml = (ListModelList) listBoxOrder.getModel();
 
 			if (lml.size() > 0) {
 
-				final Order anOrder = (Order) lml.get(0);
+				Order anOrder = (Order) lml.get(0);
 
 				if (anOrder != null) {
-					final HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(
-							Orderposition.class, getPageSizeOrderPositions());
+					HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(Orderposition.class, getPageSizeOrderPositions());
 					soOrderPosition.addFilter(new Filter("order", anOrder, Filter.OP_EQUAL));
 					// deeper loading of the relation to prevent the lazy
 					// loading problem.
 					soOrderPosition.addFetch("article");
 
-					getPlwOrderpositions()
-							.init(soOrderPosition, this.listBoxOrderArticle, this.paging_OrderArticleList);
+					getPlwOrderpositions().init(soOrderPosition, listBoxOrderArticle, paging_OrderArticleList);
 				}
 			} else {
 				// get a new Order for searching that the resultList is cleared
-				final Order anOrder = getOrderService().getNewOrder();
-				final HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(
-						Orderposition.class, getPageSizeOrderPositions());
+				Order anOrder = getOrderService().getNewOrder();
+				HibernateSearchObject<Orderposition> soOrderPosition = new HibernateSearchObject<Orderposition>(Orderposition.class, getPageSizeOrderPositions());
 				soOrderPosition.addFilter(new Filter("order", anOrder, Filter.OP_EQUAL));
 				// deeper loading of the relation to prevent the lazy
 				// loading problem.
 				soOrderPosition.addFetch("article");
 
-				getPlwOrderpositions().init(soOrderPosition, this.listBoxOrderArticle, this.paging_OrderArticleList);
+				getPlwOrderpositions().init(soOrderPosition, listBoxOrderArticle, paging_OrderArticleList);
 			}
 		}
 
 		// close the bandbox
-		this.bandbox_OrderList_CustomerSearch.close();
+		bandbox_OrderList_CustomerSearch.close();
 
 	}
 

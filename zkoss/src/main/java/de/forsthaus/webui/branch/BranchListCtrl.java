@@ -118,8 +118,8 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 		 * 2. Set this controller in the MainController.<br>
 		 * 3. Check if a 'selectedObject' exists yet in the MainController.<br>
 		 */
-		if (this.arg.containsKey("ModuleMainController")) {
-			setBranchMainCtrl((BranchMainCtrl) this.arg.get("ModuleMainController"));
+		if (arg.containsKey("ModuleMainController")) {
+			setBranchMainCtrl((BranchMainCtrl) arg.get("ModuleMainController"));
 
 			// SET THIS CONTROLLER TO THE MainController
 			getBranchMainCtrl().setBranchListCtrl(this);
@@ -160,22 +160,22 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 		doFitSize();
 
 		// set the paging params
-		this.pagingBranchList.setPageSize(getCountRows());
-		this.pagingBranchList.setDetailed(true);
+		pagingBranchList.setPageSize(getCountRows());
+		pagingBranchList.setDetailed(true);
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		this.listheader_BranchText.setSortAscending(new FieldComparator("text", true));
-		this.listheader_BranchText.setSortDescending(new FieldComparator("text", false));
+		listheader_BranchText.setSortAscending(new FieldComparator("text", true));
+		listheader_BranchText.setSortDescending(new FieldComparator("text", false));
 
 		// ++ create the searchObject and init sorting ++//
 		// get customers and only their latest address
-		this.searchObj = new HibernateSearchObject<Branche>(Branche.class, getCountRows());
-		this.searchObj.addSort("braBezeichnung", false);
-		setSearchObj(this.searchObj);
+		searchObj = new HibernateSearchObject<Branche>(Branche.class, getCountRows());
+		searchObj.addSort("braBezeichnung", false);
+		setSearchObj(searchObj);
 
 		// Set the BindingListModel
-		getPagedBindingListWrapper().init(this.searchObj, getListBoxBranch(), this.pagingBranchList);
+		getPagedBindingListWrapper().init(searchObj, getListBoxBranch(), pagingBranchList);
 		final BindingListModelList lml = (BindingListModelList) getListBoxBranch().getModel();
 		setBranches(lml);
 
@@ -258,8 +258,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 
 		// show the objects data in the statusBar
 		final String str = Labels.getLabel("common.Branch") + ": " + aBranche.getBraBezeichnung();
-		EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(
-				new Event("onChangeSelectedObject", null, str));
+		EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeSelectedObject", null, str));
 
 	}
 
@@ -284,9 +283,9 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		final int maxListBoxHeight = height - specialSize - 138;
 		setCountRows((int) Math.round(maxListBoxHeight / 17.7));
-		this.borderLayout_branchList.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		borderLayout_branchList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
-		this.windowBranchList.invalidate();
+		windowBranchList.invalidate();
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //

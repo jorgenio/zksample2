@@ -184,7 +184,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doDemoMode() {
 
-		final Office office = getOfficeService().getOfficeByID(Long.valueOf(1));
+		Office office = getOfficeService().getOfficeByID(Long.valueOf(1));
 		getUserWorkspace().setOffice(office);
 
 	}
@@ -195,10 +195,10 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	private void createMainTreeMenu() {
 
 		// get an instance of the borderlayout defined in the index.zul-file
-		final Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
+		Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
 
 		// get an instance of the searched west layout area
-		final West west = bl.getWest();
+		West west = bl.getWest();
 		west.setFlex(true);
 		// clear the center child comps
 		west.getChildren().clear();
@@ -215,9 +215,9 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void showWelcomePage() throws InterruptedException {
 		// get an instance of the borderlayout defined in the zul-file
-		final Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
+		Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
 		// get an instance of the searched CENTER layout area
-		final Center center = bl.getCenter();
+		Center center = bl.getCenter();
 		// clear the center child comps
 		center.getChildren().clear();
 		// call the zul-file and put it in the center layout area
@@ -265,11 +265,11 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 			if (workWithTabs == 1) {
 
 				/* get an instance of the borderlayout defined in the zul-file */
-				final Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
+				Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
 				/* get an instance of the searched CENTER layout area */
-				final Center center = bl.getCenter();
+				Center center = bl.getCenter();
 				// get the tabs component
-				final Tabs tabs = (Tabs) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter");
+				Tabs tabs = (Tabs) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter");
 
 				/**
 				 * Check if the tab is already opened than select them and<br>
@@ -287,15 +287,15 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 				if (checkTab == null) {
 
-					final Tab tab = new Tab();
+					Tab tab = new Tab();
 					tab.setId("tab_" + tabName.trim());
 					tab.setLabel(tabName.trim());
 					tab.setClosable(true);
 
 					tab.setParent(tabs);
 
-					final Tabpanels tabpanels = (Tabpanels) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter").getFellow("tabpanelsBoxIndexCenter");
-					final Tabpanel tabpanel = new Tabpanel();
+					Tabpanels tabpanels = (Tabpanels) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter").getFellow("tabpanelsBoxIndexCenter");
+					Tabpanel tabpanel = new Tabpanel();
 					tabpanel.setHeight("100%");
 					tabpanel.setStyle("padding: 0px;");
 					tabpanel.setParent(tabpanels);
@@ -314,9 +314,9 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 				}
 			} else {
 				/* get an instance of the borderlayout defined in the zul-file */
-				final Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
+				Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
 				/* get an instance of the searched CENTER layout area */
-				final Center center = bl.getCenter();
+				Center center = bl.getCenter();
 				/* clear the center child comps */
 				center.getChildren().clear();
 				/**

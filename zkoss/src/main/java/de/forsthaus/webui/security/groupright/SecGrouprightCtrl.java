@@ -194,9 +194,9 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 		// TODO put the logic for working with panel in the ApplicationWorkspace
 		final boolean withPanel = false;
 		if (withPanel == false) {
-			this.panel_SecGroupRight.setVisible(false);
+			panel_SecGroupRight.setVisible(false);
 		} else {
-			this.panel_SecGroupRight.setVisible(true);
+			panel_SecGroupRight.setVisible(true);
 			panelHeight = 0;
 		}
 
@@ -212,68 +212,65 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 		// System.out.println("==========> : " + getCountRowsRightDetails());
 
 		/* set the PageSize */
-		this.paging_ListBoxSecGroup.setPageSize(getCountRowsGroup());
-		this.paging_ListBoxSecGroup.setDetailed(true);
+		paging_ListBoxSecGroup.setPageSize(getCountRowsGroup());
+		paging_ListBoxSecGroup.setDetailed(true);
 
-		this.paging_ListBoxSecGroupRight.setPageSize(getCountRowsRight());
-		this.paging_ListBoxSecGroupRight.setDetailed(true);
+		paging_ListBoxSecGroupRight.setPageSize(getCountRowsRight());
+		paging_ListBoxSecGroupRight.setDetailed(true);
 
-		this.paging_ListBoxSecGroupRight_Details.setPageSize(getCountRowsRightDetails());
-		this.paging_ListBoxSecGroupRight_Details.setDetailed(true);
+		paging_ListBoxSecGroupRight_Details.setPageSize(getCountRowsRightDetails());
+		paging_ListBoxSecGroupRight_Details.setDetailed(true);
 
 		// main borderlayout height = window.height - (Panels Top)
-		this.borderlayoutSecGroupRight.setHeight(String.valueOf(maxListBoxHeight) + "px");
-		this.borderLayout_Groups.setHeight(String.valueOf(maxListBoxHeight - 5) + "px");
-		this.borderLayout_Rights.setHeight(String.valueOf(maxListBoxHeight - 5) + "px");
-		this.borderLayout_Rights_TabDetails.setHeight(String.valueOf(maxListBoxHeight - 5) + "px");
+		borderlayoutSecGroupRight.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		borderLayout_Groups.setHeight(String.valueOf(maxListBoxHeight - 5) + "px");
+		borderLayout_Rights.setHeight(String.valueOf(maxListBoxHeight - 5) + "px");
+		borderLayout_Rights_TabDetails.setHeight(String.valueOf(maxListBoxHeight - 5) + "px");
 
-		this.listBoxSecGroup.setHeight(String.valueOf(maxListBoxHeight - 98) + "px");
-		this.listBoxSecGroupRight.setHeight(String.valueOf(maxListBoxHeight - 125) + "px");
-		this.listBoxSecGroupRight_Details.setHeight(String.valueOf(maxListBoxHeight - 133) + "px");
+		listBoxSecGroup.setHeight(String.valueOf(maxListBoxHeight - 98) + "px");
+		listBoxSecGroupRight.setHeight(String.valueOf(maxListBoxHeight - 125) + "px");
+		listBoxSecGroupRight_Details.setHeight(String.valueOf(maxListBoxHeight - 133) + "px");
 
 		/* Tab All */
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class,
-				getCountRowsGroup());
+		HibernateSearchObject<SecGroup> soSecGroup = new HibernateSearchObject<SecGroup>(SecGroup.class, getCountRowsGroup());
 		soSecGroup.addSort("grpShortdescription", false);
 		// Set the ListModel.
-		getPlwSecGroups().init(soSecGroup, this.listBoxSecGroup, this.paging_ListBoxSecGroup);
+		getPlwSecGroups().init(soSecGroup, listBoxSecGroup, paging_ListBoxSecGroup);
 		// set the itemRenderer
-		this.listBoxSecGroup.setItemRenderer(new SecGrouprightDialogGroupListModelItemRenderer());
+		listBoxSecGroup.setItemRenderer(new SecGrouprightDialogGroupListModelItemRenderer());
 
 		// Before we set the ItemRenderer we select the first Item
 		// for init the rendering of the rights
-		setSelectedGroup((SecGroup) this.listBoxSecGroup.getModel().getElementAt(0));
-		this.listBoxSecGroup.setSelectedIndex(0);
+		setSelectedGroup((SecGroup) listBoxSecGroup.getModel().getElementAt(0));
+		listBoxSecGroup.setSelectedIndex(0);
 
 		// init, for displaying all rights entries in the table
 		// sets the ListModel for the 'listBoxSecGroupRight'
-		this.checkbox_SecGroupRight_All.setChecked(true);
+		checkbox_SecGroupRight_All.setChecked(true);
 		filterTypeForShowingRights();
 
 		// not used listheaders must be declared like ->
 		// lh.setSortAscending(""); lh.setSortDescending("")
-		this.listheader_SecGroupRight_grpShortdescription.setSortAscending(new FieldComparator("grpShortdescription",
-				true));
-		this.listheader_SecGroupRight_grpShortdescription.setSortDescending(new FieldComparator("grpShortdescription",
-				false));
+		this.listheader_SecGroupRight_grpShortdescription.setSortAscending(new FieldComparator("grpShortdescription", true));
+		this.listheader_SecGroupRight_grpShortdescription.setSortDescending(new FieldComparator("grpShortdescription", false));
 
 		// Assign the Comparator for sorting GroupRights Listbox
-		this.listheader_SecGroupRight_RightName.setSortAscending(new FieldComparator("rigName", true));
-		this.listheader_SecGroupRight_RightName.setSortDescending(new FieldComparator("rigName", false));
-		this.listheader_SecGroupRight_Type.setSortAscending(new FieldComparator("rigType", true));
-		this.listheader_SecGroupRight_Type.setSortDescending(new FieldComparator("rigType", false));
+		listheader_SecGroupRight_RightName.setSortAscending(new FieldComparator("rigName", true));
+		listheader_SecGroupRight_RightName.setSortDescending(new FieldComparator("rigName", false));
+		listheader_SecGroupRight_Type.setSortAscending(new FieldComparator("rigType", true));
+		listheader_SecGroupRight_Type.setSortDescending(new FieldComparator("rigType", false));
 
 		// Assign the Comparator for sorting GroupRights Listbox on Tab
 		// "only granted rights"
-		this.listheader_SecGroupRight_Details_GrantedRight.setSortAscending("");
-		this.listheader_SecGroupRight_Details_GrantedRight.setSortDescending("");
-		this.listheader_SecGroupRight_Details_RightName.setSortAscending(new FieldComparator("rigName", true));
-		this.listheader_SecGroupRight_Details_RightName.setSortDescending(new FieldComparator("rigName", false));
-		this.listheader_SecGroupRight_Details_Type.setSortAscending(new FieldComparator("rigType", true));
-		this.listheader_SecGroupRight_Details_Type.setSortDescending(new FieldComparator("rigType", false));
+		listheader_SecGroupRight_Details_GrantedRight.setSortAscending("");
+		listheader_SecGroupRight_Details_GrantedRight.setSortDescending("");
+		listheader_SecGroupRight_Details_RightName.setSortAscending(new FieldComparator("rigName", true));
+		listheader_SecGroupRight_Details_RightName.setSortDescending(new FieldComparator("rigName", false));
+		listheader_SecGroupRight_Details_Type.setSortAscending(new FieldComparator("rigType", true));
+		listheader_SecGroupRight_Details_Type.setSortDescending(new FieldComparator("rigType", false));
 
-		this.listBoxSecGroupRight.setItemRenderer(new SecGrouprightRightListModelItemRenderer(this));
+		listBoxSecGroupRight.setItemRenderer(new SecGrouprightRightListModelItemRenderer(this));
 	}
 
 	/**
@@ -284,44 +281,43 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	private void filterTypeForShowingRights() {
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class,
-				getCountRowsRight());
+		HibernateSearchObject<SecRight> soSecRight = new HibernateSearchObject<SecRight>(SecRight.class, getCountRowsRight());
 		soSecRight.addSort("rigName", false);
 
-		if (this.checkbox_SecGroupRight_All.isChecked()) {
+		if (checkbox_SecGroupRight_All.isChecked()) {
 			// nothing todo
 		}
-		if (this.checkbox_SecGroupRight_Pages.isChecked()) {
+		if (checkbox_SecGroupRight_Pages.isChecked()) {
 			// list.add(0);
 			soSecRight.addFilter(new Filter("rigType", 0, Filter.OP_EQUAL));
 		}
-		if (this.checkbox_SecGroupRight_Tabs.isChecked()) {
+		if (checkbox_SecGroupRight_Tabs.isChecked()) {
 			// list.add(5);
 			soSecRight.addFilter(new Filter("rigType", 5, Filter.OP_EQUAL));
 		}
-		if (this.checkbox_SecGroupRight_MenuCat.isChecked()) {
+		if (checkbox_SecGroupRight_MenuCat.isChecked()) {
 			// list.add(1);
 			soSecRight.addFilter(new Filter("rigType", 1, Filter.OP_EQUAL));
 		}
-		if (this.checkbox_SecGroupRight_MenuItems.isChecked()) {
+		if (checkbox_SecGroupRight_MenuItems.isChecked()) {
 			// list.add(2);
 			soSecRight.addFilter(new Filter("rigType", 2, Filter.OP_EQUAL));
 		}
-		if (this.checkbox_SecGroupRight_Methods.isChecked()) {
+		if (checkbox_SecGroupRight_Methods.isChecked()) {
 			// list.add(3);
 			soSecRight.addFilter(new Filter("rigType", 3, Filter.OP_EQUAL));
 		}
-		if (this.checkbox_SecGroupRight_Domain.isChecked()) {
+		if (checkbox_SecGroupRight_Domain.isChecked()) {
 			// list.add(4);
 			soSecRight.addFilter(new Filter("rigType", 4, Filter.OP_EQUAL));
 		}
-		if (this.checkbox_SecGroupRight_Components.isChecked()) {
+		if (checkbox_SecGroupRight_Components.isChecked()) {
 			// list.add(6);
 			soSecRight.addFilter(new Filter("rigType", 6, Filter.OP_EQUAL));
 		}
 
 		// Set the ListModel.
-		getPlwSecRights().init(soSecRight, this.listBoxSecGroupRight, this.paging_ListBoxSecGroupRight);
+		getPlwSecRights().init(soSecRight, listBoxSecGroupRight, paging_ListBoxSecGroupRight);
 
 	}
 
@@ -332,13 +328,13 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	public void onCheck$checkbox_SecGroupRight_All(Event event) {
 		logger.debug(event.toString());
 
-		this.checkbox_SecGroupRight_Pages.setChecked(false);
-		this.checkbox_SecGroupRight_Tabs.setChecked(false);
-		this.checkbox_SecGroupRight_MenuCat.setChecked(false);
-		this.checkbox_SecGroupRight_MenuItems.setChecked(false);
-		this.checkbox_SecGroupRight_Methods.setChecked(false);
-		this.checkbox_SecGroupRight_Domain.setChecked(false);
-		this.checkbox_SecGroupRight_Components.setChecked(false);
+		checkbox_SecGroupRight_Pages.setChecked(false);
+		checkbox_SecGroupRight_Tabs.setChecked(false);
+		checkbox_SecGroupRight_MenuCat.setChecked(false);
+		checkbox_SecGroupRight_MenuItems.setChecked(false);
+		checkbox_SecGroupRight_Methods.setChecked(false);
+		checkbox_SecGroupRight_Domain.setChecked(false);
+		checkbox_SecGroupRight_Components.setChecked(false);
 
 		filterTypeForShowingRights();
 	}
@@ -351,7 +347,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 */
 	public void onCheck$checkbox_SecGroupRight_Pages(Event event) {
 
-		this.checkbox_SecGroupRight_All.setChecked(false);
+		checkbox_SecGroupRight_All.setChecked(false);
 
 		filterTypeForShowingRights();
 	}
@@ -364,7 +360,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 */
 	public void onCheck$checkbox_SecGroupRight_Tabs(Event event) {
 
-		this.checkbox_SecGroupRight_All.setChecked(false);
+		checkbox_SecGroupRight_All.setChecked(false);
 
 		filterTypeForShowingRights();
 	}
@@ -377,7 +373,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 */
 	public void onCheck$checkbox_SecGroupRight_MenuCat(Event event) {
 
-		this.checkbox_SecGroupRight_All.setChecked(false);
+		checkbox_SecGroupRight_All.setChecked(false);
 
 		filterTypeForShowingRights();
 	}
@@ -390,7 +386,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 */
 	public void onCheck$checkbox_SecGroupRight_MenuItems(Event event) {
 
-		this.checkbox_SecGroupRight_All.setChecked(false);
+		checkbox_SecGroupRight_All.setChecked(false);
 
 		filterTypeForShowingRights();
 	}
@@ -403,7 +399,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 */
 	public void onCheck$checkbox_SecGroupRight_Methods(Event event) {
 
-		this.checkbox_SecGroupRight_All.setChecked(false);
+		checkbox_SecGroupRight_All.setChecked(false);
 
 		filterTypeForShowingRights();
 	}
@@ -416,7 +412,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 */
 	public void onCheck$checkbox_SecGroupRight_Domain(Event event) {
 
-		this.checkbox_SecGroupRight_All.setChecked(false);
+		checkbox_SecGroupRight_All.setChecked(false);
 
 		filterTypeForShowingRights();
 	}
@@ -429,7 +425,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 */
 	public void onCheck$checkbox_SecGroupRight_Components(Event event) {
 
-		this.checkbox_SecGroupRight_All.setChecked(false);
+		checkbox_SecGroupRight_All.setChecked(false);
 
 		filterTypeForShowingRights();
 	}
@@ -441,7 +437,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnSave(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doSave();
 	}
@@ -453,7 +449,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
@@ -467,10 +463,10 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		Events.postEvent("onCreate", this.secGroupRightWindow, event);
-		this.secGroupRightWindow.invalidate();
+		secGroupRightWindow.invalidate();
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -483,20 +479,18 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 * @param event
 	 */
 	public void onSelect$tab_SecGroupRight_Details(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		// ++ create the searchObject and init sorting ++//
-		final HibernateSearchObject<SecRight> soSecRightDetails = new HibernateSearchObject<SecRight>(SecRight.class,
-				getCountRowsRightDetails());
+		HibernateSearchObject<SecRight> soSecRightDetails = new HibernateSearchObject<SecRight>(SecRight.class, getCountRowsRightDetails());
 		soSecRightDetails.addSort("rigName", false);
 		soSecRightDetails.addFetch("secGrouprights");
 		soSecRightDetails.addFilter(new Filter("secGrouprights.secGroup", getSelectedGroup(), Filter.OP_EQUAL));
 
 		// Set the ListModel.
-		getPlwSecRights().init(soSecRightDetails, this.listBoxSecGroupRight_Details,
-				this.paging_ListBoxSecGroupRight_Details);
+		getPlwSecRights().init(soSecRightDetails, listBoxSecGroupRight_Details, this.paging_ListBoxSecGroupRight_Details);
 		// set the itemRenderer
-		this.listBoxSecGroupRight_Details.setItemRenderer(new SecGrouprightRightListModelItemRenderer(this));
+		listBoxSecGroupRight_Details.setItemRenderer(new SecGrouprightRightListModelItemRenderer(this));
 
 	}
 
@@ -507,7 +501,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 * @param event
 	 */
 	public void onSelect$tab_SecGroupRight_AllRights(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		filterTypeForShowingRights();
 	}
@@ -530,27 +524,27 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 
 		List<Listitem> li = null;
 
-		if (this.tab_SecGroupRight_AllRights.isSelected()) {
-			li = this.listBoxSecGroupRight.getItems();
+		if (tab_SecGroupRight_AllRights.isSelected()) {
+			li = listBoxSecGroupRight.getItems();
 
-		} else if (this.tab_SecGroupRight_Details.isSelected()) {
-			li = this.listBoxSecGroupRight_Details.getItems();
+		} else if (tab_SecGroupRight_Details.isSelected()) {
+			li = listBoxSecGroupRight_Details.getItems();
 
 		}
 
-		for (final Listitem listitem : li) {
+		for (Listitem listitem : li) {
 
-			final Listcell lc = (Listcell) listitem.getFirstChild();
-			final Checkbox cb = (Checkbox) lc.getFirstChild();
+			Listcell lc = (Listcell) listitem.getFirstChild();
+			Checkbox cb = (Checkbox) lc.getFirstChild();
 
 			if (cb != null) {
 
 				if (cb.isChecked() == true) {
 
 					// Get the object by casting
-					final SecRight right = (SecRight) listitem.getAttribute("data");
+					SecRight right = (SecRight) listitem.getAttribute("data");
 					// get the group
-					final SecGroup group = getSelectedGroup();
+					SecGroup group = getSelectedGroup();
 
 					// check if the item is newly checked. If so we cannot found
 					// it in the SecGroupRight-table
@@ -569,13 +563,13 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 				} else if (cb.isChecked() == false) {
 
 					// Get the object by casting
-					final SecRight right = (SecRight) listitem.getAttribute("data");
+					SecRight right = (SecRight) listitem.getAttribute("data");
 					// get the group
-					final SecGroup group = getSelectedGroup();
+					SecGroup group = getSelectedGroup();
 
 					// check if the item is newly unChecked. If so we must found
 					// it in the SecGroupRight-table
-					final SecGroupright groupRight = getSecurityService().getGroupRightByGroupAndRight(group, right);
+					SecGroupright groupRight = getSecurityService().getGroupRightByGroupAndRight(group, right);
 
 					if (groupRight != null) {
 						// delete from DB
@@ -591,40 +585,38 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 		// public void onGroupItemClicked(Event event) throws Exception {
 
 		// get the selected object
-		final Listitem item = this.listBoxSecGroup.getSelectedItem();
+		Listitem item = this.listBoxSecGroup.getSelectedItem();
 
 		// Casting
-		final SecGroup aGroup = (SecGroup) item.getAttribute("data");
+		SecGroup aGroup = (SecGroup) item.getAttribute("data");
 		setSelectedGroup(aGroup);
 
-		if (this.tab_SecGroupRight_AllRights.isSelected()) {
+		if (tab_SecGroupRight_AllRights.isSelected()) {
 			filterTypeForShowingRights();
-		} else if (this.tab_SecGroupRight_Details.isSelected()) {
+		} else if (tab_SecGroupRight_Details.isSelected()) {
 
 			// ++ create the searchObject and init sorting ++//
-			final HibernateSearchObject<SecRight> soSecRightDetails = new HibernateSearchObject<SecRight>(
-					SecRight.class, getCountRowsRightDetails());
+			HibernateSearchObject<SecRight> soSecRightDetails = new HibernateSearchObject<SecRight>(SecRight.class, getCountRowsRightDetails());
 			soSecRightDetails.addSort("rigName", false);
 			soSecRightDetails.addFetch("secGrouprights");
 			soSecRightDetails.addFilter(new Filter("secGrouprights.secGroup", getSelectedGroup(), Filter.OP_EQUAL));
 
 			// Set the ListModel.
-			getPlwSecRights().init(soSecRightDetails, this.listBoxSecGroupRight_Details,
-					this.paging_ListBoxSecGroupRight_Details);
+			getPlwSecRights().init(soSecRightDetails, listBoxSecGroupRight_Details, paging_ListBoxSecGroupRight_Details);
 			// set the itemRenderer
-			this.listBoxSecGroupRight_Details.setItemRenderer(new SecGrouprightRightListModelItemRenderer(this));
+			listBoxSecGroupRight_Details.setItemRenderer(new SecGrouprightRightListModelItemRenderer(this));
 
 		}
 	}
 
 	public void onClick$button_GroupRight_NewGroupRight(Event event) throws Exception {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		// get the selected object
-		final Listitem item = this.listBoxSecGroup.getSelectedItem();
+		Listitem item = listBoxSecGroup.getSelectedItem();
 
 		// CAST AND STORE THE SELECTED OBJECT
-		final SecGroup aGroup = (SecGroup) item.getAttribute("data");
+		SecGroup aGroup = (SecGroup) item.getAttribute("data");
 		setSelectedGroup(aGroup);
 
 		if (aGroup != null) {
@@ -635,7 +627,7 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 			 * parameter only a Map is accepted. So we put the object in a
 			 * HashMap.
 			 */
-			final HashMap<String, Object> map = new HashMap<String, Object>();
+			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("group", aGroup);
 			/*
 			 * we can additionally handed over the listBox, so we have in the
@@ -651,8 +643,8 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 				logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 
 				// Show a error box
-				final String msg = e.getMessage();
-				final String title = Labels.getLabel("message.Error");
+				String msg = e.getMessage();
+				String title = Labels.getLabel("message.Error");
 
 				MultiLineMessageBox.doSetTemplate();
 				MultiLineMessageBox.show(msg, title, MultiLineMessageBox.OK, "ERROR", true);

@@ -88,8 +88,8 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 		 * 2. Set this controller in the MainController.<br>
 		 * 3. Check if a 'selectedObject' exists yet in the MainController.<br>
 		 */
-		if (this.arg.containsKey("ModuleMainController")) {
-			setArticleMainCtrl((ArticleMainCtrl) this.arg.get("ModuleMainController"));
+		if (arg.containsKey("ModuleMainController")) {
+			setArticleMainCtrl((ArticleMainCtrl) arg.get("ModuleMainController"));
 
 			// SET THIS CONTROLLER TO THE MainController
 			getArticleMainCtrl().setArticleDetailCtrl(this);
@@ -119,8 +119,8 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void onCreate$windowArticleDetail(Event event) throws Exception {
 
-		this.binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
-		this.binder.loadAll();
+		binder = (AnnotateDataBinder) event.getTarget().getAttribute("binder", true);
+		binder.loadAll();
 
 		doFitSize(event);
 	}
@@ -143,9 +143,9 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 	public void doFitSize(Event event) {
 		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		final int maxListBoxHeight = height - 138;
-		this.borderLayout_articleDetail.setHeight(String.valueOf(maxListBoxHeight) + "px");
+		borderLayout_articleDetail.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
-		this.windowArticleDetail.invalidate();
+		windowArticleDetail.invalidate();
 	}
 
 	/**
@@ -157,10 +157,10 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param b
 	 */
 	public void doReadOnlyMode(boolean b) {
-		this.txtb_artNr.setReadonly(b);
-		this.txtb_artKurzbezeichnung.setReadonly(b);
-		this.txtb_artLangbezeichnung.setReadonly(b);
-		this.decb_artPreis.setReadonly(b);
+		txtb_artNr.setReadonly(b);
+		txtb_artKurzbezeichnung.setReadonly(b);
+		txtb_artLangbezeichnung.setReadonly(b);
+		decb_artPreis.setReadonly(b);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //

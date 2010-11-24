@@ -109,11 +109,11 @@ public class CalendarCreateEventCtrl extends GFCBaseCtrl implements Serializable
 		 * 1. Get the overhanded MainController.<br>
 		 * 2. Get the selected event.<br>
 		 */
-		if (this.arg.containsKey("calendarController")) {
-			setCalendarCtrl((CalendarCtrl) this.arg.get("calendarController"));
+		if (arg.containsKey("calendarController")) {
+			setCalendarCtrl((CalendarCtrl) arg.get("calendarController"));
 		}
-		if (this.arg.containsKey("calendarsEvent")) {
-			setNewEvent(((CalendarsEvent) this.arg.get("calendarsEvent")));
+		if (arg.containsKey("calendarsEvent")) {
+			setNewEvent(((CalendarsEvent) arg.get("calendarsEvent")));
 		} else
 			setNewEvent(null);
 	}

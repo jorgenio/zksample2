@@ -114,15 +114,14 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void onCreate$secRightDialogWindow(Event event) throws Exception {
 		// create the Button Controller. Disable not used buttons during working
-		this.btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, true, this.btnNew,
-				this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
-		final Map<String, Object> args = getCreationArgsMap(event);
+		Map<String, Object> args = getCreationArgsMap(event);
 
 		if (args.containsKey("right")) {
-			this.right = (SecRight) args.get("right");
-			setRight(this.right);
+			right = (SecRight) args.get("right");
+			setRight(right);
 		} else {
 			setRight(null);
 		}
@@ -131,24 +130,24 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// to it and can synchronize the shown data when we do insert, edit or
 		// delete users here.
 		if (args.containsKey("listBoxSecRights")) {
-			this.listBoxSecRights = (Listbox) args.get("listBoxSecRights");
+			listBoxSecRights = (Listbox) args.get("listBoxSecRights");
 		} else {
-			this.listBoxSecRights = null;
+			listBoxSecRights = null;
 		}
 
 		// +++++++++ DropDown ListBox
 		// set listModel and itemRenderer for the dropdown listbox
-		this.rigType.setModel(new ListModelList(getSecurityService().getAllTypes()));
-		this.rigType.setItemRenderer(new SecRightSecTypListModelItemRenderer());
+		rigType.setModel(new ListModelList(getSecurityService().getAllTypes()));
+		rigType.setItemRenderer(new SecRightSecTypListModelItemRenderer());
 
 		// if available, select the object
-		final ListModelList lml = (ListModelList) this.rigType.getModel();
-		final SecTyp typ = getSecurityService().getTypById(this.right.getRigType().intValue());
+		ListModelList lml = (ListModelList) rigType.getModel();
+		SecTyp typ = getSecurityService().getTypById(right.getRigType().intValue());
 
-		if (this.right.isNew()) {
-			this.rigType.setSelectedIndex(-1);
+		if (right.isNew()) {
+			rigType.setSelectedIndex(-1);
 		} else {
-			this.rigType.setSelectedIndex(lml.indexOf(typ));
+			rigType.setSelectedIndex(lml.indexOf(typ));
 		}
 
 		// set Field Properties
@@ -169,7 +168,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onClose$secRightDialogWindow(Event event) throws Exception {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doClose();
 	}
@@ -181,7 +180,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnSave(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doSave();
 	}
@@ -192,7 +191,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnEdit(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doEdit();
 	}
@@ -204,7 +203,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
@@ -215,7 +214,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnNew(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doNew();
 	}
@@ -227,7 +226,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnDelete(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doDelete();
 	}
@@ -238,7 +237,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 */
 	public void onClick$btnCancel(Event event) {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		doCancel();
 	}
@@ -250,13 +249,13 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnClose(Event event) throws InterruptedException {
-		logger.debug(event.toString());
+		// logger.debug(event.toString());
 
 		try {
 			doClose();
 		} catch (final Exception e) {
 			// close anyway
-			this.secRightDialogWindow.onClose();
+			secRightDialogWindow.onClose();
 		}
 	}
 
@@ -276,32 +275,31 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 		if (isDataChanged()) {
 
 			// Show a confirm box
-			final String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
-			final String title = Labels.getLabel("message.Information");
+			String msg = Labels.getLabel("message_Data_Modified_Save_Data_YesNo");
+			String title = Labels.getLabel("message.Information");
 
 			MultiLineMessageBox.doSetTemplate();
-			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO,
-					MultiLineMessageBox.QUESTION, true, new EventListener() {
-						@Override
-						public void onEvent(Event evt) {
-							switch (((Integer) evt.getData()).intValue()) {
-							case MultiLineMessageBox.YES:
-								try {
-									doSave();
-								} catch (final InterruptedException e) {
-									throw new RuntimeException(e);
-								}
-							case MultiLineMessageBox.NO:
-								break; //
-							}
+			if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
+				@Override
+				public void onEvent(Event evt) {
+					switch (((Integer) evt.getData()).intValue()) {
+					case MultiLineMessageBox.YES:
+						try {
+							doSave();
+						} catch (final InterruptedException e) {
+							throw new RuntimeException(e);
 						}
+					case MultiLineMessageBox.NO:
+						break; //
 					}
+				}
+			}
 
 			) == MultiLineMessageBox.YES) {
 			}
 		}
 
-		this.secRightDialogWindow.onClose();
+		secRightDialogWindow.onClose();
 	}
 
 	/**
@@ -313,7 +311,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private void doCancel() {
 		doResetInitValues();
 		doReadOnly();
-		this.btnCtrl.setInitEdit();
+		btnCtrl.setInitEdit();
 	}
 
 	/**
@@ -324,7 +322,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doWriteBeanToComponents(SecRight aRight) {
 
-		this.rigName.setValue(aRight.getRigName());
+		rigName.setValue(aRight.getRigName());
 
 	}
 
@@ -335,7 +333,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doWriteComponentsToBean(SecRight aRight) {
 
-		aRight.setRigName(this.rigName.getValue());
+		aRight.setRigName(rigName.getValue());
 	}
 
 	/**
@@ -363,10 +361,10 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// set Readonly mode accordingly if the object is new or not.
 		if (aRight.isNew()) {
-			this.btnCtrl.setInitNew();
+			btnCtrl.setInitNew();
 			doEdit();
 		} else {
-			this.btnCtrl.setInitEdit();
+			btnCtrl.setInitEdit();
 			doReadOnly();
 		}
 
@@ -378,8 +376,8 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 			// during user action.
 			doStoreInitValues();
 
-			this.secRightDialogWindow.doModal(); // open the dialog in modal
-													// mode
+			secRightDialogWindow.doModal(); // open the dialog in modal
+			// mode
 		} catch (final Exception e) {
 			Messagebox.show(e.toString());
 		}
@@ -393,23 +391,23 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * Set the properties of the fields, like maxLength.<br>
 	 */
 	private void doSetFieldProperties() {
-		this.rigName.setMaxlength(50);
+		rigName.setMaxlength(50);
 	}
 
 	/**
 	 * Stores the init values in mem vars. <br>
 	 */
 	private void doStoreInitValues() {
-		this.oldVar_rigName = this.rigName.getValue();
-		this.oldVar_rigType = this.rigType.getSelectedItem();
+		oldVar_rigName = rigName.getValue();
+		oldVar_rigType = rigType.getSelectedItem();
 	}
 
 	/**
 	 * Resets the init values from mem vars. <br>
 	 */
 	private void doResetInitValues() {
-		this.rigName.setValue(this.oldVar_rigName);
-		this.rigType.setSelectedItem(this.oldVar_rigType);
+		rigName.setValue(oldVar_rigName);
+		rigType.setSelectedItem(oldVar_rigType);
 	}
 
 	/**
@@ -421,10 +419,10 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private boolean isDataChanged() {
 		boolean changed = false;
 
-		if (this.oldVar_rigName != this.rigName.getValue()) {
+		if (oldVar_rigName != rigName.getValue()) {
 			changed = true;
 		}
-		if (this.oldVar_rigType != this.rigType.getSelectedItem()) {
+		if (oldVar_rigType != rigType.getSelectedItem()) {
 			changed = true;
 		}
 
@@ -438,7 +436,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		setValidationOn(true);
 
-		this.rigName.setConstraint("NO EMPTY");
+		rigName.setConstraint("NO EMPTY");
 		// TODO helper textbox for selectedItem ?????
 		// rigType.getSelectedItem()) {
 	}
@@ -450,7 +448,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		setValidationOn(false);
 
-		this.rigName.setConstraint("");
+		rigName.setConstraint("");
 		// TODO helper textbox for selectedItem ?????
 		// rigType.getSelectedItem()) {
 	}
@@ -469,45 +467,40 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 		final SecRight aRight = getRight();
 
 		// Show a confirm box
-		final String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> "
-				+ aRight.getRigName();
-		final String title = Labels.getLabel("message.Deleting.Record");
+		String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> " + aRight.getRigName();
+		String title = Labels.getLabel("message.Deleting.Record");
 
 		MultiLineMessageBox.doSetTemplate();
-		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO,
-				MultiLineMessageBox.QUESTION, true, new EventListener() {
-					@Override
-					public void onEvent(Event evt) {
-						switch (((Integer) evt.getData()).intValue()) {
-						case MultiLineMessageBox.YES:
-							delete();
-						case MultiLineMessageBox.NO:
-							break; //
-						}
-					}
-
-					private void delete() {
-
-						// delete from database
-						getSecurityService().delete(aRight);
-
-						// now synchronize the listBox
-						final ListModelList lml = (ListModelList) SecRightDialogCtrl.this.listBoxSecRights
-								.getListModel();
-
-						// Check if the object is new or updated
-						// -1 means that the obj is not in the list, so it's
-						// new..
-						if (lml.indexOf(aRight) == -1) {
-						} else {
-							lml.remove(lml.indexOf(aRight));
-						}
-
-						SecRightDialogCtrl.this.secRightDialogWindow.onClose(); // close
-																				// the
-																				// dialog
-					}
+		if (MultiLineMessageBox.show(msg, title, MultiLineMessageBox.YES | MultiLineMessageBox.NO, MultiLineMessageBox.QUESTION, true, new EventListener() {
+			@Override
+			public void onEvent(Event evt) {
+				switch (((Integer) evt.getData()).intValue()) {
+				case MultiLineMessageBox.YES:
+					delete();
+				case MultiLineMessageBox.NO:
+					break; //
 				}
+			}
+
+			private void delete() {
+
+				// delete from database
+				getSecurityService().delete(aRight);
+
+				// now synchronize the listBox
+				final ListModelList lml = (ListModelList) listBoxSecRights.getListModel();
+
+				// Check if the object is new or updated
+				// -1 means that the obj is not in the list, so it's
+				// new..
+				if (lml.indexOf(aRight) == -1) {
+				} else {
+					lml.remove(lml.indexOf(aRight));
+				}
+
+				secRightDialogWindow.onClose(); // close
+			}
+		}
 
 		) == MultiLineMessageBox.YES) {
 		}
@@ -530,9 +523,9 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doClear(); // clear all commponents
 		doEdit(); // edit mode
 
-		this.rigType.setSelectedIndex(-1);
+		rigType.setSelectedIndex(-1);
 
-		this.btnCtrl.setBtnStatus_New();
+		btnCtrl.setBtnStatus_New();
 
 	}
 
@@ -541,10 +534,10 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doEdit() {
 
-		this.rigName.setReadonly(false);
-		this.rigType.setDisabled(false);
+		rigName.setReadonly(false);
+		rigType.setDisabled(false);
 
-		this.btnCtrl.setBtnStatus_Edit();
+		btnCtrl.setBtnStatus_Edit();
 
 		// remember the old vars
 		doStoreInitValues();
@@ -555,8 +548,8 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doReadOnly() {
 
-		this.rigName.setReadonly(true);
-		this.rigType.setDisabled(true);
+		rigName.setReadonly(true);
+		rigType.setDisabled(true);
 	}
 
 	/**
@@ -567,9 +560,9 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// temporarely disable the validation to allow the field's clearing
 		doRemoveValidation();
 
-		this.rigName.setValue("");
+		rigName.setValue("");
 		// unselect the last customers branch
-		this.rigType.setSelectedIndex(-1);
+		rigType.setSelectedIndex(-1);
 	}
 
 	/**
@@ -592,7 +585,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doWriteComponentsToBean(aRight);
 
 		// get the selected object from the listbox
-		final Listitem item = this.rigType.getSelectedItem();
+		Listitem item = this.rigType.getSelectedItem();
 
 		if (item == null) {
 			try {
@@ -602,17 +595,17 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 			}
 			return;
 		}
-		final ListModelList lml1 = (ListModelList) this.rigType.getListModel();
-		final SecTyp typ = (SecTyp) lml1.get(item.getIndex());
+		ListModelList lml1 = (ListModelList) rigType.getListModel();
+		SecTyp typ = (SecTyp) lml1.get(item.getIndex());
 		aRight.setRigType(Integer.valueOf(typ.getStpId()));
 
 		// save it to database
 		try {
 			getSecurityService().saveOrUpdate(aRight);
 		} catch (final DataAccessException e) {
-			final String message = e.getMessage();
+			String message = e.getMessage();
 			// String message = e.getCause().getMessage();
-			final String title = Labels.getLabel("message.Error");
+			String title = Labels.getLabel("message.Error");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
 
@@ -620,12 +613,12 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 			doResetInitValues();
 
 			doReadOnly();
-			this.btnCtrl.setBtnStatus_Save();
+			btnCtrl.setBtnStatus_Save();
 			return;
 		}
 
 		// now synchronize the listBox
-		final ListModelList lml = (ListModelList) this.listBoxSecRights.getListModel();
+		ListModelList lml = (ListModelList) this.listBoxSecRights.getListModel();
 
 		// Check if the object is new or updated
 		// -1 means that the obj is not in the list, so it's new.
@@ -636,7 +629,7 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 		}
 
 		doReadOnly();
-		this.btnCtrl.setBtnStatus_Save();
+		btnCtrl.setBtnStatus_Save();
 		// init the old values vars new
 		doStoreInitValues();
 	}

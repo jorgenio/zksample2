@@ -206,7 +206,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 
 		// timer doesn't work without a page as parent
 		this.timer.setPage(this.secLoginlogListWindow.getPage());
-		this.timer.setDelay(4000);
+		this.timer.setDelay(10000);
 		this.timer.setRepeats(true);
 		this.timer.addEventListener("onTimer", new EventListener() {
 

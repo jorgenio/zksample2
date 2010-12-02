@@ -193,8 +193,7 @@ public class PagedBindingListWrapper<E> extends BindingListModelList implements 
 					getSearchObject().clearSorts();
 					getSearchObject().addSort(orderBy, true);
 				}
-			} else if ("descending".equals(sortDirection) || "natural".equals(sortDirection)
-					|| Strings.isBlank(sortDirection)) {
+			} else if ("descending".equals(sortDirection) || "natural".equals(sortDirection) || Strings.isBlank(sortDirection)) {
 				final Comparator<?> cmpr = lh.getSortAscending();
 				if (cmpr instanceof FieldComparator) {
 					String orderBy = ((FieldComparator) cmpr).getOrderBy();
@@ -206,7 +205,10 @@ public class PagedBindingListWrapper<E> extends BindingListModelList implements 
 				}
 			}
 
-			// refresh the list
+			/**
+			 * A changing of the sort order implies that the list starts new. So
+			 * we set the startpage to '0' and refresh the list.
+			 */
 			getPaging().setActivePage(0);
 			refreshModel(0);
 

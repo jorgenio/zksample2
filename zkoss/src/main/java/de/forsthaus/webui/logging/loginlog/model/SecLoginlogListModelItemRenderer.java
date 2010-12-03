@@ -188,10 +188,6 @@ public class SecLoginlogListModelItemRenderer implements ListitemRenderer, Seria
 
 		}
 
-		/* BrowserType */
-		lc = new Listcell(log.getBrowserType());
-		lc.setParent(item);
-
 		/* Session-ID */
 		lc = new Listcell(log.getLglSessionid());
 		if (log.getLglStatusid() == 0) {

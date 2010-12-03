@@ -190,12 +190,6 @@
 							sort="auto" width="240px"
 							label="${c:l('listheader_SecLoginlogList_CountryCode2.label')}" />
 						<listheader
-							id="listheader_SecLoginlogList_browserType"
-							sclass="FDListBoxHeader1"
-							image="/images/icons/exdDataPerspective.gif"
-							label="${c:l('common.BrowserType')}"
-							sort="auto" />
-						<listheader
 							id="listheader_SecLoginlogList_lglSessionid"
 							sclass="FDListBoxHeader1"
 							image="/images/icons/exdDataPerspective.gif"

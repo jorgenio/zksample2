@@ -14,7 +14,7 @@
 
 	<panel title="${arg.title}" border="normal"
 		sclass="myMultiMessageBox">
-		<panelchildren>
+		<panelchildren style="background-color: white;">
 			<hbox>
 				<div class="${arg.icon}" />
 				<div sclass="z-messagebox" width="100%">

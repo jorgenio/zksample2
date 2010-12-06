@@ -429,8 +429,12 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		addNewRow(rows, "Count of total Updates since start", String.valueOf(stat.getTotalUpdateCount()));
 
 		// Get the free Memory of the JAVA VM
-		final double value = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) * 100.0 / Runtime.getRuntime().maxMemory();
-		addNewRow(rows, "current free memory on the JAVA VM", getRoundedDouble(value) + " MB", "red");
+		// hehehe: makes not much sense
+		// final double value = (Runtime.getRuntime().totalMemory() -
+		// Runtime.getRuntime().freeMemory()) * 100.0 /
+		// Runtime.getRuntime().maxMemory();
+		// addNewRow(rows, "current free memory on the JAVA VM",
+		// getRoundedDouble(value) + " MB", "red");
 		// Get the number of processors that are available for the JAVA VM
 		final int countCPU = Runtime.getRuntime().availableProcessors();
 		addNewRow(rows, "available processors to the JAVA VM", countCPU, "red");

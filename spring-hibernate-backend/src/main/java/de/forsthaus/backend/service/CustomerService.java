@@ -37,7 +37,7 @@ public interface CustomerService {
 
 	Customer getCustomerById(Long id);
 
-	// test zum nachladen zugehörigen Branche
+	// test zum nachladen zugehoerigen Branche
 	Customer refresh(Customer customer);
 
 	List<Customer> getCustomerByBranche(Branche branche);

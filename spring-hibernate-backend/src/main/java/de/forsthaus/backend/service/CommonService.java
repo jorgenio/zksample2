@@ -5,10 +5,12 @@ import java.util.Map;
 public interface CommonService {
 
 	/**
-	 * Gets the recordCounts for all tables in a Map.
+	 * EN: Gets the recordCounts for all tables. <br>
+	 * DE: Gibt die Anzahl der Datensaetze jeder Tabelle zurueck.<br>
+	 * <br>
 	 * 
-	 * @return Map <String, Object> String = key, i.e. "Customer". Object is the
-	 *         value of recordCounts
+	 * @return Map <String, Object> String=TableName, Object=recordCount, i.e.
+	 *         "Customer" | 2345
 	 */
 	public Map<String, Object> getAllTablesRecordCounts();
 }

@@ -239,7 +239,7 @@
 								style="color: #000000; font-weight:bold;"
 								image="/images/youtube_40x16.jpg"
 								label="weekly Terry's favorite song:"
-								tooltiptext="Music (Danish): Medina  - Kun For Mig" />
+								tooltiptext="Music (Danish): Medina  - Kun For Mig + Ensome" />
 
 							<h:iframe title="YouTube video player"
 								class="youtube-player" type="text/html" width="100%"
@@ -549,7 +549,7 @@
 <!-- Music: Talking Heads - This must be the place   src="http://www.youtube.com/embed/pVrVY540xdc" -->
 <!-- Music: John Cale and Brian Eno - Spinning away   src="http://www.youtube.com/embed/-INeMspNSQ0" -->
 <!-- Music: Metric - Joyride   src="http://www.youtube.com/embed/F0ZL5YWP5I8" -->
-<!-- Music: Medina - Kun For Mig   src="http://www.youtube.com/embed/5Gf004et0SI" -->
+<!-- Music: Medina - Kun For Mig + Ensome  src="http://www.youtube.com/embed/5Gf004et0SI" -->
 
 
 

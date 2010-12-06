@@ -109,7 +109,7 @@ public class Ip4CountryServiceImpl implements Ip4CountryService, Serializable {
 					getIp4CountryDAO().saveOrUpdate(tmp);
 
 					if (logger.isDebugEnabled() && ++counter % 100 == 0) {
-						logger.debug("Aktueller Zähler: " + counter);
+						logger.debug("Aktueller Zaehler: " + counter);
 					}
 				}
 			} finally {

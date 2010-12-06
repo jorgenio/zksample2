@@ -34,7 +34,7 @@ import de.forsthaus.backend.model.SecUser;
 /**
  * DAO methods implementation for the <b>SecRight model</b> class.<br>
  * 
- * SQL injektion möglich! Überarbeitung notwendig!!!! <a
+ * SQL injektion moeglich! Ueberarbeitung notwendig!!!! <a
  * href="http://de.wikipedia.org/wiki/SQL-Injection#Java_.28JDBC.29"
  * >SQL-Injection</a>
  * 

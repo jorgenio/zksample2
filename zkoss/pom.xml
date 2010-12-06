@@ -5,6 +5,7 @@
 	<artifactId>zkoss</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
+	
 	<name>${project.artifactId}->${project.version}</name>
 	<repositories>
 		<repository>
@@ -276,6 +277,7 @@
 		</dependencies>
 	</dependencyManagement>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<zkosslibs>${basedir}/src/main/webapp/WEB-INF/lib/</zkosslibs>
 		<spring.version>3.0.1.RELEASE</spring.version>
 		<springsecurity.version>3.0.2.RELEASE</springsecurity.version>

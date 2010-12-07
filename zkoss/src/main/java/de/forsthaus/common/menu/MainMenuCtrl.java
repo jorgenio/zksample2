@@ -226,6 +226,9 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		return sep;
 	}
 
+	/**
+	 * Inner class for the GuestBookListener.
+	 */
 	public final class GuestBookListener implements EventListener {
 		@Override
 		public void onEvent(Event event) throws Exception {
@@ -237,12 +240,12 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 	/**
 	 * Creates a page from a zul-file in a tab in the center area of the
 	 * borderlayout. Checks if the tab is opened before. If yes than it selects
-	 * this tab.
+	 * this tab, if not than create it new.<br>
 	 * 
 	 * @param zulFilePathName
 	 *            The ZulFile Name with path.
 	 * @param tabName
-	 *            The tab name.
+	 *            The tab name ID.
 	 * @throws InterruptedException
 	 */
 	private void showPage(String zulFilePathName, String tabName) throws InterruptedException {
@@ -317,14 +320,12 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		}
 	}
 
-	public Window getMainMenuWindow() {
-		return this.mainMenuWindow;
-	}
-
-	public void setMainMenuWindow(Window mainMenuWindow) {
-		this.mainMenuWindow = mainMenuWindow;
-	}
-
+	/**
+	 * Expand the menuTree.<br>
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	public void onClick$btnMainMenuExpandAll(Event event) throws Exception {
 
 		if (logger.isDebugEnabled()) {
@@ -333,6 +334,12 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		doCollapseExpandAll(getMainMenuWindow(), true);
 	}
 
+	/**
+	 * Collapse the menuTree.<br>
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	public void onClick$btnMainMenuCollapseAll(Event event) throws Exception {
 
 		if (logger.isDebugEnabled()) {
@@ -428,4 +435,17 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 			}
 		}
 	}
+
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
+	public Window getMainMenuWindow() {
+		return this.mainMenuWindow;
+	}
+
+	public void setMainMenuWindow(Window mainMenuWindow) {
+		this.mainMenuWindow = mainMenuWindow;
+	}
+
 }

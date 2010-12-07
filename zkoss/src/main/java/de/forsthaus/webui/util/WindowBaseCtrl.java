@@ -72,7 +72,7 @@ public abstract class WindowBaseCtrl extends Window implements AfterCompose, Ser
 
 	/**
 	 * Go recursive through all founded components and wires all vars and added
-	 * all forwarders for ALL window components. <br>
+	 * all forwarders for <b>ALL window</b> components. <br>
 	 * 
 	 * @param main
 	 * @param child

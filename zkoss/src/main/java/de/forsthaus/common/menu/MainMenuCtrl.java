@@ -87,9 +87,6 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 
 	public void onCreate$mainMenuWindow(Event event) throws Exception {
 
-		// doOnCreateCommon(mainMenuWindow, event); // wire vars
-		doOnCreateCommon(getMainMenuWindow(), event); // wire vars
-
 		createMenu();
 	}
 

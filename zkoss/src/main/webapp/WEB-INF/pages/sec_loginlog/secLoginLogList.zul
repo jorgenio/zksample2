@@ -52,8 +52,8 @@
 							id="bandbox_SecLoginlogList_PeriodSearch" width="1px"
 							tooltiptext="${c:l('bandbox_SecLoginlogList_PeriodSearch.tooltiptext')}">
 							<bandpopup
-								id="bpop_SecLoginlogList_PeriodSearch" width="350px"
-								height="80px">
+								id="bpop_SecLoginlogList_PeriodSearch" width="360px"
+								height="90px">
 								<panel
 									id="panel_SecLoginlogList_PeriodBandboxPanel"
 									title="${c:l('panel_SecLoginlogList_PeriodBandboxPanel.title')}" />
@@ -63,12 +63,12 @@
 										style="padding: 0px">
 
 										<grid
-											sclass="GridLayoutNoBorder" fixedLayout="true"
+											sclass="GridLayoutNoBorder" fixedLayout="false"
 											width="100%">
 											<columns>
-												<column width="115px" />
-												<column width="150px" />
-												<column width="40px" />
+												<column width="120px" />
+												<column width="140px" />
+												<column width="50px" />
 												<column width="40px" />
 											</columns>
 											<rows>

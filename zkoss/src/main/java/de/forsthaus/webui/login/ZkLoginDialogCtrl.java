@@ -107,8 +107,7 @@ public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onClick$button_ZKLoginDialog_ServerTime() throws IOException {
-
-		logger.debug("get the server date/time");
+		// logger.debug("get the server date/time");
 
 		// TODO get the tomcat servers time, if the TimeServer doesn't answers.
 		final long l = getCurrentHttpTokenTime();
@@ -132,7 +131,7 @@ public class ZkLoginDialogCtrl extends WindowBaseCtrl implements Serializable {
 	}
 
 	/**
-	 * Get a date/time from a web server for the one-time-password
+	 * Get a date/time from a web server for our one-time-password
 	 * synchronizing.<br>
 	 * <br>
 	 * We became our time with calling a PHP Function on a webserver.<br>

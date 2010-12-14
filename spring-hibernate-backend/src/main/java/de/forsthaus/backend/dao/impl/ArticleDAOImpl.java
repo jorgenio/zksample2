@@ -32,7 +32,8 @@ import de.forsthaus.backend.dao.ArticleDAO;
 import de.forsthaus.backend.model.Article;
 
 /**
- * DAO methods implementation for the <b>Article model</b> class.<br>
+ * EN: DAO methods implementation for the <b>Article</b> model class.<br>
+ * DE: DAO Methoden Implementierung fuer die <b>Article</b> Model Klasse.<br>
  * 
  * @author bbruhns
  * @author sgerth

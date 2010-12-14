@@ -25,7 +25,7 @@ import java.util.Set;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * Model class for the <b>Articles table</b>.<br>
+ * EN: Model class for the <b>Articles</b> table.<br>
  * 
  * @author bbruhns
  * @author sgerth

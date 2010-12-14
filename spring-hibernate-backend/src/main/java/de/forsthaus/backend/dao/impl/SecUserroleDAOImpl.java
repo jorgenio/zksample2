@@ -31,8 +31,8 @@ import de.forsthaus.backend.model.SecUser;
 import de.forsthaus.backend.model.SecUserrole;
 
 /**
- * EN: DAO methods implementation for the <b>SecUserrole model</b> class.<br>
- * DE: DAO Methoden Implementierung fuer die Security UserRolle Tabelle.<br>
+ * EN: DAO methods implementation for the <b>SecUserrole</b> model class.<br>
+ * DE: DAO Methoden Implementierung fuer die <b>SecUserrole</b> Model Klasse.<br>
  * 
  * @author bbruhns
  * @author sgerth

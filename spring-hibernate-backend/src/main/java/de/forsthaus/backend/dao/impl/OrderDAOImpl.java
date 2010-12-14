@@ -33,7 +33,8 @@ import de.forsthaus.backend.model.Order;
 import de.forsthaus.backend.model.Orderposition;
 
 /**
- * DAO methods implementation for the <b>Order model</b> class.<br>
+ * EN: DAO methods implementation for the <b>Order</b> model class.<br>
+ * DE: DAO Methoden Implementierung fuer die <b>Order</b> Model Klasse.<br>
  * 
  * @author bbruhns
  * @author sgerth

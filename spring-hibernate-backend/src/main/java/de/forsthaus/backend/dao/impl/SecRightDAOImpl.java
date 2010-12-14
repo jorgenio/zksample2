@@ -32,7 +32,8 @@ import de.forsthaus.backend.model.SecRight;
 import de.forsthaus.backend.model.SecUser;
 
 /**
- * DAO methods implementation for the <b>SecRight model</b> class.<br>
+ * EN: DAO methods implementation for the <b>SecRight</b> model class.<br>
+ * DE: DAO Methoden Implementierung fuer die <b>SecRight</b> Model Klasse.<br>
  * 
  * SQL injektion moeglich! Ueberarbeitung notwendig!!!! <a
  * href="http://de.wikipedia.org/wiki/SQL-Injection#Java_.28JDBC.29"
@@ -169,8 +170,7 @@ public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements Sec
 		}
 
 		final DetachedCriteria criteria = DetachedCriteria.forClass(SecRight.class);
-		criteria.add(Restrictions.and(Restrictions.ilike("rigName", aRightName, MatchMode.ANYWHERE),
-				Restrictions.eq("rigType", Integer.valueOf(aRightType))));
+		criteria.add(Restrictions.and(Restrictions.ilike("rigName", aRightName, MatchMode.ANYWHERE), Restrictions.eq("rigType", Integer.valueOf(aRightType))));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 	}

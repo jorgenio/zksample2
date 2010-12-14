@@ -24,7 +24,9 @@ import de.forsthaus.backend.dao.NextidviewDAO;
 import de.forsthaus.backend.model.Nextidview;
 
 /**
- * DAO methods implementation for the PostgreSQL database primary keys.<br>
+ * EN: DAO methods implementation for the PostgreSQL database primary keys.<br>
+ * DE: DAO Methoden Implementierung fuer den PrimaeKey fuer die PostgreSQL
+ * Datenbank.<br>
  * 
  * @authors bbruhns
  */

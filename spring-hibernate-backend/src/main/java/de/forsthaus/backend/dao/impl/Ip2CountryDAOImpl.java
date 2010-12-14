@@ -27,7 +27,8 @@ import de.forsthaus.backend.model.Ip2Country;
 import de.forsthaus.backend.util.IpLocator;
 
 /**
- * DAO methods implementation for the <b>Ip2Country model</b> class.<br>
+ * EN: DAO methods implementation for the <b>Ip2Country</b> model class.<br>
+ * DE: DAO Methoden Implementierung fuer die <b>Ip2Country</b> Model Klasse.<br>
  * 
  * @author bbruhns
  * @author sgerth

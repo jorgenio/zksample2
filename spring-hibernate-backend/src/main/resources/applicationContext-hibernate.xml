@@ -164,6 +164,9 @@
 		class="de.forsthaus.backend.dao.impl.HibernateEntityStatisticsDaoImpl"
 		parent="basisDAO" />
 
+	<bean id="youtubeLinkDAO" class="de.forsthaus.backend.dao.impl.YoutubeLinkDAOImpl"
+		parent="basisDAO" />
+
 	<!-- ====================================================== -->
 	<!--                      SERVICE beans                     -->
 	<!-- ====================================================== -->
@@ -261,6 +264,11 @@
 	<bean name="hibernateStatisticsService"
 		class="de.forsthaus.backend.service.impl.HibernateStatisticsServiceImpl">
 		<property name="hibernateStatisticsDao" ref="hibernateStatisticsDao" />
+	</bean>
+
+	<bean name="youtubeLinkService"
+		class="de.forsthaus.backend.service.impl.YoutubeLinkServiceImpl">
+		<property name="youtubeLinkDAO" ref="youtubeLinkDAO" />
 	</bean>
 
 	<bean name="commonService" class="de.forsthaus.backend.service.impl.CommonServiceImpl">

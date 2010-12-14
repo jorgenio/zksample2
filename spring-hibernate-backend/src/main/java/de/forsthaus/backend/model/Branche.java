@@ -24,7 +24,8 @@ import java.util.Set;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * Model class for the <b>Branch table</b>.<br>
+ * EN: Model class for the <b>Branch table</b>.<br>
+ * DE: Model Klasse fuer die <b>Branchen</b> Tabelle.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -34,7 +35,6 @@ public class Branche implements java.io.Serializable, Entity {
 	private static final long serialVersionUID = -8799762516266595746L;
 
 	private long id = Long.MIN_VALUE;
-
 	private int version;
 	private String braBezeichnung = "";
 	private Set<Customer> customers = new HashSet<Customer>(0);

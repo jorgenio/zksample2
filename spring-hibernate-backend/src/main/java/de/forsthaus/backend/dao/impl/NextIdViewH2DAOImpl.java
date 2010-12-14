@@ -22,9 +22,11 @@ import de.forsthaus.backend.dao.NextidviewDAO;
 import de.forsthaus.backend.model.Nextidview;
 
 /**
- * DAO methods implementation for the H2 database primary keys.<br>
+ * EN: DAO methods implementation for the H2 database primary keys.<br>
+ * DE: DAO Methoden Implementierung fuer den PrimaeKey fuer die H2 Datenbank.<br>
  * 
  * @authors bbruhns
+ * @authors sGerth
  */
 public class NextIdViewH2DAOImpl extends BasisDAO<Nextidview> implements NextidviewDAO {
 

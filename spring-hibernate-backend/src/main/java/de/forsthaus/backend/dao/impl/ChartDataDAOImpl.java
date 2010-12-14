@@ -28,7 +28,8 @@ import de.forsthaus.backend.dao.ChartDataDAO;
 import de.forsthaus.backend.model.ChartData;
 
 /**
- * DAO methods implementation for the <b>ChartData model</b> class.<br>
+ * EN: DAO methods implementation for the <b>ChartData</b> model class.<br>
+ * DE: DAO Methoden Implementierung fuer die <b>ChartData</b> Model Klasse.<br>
  * 
  * @author bbruhns
  * @author sgerth

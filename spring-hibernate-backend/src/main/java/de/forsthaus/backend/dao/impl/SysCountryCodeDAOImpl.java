@@ -29,7 +29,8 @@ import de.forsthaus.backend.dao.SysCountryCodeDAO;
 import de.forsthaus.backend.model.SysCountryCode;
 
 /**
- * DAO methods implementation for the <b>SysCountryCode model</b> class.<br>
+ * EN: DAO methods implementation for the <b>SysCountryCode</b> model class.<br>
+ * DE: DAO Methoden Implementierung fuer die <b>SysCountryCode</b> Model Klasse.<br>
  * 
  * @author bbruhns
  * @author sgerth

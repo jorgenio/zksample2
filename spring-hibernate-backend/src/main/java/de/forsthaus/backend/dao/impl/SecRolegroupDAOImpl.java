@@ -31,7 +31,8 @@ import de.forsthaus.backend.model.SecRole;
 import de.forsthaus.backend.model.SecRolegroup;
 
 /**
- * DAO methods implementation for the <b>SecRolgroup model</b> class.<br>
+ * EN: DAO methods implementation for the <b>SecRolgroup</b> model class.<br>
+ * DE: DAO Methoden Implementierung fuer die <b>SecRolgroup</b> Model Klasse.<br>
  * 
  * @author bbruhns
  * @author sgerth

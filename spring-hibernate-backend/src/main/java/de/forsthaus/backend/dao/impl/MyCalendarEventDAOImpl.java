@@ -30,7 +30,8 @@ import de.forsthaus.backend.dao.MyCalendarEventDAO;
 import de.forsthaus.backend.model.MyCalendarEvent;
 
 /**
- * DAO methods implementation for the <b>Calendar Event model</b> class.<br>
+ * EN: DAO methods implementation for the <b>Calendar Event</b> model class.<br>
+ * DE: DAO Methoden Implementierung fuer die <b>Calendar Event</b> Model Klasse.<br>
  * 
  * @author bbruhns
  * @author sgerth

@@ -33,7 +33,8 @@ import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.model.Customer;
 
 /**
- * DAO methods implementation for the <b>Customers model</b> class.<br>
+ * EN: DAO methods implementation for the <b>Customers</b> model class.<br>
+ * DE: DAO Methoden Implementierung fuer die <b>Customers</b> Model Klasse.<br>
  * 
  * @author bbruhns
  * @author sgerth

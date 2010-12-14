@@ -43,6 +43,7 @@ public class OrderpositionDAOImpl extends BasisNextidDaoImpl<Orderposition> impl
 		return new Orderposition();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Orderposition> getOrderpositionsByOrder(Order order) {
 		// /** initialize() lädt die entsprechenden Daten nach. */

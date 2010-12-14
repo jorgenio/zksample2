@@ -22,16 +22,17 @@ import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * @author bbruhns
  * 
  */
 public class HibernateStatistics {
 
-	public HibernateStatistics(String callMethod, long javaFinishMs, long flushCount, long prepareStatementCount, long entityLoadCount, long entityUpdateCount,
-			long entityInsertCount, long entityDeleteCount, long entityFetchCount, long collectionLoadCount, long collectionUpdateCount,
-			long collectionRemoveCount, long collectionRecreateCount, long collectionFetchCount, long queryExecutionCount, long optimisticFailureCount,
-			long queryExecutionMaxTime, String queryExecutionMaxTimeQueryString) {
+	public HibernateStatistics(String callMethod, long javaFinishMs, long flushCount, long prepareStatementCount, long entityLoadCount, long entityUpdateCount, long entityInsertCount,
+			long entityDeleteCount, long entityFetchCount, long collectionLoadCount, long collectionUpdateCount, long collectionRemoveCount, long collectionRecreateCount, long collectionFetchCount,
+			long queryExecutionCount, long optimisticFailureCount, long queryExecutionMaxTime, String queryExecutionMaxTimeQueryString) {
 		super();
 		this.callMethod = callMethod;
 		this.javaFinishMs = javaFinishMs;
@@ -253,5 +254,9 @@ public class HibernateStatistics {
 
 	public void setJavaFinishMs(long javaFinishMs) {
 		this.javaFinishMs = javaFinishMs;
+	}
+
+	public String toString() {
+		return new ToStringBuilder(this).append("id", getId()).toString();
 	}
 }

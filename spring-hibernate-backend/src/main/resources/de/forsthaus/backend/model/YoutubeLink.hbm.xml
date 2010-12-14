@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="de.forsthaus.backend.model.YoutubeLink" table="youtube_vids">
+
+		<id name="id" type="long">
+			<column name="ytb_id" />
+			<generator class="assigned" />
+		</id>
+
+		<version name="version" column="VERSION" type="integer" />
+
+		<property name="title" type="string">
+			<column name="ytb_title" length="100" />
+		</property>
+		<property name="url" type="string">
+			<column name="ytb_url" length="300" not-null="true" unique="true" />
+		</property>
+	</class>
+</hibernate-mapping>

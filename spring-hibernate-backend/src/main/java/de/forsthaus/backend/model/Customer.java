@@ -21,6 +21,8 @@ package de.forsthaus.backend.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * Model class for the <b>Customer table</b>.<br>
  * 
@@ -55,8 +57,7 @@ public class Customer implements java.io.Serializable, Entity {
 		this.office = office;
 	}
 
-	public Customer(long id, Office office, Branche branche, String kunNr, String kunMatchcode, String kunName1, String kunName2, String kunOrt,
-			Boolean kunMahnsperre, Set<Order> orders) {
+	public Customer(long id, Office office, Branche branche, String kunNr, String kunMatchcode, String kunName1, String kunName2, String kunOrt, Boolean kunMahnsperre, Set<Order> orders) {
 		this.setId(id);
 		this.office = office;
 		this.branche = branche;
@@ -178,6 +179,10 @@ public class Customer implements java.io.Serializable, Entity {
 		}
 
 		return false;
+	}
+
+	public String toString() {
+		return new ToStringBuilder(this).append("id", getId()).toString();
 	}
 
 }

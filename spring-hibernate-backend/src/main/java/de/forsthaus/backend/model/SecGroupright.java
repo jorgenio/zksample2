@@ -18,6 +18,8 @@
  */
 package de.forsthaus.backend.model;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * Model class for the <b>SecGroupright table</b>.<br>
  * 
@@ -103,6 +105,10 @@ public class SecGroupright implements java.io.Serializable, Entity {
 		}
 
 		return false;
+	}
+
+	public String toString() {
+		return new ToStringBuilder(this).append("id", getId()).toString();
 	}
 
 }

@@ -21,6 +21,8 @@ package de.forsthaus.backend.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * Model class for the <b>Branch table</b>.<br>
  * 
@@ -108,6 +110,10 @@ public class Branche implements java.io.Serializable, Entity {
 		}
 
 		return false;
+	}
+
+	public String toString() {
+		return new ToStringBuilder(this).append("id", getId()).toString();
 	}
 
 }

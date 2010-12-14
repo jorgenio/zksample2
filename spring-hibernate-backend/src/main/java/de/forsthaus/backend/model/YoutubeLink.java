@@ -18,52 +18,49 @@
  */
 package de.forsthaus.backend.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * Model class for the <b>SecRight table</b>.<br>
+ * EN: Model class for the <b>Youtube_vid table</b>.<br>
+ * DE: Model Klasse fuer die <b>Youtube_vid Tabelle</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth
  */
-public class SecRight implements java.io.Serializable, Entity {
+public class YoutubeLink implements java.io.Serializable, Entity {
 
-	private static final long serialVersionUID = -1574628715506591010L;
+	private static final long serialVersionUID = -8799762516266595746L;
 
 	private long id = Long.MIN_VALUE;
+
 	private int version;
-	private Integer rigType;
-	private String rigName;
-	private Set<SecGroupright> secGrouprights = new HashSet<SecGroupright>(0);
+	private String title = "";
+	private String url = "";
 
 	public boolean isNew() {
 		return (getId() == Long.MIN_VALUE);
 	}
 
-	public SecRight() {
+	public YoutubeLink() {
 	}
 
-	public SecRight(long id, String rigName) {
+	public YoutubeLink(long id, String url) {
 		this.setId(id);
-		this.rigName = rigName;
+		this.url = url;
 	}
 
-	public SecRight(long id, Integer rigType, String rigName, Set<SecGroupright> secGrouprights) {
+	public YoutubeLink(long id, String title, String url) {
 		this.setId(id);
-		this.rigType = rigType;
-		this.rigName = rigName;
-		this.secGrouprights = secGrouprights;
-	}
-
-	public void setId(long id) {
-		this.id = id;
+		this.title = title;
+		this.url = url;
 	}
 
 	public long getId() {
 		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public int getVersion() {
@@ -74,28 +71,20 @@ public class SecRight implements java.io.Serializable, Entity {
 		this.version = version;
 	}
 
-	public Integer getRigType() {
-		return this.rigType;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public void setRigType(Integer rigType) {
-		this.rigType = rigType;
+	public String getTitle() {
+		return title;
 	}
 
-	public String getRigName() {
-		return this.rigName;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
-	public void setRigName(String rigName) {
-		this.rigName = rigName;
-	}
-
-	public Set<SecGroupright> getSecGrouprights() {
-		return this.secGrouprights;
-	}
-
-	public void setSecGrouprights(Set<SecGroupright> secGrouprights) {
-		this.secGrouprights = secGrouprights;
+	public String getUrl() {
+		return url;
 	}
 
 	@Override
@@ -103,8 +92,8 @@ public class SecRight implements java.io.Serializable, Entity {
 		return Long.valueOf(getId()).hashCode();
 	}
 
-	public boolean equals(SecRight secRight) {
-		return getId() == secRight.getId();
+	public boolean equals(YoutubeLink youtubeLink) {
+		return getId() == youtubeLink.getId();
 	}
 
 	@Override
@@ -113,9 +102,9 @@ public class SecRight implements java.io.Serializable, Entity {
 			return true;
 		}
 
-		if (obj instanceof SecRight) {
-			SecRight secRight = (SecRight) obj;
-			return equals(secRight);
+		if (obj instanceof YoutubeLink) {
+			YoutubeLink youtubeLink = (YoutubeLink) obj;
+			return equals(youtubeLink);
 		}
 
 		return false;
@@ -124,4 +113,5 @@ public class SecRight implements java.io.Serializable, Entity {
 	public String toString() {
 		return new ToStringBuilder(this).append("id", getId()).toString();
 	}
+
 }

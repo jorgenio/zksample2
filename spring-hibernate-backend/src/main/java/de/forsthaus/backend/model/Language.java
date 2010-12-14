@@ -20,11 +20,15 @@ package de.forsthaus.backend.model;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * This class represents the languages that have i3label property files. <br>
  * <br>
  * The domain model have no corresponding table in a database and has a fixed
  * length of records that should see as the types of login status. <br>
+ * <br>
+ * NOT USED AT TIME !!! <br>
  * <br>
  * int | String | Type <br>
  * --------------------------<br>
@@ -97,6 +101,10 @@ public class Language implements Serializable {
 		}
 
 		return false;
+	}
+
+	public String toString() {
+		return new ToStringBuilder(this).append("id", getId()).toString();
 	}
 
 }

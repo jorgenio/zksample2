@@ -25,28 +25,110 @@ import de.forsthaus.backend.model.Branche;
 
 public interface BrancheDAO {
 
+	/**
+	 * EN: Get a new CustomerBranch object.<br>
+	 * DE: Gibt ein neues Kunden Branche Objekt zurueck.<br>
+	 * 
+	 * @return Branche
+	 */
 	public Branche getNewBranche();
 
+	/**
+	 * EN: Get a list of all Branches.<br>
+	 * DE: Gibt eine Liste aller Branchen zurueck.<br>
+	 * 
+	 * @return List of Branches / Liste von Branchen
+	 */
 	public List<Branche> getAlleBranche();
 
+	/**
+	 * EN: Get the count of all CustomerBranches in the used Table Schema.<br>
+	 * DE: Gibt die Anzahl aller KundenBranchen im gewaehlten Tabellen Schema
+	 * zurueck.<br>
+	 * 
+	 * @return int
+	 */
 	public int getCountAllBranch();
 
+	/**
+	 * EN: Get a CustomerBranch by its ID.<br>
+	 * DE: Gibt eine KundenBranche anhand ihrer ID zurueck.<br>
+	 * 
+	 * @param id
+	 *            / the persistence identifier / der PrimaerKey
+	 * @return Branch / Branche
+	 */
 	public Branche getBrancheByID(long bra_id);
 
+	/**
+	 * EN: Get a CustomerBranch by it's text.<br>
+	 * DE: Gibt eine KundenBranche anhand ihrer Bezeichnung zurueck.<br>
+	 * 
+	 * @param braBezeichnung
+	 *            Description of the Branch / Name der Branche
+	 * @return Branch / Branche
+	 */
 	public Branche getBrancheByName(String braBezeichnung);
 
-	public void saveOrUpdate(Branche branche);
-
-	public void delete(Branche branche);
-
-	public void save(Branche branche);
-
+	/**
+	 * EN: Gets a list of CustomerBranches where the text is like %text% .<br>
+	 * DE: Gibt eine Liste aller KundenBranchen anhand like %text% zurueck.<br>
+	 * 
+	 * @return List of Branches / Liste of Branchen
+	 */
 	public List<Branche> getBrancheLikeName(String value);
 
+	/**
+	 * EN: Get the count of all CustomerBranches in the used Table Schema.<br>
+	 * DE: Gibt die Anzahl aller KundenBranchen im gewaehlten Tabellen Schema
+	 * zurueck.<br>
+	 * 
+	 * @return int Count of Branches / Anzahl aller Branchen
+	 */
 	public int getBrancheSize();
 
+	/**
+	 * EN: Get a paged list of all Branches.<br>
+	 * DE: Gibt eine paged Liste aller Branchen zurueck.<br>
+	 * 
+	 * @param start
+	 *            StartRecord / Start Datensatz
+	 * @param pageSize
+	 *            Count of Records / Anzahl Datensaetze
+	 * @return List of Branches / Liste von Branchen
+	 */
 	public ResultObject getAllBranches(int start, int pageSize);
 
+	/**
+	 * EN: Get a paged list of all YoutubeLinks.<br>
+	 * DE: Gibt eine paged Liste aller YoutubeLinks zurueck.<br>
+	 * 
+	 * @param text
+	 *            Text for search / SuchText
+	 * @param start
+	 *            StartRecord / Start Datensatz
+	 * @param pageSize
+	 *            Count of Records / Anzahl Datensaetze
+	 * @return List of YoutubeLinks / Liste von YoutubeLinks
+	 */
 	public ResultObject getAllBranchesLikeText(String text, int start, int pageSize);
+
+	/**
+	 * EN: Saves or updates a CustomerBranch in the DB.<br>
+	 * DE: Speichert oder aktualisiert eine KundenBranche in der DB.<br>
+	 */
+	public void saveOrUpdate(Branche branche);
+
+	/**
+	 * EN: Deletes a CustomerBranch in the DB.<br>
+	 * DE: Loescht eine KundenBranche in der DB.<br>
+	 */
+	public void delete(Branche branche);
+
+	/**
+	 * EN: Saves a CustomerBranch in the DB.<br>
+	 * DE: Speichert eine KundenBranche in der DB.<br>
+	 */
+	public void save(Branche branche);
 
 }

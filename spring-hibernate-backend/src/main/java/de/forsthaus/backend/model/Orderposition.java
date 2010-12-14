@@ -20,6 +20,8 @@ package de.forsthaus.backend.model;
 
 import java.math.BigDecimal;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * Model class for the <b>Orderposition table</b>.<br>
  * 
@@ -51,8 +53,7 @@ public class Orderposition implements java.io.Serializable, Entity {
 		this.order = order;
 	}
 
-	public Orderposition(long id, Order order, Article article, Integer aupPosition, BigDecimal aupMenge, BigDecimal aupEinzelwert,
-			BigDecimal aupGesamtwert) {
+	public Orderposition(long id, Order order, Article article, Integer aupPosition, BigDecimal aupMenge, BigDecimal aupEinzelwert, BigDecimal aupGesamtwert) {
 		this.setId(id);
 		this.order = order;
 		this.article = article;
@@ -147,6 +148,10 @@ public class Orderposition implements java.io.Serializable, Entity {
 		}
 
 		return false;
+	}
+
+	public String toString() {
+		return new ToStringBuilder(this).append("id", getId()).toString();
 	}
 
 }

@@ -2,16 +2,17 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
+
 	<class name="de.forsthaus.backend.model.HibernateEntityStatistics"
 		table="hibernate_entity_statistics">
 
 		<id name="id" type="long" column="id">
 			<generator class="sequence">
 				<param name="sequence">hibernate_statistic_sequence</param>
-				
-				<!-- for mySQL use generator class="native"
-				<generator class="native" />
-				 -->
+
+				<!--
+					for mySQL use generator class="native" <generator class="native" />
+				-->
 			</generator>
 		</id>
 		<property name="entityName" column="entityname" type="text"

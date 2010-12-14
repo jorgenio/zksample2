@@ -20,6 +20,8 @@ package de.forsthaus.backend.model;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * Model class for the <b>IpToCountry table</b>.<br>
  * 
@@ -136,6 +138,10 @@ public class IpToCountry implements Serializable, Entity {
 		}
 
 		return false;
+	}
+
+	public String toString() {
+		return new ToStringBuilder(this).append("id", getId()).toString();
 	}
 
 }

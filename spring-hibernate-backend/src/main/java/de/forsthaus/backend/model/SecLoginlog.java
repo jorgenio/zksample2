@@ -20,6 +20,8 @@ package de.forsthaus.backend.model;
 
 import java.util.Date;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * Model class for the <b>SecLoginlog table</b>.<br>
  * 
@@ -160,6 +162,10 @@ public class SecLoginlog implements java.io.Serializable, Entity {
 		}
 
 		return false;
+	}
+
+	public String toString() {
+		return new ToStringBuilder(this).append("id", getId()).toString();
 	}
 
 }

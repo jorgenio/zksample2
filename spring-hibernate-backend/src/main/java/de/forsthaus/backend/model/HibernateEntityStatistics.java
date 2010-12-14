@@ -18,14 +18,16 @@
  */
 package de.forsthaus.backend.model;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * @author bbruhns
  * 
  */
 public class HibernateEntityStatistics implements Comparable<HibernateEntityStatistics> {
 
-	public HibernateEntityStatistics(String entityName, int loadCount, int updateCount, int insertCount, int deleteCount, int fetchCount,
-			int optimisticFailureCount, HibernateStatistics hibernateStatistics) {
+	public HibernateEntityStatistics(String entityName, int loadCount, int updateCount, int insertCount, int deleteCount, int fetchCount, int optimisticFailureCount,
+			HibernateStatistics hibernateStatistics) {
 		super();
 		this.entityName = entityName;
 		this.loadCount = loadCount;
@@ -135,5 +137,9 @@ public class HibernateEntityStatistics implements Comparable<HibernateEntityStat
 	public int compareTo(HibernateEntityStatistics o) {
 		long anotherId = o.getId();
 		return (id < anotherId ? -1 : (id == anotherId ? 0 : 1));
+	}
+
+	public String toString() {
+		return new ToStringBuilder(this).append("id", getId()).toString();
 	}
 }

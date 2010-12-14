@@ -59,6 +59,8 @@
 				</value>
 				<value>de/forsthaus/backend/model/HibernateStatistics.hbm.xml
 				</value>
+				<value>de/forsthaus/backend/model/YoutubeLink.hbm.xml
+				</value>
 			</list>
 		</property>
 	</bean>

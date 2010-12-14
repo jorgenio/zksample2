@@ -20,6 +20,8 @@ package de.forsthaus.backend.model;
 
 import java.util.Date;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * Model class for the <b>Guestbook table</b>.<br>
  * 
@@ -128,6 +130,10 @@ public class GuestBook implements java.io.Serializable, Entity {
 		}
 
 		return false;
+	}
+
+	public String toString() {
+		return new ToStringBuilder(this).append("id", getId()).toString();
 	}
 
 }

@@ -102,6 +102,7 @@ public class ArticleDAOImpl extends BasisNextidDaoImpl<Article> implements Artic
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
+		// This is a test
 		System.out.println("afterPropertiesSet" + this.toString());
 
 	}

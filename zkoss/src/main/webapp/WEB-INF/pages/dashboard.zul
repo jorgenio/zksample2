@@ -220,7 +220,7 @@
 							<caption
 								style="color: #000000; font-weight:bold;"
 								image="/images/icons/new_icons_10.gif"
-								label="NEW !!!  Database driven calendar." />
+								label="NEW !!!  Added the first Dashboard module." />
 
 							<textbox height="100%" width="99.5%"
 								multiline="true" rows="28" readonly="true"

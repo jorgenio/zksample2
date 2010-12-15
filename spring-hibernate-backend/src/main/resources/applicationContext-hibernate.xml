@@ -290,6 +290,7 @@
 		<property name="sysCountryCodeDAO" ref="sysCountryCodeDAO" />
 		<property name="ipToCountryDAO" ref="ipToCountryDAO" />
 		<property name="calendarEventDAO" ref="calendarEventDAO" />
+		<property name="youtubeLinkDAO" ref="youtubeLinkDAO" />
 	</bean>
 
 </beans>

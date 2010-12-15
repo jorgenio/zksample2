@@ -22,6 +22,7 @@ import de.forsthaus.backend.dao.SecTypDAO;
 import de.forsthaus.backend.dao.SecUserroleDAO;
 import de.forsthaus.backend.dao.SysCountryCodeDAO;
 import de.forsthaus.backend.dao.UserDAO;
+import de.forsthaus.backend.dao.YoutubeLinkDAO;
 import de.forsthaus.backend.service.CommonService;
 
 /**
@@ -52,6 +53,15 @@ public class CommonServiceImpl implements CommonService {
 	private SecLoginlogDAO secLoginlogDAO;
 	private SysCountryCodeDAO sysCountryCodeDAO;
 	private MyCalendarEventDAO calendarEventDAO;
+	private YoutubeLinkDAO youtubeLinkDAO;
+
+	public YoutubeLinkDAO getYoutubeLinkDAO() {
+		return youtubeLinkDAO;
+	}
+
+	public void setYoutubeLinkDAO(YoutubeLinkDAO youtubeLinkDAO) {
+		this.youtubeLinkDAO = youtubeLinkDAO;
+	}
 
 	public ArticleDAO getArticleDAO() {
 		return articleDAO;
@@ -228,6 +238,7 @@ public class CommonServiceImpl implements CommonService {
 		map.put("SysCountryCode", getSysCountryCodeDAO().getCountAllSysCountrycode());
 		map.put("IpToCountry", getIpToCountryDAO().getCountAllIpToCountry());
 		map.put("CalendarEvents", getCalendarEventDAO().getCountAllCalendarEvents());
+		map.put("YouTubeLinks", getYoutubeLinkDAO().getCountAllYoutubeLinks());
 		return map;
 	}
 }

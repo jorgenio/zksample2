@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
 
-	<class name="de.forsthaus.backend.model.YoutubeLink" table="youtube_vids">
+	<class name="de.forsthaus.backend.model.YoutubeLink" table="youtube_link">
 
 		<id name="id" type="long">
 			<column name="ytb_id" />

@@ -13,6 +13,8 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 15.12.2010 / Added the first DashBoard Module. The welcome.zul is renamed to dashboard.zul  " + lf;
+		s = s + "            	      This DashBoard module is for selecting a youTube video from a db list. Have fun." + lf;
 		s = s + "- 08.11.2010 / For guys who would build this app from source, we have added a workaround for the " + lf;
 		s = s + "            	      JasperReport failure by the maven-build process for this project.  " + lf;
 		s = s + "            	      See /src/test/resources/readme.txt. Seems this failure comes from the   " + lf;

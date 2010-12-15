@@ -2,7 +2,7 @@
 <ns2:XMLRootMenu xmlns:ns2="http://www.daibutsu.de/zk/menu">
 
 	<!-- Old HomeMenuTree -->
-	<menuItem id="menu_Item_Home" zulNavigation="/WEB-INF/pages/welcome.zul"
+	<menuItem id="menu_Item_Home" zulNavigation="/WEB-INF/pages/dashboard.zul"
 		iconName="/images/icons/console_view.gif" />
 	<!-- Guestbook -->
 	<menuItem id="menu_Item_Guestbook" zulNavigation="/WEB-INF/pages/guestbook/guestBookList.zul"

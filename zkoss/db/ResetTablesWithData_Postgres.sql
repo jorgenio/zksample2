@@ -20,6 +20,8 @@ DELETE  FROM sec_groupright;
 DELETE  FROM sec_group;
 DELETE  FROM sec_right;
 DELETE  FROM sys_ip4country;
+
+DELETE FROM youtube_link;
 commit;
 
 /* not deleted tables for holding the history of the sample data access */
@@ -988,6 +990,19 @@ INSERT INTO AUFTRAGPOSITION (AUP_ID, AUP_AUF_ID, ART_ID, AUP_POSITION, AUP_MENGE
 (82,46, 3011, 4, 400, 2.20, 880.00, 0),
 (83,46, 3006, 5, 60.00, 0.45, 27.00, 0);
 
+
+/******************** YouTube Music Links ********************/
+INSERT INTO youtube_link (ytb_id, ytb_title, ytb_url, version) VALUES 
+(  1, 'Loquat - Swing Set Chain',                                 'http://www.youtube.com/embed/51G24IVfcaI', 0),
+(  2, 'Empire of the Sun - We Are The People',                    'http://www.youtube.com/embed/Tj_Nlm0871E', 0),
+(  3, 'Loquat - Harder Hit',                                      'http://www.youtube.com/watch?v=aoHUb2r8q-g&feature=rec-LGOUT-exp_fresh+div-1r-3-HM', 0),
+(  4, 'THIN LIZZY - Still in Love With You',                      'http://www.youtube.com/watch?v=oHUWXjNU0aM', 0),
+(  5, 'Gary Moore with Phil Lynnot - Parisienne Walkways (live)', 'http://www.youtube.com/embed/18FgnFVm5k0', 0),
+(  6, 'Talking Heads - This must be the place',                   'http://www.youtube.com/embed/pVrVY540xdc', 0),
+(  7, 'John Cale and Brian Eno - Spinning away',                  'http://www.youtube.com/embed/-INeMspNSQ0', 0),
+(  8, 'Metric - Joyride',                                         'http://www.youtube.com/embed/F0ZL5YWP5I8', 0),
+(  9, 'Medina - Kun For Mig + Ensome',                            'http://www.youtube.com/embed/5Gf004et0SI', 0),
+( 10, 'Paris - Captain Morgan',                                   'http://www.youtube.com/embed/o6Eq1bH-qA0', 0);
 
 
 

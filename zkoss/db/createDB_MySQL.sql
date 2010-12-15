@@ -31,6 +31,9 @@ drop table if exists ipc_ip4country;
 DROP TABLE IF EXISTS hibernate_entity_statistics;
 DROP TABLE IF EXISTS hibernate_statistics;
 
+drop table if exists youtube_link;
+
+
 DROP TABLE IF EXISTS sequenztable;
 CREATE TABLE IF NOT EXISTS sequenztable (
   id int(11) NOT NULL,
@@ -58,6 +61,25 @@ CREATE VIEW nextidview
 AS 
 SELECT get_nextid() as nextval ;
 
+
+/*==============================================================*/
+/* Table: youtube_link                                          */
+/*==============================================================*/
+create table youtube_link (
+   ytb_id               bigint                 not null,
+   ytb_title            varchar(100)           null,
+   ytb_url              varchar(300)           not null,
+   version              int                    not null default 0,
+   primary key (ytb_id)
+);
+
+/*==============================================================*/
+/* Index: idx_ytb_url                                           */
+/*==============================================================*/
+create unique index idx_ytb_url on youtube_link 
+(
+   ytb_url
+);
 
 
 /*==============================================================*/

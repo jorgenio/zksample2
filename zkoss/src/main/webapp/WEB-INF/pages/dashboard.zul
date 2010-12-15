@@ -6,8 +6,8 @@
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
 
-	<window id="welcomeWindow" border="none" width="100%"
-		height="100%">
+	<window id="windowDashboard" apply="${dashboardMainCtrl}"
+		border="none" width="100%" height="100%">
 
 		<zscript language="Java"><![CDATA[
 	{
@@ -234,20 +234,31 @@
 			<tablechildren width="30%">
 				<panel border="none">
 					<panelchildren>
-						<groupbox mold="3d">
+
+						<div id="divYouTube" />
+
+
+						<!-- 
+							<window id="youTubeWindow" border="none"
+							width="100%" height="200px" />
+							
+							
+							<groupbox mold="3d">
 							<caption
-								style="color: #000000; font-weight:bold;"
-								image="/images/youtube_40x16.jpg"
-								label="weekly Terry's favorite song:"
-								tooltiptext="Music: Paris - Captain Morgan" />
-
+							style="color: #000000; font-weight:bold;"
+							image="/images/youtube_40x16.jpg"
+							label="Terry's weekly favorite song:"
+							tooltiptext="Music: Paris - Captain Morgan" />
+							
 							<h:iframe title="YouTube video player"
-								class="youtube-player" type="text/html" width="100%"
-								height="198" src="http://www.youtube.com/embed/o6Eq1bH-qA0"
-								frameborder="0">
+							class="youtube-player" type="text/html" width="100%"
+							height="198" src="http://www.youtube.com/embed/o6Eq1bH-qA0"
+							frameborder="0">
 							</h:iframe>
+							
+							</groupbox>
+						-->
 
-						</groupbox>
 					</panelchildren>
 				</panel>
 			</tablechildren>

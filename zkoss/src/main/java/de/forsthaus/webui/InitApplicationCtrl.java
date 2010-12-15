@@ -355,6 +355,9 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		if (map.containsKey("CalendarEvents")) {
 			addNewRow(rows, "CalendarEvents", map.get("CalendarEvents"));
 		}
+		if (map.containsKey("YouTubeLinks")) {
+			addNewRow(rows, "YouTubeLinks", map.get("YouTubeLinks"));
+		}
 
 	}
 

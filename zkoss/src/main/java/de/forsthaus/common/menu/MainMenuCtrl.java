@@ -201,8 +201,8 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		sep1.setBar(false);
 		sep1.setParent(gb);
 
-		/* as standard, call the welcome page */
-		showPage("/WEB-INF/pages/welcome.zul", "Start");
+		/* as standard, call the dashboard page */
+		showPage("/WEB-INF/pages/dashboard.zul", "Start");
 	}
 
 	/**

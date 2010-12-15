@@ -33,6 +33,13 @@
 		<property name="pagedListWrapperCustomer" ref="pagedListWrapper" />
 	</bean>
 
+	<!-- Dashboard -->
+	<bean id="dashboardMainCtrl" class="de.forsthaus.webui.dashboard.DashboardMainCtrl"
+		parent="basisCtrl" scope="prototype">
+		<property name="commonService" ref="commonService" />
+	</bean>
+
+
 	<!-- Articles / Artikelstammdaten -->
 	<bean id="articleMainCtrl" class="de.forsthaus.webui.article.ArticleMainCtrl"
 		parent="basisCtrl" scope="prototype">

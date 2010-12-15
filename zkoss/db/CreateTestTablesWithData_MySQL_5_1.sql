@@ -32,6 +32,8 @@ drop table if exists ipc_ip4country;
 drop table if exists hibernate_entity_statistics;
 drop table if exists hibernate_statistics;
 
+drop table if exists youtube_link;
+
 drop table if exists sequenztable;
 CREATE TABLE IF NOT EXISTS sequenztable (
   id int(11) NOT NULL,
@@ -59,6 +61,26 @@ CREATE VIEW nextidview
 AS 
 SELECT get_nextid() as nextval ;
 
+
+
+/*==============================================================*/
+/* Table: youtube_link                                          */
+/*==============================================================*/
+create table youtube_link (
+   ytb_id               bigint                 not null,
+   ytb_title            varchar(100)           null,
+   ytb_url              varchar(300)           not null,
+   version              int                    not null default 0,
+   primary key (ytb_id)
+);
+
+/*==============================================================*/
+/* Index: idx_ytb_url                                           */
+/*==============================================================*/
+create unique index idx_ytb_url on youtube_link 
+(
+   ytb_url
+);
 
 
 /*==============================================================*/
@@ -2014,6 +2036,20 @@ INSERT INTO sys_countrycode(CCD_ID, CCD_NAME, CCD_CODE2, VERSION) VALUES
 (248,'JERSEY','JE', 0),
 (249,'EAST TIMOR','TP', 0),
 (250,'MONTENEGRO','ME', 0);
+
+/******************** YouTube Music Links ********************/
+INSERT INTO youtube_link (ytb_id, ytb_title, ytb_url, version) VALUES 
+(  1, 'Loquat - Swing Set Chain',                                 'http://www.youtube.com/embed/51G24IVfcaI', 0),
+(  2, 'Empire of the Sun - We Are The People',                    'http://www.youtube.com/embed/Tj_Nlm0871E', 0),
+(  3, 'Loquat - Harder Hit',                                      'http://www.youtube.com/watch?v=aoHUb2r8q-g&feature=rec-LGOUT-exp_fresh+div-1r-3-HM', 0),
+(  4, 'THIN LIZZY - Still in Love With You',                      'http://www.youtube.com/watch?v=oHUWXjNU0aM', 0),
+(  5, 'Gary Moore with Phil Lynnot - Parisienne Walkways (live)', 'http://www.youtube.com/embed/18FgnFVm5k0', 0),
+(  6, 'Talking Heads - This must be the place',                   'http://www.youtube.com/embed/pVrVY540xdc', 0),
+(  7, 'John Cale and Brian Eno - Spinning away',                  'http://www.youtube.com/embed/-INeMspNSQ0', 0),
+(  8, 'Metric - Joyride',                                         'http://www.youtube.com/embed/F0ZL5YWP5I8', 0),
+(  9, 'Medina - Kun For Mig + Ensome',                            'http://www.youtube.com/embed/5Gf004et0SI', 0),
+( 10, 'Paris - Captain Morgan',                                   'http://www.youtube.com/embed/o6Eq1bH-qA0', 0);
+
 
  /* fill sample logins */
 INSERT INTO sec_loginlog(lgl_id, i2c_id, lgl_loginname,lgl_logtime, lgl_ip, lgl_status_id,lgl_sessionid, VERSION) VALUES 

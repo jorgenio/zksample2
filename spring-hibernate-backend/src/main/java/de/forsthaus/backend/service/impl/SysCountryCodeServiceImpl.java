@@ -25,7 +25,9 @@ import de.forsthaus.backend.model.SysCountryCode;
 import de.forsthaus.backend.service.SysCountryCodeService;
 
 /**
- * Service implementation for methods that depends on <b>SysCountryCodes</b>.<br>
+ * EN: Service implementation for methods that depends on
+ * <b>SysCountryCodes</b>.<br>
+ * DE: Service Methoden Implementierung betreffend <b>Laendercodes</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

@@ -26,7 +26,8 @@ import de.forsthaus.backend.model.YoutubeLink;
 import de.forsthaus.backend.service.YoutubeLinkService;
 
 /**
- * Service implementation for methods that depends on <b>YoutubeLink</b>.<br>
+ * EN: Service implementation for methods that depends on <b>YoutubeLink</b>.<br>
+ * DE: Service Methoden Implementierung betreffend <b>YoutubeLink</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

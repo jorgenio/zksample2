@@ -25,7 +25,8 @@ import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.service.OfficeService;
 
 /**
- * Service implementation for methods that depends on <b>Offices</b>.<br>
+ * EN: Service implementation for methods that depends on <b>Offices</b>.<br>
+ * DE: Service Methoden Implementierung betreffend <b>Niederlassungen</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

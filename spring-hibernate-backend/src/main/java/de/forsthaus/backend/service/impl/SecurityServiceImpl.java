@@ -40,7 +40,8 @@ import de.forsthaus.backend.model.SecUserrole;
 import de.forsthaus.backend.service.SecurityService;
 
 /**
- * Service implementation for methods that depends on <b>Security</b>.<br>
+ * EN: Service implementation for methods that depends on <b>Security</b>.<br>
+ * DE: Service Methoden Implementierung betreffend <b>Zugriffskonzept</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

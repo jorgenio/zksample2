@@ -27,8 +27,8 @@ import de.forsthaus.backend.service.Ip2CountryService;
 import de.forsthaus.backend.util.IpLocator;
 
 /**
- * Service implementation for methods that depends on <b>Ip2Country model</b>
- * class.<br>
+ * EN: Service implementation for methods that depends on <b>Ip2Country</b>.<br>
+ * DE: Service Methoden Implementierung betreffend <b>Ip2Country</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

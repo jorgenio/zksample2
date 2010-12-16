@@ -26,7 +26,8 @@ import de.forsthaus.backend.model.SecUser;
 import de.forsthaus.backend.service.LoginService;
 
 /**
- * Service implementation for methods that depends on log in User.<br>
+ * EN: Service implementation for methods that depends on <b>login</b>.<br>
+ * DE: Service Methoden Implementierung betreffend <b>login</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

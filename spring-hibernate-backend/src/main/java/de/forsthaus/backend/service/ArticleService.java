@@ -24,20 +24,72 @@ import de.forsthaus.backend.model.Article;
 
 public interface ArticleService {
 
+	/**
+	 * EN: Get a new Article object.<br>
+	 * DE: Gibt ein neues Artikel Objekt zurueck.<br>
+	 * 
+	 * @return Article
+	 */
 	public Article getNewArticle();
 
-	public int getCountAllArticle();
-
+	/**
+	 * EN: Get a list of all Articles.<br>
+	 * DE: Gibt eine Liste aller Artikel zurueck.<br>
+	 * 
+	 * @return List of Articles / Liste von Artikeln
+	 */
 	public List<Article> getAllArticles();
 
-	public Article getArticleById(long art_id);
+	/**
+	 * EN: Get the count of all Articles in the used Table Schema.<br>
+	 * DE: Gibt die Anzahl aller Artikel im gewaehlten Tabellen Schema zurueck.<br>
+	 * 
+	 * @return int
+	 */
+	public int getCountAllArticle();
 
+	/**
+	 * EN: Get an article by its ID.<br>
+	 * DE: Gibt einen Artikel anhand seiner ID zurueck.<br>
+	 * 
+	 * @param id
+	 *            / the persistence identifier / der PrimaerKey
+	 * @return Article / Artikel
+	 */
+	public Article getArticleById(long id);
+
+	/**
+	 * EN: Gets a list of Articles where the articleNo is like %text% .<br>
+	 * DE: Gibt eine Liste aller Artikel zurueck deren ArtikelNummer gleich like
+	 * %text% ist.<br>
+	 * 
+	 * @param text
+	 *            the matching text / zu uebereinstimmende Zeichenfolge
+	 * @return List of Articles / Liste of Artikel
+	 */
+	public List<Article> getArticleLikeArticleNumber(String text);
+
+	/**
+	 * EN: Gets a list of Articles where the article Name is like %text% .<br>
+	 * DE: Gibt eine Liste aller Artikel zurueck deren ArtikelName gleich %text%
+	 * ist.<br>
+	 * 
+	 * @param text
+	 *            the matching text / zu uebereinstimmende Zeichenfolge
+	 * @return List of Articles / Liste of Artikel
+	 */
+	public List<Article> getArticleLikeName(String text);
+
+	/**
+	 * EN: Saves or updates an article in the DB.<br>
+	 * DE: Speichert oder aktualisiert einen Artikel in der DB.<br>
+	 */
 	public void saveOrUpdate(Article article);
 
+	/**
+	 * EN: Deletes an article in the DB.<br>
+	 * DE: Loescht einen Artikel in der DB.<br>
+	 */
 	public void delete(Article article);
-
-	public List<Article> getArticleLikeId(String value);
-
-	public List<Article> getArticleLikeName(String value);
 
 }

@@ -33,7 +33,8 @@ import de.forsthaus.backend.model.Orderposition;
 import de.forsthaus.backend.service.OrderService;
 
 /**
- * Service implementation for methods that depends on <b>Orders</b>.<br>
+ * EN: Service implementation for methods that depends on <b>Orders</b>.<br>
+ * DE: Service Methoden Implementierung betreffend <b>Auftraege</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

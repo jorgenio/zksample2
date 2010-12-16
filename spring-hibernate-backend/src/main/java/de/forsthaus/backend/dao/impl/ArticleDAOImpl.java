@@ -46,8 +46,8 @@ public class ArticleDAOImpl extends BasisNextidDaoImpl<Article> implements Artic
 	}
 
 	@Override
-	public Article getArticleById(long art_id) {
-		return get(Article.class, Long.valueOf(art_id));
+	public Article getArticleById(long id) {
+		return get(Article.class, Long.valueOf(id));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -61,20 +61,20 @@ public class ArticleDAOImpl extends BasisNextidDaoImpl<Article> implements Artic
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Article> getArticleLikeId(String value) {
+	public List<Article> getArticleLikeArticleNumber(String text) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Article.class);
-		criteria.add(Restrictions.ilike("artNr", value, MatchMode.ANYWHERE));
+		criteria.add(Restrictions.ilike("artNr", text, MatchMode.ANYWHERE));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Article> getArticleLikeName(String value) {
+	public List<Article> getArticleLikeName(String text) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Article.class);
-		criteria.add(Restrictions.ilike("artKurzbezeichnung", value, MatchMode.ANYWHERE));
+		criteria.add(Restrictions.ilike("artKurzbezeichnung", text, MatchMode.ANYWHERE));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 

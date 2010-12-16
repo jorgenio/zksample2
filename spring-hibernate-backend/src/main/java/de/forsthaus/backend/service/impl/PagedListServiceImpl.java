@@ -27,8 +27,9 @@ import de.forsthaus.backend.service.PagedListService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 
 /**
- * Service implementation for methods that depends on <b>PagedListWrapper</b>
- * class.<br>
+ * EN: Service implementation for methods that depends on
+ * <b>PagedListWrapper</b>.<br>
+ * DE: Service Methoden Implementierung betreffend <b>PagedListWrapper</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

@@ -23,6 +23,10 @@ import de.forsthaus.backend.model.HibernateStatistics;
 import de.forsthaus.backend.service.HibernateStatisticsService;
 
 /**
+ * EN: Service implementation for methods that depends on
+ * <b>HibernateStatictics</b>.<br>
+ * DE: Service Methoden Implementierung betreffend <b>Hibernate Statistik</b>.<br>
+ * 
  * @author bbruhns
  * 
  */

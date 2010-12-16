@@ -33,8 +33,9 @@ import de.forsthaus.backend.model.SysCountryCode;
 import de.forsthaus.backend.service.LoginLoggingService;
 
 /**
- * Service implementation for methods that depends on actions.<br>
- * who logs the user country.<br>
+ * EN: Service implementation for methods that depends on <b>logging the user
+ * country</b>.<br>
+ * DE: Service Methoden Implementierung betreffend <b>logging users Land</b>.<br>
  * 
  * @changes 11/24/2009: Added Ip2Country features. The ip data<br>
  *          can be get from a local table and updated later by calling<br>

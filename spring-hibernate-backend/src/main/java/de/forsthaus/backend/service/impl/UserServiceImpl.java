@@ -39,7 +39,8 @@ import de.forsthaus.backend.model.SecUser;
 import de.forsthaus.backend.service.UserService;
 
 /**
- * Service implementation for methods that depends on <b>Users</b>.<br>
+ * EN: Service implementation for methods that depends on <b>Users</b>.<br>
+ * DE: Service Methoden Implementierung betreffend <b>Users -Benutzer</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

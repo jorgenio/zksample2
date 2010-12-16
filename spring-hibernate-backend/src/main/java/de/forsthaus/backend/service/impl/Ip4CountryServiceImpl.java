@@ -35,8 +35,8 @@ import de.forsthaus.backend.model.Ip4Country;
 import de.forsthaus.backend.service.Ip4CountryService;
 
 /**
- * Service implementation for methods that depends on <b>Ip4Country model</b>
- * class.<br>
+ * EN: Service implementation for methods that depends on <b>Ip4Country</b>.<br>
+ * DE: Service Methoden Implementierung betreffend <b>Ip4Country</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

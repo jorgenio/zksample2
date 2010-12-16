@@ -25,7 +25,8 @@ import de.forsthaus.backend.model.Article;
 import de.forsthaus.backend.service.ArticleService;
 
 /**
- * Service implementation for methods that depends on <b>Orders</b>.<br>
+ * EN: Service implementation for methods that depends on <b>Articles</b>.<br>
+ * DE: Service Methoden Implementierung betreffend <b>Artikel</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -68,13 +69,13 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public List<Article> getArticleLikeId(String value) {
-		return getArticleDAO().getArticleLikeId(value);
+	public List<Article> getArticleLikeArticleNumber(String text) {
+		return getArticleDAO().getArticleLikeArticleNumber(text);
 	}
 
 	@Override
-	public List<Article> getArticleLikeName(String value) {
-		return getArticleDAO().getArticleLikeName(value);
+	public List<Article> getArticleLikeName(String text) {
+		return getArticleDAO().getArticleLikeName(text);
 	}
 
 	@Override

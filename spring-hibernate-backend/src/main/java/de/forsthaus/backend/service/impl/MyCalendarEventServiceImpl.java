@@ -26,7 +26,9 @@ import de.forsthaus.backend.model.MyCalendarEvent;
 import de.forsthaus.backend.service.MyCalendarEventService;
 
 /**
- * Service implementation for methods that depends on <b>MyCalendarEvents</b>.<br>
+ * EN: Service implementation for methods that depends on
+ * <b>MyCalendarEvents</b>.<br>
+ * DE: Service Methoden Implementierung betreffend <b>MyCalendarEvents</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

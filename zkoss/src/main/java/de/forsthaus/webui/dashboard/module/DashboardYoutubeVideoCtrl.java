@@ -232,7 +232,7 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 		// the windows title
 		private String _title = Labels.getLabel("btnSelectYoutubeSong.tooltiptext");
 		// 1. Listheader
-		private String _listHeader1 = Labels.getLabel("common.Description");
+		private String _listHeader1 = Labels.getLabel("dashboard.youtube.songtitle");
 		// the windows height
 		private int _height = 400;
 		// the windows width

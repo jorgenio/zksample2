@@ -13,6 +13,7 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 16.12.2010 / Added the missing methode for randomly selecting a song by the first creation of the Dashboard.  " + lf;
 		s = s + "- 15.12.2010 / Added the first DashBoard Module. The welcome.zul is renamed to dashboard.zul  " + lf;
 		s = s + "            	      This DashBoard module is for selecting a youTube video from a db list. Have fun." + lf;
 		s = s + "- 08.11.2010 / For guys who would build this app from source, we have added a workaround for the " + lf;

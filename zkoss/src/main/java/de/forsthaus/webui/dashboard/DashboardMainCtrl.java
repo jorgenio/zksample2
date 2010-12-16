@@ -114,7 +114,7 @@ public class DashboardMainCtrl extends GFCBaseCtrl implements Serializable {
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	/**
-	 * Recalculates the container size for this controller new and rezize them.
+	 * Recalculates the container size for this controller new and resize them.
 	 */
 	public void doFitSize(Event event) {
 

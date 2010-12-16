@@ -1,6 +1,7 @@
 package de.forsthaus.webui.dashboard.module;
 
 import java.io.Serializable;
+import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.zkoss.spring.SpringUtil;
@@ -36,11 +37,11 @@ import de.forsthaus.webui.util.searchdialogs.BranchSimpleSearchListBox;
 /**
  * EN: <b>YouTube iFrame</b> for the dashboard.<br>
  * Shows a youtube video in an iFrame. The video's url is getting randomly from
- * a table<br>
+ * a table by first starting.<br>
  * <hr>
  * DE: <b>YouTube iFrame</b> fuer die SystemUebersicht.<br>
- * Zeigt ein YouTube Musikvideo in einem iFrame an. Der video Link wird per
- * Zufallsgenerator aus der Tabelle geholt.<br>
+ * Zeigt ein YouTube Musikvideo in einem iFrame an. Dieser Video Link wird per
+ * Zufallsgenerator beim Erststart aus der Tabelle geholt.<br>
  * 
  * <pre>
  * call: Div div = DashboardYoutubeVideoCtrl.show(200);
@@ -88,12 +89,12 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 	}
 
 	/**
-	 * Creates the components..<br>
+	 * Creates the components.<br>
 	 */
 	private void createModul() {
 
 		/**
-		 * !! Windows as NameSpaceContainer to prevent not unique id's error
+		 * !! Window as NameSpaceContainer to prevent the 'not unique id' error
 		 * from other dashboard module buttons or other used components.
 		 */
 		ytWindow = new Window();
@@ -163,17 +164,19 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 	 */
 	private void doReadData() {
 
-		// TODO select randomly a song at first start
+		// select a random song from the table by first starting
+		YoutubeLinkService service = (YoutubeLinkService) SpringUtil.getBean("youtubeLinkService");
 
-		// set the title
-		gb.setTooltiptext("Paris - Hey Sailor!");
-		// clear all old stuff
-		iFrame.getChildren().clear();
-		// set the URL
-		iFrame.setSrc("http://www.youtube.com/embed/o6Eq1bH-qA0");
+		YoutubeLink youtubeLink = service.getRandomYoutubeLink();
 
-		// YoutubeLinkService service = (YoutubeLinkService)
-		// SpringUtil.getBean("youtubeLinkService");
+		if (youtubeLink != null) {
+			// set the title
+			gb.setTooltiptext(youtubeLink.getTitle());
+			// clear all old stuff
+			iFrame.getChildren().clear();
+			// set the URL
+			iFrame.setSrc(youtubeLink.getUrl());
+		}
 
 	}
 
@@ -189,6 +192,7 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 			// check which button is pressed
 			if (event.getTarget().getId().equalsIgnoreCase("btnSelectYoutubeSong")) {
 
+				// select a youtubeLink from the list.
 				YoutubeLink youtubeLink = YoutubeLinkSelectListBox.show(ytWindow);
 
 				if (youtubeLink != null) {
@@ -226,7 +230,7 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 
 		private Listbox listbox;
 		// the windows title
-		private String _title = Labels.getLabel("message.Information.SimpleSearch");
+		private String _title = Labels.getLabel("btnSelectYoutubeSong.tooltiptext");
 		// 1. Listheader
 		private String _listHeader1 = Labels.getLabel("common.Description");
 		// the windows height
@@ -400,8 +404,9 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 		public void setYoutubeLinkService(YoutubeLinkService youtubeLinkService) {
 			this.youtubeLinkService = youtubeLinkService;
 		}
-
 	}
+
+	// +++ END inner class YoutubeLinkSelectListBox +++ //
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //

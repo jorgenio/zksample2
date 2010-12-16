@@ -61,6 +61,15 @@ public interface YoutubeLinkService {
 	public YoutubeLink getYoutubeLinkByID(long id);
 
 	/**
+	 * EN: Get a randomly YoutubeLink.<br>
+	 * DE: Gibt einen YoutubeLink zurueck, der per Zufallszahlengenerator
+	 * ermittelt wurde.<br>
+	 * 
+	 * @return YoutubeLink / YoutubeLink
+	 */
+	public YoutubeLink getRandomYoutubeLink();
+
+	/**
 	 * EN: Get a paged list of all YoutubeLinks.<br>
 	 * DE: Gibt eine paged Liste aller YoutubeLinks zurueck.<br>
 	 * 

@@ -19,6 +19,7 @@
 package de.forsthaus.backend.dao.impl;
 
 import java.util.List;
+import java.util.Random;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
@@ -77,6 +78,26 @@ public class YoutubeLinkDAOImpl extends BasisNextidDaoImpl<YoutubeLink> implemen
 		criteria.add(Restrictions.eq("id", Long.valueOf(id)));
 
 		return (YoutubeLink) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public YoutubeLink getRandomYoutubeLink() {
+		DetachedCriteria criteria = DetachedCriteria.forClass(YoutubeLink.class);
+
+		try {
+			int recCount = getCountAllYoutubeLinks();
+			if (recCount > 0) {
+				Random random = new Random();
+				int selRecord = random.nextInt(recCount);
+
+				return (YoutubeLink) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria, selRecord, 1));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

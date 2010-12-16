@@ -83,4 +83,9 @@ public class YoutubeLinkServiceImpl implements YoutubeLinkService {
 		getYoutubeLinkDAO().saveOrUpdate(entity);
 	}
 
+	@Override
+	public YoutubeLink getRandomYoutubeLink() {
+		return getYoutubeLinkDAO().getRandomYoutubeLink();
+	}
+
 }

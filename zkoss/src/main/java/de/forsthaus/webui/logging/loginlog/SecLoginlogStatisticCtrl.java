@@ -244,7 +244,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		lh1.setParent(listhead);
 		final Listheader lh2 = new Listheader(Labels.getLabel("listheader_SecLoginlogList_CountryCode2.label"));
 		lh2.setSclass("FDListBoxHeader1");
-		lh2.setWidth("185px");
+		lh2.setWidth("175px");
 		lh2.setSortAscending(new FieldComparator("countryName", true));
 		lh2.setSortDescending(new FieldComparator("countryName", false));
 		lh2.setParent(listhead);
@@ -356,7 +356,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		lh1.setParent(listhead);
 		final Listheader lh2 = new Listheader(Labels.getLabel("listheader_SecLoginlogList_CountryCode2.label"));
 		lh2.setSclass("FDListBoxHeader1");
-		lh2.setWidth("185px");
+		lh2.setWidth("175px");
 		lh2.setSortAscending(new FieldComparator("countryName", true));
 		lh2.setSortDescending(new FieldComparator("countryName", false));
 		lh2.setParent(listhead);
@@ -463,7 +463,7 @@ public class SecLoginlogStatisticCtrl extends GFCBaseCtrl implements Serializabl
 		lh1.setParent(listhead);
 		final Listheader lh2 = new Listheader(Labels.getLabel("listheader_SecLoginlogList_CountryCode2.label"));
 		lh2.setSclass("FDListBoxHeader1");
-		lh2.setWidth("185px");
+		lh2.setWidth("175px");
 		lh2.setSortAscending(new FieldComparator("countryName", true));
 		lh2.setSortDescending(new FieldComparator("countryName", false));
 		lh2.setParent(listhead);

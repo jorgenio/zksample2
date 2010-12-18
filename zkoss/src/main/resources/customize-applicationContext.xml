@@ -67,6 +67,6 @@
 	<!-- MySQL     : " ~.backend.dao.impl.NextIdViewMySQLDaoImpl      -->
 	<!-- ============================================================ -->
 	<bean id="nextidviewDAO" class="de.forsthaus.backend.dao.impl.NextIdViewH2DAOImpl"
-		parent="basisDAO" />
+		parent="basisDAO" scope="prototype"/>
 
 </beans>

@@ -14,8 +14,9 @@
 	<!-- ====================================================== -->
 	<!--          Define the beans for the gui services         -->
 	<!-- ====================================================== -->
-	<bean id="guiLoginLoggingService" scope="request"
-		class="de.forsthaus.gui.service.impl.GuiLoginLoggingServiceImpl">
+	<bean id="guiLoginLoggingService"
+		class="de.forsthaus.gui.service.impl.GuiLoginLoggingServiceImpl"
+		scope="session">
 		<property name="ip2CountryService" ref="ip2CountryService" />
 		<property name="ip4CountryService" ref="ip4CountryService" />
 		<property name="ipToCountryService" ref="ipToCountryService" />
@@ -25,7 +26,8 @@
 	</bean>
 
 	<bean id="guiLoginLoggingPolicService"
-		class="de.forsthaus.gui.service.impl.GuiLoginLoggingPolicServiceImpl">
+		class="de.forsthaus.gui.service.impl.GuiLoginLoggingPolicServiceImpl"
+		scope="session">
 		<property name="ip2CountryService" ref="ip2CountryService" />
 		<property name="ipToCountryService" ref="ipToCountryService" />
 		<property name="loginLoggingService" ref="loginLoggingService" />
@@ -34,7 +36,7 @@
 
 	<bean id="guiHibernateStatisticsService"
 		class="de.forsthaus.gui.service.impl.GuiHibernateStatisticsServiceImpl"
-		scope="request">
+		scope="session">
 		<property name="hibernateStatisticsService" ref="hibernateStatisticsService" />
 	</bean>
 </beans>

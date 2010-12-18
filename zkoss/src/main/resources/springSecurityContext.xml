@@ -131,7 +131,7 @@
 	<!--                     Authentication.                    -->
 	<!-- ====================================================== -->
 	<beans:bean id="LoginLoggingPolicyService"
-		class="de.forsthaus.policy.LoginLoggingPolicyService">
+		class="de.forsthaus.policy.LoginLoggingPolicyService" scope="session">
 		<beans:property name="guiLoginLoggingPolicService" ref="guiLoginLoggingPolicService" />
 	</beans:bean>
 

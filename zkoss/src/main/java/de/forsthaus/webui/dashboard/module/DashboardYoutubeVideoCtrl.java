@@ -1,7 +1,6 @@
 package de.forsthaus.webui.dashboard.module;
 
 import java.io.Serializable;
-import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.zkoss.spring.SpringUtil;

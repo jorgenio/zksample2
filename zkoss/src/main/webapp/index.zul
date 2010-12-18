@@ -38,7 +38,7 @@
 			<north id="bl_north" border="none"
 				style="background-color: #EBEBEB" flex="true">
 
-				<div width="500px" height="210px"
+				<div width="500px" height="225px"
 					style="background-color: #EBEBEB; padding-top: 10px; padding-left: 10px">
 					<div width="600px" align="left"
 						style="background-color: #EBEBEB; padding: 10px">
@@ -63,6 +63,7 @@
 								image="http://sourceforge.net/sflogo.php?group_id=297404"
 								href="http://zksample2.sourceforge.net/" target="_blank" />
 							<separator width="30px" />
+							<image src="images/icons/santa32a.gif" />
 						</hbox>
 					</div>
 

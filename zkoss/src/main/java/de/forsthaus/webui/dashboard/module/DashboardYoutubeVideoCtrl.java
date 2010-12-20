@@ -124,7 +124,7 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 		gb.setParent(ytWindow);
 		Caption cap = new Caption();
 		cap.setImage("/images/youtube_40x16.jpg");
-		cap.setLabel("Terry's weekly favorite song");
+		cap.setLabel("Terry's favorite songs");
 		cap.setStyle("padding: 0px;");
 		cap.setParent(gb);
 

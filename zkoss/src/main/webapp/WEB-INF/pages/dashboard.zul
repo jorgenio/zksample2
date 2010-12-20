@@ -14,7 +14,7 @@
 		lf = "\n";
 		s = "";
 		s = s + "- 20.12.2010 / Added the second Dashboard module for showing the data inventory. This module" + lf;
-		s = s + "            	      have an inbuild timer for self refreshing which can be activated at creation time." + lf;
+		s = s + "            	      have an build in timer for self refreshing which can be activated at creation time." + lf;
 		s = s + "- 16.12.2010 / Added the missing methode for randomly selecting a song by the first creation of the Dashboard.  " + lf;
 		s = s + "- 15.12.2010 / Added the first DashBoard Module. The welcome.zul is renamed to dashboard.zul  " + lf;
 		s = s + "            	      This DashBoard module is for selecting a youTube video from a db list. Have fun." + lf;
@@ -130,19 +130,23 @@
 		s = s + "                      ([Performance] Paging and Sorting with a Filter Object) " + lf;
 		s = s + "                      Link: http://docs.zkoss.org/wiki/Paging_Sorting_with_a_filter_object " + lf;
 
+		lf = "\n";
+		t = "";
+		t = t + "- CRUD operations on all modules with spring managed services and DAO classes which are working with hibernate." + lf;
+		t = t + "- Uses ButtonControllers for showing next possible CRUD operations." + lf;
+		t = t + "- checks by onClose if there are unsaved modified data." + lf;
+		t = t + "- single and mixed searching for data." + lf;
+		t = t + "- sortable lists." + lf;
+		t = t + "- localization (english/german) language." + lf;
+		t = t + "- Reporting with the JasperReports. The order report are created with the DynamicJasper lib." + lf;
+		t = t + "- Full customizable Role based security management wich is extended for groups." + lf;
+		t = t + "- Rights data are stored in database tables. It's build on top of the spring-security framework." + lf;
+		t = t + "- Most dialogs you can reach with doubleClick on an item in the lists." + lf;
+		t = t + "- Customer No. 20 + 21 have predefiened data for orders and order positions. " + lf;
+		t = t + "- Data for orders and order-positions are available for customer No. 20 + 21." + lf;
+
 	}
 ]]></zscript>
-
-		<style>
-			body { padding: 0 0; /* 0 padding on top and bottom and 0
-			padding on right and left */ }
-
-			<!-- Title in bold letters -->
-			.z-groupbox-hl, .z-groupbox-header { color: #000000;
-			font-weight: bold; }
-		</style>
-
-
 
 		<tablelayout columns="3" width="100%">
 
@@ -210,45 +214,63 @@
 				</panel>
 
 			</tablechildren>
-
 		</tablelayout>
 
-		<tablelayout columns="2" width="100%">
+		<hbox align="stretch" pack="stretch" sclass="FDCenterNoBorder"
+			width="100%">
 
-			<tablechildren rowspan="3" width="70%">
-				<panel border="none">
-					<panelchildren>
+			<!-- MODULE CONTENT AREA -->
+			<cell>
+				<vbox align="stretch" pack="stretch" width="100%">
+					<div id="divDashboardCenter">
 
-						<groupbox mold="3d">
-							<caption
-								style="color: #000000; font-weight:bold;"
-								image="/images/icons/new_icons_10.gif"
-								label="NEW !!!  Added the first Dashboard module." />
+						<!-- Here comes the CENTER modules  -->
+						<!-- divWelcomeCenter.appendChild(DashboardNewsCtrl.show());  -->
 
-							<textbox height="100%" width="99.5%"
-								multiline="true" rows="28" readonly="true"
-								style="font-family: verdana; border: none; background-color: white;"
-								value="${s}" />
-						</groupbox>
+						<div>
+							<groupbox mold="3d">
+								<caption
+									style="color: #000000; font-weight:bold;"
+									image="/images/icons/new_icons_10.gif"
+									label="NEW !!!  Added the first Dashboard module." />
 
-					</panelchildren>
-				</panel>
-			</tablechildren>
+								<textbox height="100%" width="99.5%"
+									multiline="true" rows="28" readonly="true"
+									style="font-family: verdana; border: none; background-color: white;"
+									value="${s}" />
+							</groupbox>
+						</div>
+
+						<div id="divTableRecordCounter" />
+
+						<div>
+							<groupbox mold="3d">
+								<caption
+									style="color: #000000; font-weight:bold;"
+									image="/images/icons/method_16x16.gif"
+									label="What's in it and sample data." />
+
+								<textbox height="100%" width="99.5%"
+									multiline="true" rows="10" readonly="true"
+									style="font-family: verdana; border: none; background-color: white;"
+									value="${t}" />
+							</groupbox>
+						</div>
 
 
-			<tablechildren width="30%">
-				<panel border="none">
-					<panelchildren>
+					</div>
+				</vbox>
+			</cell>
 
+			<!-- EAST AREA -->
+			<cell width="260px">
+				<vbox align="stretch" pack="stretch" width="260px">
+					<div id="divDashboardEast">
+
+						<!-- Here comes the EAST modules  -->
+						<!-- divDashboardEast.appendChild(DashboardDatetingCtrl.show());  -->
 						<div id="divYouTube" />
 
-					</panelchildren>
-				</panel>
-			</tablechildren>
-
-			<tablechildren width="30%">
-				<panel border="none">
-					<panelchildren>
 						<groupbox mold="3d">
 							<caption
 								style="color: #000000; font-weight:bold;"
@@ -261,14 +283,7 @@
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
 						</groupbox>
-					</panelchildren>
-				</panel>
-			</tablechildren>
 
-
-			<tablechildren width="30%">
-				<panel border="none">
-					<panelchildren>
 						<groupbox mold="3d">
 							<caption
 								style="color: #000000; font-weight:bold;"
@@ -281,184 +296,7 @@
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
 						</groupbox>
-					</panelchildren>
-				</panel>
-			</tablechildren>
-		</tablelayout>
 
-		<tablelayout columns="2" width="100%">
-			<tablechildren rowspan="4" width="70%">
-				<panel border="none">
-					<panelchildren>
-
-						<div id="divTableRecordCounter" />
-
-						<groupbox mold="3d">
-							<caption
-								style="color: #000000; font-weight:bold;"
-								image="/images/icons/database_blue_16x16.gif"
-								label="What's in it and the sample data" />
-
-							<tabbox tabscroll="true">
-								<tabs>
-									<tab label="Base" />
-									<tab label="Chat" />
-									<tab label="Customers" />
-									<tab label="Orders" />
-									<tab label="Articles" />
-									<tab label="Branches" />
-									<tab label="Offices" />
-									<tab label="Administration" />
-									<tab label="Users" />
-									<tab label="User Roles" />
-									<tab label="Roles" />
-									<tab label="Role-Groups" />
-									<tab label="Groups" />
-									<tab label="Group-Rights" />
-									<tab label="Rights" />
-									<tab label="Login log" />
-								</tabs>
-								<tabpanels>
-
-									<!-- Tab base -->
-									<tabpanel>
-										<textbox height="100%"
-											width="98%" multiline="true" rows="12" readonly="true"
-											style="font-family: verdana; border: none; background-color: white;"
-											value="- CRUD operations on all modules with spring managed services and DAO classes which are working with hibernate. &#13;- Uses ButtonControllers for showing next possible CRUD operations.&#13;- checks by onClose if there are unsaved modified data.&#13;- single and mixed searching for data.&#13;- sortable lists.&#13;- internationalization (english/german) language.&#13;- Reporting with the JasperReports. The order report are created with iReport and uses a JRBeanDataSource.&#13;- Full customizable Role based security management wich is extended for groups.&#13;   All is stored in database tables. It's build on top of the spring-security framework.&#13;- Most dialogs you can reach with doubleClick on an item in the lists.&#13;" />
-									</tabpanel>
-
-									<!-- Tab chat -->
-									<tabpanel>
-										<textbox height="100%"
-											width="98%" multiline="true" rows="10" readonly="true"
-											style="font-family: verdana; border: none; background-color: white;"
-											value="- A implementation of the ZKoss chat demo. Modifications only for the date/time format in the chat window. " />
-									</tabpanel>
-
-									<!-- Tab customers -->
-									<tabpanel>
-										<textbox height="100%"
-											width="98%" multiline="true" rows="10" readonly="true"
-											style="font-family: verdana; border: none; background-color: white;"
-											value="- Customer No. 20 + 21 have	predefiened data for orders and order positions. &#13;- Printing orders with JasperReports. A main Report with two subreports &#13;" />
-									</tabpanel>
-
-									<!-- Tab orders -->
-									<tabpanel>
-										<textbox height="100%"
-											width="98%" multiline="true" rows="10" readonly="true"
-											style="font-family: verdana; border: none; background-color: white;"
-											value="- Orders and order-positions data are available for customer No. 20 + 21.&#13;&#13; - All orders are shown in the sample at init. &#13; - In a normal application you must limited the count of shown records by initialisation.&#13;" />
-									</tabpanel>
-
-									<!-- Tab articles -->
-									<tabpanel>
-										<textbox height="100%"
-											width="98%" multiline="true" rows="10" readonly="true"
-											style="font-family: verdana; border: none; background-color: white;"
-											value="- Predefined articles. Under the list is an additionally textbox for the	long article description.&#13;" />
-									</tabpanel>
-
-									<!-- Tab branches -->
-									<tabpanel>
-										<textbox height="100%"
-											width="98%" multiline="true" rows="10" readonly="true"
-											style="font-family: verdana; border: none; background-color: white;"
-											value="- Predefined branches. Branch '000' is a system branch for predefined to a new customer and cannot be deleted.&#13; " />
-									</tabpanel>
-
-									<!-- Tab offices -->
-									<tabpanel>
-										<textbox height="100%"
-											width="98%" multiline="true" rows="10" readonly="true"
-											style="font-family: verdana; border: none; background-color: white;"
-											value="- Offices. Not used in this sample application. " />
-									</tabpanel>
-
-									<!-- Tab Administration -->
-									<tabpanel>
-										<textbox height="100%"
-											width="98%" multiline="true" rows="10" readonly="true"
-											style="font-family: verdana; border: none; background-color: white;"
-											value=" - The Administration menu point includes the whole security administration, the users and Login log list.&#13; - The security is build on top of the spring-security framework and extended for groups and group-rights. &#13; - In the most simple examples roles are defined for ADMIN_ROLE, USER_ROLE or GUEST_ROLE.&#13;&#13;   This is to small for us. &#13;   Because what is a user ??? A user in a bigger business firm can works in a department of &#13;   booking, invoicing, inventory, production, sales, promotion ...&#13;   And these categories can have sub categories.&#13;   Secondly we go away from the xml configuration for assigning the roles to a page or event. &#13;   We do it in database tables and can extend the security for a group and group-right. &#13;   Further we need not a new tomcat start to consider changes in the scurity of pages or events.&#13;&#13; - At last: A right in spring-security is only a STRING &#13; While we secure the application in the CODE and manage these in tables WE and OUR CUSTOMERS would have the abbility &#13;to customize the access/right &#13; While we do not secure with a ROLE-String either we secure with a RIGHT-String. &#13; we can assign a group of right-strings to a logically closed GROUP. &#13; So RIGHTS, GROUPS and GROUP-RIGHTS are defined by the developer who knows what compoents are working together.&#13; All others like ROLES and ROLE-GROUPS can be modified/extended by the customer if needed/allowed.&#13; " />
-									</tabpanel>
-
-									<!-- Tab users -->
-									<tabpanel>
-										<textbox height="100%"
-											width="98%" multiline="true" rows="10" readonly="true"
-											style="font-family: verdana; border: none; background-color: white;"
-											value=" - All users have the right to edit her own peronal data like the name, password.&#13; - User Roles are assigned in the administration area [User Roles].&#13; " />
-									</tabpanel>
-
-									<!-- Tab User Roles -->
-									<tabpanel>
-										<textbox height="100%"
-											width="98%" multiline="true" rows="10" readonly="true"
-											style="font-family: verdana; border: none; background-color: white;"
-											value=" - Here will assigned Roles to the Users. It's possible to assign several Roles to a user.&#13;" />
-									</tabpanel>
-
-									<!-- Tab Roles -->
-									<tabpanel>
-										<textbox height="100%"
-											width="98%" multiline="true" rows="10" readonly="true"
-											style="font-family: verdana; border: none; background-color: white;"
-											value=" - Predefined Roles.&#13; " />
-									</tabpanel>
-
-									<!-- Tab Role-Groups -->
-									<tabpanel>
-										<textbox height="100%"
-											width="98%" multiline="true" rows="10" readonly="true"
-											style="font-family: verdana; border: none; background-color: white;"
-											value=" - Predefined Role Groups.&#13; " />
-									</tabpanel>
-
-									<!-- Tab Groups -->
-									<tabpanel>
-										<textbox height="100%"
-											width="98%" multiline="true" rows="10" readonly="true"
-											style="font-family: verdana; border: none; background-color: white;"
-											value=" - Predefined Groups.&#13; " />
-									</tabpanel>
-
-									<!-- Tab Group-Rights -->
-									<tabpanel>
-										<textbox height="100%"
-											width="98%" multiline="true" rows="10" readonly="true"
-											style="font-family: verdana; border: none; background-color: white;"
-											value=" - Predefined Group-Rights.&#13; " />
-									</tabpanel>
-
-									<!-- Tab Rights -->
-									<tabpanel>
-										<textbox height="100%"
-											width="98%" multiline="true" rows="10" readonly="true"
-											style="font-family: verdana; border: none; background-color: white;"
-											value=" - Predefined Rights.&#13; " />
-									</tabpanel>
-
-									<!-- Tab Login Log -->
-									<tabpanel>
-										<textbox height="100%"
-											width="98%" multiline="true" rows="10" readonly="true"
-											style="font-family: verdana; border: none; background-color: white;"
-											value=" - Login Log list.&#13; " />
-									</tabpanel>
-
-								</tabpanels>
-							</tabbox>
-						</groupbox>
-					</panelchildren>
-				</panel>
-			</tablechildren>
-
-
-			<tablechildren width="30%">
-				<panel border="none">
-					<panelchildren>
 						<groupbox mold="3d">
 							<caption
 								style="color: #000000; font-weight:bold;"
@@ -471,13 +309,7 @@
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
 						</groupbox>
-					</panelchildren>
-				</panel>
-			</tablechildren>
 
-			<tablechildren width="30%">
-				<panel border="none">
-					<panelchildren>
 						<groupbox mold="3d">
 							<caption
 								style="color: #000000; font-weight:bold;"
@@ -489,13 +321,7 @@
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
 						</groupbox>
-					</panelchildren>
-				</panel>
-			</tablechildren>
 
-			<tablechildren width="30%">
-				<panel border="none">
-					<panelchildren>
 						<groupbox mold="3d">
 							<caption
 								style="color: #000000; font-weight:bold;"
@@ -507,14 +333,7 @@
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
 						</groupbox>
-					</panelchildren>
-				</panel>
-			</tablechildren>
 
-
-			<tablechildren width="30%">
-				<panel border="none">
-					<panelchildren>
 						<groupbox mold="3d">
 							<caption
 								style="color: #000000; font-weight:bold;"
@@ -527,26 +346,15 @@
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
 						</groupbox>
-					</panelchildren>
-				</panel>
-			</tablechildren>
 
-		</tablelayout>
+					</div>
+				</vbox>
+			</cell>
 
+		</hbox>
 
 
 	</window>
 </zk>
-
-<!-- Music: Loquat - Swing Set Chain  src="http://www.youtube.com/embed/51G24IVfcaI" -->
-<!-- Music: Empire of the Sun - We Are The People  src="http://www.youtube.com/embed/Tj_Nlm0871E" -->
-<!-- Music: Loquat - Harder Hit src="http://www.youtube.com/watch?v=aoHUb2r8q-g&feature=rec-LGOUT-exp_fresh+div-1r-3-HM" -->
-<!-- Music: THIN LIZZY - Still in Love With You  src="http://www.youtube.com/watch?v=oHUWXjNU0aM" -->
-<!-- Music: Gary Moore with Phil Lynnot - Parisienne Walkways (live)  src="http://www.youtube.com/embed/18FgnFVm5k0" -->
-<!-- Music: Talking Heads - This must be the place   src="http://www.youtube.com/embed/pVrVY540xdc" -->
-<!-- Music: John Cale and Brian Eno - Spinning away   src="http://www.youtube.com/embed/-INeMspNSQ0" -->
-<!-- Music: Metric - Joyride   src="http://www.youtube.com/embed/F0ZL5YWP5I8" -->
-<!-- Music: Medina - Kun For Mig + Ensome  src="http://www.youtube.com/embed/5Gf004et0SI" -->
-<!-- Music: Paris - Captain Morgan  src="http://www.youtube.com/embed/o6Eq1bH-qA0" -->
 
 

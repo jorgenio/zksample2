@@ -15,7 +15,7 @@
 		s = "";
 		s = s + "- 20.12.2010 / Added the second Dashboard module for showing the data inventory. This module" + lf;
 		s = s + "            	      have an build in timer for self refreshing which can be activated at creation time." + lf;
-		s = s + "            	      Setup a new zul skeleton for the dashboard. Thanks Madruga and SimonPay. " + lf;
+		s = s + "            	      Setup a new zul skeleton for the dashboard. Thanks Madruga and SimonPay for 'pack/stretch' help. " + lf;
 		s = s + "- 16.12.2010 / Added the missing methode for randomly selecting a song by the first creation of the Dashboard.  " + lf;
 		s = s + "- 15.12.2010 / Added the first DashBoard Module. The welcome.zul is renamed to dashboard.zul  " + lf;
 		s = s + "            	      This DashBoard module is for selecting a youTube video from a db list. Have fun." + lf;

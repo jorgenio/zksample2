@@ -1,6 +1,10 @@
-<?page id="indexPage" title=" ZKoss sample application " cacheable="false" 
+<?page id="indexPage" title=" ZKoss sample application" contentType="text/html;charset=UTF-8" cacheable="false" 
 	language="xul/html" zscriptLanguage="Java"?>
-<?meta content="text/html; charset=UTF-8" 	pageEncoding="UTF-8"?>
+
+<!-- 	
+	<?meta content="text/html; charset=UTF-8" 	pageEncoding="UTF-8"?>
+-->
+
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 

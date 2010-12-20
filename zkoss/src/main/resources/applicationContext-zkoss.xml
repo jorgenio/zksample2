@@ -36,7 +36,6 @@
 	<!-- Dashboard -->
 	<bean id="dashboardMainCtrl" class="de.forsthaus.webui.dashboard.DashboardMainCtrl"
 		parent="basisCtrl" scope="prototype">
-		<property name="commonService" ref="commonService" />
 	</bean>
 
 

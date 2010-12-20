@@ -337,11 +337,11 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		if (map.containsKey("SecRolegroup")) {
 			addNewRow(rows, "SecRolegroup", map.get("SecRolegroup"));
 		}
-		if (map.containsKey("SecUser")) {
-			addNewRow(rows, "SecUser", map.get("SecUser"));
-		}
 		if (map.containsKey("SecUserrole")) {
 			addNewRow(rows, "SecUserrole", map.get("SecUserrole"));
+		}
+		if (map.containsKey("SecUser")) {
+			addNewRow(rows, "SecUser", map.get("SecUser"));
 		}
 		if (map.containsKey("SecLoginlog")) {
 			addNewRow(rows, "SecLoginlog", map.get("SecLoginlog"));

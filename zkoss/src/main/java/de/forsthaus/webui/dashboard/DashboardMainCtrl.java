@@ -9,6 +9,7 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Window;
 
 import de.forsthaus.backend.service.CommonService;
+import de.forsthaus.webui.dashboard.module.DashboardTableRecordsCounterCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardYoutubeVideoCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 
@@ -34,14 +35,12 @@ public class DashboardMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
 	protected Window windowDashboard; // autowired
-	// protected Borderlayout borderLayout_Welcome; // autowired
 	// protected Div divDashboardCenter; // autowired
 	// protected Div divDashboardEast; // autowired
 
-	protected Div divYouTube; // autowired
+	protected Div divTableRecordCounter; // autowired
 
-	// ServiceDAOs / Domain Classes
-	private CommonService commonService;
+	protected Div divYouTube; // autowired
 
 	/**
 	 * default constructor.<br>
@@ -84,8 +83,7 @@ public class DashboardMainCtrl extends GFCBaseCtrl implements Serializable {
 		 */
 		// divDashboardCenter.appendChild(DashboardNewsFromHtmlFileCtrl.show(200,
 		// true, 600000));
-		// divDashboardCenter.appendChild(DashboardTableRecordsCounterCtrl.show(250,
-		// true, 20000));
+		divTableRecordCounter.appendChild(DashboardTableRecordsCounterCtrl.show(200, true, 600000));
 		// divDashboardCenter.appendChild(DashboardPendingJobsCtrl.show(80,
 		// true, 600000));
 		// divDashboardCenter.appendChild(DashboardSampleCtrl.show(60, true,
@@ -113,52 +111,8 @@ public class DashboardMainCtrl extends GFCBaseCtrl implements Serializable {
 	// ++++++++++++++++++++ Helpers ++++++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
-	/**
-	 * Recalculates the container size for this controller new and resize them.
-	 */
-	public void doFitSize(Event event) {
-
-		// int offset = ((UserWorkspace)
-		// SpringUtil.getBean("userWorkspace")).getBrowserCssOffset();
-		// int height = 0;
-		// int b = 125;
-		//
-		// if ((Intbox)
-		// Path.getComponent("/outerIndexWindow/currentDesktopHeight") != null)
-		// {
-		//
-		// Intbox hei = (Intbox)
-		// Path.getComponent("/outerIndexWindow/currentDesktopHeight");
-		//
-		// if (hei.getValue() != null) {
-		// // System.out.println("not null-->" + height);
-		// height = hei.getValue() - (b - 50 - offset);
-		// borderLayout_Welcome.setHeight(height + "px");
-		// } else {
-		// // System.out.println("null-->" + height);
-		// if (FDSessionUtil.getFirstScreenHeight() != 0) {
-		// height = FDSessionUtil.getFirstScreenHeight() - b - offset;
-		// borderLayout_Welcome.setHeight(height + "px");
-		// } else {
-		// borderLayout_Welcome.setHeight(1024 + "px");
-		// }
-		//
-		// }
-		// }
-		//
-		// windowDashboard.invalidate();
-
-	}
-
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
-	public CommonService getCommonService() {
-		return commonService;
-	}
-
-	public void setCommonService(CommonService commonService) {
-		this.commonService = commonService;
-	}
 }

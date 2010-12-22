@@ -61,7 +61,7 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Customer> getAllCustomers(final int start, final int pageSize, final String fieldName, final boolean ascending) {
+	public List<Customer> getAllCustomers(final int start, final int pageSize, final String orderByFieldName, final boolean ascending) {
 		logger.info("--> ");
 
 		if (logger.isInfoEnabled()) {
@@ -70,9 +70,9 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
 		if (ascending) {
-			criteria.addOrder(Order.asc(fieldName));
+			criteria.addOrder(Order.asc(orderByFieldName));
 		} else {
-			criteria.addOrder(Order.desc(fieldName));
+			criteria.addOrder(Order.desc(orderByFieldName));
 		}
 		return getHibernateTemplate().findByCriteria(criteria, start, pageSize);
 	}
@@ -86,15 +86,7 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from Customer"));
 	}
 
-	/**
-	 * Gibt einen Kunden-Datensatz der Tabelle "Kunde" zurueck, der mit dem der
-	 * Kunden_ID uebereinstimmt
-	 * 
-	 * @param kun_id
-	 *            (int)
-	 * @return Customer
-	 */
-	public Customer getCustomerByID(final Long kun_id) {
+	public Customer getCustomerByID(long kun_id) {
 		return get(Customer.class, kun_id);
 	}
 

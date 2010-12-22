@@ -27,7 +27,7 @@ public interface BrancheDAO {
 
 	/**
 	 * EN: Get a new CustomerBranch object.<br>
-	 * DE: Gibt ein neues Kunden Branche Objekt zurueck.<br>
+	 * DE: Gibt ein neues Branche Objekt zurueck.<br>
 	 * 
 	 * @return Branche
 	 */
@@ -74,6 +74,8 @@ public interface BrancheDAO {
 	 * EN: Gets a list of CustomerBranches where the text is like %text% .<br>
 	 * DE: Gibt eine Liste aller KundenBranchen anhand like %text% zurueck.<br>
 	 * 
+	 * @param value
+	 *            Name of the branch / BranchenName
 	 * @return List of Branches / Liste of Branchen
 	 */
 	public List<Branche> getBrancheLikeName(String value);

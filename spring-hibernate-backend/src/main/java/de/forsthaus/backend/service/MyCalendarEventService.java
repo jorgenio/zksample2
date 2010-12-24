@@ -40,7 +40,7 @@ public interface MyCalendarEventService {
 	public MyCalendarEvent getNewCalendarEvent();
 
 	/**
-	 * EN: Get a List of MyCalendarEvents for a given UserId.<br>
+	 * EN: Gets a List of MyCalendarEvents for a given UserId.<br>
 	 * DE: Gibt eine Liste von MyCalendarEvents fuer eine UserId zurueck.<br>
 	 * 
 	 * @param usrId
@@ -68,7 +68,7 @@ public interface MyCalendarEventService {
 	public MyCalendarEvent getCalendarEventByID(long id);
 
 	/**
-	 * EN: Get a List of MyCalendarEvents for a given date and given userId.<br>
+	 * EN: Gets a List of MyCalendarEvents for a given date and given userId.<br>
 	 * DE: Gibt eine Liste von MyCalendarEvents fuer ein Datum und eine UserId
 	 * zurueck.<br>
 	 * 
@@ -81,7 +81,7 @@ public interface MyCalendarEventService {
 	public List<MyCalendarEvent> getCalendarEventForBeginDate(Date beginDate, long usrId);
 
 	/**
-	 * EN: Get a List of MyCalendarEvents for a given begin-date, end-date and
+	 * EN: Gets a List of MyCalendarEvents for a given begin-date, end-date and
 	 * given userId.<br>
 	 * DE: Gibt eine Liste von MyCalendarEvents fuer ein AnfangsDatum, EndDatum
 	 * und eine UserId zurueck.<br>

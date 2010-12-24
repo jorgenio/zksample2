@@ -148,7 +148,7 @@ public class BranchSimpleDJReport extends Window implements Serializable {
 
 		// Get information from database
 		BrancheService as = (BrancheService) SpringUtil.getBean("brancheService");
-		List<Branche> resultList = as.getAlleBranche();
+		List<Branche> resultList = as.getAllBranches();
 
 		// Create Datasource and put it in Dynamic Jasper Format
 		List data = new ArrayList(resultList.size());

@@ -156,7 +156,7 @@ public class OfficeSimpleDJReport extends Window implements Serializable {
 
 		// Get information from database
 		OfficeService as = (OfficeService) SpringUtil.getBean("officeService");
-		List<Office> resultList = as.getOffices();
+		List<Office> resultList = as.getAllOffices();
 
 		// Create Datasource and put it in Dynamic Jasper Format
 		List data = new ArrayList(resultList.size());

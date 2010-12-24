@@ -123,7 +123,7 @@ public class CustomerSearchCtrl extends GFCBaseCtrl implements Serializable {
 		// TODO chnagwed to ListPagedWrapper
 		// +++++++++++++++++++++++ DropDown ListBox ++++++++++++++++++++++ //
 		// set listModel and itemRenderer for the Branch dropdown listbox
-		kunBranche.setModel(new ListModelList(getBrancheService().getAlleBranche()));
+		kunBranche.setModel(new ListModelList(getBrancheService().getAllBranches()));
 		kunBranche.setItemRenderer(new CustomerBrancheListModelItemRenderer());
 
 		// +++++++++++++++++++++++ DropDown ListBox ++++++++++++++++++++++ //

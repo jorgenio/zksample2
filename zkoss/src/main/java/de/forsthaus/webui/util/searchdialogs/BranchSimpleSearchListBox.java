@@ -156,7 +156,7 @@ public class BranchSimpleSearchListBox extends Window implements Serializable {
 		listheader.setLabel(_listHeader1);
 
 		// Model
-		listbox.setModel(new ListModelList(getBrancheService().getAlleBranche()));
+		listbox.setModel(new ListModelList(getBrancheService().getAllBranches()));
 
 		try {
 			doModal();

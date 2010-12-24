@@ -46,6 +46,7 @@ import de.forsthaus.backend.dao.OrderpositionDAO;
 import de.forsthaus.backend.model.Customer;
 import de.forsthaus.backend.model.Order;
 import de.forsthaus.backend.model.Orderposition;
+import de.forsthaus.backend.service.CustomerService;
 import de.forsthaus.backend.service.OrderService;
 import de.forsthaus.services.report.service.ReportService;
 
@@ -64,6 +65,7 @@ public class ReportServiceImpl implements ReportService {
 	private transient CustomerDAO customerDAO;
 	private transient OfficeDAO officeDAO;
 	private transient OrderService orderService;
+	private transient CustomerService customerService;
 
 	@Override
 	public JRDataSource getBeanCollectionByAuftrag(Order anOrder) {
@@ -74,7 +76,7 @@ public class ReportServiceImpl implements ReportService {
 		final Set<Order> orderSet = new HashSet<Order>();
 
 		// get the customer for this order
-		final Customer customer = getOrderService().getCustomerForOrder(anOrder);
+		final Customer customer = getCustomerService().getCustomerByOrder(anOrder);
 
 		/* fill the orderPositionList */
 		orderpositionsSet.addAll(getOrderService().getOrderpositionsByOrder(anOrder));
@@ -102,8 +104,7 @@ public class ReportServiceImpl implements ReportService {
 
 		try {
 
-			final InputStream inputStream = getClass().getResourceAsStream(
-					"/de/forsthaus/webui/reports/AuftragDetailsPojo_Report.jrxml");
+			final InputStream inputStream = getClass().getResourceAsStream("/de/forsthaus/webui/reports/AuftragDetailsPojo_Report.jrxml");
 
 			/* Liste mit Daten füllen */
 			final List<Orderposition> result = getOrderService().getOrderpositionsByOrder(auftrag);
@@ -117,8 +118,7 @@ public class ReportServiceImpl implements ReportService {
 			final JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, repParams, datasource);
 			JasperViewer.viewReport(jasperPrint, false);
 		} catch (final JRException ex) {
-			final String connectMsg = "JasperReports: Could not create the report " + ex.getMessage() + " "
-					+ ex.getLocalizedMessage();
+			final String connectMsg = "JasperReports: Could not create the report " + ex.getMessage() + " " + ex.getLocalizedMessage();
 			Logger.getLogger(getClass()).error(connectMsg, ex);
 		} catch (final Exception ex) {
 			final String connectMsg = "Could not create the report " + ex.getMessage() + " " + ex.getLocalizedMessage();
@@ -134,8 +134,7 @@ public class ReportServiceImpl implements ReportService {
 			final JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
 		} catch (final Exception ex) {
-			final String connectMsg = "JasperReports: Could not create the report " + ex.getMessage() + " "
-					+ ex.getLocalizedMessage();
+			final String connectMsg = "JasperReports: Could not create the report " + ex.getMessage() + " " + ex.getLocalizedMessage();
 			Logger.getLogger(getClass()).error(connectMsg, ex);
 		}
 
@@ -191,6 +190,14 @@ public class ReportServiceImpl implements ReportService {
 
 	public OrderService getOrderService() {
 		return this.orderService;
+	}
+
+	public void setCustomerService(CustomerService customerService) {
+		this.customerService = customerService;
+	}
+
+	public CustomerService getCustomerService() {
+		return customerService;
 	}
 
 }

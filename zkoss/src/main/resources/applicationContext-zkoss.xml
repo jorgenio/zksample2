@@ -277,6 +277,7 @@
 		<property name="officeDAO" ref="officeDAO" />
 		<property name="brancheDAO" ref="brancheDAO" />
 		<property name="orderService" ref="orderService" />
+		<property name="customerService" ref="customerService" />
 	</bean>
 
 	<bean id="hibernateStatisticsCtrl" class="de.forsthaus.webui.debug.HibernateStatisticsCtrl"

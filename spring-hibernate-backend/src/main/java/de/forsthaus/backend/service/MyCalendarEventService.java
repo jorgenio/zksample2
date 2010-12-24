@@ -44,7 +44,7 @@ public interface MyCalendarEventService {
 	 * DE: Gibt eine Liste von MyCalendarEvents fuer eine UserId zurueck.<br>
 	 * 
 	 * @param usrId
-	 *            / UserId / UyserId
+	 *            UserId / UyserId
 	 * @return List of MyCalendarEvents / Liste von MyCalendarEvents
 	 */
 	public List<MyCalendarEvent> getAllCalendarEventsByUserId(long usrId);
@@ -62,7 +62,7 @@ public interface MyCalendarEventService {
 	 * DE: Gibt einen MyCalendarEvent anhand seiner ID zurueck.<br>
 	 * 
 	 * @param id
-	 *            / the persistence identifier / der PrimaerKey
+	 *            the persistence identifier / der PrimaerKey
 	 * @return MyCalendarEvent / MyCalendarEvent
 	 */
 	public MyCalendarEvent getCalendarEventByID(long id);
@@ -75,7 +75,7 @@ public interface MyCalendarEventService {
 	 * @param beginDate
 	 *            date begin of the event | Anfangsdatum des Termins
 	 * @param usrId
-	 *            / UserId / UyserId
+	 *            UserId / UyserId
 	 * @return List of MyCalendarEvents / Liste von MyCalendarEvents
 	 */
 	public List<MyCalendarEvent> getCalendarEventForBeginDate(Date beginDate, long usrId);
@@ -91,7 +91,7 @@ public interface MyCalendarEventService {
 	 * @param endDate
 	 *            date end of the event | EndeDatum des Termins
 	 * @param usrId
-	 *            / UserId / UyserId
+	 *            UserId / UyserId
 	 * @return List of MyCalendarEvents / Liste von MyCalendarEvents
 	 */
 	public List<MyCalendarEvent> getCalendarEventFromToDate(Date beginDate, Date endDate, long usrId);

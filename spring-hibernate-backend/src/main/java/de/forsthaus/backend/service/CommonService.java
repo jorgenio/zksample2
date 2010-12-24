@@ -9,8 +9,9 @@ public interface CommonService {
 	 * DE: Gibt die Anzahl der Datensaetze jeder Tabelle zurueck.<br>
 	 * <br>
 	 * 
-	 * @return Map <String, Object> String=TableName, Object=recordCount, i.e.
-	 *         "Customer" | 2345
+	 * @return Map <String, Object> String=TableName, Object=recordCount, i.e.<br>
+	 *         "Customer" | 2345 <br>
+	 *         "Article" | 4432 <br>
 	 */
 	public Map<String, Object> getAllTablesRecordCounts();
 }

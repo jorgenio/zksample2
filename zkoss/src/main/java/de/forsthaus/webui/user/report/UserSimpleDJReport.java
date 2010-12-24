@@ -208,7 +208,7 @@ public class UserSimpleDJReport extends Window implements Serializable {
 
 		// Get information from database
 		UserService sv = (UserService) SpringUtil.getBean("userService");
-		List<SecUser> resultList = sv.getAlleUser();
+		List<SecUser> resultList = sv.getAllUsers();
 
 		// Create Datasource and put it in Dynamic Jasper Format
 		List data = new ArrayList(resultList.size());

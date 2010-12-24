@@ -70,15 +70,16 @@ public interface ArticleDAO {
 	public List<Article> getArticleLikeArticleNumber(String text);
 
 	/**
-	 * EN: Gets a list of Articles where the article Name is like %text% .<br>
-	 * DE: Gibt eine Liste aller Artikel zurueck deren ArtikelName gleich %text%
-	 * ist.<br>
+	 * EN: Gets a list of Articles where the article name contains the %string%
+	 * .<br>
+	 * DE: Gibt eine Liste aller Artikel zurueck bei denen der ArtikelName
+	 * %string% enthaelt.<br>
 	 * 
 	 * @param text
 	 *            the matching text / zu uebereinstimmende Zeichenfolge
 	 * @return List of Articles / Liste of Artikel
 	 */
-	public List<Article> getArticleLikeName(String text);
+	public List<Article> getArticleLikeName(String string);
 
 	/**
 	 * EN: Saves or updates an article in the DB.<br>

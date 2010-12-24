@@ -71,10 +71,10 @@ public class ArticleDAOImpl extends BasisNextidDaoImpl<Article> implements Artic
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Article> getArticleLikeName(String text) {
+	public List<Article> getArticleLikeName(String string) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Article.class);
-		criteria.add(Restrictions.ilike("artKurzbezeichnung", text, MatchMode.ANYWHERE));
+		criteria.add(Restrictions.ilike("artKurzbezeichnung", string, MatchMode.ANYWHERE));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 

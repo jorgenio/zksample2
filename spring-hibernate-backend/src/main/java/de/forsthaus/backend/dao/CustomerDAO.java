@@ -87,9 +87,9 @@ public interface CustomerDAO {
 	public Customer getCustomerByKunNr(String kun_nr);
 
 	/**
-	 * EN: Gets a list of Customers where the matchcode is like %string% .<br>
-	 * DE: Gibt eine Liste aller Kunden zurueck deren Matchcode like %string%
-	 * uebereinstimmt.<br>
+	 * EN: Gets a list of Customers where the matchcode contains the %string% .<br>
+	 * DE: Gibt eine Liste aller Kunden zurueck bei denen der Matchcode %string%
+	 * enthaelt.<br>
 	 * 
 	 * @param string
 	 *            Matchcode of the customer / Matchcode des Kunden
@@ -98,9 +98,9 @@ public interface CustomerDAO {
 	public List<Customer> getCustomerLikeMatchcode(String string);
 
 	/**
-	 * EN: Gets a list of Customers where the cityname is like %string% .<br>
-	 * DE: Gibt eine Liste aller Kunden zurueck deren StadtNamen like %string%
-	 * uebereinstimmt.<br>
+	 * EN: Gets a list of Customers where the cityname contains the %string% .<br>
+	 * DE: Gibt eine Liste aller Kunden zurueck bei denen der Stadtname %string%
+	 * enthaelt.<br>
 	 * 
 	 * @param string
 	 *            CtityName of the customer / Stadtnamen des Kunden
@@ -109,9 +109,9 @@ public interface CustomerDAO {
 	public List<Customer> getCustomerLikeOrt(String string);
 
 	/**
-	 * EN: Gets a list of Customers where the name1 is like %string% .<br>
-	 * DE: Gibt eine Liste aller Kunden zurueck deren Name1 like %string%
-	 * uebereinstimmt.<br>
+	 * EN: Gets a list of Customers where the name1 contains the %string%.<br>
+	 * DE: Gibt eine Liste aller Kunden zurueck bei denen der Name1 %string%
+	 * enthaelt.<br>
 	 * 
 	 * @param string
 	 *            Name1 of the customer / Name1 des Kunden
@@ -120,9 +120,9 @@ public interface CustomerDAO {
 	public List<Customer> getCustomerLikeName1(String string);
 
 	/**
-	 * EN: Gets a list of Customers where the name2 is like %string% .<br>
-	 * DE: Gibt eine Liste aller Kunden zurueck deren Name2 like %string%
-	 * uebereinstimmt.<br>
+	 * EN: Gets a list of Customers where the name2 contains the %string%.<br>
+	 * DE: Gibt eine Liste aller Kunden zurueck bei denen der Name2 %string%
+	 * enthaelt.<br>
 	 * 
 	 * @param string
 	 *            Name2 of the customer / Name2 des Kunden

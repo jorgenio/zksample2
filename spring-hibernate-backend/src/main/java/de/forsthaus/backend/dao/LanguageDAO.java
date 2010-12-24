@@ -22,6 +22,12 @@ import java.util.List;
 
 import de.forsthaus.backend.model.Language;
 
+/**
+ * NOT USED AT TIME !!!<br>
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface LanguageDAO {
 
 	public List<Language> getAllLanguages();

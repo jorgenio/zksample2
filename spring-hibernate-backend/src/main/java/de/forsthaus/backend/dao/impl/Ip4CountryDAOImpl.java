@@ -49,7 +49,7 @@ public class Ip4CountryDAOImpl extends BasisNextidDaoImpl<Ip4Country> implements
 	}
 
 	@Override
-	public Ip4Country getCountryID(Long ipNumber) {
-		return get(Ip4Country.class, ipNumber);
+	public Ip4Country getCountryID(Long id) {
+		return get(Ip4Country.class, id);
 	}
 }

@@ -71,14 +71,16 @@ public interface BrancheDAO {
 	public Branche getBrancheByName(String braBezeichnung);
 
 	/**
-	 * EN: Gets a list of CustomerBranches where the text is like %text% .<br>
-	 * DE: Gibt eine Liste aller KundenBranchen anhand like %text% zurueck.<br>
+	 * EN: Gets a list of CustomerBranches where the branch name contains the
+	 * %string% .<br>
+	 * DE: Gibt eine Liste aller KundenBranchen zurueck bei denen der
+	 * Branchenname %string% enthaelt.<br>
 	 * 
 	 * @param value
 	 *            Name of the branch / BranchenName
 	 * @return List of Branches / Liste of Branchen
 	 */
-	public List<Branche> getBrancheLikeName(String value);
+	public List<Branche> getBrancheLikeName(String string);
 
 	/**
 	 * EN: Get the count of all CustomerBranches in the used Table Schema.<br>

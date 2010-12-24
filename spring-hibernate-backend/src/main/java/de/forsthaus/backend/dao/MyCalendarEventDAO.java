@@ -26,59 +26,87 @@ import de.forsthaus.backend.model.MyCalendarEvent;
 public interface MyCalendarEventDAO {
 
 	/**
-	 * Gets a new CalendarEvent object.<br>
+	 * EN: Get a new MyCalendarEvent object.<br>
+	 * DE: Gibt ein neues MyCalendarEvent Objekt zurueck.<br>
 	 * 
-	 * @return
+	 * @return MyCalendarEvent
 	 */
 	public MyCalendarEvent getNewCalendarEvent();
 
 	/**
-	 * Gets back a list with all CalendarEvents for a given user.<br>
+	 * EN: Get a List of MyCalendarEvents for a given UserId.<br>
+	 * DE: Gibt eine Liste von MyCalendarEvents fuer eine UserId zurueck.<br>
 	 * 
 	 * @param usrId
-	 * @return
+	 *            / UserId / UyserId
+	 * @return List of MyCalendarEvents / Liste von MyCalendarEvents
 	 */
-	public List<MyCalendarEvent> getAllCalendarEvents(long usrId);
+	public List<MyCalendarEvent> getAllCalendarEventsByUserId(long usrId);
 
 	/**
-	 * Gets back the count of all CalendarEvents.<br>
+	 * EN: Get the count of all MyCalendarEvents in the used Table Schema.<br>
+	 * DE: Gibt die Anzahl aller MyCalendarEvents im gewaehlten Tabellen Schema
+	 * zurueck.<br>
 	 * 
-	 * @return
+	 * @return int
 	 */
 	public int getCountAllCalendarEvents();
 
 	/**
-	 * Gets back a CalendarEvent by its ID.<br>
+	 * EN: Get a MyCalendarEvent by its ID.<br>
+	 * DE: Gibt einen MyCalendarEvent anhand seiner ID zurueck.<br>
 	 * 
-	 * @param cle_id
-	 * @return
+	 * @param id
+	 *            / the persistence identifier / der PrimaerKey
+	 * @return MyCalendarEvent / MyCalendarEvent
 	 */
-	public MyCalendarEvent getCalendarEventByID(long cle_id);
+	public MyCalendarEvent getCalendarEventByID(long id);
 
 	/**
-	 * Gets back a list of CalendarEvents for a given date and given userId.<br>
+	 * EN: Get a List of MyCalendarEvents for a given date and given userId.<br>
+	 * DE: Gibt eine Liste von MyCalendarEvents fuer ein Datum und eine UserId
+	 * zurueck.<br>
 	 * 
 	 * @param beginDate
+	 *            date begin of the event | Anfangsdatum des Termins
 	 * @param usrId
-	 * @return
+	 *            / UserId / UyserId
+	 * @return List of MyCalendarEvents / Liste von MyCalendarEvents
 	 */
 	public List<MyCalendarEvent> getCalendarEventForBeginDate(Date beginDate, long usrId);
 
 	/**
-	 * Gets back a list of CalendarEvents for a given periode and a given
-	 * userId.<br>
+	 * EN: Get a List of MyCalendarEvents for a given begin-date, end-date and
+	 * given userId.<br>
+	 * DE: Gibt eine Liste von MyCalendarEvents fuer ein AnfangsDatum, EndDatum
+	 * und eine UserId zurueck.<br>
 	 * 
 	 * @param beginDate
+	 *            date begin of the event | AnfangsDatum des Termins
 	 * @param endDate
+	 *            date end of the event | EndeDatum des Termins
 	 * @param usrId
-	 * @return
+	 *            / UserId / UyserId
+	 * @return List of MyCalendarEvents / Liste von MyCalendarEvents
 	 */
 	public List<MyCalendarEvent> getCalendarEventFromToDate(Date beginDate, Date endDate, long usrId);
 
+	/**
+	 * EN: Saves or updates a MyCalendarEvent in the DB.<br>
+	 * DE: Speichert oder aktualisiert eine MyCalendarEvent in der DB.<br>
+	 */
 	public void saveOrUpdate(MyCalendarEvent calendarEvent);
 
+	/**
+	 * EN: Deletes a MyCalendarEvent in the DB.<br>
+	 * DE: Loescht eine MyCalendarEvent in der DB.<br>
+	 */
 	public void delete(MyCalendarEvent calendarEvent);
 
+	/**
+	 * EN: Saves a MyCalendarEvent in the DB.<br>
+	 * DE: Speichert eine MyCalendarEvent in der DB.<br>
+	 */
 	public void save(MyCalendarEvent calendarEvent);
 
 }

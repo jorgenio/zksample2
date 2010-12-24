@@ -30,22 +30,65 @@ import de.forsthaus.backend.util.IpLocator;
  */
 public interface Ip2CountryDAO {
 
+	/**
+	 * EN: Get a new Ip2Country object.<br>
+	 * DE: Gibt ein neues Ip2Country Objekt zurueck.<br>
+	 * 
+	 * @return Ip2Country
+	 */
 	public Ip2Country getNewIp2Country();
 
-	public Ip2Country getIp2CountryById(Long i2c_Id);
+	/**
+	 * EN: Get a Ip2Country object by its ID.<br>
+	 * DE: Gibt ein Ip2Country Object anhand seiner ID zurueck.<br>
+	 * 
+	 * @param id
+	 *            / the persistence identifier / der PrimaerKey
+	 * @return Ip2Country / Ip2Country
+	 */
+	public Ip2Country getIp2CountryById(long id);
 
 	/**
-	 * Gibt die Anzahl aller Datensaetze der Tabelle zurueck
+	 * EN: Get the count of all Ip2Countries in the used Table Schema.<br>
+	 * DE: Gibt die Anzahl aller Ip2Countries im gewaehlten Tabellen Schema
+	 * zurueck.<br>
 	 * 
 	 * @return int
 	 */
 	public int getCountAllIp2Country();
 
-	public void deleteAll();
-
-	public void saveOrUpdate(Ip2Country ip2Country);
-
+	/**
+	 * EN: Get an IPLocator for a IP address.<br>
+	 * DE: Gibt ein IPLocator Objekt fuer eine IP Adresse zurueck.<br>
+	 * <br>
+	 * The IPLocator is a java wrapper for the hostip.info ip locator web
+	 * service.
+	 * 
+	 * @see de.forsthaus.backend.util.IpLocator.java
+	 * @return int
+	 */
 	public IpLocator hostIpLookUpIp(String ip);
 
+	/**
+	 * EN: Get a list of all Ip2Countries.<br>
+	 * DE: Gibt eine Liste aller Ip2Countries zurueck.<br>
+	 * 
+	 * @return List of Ip2Countries / Liste von Ip2Countries
+	 */
 	public List<Ip2Country> getAll();
+
+	/**
+	 * EN: Deletes all Ip2Country records.<br>
+	 * DE: Loescht alle Ip2Country Datensaetze.<br>
+	 * <br>
+	 * Don't work if we use the HibernateStatistics for measurement.
+	 */
+	public void deleteAll();
+
+	/**
+	 * EN: Saves or updates an Ip2Country in the DB.<br>
+	 * DE: Speichert oder aktualisiert eine Ip2Country in der DB.<br>
+	 */
+	public void saveOrUpdate(Ip2Country ip2Country);
+
 }

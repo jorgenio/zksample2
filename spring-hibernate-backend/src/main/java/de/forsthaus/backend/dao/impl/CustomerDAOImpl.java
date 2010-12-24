@@ -98,14 +98,6 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 		return (Customer) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria));
 	}
 
-	/**
-	 * Gets all cutomers with corresponding field 'matchcode' is 'like' a
-	 * string.<br>
-	 * 
-	 * @param string
-	 *            (String)
-	 * @return Customer (List)
-	 */
 	@SuppressWarnings("unchecked")
 	public List<Customer> getCustomerLikeMatchcode(final String string) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
@@ -115,15 +107,6 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 
 	}
 
-	/**
-	 * Gibt alle Kunden-Datensaetze der Tabelle "Kunde" zurueck, bei denen die
-	 * uebergebene Zeichenfolge mittels 'like' in 'kun_ort' auftaucht.
-	 * 
-	 * 
-	 * @param string
-	 *            (String)
-	 * @return Kunde (List)
-	 */
 	@SuppressWarnings("unchecked")
 	public List<Customer> getCustomerLikeOrt(final String string) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
@@ -133,15 +116,6 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 
 	}
 
-	/**
-	 * Gibt alle Kunden-Datensaetze der Tabelle "Kunde" zurueck, bei denen die
-	 * uebergebene Zeichenfolge mittels 'like' in 'kun_name1' auftaucht.
-	 * 
-	 * 
-	 * @param string
-	 *            (String)
-	 * @return Kunde (List)
-	 */
 	@SuppressWarnings("unchecked")
 	public List<Customer> getCustomerLikeName1(final String string) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
@@ -151,15 +125,6 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 
 	}
 
-	/**
-	 * Gibt alle Kunden-Datensaetze der Tabelle "Kunde" zurueck, bei denen die
-	 * uebergebene Zeichenfolge mittels 'like' in 'kun_strasse' auftaucht.
-	 * 
-	 * 
-	 * @param string
-	 *            (String)
-	 * @return Kunde (List)
-	 */
 	@SuppressWarnings("unchecked")
 	public List<Customer> getCustomerLikeName2(final String string) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
@@ -169,14 +134,6 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 
 	}
 
-	/**
-	 * Gibt alle Kunden der Tabelle "Kunde" zurueck, bei denen der Wert mit
-	 * 'kun_fil_id' uebereinstimmt.
-	 * 
-	 * @param i
-	 *            (int)
-	 * @return Customer (List)
-	 */
 	@SuppressWarnings("unchecked")
 	public List<Customer> getCustomerByOfficeId(long id) {
 		return getHibernateTemplate().find("from Customer where kun_fil_id = ?", Long.valueOf(id));

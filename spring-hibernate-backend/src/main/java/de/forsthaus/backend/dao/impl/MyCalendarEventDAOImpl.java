@@ -45,7 +45,7 @@ public class MyCalendarEventDAOImpl extends BasisNextidDaoImpl<MyCalendarEvent> 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<MyCalendarEvent> getAllCalendarEvents(long usrId) {
+	public List<MyCalendarEvent> getAllCalendarEventsByUserId(long usrId) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(MyCalendarEvent.class);
 		criteria.add(Restrictions.eq("secUser.id", usrId));
 		criteria.setFetchMode("secUser", FetchMode.JOIN);
@@ -65,8 +65,8 @@ public class MyCalendarEventDAOImpl extends BasisNextidDaoImpl<MyCalendarEvent> 
 	}
 
 	@Override
-	public MyCalendarEvent getCalendarEventByID(final long cle_Id) {
-		return get(MyCalendarEvent.class, cle_Id);
+	public MyCalendarEvent getCalendarEventByID(final long id) {
+		return get(MyCalendarEvent.class, id);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -23,7 +23,8 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * Model class for the <b>IpToCountry table</b>.<br>
+ * EN: Model class for the <b>IpToCountry</b> table.<br>
+ * DE: Model Klasse fuer die <b>IpToCountry</b> Tabelle.<br>
  * 
  * @author bbruhns
  * @author sgerth

@@ -22,14 +22,39 @@ import de.forsthaus.backend.model.GuestBook;
 
 public interface GuestBookDAO {
 
+	/**
+	 * EN: Get a new GuestBook object.<br>
+	 * DE: Gibt ein neues Gaestebuch Objekt zurueck.<br>
+	 * 
+	 * @return GuestBook
+	 */
 	public GuestBook getNewGuestBook();
 
+	/**
+	 * EN: Get the count of all GuestBook in the used Table Schema.<br>
+	 * DE: Gibt die Anzahl aller Gaestebucheintraege im gewaehlten Tabellen
+	 * Schema zurueck.<br>
+	 * 
+	 * @return int
+	 */
 	public int getCountAllGuestBook();
 
+	/**
+	 * EN: Saves or updates a GuestBook entry in the DB.<br>
+	 * DE: Speichert oder aktualisiert einen Gaestebuch Eintrag in der DB.<br>
+	 */
 	public void saveOrUpdate(GuestBook guestBook);
 
+	/**
+	 * EN: Deletes a GuestBook entry in the DB.<br>
+	 * DE: Loescht einen Gaestebuch Eintrag in der DB.<br>
+	 */
 	public void delete(GuestBook guestBook);
 
+	/**
+	 * EN: Saves a GuestBook entry in the DB.<br>
+	 * DE: Speichert einen Gaestebuch Eintrag in der DB.<br>
+	 */
 	public void save(GuestBook guestBook);
 
 }

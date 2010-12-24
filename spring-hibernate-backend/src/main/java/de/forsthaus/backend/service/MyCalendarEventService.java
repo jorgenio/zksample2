@@ -37,7 +37,7 @@ public interface MyCalendarEventService {
 	 * @param usrId
 	 * @return
 	 */
-	public List<MyCalendarEvent> getAllCalendarEvents(long usrId);
+	public List<MyCalendarEvent> getAllCalendarEventsByUserId(long usrId);
 
 	/**
 	 * Gets back the count of all CalendarEvents.<br>

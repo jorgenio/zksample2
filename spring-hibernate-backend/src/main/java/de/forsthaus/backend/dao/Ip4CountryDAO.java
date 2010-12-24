@@ -27,26 +27,45 @@ import de.forsthaus.backend.model.Ip4Country;
  */
 public interface Ip4CountryDAO {
 
+	/**
+	 * EN: Get a new Ip4Country object.<br>
+	 * DE: Gibt ein neues Ip4Country Objekt zurueck.<br>
+	 * 
+	 * @return Ip4Country
+	 */
 	public Ip4Country getNewIp4Country();
 
 	/**
-	 * Returns count of records.
+	 * EN: Get the count of all Ip4Countries in the used Table Schema.<br>
+	 * DE: Gibt die Anzahl aller Ip4Countries im gewaehlten Tabellen Schema
+	 * zurueck.<br>
 	 * 
 	 * @return int
 	 */
 	public int getCountAllIp4Country();
 
-	public void deleteAll();
-
-	public void saveOrUpdate(Ip4Country ip4Country);
+	/**
+	 * EN: Get a Ip4Country object by its ID.<br>
+	 * DE: Gibt ein Ip4Country Object anhand seiner ID zurueck.<br>
+	 * 
+	 * @param id
+	 *            / the persistence identifier / der PrimaerKey
+	 * @return Ip4Country / Ip4Country
+	 */
+	public Ip4Country getCountryID(final Long id);
 
 	/**
-	 * 
-	 * Gets the countryID for a given IP number.
-	 * 
-	 * @param ipNumber
-	 * @return
+	 * EN: Deletes all Ip4Country records.<br>
+	 * DE: Loescht alle Ip4Country Datensaetze.<br>
+	 * <br>
+	 * Don't work if we use the HibernateStatistics for measurement.
 	 */
-	public Ip4Country getCountryID(final Long ipNumber);
+	public void deleteAll();
+
+	/**
+	 * EN: Saves or updates an Ip4Country in the DB.<br>
+	 * DE: Speichert oder aktualisiert eine Ip4Country in der DB.<br>
+	 */
+	public void saveOrUpdate(Ip4Country ip4Country);
 
 }

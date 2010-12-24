@@ -51,8 +51,8 @@ public class MyCalendarEventServiceImpl implements MyCalendarEventService {
 	}
 
 	@Override
-	public List<MyCalendarEvent> getAllCalendarEvents(long usrId) {
-		return getCalendarEventDAO().getAllCalendarEvents(usrId);
+	public List<MyCalendarEvent> getAllCalendarEventsByUserId(long usrId) {
+		return getCalendarEventDAO().getAllCalendarEventsByUserId(usrId);
 	}
 
 	@Override

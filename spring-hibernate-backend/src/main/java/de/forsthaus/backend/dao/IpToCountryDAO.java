@@ -27,27 +27,45 @@ import de.forsthaus.backend.model.IpToCountry;
  */
 public interface IpToCountryDAO {
 
+	/**
+	 * EN: Get a new IpToCountry object.<br>
+	 * DE: Gibt ein neues IpToCountry Objekt zurueck.<br>
+	 * 
+	 * @return IpToCountry
+	 */
 	public IpToCountry getNewIpToCountry();
 
 	/**
-	 * Gibt die Anzahl aller Datensaetze der Tabelle "IpToCountry" zurueck
+	 * EN: Get the count of all IpToCountries in the used Table Schema.<br>
+	 * DE: Gibt die Anzahl aller IpToCountries im gewaehlten Tabellen Schema
+	 * zurueck.<br>
 	 * 
 	 * @return int
 	 */
 	public int getCountAllIpToCountry();
 
-	public void deleteAll();
-
-	public void saveOrUpdate(IpToCountry ipToCountry);
-
 	/**
-	 * 
-	 * Gets the country code for a given IP number.
+	 * EN: Get a IpToCountry object for a given IP address.<br>
+	 * DE: Gibt ein IpToCountry Object fuer eine IP Adresse zurueck.<br>
 	 * 
 	 * @param ipNumber
 	 *            the IP Number
 	 * @return the countryCode object
 	 */
 	public IpToCountry getCountry(final Long ipNumber);
+
+	/**
+	 * EN: Deletes all IpToCountry records.<br>
+	 * DE: Loescht alle IpToCountry Datensaetze.<br>
+	 * <br>
+	 * Don't work if we use the HibernateStatistics for measurement.
+	 */
+	public void deleteAll();
+
+	/**
+	 * EN: Saves or updates an IpToCountry in the DB.<br>
+	 * DE: Speichert oder aktualisiert eine IpToCountry in der DB.<br>
+	 */
+	public void saveOrUpdate(IpToCountry ipToCountry);
 
 }

@@ -41,8 +41,8 @@ public class Ip2CountryDAOImpl extends BasisNextidDaoImpl<Ip2Country> implements
 	}
 
 	@Override
-	public Ip2Country getIp2CountryById(Long i2c_Id) {
-		return get(Ip2Country.class, i2c_Id);
+	public Ip2Country getIp2CountryById(long id) {
+		return get(Ip2Country.class, id);
 	}
 
 	@Override

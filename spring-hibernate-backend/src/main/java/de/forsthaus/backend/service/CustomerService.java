@@ -26,32 +26,118 @@ import de.forsthaus.backend.model.Order;
 
 public interface CustomerService {
 
-	Customer getNewCustomer();
+	/**
+	 * EN: Get a new Customer object.<br>
+	 * DE: Gibt ein neues Kunden Objekt zurueck.<br>
+	 * 
+	 * @return Customer
+	 */
+	public Customer getNewCustomer();
 
+	/**
+	 * EN: Get a list of all Customers.<br>
+	 * DE: Gibt eine Liste aller Kunden zurueck.<br>
+	 * 
+	 * @return List of Customers / Liste von Kunden
+	 */
+	public List<Customer> getAllCustomers();
+
+	/**
+	 * EN: Get the count of all Customers.<br>
+	 * DE: Gibt die Anzahl aller Kunden zurueck.<br>
+	 * 
+	 * @return int
+	 */
 	public int getCountAllCustomer();
 
-	List<Customer> getAllCustomers();
+	/**
+	 * EN: Get a paged list of all Customers.<br>
+	 * DE: Gibt eine paged Liste aller Kunden zurueck.<br>
+	 * 
+	 * @param start
+	 *            StartRecord / Start Datensatz
+	 * @param pageSize
+	 *            Count of Records / Anzahl Datensaetze
+	 * @param orderByFieldName
+	 *            FieldName for the OrderBy clause / Feldname fuer die OrderBy
+	 *            Klausel
+	 * @param ascending
+	 *            sort order ascending=true / Sortierung aufsteigend=true
+	 * @return List of Customers / Liste von Kunden
+	 */
+	public List<Customer> getAllCustomers(int start, int pageSize, final String fieldName, final boolean ascending);
 
-	List<Customer> getAllCustomers(int start, int pageSize, final String fieldName, final boolean ascending);
-
-	void delete(Customer customer);
-
-	Customer getCustomerById(Long id);
+	/**
+	 * EN: Get a Customer by its ID.<br>
+	 * DE: Gibt einen Kunden anhand seiner ID zurueck.<br>
+	 * 
+	 * @param id
+	 *            / the persistence identifier / der PrimaerKey
+	 * @return Customer / Kunde
+	 */
+	public Customer getCustomerById(Long id);
 
 	// test zum nachladen zugehoerigen Branche
 	// Customer refresh(Customer customer);
 
-	List<Customer> getCustomerByBranche(Branche branche);
+	/**
+	 * EN: Gets a list of Customers by their branch.<br>
+	 * DE: Gibt eine Liste aller Kunden anhand ihrer Branche zurueck.<br>
+	 * 
+	 * @param branche
+	 *            branche / Branche
+	 * @return List of Customers / Liste of Kunden
+	 */
+	public List<Customer> getCustomerByBranche(Branche branche);
 
-	Customer getCustomerByKunNr(String kun_nr);
+	/**
+	 * EN: Get a Customer by it's customerNo.<br>
+	 * DE: Gibt einen Kunden anhand seiner KundenNummer zurueck.<br>
+	 * 
+	 * @param kun_nr
+	 *            Customer Number / Kunden Nummer
+	 * @return Customer / Kunde
+	 */
+	public Customer getCustomerByKunNr(String kun_nr);
 
+	/**
+	 * EN: Get the customer for an order.<br>
+	 * DE: Gibt einen Kunden fuer einen Auftrag zurueck.<br>
+	 * 
+	 * @param order
+	 *            Order / Auftrag
+	 * @return Customer / Kunde
+	 */
 	public Customer getCustomerByOrder(Order order);
 
-	int getMaxCustomerId();
+	/**
+	 * EN: Gets the highest customer id.<br>
+	 * DE: Gibt die hoechste Kunden ID zurueck.<br>
+	 * 
+	 * @return int
+	 */
+	public int getMaxCustomerId();
 
-	int getCountCustomers();
+	/**
+	 * EN: Get the count of all Customers.<br>
+	 * DE: Gibt die Anzahl aller Kunden zurueck.<br>
+	 * 
+	 * @return int
+	 */
+	public int getCountCustomers();
 
-	void testDeleteCustomersOver50000();
+	public void testDeleteCustomersOver50000();
 
-	void saveOrUpdate(Customer customer);
+	/**
+	 * EN: Saves new or updates a Customer.<br>
+	 * DE: Speichert neu oder aktialisert einen Kunden.<br>
+	 */
+	public void saveOrUpdate(Customer customer);
+
+	/**
+	 * EN: Deletes a Customer.<br>
+	 * DE: Loescht einen Kunden.<br>
+	 */
+	public void delete(Customer customer);
+
 }

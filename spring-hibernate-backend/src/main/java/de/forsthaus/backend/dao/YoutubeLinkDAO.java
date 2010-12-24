@@ -42,9 +42,8 @@ public interface YoutubeLinkDAO {
 	public List<YoutubeLink> getAllYoutubeLink();
 
 	/**
-	 * EN: Get the count of all YoutubeLinks in the used Table Schema.<br>
-	 * DE: Gibt die Anzahl aller YoutubeLinks im gewaehlten Tabellen Schema
-	 * zurueck.<br>
+	 * EN: Get the count of all YoutubeLinks.<br>
+	 * DE: Gibt die Anzahl aller YoutubeLinks zurueck.<br>
 	 * 
 	 * @return int
 	 */
@@ -82,20 +81,20 @@ public interface YoutubeLinkDAO {
 	public ResultObject getAllYoutubeLinks(int start, int pageSize);
 
 	/**
-	 * EN: Saves or updates a YoutubeLink in the DB.<br>
-	 * DE: Speichert oder aktualisiert einen YoutubeLink in der DB.<br>
+	 * EN: Saves or updates a YoutubeLink.<br>
+	 * DE: Speichert oder aktualisiert einen YoutubeLink.<br>
 	 */
 	public void saveOrUpdate(YoutubeLink entity);
 
 	/**
-	 * EN: Deletes a YoutubeLink in the DB.<br>
-	 * DE: Loescht einen YoutubeLink in der DB.<br>
+	 * EN: Deletes a YoutubeLink.<br>
+	 * DE: Loescht einen YoutubeLink.<br>
 	 */
 	public void delete(YoutubeLink entity);
 
 	/**
-	 * EN: Saves a YoutubeLink in the DB.<br>
-	 * DE: Speichert einen YoutubeLink in der DB.<br>
+	 * EN: Saves a YoutubeLink.<br>
+	 * DE: Speichert einen YoutubeLink.<br>
 	 */
 	public void save(YoutubeLink entity);
 

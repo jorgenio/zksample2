@@ -72,11 +72,37 @@ public interface UserDAO {
 	 */
 	public SecUser getUserByNameAndPassword(String userName, String passWord);
 
+	/**
+	 * EN: Get an User by its LoginName.<br>
+	 * DE: Gibt einen User anhand seines Login Namens zurueck.<br>
+	 * 
+	 * @param userName
+	 *            UserName / User Name
+	 * @return User/ User
+	 */
 	public SecUser getUserByLoginname(final String userName);
 
-	public List<SecUser> getUserLikeLastname(String value);
+	/**
+	 * EN: Gets a list of Users where the LastName name contains the %string% .<br>
+	 * DE: Gibt eine Liste aller Users zurueck bei denen der LastName %string%
+	 * enthaelt.<br>
+	 * 
+	 * @param string
+	 *            LastName / LastName
+	 * @return List of Users / Liste of Users
+	 */
+	public List<SecUser> getUserLikeLastname(String string);
 
-	public List<SecUser> getUserLikeLoginname(String value);
+	/**
+	 * EN: Gets a list of Users where the LoginName contains the %string% .<br>
+	 * DE: Gibt eine Liste aller Users zurueck bei denen der LoginName %string%
+	 * enthaelt.<br>
+	 * 
+	 * @param string
+	 *            LoginName / LoginName
+	 * @return List of Users / Liste of Users
+	 */
+	public List<SecUser> getUserLikeLoginname(String string);
 
 	/**
 	 * EN: Get a list of Users by its emailaddress with the like SQL operator.<br>
@@ -101,20 +127,20 @@ public interface UserDAO {
 	public List<SecUser> getUserListByLoginname(String loginName);
 
 	/**
-	 * EN: Saves or updates an User in the DB.<br>
-	 * DE: Speichert oder aktualisiert einen User in der DB.<br>
+	 * EN: Saves or updates an User.<br>
+	 * DE: Speichert oder aktualisiert einen User.<br>
 	 */
 	public void saveOrUpdate(SecUser user);
 
 	/**
-	 * EN: Deletes an User in the DB.<br>
-	 * DE: Loescht einen User in der DB.<br>
+	 * EN: Deletes an User.<br>
+	 * DE: Loescht einen User.<br>
 	 */
 	public void delete(SecUser user);
 
 	/**
-	 * EN: Saves an User in the DB.<br>
-	 * DE: Speichert einen User in der DB.<br>
+	 * EN: Saves an User.<br>
+	 * DE: Speichert einen User.<br>
 	 */
 	public void save(SecUser user);
 

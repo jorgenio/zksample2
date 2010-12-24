@@ -48,7 +48,7 @@ public class BrancheDAOImpl extends BasisNextidDaoImpl<Branche> implements Branc
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Branche> getAlleBranche() {
+	public List<Branche> getAllBranches() {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Branche.class);
 		criteria.addOrder(Order.asc("braBezeichnung"));
 
@@ -91,7 +91,7 @@ public class BrancheDAOImpl extends BasisNextidDaoImpl<Branche> implements Branc
 	}
 
 	@Override
-	public int getCountAllBranch() {
+	public int getCountAllBranches() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from Branche"));
 	}
 

@@ -27,9 +27,9 @@ public interface BrancheService {
 
 	public Branche getNewBranche();
 
-	public int getCountAllBranch();
+	public int getCountAllBranches();
 
-	List<Branche> getAlleBranche();
+	List<Branche> getAllBranches();
 
 	Branche getBrancheById(long bra_id);
 

@@ -36,9 +36,8 @@ public interface IpToCountryDAO {
 	public IpToCountry getNewIpToCountry();
 
 	/**
-	 * EN: Get the count of all IpToCountries in the used Table Schema.<br>
-	 * DE: Gibt die Anzahl aller IpToCountries im gewaehlten Tabellen Schema
-	 * zurueck.<br>
+	 * EN: Get the count of all IpToCountries.<br>
+	 * DE: Gibt die Anzahl aller IpToCountries zurueck.<br>
 	 * 
 	 * @return int
 	 */

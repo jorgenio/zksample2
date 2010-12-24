@@ -144,13 +144,13 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Customer getCustomerForOrder(Order auftrag) {
-		return getOrderDAO().getCustomerForOrder(auftrag);
+	public Customer getCustomerByOrder(Order auftrag) {
+		return getOrderDAO().getCustomerByOrder(auftrag);
 	}
 
 	@Override
-	public Order getOrderById(Long auf_id) {
-		return getOrderDAO().getOrderById(auf_id);
+	public Order getOrderById(long id) {
+		return getOrderDAO().getOrderById(id);
 	}
 
 	@Override

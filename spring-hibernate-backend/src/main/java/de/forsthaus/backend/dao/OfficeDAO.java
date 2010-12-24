@@ -61,8 +61,8 @@ public interface OfficeDAO {
 	public List<Office> getAllOffices();
 
 	/**
-	 * EN: Get the count of all Offices in the used Table Schema.<br>
-	 * DE: Gibt die Anzahl aller Offices im gewaehlten Tabellen Schema zurueck.<br>
+	 * EN: Get the count of all Offices.<br>
+	 * DE: Gibt die Anzahl aller Offices zurueck.<br>
 	 * 
 	 * @return int
 	 */

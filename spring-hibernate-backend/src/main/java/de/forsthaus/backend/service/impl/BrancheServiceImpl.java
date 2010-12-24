@@ -61,8 +61,8 @@ public class BrancheServiceImpl implements BrancheService {
 	 * @see de.forsthaus.backend.dao.BrancheDAO#getAlleBranche()
 	 */
 	@Override
-	public List<Branche> getAlleBranche() {
-		return getBrancheDAO().getAlleBranche();
+	public List<Branche> getAllBranches() {
+		return getBrancheDAO().getAllBranches();
 	}
 
 	@Override
@@ -81,8 +81,8 @@ public class BrancheServiceImpl implements BrancheService {
 	}
 
 	@Override
-	public int getCountAllBranch() {
-		return getBrancheDAO().getCountAllBranch();
+	public int getCountAllBranches() {
+		return getBrancheDAO().getCountAllBranches();
 	}
 
 	@Override

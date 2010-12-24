@@ -47,8 +47,8 @@ public class OrderDAOImpl extends BasisNextidDaoImpl<Order> implements OrderDAO 
 	}
 
 	@Override
-	public Order getOrderById(Long auf_id) {
-		return get(Order.class, auf_id);
+	public Order getOrderById(long id) {
+		return get(Order.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -118,7 +118,7 @@ public class OrderDAOImpl extends BasisNextidDaoImpl<Order> implements OrderDAO 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Customer getCustomerForOrder(Order order) {
+	public Customer getCustomerByOrder(Order order) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
 
 		criteria.createAlias("orders", "au");

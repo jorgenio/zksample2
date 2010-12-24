@@ -36,9 +36,8 @@ public interface Ip4CountryDAO {
 	public Ip4Country getNewIp4Country();
 
 	/**
-	 * EN: Get the count of all Ip4Countries in the used Table Schema.<br>
-	 * DE: Gibt die Anzahl aller Ip4Countries im gewaehlten Tabellen Schema
-	 * zurueck.<br>
+	 * EN: Get the count of all Ip4Countries.<br>
+	 * DE: Gibt die Anzahl aller Ip4Countries zurueck.<br>
 	 * 
 	 * @return int
 	 */

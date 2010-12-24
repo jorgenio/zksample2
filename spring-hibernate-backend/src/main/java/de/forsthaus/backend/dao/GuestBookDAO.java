@@ -31,9 +31,8 @@ public interface GuestBookDAO {
 	public GuestBook getNewGuestBook();
 
 	/**
-	 * EN: Get the count of all GuestBook in the used Table Schema.<br>
-	 * DE: Gibt die Anzahl aller Gaestebucheintraege im gewaehlten Tabellen
-	 * Schema zurueck.<br>
+	 * EN: Get the count of all GuestBook.<br>
+	 * DE: Gibt die Anzahl aller Gaestebucheintraege zurueck.<br>
 	 * 
 	 * @return int
 	 */

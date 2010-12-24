@@ -27,23 +27,110 @@ import de.forsthaus.backend.model.Order;
 
 public interface OrderDAO {
 
+	/**
+	 * EN: Get a new Order object.<br>
+	 * DE: Gibt ein neues Order (Auftrag) Objekt zurueck.<br>
+	 * 
+	 * @return Order
+	 */
 	public Order getNewOrder();
 
+	/**
+	 * EN: Gets a list of Orders by a given customer.<br>
+	 * DE: Gibt eine Liste aller Auftraege fuer einen Kunden zurueck.<br>
+	 * 
+	 * @param customer
+	 *            customer / Kunde
+	 * @return List of Order / Liste of Orders (Auftraege)
+	 */
 	public List<Order> getOrdersByCustomer(Customer customer);
 
+	/**
+	 * EN: Get the count of all Orders by a given customer.<br>
+	 * DE: Gibt die Anzahl aller Auftraege fuer einen Kunden zurueck.<br>
+	 * 
+	 * @param customer
+	 *            customer / Kunde
+	 * @return int
+	 */
 	public int getCountOrdersByCustomer(Customer customer);
 
-	public Order getOrderById(Long auf_id);
-
-	public Order getOrderByAufNr(String auf_nr);
-
-	public List<Order> getOrdersByOffice(Office office);
-
+	/**
+	 * EN: Gets the count of all Orders.<br>
+	 * DE: Gibt die Anzahl aller Auftraege zurueck.<br>
+	 * 
+	 * @return int
+	 */
 	public int getCountAllOrder();
 
+	/**
+	 * EN: Get an Order by its ID.<br>
+	 * DE: Gibt einen Auftrag anhand seiner ID zurueck.<br>
+	 * 
+	 * @param id
+	 *            / the persistence identifier / der PrimaerKey
+	 * @return Order / Order (Auftrag)
+	 */
+	public Order getOrderById(long id);
+
+	/**
+	 * EN: Get an Order by its order number.<br>
+	 * DE: Gibt einen Auftrag anhand seiner Nummer zurueck.<br>
+	 * 
+	 * @param auf_nr
+	 *            the order number / die Auftragsnummer
+	 * @return Order / Order (Auftrag)
+	 */
+	public Order getOrderByAufNr(String auf_nr);
+
+	/**
+	 * EN: Gets a list of Orders by a given office.<br>
+	 * DE: Gibt eine Liste aller Auftraege fuer ein Office (Niederlassung)
+	 * zurueck.<br>
+	 * 
+	 * @param office
+	 *            office / office (Niederlassung)
+	 * @return List of Order / Liste of Orders (Auftraege)
+	 */
+	public List<Order> getOrdersByOffice(Office office);
+
+	/**
+	 * EN: Deletes an Order by its order number.<br>
+	 * DE: Loescht einen Auftrag anhand seiner Auftragsnummer.<br>
+	 * 
+	 * @param auf_nr
+	 *            order number / Auftragsnummer
+	 */
 	public void deleteOrderByAufNr(String auf_nr);
 
+	/**
+	 * EN: Deletes all Orders by an customer.<br>
+	 * DE: Loescht alle Auftraege fuer einen Kunden.<br>
+	 * 
+	 * @param customer
+	 *            customer / Kunde
+	 */
 	public void deleteOrdersByCustomer(Customer customer);
+
+	/**
+	 * EN: Get a list of all Orders.<br>
+	 * DE: Gibt eine Liste aller Auftraege zurueck.<br>
+	 * 
+	 * @return List of Orders / Liste von Auftraegen
+	 */
+	public List<Order> getAllOrders();
+
+	/**
+	 * EN: Get the customer for an order.<br>
+	 * DE: Gibt einen Kunden fuer einen Auftrag zurueck.<br>
+	 * 
+	 * @param order
+	 *            Order / Auftrag
+	 * @return Customer / Kunde
+	 */
+	public Customer getCustomerByOrder(Order order);
+
+	public BigDecimal getOrderSum(Order order);
 
 	public void saveOrUpdate(Order order);
 
@@ -54,11 +141,5 @@ public interface OrderDAO {
 	public void refresh(Order order);
 
 	public void initialize(Order order);
-
-	public List<Order> getAllOrders();
-
-	public Customer getCustomerForOrder(Order order);
-
-	public BigDecimal getOrderSum(Order order);
 
 }

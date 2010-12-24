@@ -44,9 +44,8 @@ public interface MyCalendarEventDAO {
 	public List<MyCalendarEvent> getAllCalendarEventsByUserId(long usrId);
 
 	/**
-	 * EN: Get the count of all MyCalendarEvents in the used Table Schema.<br>
-	 * DE: Gibt die Anzahl aller MyCalendarEvents im gewaehlten Tabellen Schema
-	 * zurueck.<br>
+	 * EN: Get the count of all MyCalendarEvents.<br>
+	 * DE: Gibt die Anzahl aller MyCalendarEvents zurueck.<br>
 	 * 
 	 * @return int
 	 */

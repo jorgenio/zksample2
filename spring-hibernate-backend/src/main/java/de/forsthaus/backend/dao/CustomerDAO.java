@@ -59,8 +59,8 @@ public interface CustomerDAO {
 	public List<Customer> getAllCustomers(final int start, final int pageSize, final String orderByFieldName, final boolean ascending);
 
 	/**
-	 * EN: Get the count of all Customers in the used Table Schema.<br>
-	 * DE: Gibt die Anzahl aller Kunden im gewaehlten Tabellen Schema zurueck.<br>
+	 * EN: Get the count of all Customers.<br>
+	 * DE: Gibt die Anzahl aller Kunden zurueck.<br>
 	 * 
 	 * @return int
 	 */

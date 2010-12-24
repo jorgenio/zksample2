@@ -49,9 +49,8 @@ public interface Ip2CountryDAO {
 	public Ip2Country getIp2CountryById(long id);
 
 	/**
-	 * EN: Get the count of all Ip2Countries in the used Table Schema.<br>
-	 * DE: Gibt die Anzahl aller Ip2Countries im gewaehlten Tabellen Schema
-	 * zurueck.<br>
+	 * EN: Get the count of all Ip2Countries.<br>
+	 * DE: Gibt die Anzahl aller Ip2Countries zurueck.<br>
 	 * 
 	 * @return int
 	 */

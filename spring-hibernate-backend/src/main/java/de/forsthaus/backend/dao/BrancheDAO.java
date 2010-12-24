@@ -39,7 +39,7 @@ public interface BrancheDAO {
 	 * 
 	 * @return List of Branches / Liste von Branchen
 	 */
-	public List<Branche> getAlleBranche();
+	public List<Branche> getAllBranches();
 
 	/**
 	 * EN: Get the count of all CustomerBranches in the used Table Schema.<br>
@@ -48,7 +48,7 @@ public interface BrancheDAO {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllBranch();
+	public int getCountAllBranches();
 
 	/**
 	 * EN: Get a CustomerBranch by its ID.<br>

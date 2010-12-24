@@ -41,8 +41,8 @@ public interface ArticleDAO {
 	public List<Article> getAllArticle();
 
 	/**
-	 * EN: Get the count of all Articles in the used Table Schema.<br>
-	 * DE: Gibt die Anzahl aller Artikel im gewaehlten Tabellen Schema zurueck.<br>
+	 * EN: Get the count of all Articles.<br>
+	 * DE: Gibt die Anzahl aller Artikel zurueck.<br>
 	 * 
 	 * @return int
 	 */

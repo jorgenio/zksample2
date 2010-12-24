@@ -86,8 +86,8 @@ public interface Ip2CountryDAO {
 	public void deleteAll();
 
 	/**
-	 * EN: Saves or updates an Ip2Country in the DB.<br>
-	 * DE: Speichert oder aktualisiert eine Ip2Country in der DB.<br>
+	 * EN: Saves or updates an Ip2Country.<br>
+	 * DE: Speichert oder aktualisiert eine Ip2Country.<br>
 	 */
 	public void saveOrUpdate(Ip2Country ip2Country);
 

@@ -56,13 +56,13 @@ public class OfficeDAOImpl extends BasisNextidDaoImpl<Office> implements OfficeD
 	}
 
 	@Override
-	public List<Office> getOffices() {
+	public List<Office> getAllOffices() {
 		return getHibernateTemplate().loadAll(Office.class);
 	}
 
 	@Override
-	public void deleteOfficeById(long fil_id) {
-		Office office = getOfficeById(fil_id);
+	public void deleteOfficeById(long id) {
+		Office office = getOfficeById(id);
 		if (office != null) {
 			delete(office);
 		}
@@ -70,30 +70,30 @@ public class OfficeDAOImpl extends BasisNextidDaoImpl<Office> implements OfficeD
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Office> getOfficeLikeCity(String value) {
+	public List<Office> getOfficeLikeCity(String string) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Office.class);
-		criteria.add(Restrictions.ilike("filOrt", value, MatchMode.ANYWHERE));
+		criteria.add(Restrictions.ilike("filOrt", string, MatchMode.ANYWHERE));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Office> getOfficeLikeName1(String value) {
+	public List<Office> getOfficeLikeName1(String string) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Office.class);
-		criteria.add(Restrictions.ilike("filName1", value, MatchMode.ANYWHERE));
+		criteria.add(Restrictions.ilike("filName1", string, MatchMode.ANYWHERE));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Office> getOfficeLikeNo(String value) {
+	public List<Office> getOfficeLikeNo(String string) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Office.class);
-		criteria.add(Restrictions.ilike("filNr", value, MatchMode.ANYWHERE));
+		criteria.add(Restrictions.ilike("filNr", string, MatchMode.ANYWHERE));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 	}

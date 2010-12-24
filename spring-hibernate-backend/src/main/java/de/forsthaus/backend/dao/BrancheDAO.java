@@ -118,20 +118,20 @@ public interface BrancheDAO {
 	public ResultObject getAllBranchesLikeText(String text, int start, int pageSize);
 
 	/**
-	 * EN: Saves or updates a CustomerBranch in the DB.<br>
-	 * DE: Speichert oder aktualisiert eine KundenBranche in der DB.<br>
+	 * EN: Saves or updates a CustomerBranch.<br>
+	 * DE: Speichert oder aktualisiert eine KundenBranche.<br>
 	 */
 	public void saveOrUpdate(Branche branche);
 
 	/**
-	 * EN: Deletes a CustomerBranch in the DB.<br>
-	 * DE: Loescht eine KundenBranche in der DB.<br>
+	 * EN: Deletes a CustomerBranch.<br>
+	 * DE: Loescht eine KundenBranche.<br>
 	 */
 	public void delete(Branche branche);
 
 	/**
-	 * EN: Saves a CustomerBranch in the DB.<br>
-	 * DE: Speichert eine KundenBranche in der DB.<br>
+	 * EN: Saves a CustomerBranch.<br>
+	 * DE: Speichert eine KundenBranche.<br>
 	 */
 	public void save(Branche branche);
 

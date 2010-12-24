@@ -82,20 +82,20 @@ public interface ArticleDAO {
 	public List<Article> getArticleLikeName(String string);
 
 	/**
-	 * EN: Saves or updates an article in the DB.<br>
-	 * DE: Speichert oder aktualisiert einen Artikel in der DB.<br>
+	 * EN: Saves or updates an article.<br>
+	 * DE: Speichert oder aktualisiert einen Artikel.<br>
 	 */
 	public void saveOrUpdate(Article article);
 
 	/**
-	 * EN: Deletes an article in the DB.<br>
-	 * DE: Loescht einen Artikel in der DB.<br>
+	 * EN: Deletes an article.<br>
+	 * DE: Loescht einen Artikel.<br>
 	 */
 	public void delete(Article article);
 
 	/**
-	 * EN: Saves an article in the DB.<br>
-	 * DE: Speichert einen Artikel in der DB.<br>
+	 * EN: Saves an article.<br>
+	 * DE: Speichert einen Artikel.<br>
 	 */
 	public void save(Article article);
 

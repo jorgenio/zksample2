@@ -95,15 +95,15 @@ public class CustomerServiceImpl implements CustomerService {
 		return customer;
 	}
 
-	@Override
-	public Customer refresh(Customer customer) {
-		/** lädt das Object neu */
-		getCustomerDAO().refresh(customer);
-		getCustomerDAO().initialize(customer);
-		/** lädt in diesem Falle den zugehörigen Kunden nach */
-
-		return customer;
-	}
+//	@Override
+//	public Customer refresh(Customer customer) {
+//		/** lädt das Object neu */
+//		getCustomerDAO().refresh(customer);
+//		getCustomerDAO().initialize(customer);
+//		/** lädt in diesem Falle den zugehörigen Kunden nach */
+//
+//		return customer;
+//	}
 
 	@Override
 	public List<Customer> getCustomerByBranche(Branche branche) {

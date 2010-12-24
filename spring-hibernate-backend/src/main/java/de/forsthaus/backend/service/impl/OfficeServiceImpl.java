@@ -54,8 +54,8 @@ public class OfficeServiceImpl implements OfficeService {
 	}
 
 	@Override
-	public List<Office> getOffices() {
-		return getOfficeDAO().getOffices();
+	public List<Office> getAllOffices() {
+		return getOfficeDAO().getAllOffices();
 	}
 
 	@Override
@@ -69,18 +69,18 @@ public class OfficeServiceImpl implements OfficeService {
 	}
 
 	@Override
-	public List<Office> getOfficeLikeCity(String value) {
-		return getOfficeDAO().getOfficeLikeCity(value);
+	public List<Office> getOfficeLikeCity(String string) {
+		return getOfficeDAO().getOfficeLikeCity(string);
 	}
 
 	@Override
-	public List<Office> getOfficeLikeName1(String value) {
-		return getOfficeDAO().getOfficeLikeName1(value);
+	public List<Office> getOfficeLikeName1(String string) {
+		return getOfficeDAO().getOfficeLikeName1(string);
 	}
 
 	@Override
-	public List<Office> getOfficeLikeNo(String value) {
-		return getOfficeDAO().getOfficeLikeNo(value);
+	public List<Office> getOfficeLikeNo(String string) {
+		return getOfficeDAO().getOfficeLikeNo(string);
 	}
 
 	@Override

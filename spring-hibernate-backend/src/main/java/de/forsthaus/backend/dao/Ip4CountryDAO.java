@@ -63,8 +63,8 @@ public interface Ip4CountryDAO {
 	public void deleteAll();
 
 	/**
-	 * EN: Saves or updates an Ip4Country in the DB.<br>
-	 * DE: Speichert oder aktualisiert eine Ip4Country in der DB.<br>
+	 * EN: Saves or updates an Ip4Country.<br>
+	 * DE: Speichert oder aktualisiert eine Ip4Country.<br>
 	 */
 	public void saveOrUpdate(Ip4Country ip4Country);
 

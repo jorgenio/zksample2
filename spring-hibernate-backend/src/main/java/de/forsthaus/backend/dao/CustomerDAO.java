@@ -151,18 +151,40 @@ public interface CustomerDAO {
 	 */
 	public List<Customer> getCustomerByBranche(Branche branche);
 
+	/**
+	 * EN: Updates a Customer.<br>
+	 * DE: Aktualisiert einen Kunden.<br>
+	 */
 	public void update(Customer customer);
 
+	/**
+	 * EN: Deletes a Customer.<br>
+	 * DE: Loescht einen Kunden.<br>
+	 */
 	public void delete(Customer customer);
 
+	/**
+	 * EN: Saves a Customer.<br>
+	 * DE: Speichert einen Kunden.<br>
+	 */
 	public void save(Customer customer);
 
+	/**
+	 * EN: Load the relations data for a Customer.<br>
+	 * DE: Lädt die relationalen Daten zu einem Kunden.<br>
+	 */
 	public void initialize(Customer customer);
 
-	public void refresh(Customer entity);
+	// public void refresh(Customer entity);
 
 	public void testDeleteCustomersOver50000();
 
+	/**
+	 * EN: Gets the highest customer id.<br>
+	 * DE: Gibt die hoechste Kunden ID zurueck.<br>
+	 * 
+	 * @return int
+	 */
 	public int getMaxCustomerId();
 
 }

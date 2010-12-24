@@ -30,16 +30,16 @@ public interface OfficeService {
 
 	Office getOfficeByID(Long fil_nr);
 
-	List<Office> getOffices();
+	List<Office> getAllOffices();
 
 	void saveOrUpdate(Office ofice);
 
 	void delete(Office office);
 
-	public List<Office> getOfficeLikeCity(String value);
+	public List<Office> getOfficeLikeCity(String string);
 
-	public List<Office> getOfficeLikeName1(String value);
+	public List<Office> getOfficeLikeName1(String string);
 
-	public List<Office> getOfficeLikeNo(String value);
+	public List<Office> getOfficeLikeNo(String string);
 
 }

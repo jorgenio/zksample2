@@ -92,20 +92,20 @@ public interface MyCalendarEventDAO {
 	public List<MyCalendarEvent> getCalendarEventFromToDate(Date beginDate, Date endDate, long usrId);
 
 	/**
-	 * EN: Saves or updates a MyCalendarEvent in the DB.<br>
-	 * DE: Speichert oder aktualisiert eine MyCalendarEvent in der DB.<br>
+	 * EN: Saves or updates a MyCalendarEvent.<br>
+	 * DE: Speichert oder aktualisiert eine MyCalendarEvent Termin.<br>
 	 */
 	public void saveOrUpdate(MyCalendarEvent calendarEvent);
 
 	/**
-	 * EN: Deletes a MyCalendarEvent in the DB.<br>
-	 * DE: Loescht eine MyCalendarEvent in der DB.<br>
+	 * EN: Deletes a MyCalendarEvent.<br>
+	 * DE: Loescht eine MyCalendarEvent Termin.<br>
 	 */
 	public void delete(MyCalendarEvent calendarEvent);
 
 	/**
-	 * EN: Saves a MyCalendarEvent in the DB.<br>
-	 * DE: Speichert eine MyCalendarEvent in der DB.<br>
+	 * EN: Saves a MyCalendarEvent.<br>
+	 * DE: Speichert einen MyCalendarEvent Termin.<br>
 	 */
 	public void save(MyCalendarEvent calendarEvent);
 

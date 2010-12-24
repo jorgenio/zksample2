@@ -24,39 +24,109 @@ import de.forsthaus.backend.model.Office;
 
 public interface OfficeDAO {
 
+	/**
+	 * EN: Get a new Office object.<br>
+	 * DE: Gibt ein neues Office (Niederlassung) Objekt zurueck.<br>
+	 * 
+	 * @return Office
+	 */
 	public Office getNewOffice();
 
 	/**
-	 * Get the office by its ID. <br>
+	 * EN: Get an Office by its ID.<br>
+	 * DE: Gibt ein Office anhand seiner ID zurueck.<br>
 	 * 
 	 * @param filId
-	 * @return Office
+	 *            / the persistence identifier / der PrimaerKey
+	 * @return Office / Office
 	 */
 	public Office getOfficeById(Long filId);
 
+	/**
+	 * EN: Get an Office object by its ID.<br>
+	 * DE: Gibt ein Office Objekt anhand seiner ID zurueck.<br>
+	 * 
+	 * @param fil_nr
+	 *            / the office number / die Niederlassungs Nummer
+	 * @return Office / Office
+	 */
 	public Office getOfficeByFilNr(String fil_nr);
 
-	public List<Office> getOffices();
+	/**
+	 * EN: Get a list of all Offices.<br>
+	 * DE: Gibt eine Liste aller Offices zurueck.<br>
+	 * 
+	 * @return List of Offices / Liste von Offices
+	 */
+	public List<Office> getAllOffices();
 
+	/**
+	 * EN: Get the count of all Offices in the used Table Schema.<br>
+	 * DE: Gibt die Anzahl aller Offices im gewaehlten Tabellen Schema zurueck.<br>
+	 * 
+	 * @return int
+	 */
 	public int getCountAllOffices();
 
 	/**
-	 * Delete an office by its ID.<br>
+	 * EN: Gets a list of Offices where the city name contains the %string% .<br>
+	 * DE: Gibt eine Liste aller Offices zurueck bei denen der Stadtname
+	 * %string% enthaelt.<br>
 	 * 
-	 * @param fil_id
+	 * @param string
+	 *            Name of the city / Stadtnamen
+	 * @return List of Offices / Liste of Offices
 	 */
-	public void deleteOfficeById(long fil_id);
+	public List<Office> getOfficeLikeCity(String string);
 
+	/**
+	 * EN: Gets a list of Offices where the office name1 contains the %string% .<br>
+	 * DE: Gibt eine Liste aller Offices zurueck bei denen der Office Name1
+	 * %string% enthaelt.<br>
+	 * 
+	 * @param string
+	 *            Name1 of the office / Name1 vom Office
+	 * @return List of Offices / Liste of Offices
+	 */
+	public List<Office> getOfficeLikeName1(String string);
+
+	/**
+	 * EN: Gets a list of Offices where the office number contains the %string%
+	 * .<br>
+	 * DE: Gibt eine Liste aller Offices zurueck bei denen die Office Nummer
+	 * %string% enthaelt.<br>
+	 * 
+	 * @param string
+	 *            Number of the office / Nummer vom Office
+	 * @return List of Offices / Liste of Offices
+	 */
+	public List<Office> getOfficeLikeNo(String string);
+
+	/**
+	 * EN: Deletes an Office by its Id.<br>
+	 * DE: Loescht ein Office anhand seiner Id.<br>
+	 * 
+	 * @param id
+	 *            / the persistence identifier / der PrimaerKey
+	 */
+	public void deleteOfficeById(long id);
+
+	/**
+	 * EN: Saves or updates an Office.<br>
+	 * DE: Speichert oder aktualisiert ein Office.<br>
+	 */
 	public void saveOrUpdate(Office office);
 
+	/**
+	 * EN: Deletes an Office.<br>
+	 * DE: Loescht ein Office.<br>
+	 */
 	public void delete(Office office);
 
+	/**
+	 * EN: Saves an Office.<br>
+	 * DE: Speichert ein Office.<br>
+	 */
 	public void save(Office office);
-
-	public List<Office> getOfficeLikeCity(String value);
-
-	public List<Office> getOfficeLikeName1(String value);
-
-	public List<Office> getOfficeLikeNo(String value);
 
 }

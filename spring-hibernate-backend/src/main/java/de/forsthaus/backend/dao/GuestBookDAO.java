@@ -40,20 +40,20 @@ public interface GuestBookDAO {
 	public int getCountAllGuestBook();
 
 	/**
-	 * EN: Saves or updates a GuestBook entry in the DB.<br>
-	 * DE: Speichert oder aktualisiert einen Gaestebuch Eintrag in der DB.<br>
+	 * EN: Saves or updates a GuestBook entry.<br>
+	 * DE: Speichert oder aktualisiert einen Gaestebuch Eintrag.<br>
 	 */
 	public void saveOrUpdate(GuestBook guestBook);
 
 	/**
-	 * EN: Deletes a GuestBook entry in the DB.<br>
-	 * DE: Loescht einen Gaestebuch Eintrag in der DB.<br>
+	 * EN: Deletes a GuestBook entry.<br>
+	 * DE: Loescht einen Gaestebuch Eintrag.<br>
 	 */
 	public void delete(GuestBook guestBook);
 
 	/**
-	 * EN: Saves a GuestBook entry in the DB.<br>
-	 * DE: Speichert einen Gaestebuch Eintrag in der DB.<br>
+	 * EN: Saves a GuestBook entry.<br>
+	 * DE: Speichert einen Gaestebuch Eintrag.<br>
 	 */
 	public void save(GuestBook guestBook);
 

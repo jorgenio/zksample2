@@ -22,20 +22,68 @@ import java.util.List;
 
 import de.forsthaus.backend.model.SysCountryCode;
 
+/**
+ * Service methods Interface for working with SysCountryCode data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface SysCountryCodeService {
 
+	/**
+	 * EN: Get a new CountryCode object.<br>
+	 * DE: Gibt ein neues SysCountryCode Objekt zurueck.<br>
+	 * 
+	 * @return SysCountryCode
+	 */
 	public SysCountryCode getNewCountryCode();
 
+	/**
+	 * EN: Get the count of all CountryCodes.<br>
+	 * DE: Gibt die Anzahl aller LaenderCodes zurueck.<br>
+	 * 
+	 * @return int
+	 */
 	public int getCountAllSysCountrycode();
 
-	List<SysCountryCode> getAllCountryCodes();
+	/**
+	 * EN: Get a list of all CountryCodes.<br>
+	 * DE: Gibt eine Liste aller LaenderCodes zurueck.<br>
+	 * 
+	 * @return List of CountryCodes / Liste von LaenderCodes
+	 */
+	public List<SysCountryCode> getAllCountryCodes();
 
-	SysCountryCode getCountryCodeById(long id);
+	/**
+	 * EN: Get a CountryCode by its ID.<br>
+	 * DE: Gibt einen LaenderCodes anhand ihrer ID zurueck.<br>
+	 * 
+	 * @param id
+	 *            / the persistence identifier / der PrimaerKey
+	 * @return CountryCode / LaenderCode
+	 */
+	public SysCountryCode getCountryCodeById(long id);
 
+	/**
+	 * EN: Get a CountryCode by its ID.<br>
+	 * DE: Gibt einen LaenderCodes anhand ihrer ID zurueck.<br>
+	 * 
+	 * @param code2
+	 *            / code2 for the country / Code Kuerzel
+	 * @return CountryCode / LaenderCode
+	 */
 	public SysCountryCode getCountryCodeByCode2(String code2);
 
-	void saveOrUpdate(SysCountryCode countryCode);
+	/**
+	 * EN: Saves new or updates a SysCountryCode.<br>
+	 * DE: Speichert neu oder aktualisiert einen LaenderCode.<br>
+	 */
+	public void saveOrUpdate(SysCountryCode countryCode);
 
-	void delete(SysCountryCode countryCode);
+	/**
+	 * EN: Deletes a SysCountryCode.<br>
+	 * DE: Loescht einen LaenderCode.<br>
+	 */
+	public void delete(SysCountryCode countryCode);
 
 }

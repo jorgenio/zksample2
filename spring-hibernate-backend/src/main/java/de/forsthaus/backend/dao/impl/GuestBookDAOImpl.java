@@ -38,7 +38,7 @@ public class GuestBookDAOImpl extends BasisNextidDaoImpl<GuestBook> implements G
 	}
 
 	@Override
-	public int getCountAllGuestBook() {
+	public int getCountAllGuestBooks() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from GuestBook"));
 	}
 }

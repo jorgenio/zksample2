@@ -225,8 +225,8 @@ public class CommonServiceImpl implements CommonService {
 		map.put("Branch", getBrancheDAO().getCountAllBranches());
 		map.put("Article", getArticleDAO().getCountAllArticle());
 		map.put("Order", getOrderDAO().getCountAllOrder());
-		map.put("Orderposition", getOrderpositionDAO().getCountAllOrderposition());
-		map.put("GuestBook", getGuestBookDAO().getCountAllGuestBook());
+		map.put("Orderposition", getOrderpositionDAO().getCountAllOrderpositions());
+		map.put("GuestBook", getGuestBookDAO().getCountAllGuestBooks());
 		map.put("SecGroup", getSecGroupDAO().getCountAllSecGroup());
 		map.put("SecGroupright", getSecGrouprightDAO().getCountAllSecGroupright());
 		map.put("SecRight", getSecRightDAO().getCountAllSecRights());

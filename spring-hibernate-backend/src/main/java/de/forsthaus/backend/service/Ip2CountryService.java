@@ -23,16 +23,54 @@ import java.util.List;
 import de.forsthaus.backend.model.Ip2Country;
 import de.forsthaus.backend.util.IpLocator;
 
+/**
+ * Service methods Interface for working with Ip2Country data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface Ip2CountryService {
 
-	public IpLocator hostIpLookUpIp(String ip);
-
+	/**
+	 * EN: Get a new Ip2Country object.<br>
+	 * DE: Gibt ein neues Ip2Country Objekt zurueck.<br>
+	 * 
+	 * @return Ip2Country
+	 */
 	public Ip2Country getNewIp2Country();
 
+	/**
+	 * EN: Get the count of all Ip2Countries.<br>
+	 * DE: Gibt die Anzahl aller Ip2Countries zurueck.<br>
+	 * 
+	 * @return int
+	 */
 	public int getCountAllIp2Country();
 
-	public void saveOrUpdate(Ip2Country ip2c);
+	/**
+	 * EN: Get an IPLocator for a IP address.<br>
+	 * DE: Gibt ein IPLocator Objekt fuer eine IP Adresse zurueck.<br>
+	 * <br>
+	 * The IPLocator is a java wrapper for the hostip.info ip locator web
+	 * service.
+	 * 
+	 * @see de.forsthaus.backend.util.IpLocator.java
+	 * @return int
+	 */
+	public IpLocator hostIpLookUpIp(String ip);
 
+	/**
+	 * EN: Get a list of all Ip2Countries.<br>
+	 * DE: Gibt eine Liste aller Ip2Countries zurueck.<br>
+	 * 
+	 * @return List of Ip2Countries / Liste von Ip2Countries
+	 */
 	public List<Ip2Country> getAll();
+
+	/**
+	 * EN: Saves new or updates an Ip2Country.<br>
+	 * DE: Speichert neu oder aktualisiert eine Ip2Country.<br>
+	 */
+	public void saveOrUpdate(Ip2Country ip2c);
 
 }

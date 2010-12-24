@@ -2,6 +2,12 @@ package de.forsthaus.backend.service;
 
 import java.util.Map;
 
+/**
+ * Service methods Interface for working with common data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface CommonService {
 
 	/**

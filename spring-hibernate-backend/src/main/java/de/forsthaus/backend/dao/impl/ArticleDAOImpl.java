@@ -52,7 +52,7 @@ public class ArticleDAOImpl extends BasisNextidDaoImpl<Article> implements Artic
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Article> getAllArticle() {
+	public List<Article> getAllArticles() {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Article.class);
 		criteria.addOrder(Order.asc("artKurzbezeichnung"));
 

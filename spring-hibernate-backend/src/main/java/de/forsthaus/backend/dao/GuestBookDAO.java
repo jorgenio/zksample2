@@ -20,6 +20,12 @@ package de.forsthaus.backend.dao;
 
 import de.forsthaus.backend.model.GuestBook;
 
+/**
+ * DAO methods Interface for working with Guestbook data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface GuestBookDAO {
 
 	/**
@@ -36,10 +42,10 @@ public interface GuestBookDAO {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllGuestBook();
+	public int getCountAllGuestBooks();
 
 	/**
-	 * EN: Saves or updates a GuestBook entry.<br>
+	 * EN: Saves new or updates a GuestBook entry.<br>
 	 * DE: Speichert oder aktualisiert einen Gaestebuch Eintrag.<br>
 	 */
 	public void saveOrUpdate(GuestBook guestBook);

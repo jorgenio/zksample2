@@ -20,6 +20,12 @@ package de.forsthaus.backend.service;
 
 import de.forsthaus.backend.model.SecUser;
 
+/**
+ * Service methods Interface for working with Login data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface LoginService {
 
 	SecUser getLoginUser(String usrLoginName, String usrPassword);

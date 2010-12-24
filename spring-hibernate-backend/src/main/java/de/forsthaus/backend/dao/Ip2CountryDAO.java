@@ -24,9 +24,10 @@ import de.forsthaus.backend.model.Ip2Country;
 import de.forsthaus.backend.util.IpLocator;
 
 /**
- * DAO for getting Ip2Country data.
+ * DAO methods Interface for working with Ip2Country data.
  * 
- * @author sge(at)forsthaus(dot)de
+ * @author bbruhns
+ * @author sgerth
  */
 public interface Ip2CountryDAO {
 
@@ -85,8 +86,8 @@ public interface Ip2CountryDAO {
 	public void deleteAll();
 
 	/**
-	 * EN: Saves or updates an Ip2Country.<br>
-	 * DE: Speichert oder aktualisiert eine Ip2Country.<br>
+	 * EN: Saves new or updates an Ip2Country.<br>
+	 * DE: Speichert neu oder aktualisiert eine Ip2Country.<br>
 	 */
 	public void saveOrUpdate(Ip2Country ip2Country);
 

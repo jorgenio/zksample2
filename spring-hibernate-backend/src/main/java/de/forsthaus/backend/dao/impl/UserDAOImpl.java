@@ -43,7 +43,7 @@ public class UserDAOImpl extends BasisNextidDaoImpl<SecUser> implements UserDAO 
 	}
 
 	@Override
-	public List<SecUser> getAlleUser() {
+	public List<SecUser> getAllUsers() {
 		return getHibernateTemplate().loadAll(SecUser.class);
 	}
 

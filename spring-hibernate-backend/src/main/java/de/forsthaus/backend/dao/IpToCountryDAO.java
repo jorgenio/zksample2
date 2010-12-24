@@ -21,9 +21,10 @@ package de.forsthaus.backend.dao;
 import de.forsthaus.backend.model.IpToCountry;
 
 /**
- * DAO for getting Ip2Country data.
+ * DAO methods Interface for working with IpToCountry data.
  * 
- * @author sge(at)forsthaus(dot)de
+ * @author bbruhns
+ * @author sgerth
  */
 public interface IpToCountryDAO {
 
@@ -62,8 +63,8 @@ public interface IpToCountryDAO {
 	public void deleteAll();
 
 	/**
-	 * EN: Saves or updates an IpToCountry.<br>
-	 * DE: Speichert oder aktualisiert eine IpToCountry.<br>
+	 * EN: Saves new or updates an IpToCountry.<br>
+	 * DE: Speichert neu oder aktualisiert eine IpToCountry.<br>
 	 */
 	public void saveOrUpdate(IpToCountry ipToCountry);
 

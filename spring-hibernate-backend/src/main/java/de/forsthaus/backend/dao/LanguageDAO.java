@@ -23,6 +23,12 @@ import java.util.List;
 import de.forsthaus.backend.model.Language;
 
 /**
+ * DAO methods Interface for working with Language data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
+/**
  * NOT USED AT TIME !!!<br>
  * 
  * @author bbruhns

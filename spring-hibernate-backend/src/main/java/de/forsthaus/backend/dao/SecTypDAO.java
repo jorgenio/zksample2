@@ -22,6 +22,12 @@ import java.util.List;
 
 import de.forsthaus.backend.model.SecTyp;
 
+/**
+ * DAO methods Interface for working with SecTyp data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface SecTypDAO {
 
 	/**

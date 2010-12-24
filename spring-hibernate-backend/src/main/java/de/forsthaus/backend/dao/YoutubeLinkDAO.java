@@ -23,6 +23,12 @@ import java.util.List;
 import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.model.YoutubeLink;
 
+/**
+ * DAO methods Interface for working with YouTubeLinks data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface YoutubeLinkDAO {
 
 	/**
@@ -81,8 +87,8 @@ public interface YoutubeLinkDAO {
 	public ResultObject getAllYoutubeLinks(int start, int pageSize);
 
 	/**
-	 * EN: Saves or updates a YoutubeLink.<br>
-	 * DE: Speichert oder aktualisiert einen YoutubeLink.<br>
+	 * EN: Saves new or updates a YoutubeLink.<br>
+	 * DE: Speichert neu oder aktualisiert einen YoutubeLink.<br>
 	 */
 	public void saveOrUpdate(YoutubeLink entity);
 

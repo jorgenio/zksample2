@@ -127,8 +127,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<SecUser> getAlleUser() {
-		return getUserDAO().getAlleUser();
+	public List<SecUser> getAllUsers() {
+		return getUserDAO().getAllUsers();
 	}
 
 	@Override

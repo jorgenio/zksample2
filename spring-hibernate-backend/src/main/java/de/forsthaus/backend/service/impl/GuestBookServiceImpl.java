@@ -57,8 +57,8 @@ public class GuestBookServiceImpl implements GuestBookService {
 	}
 
 	@Override
-	public int getCountAllGuestBook() {
-		return getGuestBookDAO().getCountAllGuestBook();
+	public int getCountAllGuestBooks() {
+		return getGuestBookDAO().getCountAllGuestBooks();
 	}
 
 }

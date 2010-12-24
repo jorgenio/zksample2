@@ -22,24 +22,92 @@ import java.util.List;
 
 import de.forsthaus.backend.model.Office;
 
+/**
+ * Service methods Interface for working with Office data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface OfficeService {
 
+	/**
+	 * EN: Get a new Office object.<br>
+	 * DE: Gibt ein neues Office (Niederlassung) Objekt zurueck.<br>
+	 * 
+	 * @return Office
+	 */
 	public Office getNewOffice();
 
+	/**
+	 * EN: Get the count of all Offices.<br>
+	 * DE: Gibt die Anzahl aller Offices zurueck.<br>
+	 * 
+	 * @return int
+	 */
 	public int getCountAllOffices();
 
-	Office getOfficeByID(Long fil_nr);
+	/**
+	 * EN: Get an Office by its ID.<br>
+	 * DE: Gibt ein Office anhand seiner ID zurueck.<br>
+	 * 
+	 * @param filId
+	 *            / the persistence identifier / der PrimaerKey
+	 * @return Office / Office
+	 */
+	public Office getOfficeByID(Long fil_nr);
 
-	List<Office> getAllOffices();
+	/**
+	 * EN: Get a list of all Offices.<br>
+	 * DE: Gibt eine Liste aller Offices zurueck.<br>
+	 * 
+	 * @return List of Offices / Liste von Offices
+	 */
+	public List<Office> getAllOffices();
 
-	void saveOrUpdate(Office ofice);
+	/**
+	 * EN: Gets a list of Offices where the city name contains the %string% .<br>
+	 * DE: Gibt eine Liste aller Offices zurueck bei denen der Stadtname
+	 * %string% enthaelt.<br>
+	 * 
+	 * @param string
+	 *            Name of the city / Stadtnamen
+	 * @return List of Offices / Liste of Offices
+	 */
+	public List<Office> getOfficesLikeCity(String string);
 
-	void delete(Office office);
+	/**
+	 * EN: Gets a list of Offices where the office name1 contains the %string% .<br>
+	 * DE: Gibt eine Liste aller Offices zurueck bei denen der Office Name1
+	 * %string% enthaelt.<br>
+	 * 
+	 * @param string
+	 *            Name1 of the office / Name1 vom Office
+	 * @return List of Offices / Liste of Offices
+	 */
+	public List<Office> getOfficesLikeName1(String string);
 
-	public List<Office> getOfficeLikeCity(String string);
+	/**
+	 * EN: Gets a list of Offices where the office number contains the %string%
+	 * .<br>
+	 * DE: Gibt eine Liste aller Offices zurueck bei denen die Office Nummer
+	 * %string% enthaelt.<br>
+	 * 
+	 * @param string
+	 *            Number of the office / Nummer vom Office
+	 * @return List of Offices / Liste of Offices
+	 */
+	public List<Office> getOfficesLikeNo(String string);
 
-	public List<Office> getOfficeLikeName1(String string);
+	/**
+	 * EN: Saves new or updates an Office.<br>
+	 * DE: Speichert neu oder aktualisiert ein Office.<br>
+	 */
+	public void saveOrUpdate(Office ofice);
 
-	public List<Office> getOfficeLikeNo(String string);
+	/**
+	 * EN: Deletes an Office.<br>
+	 * DE: Loescht ein Office.<br>
+	 */
+	public void delete(Office office);
 
 }

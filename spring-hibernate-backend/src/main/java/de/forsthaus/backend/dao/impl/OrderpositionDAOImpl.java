@@ -82,7 +82,7 @@ public class OrderpositionDAOImpl extends BasisNextidDaoImpl<Orderposition> impl
 	}
 
 	@Override
-	public int getCountAllOrderposition() {
+	public int getCountAllOrderpositions() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from Orderposition"));
 	}
 

@@ -22,13 +22,19 @@ import java.util.List;
 
 import de.forsthaus.backend.model.SecUser;
 
+/**
+ * DAO methods Interface for working with User data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface UserDAO {
 
 	/**
 	 * EN: Get a new User object.<br>
 	 * DE: Gibt ein neues User Objekt zurueck.<br>
 	 * 
-	 * @return User
+	 * @return SecUser
 	 */
 	public SecUser getNewSecUser();
 
@@ -46,7 +52,7 @@ public interface UserDAO {
 	 * 
 	 * @return List of Users / Liste aus Usern
 	 */
-	public List<SecUser> getAlleUser();
+	public List<SecUser> getAllUsers();
 
 	/**
 	 * EN: Get an User by its ID.<br>
@@ -127,8 +133,8 @@ public interface UserDAO {
 	public List<SecUser> getUserListByLoginname(String loginName);
 
 	/**
-	 * EN: Saves or updates an User.<br>
-	 * DE: Speichert oder aktualisiert einen User.<br>
+	 * EN: Saves new or updates an User.<br>
+	 * DE: Speichert neu oder aktualisiert einen User.<br>
 	 */
 	public void saveOrUpdate(SecUser user);
 

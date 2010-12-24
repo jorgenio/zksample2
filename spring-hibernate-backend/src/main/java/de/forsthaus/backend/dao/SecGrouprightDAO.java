@@ -24,6 +24,12 @@ import de.forsthaus.backend.model.SecGroup;
 import de.forsthaus.backend.model.SecGroupright;
 import de.forsthaus.backend.model.SecRight;
 
+/**
+ * DAO methods Interface for working with SecGroupright data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface SecGrouprightDAO {
 
 	/**
@@ -89,8 +95,8 @@ public interface SecGrouprightDAO {
 	public List<SecRight> getGroupRightsByGroup(SecGroup group);
 
 	/**
-	 * EN: Saves or updates a SecGroupright.<br>
-	 * DE: Speichert oder aktualisiert ein GruppenRecht.<br>
+	 * EN: Saves new or updates a SecGroupright.<br>
+	 * DE: Speichert neu oder aktualisiert ein GruppenRecht.<br>
 	 */
 	public void saveOrUpdate(SecGroupright secGroupright);
 

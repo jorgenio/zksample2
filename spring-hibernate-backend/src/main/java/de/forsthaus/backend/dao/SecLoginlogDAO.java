@@ -26,6 +26,12 @@ import de.forsthaus.backend.bean.ListLongSumBean;
 import de.forsthaus.backend.model.LoginStatus;
 import de.forsthaus.backend.model.SecLoginlog;
 
+/**
+ * DAO methods Interface for working with SecLoginlog data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface SecLoginlogDAO {
 
 	/**
@@ -132,8 +138,8 @@ public interface SecLoginlogDAO {
 	public SecLoginlog saveLog(String userName, String clientAddress, String sessionId, String browserType, int status);
 
 	/**
-	 * EN: Saves or updates a SecLoginlog.<br>
-	 * DE: Speichert oder aktualisiert einen Login.<br>
+	 * EN: Saves new or updates a SecLoginlog.<br>
+	 * DE: Speichert neu oder aktualisiert einen Login.<br>
 	 */
 	public void saveOrUpdate(SecLoginlog secLoginlog);
 

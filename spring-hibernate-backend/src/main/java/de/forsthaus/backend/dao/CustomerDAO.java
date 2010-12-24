@@ -24,6 +24,12 @@ import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.model.Customer;
 import de.forsthaus.backend.model.Order;
 
+/**
+ * DAO methods Interface for working with Customer data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface CustomerDAO {
 
 	/**

@@ -24,6 +24,12 @@ import de.forsthaus.backend.model.SecGroup;
 import de.forsthaus.backend.model.SecRole;
 import de.forsthaus.backend.model.SecRolegroup;
 
+/**
+ * DAO methods Interface for working with SecRolegroup data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface SecRolegroupDAO {
 
 	/**
@@ -82,8 +88,8 @@ public interface SecRolegroupDAO {
 	public boolean isGroupInRole(SecGroup group, SecRole role);
 
 	/**
-	 * EN: Saves or updates a Security RoleGroups.<br>
-	 * DE: Speichert oder aktualisiert eine Security RollenGruppe.<br>
+	 * EN: Saves new or updates a Security RoleGroups.<br>
+	 * DE: Speichert neu oder aktualisiert eine Security RollenGruppe.<br>
 	 */
 	public void saveOrUpdate(SecRolegroup roleGroup);
 

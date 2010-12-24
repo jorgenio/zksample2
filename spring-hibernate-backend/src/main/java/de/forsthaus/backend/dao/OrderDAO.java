@@ -25,6 +25,12 @@ import de.forsthaus.backend.model.Customer;
 import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.model.Order;
 
+/**
+ * DAO methods Interface for working with Order data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface OrderDAO {
 
 	/**
@@ -137,8 +143,8 @@ public interface OrderDAO {
 	public void initialize(Order order);
 
 	/**
-	 * EN: Saves or updates an Order.<br>
-	 * DE: Speichert oder aktualisiert einen Auftrag.<br>
+	 * EN: Saves new or updates an Order.<br>
+	 * DE: Speichert neu oder aktualisiert einen Auftrag.<br>
 	 */
 	public void saveOrUpdate(Order order);
 

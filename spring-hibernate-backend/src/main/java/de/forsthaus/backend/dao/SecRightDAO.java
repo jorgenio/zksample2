@@ -24,6 +24,12 @@ import de.forsthaus.backend.model.SecGroupright;
 import de.forsthaus.backend.model.SecRight;
 import de.forsthaus.backend.model.SecUser;
 
+/**
+ * DAO methods Interface for working with SecRight data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface SecRightDAO {
 
 	/**
@@ -135,8 +141,8 @@ public interface SecRightDAO {
 	public List<SecRight> getRightsLikeRightNameAndTypes(String aRightName, List<Integer> listOfRightTyps);
 
 	/**
-	 * EN: Saves or updates a SecRight.<br>
-	 * DE: Speichert oder aktualisiert ein EinzelRecht.<br>
+	 * EN: Saves new or updates a SecRight.<br>
+	 * DE: Speichert neu oder aktualisiert ein EinzelRecht.<br>
 	 */
 	public void saveOrUpdate(SecRight right);
 

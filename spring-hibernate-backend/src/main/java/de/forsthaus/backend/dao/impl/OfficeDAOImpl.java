@@ -70,7 +70,7 @@ public class OfficeDAOImpl extends BasisNextidDaoImpl<Office> implements OfficeD
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Office> getOfficeLikeCity(String string) {
+	public List<Office> getOfficesLikeCity(String string) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Office.class);
 		criteria.add(Restrictions.ilike("filOrt", string, MatchMode.ANYWHERE));
@@ -80,7 +80,7 @@ public class OfficeDAOImpl extends BasisNextidDaoImpl<Office> implements OfficeD
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Office> getOfficeLikeName1(String string) {
+	public List<Office> getOfficesLikeName1(String string) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Office.class);
 		criteria.add(Restrictions.ilike("filName1", string, MatchMode.ANYWHERE));
@@ -90,7 +90,7 @@ public class OfficeDAOImpl extends BasisNextidDaoImpl<Office> implements OfficeD
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Office> getOfficeLikeNo(String string) {
+	public List<Office> getOfficesLikeNo(String string) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Office.class);
 		criteria.add(Restrictions.ilike("filNr", string, MatchMode.ANYWHERE));

@@ -24,6 +24,12 @@ import de.forsthaus.backend.model.SecRole;
 import de.forsthaus.backend.model.SecUser;
 import de.forsthaus.backend.model.SecUserrole;
 
+/**
+ * DAO methods Interface for working with SecUserrole data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface SecUserroleDAO {
 
 	/**
@@ -75,8 +81,8 @@ public interface SecUserroleDAO {
 	public boolean isUserInRole(SecUser user, SecRole role);
 
 	/**
-	 * EN: Saves or updates a Security UserRole.<br>
-	 * DE: Speichert oder aktualisiert eine Security UserRole.<br>
+	 * EN: Saves new or updates a Security UserRole.<br>
+	 * DE: Speichert neu oder aktualisiert eine Security UserRole.<br>
 	 */
 	public void saveOrUpdate(SecUserrole secUserrole);
 

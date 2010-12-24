@@ -23,6 +23,12 @@ import java.util.List;
 import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.model.Branche;
 
+/**
+ * Service methods Interface for working with Branches data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface BrancheService {
 
 	/**

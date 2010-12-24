@@ -23,6 +23,12 @@ import java.util.List;
 import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.model.YoutubeLink;
 
+/**
+ * Service methods Interface for working with YouTubeLinks data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface YoutubeLinkService {
 
 	/**

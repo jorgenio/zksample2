@@ -26,6 +26,12 @@ import de.forsthaus.backend.bean.ListLongSumBean;
 import de.forsthaus.backend.model.LoginStatus;
 import de.forsthaus.backend.model.SecLoginlog;
 
+/**
+ * Service methods Interface for working with Login Log data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface LoginLoggingService {
 
 	public int getCountAllSecLoginlog();

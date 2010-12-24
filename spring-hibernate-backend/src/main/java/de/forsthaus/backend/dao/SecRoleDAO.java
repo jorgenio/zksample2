@@ -23,6 +23,12 @@ import java.util.List;
 import de.forsthaus.backend.model.SecRole;
 import de.forsthaus.backend.model.SecUser;
 
+/**
+ * DAO methods Interface for working with SecRole data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface SecRoleDAO {
 
 	/**
@@ -80,8 +86,8 @@ public interface SecRoleDAO {
 	public List<SecRole> getRolesLikeRoleName(String aRoleName);
 
 	/**
-	 * EN: Saves or updates a Security Role.<br>
-	 * DE: Speichert oder aktualisiert eine Security Role.<br>
+	 * EN: Saves new or updates a Security Role.<br>
+	 * DE: Speichert neu oder aktualisiert eine Security Role.<br>
 	 */
 	public void saveOrUpdate(SecRole secRole);
 

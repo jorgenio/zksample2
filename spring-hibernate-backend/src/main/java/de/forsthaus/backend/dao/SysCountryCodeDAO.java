@@ -23,7 +23,7 @@ import java.util.List;
 import de.forsthaus.backend.model.SysCountryCode;
 
 /**
- * Interface for working with SysCountryCode data.
+ * DAO methods Interface for working with SysCountryCode data.
  * 
  * @author bbruhns
  * @author sgerth
@@ -75,8 +75,8 @@ public interface SysCountryCodeDAO {
 	public SysCountryCode getCountryCodeByCode2(String code2);
 
 	/**
-	 * EN: Saves or updates a SysCountryCode.<br>
-	 * DE: Speichert oder aktualisiert einen LaenderCode.<br>
+	 * EN: Saves new or updates a SysCountryCode.<br>
+	 * DE: Speichert neu oder aktualisiert einen LaenderCode.<br>
 	 */
 	public void saveOrUpdate(SysCountryCode sysCountryCode);
 

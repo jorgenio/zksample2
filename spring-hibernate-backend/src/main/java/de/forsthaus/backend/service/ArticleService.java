@@ -22,6 +22,12 @@ import java.util.List;
 
 import de.forsthaus.backend.model.Article;
 
+/**
+ * Service methods Interface for working with Article data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface ArticleService {
 
 	/**

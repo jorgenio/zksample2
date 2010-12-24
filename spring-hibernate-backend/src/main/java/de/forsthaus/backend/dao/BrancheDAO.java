@@ -23,6 +23,12 @@ import java.util.List;
 import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.model.Branche;
 
+/**
+ * DAO methods Interface for working with Branches data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface BrancheDAO {
 
 	/**
@@ -117,8 +123,8 @@ public interface BrancheDAO {
 	public ResultObject getAllBranchesLikeText(String text, int start, int pageSize);
 
 	/**
-	 * EN: Saves or updates a CustomerBranch.<br>
-	 * DE: Speichert oder aktualisiert eine KundenBranche.<br>
+	 * EN: Saves new or updates a CustomerBranch.<br>
+	 * DE: Speichert neu oder aktualisiert eine KundenBranche.<br>
 	 */
 	public void saveOrUpdate(Branche branche);
 

@@ -29,6 +29,12 @@ import de.forsthaus.backend.model.SecTyp;
 import de.forsthaus.backend.model.SecUser;
 import de.forsthaus.backend.model.SecUserrole;
 
+/**
+ * Service methods Interface for working with Security data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface SecurityService {
 
 	/* +++++ Security: Userroles +++++++ */

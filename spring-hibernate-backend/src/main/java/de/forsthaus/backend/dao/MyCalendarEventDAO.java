@@ -23,6 +23,12 @@ import java.util.List;
 
 import de.forsthaus.backend.model.MyCalendarEvent;
 
+/**
+ * DAO methods Interface for working with MyCalendarEvent data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface MyCalendarEventDAO {
 
 	/**
@@ -91,8 +97,8 @@ public interface MyCalendarEventDAO {
 	public List<MyCalendarEvent> getCalendarEventFromToDate(Date beginDate, Date endDate, long usrId);
 
 	/**
-	 * EN: Saves or updates a MyCalendarEvent.<br>
-	 * DE: Speichert oder aktualisiert eine MyCalendarEvent Termin.<br>
+	 * EN: Saves new or updates a MyCalendarEvent.<br>
+	 * DE: Speichert neu oder aktualisiert eine MyCalendarEvent Termin.<br>
 	 */
 	public void saveOrUpdate(MyCalendarEvent calendarEvent);
 

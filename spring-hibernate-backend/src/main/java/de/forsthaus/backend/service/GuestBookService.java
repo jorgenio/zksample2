@@ -20,14 +20,40 @@ package de.forsthaus.backend.service;
 
 import de.forsthaus.backend.model.GuestBook;
 
+/**
+ * Service methods Interface for working with Guestbook data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface GuestBookService {
 
+	/**
+	 * EN: Get a new GuestBook object.<br>
+	 * DE: Gibt ein neues Gaestebuch Objekt zurueck.<br>
+	 * 
+	 * @return GuestBook
+	 */
 	public GuestBook getNewGuestBook();
 
-	public int getCountAllGuestBook();
+	/**
+	 * EN: Get the count of all GuestBook.<br>
+	 * DE: Gibt die Anzahl aller Gaestebucheintraege zurueck.<br>
+	 * 
+	 * @return int
+	 */
+	public int getCountAllGuestBooks();
 
+	/**
+	 * EN: Saves new or updates a GuestBook entry.<br>
+	 * DE: Speichert oder aktualisiert einen Gaestebuch Eintrag.<br>
+	 */
 	void saveOrUpdate(GuestBook guestBook);
 
+	/**
+	 * EN: Deletes a GuestBook entry.<br>
+	 * DE: Loescht einen Gaestebuch Eintrag.<br>
+	 */
 	void delete(GuestBook guestBook);
 
 }

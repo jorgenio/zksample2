@@ -22,6 +22,12 @@ import java.util.List;
 
 import de.forsthaus.backend.model.Office;
 
+/**
+ * DAO methods Interface for working with Office data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface OfficeDAO {
 
 	/**
@@ -77,7 +83,7 @@ public interface OfficeDAO {
 	 *            Name of the city / Stadtnamen
 	 * @return List of Offices / Liste of Offices
 	 */
-	public List<Office> getOfficeLikeCity(String string);
+	public List<Office> getOfficesLikeCity(String string);
 
 	/**
 	 * EN: Gets a list of Offices where the office name1 contains the %string% .<br>
@@ -88,7 +94,7 @@ public interface OfficeDAO {
 	 *            Name1 of the office / Name1 vom Office
 	 * @return List of Offices / Liste of Offices
 	 */
-	public List<Office> getOfficeLikeName1(String string);
+	public List<Office> getOfficesLikeName1(String string);
 
 	/**
 	 * EN: Gets a list of Offices where the office number contains the %string%
@@ -100,7 +106,7 @@ public interface OfficeDAO {
 	 *            Number of the office / Nummer vom Office
 	 * @return List of Offices / Liste of Offices
 	 */
-	public List<Office> getOfficeLikeNo(String string);
+	public List<Office> getOfficesLikeNo(String string);
 
 	/**
 	 * EN: Deletes an Office by its Id.<br>
@@ -112,8 +118,8 @@ public interface OfficeDAO {
 	public void deleteOfficeById(long id);
 
 	/**
-	 * EN: Saves or updates an Office.<br>
-	 * DE: Speichert oder aktualisiert ein Office.<br>
+	 * EN: Saves new or updates an Office.<br>
+	 * DE: Speichert neu oder aktualisiert ein Office.<br>
 	 */
 	public void saveOrUpdate(Office office);
 

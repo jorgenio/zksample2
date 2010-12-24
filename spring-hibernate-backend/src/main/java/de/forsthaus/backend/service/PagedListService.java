@@ -24,6 +24,12 @@ import com.trg.search.SearchResult;
 
 import de.forsthaus.backend.util.HibernateSearchObject;
 
+/**
+ * Service methods Interface for working with pagedListWrappers data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface PagedListService {
 
 	public <T> List<T> getBySearchObject(HibernateSearchObject<T> so);

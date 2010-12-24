@@ -99,7 +99,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> getAllOrdersByCustomer(Customer customer) {
+	public List<Order> getOrdersByCustomer(Customer customer) {
 		List<Order> result = getOrderDAO().getOrdersByCustomer(customer);
 		return result;
 	}
@@ -155,7 +155,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<Article> getAllArticles() {
-		return getArticleDAO().getAllArticle();
+		return getArticleDAO().getAllArticles();
 	}
 
 	@Override
@@ -179,7 +179,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int getCountAllOrderposition() {
-		return getOrderpositionDAO().getCountAllOrderposition();
+	public int getCountAllOrderpositions() {
+		return getOrderpositionDAO().getCountAllOrderpositions();
 	}
 }

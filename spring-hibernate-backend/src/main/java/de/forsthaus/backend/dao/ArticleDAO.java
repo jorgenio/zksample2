@@ -22,6 +22,12 @@ import java.util.List;
 
 import de.forsthaus.backend.model.Article;
 
+/**
+ * DAO methods Interface for working with Article data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface ArticleDAO {
 
 	/**
@@ -38,7 +44,7 @@ public interface ArticleDAO {
 	 * 
 	 * @return List of Articles / Liste von Artikeln
 	 */
-	public List<Article> getAllArticle();
+	public List<Article> getAllArticles();
 
 	/**
 	 * EN: Get the count of all Articles.<br>
@@ -82,8 +88,8 @@ public interface ArticleDAO {
 	public List<Article> getArticleLikeName(String string);
 
 	/**
-	 * EN: Saves or updates an article.<br>
-	 * DE: Speichert oder aktualisiert einen Artikel.<br>
+	 * EN: Saves new or updates an article.<br>
+	 * DE: Speichert neu oder aktualisiert einen Artikel.<br>
 	 */
 	public void saveOrUpdate(Article article);
 

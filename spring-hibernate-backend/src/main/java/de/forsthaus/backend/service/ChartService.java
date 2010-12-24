@@ -22,6 +22,12 @@ import java.util.List;
 
 import de.forsthaus.backend.model.ChartData;
 
+/**
+ * Service methods Interface for working with Chart data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface ChartService {
 
 	public List<ChartData> getChartDataForCustomer(long kunId);

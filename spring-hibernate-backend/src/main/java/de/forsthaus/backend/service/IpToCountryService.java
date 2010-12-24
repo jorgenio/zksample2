@@ -22,8 +22,20 @@ import java.net.InetAddress;
 
 import de.forsthaus.backend.model.IpToCountry;
 
+/**
+ * Service methods Interface for working with IpToCountry data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface IpToCountryService {
 
+	/**
+	 * EN: Get the count of all IpToCountries.<br>
+	 * DE: Gibt die Anzahl aller IpToCountries zurueck.<br>
+	 * 
+	 * @return int
+	 */
 	public int getCountAllIpToCountry();
 
 	public IpToCountry getIpToCountry(InetAddress address);

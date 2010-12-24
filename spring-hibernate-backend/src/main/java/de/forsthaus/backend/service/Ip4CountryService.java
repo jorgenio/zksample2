@@ -22,8 +22,20 @@ import java.net.InetAddress;
 
 import de.forsthaus.backend.model.Ip4Country;
 
+/**
+ * Service methods Interface for working with Ip4Country data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface Ip4CountryService {
 
+	/**
+	 * EN: Get the count of all Ip4Countries.<br>
+	 * DE: Gibt die Anzahl aller Ip4Countries zurueck.<br>
+	 * 
+	 * @return int
+	 */
 	public int getCountAllIp4Country();
 
 	public Ip4Country getIp4Country(InetAddress address);

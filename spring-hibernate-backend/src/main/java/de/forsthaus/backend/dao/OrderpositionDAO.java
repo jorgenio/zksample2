@@ -23,6 +23,12 @@ import java.util.List;
 import de.forsthaus.backend.model.Order;
 import de.forsthaus.backend.model.Orderposition;
 
+/**
+ * DAO methods Interface for working with Orderposition data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface OrderpositionDAO {
 
 	/**
@@ -59,7 +65,7 @@ public interface OrderpositionDAO {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllOrderposition();
+	public int getCountAllOrderpositions();
 
 	/**
 	 * EN: Get an Orderposition by its ID.<br>
@@ -81,8 +87,8 @@ public interface OrderpositionDAO {
 	public void deleteOrderpositionsByOrder(Order order);
 
 	/**
-	 * EN: Saves or updates an Orderposition.<br>
-	 * DE: Speichert oder aktualisiert eine AuftragsPosition.<br>
+	 * EN: Saves new or updates an Orderposition.<br>
+	 * DE: Speichert neu oder aktualisiert eine AuftragsPosition.<br>
 	 */
 	public void saveOrUpdate(Orderposition orderposition);
 

@@ -25,6 +25,12 @@ import de.forsthaus.backend.model.SecGroupright;
 import de.forsthaus.backend.model.SecRolegroup;
 import de.forsthaus.backend.model.SecUser;
 
+/**
+ * DAO methods Interface for working with SecGroup data.
+ * 
+ * @author bbruhns
+ * @author sgerth
+ */
 public interface SecGroupDAO {
 
 	/**
@@ -99,8 +105,8 @@ public interface SecGroupDAO {
 	public List<SecGroup> getGroupsLikeGroupName(String aGroupName);
 
 	/**
-	 * EN: Saves or updates a SecGroup.<br>
-	 * DE: Speichert oder aktualisiert eine SecurityGruppe.<br>
+	 * EN: Saves new or updates a SecGroup.<br>
+	 * DE: Speichert neu oder aktualisiert eine SecurityGruppe.<br>
 	 */
 	public void saveOrUpdate(SecGroup secGroup);
 

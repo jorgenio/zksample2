@@ -69,8 +69,8 @@ public class OrderpositionDAOImpl extends BasisNextidDaoImpl<Orderposition> impl
 	}
 
 	@Override
-	public Orderposition getOrderpositionById(Long aup_id) {
-		return get(Orderposition.class, aup_id);
+	public Orderposition getOrderpositionById(long id) {
+		return get(Orderposition.class, id);
 	}
 
 	@Override

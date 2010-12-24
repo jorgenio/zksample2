@@ -42,9 +42,8 @@ public interface BrancheDAO {
 	public List<Branche> getAllBranches();
 
 	/**
-	 * EN: Get the count of all CustomerBranches in the used Table Schema.<br>
-	 * DE: Gibt die Anzahl aller KundenBranchen im gewaehlten Tabellen Schema
-	 * zurueck.<br>
+	 * EN: Get the count of all CustomerBranches.<br>
+	 * DE: Gibt die Anzahl aller KundenBranchen zurueck.<br>
 	 * 
 	 * @return int
 	 */

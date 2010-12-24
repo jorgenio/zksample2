@@ -103,8 +103,8 @@ public interface BrancheDAO {
 	public ResultObject getAllBranches(int start, int pageSize);
 
 	/**
-	 * EN: Get a paged list of all YoutubeLinks.<br>
-	 * DE: Gibt eine paged Liste aller YoutubeLinks zurueck.<br>
+	 * EN: Get a paged list of all Branches.<br>
+	 * DE: Gibt eine paged Liste aller Branchen zurueck.<br>
 	 * 
 	 * @param text
 	 *            Text for search / SuchText

@@ -54,12 +54,6 @@ public class BrancheServiceImpl implements BrancheService {
 		getBrancheDAO().delete(branche);
 	}
 
-	/*
-	 * Gibt eine Liste aller Branchen zurück, die nach BranchenBezeichnung
-	 * sortiert ist.
-	 * 
-	 * @see de.forsthaus.backend.dao.BrancheDAO#getAlleBranche()
-	 */
 	@Override
 	public List<Branche> getAllBranches() {
 		return getBrancheDAO().getAllBranches();
@@ -73,6 +67,11 @@ public class BrancheServiceImpl implements BrancheService {
 	@Override
 	public Branche getBrancheById(long bra_id) {
 		return getBrancheDAO().getBrancheByID(bra_id);
+	}
+
+	@Override
+	public Branche getBrancheByName(String braBezeichnung) {
+		return getBrancheDAO().getBrancheByName(braBezeichnung);
 	}
 
 	@Override

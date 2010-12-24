@@ -25,21 +25,98 @@ import de.forsthaus.backend.model.Branche;
 
 public interface BrancheService {
 
+	/**
+	 * EN: Get a new CustomerBranch object.<br>
+	 * DE: Gibt ein neues Branche Objekt zurueck.<br>
+	 * 
+	 * @return Branche
+	 */
 	public Branche getNewBranche();
 
+	/**
+	 * EN: Get a list of all Branches.<br>
+	 * DE: Gibt eine Liste aller Branchen zurueck.<br>
+	 * 
+	 * @return List of Branches / Liste von Branchen
+	 */
+	public List<Branche> getAllBranches();
+
+	/**
+	 * EN: Get the count of all CustomerBranches.<br>
+	 * DE: Gibt die Anzahl aller KundenBranchen zurueck.<br>
+	 * 
+	 * @return int
+	 */
 	public int getCountAllBranches();
 
-	List<Branche> getAllBranches();
+	/**
+	 * EN: Get a CustomerBranch by its ID.<br>
+	 * DE: Gibt eine KundenBranche anhand ihrer ID zurueck.<br>
+	 * 
+	 * @param id
+	 *            / the persistence identifier / der PrimaerKey
+	 * @return Branch / Branche
+	 */
+	public Branche getBrancheById(long bra_id);
 
-	Branche getBrancheById(long bra_id);
+	/**
+	 * EN: Get a CustomerBranch by it's text.<br>
+	 * DE: Gibt eine KundenBranche anhand ihrer Bezeichnung zurueck.<br>
+	 * 
+	 * @param braBezeichnung
+	 *            Description of the Branch / Name der Branche
+	 * @return Branch / Branche
+	 */
+	public Branche getBrancheByName(String braBezeichnung);
 
-	void saveOrUpdate(Branche branche);
-
-	void delete(Branche branche);
-
+	/**
+	 * EN: Gets a list of CustomerBranches where the branch name contains the
+	 * %string% .<br>
+	 * DE: Gibt eine Liste aller KundenBranchen zurueck bei denen der
+	 * Branchenname %string% enthaelt.<br>
+	 * 
+	 * @param value
+	 *            Name of the branch / BranchenName
+	 * @return List of Branches / Liste of Branchen
+	 */
 	public List<Branche> getBrancheLikeName(String value);
 
+	/**
+	 * EN: Get a paged list of all Branches.<br>
+	 * DE: Gibt eine paged Liste aller Branchen zurueck.<br>
+	 * 
+	 * @param start
+	 *            StartRecord / Start Datensatz
+	 * @param pageSize
+	 *            Count of Records / Anzahl Datensaetze
+	 * @return List of Branches / Liste von Branchen
+	 */
 	public ResultObject getAllBranches(int start, int pageSize);
 
+	/**
+	 * EN: Get a paged list of all Branches.<br>
+	 * DE: Gibt eine paged Liste aller Branchen zurueck.<br>
+	 * 
+	 * @param text
+	 *            Text for search / SuchText
+	 * @param start
+	 *            StartRecord / Start Datensatz
+	 * @param pageSize
+	 *            Count of Records / Anzahl Datensaetze
+	 * @return List of YoutubeLinks / Liste von YoutubeLinks
+	 */
 	public ResultObject getAllBranchesLikeText(String text, int start, int pageSize);
+
+	/**
+	 * EN: Saves or updates a CustomerBranch.<br>
+	 * DE: Speichert oder aktualisiert eine KundenBranche.<br>
+	 */
+	public void saveOrUpdate(Branche branche);
+
+	/**
+	 * EN: Deletes a CustomerBranch.<br>
+	 * DE: Loescht eine KundenBranche.<br>
+	 */
+	public void delete(Branche branche);
+
 }

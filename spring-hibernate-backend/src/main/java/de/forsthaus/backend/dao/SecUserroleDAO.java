@@ -66,23 +66,23 @@ public interface SecUserroleDAO {
 	 * DE: Prueft ob ein User zu einer Security Rolle gehoert.<br>
 	 * 
 	 * @param aUser
-	 *            the User to check / der zu pr�fende User
+	 *            the User to check / der zu pruefende User
 	 * @param aRole
-	 *            the Role zu check / die zu pr�fende Role
+	 *            the Role zu check / die zu pruefende Role
 	 * @return true, if the User is attached to this Role / wahr, wenn der User
 	 *         dieser Role zugeteilt ist.
 	 */
 	public boolean isUserInRole(SecUser user, SecRole role);
 
 	/**
-	 * EN: Saves or updates a Security UserRole in the DB.<br>
-	 * DE: Speichert oder aktualisiert eine Security UserRole in der DB.<br>
+	 * EN: Saves or updates a Security UserRole.<br>
+	 * DE: Speichert oder aktualisiert eine Security UserRole.<br>
 	 */
 	public void saveOrUpdate(SecUserrole secUserrole);
 
 	/**
-	 * EN: Deletes a Security UserRole in the DB.<br>
-	 * DE: Loescht eine Security UserRole in der DB.<br>
+	 * EN: Deletes a Security UserRole.<br>
+	 * DE: Loescht eine Security UserRole.<br>
 	 */
 	public void delete(SecUserrole secUserrole);
 

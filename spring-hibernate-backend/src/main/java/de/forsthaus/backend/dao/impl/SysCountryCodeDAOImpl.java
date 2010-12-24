@@ -52,8 +52,8 @@ public class SysCountryCodeDAOImpl extends BasisNextidDaoImpl<SysCountryCode> im
 	}
 
 	@Override
-	public SysCountryCode getCountryCodeById(Long ccd_Id) {
-		return get(SysCountryCode.class, ccd_Id);
+	public SysCountryCode getCountryCodeById(long id) {
+		return get(SysCountryCode.class, id);
 	}
 
 	@SuppressWarnings("unchecked")

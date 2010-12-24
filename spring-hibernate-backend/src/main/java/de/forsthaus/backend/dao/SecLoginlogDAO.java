@@ -119,8 +119,8 @@ public interface SecLoginlogDAO {
 	public int deleteLocalIPs();
 
 	/**
-	 * EN: Saves a SecLoginlog in the DB.<br>
-	 * DE: Speichert einen Login in der DB.<br>
+	 * EN: Saves a SecLoginlog.<br>
+	 * DE: Speichert einen Login.<br>
 	 * 
 	 * @param userName
 	 * @param clientAddress
@@ -132,20 +132,20 @@ public interface SecLoginlogDAO {
 	public SecLoginlog saveLog(String userName, String clientAddress, String sessionId, String browserType, int status);
 
 	/**
-	 * EN: Saves or updates a SecLoginlog in the DB.<br>
-	 * DE: Speichert oder aktualisiert einen Login in der DB.<br>
+	 * EN: Saves or updates a SecLoginlog.<br>
+	 * DE: Speichert oder aktualisiert einen Login.<br>
 	 */
 	public void saveOrUpdate(SecLoginlog secLoginlog);
 
 	/**
-	 * EN: Deletes a SecLoginlog in the DB.<br>
-	 * DE: Loescht einen Login in der DB.<br>
+	 * EN: Deletes a SecLoginlog.<br>
+	 * DE: Loescht einen Login.<br>
 	 */
 	public void delete(SecLoginlog loginLog);
 
 	/**
-	 * EN: Updates a SecLoginlog in the DB.<br>
-	 * DE: Aktualisiert einen Login in der DB.<br>
+	 * EN: Updates a SecLoginlog.<br>
+	 * DE: Aktualisiert einen Login.<br>
 	 */
 	public void update(SecLoginlog log);
 

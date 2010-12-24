@@ -65,8 +65,8 @@ public class SysCountryCodeServiceImpl implements SysCountryCodeService {
 	}
 
 	@Override
-	public SysCountryCode getCountryCodeById(Long ccd_Id) {
-		return getSysCountryCodeDAO().getCountryCodeById(ccd_Id);
+	public SysCountryCode getCountryCodeById(long id) {
+		return getSysCountryCodeDAO().getCountryCodeById(id);
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public interface SysCountryCodeService {
 
 	List<SysCountryCode> getAllCountryCodes();
 
-	SysCountryCode getCountryCodeById(Long ccd_id);
+	SysCountryCode getCountryCodeById(long id);
 
 	public SysCountryCode getCountryCodeByCode2(String code2);
 

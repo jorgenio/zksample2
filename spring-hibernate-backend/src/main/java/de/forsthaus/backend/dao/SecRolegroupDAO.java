@@ -82,14 +82,14 @@ public interface SecRolegroupDAO {
 	public boolean isGroupInRole(SecGroup group, SecRole role);
 
 	/**
-	 * EN: Saves or updates a Security RoleGroups in the DB.<br>
-	 * DE: Speichert oder aktualisiert eine Security RollenGruppe in der DB.<br>
+	 * EN: Saves or updates a Security RoleGroups.<br>
+	 * DE: Speichert oder aktualisiert eine Security RollenGruppe.<br>
 	 */
 	public void saveOrUpdate(SecRolegroup roleGroup);
 
 	/**
-	 * EN: Deletes a Security RoleGroups in the DB.<br>
-	 * DE: Loescht eine Security RollenGruppe in der DB.<br>
+	 * EN: Deletes a Security RoleGroups.<br>
+	 * DE: Loescht eine Security RollenGruppe.<br>
 	 */
 	public void delete(SecRolegroup roleGroup);
 }

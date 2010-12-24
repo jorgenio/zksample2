@@ -80,14 +80,14 @@ public interface SecRoleDAO {
 	public List<SecRole> getRolesLikeRoleName(String aRoleName);
 
 	/**
-	 * EN: Saves or updates a Security Role in the DB.<br>
-	 * DE: Speichert oder aktualisiert eine Security Role in der DB.<br>
+	 * EN: Saves or updates a Security Role.<br>
+	 * DE: Speichert oder aktualisiert eine Security Role.<br>
 	 */
 	public void saveOrUpdate(SecRole secRole);
 
 	/**
-	 * EN: Deletes a Security Role in the DB.<br>
-	 * DE: Loescht eine Security Role in der DB.<br>
+	 * EN: Deletes a Security Role.<br>
+	 * DE: Loescht eine Security Role.<br>
 	 */
 	public void delete(SecRole secRole);
 

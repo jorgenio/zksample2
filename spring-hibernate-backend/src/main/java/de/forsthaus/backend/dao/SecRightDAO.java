@@ -135,14 +135,14 @@ public interface SecRightDAO {
 	public List<SecRight> getRightsLikeRightNameAndTypes(String aRightName, List<Integer> listOfRightTyps);
 
 	/**
-	 * EN: Saves or updates a SecRight in the DB.<br>
-	 * DE: Speichert oder aktualisiert ein EinzelRecht in der DB.<br>
+	 * EN: Saves or updates a SecRight.<br>
+	 * DE: Speichert oder aktualisiert ein EinzelRecht.<br>
 	 */
 	public void saveOrUpdate(SecRight right);
 
 	/**
-	 * EN: Deletes a SecRight in the DB.<br>
-	 * DE: Loescht ein EinzelRecht in der DB.<br>
+	 * EN: Deletes a SecRight.<br>
+	 * DE: Loescht ein EinzelRecht.<br>
 	 */
 	public void delete(SecRight right);
 

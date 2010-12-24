@@ -99,14 +99,14 @@ public interface SecGroupDAO {
 	public List<SecGroup> getGroupsLikeGroupName(String aGroupName);
 
 	/**
-	 * EN: Saves or updates a SecGroup in the DB.<br>
-	 * DE: Speichert oder aktualisiert eine SecurityGruppe in der DB.<br>
+	 * EN: Saves or updates a SecGroup.<br>
+	 * DE: Speichert oder aktualisiert eine SecurityGruppe.<br>
 	 */
 	public void saveOrUpdate(SecGroup secGroup);
 
 	/**
-	 * EN: Deletes a SecGroup in the DB.<br>
-	 * DE: Loescht eine SecurityGruppe in der DB.<br>
+	 * EN: Deletes a SecGroup.<br>
+	 * DE: Loescht eine SecurityGruppe.<br>
 	 */
 	public void delete(SecGroup secGroup);
 

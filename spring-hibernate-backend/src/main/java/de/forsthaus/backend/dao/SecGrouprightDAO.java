@@ -89,14 +89,14 @@ public interface SecGrouprightDAO {
 	public List<SecRight> getGroupRightsByGroup(SecGroup group);
 
 	/**
-	 * EN: Saves or updates a SecGroupright in the DB.<br>
-	 * DE: Speichert oder aktualisiert ein GruppenRecht in der DB.<br>
+	 * EN: Saves or updates a SecGroupright.<br>
+	 * DE: Speichert oder aktualisiert ein GruppenRecht.<br>
 	 */
 	public void saveOrUpdate(SecGroupright secGroupright);
 
 	/**
-	 * EN: Deletes a SecGroupright in the DB.<br>
-	 * DE: Loescht ein GruppenRecht in der DB.<br>
+	 * EN: Deletes a SecGroupright.<br>
+	 * DE: Loescht ein GruppenRecht.<br>
 	 */
 	public void delete(SecGroupright secGroupright);
 }

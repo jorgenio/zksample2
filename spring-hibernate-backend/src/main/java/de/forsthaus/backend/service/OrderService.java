@@ -51,8 +51,6 @@ public interface OrderService {
 
 	public void initialize(Order proxy);
 
-	public Customer getCustomerByOrder(Order order);
-
 	public Order getOrderById(long id);
 
 	public Orderposition getNewOrderposition();

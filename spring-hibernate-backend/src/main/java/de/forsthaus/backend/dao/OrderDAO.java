@@ -121,25 +121,37 @@ public interface OrderDAO {
 	public List<Order> getAllOrders();
 
 	/**
-	 * EN: Get the customer for an order.<br>
-	 * DE: Gibt einen Kunden fuer einen Auftrag zurueck.<br>
+	 * EN: Gets the sum of an Order.<br>
+	 * DE: Gibt die Summe eines Auftrags zurueck.<br>
 	 * 
-	 * @param order
-	 *            Order / Auftrag
-	 * @return Customer / Kunde
+	 * @return sum of an Order / Auftragssumme
 	 */
-	public Customer getCustomerByOrder(Order order);
-
 	public BigDecimal getOrderSum(Order order);
-
-	public void saveOrUpdate(Order order);
-
-	public void delete(Order order);
-
-	public void save(Order order);
 
 	public void refresh(Order order);
 
+	/**
+	 * EN: Load the relations data for an Order.<br>
+	 * DE: Lädt die relationalen Daten zu einem Auftrag.<br>
+	 */
 	public void initialize(Order order);
+
+	/**
+	 * EN: Saves or updates an Order.<br>
+	 * DE: Speichert oder aktualisiert einen Auftrag.<br>
+	 */
+	public void saveOrUpdate(Order order);
+
+	/**
+	 * EN: Deletes an Order.<br>
+	 * DE: Loescht einen Auftrag.<br>
+	 */
+	public void delete(Order order);
+
+	/**
+	 * EN: Saves an Order.<br>
+	 * DE: Speichert einen Auftrag.<br>
+	 */
+	public void save(Order order);
 
 }

@@ -25,6 +25,7 @@ import de.forsthaus.backend.dao.OfficeDAO;
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.model.Customer;
 import de.forsthaus.backend.model.Office;
+import de.forsthaus.backend.model.Order;
 import de.forsthaus.backend.service.CustomerService;
 
 /**
@@ -95,15 +96,15 @@ public class CustomerServiceImpl implements CustomerService {
 		return customer;
 	}
 
-//	@Override
-//	public Customer refresh(Customer customer) {
-//		/** lädt das Object neu */
-//		getCustomerDAO().refresh(customer);
-//		getCustomerDAO().initialize(customer);
-//		/** lädt in diesem Falle den zugehörigen Kunden nach */
-//
-//		return customer;
-//	}
+	// @Override
+	// public Customer refresh(Customer customer) {
+	// /** lädt das Object neu */
+	// getCustomerDAO().refresh(customer);
+	// getCustomerDAO().initialize(customer);
+	// /** lädt in diesem Falle den zugehörigen Kunden nach */
+	//
+	// return customer;
+	// }
 
 	@Override
 	public List<Customer> getCustomerByBranche(Branche branche) {
@@ -114,6 +115,11 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer getCustomerByKunNr(String kun_nr) {
 		Customer customer = getCustomerDAO().getCustomerByKunNr(kun_nr);
 		return customer;
+	}
+
+	@Override
+	public Customer getCustomerByOrder(Order auftrag) {
+		return getCustomerDAO().getCustomerByOrder(auftrag);
 	}
 
 	@Override

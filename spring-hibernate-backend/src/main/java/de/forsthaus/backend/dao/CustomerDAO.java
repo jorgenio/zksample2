@@ -22,6 +22,7 @@ import java.util.List;
 
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.model.Customer;
+import de.forsthaus.backend.model.Order;
 
 public interface CustomerDAO {
 
@@ -140,6 +141,16 @@ public interface CustomerDAO {
 	 * @return List of Customers / Liste of Kunden
 	 */
 	public List<Customer> getCustomerByOfficeId(long id);
+
+	/**
+	 * EN: Get the customer for an order.<br>
+	 * DE: Gibt einen Kunden fuer einen Auftrag zurueck.<br>
+	 * 
+	 * @param order
+	 *            Order / Auftrag
+	 * @return Customer / Kunde
+	 */
+	public Customer getCustomerByOrder(Order order);
 
 	/**
 	 * EN: Gets a list of Customers by their branch.<br>

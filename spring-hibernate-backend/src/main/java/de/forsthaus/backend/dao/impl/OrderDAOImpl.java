@@ -118,25 +118,6 @@ public class OrderDAOImpl extends BasisNextidDaoImpl<Order> implements OrderDAO 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Customer getCustomerByOrder(Order order) {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
-
-		criteria.createAlias("orders", "au");
-		criteria.add(Restrictions.eq("au.id", Long.valueOf(order.getId())));
-
-		return (Customer) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria));
-	}
-
-	/**
-	 * Gets the sum for all 'aupGesamtwert' fields of the table orderPositions
-	 * for an order (auftrag).<br>
-	 * 
-	 * (non-Javadoc)
-	 * 
-	 * @see de.forsthaus.backend.dao.OrderDAO#getOrderSum(de.forsthaus.backend.model.Order)
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
 	public BigDecimal getOrderSum(Order order) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Orderposition.class);
 		criteria.add(Restrictions.eq("order", order));

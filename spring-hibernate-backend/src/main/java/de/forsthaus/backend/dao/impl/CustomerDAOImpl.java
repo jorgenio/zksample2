@@ -141,6 +141,17 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public Customer getCustomerByOrder(de.forsthaus.backend.model.Order order) {
+		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
+
+		criteria.createAlias("orders", "au");
+		criteria.add(Restrictions.eq("au.id", Long.valueOf(order.getId())));
+
+		return (Customer) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<Customer> getCustomerByBranche(Branche branche) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
 		criteria.add(Restrictions.eq("branche", branche));

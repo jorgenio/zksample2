@@ -22,6 +22,7 @@ import java.util.List;
 
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.model.Customer;
+import de.forsthaus.backend.model.Order;
 
 public interface CustomerService {
 
@@ -38,11 +39,13 @@ public interface CustomerService {
 	Customer getCustomerById(Long id);
 
 	// test zum nachladen zugehoerigen Branche
-//	Customer refresh(Customer customer);
+	// Customer refresh(Customer customer);
 
 	List<Customer> getCustomerByBranche(Branche branche);
 
 	Customer getCustomerByKunNr(String kun_nr);
+
+	public Customer getCustomerByOrder(Order order);
 
 	int getMaxCustomerId();
 

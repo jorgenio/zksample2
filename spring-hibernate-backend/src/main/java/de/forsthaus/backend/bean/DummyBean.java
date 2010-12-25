@@ -19,6 +19,12 @@
 package de.forsthaus.backend.bean;
 
 /**
+ * EN: A Dummy bean for holding the result of a select statement who aggregate
+ * the login counts for a country. We use this bean for the LoginLog List.<br>
+ * DE: Ein Dummy Bean, der das Resultat einer Aggregat Query haelt. Diese
+ * liefert die Anzahl der Logins fuer ein Land. Wir benutzen diese Bean fuer die
+ * Login Log Liste.<br>
+ * 
  * @author sge
  * 
  */
@@ -39,7 +45,7 @@ public class DummyBean implements LongCount {
 		if (totalCount == null) {
 			throw new NullPointerException("totalCount is null!");
 		}
-		
+
 		if (totalCount instanceof Long) {
 			this.totalCount = (Long) totalCount;
 		} else {

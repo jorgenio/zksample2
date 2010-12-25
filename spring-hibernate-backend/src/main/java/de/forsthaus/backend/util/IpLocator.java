@@ -31,7 +31,10 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * The IPLocator is a java wrapper for the hostip.info ip locator web service.
+ * EN: The IPLocator is a java wrapper for the <b>hostip.info</b> ip locator web
+ * service.<br>
+ * DE: Der IPLocator ist ein JAVA wrapper fuer den <b>hostip.info</b> ip locator
+ * web service.<br>
  * 
  * @author <a href="mailto:pillvin@iit.edu">Vinod Pillai</a>
  * @version $Revision: 1.0 $
@@ -121,8 +124,7 @@ public class IpLocator {
 
 			final int code = http.getResponseCode();
 			if (code != 200)
-				throw new IOException("IP Locator failed to get the location. Http Status code : " + code + " [" + url
-						+ "]");
+				throw new IOException("IP Locator failed to get the location. Http Status code : " + code + " [" + url + "]");
 			return getContent(http);
 		} finally {
 			http.disconnect();

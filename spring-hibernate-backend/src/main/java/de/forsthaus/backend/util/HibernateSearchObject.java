@@ -23,8 +23,10 @@ import java.io.Serializable;
 import com.trg.search.Search;
 
 /**
- * SearchObject depending on the Search Object from the Hibernate-Generic-DAO
- * framework. <br>
+ * EN: SearchObject depending on the Search Object from the
+ * Hibernate-Generic-DAO framework. <br>
+ * DE: SearchObject aufbauend auf dem Search object des
+ * <b>Hibernate-Generic-DAO</b> frameworks.<br>
  * 
  * @see http://code.google.com/p/hibernate-generic-dao/ <br>
  *      Many thanks to David Wolverton.

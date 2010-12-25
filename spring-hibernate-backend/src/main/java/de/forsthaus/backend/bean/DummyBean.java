@@ -25,7 +25,7 @@ package de.forsthaus.backend.bean;
  * liefert die Anzahl der Logins fuer ein Land. Wir benutzen diese Bean fuer die
  * Login Log Liste.<br>
  * 
- * @author sge
+ * @author sgerth
  * 
  */
 public class DummyBean implements LongCount {

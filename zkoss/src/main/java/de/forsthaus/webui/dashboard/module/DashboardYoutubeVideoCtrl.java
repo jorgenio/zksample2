@@ -334,7 +334,7 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 			listheader.setLabel(_listHeader1);
 
 			// Model
-			listbox.setModel(new ListModelList(getYoutubeLinkService().getAllYoutubeLink()));
+			listbox.setModel(new ListModelList(getYoutubeLinkService().getAllYoutubeLinks()));
 
 			try {
 				doModal();

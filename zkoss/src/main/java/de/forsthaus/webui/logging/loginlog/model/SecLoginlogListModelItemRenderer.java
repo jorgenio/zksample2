@@ -32,10 +32,10 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Separator;
 
+import de.forsthaus.backend.model.CountryCode;
 import de.forsthaus.backend.model.Ip2Country;
 import de.forsthaus.backend.model.LoginStatus;
 import de.forsthaus.backend.model.SecLoginlog;
-import de.forsthaus.backend.model.SysCountryCode;
 import de.forsthaus.backend.service.IpToCountryService;
 import de.forsthaus.backend.service.LoginLoggingService;
 import de.forsthaus.backend.service.SecurityService;
@@ -138,7 +138,7 @@ public class SecLoginlogListModelItemRenderer implements ListitemRenderer, Seria
 			hbox.setParent(lc);
 
 			// Fill with the related data for CountryCode
-			final SysCountryCode cc = ip2.getSysCountryCode();
+			final CountryCode cc = ip2.getCountryCode();
 			if (cc != null) {
 				/* Flag-image */
 				final Image img = new Image();

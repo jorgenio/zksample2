@@ -64,6 +64,7 @@ import de.forsthaus.backend.model.Customer;
 import de.forsthaus.backend.service.ArticleService;
 import de.forsthaus.backend.service.BrancheService;
 import de.forsthaus.backend.service.CommonService;
+import de.forsthaus.backend.service.CountryCodeService;
 import de.forsthaus.backend.service.CustomerService;
 import de.forsthaus.backend.service.GuestBookService;
 import de.forsthaus.backend.service.IpToCountryService;
@@ -71,7 +72,6 @@ import de.forsthaus.backend.service.LoginLoggingService;
 import de.forsthaus.backend.service.OfficeService;
 import de.forsthaus.backend.service.OrderService;
 import de.forsthaus.backend.service.SecurityService;
-import de.forsthaus.backend.service.SysCountryCodeService;
 import de.forsthaus.backend.service.UserService;
 import de.forsthaus.example.RandomDataEngine;
 import de.forsthaus.statistic.FDStatistic;
@@ -134,7 +134,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	private transient SecurityService securityService;
 	private transient UserService userService;
 	private transient LoginLoggingService loginLoggingService;
-	private transient SysCountryCodeService sysCountryCodeService;
+	private transient CountryCodeService sysCountryCodeService;
 	private transient CommonService commonService;
 
 	private String orientation;
@@ -346,8 +346,8 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		if (map.containsKey("SecLoginlog")) {
 			addNewRow(rows, "SecLoginlog", map.get("SecLoginlog"));
 		}
-		if (map.containsKey("SysCountryCode")) {
-			addNewRow(rows, "SysCountryCode", map.get("SysCountryCode"));
+		if (map.containsKey("CountryCode")) {
+			addNewRow(rows, "CountryCode", map.get("CountryCode"));
 		}
 		if (map.containsKey("IpToCountry")) {
 			addNewRow(rows, "IpToCountry", map.get("IpToCountry"));
@@ -763,7 +763,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	private int getTotalCountRecordsForCustomer() {
 
 		int recCount = 0;
-		recCount = getCustomerService().getCountAllCustomer();
+		recCount = getCustomerService().getCountAllCustomers();
 
 		return recCount;
 	}
@@ -946,15 +946,15 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		this.loginLoggingService = loginLoggingService;
 	}
 
-	public SysCountryCodeService getSysCountryCodeService() {
+	public CountryCodeService getSysCountryCodeService() {
 		if (this.sysCountryCodeService == null) {
-			this.sysCountryCodeService = (SysCountryCodeService) SpringUtil.getBean("sysCountryCodeService");
+			this.sysCountryCodeService = (CountryCodeService) SpringUtil.getBean("sysCountryCodeService");
 			setSysCountryCodeService(this.sysCountryCodeService);
 		}
 		return this.sysCountryCodeService;
 	}
 
-	public void setSysCountryCodeService(SysCountryCodeService sysCountryCodeService) {
+	public void setSysCountryCodeService(CountryCodeService sysCountryCodeService) {
 		this.sysCountryCodeService = sysCountryCodeService;
 	}
 

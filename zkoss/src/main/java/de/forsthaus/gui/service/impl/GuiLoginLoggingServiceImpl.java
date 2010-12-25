@@ -26,16 +26,16 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.zkoss.zul.Messagebox;
 
+import de.forsthaus.backend.model.CountryCode;
 import de.forsthaus.backend.model.Ip2Country;
 import de.forsthaus.backend.model.IpToCountry;
 import de.forsthaus.backend.model.SecLoginlog;
-import de.forsthaus.backend.model.SysCountryCode;
+import de.forsthaus.backend.service.CountryCodeService;
 import de.forsthaus.backend.service.Ip2CountryService;
 import de.forsthaus.backend.service.Ip4CountryService;
 import de.forsthaus.backend.service.IpToCountryService;
 import de.forsthaus.backend.service.LoginLoggingService;
 import de.forsthaus.backend.service.PagedListService;
-import de.forsthaus.backend.service.SysCountryCodeService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.backend.util.IpLocator;
 import de.forsthaus.gui.service.GuiLoginLoggingService;
@@ -64,7 +64,7 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 	private transient Ip2CountryService ip2CountryService;
 	private transient Ip4CountryService ip4CountryService;
 	private transient LoginLoggingService loginLoggingService;
-	private transient SysCountryCodeService sysCountryCodeService;
+	private transient CountryCodeService countryCodeService;
 	private transient PagedListService pagedListService;
 
 	/*
@@ -95,7 +95,7 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 			ip2c.setI2cCity(ipl.getCity());
 			ip2c.setI2cLatitude(ipl.getLatitude());
 			ip2c.setI2cLongitude(ipl.getLongitude());
-			ip2c.setSysCountryCode(getSysCountryCodeService().getCountryCodeByCode2(ipl.getCountryCode()));
+			ip2c.setCountryCode(getCountryCodeService().getCountryCodeByCode2(ipl.getCountryCode()));
 
 			getIp2CountryService().saveOrUpdate(ip2c);
 
@@ -142,11 +142,11 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 					// all
 					if (ipToCountry != null) {
 						final String code2 = ipToCountry.getIpcCountryCode2();
-						final SysCountryCode sysCC = getSysCountryCodeService().getCountryCodeByCode2(code2);
+						final CountryCode sysCC = getCountryCodeService().getCountryCodeByCode2(code2);
 
 						if (sysCC != null) {
 							final Ip2Country ip2 = getIp2CountryService().getNewIp2Country();
-							ip2.setSysCountryCode(sysCC);
+							ip2.setCountryCode(sysCC);
 
 							// save all
 							getIp2CountryService().saveOrUpdate(ip2);
@@ -258,8 +258,8 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 							logger.debug("hostLookUp resolved for : " + secLoginlog.getLglIp());
 						}
 
-						final SysCountryCode sysCC = getSysCountryCodeService().getCountryCodeByCode2(ipl.getCountryCode());
-						ip2.setSysCountryCode(sysCC);
+						final CountryCode sysCC = getCountryCodeService().getCountryCodeByCode2(ipl.getCountryCode());
+						ip2.setCountryCode(sysCC);
 
 						ip2.setI2cCity(ipl.getCity());
 						ip2.setI2cLatitude(ipl.getLatitude());
@@ -358,12 +358,12 @@ public class GuiLoginLoggingServiceImpl implements GuiLoginLoggingService {
 		return this.pagedListService;
 	}
 
-	public SysCountryCodeService getSysCountryCodeService() {
-		return this.sysCountryCodeService;
+	public void setCountryCodeService(CountryCodeService countryCodeService) {
+		this.countryCodeService = countryCodeService;
 	}
 
-	public void setSysCountryCodeService(SysCountryCodeService sysCountryCodeService) {
-		this.sysCountryCodeService = sysCountryCodeService;
+	public CountryCodeService getCountryCodeService() {
+		return countryCodeService;
 	}
 
 	public Ip2CountryService getIp2CountryService() {

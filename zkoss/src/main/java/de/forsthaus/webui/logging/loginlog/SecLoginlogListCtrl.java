@@ -169,8 +169,8 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		this.listheader_SecLoginlogList_lglStatusid.setSortDescending(new FieldComparator("lglStatusid", false));
 		this.listheader_SecLoginlogList_lglIp.setSortAscending(new FieldComparator("lglIp", true));
 		this.listheader_SecLoginlogList_lglIp.setSortDescending(new FieldComparator("lglIp", false));
-		this.listheader_SecLoginlogList_CountryCode2.setSortAscending(new FieldComparator("ip2Country.sysCountryCode.ccdCode2", true));
-		this.listheader_SecLoginlogList_CountryCode2.setSortDescending(new FieldComparator("ip2Country.sysCountryCode.ccdCode2", false));
+		this.listheader_SecLoginlogList_CountryCode2.setSortAscending(new FieldComparator("ip2Country.countryCode.ccdCode2", true));
+		this.listheader_SecLoginlogList_CountryCode2.setSortDescending(new FieldComparator("ip2Country.countryCode.ccdCode2", false));
 		this.listheader_SecLoginlogList_lglSessionid.setSortAscending(new FieldComparator("lglSessionid", true));
 		this.listheader_SecLoginlogList_lglSessionid.setSortDescending(new FieldComparator("lglSessionid", false));
 
@@ -178,7 +178,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class);
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
-		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
+		soSecLoginlog.addFetch("ip2Country.countryCode");
 		soSecLoginlog.addSort("lglLogtime", true);
 
 		// set the paging params
@@ -254,7 +254,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
-		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
+		soSecLoginlog.addFetch("ip2Country.countryCode");
 		soSecLoginlog.addSort("lglLogtime", true);
 
 		// Set the ListModel
@@ -278,7 +278,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
-		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
+		soSecLoginlog.addFetch("ip2Country.countryCode");
 		soSecLoginlog.addSort("lglLogtime", true);
 
 		soSecLoginlog.addFilter(new Filter("lglStatusid", 1, Filter.OP_EQUAL));
@@ -304,7 +304,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
-		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
+		soSecLoginlog.addFetch("ip2Country.countryCode");
 		soSecLoginlog.addSort("lglLogtime", true);
 
 		soSecLoginlog.addFilter(new Filter("lglStatusid", 0, Filter.OP_EQUAL));
@@ -339,7 +339,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 			final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 			// deeper loading of the relations to prevent the lazy
 			// loading problem.
-			soSecLoginlog.addFetch("ip2Country.sysCountryCode");
+			soSecLoginlog.addFetch("ip2Country.countryCode");
 			soSecLoginlog.addSort("lglLogtime", true);
 
 			soSecLoginlog.addFilter(new Filter("lglLoginname", this.tb_SecUserlog_LoginName.getValue(), Filter.OP_EQUAL));
@@ -477,7 +477,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 		final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 		// deeper loading of the relations to prevent the lazy
 		// loading problem.
-		soSecLoginlog.addFetch("ip2Country.sysCountryCode");
+		soSecLoginlog.addFetch("ip2Country.countryCode");
 		soSecLoginlog.addSort("lglLogtime", true);
 
 		// Set the ListModel
@@ -537,7 +537,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 			final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 			// deeper loading of the relations to prevent the lazy
 			// loading problem.
-			soSecLoginlog.addFetch("ip2Country.sysCountryCode");
+			soSecLoginlog.addFetch("ip2Country.countryCode");
 			soSecLoginlog.addSort("lglLogtime", true);
 
 			// Set the ListModel
@@ -614,7 +614,7 @@ public class SecLoginlogListCtrl extends GFCBaseListCtrl<SecLoginlog> implements
 				final HibernateSearchObject<SecLoginlog> soSecLoginlog = new HibernateSearchObject<SecLoginlog>(SecLoginlog.class, getCountRows());
 				// deeper loading of the relations to prevent the lazy
 				// loading problem.
-				soSecLoginlog.addFetch("ip2Country.sysCountryCode");
+				soSecLoginlog.addFetch("ip2Country.countryCode");
 				soSecLoginlog.addSort("lglLogtime", true);
 
 				soSecLoginlog.addFilter(new Filter("lglLogtime", dateFrom, Filter.OP_GREATER_OR_EQUAL));

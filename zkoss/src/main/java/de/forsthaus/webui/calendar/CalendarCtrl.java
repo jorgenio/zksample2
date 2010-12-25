@@ -574,7 +574,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 		final SecUser user = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSecUser();
 		// List<MyCalendarEvent> list =
 		// getCalendarEventService().getAllCalendarEvents(user.getId());
-		List<MyCalendarEvent> list = getCalendarEventService().getCalendarEventFromToDate(beginDate, endDate, user.getId());
+		List<MyCalendarEvent> list = getCalendarEventService().getCalendarEventsFromToDate(beginDate, endDate, user.getId());
 
 		cm = new SimpleCalendarModel();
 

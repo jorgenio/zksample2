@@ -338,8 +338,8 @@ public class DashboardTableRecordsCounterCtrl extends Div implements Serializabl
 		if (map.containsKey("SecLoginlog")) {
 			addNewRow(rows, Labels.getLabel("table.sec_loginlog"), map.get("SecLoginlog"));
 		}
-		if (map.containsKey("SysCountryCode")) {
-			addNewRow(rows, Labels.getLabel("table.sys_countrycode"), map.get("SysCountryCode"));
+		if (map.containsKey("CountryCode")) {
+			addNewRow(rows, Labels.getLabel("table.sys_countrycode"), map.get("CountryCode"));
 		}
 		if (map.containsKey("IpToCountry")) {
 			addNewRow(rows, Labels.getLabel("table.ip_to_country"), map.get("IpToCountry"));

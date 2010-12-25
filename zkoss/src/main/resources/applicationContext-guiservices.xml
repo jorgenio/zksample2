@@ -21,7 +21,7 @@
 		<property name="ip4CountryService" ref="ip4CountryService" />
 		<property name="ipToCountryService" ref="ipToCountryService" />
 		<property name="loginLoggingService" ref="loginLoggingService" />
-		<property name="sysCountryCodeService" ref="sysCountryCodeService" />
+		<property name="countryCodeService" ref="countryCodeService" />
 		<property name="pagedListService" ref="pagedListService" />
 	</bean>
 
@@ -31,7 +31,7 @@
 		<property name="ip2CountryService" ref="ip2CountryService" />
 		<property name="ipToCountryService" ref="ipToCountryService" />
 		<property name="loginLoggingService" ref="loginLoggingService" />
-		<property name="sysCountryCodeService" ref="sysCountryCodeService" />
+		<property name="countryCodeService" ref="countryCodeService" />
 	</bean>
 
 	<bean id="guiHibernateStatisticsService"

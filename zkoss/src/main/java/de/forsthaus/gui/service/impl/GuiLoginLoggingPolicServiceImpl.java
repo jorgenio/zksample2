@@ -26,10 +26,10 @@ import org.apache.log4j.Logger;
 import de.forsthaus.backend.model.Ip2Country;
 import de.forsthaus.backend.model.IpToCountry;
 import de.forsthaus.backend.model.SecLoginlog;
+import de.forsthaus.backend.service.CountryCodeService;
 import de.forsthaus.backend.service.Ip2CountryService;
 import de.forsthaus.backend.service.IpToCountryService;
 import de.forsthaus.backend.service.LoginLoggingService;
-import de.forsthaus.backend.service.SysCountryCodeService;
 import de.forsthaus.gui.service.GuiLoginLoggingPolicService;
 
 /**
@@ -44,7 +44,7 @@ public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicServ
 
 	private final static Logger logger = Logger.getLogger(GuiLoginLoggingPolicServiceImpl.class);
 	private transient LoginLoggingService loginLoggingService;
-	private transient SysCountryCodeService sysCountryCodeService;
+	private transient CountryCodeService countryCodeService;
 	private transient Ip2CountryService ip2CountryService;
 	private transient IpToCountryService ipToCountryService;
 
@@ -83,9 +83,9 @@ public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicServ
 		// Get the users BrowserType
 		String browserType = "";
 
-//		if (Executions.getCurrent().getUserAgent() != null) {
-//			browserType = Executions.getCurrent().getUserAgent();
-//		}
+		// if (Executions.getCurrent().getUserAgent() != null) {
+		// browserType = Executions.getCurrent().getUserAgent();
+		// }
 
 		final SecLoginlog log = this.loginLoggingService.saveLog(userName, clientAddress, sessionId, browserType, 1);
 
@@ -129,7 +129,7 @@ public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicServ
 				final Ip2Country ip2c = getIp2CountryService().getNewIp2Country();
 				ip2c.setI2cCity("");
 				// ip2c.setSecLoginlog(log);
-				ip2c.setSysCountryCode(getSysCountryCodeService().getCountryCodeByCode2(ipToCountry.getIpcCountryCode2()));
+				ip2c.setCountryCode(getCountryCodeService().getCountryCodeByCode2(ipToCountry.getIpcCountryCode2()));
 
 				getIp2CountryService().saveOrUpdate(ip2c);
 
@@ -147,12 +147,12 @@ public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicServ
 	// ############################# Getter / Setter ###########################
 	// #########################################################################
 
-	public SysCountryCodeService getSysCountryCodeService() {
-		return this.sysCountryCodeService;
+	public CountryCodeService getCountryCodeService() {
+		return countryCodeService;
 	}
 
-	public void setSysCountryCodeService(SysCountryCodeService sysCountryCodeService) {
-		this.sysCountryCodeService = sysCountryCodeService;
+	public void setCountryCodeService(CountryCodeService countryCodeService) {
+		this.countryCodeService = countryCodeService;
 	}
 
 	public Ip2CountryService getIp2CountryService() {

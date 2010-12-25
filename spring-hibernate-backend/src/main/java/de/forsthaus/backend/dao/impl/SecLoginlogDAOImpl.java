@@ -135,15 +135,6 @@ public class SecLoginlogDAOImpl extends BasisNextidDaoImpl<SecLoginlog> implemen
 		return getHibernateTemplate().find(hqlStr);
 	}
 
-	/**
-	 * Saves the log data to the table.
-	 * 
-	 * @param userName
-	 * @param clientAddress
-	 * @param sessionId
-	 * @param status
-	 * @return
-	 */
 	public SecLoginlog saveLog(String userName, String clientAddress, String sessionId, String browserType, int status) {
 
 		SecLoginlog log = getNewSecLoginlog();

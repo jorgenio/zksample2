@@ -126,14 +126,19 @@ public interface SecLoginlogDAO {
 	public int deleteLocalIPs();
 
 	/**
-	 * EN: Saves a SecLoginlog.<br>
-	 * DE: Speichert einen Login.<br>
+	 * EN: Saves the log data to the table.<br>
+	 * DE: Speichert die Log Daten.<br>
 	 * 
 	 * @param userName
+	 *            UserName | UserName
 	 * @param clientAddress
+	 *            User IP address | User IP Adresse
 	 * @param sessionId
+	 *            Session ID | Session ID
 	 * @param browserType
+	 *            Brwoser Type | Browser Typ
 	 * @param status
+	 *            Status (success/failed) | Status (erfolgreich / abgewiesen)
 	 * @return SecLoginlog
 	 */
 	public SecLoginlog saveLog(String userName, String clientAddress, String sessionId, String browserType, int status);

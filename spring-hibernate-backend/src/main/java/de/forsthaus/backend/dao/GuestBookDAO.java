@@ -21,7 +21,8 @@ package de.forsthaus.backend.dao;
 import de.forsthaus.backend.model.GuestBook;
 
 /**
- * DAO methods Interface for working with Guestbook data.
+ * EN: DAO methods Interface for working with Guestbook data.<br>
+ * DE: DAO Methoden Interface fuer die Gaestebuch Daten.<br>
  * 
  * @author bbruhns
  * @author sgerth

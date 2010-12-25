@@ -24,7 +24,8 @@ import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.model.Branche;
 
 /**
- * DAO methods Interface for working with Branches data.
+ * EN: DAO methods Interface for working with Branch data.<br>
+ * DE: DAO Methoden Interface fuer die Branchen Daten.<br>
  * 
  * @author bbruhns
  * @author sgerth

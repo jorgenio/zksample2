@@ -21,9 +21,8 @@
 			<one-to-many class="de.forsthaus.backend.model.SecLoginlog" />
 		</set>
 
-		<many-to-one name="sysCountryCode"
-			class="de.forsthaus.backend.model.SysCountryCode" fetch="select"
-			lazy="false">
+		<many-to-one name="countryCode" class="de.forsthaus.backend.model.CountryCode"
+			fetch="select" lazy="false">
 			<column name="ccd_id" />
 		</many-to-one>
 

@@ -16,19 +16,19 @@
  * You should have received a copy of the GNU General Public License
  * along with Zksample2.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
-package de.forsthaus.backend.dao;
+package de.forsthaus.backend.service;
 
 import java.util.List;
 
-import de.forsthaus.backend.model.SysCountryCode;
+import de.forsthaus.backend.model.CountryCode;
 
 /**
- * DAO methods Interface for working with SysCountryCode data.
+ * Service methods Interface for working with SysCountryCode data.
  * 
  * @author bbruhns
  * @author sgerth
  */
-public interface SysCountryCodeDAO {
+public interface CountryCodeService {
 
 	/**
 	 * EN: Get a new CountryCode object.<br>
@@ -36,15 +36,7 @@ public interface SysCountryCodeDAO {
 	 * 
 	 * @return SysCountryCode
 	 */
-	public SysCountryCode getNewSysCountryCode();
-
-	/**
-	 * EN: Get a list of all CountryCodes.<br>
-	 * DE: Gibt eine Liste aller LaenderCodes zurueck.<br>
-	 * 
-	 * @return List of CountryCodes / Liste von LaenderCodes
-	 */
-	public List<SysCountryCode> getAllCountryCodes();
+	public CountryCode getNewCountryCode();
 
 	/**
 	 * EN: Get the count of all CountryCodes.<br>
@@ -55,6 +47,14 @@ public interface SysCountryCodeDAO {
 	public int getCountAllSysCountrycode();
 
 	/**
+	 * EN: Get a list of all CountryCodes.<br>
+	 * DE: Gibt eine Liste aller LaenderCodes zurueck.<br>
+	 * 
+	 * @return List of CountryCodes / Liste von LaenderCodes
+	 */
+	public List<CountryCode> getAllCountryCodes();
+
+	/**
 	 * EN: Get a CountryCode by its ID.<br>
 	 * DE: Gibt einen LaenderCodes anhand ihrer ID zurueck.<br>
 	 * 
@@ -62,7 +62,7 @@ public interface SysCountryCodeDAO {
 	 *            / the persistence identifier / der PrimaerKey
 	 * @return CountryCode / LaenderCode
 	 */
-	public SysCountryCode getCountryCodeById(long id);
+	public CountryCode getCountryCodeById(long id);
 
 	/**
 	 * EN: Get a CountryCode by its ID.<br>
@@ -72,18 +72,18 @@ public interface SysCountryCodeDAO {
 	 *            / code2 for the country / Code Kuerzel
 	 * @return CountryCode / LaenderCode
 	 */
-	public SysCountryCode getCountryCodeByCode2(String code2);
+	public CountryCode getCountryCodeByCode2(String code2);
 
 	/**
 	 * EN: Saves new or updates a SysCountryCode.<br>
 	 * DE: Speichert neu oder aktualisiert einen LaenderCode.<br>
 	 */
-	public void saveOrUpdate(SysCountryCode sysCountryCode);
+	public void saveOrUpdate(CountryCode countryCode);
 
 	/**
 	 * EN: Deletes a SysCountryCode.<br>
 	 * DE: Loescht einen LaenderCode.<br>
 	 */
-	public void delete(SysCountryCode countryCode);
+	public void delete(CountryCode countryCode);
 
 }

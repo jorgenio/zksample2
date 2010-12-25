@@ -25,7 +25,8 @@ import de.forsthaus.backend.model.SecUser;
 import de.forsthaus.backend.model.SecUserrole;
 
 /**
- * DAO methods Interface for working with SecUserrole data.
+ * EN: DAO methods Interface for working with Security-Userrole data.<br>
+ * DE: DAO Methoden Interface fuer die Zugriffs-UserRollen Daten.<br>
  * 
  * @author bbruhns
  * @author sgerth

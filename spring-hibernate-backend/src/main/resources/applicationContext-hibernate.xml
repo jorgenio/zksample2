@@ -51,7 +51,7 @@
 				</value>
 				<value>de/forsthaus/backend/model/Ip4Country.hbm.xml
 				</value>
-				<value>de/forsthaus/backend/model/SysCountryCode.hbm.xml
+				<value>de/forsthaus/backend/model/CountryCode.hbm.xml
 				</value>
 				<value>de/forsthaus/backend/model/MyCalendarEvent.hbm.xml
 				</value>
@@ -150,7 +150,7 @@
 		parent="basisNextidDao" scope="session" />
 	<bean id="ip4CountryDAO" class="de.forsthaus.backend.dao.impl.Ip4CountryDAOImpl"
 		parent="basisNextidDao" scope="session" />
-	<bean id="sysCountryCodeDAO" class="de.forsthaus.backend.dao.impl.SysCountryCodeDAOImpl"
+	<bean id="countryCodeDAO" class="de.forsthaus.backend.dao.impl.CountryCodeDAOImpl"
 		parent="basisNextidDao" scope="session" />
 
 	<bean id="calendarEventDAO" class="de.forsthaus.backend.dao.impl.MyCalendarEventDAOImpl"
@@ -229,7 +229,7 @@
 		class="de.forsthaus.backend.service.impl.LoginLoggingServiceImpl"
 		scope="session">
 		<property name="secLoginlogDAO" ref="secLoginlogDAO" />
-		<property name="sysCountryCodeDAO" ref="sysCountryCodeDAO" />
+		<property name="countryCodeDAO" ref="countryCodeDAO" />
 		<property name="ip2CountryDAO" ref="ip2CountryDAO" />
 	</bean>
 
@@ -261,10 +261,10 @@
 		<property name="ip4CountryDAO" ref="ip4CountryDAO" />
 	</bean>
 
-	<bean name="sysCountryCodeService"
-		class="de.forsthaus.backend.service.impl.SysCountryCodeServiceImpl"
+	<bean name="countryCodeService"
+		class="de.forsthaus.backend.service.impl.CountryCodeServiceImpl"
 		scope="session">
-		<property name="sysCountryCodeDAO" ref="sysCountryCodeDAO" />
+		<property name="countryCodeDAO" ref="countryCodeDAO" />
 	</bean>
 
 	<bean name="calendarEventService"
@@ -302,7 +302,7 @@
 		<property name="userDAO" ref="userDAO" />
 		<property name="secUserroleDAO" ref="secUserroleDAO" />
 		<property name="secLoginlogDAO" ref="secLoginlogDAO" />
-		<property name="sysCountryCodeDAO" ref="sysCountryCodeDAO" />
+		<property name="countryCodeDAO" ref="countryCodeDAO" />
 		<property name="ipToCountryDAO" ref="ipToCountryDAO" />
 		<property name="calendarEventDAO" ref="calendarEventDAO" />
 		<property name="youtubeLinkDAO" ref="youtubeLinkDAO" />

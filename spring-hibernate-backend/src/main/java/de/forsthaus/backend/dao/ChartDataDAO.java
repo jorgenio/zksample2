@@ -23,13 +23,16 @@ import java.util.List;
 import de.forsthaus.backend.model.ChartData;
 
 /**
- * DAO methods Interface for working with Chart data.
- * 
+ * EN: DAO methods Interface for working with Chart data.<br>
+ * DE: DAO Methoden Interface fuer die Chart Daten.<br>
+ *
  * @author bbruhns
  * @author sgerth
  */
 /**
- * @deprecated ist das ein DAO?
+ * Comming soon... <br>
+ * 
+ * @deprecated ist das ein DAO? Kommt noch !
  */
 @Deprecated
 public interface ChartDataDAO {

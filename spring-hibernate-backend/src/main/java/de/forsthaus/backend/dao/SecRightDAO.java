@@ -25,7 +25,8 @@ import de.forsthaus.backend.model.SecRight;
 import de.forsthaus.backend.model.SecUser;
 
 /**
- * DAO methods Interface for working with SecRight data.
+ * EN: DAO methods Interface for working with Security-Right data.<br>
+ * DE: DAO Methoden Interface fuer die Zugriffs-EinzelRecht Daten.<br>
  * 
  * @author bbruhns
  * @author sgerth

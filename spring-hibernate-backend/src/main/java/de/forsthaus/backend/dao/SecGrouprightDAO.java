@@ -25,7 +25,8 @@ import de.forsthaus.backend.model.SecGroupright;
 import de.forsthaus.backend.model.SecRight;
 
 /**
- * DAO methods Interface for working with SecGroupright data.
+ * EN: DAO methods Interface for working with Security-Groupright data.<br>
+ * DE: DAO Methoden Interface fuer die Zugriffs-GruppenRecht Daten.<br>
  * 
  * @author bbruhns
  * @author sgerth

@@ -30,7 +30,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * @author bbruhns
  * @author sgerth
  */
-public class SysCountryCode implements Serializable, Entity {
+public class CountryCode implements Serializable, Entity {
 
 	private static final long serialVersionUID = 5133361434867930930L;
 
@@ -44,10 +44,10 @@ public class SysCountryCode implements Serializable, Entity {
 		return (getId() == Long.MIN_VALUE);
 	}
 
-	public SysCountryCode() {
+	public CountryCode() {
 	}
 
-	public SysCountryCode(long id, String ccdCode2, String ccdName) {
+	public CountryCode(long id, String ccdCode2, String ccdName) {
 		this.setId(id);
 		this.ccdCode2 = ccdCode2;
 		this.ccdName = ccdName;
@@ -98,7 +98,7 @@ public class SysCountryCode implements Serializable, Entity {
 		return Long.valueOf(getId()).hashCode();
 	}
 
-	public boolean equals(SysCountryCode sysCountryCode) {
+	public boolean equals(CountryCode sysCountryCode) {
 		return getId() == sysCountryCode.getId();
 	}
 
@@ -108,8 +108,8 @@ public class SysCountryCode implements Serializable, Entity {
 			return true;
 		}
 
-		if (obj instanceof SysCountryCode) {
-			SysCountryCode sysCountryCode = (SysCountryCode) obj;
+		if (obj instanceof CountryCode) {
+			CountryCode sysCountryCode = (CountryCode) obj;
 			return equals(sysCountryCode);
 		}
 

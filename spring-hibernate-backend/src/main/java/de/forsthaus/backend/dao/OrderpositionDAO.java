@@ -24,7 +24,8 @@ import de.forsthaus.backend.model.Order;
 import de.forsthaus.backend.model.Orderposition;
 
 /**
- * DAO methods Interface for working with Orderposition data.
+ * EN: DAO methods Interface for working with Orderposition data.<br>
+ * DE: DAO Methoden Interface fuer die AufragsPositionen Daten.<br>
  * 
  * @author bbruhns
  * @author sgerth

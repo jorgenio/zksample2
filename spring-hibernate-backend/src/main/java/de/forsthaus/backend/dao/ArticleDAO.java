@@ -23,7 +23,8 @@ import java.util.List;
 import de.forsthaus.backend.model.Article;
 
 /**
- * DAO methods Interface for working with Article data.
+ * EN: DAO methods Interface for working with Article data.<br>
+ * DE: DAO Methoden Interface fuer die Artikel Daten.<br>
  * 
  * @author bbruhns
  * @author sgerth

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import de.forsthaus.backend.dao.ArticleDAO;
 import de.forsthaus.backend.dao.BrancheDAO;
+import de.forsthaus.backend.dao.CountryCodeDAO;
 import de.forsthaus.backend.dao.CustomerDAO;
 import de.forsthaus.backend.dao.GuestBookDAO;
 import de.forsthaus.backend.dao.IpToCountryDAO;
@@ -20,7 +21,6 @@ import de.forsthaus.backend.dao.SecRoleDAO;
 import de.forsthaus.backend.dao.SecRolegroupDAO;
 import de.forsthaus.backend.dao.SecTypDAO;
 import de.forsthaus.backend.dao.SecUserroleDAO;
-import de.forsthaus.backend.dao.SysCountryCodeDAO;
 import de.forsthaus.backend.dao.UserDAO;
 import de.forsthaus.backend.dao.YoutubeLinkDAO;
 import de.forsthaus.backend.service.CommonService;
@@ -51,7 +51,7 @@ public class CommonServiceImpl implements CommonService {
 	private SecRightDAO secRightDAO;
 	private SecTypDAO secTypDAO;
 	private SecLoginlogDAO secLoginlogDAO;
-	private SysCountryCodeDAO sysCountryCodeDAO;
+	private CountryCodeDAO countryCodeDAO;
 	private MyCalendarEventDAO calendarEventDAO;
 	private YoutubeLinkDAO youtubeLinkDAO;
 
@@ -199,12 +199,12 @@ public class CommonServiceImpl implements CommonService {
 		return secLoginlogDAO;
 	}
 
-	public void setSysCountryCodeDAO(SysCountryCodeDAO sysCountryCodeDAO) {
-		this.sysCountryCodeDAO = sysCountryCodeDAO;
+	public void setCountryCodeDAO(CountryCodeDAO countryCodeDAO) {
+		this.countryCodeDAO = countryCodeDAO;
 	}
 
-	public SysCountryCodeDAO getSysCountryCodeDAO() {
-		return sysCountryCodeDAO;
+	public CountryCodeDAO getCountryCodeDAO() {
+		return countryCodeDAO;
 	}
 
 	public void setCalendarEventDAO(MyCalendarEventDAO calendarEventDAO) {
@@ -235,10 +235,11 @@ public class CommonServiceImpl implements CommonService {
 		map.put("SecUser", getUserDAO().getCountAllSecUser());
 		map.put("SecUserrole", getSecUserroleDAO().getCountAllSecUserrole());
 		map.put("SecLoginlog", getSecLoginlogDAO().getCountAllSecLoginlog());
-		map.put("SysCountryCode", getSysCountryCodeDAO().getCountAllSysCountrycode());
+		map.put("CountryCode", getCountryCodeDAO().getCountAllSysCountrycode());
 		map.put("IpToCountry", getIpToCountryDAO().getCountAllIpToCountry());
 		map.put("CalendarEvents", getCalendarEventDAO().getCountAllCalendarEvents());
 		map.put("YouTubeLinks", getYoutubeLinkDAO().getCountAllYoutubeLinks());
 		return map;
 	}
+
 }

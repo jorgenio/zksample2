@@ -23,7 +23,8 @@ import java.util.List;
 import de.forsthaus.backend.model.Office;
 
 /**
- * DAO methods Interface for working with Office data.
+ * EN: DAO methods Interface for working with Office data.<br>
+ * DE: DAO Methoden Interface fuer die Office (Niederlassungs) Daten.<br>
  * 
  * @author bbruhns
  * @author sgerth

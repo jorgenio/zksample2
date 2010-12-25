@@ -25,7 +25,8 @@ import de.forsthaus.backend.model.SecRole;
 import de.forsthaus.backend.model.SecRolegroup;
 
 /**
- * DAO methods Interface for working with SecRolegroup data.
+ * EN: DAO methods Interface for working with Security-Rolegroup data.<br>
+ * DE: DAO Methoden Interface fuer die Zugriffs-RollenGruppe Daten.<br>
  * 
  * @author bbruhns
  * @author sgerth

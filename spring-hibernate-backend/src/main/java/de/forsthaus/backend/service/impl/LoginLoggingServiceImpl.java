@@ -25,11 +25,11 @@ import de.forsthaus.backend.bean.DummyBean;
 import de.forsthaus.backend.bean.ListLongSumBean;
 import de.forsthaus.backend.dao.Ip2CountryDAO;
 import de.forsthaus.backend.dao.SecLoginlogDAO;
-import de.forsthaus.backend.dao.SysCountryCodeDAO;
+import de.forsthaus.backend.dao.CountryCodeDAO;
 import de.forsthaus.backend.model.Ip2Country;
 import de.forsthaus.backend.model.LoginStatus;
 import de.forsthaus.backend.model.SecLoginlog;
-import de.forsthaus.backend.model.SysCountryCode;
+import de.forsthaus.backend.model.CountryCode;
 import de.forsthaus.backend.service.LoginLoggingService;
 
 /**
@@ -53,7 +53,7 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 
 	private SecLoginlogDAO secLoginlogDAO;
 	private Ip2CountryDAO ip2CountryDAO;
-	private SysCountryCodeDAO sysCountryCodeDAO;
+	private CountryCodeDAO countryCodeDAO;
 
 	public Ip2CountryDAO getIp2CountryDAO() {
 		return this.ip2CountryDAO;
@@ -63,12 +63,12 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 		this.ip2CountryDAO = ip2CountryDAO;
 	}
 
-	public void setSysCountryCodeDAO(SysCountryCodeDAO sysCountryCodeDAO) {
-		this.sysCountryCodeDAO = sysCountryCodeDAO;
+	public CountryCodeDAO getCountryCodeDAO() {
+		return countryCodeDAO;
 	}
 
-	public SysCountryCodeDAO getSysCountryCodeDAO() {
-		return this.sysCountryCodeDAO;
+	public void setCountryCodeDAO(CountryCodeDAO countryCodeDAO) {
+		this.countryCodeDAO = countryCodeDAO;
 	}
 
 	public SecLoginlogDAO getSecLoginlogDAO() {
@@ -147,7 +147,7 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 			final Ip2Country ip2 = secLoginlog.getIp2Country();
 			if (ip2 != null) {
 				// Fill with the related data for CountryCode
-				final SysCountryCode cc = ip2.getSysCountryCode();
+				final CountryCode cc = ip2.getCountryCode();
 				if (cc != null) {
 				}
 
@@ -167,7 +167,7 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 			final Ip2Country ip2 = secLoginlog.getIp2Country();
 			if (ip2 != null) {
 				// Fill with the related data for CountryCode
-				final SysCountryCode cc = ip2.getSysCountryCode();
+				final CountryCode cc = ip2.getCountryCode();
 				if (cc != null) {
 				}
 
@@ -187,7 +187,7 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 			final Ip2Country ip2 = secLoginlog.getIp2Country();
 			if (ip2 != null) {
 				// Fill with the related data for CountryCode
-				final SysCountryCode cc = ip2.getSysCountryCode();
+				final CountryCode cc = ip2.getCountryCode();
 				if (cc != null) {
 				}
 

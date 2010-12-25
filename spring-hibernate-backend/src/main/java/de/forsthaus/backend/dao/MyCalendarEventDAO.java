@@ -24,7 +24,8 @@ import java.util.List;
 import de.forsthaus.backend.model.MyCalendarEvent;
 
 /**
- * DAO methods Interface for working with MyCalendarEvent data.
+ * EN: DAO methods Interface for working with MyCalendarEvent data.<br>
+ * DE: DAO Methoden Interface fuer die Kalender Termine Daten.<br>
  * 
  * @author bbruhns
  * @author sgerth

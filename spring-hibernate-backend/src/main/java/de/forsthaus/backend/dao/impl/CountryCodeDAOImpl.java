@@ -25,8 +25,8 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
 
-import de.forsthaus.backend.dao.SysCountryCodeDAO;
-import de.forsthaus.backend.model.SysCountryCode;
+import de.forsthaus.backend.dao.CountryCodeDAO;
+import de.forsthaus.backend.model.CountryCode;
 
 /**
  * EN: DAO methods implementation for the <b>SysCountryCode</b> model class.<br>
@@ -35,39 +35,39 @@ import de.forsthaus.backend.model.SysCountryCode;
  * @author bbruhns
  * @author sgerth
  */
-public class SysCountryCodeDAOImpl extends BasisNextidDaoImpl<SysCountryCode> implements SysCountryCodeDAO {
+public class CountryCodeDAOImpl extends BasisNextidDaoImpl<CountryCode> implements CountryCodeDAO {
 
 	@Override
-	public SysCountryCode getNewSysCountryCode() {
-		return new SysCountryCode();
+	public CountryCode getNewSysCountryCode() {
+		return new CountryCode();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SysCountryCode> getAllCountryCodes() {
-		DetachedCriteria criteria = DetachedCriteria.forClass(SysCountryCode.class);
+	public List<CountryCode> getAllCountryCodes() {
+		DetachedCriteria criteria = DetachedCriteria.forClass(CountryCode.class);
 		criteria.addOrder(Order.asc("ccdName"));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
 
 	@Override
-	public SysCountryCode getCountryCodeById(long id) {
-		return get(SysCountryCode.class, id);
+	public CountryCode getCountryCodeById(long id) {
+		return get(CountryCode.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public SysCountryCode getCountryCodeByCode2(String code2) {
-		DetachedCriteria criteria = DetachedCriteria.forClass(SysCountryCode.class);
+	public CountryCode getCountryCodeByCode2(String code2) {
+		DetachedCriteria criteria = DetachedCriteria.forClass(CountryCode.class);
 		criteria.add(Restrictions.eq("ccdCode2", code2));
 
-		return (SysCountryCode) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria));
+		return (CountryCode) DataAccessUtils.uniqueResult(getHibernateTemplate().findByCriteria(criteria));
 	}
 
 	@Override
 	public int getCountAllSysCountrycode() {
-		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from SysCountryCode"));
+		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from CountryCode"));
 	}
 
 }

@@ -26,7 +26,8 @@ import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.model.Order;
 
 /**
- * DAO methods Interface for working with Order data.
+ * EN: DAO methods Interface for working with Order data.<br>
+ * DE: DAO Methoden Interface fuer die Aufrags Daten.<br>
  * 
  * @author bbruhns
  * @author sgerth

@@ -35,7 +35,7 @@ public class Ip2Country implements Serializable, Entity {
 	private static final long serialVersionUID = -8799762516266595746L;
 
 	private long id = Long.MIN_VALUE;
-	private SysCountryCode sysCountryCode;
+	private CountryCode countryCode;
 	private String i2cCity;
 	private Float i2cLatitude;
 	private Float i2cLongitude;
@@ -61,12 +61,12 @@ public class Ip2Country implements Serializable, Entity {
 		return id;
 	}
 
-	public void setSysCountryCode(SysCountryCode sysCountryCode) {
-		this.sysCountryCode = sysCountryCode;
+	public void setCountryCode(CountryCode countryCode) {
+		this.countryCode = countryCode;
 	}
 
-	public SysCountryCode getSysCountryCode() {
-		return sysCountryCode;
+	public CountryCode getCountryCode() {
+		return countryCode;
 	}
 
 	public void setI2cCity(String i2cCity) {

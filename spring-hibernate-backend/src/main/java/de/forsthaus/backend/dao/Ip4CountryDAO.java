@@ -21,7 +21,8 @@ package de.forsthaus.backend.dao;
 import de.forsthaus.backend.model.Ip4Country;
 
 /**
- * DAO methods Interface for working with Ip4Country data.
+ * EN: DAO methods Interface for working with Ip4Country data.<br>
+ * DE: DAO Methoden Interface fuer die Ip4Country Daten.<br>
  * 
  * @author bbruhns
  * @author sgerth

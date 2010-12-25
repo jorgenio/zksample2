@@ -27,7 +27,8 @@ import de.forsthaus.backend.model.LoginStatus;
 import de.forsthaus.backend.model.SecLoginlog;
 
 /**
- * DAO methods Interface for working with SecLoginlog data.
+ * EN: DAO methods Interface for working with Security-Loginlog data.<br>
+ * DE: DAO Methoden Interface fuer die Zugriffs-LoginLog Daten.<br>
  * 
  * @author bbruhns
  * @author sgerth

@@ -23,7 +23,8 @@ import java.util.List;
 import de.forsthaus.backend.model.SecTyp;
 
 /**
- * DAO methods Interface for working with SecTyp data.
+ * EN: DAO methods Interface for working with Security-RightTyp data.<br>
+ * DE: DAO Methoden Interface fuer die Zugriffs-RechteType Daten.<br>
  * 
  * @author bbruhns
  * @author sgerth

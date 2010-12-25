@@ -25,7 +25,8 @@ import de.forsthaus.backend.model.Customer;
 import de.forsthaus.backend.model.Order;
 
 /**
- * DAO methods Interface for working with Customer data.
+ * EN: DAO methods Interface for working with Customer data.<br>
+ * DE: DAO Methoden Interface fuer die Kunden Daten.<br>
  * 
  * @author bbruhns
  * @author sgerth

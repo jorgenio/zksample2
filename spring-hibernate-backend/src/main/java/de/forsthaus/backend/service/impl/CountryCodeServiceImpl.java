@@ -45,7 +45,7 @@ public class CountryCodeServiceImpl implements CountryCodeService {
 
 	@Override
 	public CountryCode getNewCountryCode() {
-		return getCountryCodeDAO().getNewSysCountryCode();
+		return getCountryCodeDAO().getNewCountryCode();
 	}
 
 	@Override
@@ -74,8 +74,8 @@ public class CountryCodeServiceImpl implements CountryCodeService {
 	}
 
 	@Override
-	public int getCountAllSysCountrycode() {
-		return getCountryCodeDAO().getCountAllSysCountrycode();
+	public int getCountAllCountryCodes() {
+		return getCountryCodeDAO().getCountAllCountryCodes();
 	}
 
 }

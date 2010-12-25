@@ -116,7 +116,7 @@ public class Ip4CountryServiceImpl implements Ip4CountryService, Serializable {
 				in.close();
 				istream.close();
 			}
-			return getIp4CountryDAO().getCountAllIp4Country();
+			return getIp4CountryDAO().getCountAllIp4Countries();
 
 		} catch (final IOException e) {
 			throw new RuntimeException(e);
@@ -124,7 +124,7 @@ public class Ip4CountryServiceImpl implements Ip4CountryService, Serializable {
 	}
 
 	@Override
-	public int getCountAllIp4Country() {
-		return getIp4CountryDAO().getCountAllIp4Country();
+	public int getCountAllIp4Countries() {
+		return getIp4CountryDAO().getCountAllIp4Countries();
 	}
 }

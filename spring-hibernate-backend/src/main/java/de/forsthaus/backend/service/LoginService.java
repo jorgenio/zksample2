@@ -21,7 +21,10 @@ package de.forsthaus.backend.service;
 import de.forsthaus.backend.model.SecUser;
 
 /**
- * Service methods Interface for working with Login data.
+ * EN: Service methods Interface for working with <b>User Login</b> dependend
+ * DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>User Login</b> betreffenden
+ * DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth

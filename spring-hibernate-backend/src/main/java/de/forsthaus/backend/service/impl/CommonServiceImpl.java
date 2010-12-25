@@ -220,23 +220,23 @@ public class CommonServiceImpl implements CommonService {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		map.put("Customer", getCustomerDAO().getCountAllCustomer());
+		map.put("Customer", getCustomerDAO().getCountAllCustomers());
 		map.put("Offices", getOfficeDAO().getCountAllOffices());
 		map.put("Branch", getBrancheDAO().getCountAllBranches());
-		map.put("Article", getArticleDAO().getCountAllArticle());
-		map.put("Order", getOrderDAO().getCountAllOrder());
+		map.put("Article", getArticleDAO().getCountAllArticles());
+		map.put("Order", getOrderDAO().getCountAllOrders());
 		map.put("Orderposition", getOrderpositionDAO().getCountAllOrderpositions());
 		map.put("GuestBook", getGuestBookDAO().getCountAllGuestBooks());
-		map.put("SecGroup", getSecGroupDAO().getCountAllSecGroup());
-		map.put("SecGroupright", getSecGrouprightDAO().getCountAllSecGroupright());
+		map.put("SecGroup", getSecGroupDAO().getCountAllSecGroups());
+		map.put("SecGroupright", getSecGrouprightDAO().getCountAllSecGrouprights());
 		map.put("SecRight", getSecRightDAO().getCountAllSecRights());
-		map.put("SecRole", getSecRoleDAO().getCountAllSecRole());
-		map.put("SecRolegroup", getSecRolegroupDAO().getCountAllSecRolegroup());
+		map.put("SecRole", getSecRoleDAO().getCountAllSecRoles());
+		map.put("SecRolegroup", getSecRolegroupDAO().getCountAllSecRolegroups());
 		map.put("SecUser", getUserDAO().getCountAllSecUser());
-		map.put("SecUserrole", getSecUserroleDAO().getCountAllSecUserrole());
-		map.put("SecLoginlog", getSecLoginlogDAO().getCountAllSecLoginlog());
-		map.put("CountryCode", getCountryCodeDAO().getCountAllSysCountrycode());
-		map.put("IpToCountry", getIpToCountryDAO().getCountAllIpToCountry());
+		map.put("SecUserrole", getSecUserroleDAO().getCountAllSecUserroles());
+		map.put("SecLoginlog", getSecLoginlogDAO().getCountAllSecLoginlogs());
+		map.put("CountryCode", getCountryCodeDAO().getCountAllCountryCodes());
+		map.put("IpToCountry", getIpToCountryDAO().getCountAllIpToCountries());
 		map.put("CalendarEvents", getCalendarEventDAO().getCountAllCalendarEvents());
 		map.put("YouTubeLinks", getYoutubeLinkDAO().getCountAllYoutubeLinks());
 		return map;

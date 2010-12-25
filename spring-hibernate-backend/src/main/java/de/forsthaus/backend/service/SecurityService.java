@@ -30,7 +30,10 @@ import de.forsthaus.backend.model.SecUser;
 import de.forsthaus.backend.model.SecUserrole;
 
 /**
- * Service methods Interface for working with Security data.
+ * EN: Service methods Interface for working with <b>Security data</b> dependend
+ * DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>Security data</b>
+ * betreffenden DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -38,7 +41,7 @@ import de.forsthaus.backend.model.SecUserrole;
 public interface SecurityService {
 
 	/* +++++ Security: Userroles +++++++ */
-	public int getCountAllSecUserrole();
+	public int getCountAllSecUserroles();
 
 	public SecUserrole getNewSecUserrole();
 
@@ -53,7 +56,7 @@ public interface SecurityService {
 	public boolean isUserInRole(SecUser user, SecRole role);
 
 	/* +++++ Security: Roles +++++++ */
-	public int getCountAllSecRole();
+	public int getCountAllSecRoles();
 
 	public SecRole getNewSecRole();
 
@@ -64,7 +67,7 @@ public interface SecurityService {
 	public void delete(SecRole role);
 
 	/* +++++ Security: RoleGroups +++++++ */
-	public int getCountAllSecRolegroup();
+	public int getCountAllSecRolegroups();
 
 	public SecRolegroup getNewSecRolegroup();
 
@@ -80,7 +83,7 @@ public interface SecurityService {
 
 	/* +++++ Security: Groups +++++++ */
 
-	public int getCountAllSecGroup();
+	public int getCountAllSecGroups();
 
 	public List<SecGroup> getAllGroups();
 
@@ -125,7 +128,7 @@ public interface SecurityService {
 
 	/* +++++ Security: Grouprights +++++++ */
 
-	public int getCountAllSecGroupright();
+	public int getCountAllSecGrouprights();
 
 	public List<SecGroupright> getAllGroupRights();
 

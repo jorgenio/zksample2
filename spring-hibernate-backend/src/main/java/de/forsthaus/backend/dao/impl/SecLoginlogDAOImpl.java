@@ -241,7 +241,7 @@ public class SecLoginlogDAOImpl extends BasisNextidDaoImpl<SecLoginlog> implemen
 	}
 
 	@Override
-	public int getCountAllSecLoginlog() {
+	public int getCountAllSecLoginlogs() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from SecLoginlog"));
 	}
 }

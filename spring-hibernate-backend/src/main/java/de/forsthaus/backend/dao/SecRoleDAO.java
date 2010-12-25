@@ -54,7 +54,7 @@ public interface SecRoleDAO {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllSecRole();
+	public int getCountAllSecRoles();
 
 	/**
 	 * EN: Get a Security Role by its ID.<br>
@@ -90,12 +90,12 @@ public interface SecRoleDAO {
 	 * EN: Saves new or updates a Security Role.<br>
 	 * DE: Speichert neu oder aktualisiert eine Security Role.<br>
 	 */
-	public void saveOrUpdate(SecRole secRole);
+	public void saveOrUpdate(SecRole entity);
 
 	/**
 	 * EN: Deletes a Security Role.<br>
 	 * DE: Loescht eine Security Role.<br>
 	 */
-	public void delete(SecRole secRole);
+	public void delete(SecRole entity);
 
 }

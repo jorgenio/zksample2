@@ -68,7 +68,7 @@ public interface OrderDAO {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllOrder();
+	public int getCountAllOrders();
 
 	/**
 	 * EN: Get an Order by its ID.<br>
@@ -147,18 +147,18 @@ public interface OrderDAO {
 	 * EN: Saves new or updates an Order.<br>
 	 * DE: Speichert neu oder aktualisiert einen Auftrag.<br>
 	 */
-	public void saveOrUpdate(Order order);
+	public void saveOrUpdate(Order entity);
 
 	/**
 	 * EN: Deletes an Order.<br>
 	 * DE: Loescht einen Auftrag.<br>
 	 */
-	public void delete(Order order);
+	public void delete(Order entity);
 
 	/**
 	 * EN: Saves an Order.<br>
 	 * DE: Speichert einen Auftrag.<br>
 	 */
-	public void save(Order order);
+	public void save(Order entity);
 
 }

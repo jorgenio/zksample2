@@ -23,7 +23,10 @@ import java.util.List;
 import de.forsthaus.backend.model.CountryCode;
 
 /**
- * Service methods Interface for working with SysCountryCode data.
+ * EN: Service methods Interface for working with <b>CountryCode</b> dependend
+ * DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>LaenderCodes</b>
+ * betreffenden DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -44,7 +47,7 @@ public interface CountryCodeService {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllSysCountrycode();
+	public int getCountAllCountryCodes();
 
 	/**
 	 * EN: Get a list of all CountryCodes.<br>
@@ -75,13 +78,13 @@ public interface CountryCodeService {
 	public CountryCode getCountryCodeByCode2(String code2);
 
 	/**
-	 * EN: Saves new or updates a SysCountryCode.<br>
+	 * EN: Saves new or updates a CountryCode.<br>
 	 * DE: Speichert neu oder aktualisiert einen LaenderCode.<br>
 	 */
 	public void saveOrUpdate(CountryCode countryCode);
 
 	/**
-	 * EN: Deletes a SysCountryCode.<br>
+	 * EN: Deletes a CountryCode.<br>
 	 * DE: Loescht einen LaenderCode.<br>
 	 */
 	public void delete(CountryCode countryCode);

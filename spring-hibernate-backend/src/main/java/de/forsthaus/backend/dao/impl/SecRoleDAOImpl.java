@@ -76,7 +76,7 @@ public class SecRoleDAOImpl extends BasisNextidDaoImpl<SecRole> implements SecRo
 	}
 
 	@Override
-	public int getCountAllSecRole() {
+	public int getCountAllSecRoles() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from SecRole"));
 	}
 

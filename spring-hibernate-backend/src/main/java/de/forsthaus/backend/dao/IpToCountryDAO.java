@@ -43,7 +43,7 @@ public interface IpToCountryDAO {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllIpToCountry();
+	public int getCountAllIpToCountries();
 
 	/**
 	 * EN: Get a IpToCountry object for a given IP address.<br>
@@ -67,6 +67,6 @@ public interface IpToCountryDAO {
 	 * EN: Saves new or updates an IpToCountry.<br>
 	 * DE: Speichert neu oder aktualisiert eine IpToCountry.<br>
 	 */
-	public void saveOrUpdate(IpToCountry ipToCountry);
+	public void saveOrUpdate(IpToCountry entity);
 
 }

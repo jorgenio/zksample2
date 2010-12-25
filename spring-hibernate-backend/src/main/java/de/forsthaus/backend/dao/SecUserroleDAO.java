@@ -55,7 +55,7 @@ public interface SecUserroleDAO {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllSecUserrole();
+	public int getCountAllSecUserroles();
 
 	/**
 	 * EN: Get a Security UserRole by a given User and a given Role.<br>
@@ -85,12 +85,12 @@ public interface SecUserroleDAO {
 	 * EN: Saves new or updates a Security UserRole.<br>
 	 * DE: Speichert neu oder aktualisiert eine Security UserRole.<br>
 	 */
-	public void saveOrUpdate(SecUserrole secUserrole);
+	public void saveOrUpdate(SecUserrole entity);
 
 	/**
 	 * EN: Deletes a Security UserRole.<br>
 	 * DE: Loescht eine Security UserRole.<br>
 	 */
-	public void delete(SecUserrole secUserrole);
+	public void delete(SecUserrole entity);
 
 }

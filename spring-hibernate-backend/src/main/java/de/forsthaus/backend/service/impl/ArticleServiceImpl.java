@@ -49,8 +49,8 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public void delete(Article article) {
-		getArticleDAO().delete(article);
+	public void delete(Article entity) {
+		getArticleDAO().delete(entity);
 	}
 
 	@Override
@@ -64,23 +64,23 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public void saveOrUpdate(Article article) {
-		getArticleDAO().saveOrUpdate(article);
+	public void saveOrUpdate(Article entity) {
+		getArticleDAO().saveOrUpdate(entity);
 	}
 
 	@Override
-	public List<Article> getArticleLikeArticleNumber(String text) {
-		return getArticleDAO().getArticleLikeArticleNumber(text);
+	public List<Article> getArticlesLikeArticleNumber(String text) {
+		return getArticleDAO().getArticlesLikeArticleNumber(text);
 	}
 
 	@Override
-	public List<Article> getArticleLikeName(String text) {
-		return getArticleDAO().getArticleLikeName(text);
+	public List<Article> getArticlesLikeName(String text) {
+		return getArticleDAO().getArticlesLikeName(text);
 	}
 
 	@Override
-	public int getCountAllArticle() {
-		return getArticleDAO().getCountAllArticle();
+	public int getCountAllArticles() {
+		return getArticleDAO().getCountAllArticles();
 	}
 
 }

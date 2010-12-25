@@ -49,18 +49,18 @@ public interface GuestBookDAO {
 	 * EN: Saves new or updates a GuestBook entry.<br>
 	 * DE: Speichert oder aktualisiert einen Gaestebuch Eintrag.<br>
 	 */
-	public void saveOrUpdate(GuestBook guestBook);
+	public void saveOrUpdate(GuestBook entity);
 
 	/**
 	 * EN: Deletes a GuestBook entry.<br>
 	 * DE: Loescht einen Gaestebuch Eintrag.<br>
 	 */
-	public void delete(GuestBook guestBook);
+	public void delete(GuestBook entity);
 
 	/**
 	 * EN: Saves a GuestBook entry.<br>
 	 * DE: Speichert einen Gaestebuch Eintrag.<br>
 	 */
-	public void save(GuestBook guestBook);
+	public void save(GuestBook entity);
 
 }

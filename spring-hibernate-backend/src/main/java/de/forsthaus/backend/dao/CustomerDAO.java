@@ -72,7 +72,7 @@ public interface CustomerDAO {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllCustomer();
+	public int getCountAllCustomers();
 
 	/**
 	 * EN: Get a Customer by its ID.<br>
@@ -103,7 +103,7 @@ public interface CustomerDAO {
 	 *            Matchcode of the customer / Matchcode des Kunden
 	 * @return List of Customers / Liste of Kunden
 	 */
-	public List<Customer> getCustomerLikeMatchcode(String string);
+	public List<Customer> getCustomersLikeMatchcode(String string);
 
 	/**
 	 * EN: Gets a list of Customers where the cityname contains the %string% .<br>
@@ -114,7 +114,7 @@ public interface CustomerDAO {
 	 *            CtityName of the customer / Stadtnamen des Kunden
 	 * @return List of Customers / Liste of Kunden
 	 */
-	public List<Customer> getCustomerLikeOrt(String string);
+	public List<Customer> getCustomersLikeOrt(String string);
 
 	/**
 	 * EN: Gets a list of Customers where the name1 contains the %string%.<br>
@@ -125,7 +125,7 @@ public interface CustomerDAO {
 	 *            Name1 of the customer / Name1 des Kunden
 	 * @return List of Customers / Liste of Kunden
 	 */
-	public List<Customer> getCustomerLikeName1(String string);
+	public List<Customer> getCustomersLikeName1(String string);
 
 	/**
 	 * EN: Gets a list of Customers where the name2 contains the %string%.<br>
@@ -136,7 +136,7 @@ public interface CustomerDAO {
 	 *            Name2 of the customer / Name2 des Kunden
 	 * @return List of Customers / Liste of Kunden
 	 */
-	public List<Customer> getCustomerLikeName2(String string);
+	public List<Customer> getCustomersLikeName2(String string);
 
 	/**
 	 * EN: Gets a list of Customers by their officeID.<br>
@@ -147,7 +147,7 @@ public interface CustomerDAO {
 	 *            der Niederlassung
 	 * @return List of Customers / Liste of Kunden
 	 */
-	public List<Customer> getCustomerByOfficeId(long id);
+	public List<Customer> getCustomersByOfficeId(long id);
 
 	/**
 	 * EN: Get the customer for an order.<br>
@@ -167,25 +167,25 @@ public interface CustomerDAO {
 	 *            branche / Branche
 	 * @return List of Customers / Liste of Kunden
 	 */
-	public List<Customer> getCustomerByBranche(Branche branche);
+	public List<Customer> getCustomersByBranche(Branche branche);
 
 	/**
 	 * EN: Updates a Customer.<br>
 	 * DE: Aktualisiert einen Kunden.<br>
 	 */
-	public void update(Customer customer);
+	public void update(Customer entity);
 
 	/**
 	 * EN: Deletes a Customer.<br>
 	 * DE: Loescht einen Kunden.<br>
 	 */
-	public void delete(Customer customer);
+	public void delete(Customer entity);
 
 	/**
 	 * EN: Saves a Customer.<br>
 	 * DE: Speichert einen Kunden.<br>
 	 */
-	public void save(Customer customer);
+	public void save(Customer entity);
 
 	/**
 	 * EN: Load the relations data for a Customer.<br>

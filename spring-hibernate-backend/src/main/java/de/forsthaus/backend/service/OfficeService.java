@@ -23,7 +23,9 @@ import java.util.List;
 import de.forsthaus.backend.model.Office;
 
 /**
- * Service methods Interface for working with Office data.
+ * EN: Service methods Interface for working with <b>Office</b> dependend DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>Office (Niederlassung)</b>
+ * betreffenden DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth

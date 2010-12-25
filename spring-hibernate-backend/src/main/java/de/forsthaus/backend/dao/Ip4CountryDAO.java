@@ -43,7 +43,7 @@ public interface Ip4CountryDAO {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllIp4Country();
+	public int getCountAllIp4Countries();
 
 	/**
 	 * EN: Get a Ip4Country object by its ID.<br>
@@ -67,6 +67,6 @@ public interface Ip4CountryDAO {
 	 * EN: Saves new or updates an Ip4Country.<br>
 	 * DE: Speichert neu oder aktualisiert eine Ip4Country.<br>
 	 */
-	public void saveOrUpdate(Ip4Country ip4Country);
+	public void saveOrUpdate(Ip4Country entity);
 
 }

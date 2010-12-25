@@ -86,7 +86,7 @@ public interface BrancheDAO {
 	 *            Name of the branch / BranchenName
 	 * @return List of Branches / Liste of Branchen
 	 */
-	public List<Branche> getBrancheLikeName(String string);
+	public List<Branche> getBranchesLikeName(String string);
 
 	/**
 	 * EN: Get the count of all CustomerBranches in the used Table Schema.<br>
@@ -127,18 +127,18 @@ public interface BrancheDAO {
 	 * EN: Saves new or updates a CustomerBranch.<br>
 	 * DE: Speichert neu oder aktualisiert eine KundenBranche.<br>
 	 */
-	public void saveOrUpdate(Branche branche);
+	public void saveOrUpdate(Branche entity);
 
 	/**
 	 * EN: Deletes a CustomerBranch.<br>
 	 * DE: Loescht eine KundenBranche.<br>
 	 */
-	public void delete(Branche branche);
+	public void delete(Branche entity);
 
 	/**
 	 * EN: Saves a CustomerBranch.<br>
 	 * DE: Speichert eine KundenBranche.<br>
 	 */
-	public void save(Branche branche);
+	public void save(Branche entity);
 
 }

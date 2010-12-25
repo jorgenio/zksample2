@@ -25,7 +25,10 @@ import de.forsthaus.backend.model.Customer;
 import de.forsthaus.backend.model.Order;
 
 /**
- * Service methods Interface for working with Customer data.
+ * EN: Service methods Interface for working with <b>Customer</b> dependend
+ * DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>Kunden</b> betreffenden
+ * DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -54,7 +57,7 @@ public interface CustomerService {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllCustomer();
+	public int getCountAllCustomers();
 
 	/**
 	 * EN: Get a paged list of all Customers.<br>
@@ -94,7 +97,7 @@ public interface CustomerService {
 	 *            branche / Branche
 	 * @return List of Customers / Liste of Kunden
 	 */
-	public List<Customer> getCustomerByBranche(Branche branche);
+	public List<Customer> getCustomersByBranche(Branche branche);
 
 	/**
 	 * EN: Get a Customer by it's customerNo.<br>
@@ -123,14 +126,6 @@ public interface CustomerService {
 	 * @return int
 	 */
 	public int getMaxCustomerId();
-
-	/**
-	 * EN: Get the count of all Customers.<br>
-	 * DE: Gibt die Anzahl aller Kunden zurueck.<br>
-	 * 
-	 * @return int
-	 */
-	public int getCountCustomers();
 
 	public void testDeleteCustomersOver50000();
 

@@ -96,7 +96,7 @@ public class SecGrouprightDAOImpl extends BasisNextidDaoImpl<SecGroupright> impl
 	}
 
 	@Override
-	public int getCountAllSecGroupright() {
+	public int getCountAllSecGrouprights() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from SecGroupright"));
 	}
 }

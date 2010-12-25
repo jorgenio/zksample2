@@ -3,7 +3,10 @@ package de.forsthaus.backend.service;
 import java.util.Map;
 
 /**
- * Service methods Interface for working with common data.
+ * EN: Service methods Interface for working with <b>common data</b> dependend
+ * DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>allgemeine Daten</b>
+ * betreffenden DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth

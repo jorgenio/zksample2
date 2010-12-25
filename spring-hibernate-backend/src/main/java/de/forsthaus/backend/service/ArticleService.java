@@ -23,7 +23,9 @@ import java.util.List;
 import de.forsthaus.backend.model.Article;
 
 /**
- * Service methods Interface for working with Article data.
+ * EN: Service methods Interface for working with <b>Article</b> dependend DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>Artikel</b> betreffenden
+ * DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -52,7 +54,7 @@ public interface ArticleService {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllArticle();
+	public int getCountAllArticles();
 
 	/**
 	 * EN: Get an article by its ID.<br>
@@ -73,7 +75,7 @@ public interface ArticleService {
 	 *            the matching text / zu uebereinstimmende Zeichenfolge
 	 * @return List of Articles / Liste of Artikel
 	 */
-	public List<Article> getArticleLikeArticleNumber(String text);
+	public List<Article> getArticlesLikeArticleNumber(String text);
 
 	/**
 	 * EN: Gets a list of Articles where the article Name is like %text% .<br>
@@ -84,18 +86,18 @@ public interface ArticleService {
 	 *            the matching text / zu uebereinstimmende Zeichenfolge
 	 * @return List of Articles / Liste of Artikel
 	 */
-	public List<Article> getArticleLikeName(String text);
+	public List<Article> getArticlesLikeName(String text);
 
 	/**
 	 * EN: Saves or updates an article in the DB.<br>
 	 * DE: Speichert oder aktualisiert einen Artikel in der DB.<br>
 	 */
-	public void saveOrUpdate(Article article);
+	public void saveOrUpdate(Article entity);
 
 	/**
 	 * EN: Deletes an article in the DB.<br>
 	 * DE: Loescht einen Artikel in der DB.<br>
 	 */
-	public void delete(Article article);
+	public void delete(Article entity);
 
 }

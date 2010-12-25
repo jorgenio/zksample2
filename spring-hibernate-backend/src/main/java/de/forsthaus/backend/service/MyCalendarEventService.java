@@ -24,7 +24,10 @@ import java.util.List;
 import de.forsthaus.backend.model.MyCalendarEvent;
 
 /**
- * Service methods Interface for working with CalendarEvents data.
+ * EN: Service methods Interface for working with <b>CalendarEvents</b>
+ * dependend DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>Kalender Termine</b>
+ * betreffenden DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -78,7 +81,7 @@ public interface MyCalendarEventService {
 	 *            UserId / UyserId
 	 * @return List of MyCalendarEvents / Liste von MyCalendarEvents
 	 */
-	public List<MyCalendarEvent> getCalendarEventForBeginDate(Date beginDate, long usrId);
+	public List<MyCalendarEvent> getCalendarEventsForBeginDate(Date beginDate, long usrId);
 
 	/**
 	 * EN: Gets a List of MyCalendarEvents for a given begin-date, end-date and
@@ -94,7 +97,7 @@ public interface MyCalendarEventService {
 	 *            UserId / UyserId
 	 * @return List of MyCalendarEvents / Liste von MyCalendarEvents
 	 */
-	public List<MyCalendarEvent> getCalendarEventFromToDate(Date beginDate, Date endDate, long usrId);
+	public List<MyCalendarEvent> getCalendarEventsFromToDate(Date beginDate, Date endDate, long usrId);
 
 	/**
 	 * EN: Saves new or updates a MyCalendarEvent.<br>

@@ -179,18 +179,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<SecUser> getUserLikeLastname(String value) {
-		return getUserDAO().getUserLikeLastname(value);
+	public List<SecUser> getUsersLikeLastname(String value) {
+		return getUserDAO().getUsersLikeLastname(value);
 	}
 
 	@Override
-	public List<SecUser> getUserLikeLoginname(String value) {
-		return getUserDAO().getUserLikeLoginname(value);
+	public List<SecUser> getUsersLikeLoginname(String value) {
+		return getUserDAO().getUsersLikeLoginname(value);
 	}
 
 	@Override
-	public List<SecUser> getUserLikeEmail(String value) {
-		return getUserDAO().getUserLikeEmail(value);
+	public List<SecUser> getUsersLikeEmail(String value) {
+		return getUserDAO().getUsersLikeEmail(value);
 	}
 
 	@Override
@@ -201,11 +201,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Language getLanguageByLocale(String lan_locale) {
 		return getLanguageDAO().getLanguageByLocale(lan_locale);
-	}
-
-	@Override
-	public List<SecUser> getUserListByLoginname(String userName) {
-		return getUserDAO().getUserListByLoginname(userName);
 	}
 
 	public SecRightDAO getSecRightDAO() {

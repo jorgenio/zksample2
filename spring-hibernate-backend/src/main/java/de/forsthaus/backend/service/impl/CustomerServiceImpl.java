@@ -107,8 +107,8 @@ public class CustomerServiceImpl implements CustomerService {
 	// }
 
 	@Override
-	public List<Customer> getCustomerByBranche(Branche branche) {
-		return getCustomerDAO().getCustomerByBranche(branche);
+	public List<Customer> getCustomersByBranche(Branche branche) {
+		return getCustomerDAO().getCustomersByBranche(branche);
 	}
 
 	@Override
@@ -128,18 +128,13 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public int getCountCustomers() {
-		return getCustomerDAO().getCountAllCustomer();
-	}
-
-	@Override
 	public void testDeleteCustomersOver50000() {
 		getCustomerDAO().testDeleteCustomersOver50000();
 	}
 
 	@Override
-	public int getCountAllCustomer() {
-		return getCustomerDAO().getCountAllCustomer();
+	public int getCountAllCustomers() {
+		return getCustomerDAO().getCountAllCustomers();
 	}
 
 }

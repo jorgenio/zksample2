@@ -49,7 +49,7 @@ public interface SecLoginlogDAO {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllSecLoginlog();
+	public int getCountAllSecLoginlogs();
 
 	/**
 	 * EN: Get a list af all SecLoginlog.<br>
@@ -142,18 +142,18 @@ public interface SecLoginlogDAO {
 	 * EN: Saves new or updates a SecLoginlog.<br>
 	 * DE: Speichert neu oder aktualisiert einen Login.<br>
 	 */
-	public void saveOrUpdate(SecLoginlog secLoginlog);
+	public void saveOrUpdate(SecLoginlog entity);
 
 	/**
 	 * EN: Deletes a SecLoginlog.<br>
 	 * DE: Loescht einen Login.<br>
 	 */
-	public void delete(SecLoginlog loginLog);
+	public void delete(SecLoginlog entity);
 
 	/**
 	 * EN: Updates a SecLoginlog.<br>
 	 * DE: Aktualisiert einen Login.<br>
 	 */
-	public void update(SecLoginlog log);
+	public void update(SecLoginlog entity);
 
 }

@@ -47,7 +47,7 @@ public interface SecGrouprightDAO {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllSecGroupright();
+	public int getCountAllSecGrouprights();
 
 	/**
 	 * EN: Get a list of SecRights by a SecGroup.<br>
@@ -99,11 +99,11 @@ public interface SecGrouprightDAO {
 	 * EN: Saves new or updates a SecGroupright.<br>
 	 * DE: Speichert neu oder aktualisiert ein GruppenRecht.<br>
 	 */
-	public void saveOrUpdate(SecGroupright secGroupright);
+	public void saveOrUpdate(SecGroupright entity);
 
 	/**
 	 * EN: Deletes a SecGroupright.<br>
 	 * DE: Loescht ein GruppenRecht.<br>
 	 */
-	public void delete(SecGroupright secGroupright);
+	public void delete(SecGroupright entity);
 }

@@ -56,7 +56,7 @@ public interface SecGroupDAO {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllSecGroup();
+	public int getCountAllSecGroups();
 
 	/**
 	 * EN: Get a SecGroup by its ID.<br>
@@ -109,12 +109,12 @@ public interface SecGroupDAO {
 	 * EN: Saves new or updates a SecGroup.<br>
 	 * DE: Speichert neu oder aktualisiert eine SecurityGruppe.<br>
 	 */
-	public void saveOrUpdate(SecGroup secGroup);
+	public void saveOrUpdate(SecGroup entity);
 
 	/**
 	 * EN: Deletes a SecGroup.<br>
 	 * DE: Loescht eine SecurityGruppe.<br>
 	 */
-	public void delete(SecGroup secGroup);
+	public void delete(SecGroup entity);
 
 }

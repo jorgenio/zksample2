@@ -55,7 +55,7 @@ public class MyCalendarEventDAOImpl extends BasisNextidDaoImpl<MyCalendarEvent> 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<MyCalendarEvent> getCalendarEventForBeginDate(Date beginDate, long usrId) {
+	public List<MyCalendarEvent> getCalendarEventsForBeginDate(Date beginDate, long usrId) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(MyCalendarEvent.class);
 		criteria.add(Restrictions.eq("beginDate", beginDate));
 		criteria.add(Restrictions.eq("secUser.id", usrId));
@@ -71,7 +71,7 @@ public class MyCalendarEventDAOImpl extends BasisNextidDaoImpl<MyCalendarEvent> 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<MyCalendarEvent> getCalendarEventFromToDate(Date beginDate, Date endDate, long usrId) {
+	public List<MyCalendarEvent> getCalendarEventsFromToDate(Date beginDate, Date endDate, long usrId) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(MyCalendarEvent.class);
 		criteria.add(Restrictions.ge("beginDate", beginDate));
 		criteria.add(Restrictions.le("endDate", endDate));

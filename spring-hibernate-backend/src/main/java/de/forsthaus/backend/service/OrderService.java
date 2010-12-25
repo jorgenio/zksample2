@@ -27,7 +27,9 @@ import de.forsthaus.backend.model.Order;
 import de.forsthaus.backend.model.Orderposition;
 
 /**
- * Service methods Interface for working with Order data.
+ * EN: Service methods Interface for working with <b>Orders</b> dependend DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>Auftraege</b> betreffenden
+ * DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -52,7 +54,7 @@ public interface OrderService {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllOrder();
+	public int getCountAllOrders();
 
 	/**
 	 * EN: Get the count of all Orderpositions.<br>

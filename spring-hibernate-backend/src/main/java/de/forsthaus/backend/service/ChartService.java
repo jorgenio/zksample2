@@ -23,7 +23,8 @@ import java.util.List;
 import de.forsthaus.backend.model.ChartData;
 
 /**
- * Service methods Interface for working with Chart data.
+ * EN: Service methods Interface for working with <b>Chart</b> dependend DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>Chart</b> betreffenden DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth

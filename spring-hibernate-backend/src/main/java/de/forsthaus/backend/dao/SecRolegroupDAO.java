@@ -55,7 +55,7 @@ public interface SecRolegroupDAO {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllSecRolegroup();
+	public int getCountAllSecRolegroups();
 
 	/**
 	 * EN: Get a list of all Security RoleGroups by a given Role.<br>
@@ -92,11 +92,11 @@ public interface SecRolegroupDAO {
 	 * EN: Saves new or updates a Security RoleGroups.<br>
 	 * DE: Speichert neu oder aktualisiert eine Security RollenGruppe.<br>
 	 */
-	public void saveOrUpdate(SecRolegroup roleGroup);
+	public void saveOrUpdate(SecRolegroup entity);
 
 	/**
 	 * EN: Deletes a Security RoleGroups.<br>
 	 * DE: Loescht eine Security RollenGruppe.<br>
 	 */
-	public void delete(SecRolegroup roleGroup);
+	public void delete(SecRolegroup entity);
 }

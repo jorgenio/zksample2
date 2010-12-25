@@ -23,13 +23,13 @@ import java.util.List;
 
 import de.forsthaus.backend.bean.DummyBean;
 import de.forsthaus.backend.bean.ListLongSumBean;
+import de.forsthaus.backend.dao.CountryCodeDAO;
 import de.forsthaus.backend.dao.Ip2CountryDAO;
 import de.forsthaus.backend.dao.SecLoginlogDAO;
-import de.forsthaus.backend.dao.CountryCodeDAO;
+import de.forsthaus.backend.model.CountryCode;
 import de.forsthaus.backend.model.Ip2Country;
 import de.forsthaus.backend.model.LoginStatus;
 import de.forsthaus.backend.model.SecLoginlog;
-import de.forsthaus.backend.model.CountryCode;
 import de.forsthaus.backend.service.LoginLoggingService;
 
 /**
@@ -233,7 +233,7 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 
 	@Override
 	public int getTotalCountOfLogs() {
-		return getIp2CountryDAO().getCountAllIp2Country();
+		return getIp2CountryDAO().getCountAllIp2Countries();
 	}
 
 	@Override
@@ -252,8 +252,8 @@ public class LoginLoggingServiceImpl implements LoginLoggingService {
 	}
 
 	@Override
-	public int getCountAllSecLoginlog() {
-		return getSecLoginlogDAO().getCountAllSecLoginlog();
+	public int getCountAllSecLoginlogs() {
+		return getSecLoginlogDAO().getCountAllSecLoginlogs();
 	}
 
 }

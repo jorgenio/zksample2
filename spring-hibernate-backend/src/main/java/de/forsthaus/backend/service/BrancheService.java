@@ -24,7 +24,10 @@ import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.model.Branche;
 
 /**
- * Service methods Interface for working with Branches data.
+ * EN: Service methods Interface for working with <b>Branches</b> dependend
+ * DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>Branchen</b> betreffenden
+ * DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -81,11 +84,11 @@ public interface BrancheService {
 	 * DE: Gibt eine Liste aller KundenBranchen zurueck bei denen der
 	 * Branchenname %string% enthaelt.<br>
 	 * 
-	 * @param value
+	 * @param string
 	 *            Name of the branch / BranchenName
 	 * @return List of Branches / Liste of Branchen
 	 */
-	public List<Branche> getBrancheLikeName(String value);
+	public List<Branche> getBranchesLikeName(String string);
 
 	/**
 	 * EN: Get a paged list of all Branches.<br>

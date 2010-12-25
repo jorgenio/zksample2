@@ -56,7 +56,7 @@ public interface Ip2CountryDAO {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllIp2Country();
+	public int getCountAllIp2Countries();
 
 	/**
 	 * EN: Get an IPLocator for a IP address.<br>
@@ -90,6 +90,6 @@ public interface Ip2CountryDAO {
 	 * EN: Saves new or updates an Ip2Country.<br>
 	 * DE: Speichert neu oder aktualisiert eine Ip2Country.<br>
 	 */
-	public void saveOrUpdate(Ip2Country ip2Country);
+	public void saveOrUpdate(Ip2Country entity);
 
 }

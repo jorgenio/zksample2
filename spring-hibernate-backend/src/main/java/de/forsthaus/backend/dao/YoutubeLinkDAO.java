@@ -45,7 +45,7 @@ public interface YoutubeLinkDAO {
 	 * 
 	 * @return List of YoutubeLinks / Liste von YoutubeLinks
 	 */
-	public List<YoutubeLink> getAllYoutubeLink();
+	public List<YoutubeLink> getAllYoutubeLinks();
 
 	/**
 	 * EN: Get the count of all YoutubeLinks.<br>

@@ -77,7 +77,7 @@ public class UserDAOImpl extends BasisNextidDaoImpl<SecUser> implements UserDAO 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SecUser> getUserLikeLastname(String string) {
+	public List<SecUser> getUsersLikeLastname(String string) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecUser.class);
 		criteria.add(Restrictions.like("usrLastname", string, MatchMode.ANYWHERE));
@@ -87,7 +87,7 @@ public class UserDAOImpl extends BasisNextidDaoImpl<SecUser> implements UserDAO 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SecUser> getUserLikeLoginname(String string) {
+	public List<SecUser> getUsersLikeLoginname(String string) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecUser.class);
 		criteria.add(Restrictions.like("usrLoginname", string, MatchMode.ANYWHERE));
@@ -97,7 +97,7 @@ public class UserDAOImpl extends BasisNextidDaoImpl<SecUser> implements UserDAO 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SecUser> getUserLikeEmail(String email) {
+	public List<SecUser> getUsersLikeEmail(String email) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecUser.class);
 		criteria.add(Restrictions.like("usrEmail", email, MatchMode.ANYWHERE));
@@ -107,7 +107,7 @@ public class UserDAOImpl extends BasisNextidDaoImpl<SecUser> implements UserDAO 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SecUser> getUserListByLoginname(String loginName) {
+	public List<SecUser> getUsersByLoginname(String loginName) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(SecUser.class);
 		criteria.add(Restrictions.like("usrLoginname", loginName));
 

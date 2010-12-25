@@ -25,7 +25,6 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.support.DataAccessUtils;
 
 import de.forsthaus.backend.dao.ArticleDAO;
@@ -61,7 +60,7 @@ public class ArticleDAOImpl extends BasisNextidDaoImpl<Article> implements Artic
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Article> getArticleLikeArticleNumber(String text) {
+	public List<Article> getArticlesLikeArticleNumber(String text) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Article.class);
 		criteria.add(Restrictions.ilike("artNr", text, MatchMode.ANYWHERE));
@@ -71,7 +70,7 @@ public class ArticleDAOImpl extends BasisNextidDaoImpl<Article> implements Artic
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Article> getArticleLikeName(String string) {
+	public List<Article> getArticlesLikeName(String string) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Article.class);
 		criteria.add(Restrictions.ilike("artKurzbezeichnung", string, MatchMode.ANYWHERE));
@@ -81,23 +80,8 @@ public class ArticleDAOImpl extends BasisNextidDaoImpl<Article> implements Artic
 	}
 
 	@Override
-	public int getCountAllArticle() {
+	public int getCountAllArticles() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from Article"));
-	}
-
-	@Override
-	public void save(Article entity) throws DataAccessException {
-		super.save(entity);
-	}
-
-	@Override
-	public void saveOrUpdate(Article article) throws DataAccessException {
-		super.saveOrUpdate(article);
-	}
-
-	@Override
-	public void delete(Article entity) throws DataAccessException {
-		super.delete(entity);
 	}
 
 	@Override

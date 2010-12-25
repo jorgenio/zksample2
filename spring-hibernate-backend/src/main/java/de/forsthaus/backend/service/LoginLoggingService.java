@@ -27,14 +27,17 @@ import de.forsthaus.backend.model.LoginStatus;
 import de.forsthaus.backend.model.SecLoginlog;
 
 /**
- * Service methods Interface for working with Login Log data.
+ * EN: Service methods Interface for working with <b>Login Log</b> dependend
+ * DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>Login Log</b> betreffenden
+ * DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth
  */
 public interface LoginLoggingService {
 
-	public int getCountAllSecLoginlog();
+	public int getCountAllSecLoginlogs();
 
 	/* +++++ Security: Userlog +++++++ */
 	public SecLoginlog saveLog(String userName, String clientAddress, String sessionId, String browserType, int status);

@@ -332,13 +332,13 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
-	public int getCountAllSecGroup() {
-		return getSecGroupDAO().getCountAllSecGroup();
+	public int getCountAllSecGroups() {
+		return getSecGroupDAO().getCountAllSecGroups();
 	}
 
 	@Override
-	public int getCountAllSecGroupright() {
-		return getSecGrouprightDAO().getCountAllSecGroupright();
+	public int getCountAllSecGrouprights() {
+		return getSecGrouprightDAO().getCountAllSecGrouprights();
 	}
 
 	@Override
@@ -347,18 +347,18 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
-	public int getCountAllSecRole() {
-		return getSecRoleDAO().getCountAllSecRole();
+	public int getCountAllSecRoles() {
+		return getSecRoleDAO().getCountAllSecRoles();
 	}
 
 	@Override
-	public int getCountAllSecRolegroup() {
-		return getSecRolegroupDAO().getCountAllSecRolegroup();
+	public int getCountAllSecRolegroups() {
+		return getSecRolegroupDAO().getCountAllSecRolegroups();
 	}
 
 	@Override
-	public int getCountAllSecUserrole() {
-		return getSecUserroleDAO().getCountAllSecUserrole();
+	public int getCountAllSecUserroles() {
+		return getSecUserroleDAO().getCountAllSecUserroles();
 	}
 
 }

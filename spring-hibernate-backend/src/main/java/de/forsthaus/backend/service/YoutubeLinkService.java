@@ -24,7 +24,10 @@ import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.model.YoutubeLink;
 
 /**
- * Service methods Interface for working with YouTubeLinks data.
+ * EN: Service methods Interface for working with <b>YoutubeLinks</b> dependend
+ * DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>YoutubeLinks</b>
+ * betreffenden DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -45,7 +48,7 @@ public interface YoutubeLinkService {
 	 * 
 	 * @return List of YoutubeLinks / Liste von YoutubeLinks
 	 */
-	public List<YoutubeLink> getAllYoutubeLink();
+	public List<YoutubeLink> getAllYoutubeLinks();
 
 	/**
 	 * EN: Get the count of all YoutubeLinks in the used Table Schema.<br>

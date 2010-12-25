@@ -122,18 +122,18 @@ public interface OfficeDAO {
 	 * EN: Saves new or updates an Office.<br>
 	 * DE: Speichert neu oder aktualisiert ein Office.<br>
 	 */
-	public void saveOrUpdate(Office office);
+	public void saveOrUpdate(Office entity);
 
 	/**
 	 * EN: Deletes an Office.<br>
 	 * DE: Loescht ein Office.<br>
 	 */
-	public void delete(Office office);
+	public void delete(Office entity);
 
 	/**
 	 * EN: Saves an Office.<br>
 	 * DE: Speichert ein Office.<br>
 	 */
-	public void save(Office office);
+	public void save(Office entity);
 
 }

@@ -72,7 +72,7 @@ public class SecUserroleDAOImpl extends BasisNextidDaoImpl<SecUserrole> implemen
 	}
 
 	@Override
-	public int getCountAllSecUserrole() {
+	public int getCountAllSecUserroles() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from SecUserrole"));
 	}
 

@@ -61,13 +61,13 @@ public class MyCalendarEventServiceImpl implements MyCalendarEventService {
 	}
 
 	@Override
-	public List<MyCalendarEvent> getCalendarEventForBeginDate(Date beginDate, long usrId) {
-		return getCalendarEventDAO().getCalendarEventForBeginDate(beginDate, usrId);
+	public List<MyCalendarEvent> getCalendarEventsForBeginDate(Date beginDate, long usrId) {
+		return getCalendarEventDAO().getCalendarEventsForBeginDate(beginDate, usrId);
 	}
 
 	@Override
-	public List<MyCalendarEvent> getCalendarEventFromToDate(Date beginDate, Date endDate, long usrId) {
-		return getCalendarEventDAO().getCalendarEventFromToDate(beginDate, endDate, usrId);
+	public List<MyCalendarEvent> getCalendarEventsFromToDate(Date beginDate, Date endDate, long usrId) {
+		return getCalendarEventDAO().getCalendarEventsFromToDate(beginDate, endDate, usrId);
 	}
 
 	@Override

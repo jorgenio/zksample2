@@ -28,7 +28,10 @@ import de.forsthaus.backend.model.SecRole;
 import de.forsthaus.backend.model.SecUser;
 
 /**
- * Service methods Interface for working with User data.
+ * EN: Service methods Interface for working with <b>User data</b> dependend
+ * DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>User Daten</b> betreffenden
+ * DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -78,7 +81,7 @@ public interface UserService {
 	 *            LoginName / LoginName
 	 * @return List of Users / Liste of Users
 	 */
-	public List<SecUser> getUserLikeLoginname(String value);
+	public List<SecUser> getUsersLikeLoginname(String value);
 
 	/**
 	 * EN: Gets a list of Users where the LastName name contains the %string% .<br>
@@ -89,7 +92,7 @@ public interface UserService {
 	 *            LastName / LastName
 	 * @return List of Users / Liste of Users
 	 */
-	public List<SecUser> getUserLikeLastname(String value);
+	public List<SecUser> getUsersLikeLastname(String value);
 
 	/**
 	 * EN: Get a list of Users by its emailaddress with the like SQL operator.<br>
@@ -100,18 +103,7 @@ public interface UserService {
 	 *            Email Address / Email Adresse
 	 * @return List of Users
 	 */
-	public List<SecUser> getUserLikeEmail(String value);
-
-	/**
-	 * EN: Get a list of Users by its loginName with the like SQL operator.<br>
-	 * DE: Gibt eine Liste von Usern anhand des LoginNamens mittels SQL like
-	 * Operator zurueck.<br>
-	 * 
-	 * @param loginName
-	 *            Login Name / Login Name
-	 * @return List of Users
-	 */
-	public List<SecUser> getUserListByLoginname(String userName);
+	public List<SecUser> getUsersLikeEmail(String value);
 
 	public List<SecRole> getRolesByUser(SecUser user);
 

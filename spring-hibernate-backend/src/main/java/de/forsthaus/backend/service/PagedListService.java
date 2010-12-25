@@ -25,7 +25,10 @@ import com.trg.search.SearchResult;
 import de.forsthaus.backend.util.HibernateSearchObject;
 
 /**
- * Service methods Interface for working with pagedListWrappers data.
+ * EN: Service methods Interface for working with <b>pagedListWrappers</b>
+ * dependend DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>pagedListWrappers</b>
+ * betreffenden DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth

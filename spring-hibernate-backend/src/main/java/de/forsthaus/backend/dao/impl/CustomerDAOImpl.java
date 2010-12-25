@@ -82,7 +82,7 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 	 * 
 	 * @return int
 	 */
-	public int getCountAllCustomer() {
+	public int getCountAllCustomers() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from Customer"));
 	}
 
@@ -99,7 +99,7 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Customer> getCustomerLikeMatchcode(final String string) {
+	public List<Customer> getCustomersLikeMatchcode(final String string) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
 		criteria.add(Restrictions.ilike("kunMatchcode", string.toUpperCase(), MatchMode.ANYWHERE));
 
@@ -108,7 +108,7 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Customer> getCustomerLikeOrt(final String string) {
+	public List<Customer> getCustomersLikeOrt(final String string) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
 		criteria.add(Restrictions.ilike("kunOrt", string.toUpperCase(), MatchMode.ANYWHERE));
 
@@ -117,7 +117,7 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Customer> getCustomerLikeName1(final String string) {
+	public List<Customer> getCustomersLikeName1(final String string) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
 		criteria.add(Restrictions.ilike("kunName1", string.toUpperCase(), MatchMode.ANYWHERE));
 
@@ -126,7 +126,7 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Customer> getCustomerLikeName2(final String string) {
+	public List<Customer> getCustomersLikeName2(final String string) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
 		criteria.add(Restrictions.ilike("kunName2", string.toUpperCase(), MatchMode.ANYWHERE));
 
@@ -135,7 +135,7 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Customer> getCustomerByOfficeId(long id) {
+	public List<Customer> getCustomersByOfficeId(long id) {
 		return getHibernateTemplate().find("from Customer where kun_fil_id = ?", Long.valueOf(id));
 	}
 
@@ -152,7 +152,7 @@ public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements Cus
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Customer> getCustomerByBranche(Branche branche) {
+	public List<Customer> getCustomersByBranche(Branche branche) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
 		criteria.add(Restrictions.eq("branche", branche));
 		criteria.addOrder(Order.asc("kunMatchcode")); // set the order

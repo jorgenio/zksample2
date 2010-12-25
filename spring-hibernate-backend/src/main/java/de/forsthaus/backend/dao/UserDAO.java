@@ -97,7 +97,7 @@ public interface UserDAO {
 	 *            LastName / LastName
 	 * @return List of Users / Liste of Users
 	 */
-	public List<SecUser> getUserLikeLastname(String string);
+	public List<SecUser> getUsersLikeLastname(String string);
 
 	/**
 	 * EN: Gets a list of Users where the LoginName contains the %string% .<br>
@@ -108,7 +108,7 @@ public interface UserDAO {
 	 *            LoginName / LoginName
 	 * @return List of Users / Liste of Users
 	 */
-	public List<SecUser> getUserLikeLoginname(String string);
+	public List<SecUser> getUsersLikeLoginname(String string);
 
 	/**
 	 * EN: Get a list of Users by its emailaddress with the like SQL operator.<br>
@@ -119,7 +119,7 @@ public interface UserDAO {
 	 *            Email Address / Email Adresse
 	 * @return List of Users
 	 */
-	public List<SecUser> getUserLikeEmail(String email);
+	public List<SecUser> getUsersLikeEmail(String email);
 
 	/**
 	 * EN: Get a list of Users by its loginName with the like SQL operator.<br>
@@ -130,24 +130,24 @@ public interface UserDAO {
 	 *            Login Name / Login Name
 	 * @return List of Users
 	 */
-	public List<SecUser> getUserListByLoginname(String loginName);
+	public List<SecUser> getUsersByLoginname(String loginName);
 
 	/**
 	 * EN: Saves new or updates an User.<br>
 	 * DE: Speichert neu oder aktualisiert einen User.<br>
 	 */
-	public void saveOrUpdate(SecUser user);
+	public void saveOrUpdate(SecUser entity);
 
 	/**
 	 * EN: Deletes an User.<br>
 	 * DE: Loescht einen User.<br>
 	 */
-	public void delete(SecUser user);
+	public void delete(SecUser entity);
 
 	/**
 	 * EN: Saves an User.<br>
 	 * DE: Speichert einen User.<br>
 	 */
-	public void save(SecUser user);
+	public void save(SecUser entity);
 
 }

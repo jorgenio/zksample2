@@ -33,11 +33,11 @@ public interface CountryCodeDAO {
 
 	/**
 	 * EN: Get a new CountryCode object.<br>
-	 * DE: Gibt ein neues SysCountryCode Objekt zurueck.<br>
+	 * DE: Gibt ein neues LaenderCode Objekt zurueck.<br>
 	 * 
 	 * @return SysCountryCode
 	 */
-	public CountryCode getNewSysCountryCode();
+	public CountryCode getNewCountryCode();
 
 	/**
 	 * EN: Get a list of all CountryCodes.<br>
@@ -53,7 +53,7 @@ public interface CountryCodeDAO {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllSysCountrycode();
+	public int getCountAllCountryCodes();
 
 	/**
 	 * EN: Get a CountryCode by its ID.<br>
@@ -76,15 +76,21 @@ public interface CountryCodeDAO {
 	public CountryCode getCountryCodeByCode2(String code2);
 
 	/**
-	 * EN: Saves new or updates a SysCountryCode.<br>
+	 * EN: Saves new or updates a CountryCode.<br>
 	 * DE: Speichert neu oder aktualisiert einen LaenderCode.<br>
 	 */
-	public void saveOrUpdate(CountryCode sysCountryCode);
+	public void saveOrUpdate(CountryCode entity);
 
 	/**
-	 * EN: Deletes a SysCountryCode.<br>
+	 * EN: Deletes a CountryCode.<br>
 	 * DE: Loescht einen LaenderCode.<br>
 	 */
-	public void delete(CountryCode countryCode);
+	public void delete(CountryCode entity);
+
+	/**
+	 * EN: Saves a CountryCode.<br>
+	 * DE: Speichert einen LaenderCode.<br>
+	 */
+	public void save(CountryCode entity);
 
 }

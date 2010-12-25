@@ -29,8 +29,8 @@ import de.forsthaus.backend.dao.CountryCodeDAO;
 import de.forsthaus.backend.model.CountryCode;
 
 /**
- * EN: DAO methods implementation for the <b>SysCountryCode</b> model class.<br>
- * DE: DAO Methoden Implementierung fuer die <b>SysCountryCode</b> Model Klasse.<br>
+ * EN: DAO methods implementation for the <b>CountryCode</b> model class.<br>
+ * DE: DAO Methoden Implementierung fuer die <b>CountryCode</b> Model Klasse.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -38,7 +38,7 @@ import de.forsthaus.backend.model.CountryCode;
 public class CountryCodeDAOImpl extends BasisNextidDaoImpl<CountryCode> implements CountryCodeDAO {
 
 	@Override
-	public CountryCode getNewSysCountryCode() {
+	public CountryCode getNewCountryCode() {
 		return new CountryCode();
 	}
 
@@ -66,7 +66,7 @@ public class CountryCodeDAOImpl extends BasisNextidDaoImpl<CountryCode> implemen
 	}
 
 	@Override
-	public int getCountAllSysCountrycode() {
+	public int getCountAllCountryCodes() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from CountryCode"));
 	}
 

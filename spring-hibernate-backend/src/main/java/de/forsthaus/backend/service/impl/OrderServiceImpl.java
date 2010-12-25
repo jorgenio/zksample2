@@ -174,8 +174,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int getCountAllOrder() {
-		return getOrderDAO().getCountAllOrder();
+	public int getCountAllOrders() {
+		return getOrderDAO().getCountAllOrders();
 	}
 
 	@Override

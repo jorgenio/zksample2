@@ -53,7 +53,7 @@ public interface ArticleDAO {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllArticle();
+	public int getCountAllArticles();
 
 	/**
 	 * EN: Get an article by its ID.<br>
@@ -74,7 +74,7 @@ public interface ArticleDAO {
 	 *            the matching text / zu uebereinstimmende Zeichenfolge
 	 * @return List of Articles / Liste of Artikel
 	 */
-	public List<Article> getArticleLikeArticleNumber(String text);
+	public List<Article> getArticlesLikeArticleNumber(String text);
 
 	/**
 	 * EN: Gets a list of Articles where the article name contains the %string%
@@ -86,24 +86,24 @@ public interface ArticleDAO {
 	 *            the matching text / zu uebereinstimmende Zeichenfolge
 	 * @return List of Articles / Liste of Artikel
 	 */
-	public List<Article> getArticleLikeName(String string);
+	public List<Article> getArticlesLikeName(String string);
 
 	/**
 	 * EN: Saves new or updates an article.<br>
 	 * DE: Speichert neu oder aktualisiert einen Artikel.<br>
 	 */
-	public void saveOrUpdate(Article article);
+	public void saveOrUpdate(Article entity);
 
 	/**
 	 * EN: Deletes an article.<br>
 	 * DE: Loescht einen Artikel.<br>
 	 */
-	public void delete(Article article);
+	public void delete(Article entity);
 
 	/**
 	 * EN: Saves an article.<br>
 	 * DE: Speichert einen Artikel.<br>
 	 */
-	public void save(Article article);
+	public void save(Article entity);
 
 }

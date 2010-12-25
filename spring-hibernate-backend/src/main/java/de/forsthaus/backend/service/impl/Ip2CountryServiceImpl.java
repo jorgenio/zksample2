@@ -69,8 +69,8 @@ public class Ip2CountryServiceImpl implements Ip2CountryService, Serializable {
 	}
 
 	@Override
-	public int getCountAllIp2Country() {
-		return getIp2CountryDAO().getCountAllIp2Country();
+	public int getCountAllIp2Countries() {
+		return getIp2CountryDAO().getCountAllIp2Countries();
 	}
 
 }

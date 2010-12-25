@@ -23,7 +23,10 @@ import java.net.InetAddress;
 import de.forsthaus.backend.model.IpToCountry;
 
 /**
- * Service methods Interface for working with IpToCountry data.
+ * EN: Service methods Interface for working with <b>IpToCountry</b> dependend
+ * DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>IpToCountry</b> betreffenden
+ * DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -36,7 +39,7 @@ public interface IpToCountryService {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllIpToCountry();
+	public int getCountAllIpToCountries();
 
 	public IpToCountry getIpToCountry(InetAddress address);
 

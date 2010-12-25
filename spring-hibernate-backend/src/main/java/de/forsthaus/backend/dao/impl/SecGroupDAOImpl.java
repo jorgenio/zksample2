@@ -104,7 +104,7 @@ public class SecGroupDAOImpl extends BasisNextidDaoImpl<SecGroup> implements Sec
 	}
 
 	@Override
-	public int getCountAllSecGroup() {
+	public int getCountAllSecGroups() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from SecGroup"));
 	}
 }

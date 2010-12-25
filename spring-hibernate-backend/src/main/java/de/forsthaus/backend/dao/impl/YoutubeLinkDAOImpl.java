@@ -41,7 +41,7 @@ public class YoutubeLinkDAOImpl extends BasisNextidDaoImpl<YoutubeLink> implemen
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<YoutubeLink> getAllYoutubeLink() {
+	public List<YoutubeLink> getAllYoutubeLinks() {
 		DetachedCriteria criteria = DetachedCriteria.forClass(YoutubeLink.class);
 		criteria.addOrder(Order.asc("title"));
 

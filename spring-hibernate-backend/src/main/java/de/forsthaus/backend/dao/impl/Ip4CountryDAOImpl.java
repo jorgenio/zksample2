@@ -38,7 +38,7 @@ public class Ip4CountryDAOImpl extends BasisNextidDaoImpl<Ip4Country> implements
 	}
 
 	@Override
-	public int getCountAllIp4Country() {
+	public int getCountAllIp4Countries() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from Ip4Country"));
 	}
 

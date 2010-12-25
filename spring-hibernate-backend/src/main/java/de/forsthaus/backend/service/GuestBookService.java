@@ -21,7 +21,10 @@ package de.forsthaus.backend.service;
 import de.forsthaus.backend.model.GuestBook;
 
 /**
- * Service methods Interface for working with Guestbook data.
+ * EN: Service methods Interface for working with <b>GuestBook</b> dependend
+ * DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>Gaestebuch</b> betreffenden
+ * DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth

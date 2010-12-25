@@ -145,12 +145,12 @@ public interface SecRightDAO {
 	 * EN: Saves new or updates a SecRight.<br>
 	 * DE: Speichert neu oder aktualisiert ein EinzelRecht.<br>
 	 */
-	public void saveOrUpdate(SecRight right);
+	public void saveOrUpdate(SecRight entity);
 
 	/**
 	 * EN: Deletes a SecRight.<br>
 	 * DE: Loescht ein EinzelRecht.<br>
 	 */
-	public void delete(SecRight right);
+	public void delete(SecRight entity);
 
 }

@@ -79,7 +79,7 @@ public interface MyCalendarEventDAO {
 	 *            / UserId / UyserId
 	 * @return List of MyCalendarEvents / Liste von MyCalendarEvents
 	 */
-	public List<MyCalendarEvent> getCalendarEventForBeginDate(Date beginDate, long usrId);
+	public List<MyCalendarEvent> getCalendarEventsForBeginDate(Date beginDate, long usrId);
 
 	/**
 	 * EN: Get a List of MyCalendarEvents for a given begin-date, end-date and
@@ -95,24 +95,24 @@ public interface MyCalendarEventDAO {
 	 *            / UserId / UyserId
 	 * @return List of MyCalendarEvents / Liste von MyCalendarEvents
 	 */
-	public List<MyCalendarEvent> getCalendarEventFromToDate(Date beginDate, Date endDate, long usrId);
+	public List<MyCalendarEvent> getCalendarEventsFromToDate(Date beginDate, Date endDate, long usrId);
 
 	/**
 	 * EN: Saves new or updates a MyCalendarEvent.<br>
 	 * DE: Speichert neu oder aktualisiert eine MyCalendarEvent Termin.<br>
 	 */
-	public void saveOrUpdate(MyCalendarEvent calendarEvent);
+	public void saveOrUpdate(MyCalendarEvent entity);
 
 	/**
 	 * EN: Deletes a MyCalendarEvent.<br>
 	 * DE: Loescht eine MyCalendarEvent Termin.<br>
 	 */
-	public void delete(MyCalendarEvent calendarEvent);
+	public void delete(MyCalendarEvent entity);
 
 	/**
 	 * EN: Saves a MyCalendarEvent.<br>
 	 * DE: Speichert einen MyCalendarEvent Termin.<br>
 	 */
-	public void save(MyCalendarEvent calendarEvent);
+	public void save(MyCalendarEvent entity);
 
 }

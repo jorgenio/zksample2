@@ -54,8 +54,7 @@ public class IpToCountryServiceImpl implements IpToCountryService, Serializable 
 
 	final private String updateUrl = "http://ip-to-country.webhosting.info/downloads/ip-to-country.csv.zip";
 
-	final private String[] stringNameMapping = { "ipcIpFrom", "ipcIpTo", "ipcCountryCode2", "ipcCountryCode3",
-			"ipcCountryName" };
+	final private String[] stringNameMapping = { "ipcIpFrom", "ipcIpTo", "ipcCountryCode2", "ipcCountryCode3", "ipcCountryName" };
 
 	private IpToCountryDAO ipToCountryDAO;
 
@@ -135,7 +134,7 @@ public class IpToCountryServiceImpl implements IpToCountryService, Serializable 
 			// close the stream !!!
 			in.close();
 
-			return getIpToCountryDAO().getCountAllIpToCountry();
+			return getIpToCountryDAO().getCountAllIpToCountries();
 
 		} catch (final IOException e) {
 			throw new RuntimeException(e);
@@ -143,8 +142,8 @@ public class IpToCountryServiceImpl implements IpToCountryService, Serializable 
 	}
 
 	@Override
-	public int getCountAllIpToCountry() {
-		return getIpToCountryDAO().getCountAllIpToCountry();
+	public int getCountAllIpToCountries() {
+		return getIpToCountryDAO().getCountAllIpToCountries();
 	}
 
 }

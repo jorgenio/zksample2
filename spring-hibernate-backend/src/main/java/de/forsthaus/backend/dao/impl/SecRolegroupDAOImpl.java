@@ -85,7 +85,7 @@ public class SecRolegroupDAOImpl extends BasisNextidDaoImpl<SecRolegroup> implem
 	}
 
 	@Override
-	public int getCountAllSecRolegroup() {
+	public int getCountAllSecRolegroups() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from SecRolegroup"));
 	}
 }

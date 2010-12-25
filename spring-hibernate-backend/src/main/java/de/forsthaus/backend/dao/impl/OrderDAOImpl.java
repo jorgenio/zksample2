@@ -129,7 +129,7 @@ public class OrderDAOImpl extends BasisNextidDaoImpl<Order> implements OrderDAO 
 	}
 
 	@Override
-	public int getCountAllOrder() {
+	public int getCountAllOrders() {
 		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from Order"));
 	}
 

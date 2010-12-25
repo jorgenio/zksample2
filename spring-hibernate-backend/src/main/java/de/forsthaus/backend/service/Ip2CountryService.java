@@ -24,7 +24,10 @@ import de.forsthaus.backend.model.Ip2Country;
 import de.forsthaus.backend.util.IpLocator;
 
 /**
- * Service methods Interface for working with Ip2Country data.
+ * EN: Service methods Interface for working with <b>Ip2Country</b> dependend
+ * DAOs.<br>
+ * DE: Service Methoden Implementierung fuer die <b>Ip2Country</b> betreffenden
+ * DAOs.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -45,7 +48,7 @@ public interface Ip2CountryService {
 	 * 
 	 * @return int
 	 */
-	public int getCountAllIp2Country();
+	public int getCountAllIp2Countries();
 
 	/**
 	 * EN: Get an IPLocator for a IP address.<br>

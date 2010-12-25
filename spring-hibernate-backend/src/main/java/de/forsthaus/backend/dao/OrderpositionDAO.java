@@ -91,18 +91,18 @@ public interface OrderpositionDAO {
 	 * EN: Saves new or updates an Orderposition.<br>
 	 * DE: Speichert neu oder aktualisiert eine AuftragsPosition.<br>
 	 */
-	public void saveOrUpdate(Orderposition orderposition);
+	public void saveOrUpdate(Orderposition entity);
 
 	/**
 	 * EN: Deletes an Orderposition.<br>
 	 * DE: Loescht eine AuftragsPosition.<br>
 	 */
-	public void delete(Orderposition orderposition);
+	public void delete(Orderposition entity);
 
 	/**
 	 * EN: Saves an Orderposition.<br>
 	 * DE: Speichert eine AuftragsPosition.<br>
 	 */
-	public void save(Orderposition orderposition);
+	public void save(Orderposition entity);
 
 }

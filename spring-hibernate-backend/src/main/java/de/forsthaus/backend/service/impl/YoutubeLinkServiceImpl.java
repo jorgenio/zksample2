@@ -50,8 +50,8 @@ public class YoutubeLinkServiceImpl implements YoutubeLinkService {
 	}
 
 	@Override
-	public List<YoutubeLink> getAllYoutubeLink() {
-		return getYoutubeLinkDAO().getAllYoutubeLink();
+	public List<YoutubeLink> getAllYoutubeLinks() {
+		return getYoutubeLinkDAO().getAllYoutubeLinks();
 	}
 
 	@Override

@@ -75,7 +75,7 @@ public class BrancheDAOImpl extends BasisNextidDaoImpl<Branche> implements Branc
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Branche> getBrancheLikeName(String string) {
+	public List<Branche> getBranchesLikeName(String string) {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Branche.class);
 		criteria.add(Restrictions.ilike("braBezeichnung", string, MatchMode.ANYWHERE));

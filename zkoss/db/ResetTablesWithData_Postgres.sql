@@ -1,9 +1,9 @@
 /* 
- * Reset of the data after to much modifications through tests.
+ * Reset of the data in our ONLINE APPLICATION after to much modifications through tests.
  */
 
 
-/* Kaskadiertes Loeschen der Tables, wenn sie schon existieren */
+/* Delete all basic stuff, but NOT the guestbook and login log data */
 DELETE  FROM filiale;
 DELETE  FROM kunde;
 DELETE  FROM artikel;

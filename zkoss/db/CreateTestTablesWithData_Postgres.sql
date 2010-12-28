@@ -172,12 +172,6 @@ without oids;
 -- set table ownership
 alter table youtube_link owner to toledo
 ;
-/*==============================================================*/
-/* Index: idx_ytb_url                                           */
-/*==============================================================*/
-create unique index idx_ytb_url on youtube_link (
-ytb_url
-);
 
 
 /*==============================================================*/

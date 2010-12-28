@@ -7,6 +7,9 @@
 drop database if exists test_db;
 create database test_db;
 */
+
+use test_db;
+
 drop table if exists auftrag;
 drop table if exists kunde;
 drop table if exists branche;

@@ -338,7 +338,7 @@
 						<groupbox mold="3d">
 							<caption
 								style="color: #000000; font-weight:bold;"
-								image="/images/jasperReport_16x16.ico"
+								image="/images/jasperReport_16x16.gif"
 								label="Jasper Reports + DynamicJasper lib" />
 
 							<textbox width="98%"

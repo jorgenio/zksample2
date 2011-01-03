@@ -2212,7 +2212,7 @@ INSERT INTO youtube_link(ytb_id, ytb_title, ytb_url, version) VALUES
 (  4, 'THIN LIZZY - Still in Love With You',                      'http://www.youtube.com/embed/oHUWXjNU0aM', 0),
 (  5, 'THIN LIZZY - Whiskey in the jar (1973)',                   'http://www.youtube.com/embed/-M2jSzLBzK4', 0),
 (  6, 'Gary Moore with Phil Lynnot - Parisienne Walkways (live)', 'http://www.youtube.com/embed/18FgnFVm5k0',   0),
-(  7, 'Talking Heads - This must be the place',                   'http://www.youtube.com/embed/pVrVY540xdc',   0),
+(  7, 'Talking Heads - This must be the place',                   'http://www.youtube.com/embed/TTPqPZzH-LA',   0),
 (  8, 'John Cale and Brian Eno - Spinning away',                  'http://www.youtube.com/embed/-INeMspNSQ0',   0),
 (  9, 'Metric - Joyride',                                         'http://www.youtube.com/embed/F0ZL5YWP5I8',   0),
 ( 10, 'Medina - Kun For Mig + Ensome',                            'http://www.youtube.com/embed/5Gf004et0SI',   0),

@@ -158,10 +158,10 @@ public class SecLoginlogDAOImpl extends BasisNextidDaoImpl<SecLoginlog> implemen
 	@Override
 	public List<DummyBean> getTotalCountByCountries() {
 
-		String str1 = " SELECT distinct (sys_countrycode.ccdCode2), sys_countrycode.ccdName, count(*) as count ";
-		String str2 = " FROM Ip2Country AS log_ip2country, SysCountryCode AS sys_countrycode ";
-		String str3 = " WHERE log_ip2country.sysCountryCode = sys_countrycode.id ";
-		String str4 = " GROUP BY sys_countrycode.ccdCode2, sys_countrycode.ccdName ORDER BY count(*) desc ";
+		String str1 = " SELECT distinct (countrycode.ccdCode2), countrycode.ccdName, count(*) as count ";
+		String str2 = " FROM Ip2Country AS log_ip2country, CountryCode AS countrycode ";
+		String str3 = " WHERE log_ip2country.countryCode = countrycode.id ";
+		String str4 = " GROUP BY countrycode.ccdCode2, countrycode.ccdName ORDER BY count(*) desc ";
 		String hqlStr = str1 + str2 + str3 + str4;
 
 		return CustomDataAccessUtils.transfer2Bean(getHibernateTemplate().find(hqlStr), DummyBean.class, "country", "countryName", "totalCount");
@@ -179,13 +179,13 @@ public class SecLoginlogDAOImpl extends BasisNextidDaoImpl<SecLoginlog> implemen
 		Date dateFrom = month.getStart();
 		Date dateTo = month.getEnd();
 
-		String str1 = " SELECT distinct (sys_countrycode.ccdCode2), sys_countrycode.ccdName, count(*) as count ";
-		String str2 = " FROM Ip2Country AS log_ip2country, SysCountryCode AS sys_countrycode ";
+		String str1 = " SELECT distinct (countrycode.ccdCode2), countrycode.ccdName, count(*) as count ";
+		String str2 = " FROM Ip2Country AS log_ip2country, CountryCode AS countrycode ";
 		String str3 = " , SecLoginlog as secLoginLog ";
 		String str4 = " WHERE secLoginLog.ip2Country = log_ip2country.id ";
-		String str5 = " AND log_ip2country.sysCountryCode = sys_countrycode.id ";
+		String str5 = " AND log_ip2country.countryCode = countrycode.id ";
 		String str6 = " AND secLoginLog.lglLogtime BETWEEN ? and ? ";
-		String str7 = " GROUP BY sys_countrycode.ccdCode2, sys_countrycode.ccdName ORDER BY count(*) desc ";
+		String str7 = " GROUP BY countrycode.ccdCode2, countrycode.ccdName ORDER BY count(*) desc ";
 		String hqlStr = str1 + str2 + str3 + str4 + str5 + str6 + str7;
 
 		Object[] params = { dateFrom, dateTo };
@@ -203,13 +203,13 @@ public class SecLoginlogDAOImpl extends BasisNextidDaoImpl<SecLoginlog> implemen
 		Date dateFrom = day.getStart();
 		Date dateTo = day.getEnd();
 
-		String str1 = " SELECT DISTINCT (sys_countrycode.ccdCode2), sys_countrycode.ccdName, count(*) as count ";
-		String str2 = " FROM Ip2Country AS log_ip2country, SysCountryCode AS sys_countrycode ";
+		String str1 = " SELECT DISTINCT (countrycode.ccdCode2), countrycode.ccdName, count(*) as count ";
+		String str2 = " FROM Ip2Country AS log_ip2country, CountryCode AS countrycode ";
 		String str3 = " , SecLoginlog as secLoginLog ";
 		String str4 = " WHERE secLoginLog.ip2Country = log_ip2country.id ";
-		String str5 = " AND log_ip2country.sysCountryCode = sys_countrycode.id ";
+		String str5 = " AND log_ip2country.countryCode = countrycode.id ";
 		String str6 = " AND secLoginLog.lglLogtime BETWEEN ? AND ? ";
-		String str7 = " GROUP BY sys_countrycode.ccdCode2, sys_countrycode.ccdName ORDER BY count(*) desc ";
+		String str7 = " GROUP BY countrycode.ccdCode2, countrycode.ccdName ORDER BY count(*) desc ";
 		String hqlStr = str1 + str2 + str3 + str4 + str5 + str6 + str7;
 
 		Object[] params = { dateFrom, dateTo };

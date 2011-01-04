@@ -46,11 +46,11 @@ public class ZkossDropDownMenuFactory extends ZkossMenuFactory {
 	}
 
 	@Override
-	protected MenuFactoryDto createMenuComponent(Component parent) {
-		DefaultDropDownMenu menu = new DefaultDropDownMenu();
+	protected MenuFactoryDto createMenuComponent(Component parent, boolean open) {
+		final DefaultDropDownMenu menu = new DefaultDropDownMenu();
 		parent.appendChild(menu);
 
-		Menupopup menupopup = new Menupopup();
+		final Menupopup menupopup = new Menupopup();
 		menu.appendChild(menupopup);
 
 		return new MenuFactoryDto(menupopup, menu);
@@ -58,7 +58,7 @@ public class ZkossDropDownMenuFactory extends ZkossMenuFactory {
 
 	@Override
 	protected ILabelElement createItemComponent(Component parent) {
-		DefaultDropDownMenuItem item = new DefaultDropDownMenuItem();
+		final DefaultDropDownMenuItem item = new DefaultDropDownMenuItem();
 		parent.appendChild(item);
 		return item;
 	}

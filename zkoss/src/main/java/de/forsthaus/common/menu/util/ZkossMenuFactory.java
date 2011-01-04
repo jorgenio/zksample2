@@ -32,6 +32,7 @@ import de.forsthaus.UserWorkspace;
 import de.forsthaus.common.menu.domain.IMenuDomain;
 import de.forsthaus.common.menu.domain.MenuDomain;
 import de.forsthaus.common.menu.domain.MetaMenuFactory;
+import de.forsthaus.util.ZkossComponentTreeUtil;
 
 /**
  * @author bbruhns
@@ -59,20 +60,20 @@ abstract public class ZkossMenuFactory implements Serializable {
 
 		createMenu(MetaMenuFactory.getRootMenuDomain().getItems());
 
-//		if (getLogger().isTraceEnabled()) {
-//			t1 = System.nanoTime() - t1;
-//			getLogger().trace("Needed time for inserting the menu: " + t1 / 1000000 + "ms");
-//			// getLogger().trace("\n" + ZkossBaumUtil.getZulBaum(component));
-//		}
+		if (getLogger().isTraceEnabled()) {
+			t1 = System.nanoTime() - t1;
+			getLogger().trace("Needed time for inserting the menu: " + t1 / 1000000 + "ms");
+			getLogger().trace("\n" + ZkossComponentTreeUtil.getZulTree(component));
+		}
 	}
 
 	private void createMenu(List<IMenuDomain> items) {
 		if (items.isEmpty()) {
 			return;
 		}
-		for (IMenuDomain menuDomain : items) {
+		for (final IMenuDomain menuDomain : items) {
 			if (menuDomain instanceof MenuDomain) {
-				MenuDomain menu = (MenuDomain) menuDomain;
+				final MenuDomain menu = (MenuDomain) menuDomain;
 				if (addSubMenuImpl(menu)) {
 					createMenu(menu.getItems());
 					ebeneHoch();
@@ -93,7 +94,7 @@ abstract public class ZkossMenuFactory implements Serializable {
 
 	private boolean addSubMenuImpl(MenuDomain menu) {
 		if (isAllowed(menu)) {
-			MenuFactoryDto dto = createMenuComponent(getCurrentComponent());
+			final MenuFactoryDto dto = createMenuComponent(getCurrentComponent(), menu.isOpen());
 
 			setAttributes(menu, dto.getNode());
 
@@ -104,13 +105,13 @@ abstract public class ZkossMenuFactory implements Serializable {
 		return false;
 	}
 
-	abstract protected MenuFactoryDto createMenuComponent(Component parent);
+	abstract protected MenuFactoryDto createMenuComponent(Component parent, boolean open);
 
 	private boolean isAllowed(IMenuDomain treecellValue) {
 		return isAllowed(treecellValue.getRightName());
 	}
 
-	public void ebeneHoch() {
+	private void ebeneHoch() {
 		poll();
 	}
 

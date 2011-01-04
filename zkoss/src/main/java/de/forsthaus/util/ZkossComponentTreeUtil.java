@@ -26,7 +26,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.zkoss.zk.ui.AbstractComponent;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Components;
+import org.zkoss.zk.ui.sys.ComponentsCtrl;
 
 /**
  * Helper class for showing the zkoss component tree in the console for a root
@@ -53,14 +53,14 @@ public class ZkossComponentTreeUtil {
 		@Override
 		public void addListener(Component component, StringBuilder result, int depth) {
 			try {
-				Map<?, ?> m = (Map<?, ?>) field.get(component);
+				final Map<?, ?> m = (Map<?, ?>) this.field.get(component);
 				if (m != null && !m.isEmpty()) {
-					for (Map.Entry<?, ?> entry : m.entrySet()) {
+					for (final Map.Entry<?, ?> entry : m.entrySet()) {
 						result.append(StringUtils.leftPad("", depth << 2) + "  " + entry.getKey() + " -> " + entry.getValue() + "\n");
 					}
 				}
-			} catch (IllegalArgumentException e) {
-			} catch (IllegalAccessException e) {
+			} catch (final IllegalArgumentException e) {
+			} catch (final IllegalAccessException e) {
 			}
 		}
 	}
@@ -78,8 +78,8 @@ public class ZkossComponentTreeUtil {
 			field = AbstractComponent.class.getDeclaredField("_listeners");
 			field.setAccessible(true);
 			tmp = new FieldListener(field);
-		} catch (SecurityException e) {
-		} catch (NoSuchFieldException e) {
+		} catch (final SecurityException e) {
+		} catch (final NoSuchFieldException e) {
 		}
 
 		if (tmp == null) {
@@ -102,11 +102,11 @@ public class ZkossComponentTreeUtil {
 	}
 
 	private CharSequence createCompName(Component component) {
-		StringBuilder sb = new StringBuilder();
+		final StringBuilder sb = new StringBuilder();
 		sb.append(component.getClass().getSimpleName());
 
-		String id = component.getId();
-		if (!Components.isAutoId(id)) {
+		final String id = component.getId();
+		if (StringUtils.isNotBlank(id) && !ComponentsCtrl.isAutoUuid(id)) {
 			sb.append(" id=\"" + id + "\"");
 		}
 		return sb;
@@ -117,14 +117,13 @@ public class ZkossComponentTreeUtil {
 			return "Component is null!";
 		}
 
-		StringBuilder result = new StringBuilder(6000);
+		final StringBuilder result = new StringBuilder(6000);
 		return getZulTreeImpl(component, result, -1);
 	}
 
-	@SuppressWarnings("unchecked")
 	private StringBuilder getZulTreeImpl(Component component, StringBuilder result, int depth) {
 		++depth;
-		CharSequence id = createCompName(component);
+		final CharSequence id = createCompName(component);
 		if (CollectionUtils.isEmpty(component.getChildren())) {
 			result.append(StringUtils.leftPad("", depth << 2) + "<" + id + " />\n");
 			return result;
@@ -134,7 +133,7 @@ public class ZkossComponentTreeUtil {
 
 		ADD_LISTENER.addListener(component, result, depth);
 
-		for (Iterator iterator = component.getChildren().iterator(); iterator.hasNext();) {
+		for (final Iterator<?> iterator = component.getChildren().iterator(); iterator.hasNext();) {
 			getZulTreeImpl((Component) iterator.next(), result, depth);
 		}
 

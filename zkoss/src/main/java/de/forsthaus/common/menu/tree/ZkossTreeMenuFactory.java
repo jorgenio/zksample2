@@ -47,13 +47,15 @@ public class ZkossTreeMenuFactory extends ZkossMenuFactory {
 	}
 
 	@Override
-	protected MenuFactoryDto createMenuComponent(Component parent) {
-		Treeitem treeitem = new Treeitem();
+	protected MenuFactoryDto createMenuComponent(Component parent, boolean open) {
+		final Treeitem treeitem = new Treeitem();
 		parent.appendChild(treeitem);
 
-		ILabelElement item = insertTreeCell(treeitem);
+		treeitem.setOpen(open);
 
-		Treechildren treechildren = new Treechildren();
+		final ILabelElement item = insertTreeCell(treeitem);
+
+		final Treechildren treechildren = new Treechildren();
 		treeitem.appendChild(treechildren);
 
 		return new MenuFactoryDto(treechildren, item);
@@ -61,21 +63,22 @@ public class ZkossTreeMenuFactory extends ZkossMenuFactory {
 
 	@Override
 	protected ILabelElement createItemComponent(Component parent) {
-		Treeitem treeitem = new Treeitem();
+		final Treeitem treeitem = new Treeitem();
 		parent.appendChild(treeitem);
 
-		ILabelElement item = insertTreeCell(treeitem);
+		final ILabelElement item = insertTreeCell(treeitem);
 
 		return item;
 	}
 
 	private ILabelElement insertTreeCell(Component parent) {
-		Treerow treerow = new Treerow();
+		final Treerow treerow = new Treerow();
 		parent.appendChild(treerow);
 
-		DefaultTreecell treecell = new DefaultTreecell();
+		final DefaultTreecell treecell = new DefaultTreecell();
 		treerow.appendChild(treecell);
 
 		return treecell;
 	}
+
 }

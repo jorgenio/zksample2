@@ -27,7 +27,7 @@
 	-->
 
 	<!-- Old OfficeDataMenuTree -->
-	<menu id="menu_Category_OfficeData" rightName="menuCat_OfficeData" open="false">
+	<menu id="menu_Category_OfficeData" rightName="menuCat_OfficeData">
 		<menuItem id="menu_Item_Customers" zulNavigation="/WEB-INF/pages/customer/customerList.zul"
 			iconName="/images/icons/view.gif" rightName="menuItem_OfficeData_Customers" />
 		<menuItem id="menu_Item_Orders" zulNavigation="/WEB-INF/pages/order/orderList.zul"

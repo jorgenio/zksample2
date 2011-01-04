@@ -60,13 +60,12 @@ class DefaultDropDownMenuItem extends Menuitem implements EventListener, Seriali
 				/* get an instance of the searched CENTER layout area */
 				final Center center = bl.getCenter();
 
-				final Tabs tabs = (Tabs) center.getFellow("divCenter").getFellow("tabBoxIndexCenter")
-						.getFellow("tabsIndexCenter");
+				final Tabs tabs = (Tabs) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter");
 
 				// Check if the tab is already open, if not than create them
 				Tab checkTab = null;
 				try {
-					checkTab = (Tab) tabs.getFellow("tab_" + this.getLabel().trim());
+					checkTab = (Tab) tabs.getFellow("tab_" + this.getId());
 					checkTab.setSelected(true);
 				} catch (final ComponentNotFoundException ex) {
 					// Ignore if can not get tab.
@@ -74,15 +73,13 @@ class DefaultDropDownMenuItem extends Menuitem implements EventListener, Seriali
 
 				if (checkTab == null) {
 					final Tab tab = new Tab();
-					tab.setId("tab_" + this.getLabel().trim());
+					tab.setId("tab_" + this.getId());
 					tab.setLabel(this.getLabel().trim());
 					tab.setClosable(true);
 
 					tab.setParent(tabs);
 
-					final Tabpanels tabpanels = (Tabpanels) center.getFellow("divCenter")
-							.getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter")
-							.getFellow("tabpanelsBoxIndexCenter");
+					final Tabpanels tabpanels = (Tabpanels) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter").getFellow("tabpanelsBoxIndexCenter");
 					final Tabpanel tabpanel = new Tabpanel();
 					tabpanel.setHeight("100%");
 					tabpanel.setStyle("padding: 0px;");

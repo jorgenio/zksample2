@@ -36,38 +36,35 @@ public class SpringUtil {
 	 * Get the spring application context.
 	 */
 	public static ApplicationContext getApplicationContext() {
-		Execution exec = Executions.getCurrent();
+		final Execution exec = Executions.getCurrent();
 		if (exec == null) {
 			throw new UiException("SpringUtil can be called only under ZK environment!");
 		}
-		
-		return WebApplicationContextUtils.getRequiredWebApplicationContext(
-				(ServletContext)exec.getDesktop().getWebApp().getNativeContext());
+
+		return WebApplicationContextUtils.getRequiredWebApplicationContext((ServletContext) exec.getDesktop().getWebApp().getNativeContext());
 	}
-	
+
 	/**
 	 * Get the spring bean by the specified name.
-	 */		
+	 */
 	public static Object getBean(String name) {
-		Object o = null;
 		try {
-			o = getApplicationContext().getBean(name);
-		} catch (NoSuchBeanDefinitionException ex) {
+			return getApplicationContext().getBean(name);
+		} catch (final NoSuchBeanDefinitionException ex) {
 			// ignore
+			return null;
 		}
-		return o;
 	}
 
 	/**
 	 * Get the spring bean by the specified name and class.
-	 */		
-	public static Object getBean(String name, Class cls) {
-		Object o = null;
+	 */
+	public static <T> T getBean(String name, Class<T> cls) {
 		try {
-			o = getApplicationContext().getBean(name, cls);
-		} catch (NoSuchBeanDefinitionException ex) {
+			return getApplicationContext().getBean(name, cls);
+		} catch (final NoSuchBeanDefinitionException ex) {
 			// ignore
+			return null;
 		}
-		return o;
 	}
 }

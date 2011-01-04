@@ -12,7 +12,7 @@
 		iconName="/images/icons/calendar1_16x16.gif" />
 
 	<!-- Old OfficeDataMenuTree -->
-	<menu id="menu_Category_ReadMe" rightName="">
+	<menu id="menu_Category_ReadMe" rightName="" open="true">
 		<!-- Documentation -->
 		<menuItem id="menu_Item_Documentation" zulNavigation="/WEB-INF/pages/documentation/documentation.zul"
 			iconName="/images/icons/icon-pdf_16x16.png" />

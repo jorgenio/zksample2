@@ -13,6 +13,11 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 05.01.2011 / Refactoring of the backend. 90% are now commented (english/german). Deleting the " + lf;
+		s = s + "            	      old stuff for generating the PrimaryKey for different databases independent from " + lf;
+		s = s + "            	      hibernate. Now it works with hibernate controlled sequences." + lf;
+		s = s + "- 04.01.2011 / Extend the menu taglib used in the mainmenu.xml for the tag 'open'. Now we can open/close" + lf;
+		s = s + "            	      a menuItem at creation time. Splash out an 'about' screen." + lf;
 		s = s + "- 20.12.2010 / Added the second Dashboard module for showing the data inventory. This module" + lf;
 		s = s + "            	      have an build in timer for self refreshing which can be activated at creation time." + lf;
 		s = s + "            	      Setup a new zul skeleton for the dashboard. Thanks Madruga and SimonPay for 'pack/stretch' help. " + lf;

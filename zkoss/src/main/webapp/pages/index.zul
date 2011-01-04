@@ -93,8 +93,7 @@
 												id="btnIndexMySettings" label="${c:l('common.MySettings')}"
 												style="text-decoration: underline; color: white;" />
 											<toolbarbutton
-												id="btnIndexUserAppConfiguration"
-												label="${c:l('common.Configuration')}"
+												id="btnAboutZksample2" label="${c:l('common.About')}"
 												style="text-decoration: underline; color: white;" />
 											<button id="btnLogout"
 												height="20px" label="${c:l('btnLogout.label')}"

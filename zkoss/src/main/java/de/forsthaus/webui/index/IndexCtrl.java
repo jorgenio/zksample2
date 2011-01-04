@@ -49,6 +49,7 @@ import de.forsthaus.backend.service.OfficeService;
 import de.forsthaus.policy.model.UserImpl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.ZksampleDateFormat;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
@@ -233,17 +234,24 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnIndexMySettings() throws IOException, InterruptedException {
-		showPage("/WEB-INF/pages/sec_user/userSettings.zul", "UserSettings");
+		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 
 	/**
-	 * When the 'Configuration' toolbarButton is clicked.<br>
+	 * When the 'about' toolbarButton is clicked.<br>
 	 * 
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	public void onClick$btnIndexUserAppConfiguration() throws IOException, InterruptedException {
-		showPage("/WEB-INF/pages/sec_user/userAppConfiguration.zul", "Configuration");
+	public void onClick$btnAboutZksample2() throws IOException, InterruptedException {
+
+		/* get an instance of the borderlayout defined in the zul-file */
+		Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
+		/* get an instance of the searched CENTER layout area */
+		Center center = bl.getCenter();
+
+		Executions.createComponents("/WEB-INF/pages/about/aboutZksample2.zul", null, null);
+
 	}
 
 	/**

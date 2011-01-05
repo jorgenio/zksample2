@@ -66,7 +66,7 @@ public class UserWorkspace implements Serializable, DisposableBean {
 	 */
 	@Deprecated
 	public static UserWorkspace getInstance() {
-		return (UserWorkspace) SpringUtil.getBean("userWorkspace");
+		return SpringUtil.getBean("userWorkspace", UserWorkspace.class);
 	}
 
 	private String userLanguage;
@@ -182,7 +182,7 @@ public class UserWorkspace implements Serializable, DisposableBean {
 	}
 
 	public String getBrowserType() {
-		return browserType;
+		return this.browserType;
 	}
 
 }

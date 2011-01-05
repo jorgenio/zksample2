@@ -13,7 +13,7 @@
 	{
 		lf = "\n";
 		s = "";
-		s = s + "- 05.01.2011 / Refactoring of the backend. 90% are now commented (english/german). Deleting the " + lf;
+		s = s + "- 05.01.2011 / Refactoring of the backend. Adding missing comments (english/german). Deleting the " + lf;
 		s = s + "            	      old stuff for generating the PrimaryKey for different databases independent from " + lf;
 		s = s + "            	      hibernate. Now it works with hibernate controlled sequences." + lf;
 		s = s + "- 04.01.2011 / Extend the menu taglib used in the mainmenu.xml for the tag 'open'. Now we can open/close" + lf;

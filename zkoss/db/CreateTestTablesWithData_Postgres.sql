@@ -2295,7 +2295,7 @@ ALTER SEQUENCE sec_groupright_seq OWNER TO toledo;
 CREATE SEQUENCE sec_right_seq START 100000;
 ALTER SEQUENCE sec_right_seq OWNER TO toledo;
 
-CREATE SEQUENCE sys_countrycode_seq START 100000;
+CREATE SEQUENCE sys_countrycode_seq START 300;
 ALTER SEQUENCE sys_countrycode_seq OWNER TO toledo;
 
 CREATE SEQUENCE sys_ip4country_seq START 100000;
@@ -2311,7 +2311,7 @@ CREATE SEQUENCE hibernate_statistics_seq START 100000;
 ALTER SEQUENCE hibernate_statistics_seq OWNER TO toledo;
 
 
-/* These sequences holds the key for existing online demo data and should not be restet*/
+/* These sequences holds the key for existing online demo data and should not be reseted*/
 /*
 CREATE SEQUENCE ipc_ip2country_seq START 100000;
 ALTER SEQUENCE ipc_ip2country_seq OWNER TO toledo;

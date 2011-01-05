@@ -8,7 +8,7 @@
 
 		<id name="id" type="long" column="id">
 			<generator class="sequence">
-				<param name="sequence">hibernate_statistic_sequence</param>
+				<param name="sequence">hibernate_entity_statistics_seq</param>
 				<!--
 					for mySQL use generator class="native" <generator class="native" />
 				-->

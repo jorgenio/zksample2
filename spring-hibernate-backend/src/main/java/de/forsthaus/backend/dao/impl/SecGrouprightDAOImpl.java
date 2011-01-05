@@ -37,7 +37,7 @@ import de.forsthaus.backend.model.SecRight;
  * @author bbruhns
  * @author sgerth
  */
-public class SecGrouprightDAOImpl extends BasisNextidDaoImpl<SecGroupright> implements SecGrouprightDAO {
+public class SecGrouprightDAOImpl extends BasisDAO<SecGroupright> implements SecGrouprightDAO {
 	@Override
 	public SecGroupright getNewSecGroupright() {
 		return new SecGroupright();

@@ -6,9 +6,19 @@
 
 	<class name="de.forsthaus.backend.model.Branche" table="branche">
 
+		<!--
+			<id name="id" type="long"> <column name="bra_id" /> <generator
+			class="assigned" /> </id>
+		-->
+
 		<id name="id" type="long">
 			<column name="bra_id" />
-			<generator class="assigned" />
+			<generator class="sequence">
+				<param name="sequence">branche_seq</param>
+				<!--
+					for mySQL use generator class="native" <generator class="native" />
+				-->
+			</generator>
 		</id>
 
 		<version name="version" column="VERSION" type="integer" />

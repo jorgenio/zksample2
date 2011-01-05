@@ -39,7 +39,7 @@ import de.forsthaus.backend.model.Branche;
  * @author bbruhns
  * @author sgerth
  */
-public class BrancheDAOImpl extends BasisNextidDaoImpl<Branche> implements BrancheDAO {
+public class BrancheDAOImpl extends BasisDAO<Branche> implements BrancheDAO {
 
 	@Override
 	public Branche getNewBranche() {

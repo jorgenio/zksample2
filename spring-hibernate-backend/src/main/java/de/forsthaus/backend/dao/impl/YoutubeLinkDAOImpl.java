@@ -37,7 +37,7 @@ import de.forsthaus.backend.model.YoutubeLink;
  * @author bbruhns
  * @author sgerth
  */
-public class YoutubeLinkDAOImpl extends BasisNextidDaoImpl<YoutubeLink> implements YoutubeLinkDAO {
+public class YoutubeLinkDAOImpl extends BasisDAO<YoutubeLink> implements YoutubeLinkDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override

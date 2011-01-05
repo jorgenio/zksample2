@@ -35,7 +35,7 @@ import de.forsthaus.backend.model.Office;
  * @author bbruhns
  * @author sgerth
  */
-public class OfficeDAOImpl extends BasisNextidDaoImpl<Office> implements OfficeDAO {
+public class OfficeDAOImpl extends BasisDAO<Office> implements OfficeDAO {
 
 	@Override
 	public Office getNewOffice() {

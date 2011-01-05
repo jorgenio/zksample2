@@ -39,7 +39,7 @@ import de.forsthaus.backend.model.SecUser;
  * @author bbruhns
  * @author sgerth
  */
-public class SecGroupDAOImpl extends BasisNextidDaoImpl<SecGroup> implements SecGroupDAO {
+public class SecGroupDAOImpl extends BasisDAO<SecGroup> implements SecGroupDAO {
 
 	@Override
 	public SecGroup getNewSecGroup() {

@@ -35,7 +35,7 @@ import de.forsthaus.backend.model.CountryCode;
  * @author bbruhns
  * @author sgerth
  */
-public class CountryCodeDAOImpl extends BasisNextidDaoImpl<CountryCode> implements CountryCodeDAO {
+public class CountryCodeDAOImpl extends BasisDAO<CountryCode> implements CountryCodeDAO {
 
 	@Override
 	public CountryCode getNewCountryCode() {

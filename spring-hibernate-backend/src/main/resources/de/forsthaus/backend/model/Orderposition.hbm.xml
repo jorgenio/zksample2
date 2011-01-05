@@ -5,9 +5,19 @@
 <hibernate-mapping>
 	<class name="de.forsthaus.backend.model.Orderposition" table="auftragposition">
 
+		<!--
+			<id name="id" type="long"> <column name="aup_id" /> <generator
+			class="assigned" /> </id>
+		-->
+
 		<id name="id" type="long">
 			<column name="aup_id" />
-			<generator class="assigned" />
+			<generator class="sequence">
+				<param name="sequence">auftragposition_seq</param>
+				<!--
+					for mySQL use generator class="native" <generator class="native" />
+				-->
+			</generator>
 		</id>
 
 		<version name="version" column="VERSION" type="integer" />

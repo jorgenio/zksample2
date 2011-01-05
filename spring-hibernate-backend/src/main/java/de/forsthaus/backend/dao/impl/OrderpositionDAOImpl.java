@@ -36,7 +36,7 @@ import de.forsthaus.backend.model.Orderposition;
  * @author bbruhns
  * @author sgerth
  */
-public class OrderpositionDAOImpl extends BasisNextidDaoImpl<Orderposition> implements OrderpositionDAO {
+public class OrderpositionDAOImpl extends BasisDAO<Orderposition> implements OrderpositionDAO {
 
 	@Override
 	public Orderposition getNewOrderposition() {

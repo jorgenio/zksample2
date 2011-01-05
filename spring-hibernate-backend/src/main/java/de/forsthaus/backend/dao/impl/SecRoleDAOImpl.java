@@ -36,7 +36,7 @@ import de.forsthaus.backend.model.SecUser;
  * @author bbruhns
  * @author sgerth
  */
-public class SecRoleDAOImpl extends BasisNextidDaoImpl<SecRole> implements SecRoleDAO {
+public class SecRoleDAOImpl extends BasisDAO<SecRole> implements SecRoleDAO {
 
 	@Override
 	public SecRole getNewSecRole() {

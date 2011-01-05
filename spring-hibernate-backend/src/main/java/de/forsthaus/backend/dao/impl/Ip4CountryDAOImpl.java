@@ -30,7 +30,7 @@ import de.forsthaus.backend.model.Ip4Country;
  * @author bbruhns
  * @author sgerth
  */
-public class Ip4CountryDAOImpl extends BasisNextidDaoImpl<Ip4Country> implements Ip4CountryDAO {
+public class Ip4CountryDAOImpl extends BasisDAO<Ip4Country> implements Ip4CountryDAO {
 
 	@Override
 	public Ip4Country getNewIp4Country() {

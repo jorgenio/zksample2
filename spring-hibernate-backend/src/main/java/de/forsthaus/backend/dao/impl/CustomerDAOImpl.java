@@ -39,7 +39,7 @@ import de.forsthaus.backend.model.Customer;
  * @author bbruhns
  * @author sgerth
  */
-public class CustomerDAOImpl extends BasisNextidDaoImpl<Customer> implements CustomerDAO {
+public class CustomerDAOImpl extends BasisDAO<Customer> implements CustomerDAO {
 
 	private static Logger logger = Logger.getLogger(CustomerDAOImpl.class);
 

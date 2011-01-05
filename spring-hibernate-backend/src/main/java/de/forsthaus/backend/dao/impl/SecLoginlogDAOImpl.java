@@ -42,7 +42,7 @@ import de.forsthaus.backend.util.CustomDataAccessUtils;
  * @author bbruhns
  * @author sgerth
  */
-public class SecLoginlogDAOImpl extends BasisNextidDaoImpl<SecLoginlog> implements SecLoginlogDAO {
+public class SecLoginlogDAOImpl extends BasisDAO<SecLoginlog> implements SecLoginlogDAO {
 
 	@Override
 	public SecLoginlog getNewSecLoginlog() {

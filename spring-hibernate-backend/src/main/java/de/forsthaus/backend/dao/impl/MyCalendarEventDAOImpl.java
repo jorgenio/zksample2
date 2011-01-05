@@ -36,7 +36,7 @@ import de.forsthaus.backend.model.MyCalendarEvent;
  * @author bbruhns
  * @author sgerth
  */
-public class MyCalendarEventDAOImpl extends BasisNextidDaoImpl<MyCalendarEvent> implements MyCalendarEventDAO {
+public class MyCalendarEventDAOImpl extends BasisDAO<MyCalendarEvent> implements MyCalendarEventDAO {
 
 	@Override
 	public MyCalendarEvent getNewCalendarEvent() {

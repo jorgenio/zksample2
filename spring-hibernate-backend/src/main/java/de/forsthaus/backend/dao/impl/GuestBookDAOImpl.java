@@ -30,7 +30,7 @@ import de.forsthaus.backend.model.GuestBook;
  * @author bbruhns
  * @author sgerth
  */
-public class GuestBookDAOImpl extends BasisNextidDaoImpl<GuestBook> implements GuestBookDAO {
+public class GuestBookDAOImpl extends BasisDAO<GuestBook> implements GuestBookDAO {
 
 	@Override
 	public GuestBook getNewGuestBook() {

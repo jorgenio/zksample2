@@ -37,7 +37,7 @@ import de.forsthaus.backend.model.Article;
  * @author bbruhns
  * @author sgerth
  */
-public class ArticleDAOImpl extends BasisNextidDaoImpl<Article> implements ArticleDAO, InitializingBean {
+public class ArticleDAOImpl extends BasisDAO<Article> implements ArticleDAO, InitializingBean {
 
 	@Override
 	public Article getNewArticle() {

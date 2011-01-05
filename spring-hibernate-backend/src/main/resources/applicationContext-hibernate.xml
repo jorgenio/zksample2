@@ -25,8 +25,6 @@
 				</value>
 				<value>de/forsthaus/backend/model/Branche.hbm.xml
 				</value>
-				<value>de/forsthaus/backend/model/Nextidview.hbm.xml
-				</value>
 				<value>de/forsthaus/backend/model/SecGroup.hbm.xml
 				</value>
 				<value>de/forsthaus/backend/model/SecGroupright.hbm.xml
@@ -94,67 +92,62 @@
 	<bean id="basisDAO" abstract="true" p:hibernateTemplate-ref="hibernateTemplate"
 		class="de.forsthaus.backend.dao.impl.BasisDAO" scope="session" />
 
-	<!-- ====================================================== -->
-	<!--      Base bean for getting the tables primary key      -->
-	<!-- ====================================================== -->
-	<bean id="basisNextidDao" abstract="true" p:nextidviewDAO-ref="nextidviewDAO"
-		class="de.forsthaus.backend.dao.impl.BasisNextidDaoImpl" parent="basisDAO"
-		scope="session" />
+
 
 	<!-- ====================================================== -->
 	<!--                        DAO beans                       -->
 	<!-- ====================================================== -->
 	<bean id="customerDAO" class="de.forsthaus.backend.dao.impl.CustomerDAOImpl"
-		parent="basisNextidDao" scope="session" />
+		parent="basisDAO" scope="session" />
 	<bean id="orderDAO" class="de.forsthaus.backend.dao.impl.OrderDAOImpl"
-		parent="basisNextidDao" scope="session" />
+		parent="basisDAO" scope="session" />
 	<bean id="orderpositionDAO" class="de.forsthaus.backend.dao.impl.OrderpositionDAOImpl"
-		parent="basisNextidDao" scope="session" />
+		parent="basisDAO" scope="session" />
 	<bean id="articleDAO" class="de.forsthaus.backend.dao.impl.ArticleDAOImpl"
-		parent="basisNextidDao" scope="session" />
+		parent="basisDAO" scope="session" />
 	<bean id="officeDAO" class="de.forsthaus.backend.dao.impl.OfficeDAOImpl"
-		parent="basisNextidDao" scope="prototype" />
+		parent="basisDAO" scope="prototype" />
 	<bean id="brancheDAO" class="de.forsthaus.backend.dao.impl.BrancheDAOImpl"
-		parent="basisNextidDao" scope="session" />
+		parent="basisDAO" scope="session" />
 
 	<bean id="userDAO" class="de.forsthaus.backend.dao.impl.UserDAOImpl"
-		parent="basisNextidDao" scope="prototype" />
+		parent="basisDAO" scope="prototype" />
 
 	<bean id="secGroupDAO" class="de.forsthaus.backend.dao.impl.SecGroupDAOImpl"
-		parent="basisNextidDao" scope="prototype" />
+		parent="basisDAO" scope="prototype" />
 	<bean id="secGrouprightDAO" class="de.forsthaus.backend.dao.impl.SecGrouprightDAOImpl"
-		parent="basisNextidDao" scope="prototype" />
+		parent="basisDAO" scope="prototype" />
 	<bean id="secRightDAO" class="de.forsthaus.backend.dao.impl.SecRightDAOImpl"
-		parent="basisNextidDao" scope="prototype" />
+		parent="basisDAO" scope="prototype" />
 	<bean id="secRoleDAO" class="de.forsthaus.backend.dao.impl.SecRoleDAOImpl"
-		parent="basisNextidDao" scope="prototype" />
+		parent="basisDAO" scope="prototype" />
 	<bean id="secRolegroupDAO" class="de.forsthaus.backend.dao.impl.SecRolegroupDAOImpl"
-		parent="basisNextidDao" scope="prototype" />
+		parent="basisDAO" scope="prototype" />
 	<bean id="secUserroleDAO" class="de.forsthaus.backend.dao.impl.SecUserroleDAOImpl"
-		parent="basisNextidDao" scope="prototype" />
+		parent="basisDAO" scope="prototype" />
 	<bean id="secTypDAO" class="de.forsthaus.backend.dao.impl.SecTypDAOImpl" />
 	<bean id="secLoginlogDAO" class="de.forsthaus.backend.dao.impl.SecLoginlogDAOImpl"
-		parent="basisNextidDao" scope="prototype" />
+		parent="basisDAO" scope="prototype" />
 	<bean id="languageDAO" class="de.forsthaus.backend.dao.impl.LanguageDAOImpl"
 		scope="prototype" />
 
 	<bean id="guestBookDAO" class="de.forsthaus.backend.dao.impl.GuestBookDAOImpl"
-		parent="basisNextidDao" scope="session" />
+		parent="basisDAO" scope="session" />
 
 	<bean id="chartDataDAO" class="de.forsthaus.backend.dao.impl.ChartDataDAOImpl"
 		scope="session" />
 
 	<bean id="ipToCountryDAO" class="de.forsthaus.backend.dao.impl.IpToCountryDAOImpl"
-		parent="basisNextidDao" scope="session" />
+		parent="basisDAO" scope="session" />
 	<bean id="ip2CountryDAO" class="de.forsthaus.backend.dao.impl.Ip2CountryDAOImpl"
-		parent="basisNextidDao" scope="session" />
+		parent="basisDAO" scope="session" />
 	<bean id="ip4CountryDAO" class="de.forsthaus.backend.dao.impl.Ip4CountryDAOImpl"
-		parent="basisNextidDao" scope="session" />
+		parent="basisDAO" scope="session" />
 	<bean id="countryCodeDAO" class="de.forsthaus.backend.dao.impl.CountryCodeDAOImpl"
-		parent="basisNextidDao" scope="session" />
+		parent="basisDAO" scope="session" />
 
 	<bean id="calendarEventDAO" class="de.forsthaus.backend.dao.impl.MyCalendarEventDAOImpl"
-		parent="basisNextidDao" scope="session" />
+		parent="basisDAO" scope="session" />
 
 	<bean id="hibernateStatisticsDao"
 		class="de.forsthaus.backend.dao.impl.HibernateStatisticsDaoImpl"

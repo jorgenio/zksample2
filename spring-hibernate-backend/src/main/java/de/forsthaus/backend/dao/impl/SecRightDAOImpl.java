@@ -44,7 +44,7 @@ import de.forsthaus.backend.model.SecUser;
  * @deprecated
  */
 @Deprecated
-public class SecRightDAOImpl extends BasisNextidDaoImpl<SecRight> implements SecRightDAO {
+public class SecRightDAOImpl extends BasisDAO<SecRight> implements SecRightDAO {
 
 	@Override
 	public SecRight getNewSecRight() {

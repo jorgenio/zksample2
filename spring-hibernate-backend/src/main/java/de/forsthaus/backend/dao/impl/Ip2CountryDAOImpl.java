@@ -33,7 +33,7 @@ import de.forsthaus.backend.util.IpLocator;
  * @author bbruhns
  * @author sgerth
  */
-public class Ip2CountryDAOImpl extends BasisNextidDaoImpl<Ip2Country> implements Ip2CountryDAO {
+public class Ip2CountryDAOImpl extends BasisDAO<Ip2Country> implements Ip2CountryDAO {
 
 	@Override
 	public Ip2Country getNewIp2Country() {

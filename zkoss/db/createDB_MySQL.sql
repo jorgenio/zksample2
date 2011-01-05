@@ -2,6 +2,7 @@
 /* DBMS name:      MySQL 5.1                                    */
 /* Thanks to AndyX                                              */
 /* Created on:     31.08.2010 13:07:33                          */
+/* Changes:  */
 /*==============================================================*/
 /*
 drop database if exists test_db;

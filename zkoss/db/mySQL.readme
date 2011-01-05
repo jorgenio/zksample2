@@ -1,3 +1,5 @@
+05.01.2011/sge the script is not updated for work with the hibernate sequences
+
 Thanks to Andyx. 
 
 He makes the modifications that zksample2 runs with a mySQL 5.1 database.
@@ -16,3 +18,4 @@ src/main/resources/
 
 /db
 CreateTestTablesWithDataMySQL_5_1.sql ( run these script in your mySQL admin tool )
+

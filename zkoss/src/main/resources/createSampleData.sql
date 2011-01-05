@@ -1,21 +1,77 @@
-/* Create the tables, sequences, views and data for the H2 Database */
-DROP SEQUENCE IF EXISTS PRG_SEQUENZ;
-CREATE SEQUENCE PRG_SEQUENZ  INCREMENT BY 1 START WITH 100000; 
+/* create tables and demo data for the Zksample2 demo application */
+/* Script for the H2 database */
 
-DROP VIEW IF EXISTS nextidView;
-/* CREATE VIEW nextidView as select NEXTVAL('PRG_SEQUENZ') as nextval;*/
+DROP TABLE IF EXISTS filiale cascade;
+DROP SEQUENCE IF EXISTS filiale_seq;
 
-/* CREATE VIEW nextidView as select 'PRG_SEQUENZ'.NEXTVAL AS NEXTVAL ;*/ 
-CREATE VIEW nextidView as select NEXT VALUE FOR PRG_SEQUENZ as nextval;
+DROP TABLE IF EXISTS kunde cascade;
+DROP SEQUENCE IF EXISTS kunde_seq;
 
+DROP TABLE IF EXISTS artikel cascade;
+DROP SEQUENCE IF EXISTS artikel_seq;
+
+DROP TABLE IF EXISTS auftrag cascade;
+DROP SEQUENCE IF EXISTS auftrag_seq;
+
+DROP TABLE IF EXISTS auftragposition cascade;
+DROP SEQUENCE IF EXISTS auftragposition_seq;
+
+DROP TABLE IF EXISTS branche cascade;
+DROP SEQUENCE IF EXISTS branche_seq;
+
+/* Security */
+DROP TABLE IF EXISTS sec_user cascade;
+DROP SEQUENCE IF EXISTS sec_user_seq;
+
+DROP TABLE IF EXISTS sec_userrole cascade;
+DROP SEQUENCE IF EXISTS sec_userrole_seq;
+
+DROP TABLE IF EXISTS sec_role cascade;
+DROP SEQUENCE IF EXISTS sec_role_seq;
+
+DROP TABLE IF EXISTS sec_rolegroup cascade;
+DROP SEQUENCE IF EXISTS sec_rolegroup_seq;
+
+DROP TABLE IF EXISTS sec_group cascade;
+DROP SEQUENCE IF EXISTS sec_group_seq;
+
+DROP TABLE IF EXISTS sec_groupright cascade;
+DROP SEQUENCE IF EXISTS sec_groupright_seq;
+
+DROP TABLE IF EXISTS sec_right cascade;
+DROP SEQUENCE IF EXISTS sec_right_seq;
+/* END: Security */
+
+DROP TABLE IF EXISTS sys_countrycode cascade;
+DROP SEQUENCE IF EXISTS sys_countrycode_seq;
+
+DROP TABLE IF EXISTS sys_ip4country cascade;
+DROP SEQUENCE IF EXISTS sys_ip4country_seq;
+
+DROP TABLE IF EXISTS youtube_link cascade;
+DROP SEQUENCE IF EXISTS youtube_link_seq;
+
+DROP TABLE IF EXISTS ipc_ip2country cascade;
+DROP SEQUENCE IF EXISTS ipc_ip2country_seq;
+ 
+DROP TABLE IF EXISTS sec_loginlog cascade;
+DROP SEQUENCE IF EXISTS sec_loginlog_seq;
+ 
+DROP TABLE IF EXISTS log_ip2country cascade;
+DROP SEQUENCE IF EXISTS log_ip2country_seq;
+ 
+DROP TABLE IF EXISTS guestbook cascade;
+DROP SEQUENCE IF EXISTS guestbook_seq;
+ 
+DROP TABLE IF EXISTS calendar_event cascade;
+DROP SEQUENCE IF EXISTS calendar_event_seq;
 
 /********** Hibernate DB Performance Logging ****************/
-/**** SEQUENCE FOR Hibernate DB performance logging****/
-DROP SEQUENCE IF EXISTS HIBERNATE_STATISTIC_SEQUENCE;
-CREATE SEQUENCE HIBERNATE_STATISTIC_SEQUENCE  INCREMENT BY 1 START WITH 100000; 
- 
 DROP TABLE IF EXISTS hibernate_entity_statistics cascade;
+DROP SEQUENCE IF EXISTS hibernate_entity_statistics_seq;
+
 DROP TABLE IF EXISTS hibernate_statistics cascade;
+DROP SEQUENCE IF EXISTS hibernate_statistics_seq;
 
 /*==============================================================*/
 /* Table: Hibernate_Statistics                                  */
@@ -69,34 +125,8 @@ CREATE INDEX fki_
   hibernateentitystatisticsid
   );
 /*************End Hibernate Statistics **********************/
-
-
-DROP TABLE IF EXISTS filiale cascade;
-DROP TABLE IF EXISTS kunde cascade;
-DROP TABLE IF EXISTS artikel cascade;
-DROP TABLE IF EXISTS auftrag cascade;
-DROP TABLE IF EXISTS auftragposition cascade;
-DROP TABLE IF EXISTS branche cascade;
-DROP TABLE IF EXISTS calendar_event cascade;
-
-DROP TABLE IF EXISTS sec_user cascade;
-DROP TABLE IF EXISTS sec_userrole cascade;
-DROP TABLE IF EXISTS sec_role cascade;
-DROP TABLE IF EXISTS sec_rolegroup cascade;
-DROP TABLE IF EXISTS sec_group cascade;
-DROP TABLE IF EXISTS sec_groupright cascade;
-DROP TABLE IF EXISTS sec_right cascade;
-DROP TABLE IF EXISTS sys_countrycode cascade;
-DROP TABLE IF EXISTS ipc_ip2country cascade;
-
-DROP TABLE IF EXISTS sys_ip4country cascade;
-
-DROP TABLE IF EXISTS sec_loginlog cascade;
-DROP TABLE IF EXISTS log_ip2country cascade;
-DROP TABLE IF EXISTS guestbook cascade;
-
-DROP TABLE IF EXISTS youtube_link cascade;
-
+  
+  
 /*==============================================================*/
 /* Table: youtube_link                                          */
 /*==============================================================*/
@@ -2049,5 +2079,30 @@ INSERT INTO sec_loginlog(lgl_id, i2c_id, lgl_loginname,lgl_logtime, lgl_ip, lgl_
 (16, NULL, 'headoffice', '2010-01-08 17:22:33', '89.218.26.20', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
 (17, NULL, 'headoffice', '2010-01-08 17:22:33', '118.68.97.45', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
 (18, NULL, 'admin',      '2010-01-08 17:22:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0);
+
+/* create the sequences */
+CREATE SEQUENCE filiale_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE kunde_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE artikel_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE auftrag_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE auftragposition_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE branche_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE sec_user_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE sec_userrole_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE sec_role_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE sec_rolegroup_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE sec_group_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE sec_groupright_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE sec_right_seq  INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE sys_countrycode_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE sys_ip4country_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE youtube_link_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE hibernate_entity_statistics_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE hibernate_statistics_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE ipc_ip2country_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE sec_loginlog_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE log_ip2country_seq INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE guestbook_seq  INCREMENT BY 1 START WITH 100000;
+CREATE SEQUENCE calendar_event_seq INCREMENT BY 1 START WITH 100000;
 
 commit;

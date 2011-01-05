@@ -31,67 +31,81 @@ SELECT CASE WHEN
 DROP FUNCTION public.create_plpgsql_language ();
 
 
-/********** Hibernate DB Performance Logging ****************/
-/**** SEQUENCE FOR Hibernate DB performance logging****/
-DROP SEQUENCE IF EXISTS HIBERNATE_STATISTIC_SEQUENCE cascade;
-CREATE SEQUENCE HIBERNATE_STATISTIC_SEQUENCE; 
-GRANT USAGE, SELECT, UPDATE
- ON HIBERNATE_STATISTIC_SEQUENCE TO toledo WITH GRANT OPTION;
- ALTER TABLE HIBERNATE_STATISTIC_SEQUENCE owner to toledo;
- 
-
- 
- 
-/****************** SEQUENCES ********************/
-DROP SEQUENCE IF EXISTS PRG_SEQUENZ cascade;
-CREATE SEQUENCE PRG_SEQUENZ; 
-GRANT USAGE, SELECT, UPDATE
- ON PRG_SEQUENZ TO toledo WITH GRANT OPTION;
- ALTER TABLE PRG_SEQUENZ owner to toledo;
-
-/* Loeschen der View fuer den Primaerkey */
-DROP VIEW IF EXISTS nextidView cascade;
-
-/* View fuer das Holen des naechsten Primaerkeys */
-
-CREATE VIEW nextidView as select nextval('PRG_SEQUENZ');
-GRANT DELETE, INSERT, REFERENCES, SELECT, UPDATE
- ON nextidView TO toledo WITH GRANT OPTION;
-ALTER TABLE nextidView owner to toledo;
-
-
 /* Kaskadiertes Loeschen der Tables, wenn sie schon existieren */
 DROP TABLE IF EXISTS filiale cascade;
+DROP SEQUENCE IF EXISTS filiale_seq;
+
 DROP TABLE IF EXISTS kunde cascade;
+DROP SEQUENCE IF EXISTS kunde_seq;
+
 DROP TABLE IF EXISTS artikel cascade;
+DROP SEQUENCE IF EXISTS artikel_seq;
+
 DROP TABLE IF EXISTS auftrag cascade;
+DROP SEQUENCE IF EXISTS auftrag_seq;
+
 DROP TABLE IF EXISTS auftragposition cascade;
+DROP SEQUENCE IF EXISTS auftragposition_seq;
+
 DROP TABLE IF EXISTS branche cascade;
+DROP SEQUENCE IF EXISTS branche_seq;
 
 DROP TABLE IF EXISTS sec_user cascade;
+DROP SEQUENCE IF EXISTS sec_user_seq;
+
 DROP TABLE IF EXISTS sec_userrole cascade;
+DROP SEQUENCE IF EXISTS sec_userrole_seq;
+
 DROP TABLE IF EXISTS sec_role cascade;
+DROP SEQUENCE IF EXISTS sec_role_seq;
+
 DROP TABLE IF EXISTS sec_rolegroup cascade;
+DROP SEQUENCE IF EXISTS sec_rolegroup_seq;
+
 DROP TABLE IF EXISTS sec_group cascade;
+DROP SEQUENCE IF EXISTS sec_group_seq;
+
 DROP TABLE IF EXISTS sec_groupright cascade;
+DROP SEQUENCE IF EXISTS sec_groupright_seq;
+
 DROP TABLE IF EXISTS sec_right cascade;
+DROP SEQUENCE IF EXISTS sec_right_seq;
+
 DROP TABLE IF EXISTS sys_countrycode cascade;
+DROP SEQUENCE IF EXISTS sys_countrycode_seq;
+
 DROP TABLE IF EXISTS sys_ip4country cascade;
+DROP SEQUENCE IF EXISTS sys_ip4country_seq;
 
 DROP TABLE IF EXISTS youtube_link cascade;
+DROP SEQUENCE IF EXISTS youtube_link_seq;
+
+/* hibernate performance statistics */
+DROP TABLE IF EXISTS hibernate_entity_statistics cascade;
+DROP SEQUENCE IF EXISTS hibernate_entity_statistics_seq;
+
+DROP TABLE IF EXISTS hibernate_statistics cascade;
+DROP SEQUENCE IF EXISTS hibernate_statistics_seq;
+
 
 /* not deleted tables for holding the history of the sample data access */
 /*
  ipc_ip2country=can be updated from CSV over webservice.
  DROP TABLE IF EXISTS ipc_ip2country cascade;
+ DROP SEQUENCE IF EXISTS ipc_ip2country_seq;
  
  DROP TABLE IF EXISTS sec_loginlog cascade;
+ DROP SEQUENCE IF EXISTS sec_loginlog_seq;
+ 
  DROP TABLE IF EXISTS log_ip2country cascade;
+ DROP SEQUENCE IF EXISTS log_ip2country_seq;
+ 
  DROP TABLE IF EXISTS guestbook cascade;
+ DROP SEQUENCE IF EXISTS guestbook_seq;
+ 
  DROP TABLE IF EXISTS calendar_event cascade;
+ DROP SEQUENCE IF EXISTS calendar_event_seq;
  */
-DROP TABLE IF EXISTS hibernate_entity_statistics cascade;
-DROP TABLE IF EXISTS hibernate_statistics cascade;
 
 /*==============================================================*/
 /* Table: Hibernate_Statistics                                  */
@@ -124,7 +138,7 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE hibernate_statistics OWNER TO toledo;
-COMMENT ON TABLE hibernate_statistics IS 'Enth�lt eine Hibernatestatistik';
+COMMENT ON TABLE hibernate_statistics IS 'Enthaelt eine Hibernatestatistik';
 
 /*==============================================================*/
 /* Table: Hibernate_                                               */
@@ -2241,19 +2255,81 @@ INSERT INTO sec_loginlog(lgl_id, i2c_id, lgl_loginname,lgl_logtime, lgl_ip, lgl_
 (18, NULL, 'admin', '2009-01-01 17:22:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0);
 
 
-/* Set the Sequence for the GENERAL PRIMARY KEY GENERATOR */
-ALTER SEQUENCE prg_sequenz RESTART WITH 100000;
+/* create the sequences */
+CREATE SEQUENCE filiale_seq START 100000;
+ALTER SEQUENCE filiale_seq OWNER TO toledo;
+
+CREATE SEQUENCE kunde_seq START 100000;
+ALTER SEQUENCE kunde_seq OWNER TO toledo;
+
+CREATE SEQUENCE artikel_seq START 100000;
+ALTER SEQUENCE artikel_seq OWNER TO toledo;
+
+CREATE SEQUENCE auftrag_seq START 100000;
+ALTER SEQUENCE auftrag_seq OWNER TO toledo;
+
+CREATE SEQUENCE auftragposition_seq START 100000;
+ALTER SEQUENCE auftragposition_seq OWNER TO toledo;
+
+CREATE SEQUENCE branche_seq START 100000;
+ALTER SEQUENCE branche_seq OWNER TO toledo;
+
+CREATE SEQUENCE sec_user_seq START 100000;
+ALTER SEQUENCE sec_user_seq OWNER TO toledo;
+
+CREATE SEQUENCE sec_userrole_seq START 100000;
+ALTER SEQUENCE sec_userrole_seq OWNER TO toledo;
+
+CREATE SEQUENCE sec_role_seq START 100000;
+ALTER SEQUENCE sec_role_seq OWNER TO toledo;
+
+CREATE SEQUENCE sec_rolegroup_seq START 100000;
+ALTER SEQUENCE sec_rolegroup_seq OWNER TO toledo;
+
+CREATE SEQUENCE sec_group_seq START 100000;
+ALTER SEQUENCE sec_group_seq OWNER TO toledo;
+
+CREATE SEQUENCE sec_groupright_seq START 100000;
+ALTER SEQUENCE sec_groupright_seq OWNER TO toledo;
+
+CREATE SEQUENCE sec_right_seq START 100000;
+ALTER SEQUENCE sec_right_seq OWNER TO toledo;
+
+CREATE SEQUENCE sys_countrycode_seq START 100000;
+ALTER SEQUENCE sys_countrycode_seq OWNER TO toledo;
+
+CREATE SEQUENCE sys_ip4country_seq START 100000;
+ALTER SEQUENCE sys_ip4country_seq OWNER TO toledo;
+
+CREATE SEQUENCE youtube_link_seq START 100000;
+ALTER SEQUENCE youtube_link_seq OWNER TO toledo;
+
+CREATE SEQUENCE hibernate_entity_statistics_seq START 100000;
+ALTER SEQUENCE hibernate_entity_statistics_seq OWNER TO toledo;
+
+CREATE SEQUENCE hibernate_statistics_seq START 100000;
+ALTER SEQUENCE hibernate_statistics_seq OWNER TO toledo;
 
 
-/* nur fuer DB's die keine Sequenzen unterstuetzen */
+/* These sequences holds the key for existing online demo data and should not be restet*/
 /*
-CREATE OR REPLACE FUNCTION get_nextid() RETURNS bigint AS $$
-        BEGIN
-                RETURN nextval(PRG_SEQUENZ);
-        END;
-$$ LANGUAGE plpgsql;
+CREATE SEQUENCE ipc_ip2country_seq START 100000;
+ALTER SEQUENCE ipc_ip2country_seq OWNER TO toledo;
+
+CREATE SEQUENCE sec_loginlog_seq START 100000;
+ALTER SEQUENCE sec_loginlog_seq OWNER TO toledo;
+
+CREATE SEQUENCE log_ip2country_seq START 100000;
+ALTER SEQUENCE log_ip2country_seq OWNER TO toledo;
+
+CREATE SEQUENCE guestbook_seq START 100000;
+ALTER SEQUENCE guestbook_seq OWNER TO toledo;
+
+CREATE SEQUENCE calendar_event_seq START 100000;
+ALTER SEQUENCE calendar_event_seq OWNER TO toledo;
+ */
 
 
-CREATE VIEW nextidView as select * from get_nextid();
 
-*/
+
+

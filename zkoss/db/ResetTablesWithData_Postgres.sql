@@ -22,6 +22,10 @@ DELETE  FROM sec_right;
 DELETE  FROM sys_ip4country;
 
 DELETE FROM youtube_link;
+
+DELETE  FROM  hibernate_entity_statistics cascade;
+DELETE  FROM  hibernate_statistics cascade;
+
 commit;
 
 /* not deleted tables for holding the history of the sample data access */
@@ -34,12 +38,9 @@ commit;
  DROP TABLE IF EXISTS log_ip2country cascade;
  DROP TABLE IF EXISTS guestbook cascade;
  DROP TABLE IF EXISTS calendar_event cascade;
- 
  */
-DELETE  FROM  hibernate_entity_statistics cascade;
-DELETE  FROM  hibernate_statistics cascade;
 
-      
+    
       
 /******************** TEST DATA ********************/
 
@@ -1005,7 +1006,26 @@ INSERT INTO youtube_link (ytb_id, ytb_title, ytb_url, version) VALUES
 ( 10, 'Paris - Captain Morgan',                                   'http://www.youtube.com/embed/o6Eq1bH-qA0', 0);
 
 
+/* create the sequences */
+ALTER SEQUENCE filiale_seq RESTART WITH 100000;
+ALTER SEQUENCE kunde_seq RESTART WITH 100000;
+ALTER SEQUENCE artikel_seq RESTART WITH 100000;
+ALTER SEQUENCE auftrag_seq RESTART WITH 100000;
+ALTER SEQUENCE auftragposition_seq RESTART WITH 100000;
+ALTER SEQUENCE branche_seq RESTART WITH 100000;
+ALTER SEQUENCE sec_user_seq RESTART WITH 100000;
+ALTER SEQUENCE sec_userrole_seq RESTART WITH 100000;
+ALTER SEQUENCE sec_role_seq RESTART WITH 100000;
+ALTER SEQUENCE sec_rolegroup_seq RESTART WITH 100000;
+ALTER SEQUENCE sec_group_seq RESTART WITH 100000;
+ALTER SEQUENCE sec_groupright_seq RESTART WITH 100000;
+ALTER SEQUENCE sec_right_seq RESTART WITH 100000;
+ALTER SEQUENCE sys_countrycode_seq RESTART WITH 100000;
+ALTER SEQUENCE sys_ip4country_seq RESTART WITH 100000;
+ALTER SEQUENCE youtube_link_seq RESTART WITH 100000;
+ALTER SEQUENCE hibernate_entity_statistics_seq RESTART WITH 100000;
+ALTER SEQUENCE hibernate_statistics_seq RESTART WITH 100000;
 
-/* Set the Sequence for the GENERAL PRIMARY KEY GENERATOR */
-ALTER SEQUENCE prg_sequenz RESTART WITH 100000;
+
+
 

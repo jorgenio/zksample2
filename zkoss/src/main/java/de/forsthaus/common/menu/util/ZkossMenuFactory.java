@@ -32,7 +32,6 @@ import de.forsthaus.UserWorkspace;
 import de.forsthaus.common.menu.domain.IMenuDomain;
 import de.forsthaus.common.menu.domain.MenuDomain;
 import de.forsthaus.common.menu.domain.MetaMenuFactory;
-import de.forsthaus.util.ZkossComponentTreeUtil;
 
 /**
  * @author bbruhns

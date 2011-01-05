@@ -202,7 +202,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		sep1.setParent(gb);
 
 		/* as standard, call the dashboard page */
-		showPage("/WEB-INF/pages/dashboard.zul", "Start");
+		showPage("/WEB-INF/pages/dashboard.zul", "menu_Item_Home", Labels.getLabel("menu_Item_Home"));
 	}
 
 	/**
@@ -230,7 +230,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		@Override
 		public void onEvent(Event event) throws Exception {
 
-			showPage("/WEB-INF/pages/guestbook/guestBookList.zul", "Guestbook");
+			showPage("/WEB-INF/pages/guestbook/guestBookList.zul", "Guestbook", null);
 		}
 	}
 
@@ -243,9 +243,11 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 	 *            The ZulFile Name with path.
 	 * @param tabName
 	 *            The tab name ID.
+	 * @param differentLabel
+	 *            needed for the home/start/dashboard page
 	 * @throws InterruptedException
 	 */
-	private void showPage(String zulFilePathName, String tabName) throws InterruptedException {
+	private void showPage(String zulFilePathName, String tabName, String differentLabel) throws InterruptedException {
 
 		try {
 			// TODO get the parameter for working with tabs from the application
@@ -279,9 +281,13 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 
 					final Tab tab = new Tab();
 					tab.setId("tab_" + tabName.trim());
-					tab.setLabel(tabName.trim());
-					tab.setClosable(true);
 
+					if (differentLabel != null) {
+						tab.setLabel(differentLabel.trim());
+					} else {
+						tab.setLabel(tabName.trim());
+					}
+					tab.setClosable(true);
 					tab.setParent(tabs);
 
 					final Tabpanels tabpanels = (Tabpanels) center.getFellow("divCenter").getFellow("tabBoxIndexCenter").getFellow("tabsIndexCenter").getFellow("tabpanelsBoxIndexCenter");

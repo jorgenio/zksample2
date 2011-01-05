@@ -2,6 +2,8 @@
 <ns2:XMLRootMenu xmlns:ns2="http://www.daibutsu.de/zk/menu">
 
 	<!-- Old HomeMenuTree -->
+	<!-- DON'T CHANGE THE ID FOR the Dashboard menu entry -->
+	<!-- it's used in the mainMenuCtrl.java  -->
 	<menuItem id="menu_Item_Home" zulNavigation="/WEB-INF/pages/dashboard.zul"
 		iconName="/images/icons/console_view.gif" />
 	<!-- Guestbook -->

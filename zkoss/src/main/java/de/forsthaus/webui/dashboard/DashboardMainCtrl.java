@@ -93,8 +93,6 @@ public class DashboardMainCtrl extends GFCBaseCtrl implements Serializable {
 	public void onCreate$windowDashboard(Event event) throws Exception {
 		// logger.debug(event.toString());
 
-		// doFitSize(event);
-
 		/**
 		 * CENTER area
 		 */

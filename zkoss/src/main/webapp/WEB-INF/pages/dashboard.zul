@@ -12,6 +12,7 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 06.01.2011 / Bugfixes in the annotated databinding modules. Sorry. " + lf;
 		s = s + "- 05.01.2011 / Refactoring of the backend. Adding missing comments (english/german). Deleting the " + lf;
 		s = s + "            	      old stuff for generating the PrimaryKey for different databases independent from " + lf;
 		s = s + "            	      hibernate. Now it works with hibernate controlled sequences." + lf;

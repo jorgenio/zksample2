@@ -29,6 +29,7 @@ import de.forsthaus.UserWorkspace;
 import de.forsthaus.backend.model.Article;
 import de.forsthaus.backend.service.ArticleService;
 import de.forsthaus.backend.util.HibernateSearchObject;
+import de.forsthaus.backend.util.ZksampleBeanUtils;
 import de.forsthaus.webui.article.report.ArticleSimpleDJReport;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
@@ -112,7 +113,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	// The same Detail as a modal Dialog
 
 	// Databinding
-	private Article article;
+	// private Article article;
 	private Article selectedArticle;
 	private BindingListModelList articles;
 
@@ -705,7 +706,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		if (getSelectedArticle() != null) {
 
 			try {
-				setOriginalArticle((Article) org.apache.commons.beanutils.BeanUtils.cloneBean(getSelectedArticle()));
+				setOriginalArticle((Article) ZksampleBeanUtils.cloneBean(getSelectedArticle()));
 			} catch (final IllegalAccessException e) {
 				throw new RuntimeException(e);
 			} catch (final InstantiationException e) {
@@ -729,11 +730,9 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		if (getOriginalArticle() != null) {
 
 			try {
-				getArticleDetailCtrl().setArticle((Article) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalArticle()));
-				setSelectedArticle((Article) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalArticle()));
+				setSelectedArticle((Article) ZksampleBeanUtils.cloneBean(getOriginalArticle()));
 				// TODO Bug in DataBinder??
 				windowArticleMain.invalidate();
-				getArticleDetailCtrl().windowArticleDetail.invalidate();
 
 			} catch (final IllegalAccessException e) {
 				throw new RuntimeException(e);
@@ -770,13 +769,13 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
-	public void setArticle(Article article) {
-		this.article = article;
-	}
-
-	public Article getArticle() {
-		return this.article;
-	}
+	// public void setArticle(Article article) {
+	// this.article = article;
+	// }
+	//
+	// public Article getArticle() {
+	// return this.article;
+	// }
 
 	public void setOriginalArticle(Article originalArticle) {
 		this.originalArticle = originalArticle;

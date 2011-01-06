@@ -43,7 +43,7 @@ import de.forsthaus.common.menu.util.ILabelElement;
  * @changes 12/10/2009:sge opens the zul-file window in a tab.<br>
  * 
  */
-class DefaultTreecell extends Treecell implements EventListener, Serializable, ILabelElement {
+public class DefaultTreecell extends Treecell implements EventListener, Serializable, ILabelElement {
 
 	private static final long serialVersionUID = 5221385297281381652L;
 	private static final Logger logger = Logger.getLogger(DefaultTreecell.class);

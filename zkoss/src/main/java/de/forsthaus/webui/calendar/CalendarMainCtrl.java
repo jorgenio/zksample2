@@ -61,10 +61,10 @@ import de.forsthaus.webui.util.ZksampleMessageUtils;
  * @author bbruhns
  * @author sgerth
  */
-public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
+public class CalendarMainCtrl extends GFCBaseCtrl implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(CalendarCtrl.class);
+	private static final Logger logger = Logger.getLogger(CalendarMainCtrl.class);
 
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -96,7 +96,7 @@ public class CalendarCtrl extends GFCBaseCtrl implements Serializable {
 	/**
 	 * default constructor.<br>
 	 */
-	public CalendarCtrl() {
+	public CalendarMainCtrl() {
 		super();
 	}
 

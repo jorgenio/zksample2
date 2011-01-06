@@ -115,7 +115,7 @@
 	</bean>
 
 	<!-- Calendar / Kalender -->
-	<bean id="calendarCtrl" class="de.forsthaus.webui.calendar.CalendarCtrl"
+	<bean id="calendarMainCtrl" class="de.forsthaus.webui.calendar.CalendarMainCtrl"
 		parent="basisCtrl" scope="prototype">
 		<property name="calendarEventService" ref="calendarEventService" />
 	</bean>

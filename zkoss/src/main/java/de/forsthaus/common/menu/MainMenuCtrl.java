@@ -54,6 +54,7 @@ import org.zkoss.zul.Window;
 
 import de.forsthaus.common.menu.dropdown.ZkossDropDownMenuFactory;
 import de.forsthaus.common.menu.tree.ZkossTreeMenuFactory;
+import de.forsthaus.webui.index.IndexCtrl;
 import de.forsthaus.webui.util.WindowBaseCtrl;
 
 /**
@@ -80,12 +81,28 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 	 * 'extends BaseCtrl' class wich extends Window and implements AfterCompose.
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
-	private Window mainMenuWindow; // autowire
+	private Window mainMenuWindow; // autowire the IDSpace
+
+	private Tree mainMenuTree;
 
 	private static String bgColor = "D6DCDE";
 	private static String bgColorInner = "white";
 
+	// Controllers
+	private IndexCtrl indexCtrl;
+
 	public void onCreate$mainMenuWindow(Event event) throws Exception {
+
+		doOnCreateCommon(this.mainMenuWindow, event); // do the autowire stuff
+
+		/*
+		 * Overhand this controller to the caller.
+		 */
+		if (args.containsKey("indexController")) {
+			setIndexCtrl((IndexCtrl) args.get("indexController"));
+			// SET THIS CONTROLLER TO THE MainController
+			getIndexCtrl().setMainMenuCtrl(this);
+		}
 
 		createMenu();
 	}
@@ -182,16 +199,14 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
 		// the menuTree
-		final Tree tree = new Tree();
+		mainMenuTree = new Tree();
 		// tree.setSizedByContent(true);
-		tree.setStyle("overflow:auto;");
-		tree.setParent(gb);
-
 		// tree.setZclass("z-dottree");
-		tree.setStyle("border: none");
+		mainMenuTree.setStyle("overflow:auto; border: none;");
+		mainMenuTree.setParent(gb);
 
 		final Treechildren treechildren = new Treechildren();
-		tree.appendChild(treechildren);
+		mainMenuTree.appendChild(treechildren);
 
 		// generate the treeMenu from the menuXMLFile
 		ZkossTreeMenuFactory.addMainMenu(treechildren);
@@ -241,13 +256,13 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 	 * 
 	 * @param zulFilePathName
 	 *            The ZulFile Name with path.
-	 * @param tabName
+	 * @param tabID
 	 *            The tab name ID.
 	 * @param differentLabel
 	 *            needed for the home/start/dashboard page
 	 * @throws InterruptedException
 	 */
-	private void showPage(String zulFilePathName, String tabName, String differentLabel) throws InterruptedException {
+	private void showPage(String zulFilePathName, String tabID, String tabLabel) throws InterruptedException {
 
 		try {
 			// TODO get the parameter for working with tabs from the application
@@ -271,7 +286,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 				Tab checkTab = null;
 				try {
 					// checkTab = (Tab) tabs.getFellow(tabName);
-					checkTab = (Tab) tabs.getFellow("tab_" + tabName.trim());
+					checkTab = (Tab) tabs.getFellow("tab_" + tabID.trim());
 					checkTab.setSelected(true);
 				} catch (final ComponentNotFoundException ex) {
 					// Ignore if can not get tab.
@@ -280,12 +295,12 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 				if (checkTab == null) {
 
 					final Tab tab = new Tab();
-					tab.setId("tab_" + tabName.trim());
+					tab.setId("tab_" + tabID.trim());
 
-					if (differentLabel != null) {
-						tab.setLabel(differentLabel.trim());
+					if (tabLabel != null) {
+						tab.setLabel(tabLabel.trim());
 					} else {
-						tab.setLabel(tabName.trim());
+						tab.setLabel(tabLabel.trim());
 					}
 					tab.setClosable(true);
 					tab.setParent(tabs);
@@ -449,6 +464,14 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 
 	public void setMainMenuWindow(Window mainMenuWindow) {
 		this.mainMenuWindow = mainMenuWindow;
+	}
+
+	public void setIndexCtrl(IndexCtrl indexCtrl) {
+		this.indexCtrl = indexCtrl;
+	}
+
+	public IndexCtrl getIndexCtrl() {
+		return indexCtrl;
 	}
 
 }

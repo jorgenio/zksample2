@@ -175,12 +175,12 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public Article getArticle() {
 		// STORED IN THE module's MainController
-		return getArticleMainCtrl().getArticle();
+		return getArticleMainCtrl().getSelectedArticle();
 	}
 
 	public void setArticle(Article article) {
 		// STORED IN THE module's MainController
-		getArticleMainCtrl().setArticle(article);
+		getArticleMainCtrl().setSelectedArticle(article);
 	}
 
 	public Article getSelectedArticle() {

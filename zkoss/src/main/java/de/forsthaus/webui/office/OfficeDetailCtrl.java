@@ -196,12 +196,12 @@ public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public Office getOffice() {
 		// STORED IN THE module's MainController
-		return getOfficeMainCtrl().getOffice();
+		return getOfficeMainCtrl().getSelectedOffice();
 	}
 
 	public void setOffice(Office anOffice) {
 		// STORED IN THE module's MainController
-		getOfficeMainCtrl().setOffice(anOffice);
+		getOfficeMainCtrl().setSelectedOffice(anOffice);
 	}
 
 	public Office getSelectedOffice() {

@@ -29,6 +29,7 @@ import de.forsthaus.UserWorkspace;
 import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.service.OfficeService;
 import de.forsthaus.backend.util.HibernateSearchObject;
+import de.forsthaus.backend.util.ZksampleBeanUtils;
 import de.forsthaus.webui.office.report.OfficeSimpleDJReport;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
@@ -106,7 +107,6 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	private OfficeDetailCtrl officeDetailCtrl;
 
 	// Databinding
-	private Office office;
 	private Office selectedOffice;
 	private BindingListModelList offices;
 
@@ -741,7 +741,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		if (getSelectedOffice() != null) {
 
 			try {
-				setOriginalOffice((Office) org.apache.commons.beanutils.BeanUtils.cloneBean(getSelectedOffice()));
+				setOriginalOffice((Office) ZksampleBeanUtils.cloneBean(getSelectedOffice()));
 			} catch (final IllegalAccessException e) {
 				throw new RuntimeException(e);
 			} catch (final InstantiationException e) {
@@ -765,11 +765,9 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		if (getOriginalOffice() != null) {
 
 			try {
-				getOfficeDetailCtrl().setOffice((Office) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalOffice()));
-				setSelectedOffice((Office) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalOffice()));
+				setSelectedOffice((Office) ZksampleBeanUtils.cloneBean(getOriginalOffice()));
 				// TODO Bug in DataBinder??
 				windowOfficeMain.invalidate();
-				getOfficeDetailCtrl().windowOfficeDetail.invalidate();
 
 			} catch (final IllegalAccessException e) {
 				throw new RuntimeException(e);
@@ -814,14 +812,6 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
-
-	public void setOffice(Office office) {
-		this.office = office;
-	}
-
-	public Office getOffice() {
-		return this.office;
-	}
 
 	public void setOriginalOffice(Office originalOffice) {
 		this.originalOffice = originalOffice;

@@ -29,6 +29,7 @@ import de.forsthaus.UserWorkspace;
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.service.BrancheService;
 import de.forsthaus.backend.util.HibernateSearchObject;
+import de.forsthaus.backend.util.ZksampleBeanUtils;
 import de.forsthaus.webui.branch.report.BranchSimpleDJReport;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
@@ -106,7 +107,6 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	private BranchDetailCtrl branchDetailCtrl;
 
 	// Databinding
-	private Branche branche;
 	private Branche selectedBranche;
 	private BindingListModelList branches;
 
@@ -659,8 +659,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		if (getSelectedBranche() != null) {
 
 			try {
-				// FIXME ist das notwendig?
-				setOriginalBranche((Branche) org.apache.commons.beanutils.BeanUtils.cloneBean(getSelectedBranche()));
+				setOriginalBranche((Branche) ZksampleBeanUtils.cloneBean(getSelectedBranche()));
 			} catch (final IllegalAccessException e) {
 				throw new RuntimeException(e);
 			} catch (final InstantiationException e) {
@@ -684,11 +683,9 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		if (getOriginalBranche() != null) {
 
 			try {
-				getBranchDetailCtrl().setBranche((Branche) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalBranche()));
-				setSelectedBranche((Branche) org.apache.commons.beanutils.BeanUtils.cloneBean(getOriginalBranche()));
+				setSelectedBranche((Branche) ZksampleBeanUtils.cloneBean(getOriginalBranche()));
 				// TODO Bug in DataBinder??
 				this.windowBranchMain.invalidate();
-				getBranchDetailCtrl().windowBranchDetail.invalidate();
 
 			} catch (final IllegalAccessException e) {
 				throw new RuntimeException(e);
@@ -730,14 +727,6 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
-
-	public void setBranche(Branche branche) {
-		this.branche = branche;
-	}
-
-	public Branche getBranche() {
-		return this.branche;
-	}
 
 	public void setOriginalBranche(Branche originalBranche) {
 		this.originalBranche = originalBranche;

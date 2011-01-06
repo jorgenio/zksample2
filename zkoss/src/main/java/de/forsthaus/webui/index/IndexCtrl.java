@@ -21,6 +21,7 @@ package de.forsthaus.webui.index;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 import org.jfree.data.time.Day;
@@ -31,9 +32,11 @@ import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.ClientInfoEvent;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventQueues;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Center;
 import org.zkoss.zul.Checkbox;
+import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Menubar;
@@ -42,11 +45,16 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabpanel;
 import org.zkoss.zul.Tabpanels;
 import org.zkoss.zul.Tabs;
+import org.zkoss.zul.Tree;
 import org.zkoss.zul.West;
+import org.zkoss.zul.Window;
 
 import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.service.OfficeService;
+import de.forsthaus.common.menu.MainMenuCtrl;
+import de.forsthaus.common.menu.tree.DefaultTreecell;
 import de.forsthaus.policy.model.UserImpl;
+import de.forsthaus.util.ZkossComponentTreeUtil;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.ZksampleDateFormat;
 import de.forsthaus.webui.util.ZksampleMessageUtils;
@@ -87,6 +95,9 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 	private final String appName = "Zksample2";
 
+	// Controllers
+	private MainMenuCtrl mainMenuCtrl;
+
 	public IndexCtrl() {
 		super();
 	}
@@ -94,7 +105,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	public void onCreate$outerIndexWindow(Event event) throws Exception {
 		this.mainMenuBar.setVisible(false);
 
-		createMainTreeMenu();
+		createMainTreeMenu(event);
 
 		doDemoMode();
 
@@ -195,7 +206,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	/**
 	 * Creates the MainMenu as TreeMenu as default. <br>
 	 */
-	private void createMainTreeMenu() {
+	private void createMainTreeMenu(Event event) {
 
 		// get an instance of the borderlayout defined in the index.zul-file
 		Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");
@@ -203,12 +214,17 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 		// get an instance of the searched west layout area
 		West west = bl.getWest();
 		west.setFlex(true);
-		// clear the center child comps
+		// clear the WEST child comps
 		west.getChildren().clear();
 
-		// create the components from the mainmenu.zul-file and put
-		// it in the west layout area
-		Executions.createComponents("/WEB-INF/pages/mainTreeMenu.zul", west, null);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("indexController", this);
+
+		// create the components from the src/main/resources/mainmenu.xml and
+		// put it in the WEST layout area
+		// Overhand this controller self in a map
+		Executions.createComponents("/WEB-INF/pages/mainTreeMenu.zul", west, map);
+
 	}
 
 	/**
@@ -381,6 +397,14 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 	public boolean isTreeMenu() {
 		return this.CBtreeMenu.isChecked();
+	}
+
+	public void setMainMenuCtrl(MainMenuCtrl mainMenuCtrl) {
+		this.mainMenuCtrl = mainMenuCtrl;
+	}
+
+	public MainMenuCtrl getMainMenuCtrl() {
+		return mainMenuCtrl;
 	}
 
 }

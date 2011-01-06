@@ -168,12 +168,12 @@ public class BranchDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public Branche getBranche() {
 		// STORED IN THE module's MainController
-		return getBranchMainCtrl().getBranche();
+		return getBranchMainCtrl().getSelectedBranche();
 	}
 
 	public void setBranche(Branche branche) {
 		// STORED IN THE module's MainController
-		getBranchMainCtrl().setBranche(branche);
+		getBranchMainCtrl().setSelectedBranche(branche);
 	}
 
 	public Branche getSelectedBranche() {

@@ -90,7 +90,7 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 	protected Button btnCancel; // autowired
 	protected Button btnDelete; // autowired
 
-	private CalendarCtrl calendarCtrl;
+	private CalendarMainCtrl calendarCtrl;
 	private CalendarsEvent editEvent;
 
 	// ServiceDAOs / Domain Classes
@@ -112,7 +112,7 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 		 * 2. Get the selected event.<br>
 		 */
 		if (arg.containsKey("calendarController")) {
-			setCalendarCtrl((CalendarCtrl) arg.get("calendarController"));
+			setCalendarCtrl((CalendarMainCtrl) arg.get("calendarController"));
 		}
 		if (arg.containsKey("calendarsEvent")) {
 			setEditEvent(((CalendarsEvent) arg.get("calendarsEvent")));
@@ -445,11 +445,11 @@ public class CalendarEditEventCtrl extends GFCBaseCtrl implements Serializable {
 	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
-	public CalendarCtrl getCalendarCtrl() {
+	public CalendarMainCtrl getCalendarCtrl() {
 		return calendarCtrl;
 	}
 
-	public void setCalendarCtrl(CalendarCtrl calendarCtrl) {
+	public void setCalendarCtrl(CalendarMainCtrl calendarCtrl) {
 		this.calendarCtrl = calendarCtrl;
 	}
 

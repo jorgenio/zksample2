@@ -16,8 +16,8 @@
 
 	<style src="/css/zul/calendar.css" />
 
-	<window id="windowCalendar" apply="${calendarCtrl}" border="none"
-		width="100%">
+	<window id="windowCalendar" apply="${calendarMainCtrl}"
+		border="none" width="100%">
 
 		<div sclass="z-toolbar" style="padding:0">
 			<hbox pack="stretch" sclass="hboxRemoveWhiteStrips"

@@ -119,6 +119,7 @@ public interface SecLoginlogDAO {
 
 	public ListLongSumBean<DummyBean> getDailyCountByCountries(Date aDate);
 
+	
 	/**
 	 * EN: Deletes local IPs from the table.<br>
 	 * DE: Loescht lokale IPs aus der Tabelle.<br>

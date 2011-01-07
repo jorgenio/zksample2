@@ -33,12 +33,7 @@
 		<property name="password" value="${jdbc.password}" />
 	</bean>
 
-	<!-- /////////    BEAN FOR GENERATING THE PRIMARY KEYS    //////// -->
-	<!--  for DEMO Database H2 we use a special implementation !!!     -->
-	<!-- H2:         " ~.backend.dao.impl.NextIdViewH2DAOImpl"         -->
-	<!-- PostgreSQL: " ~.backend.dao.impl.NextIdViewPostgresDaoImpl    -->
-	<bean id="nextidviewDAO" class="de.forsthaus.backend.dao.impl.NextIdViewPostgresDaoImpl"
-		parent="basisDAO" />
+
 	<util:properties id="hibernateProperties" >
 		<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 		<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>

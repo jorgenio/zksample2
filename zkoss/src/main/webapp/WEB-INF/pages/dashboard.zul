@@ -12,6 +12,7 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 07.01.2011 / Thanks to AndyX for making the changes in the script-files for mySQL 5.1. " + lf;
 		s = s + "- 06.01.2011 / Bugfixes in the annotated databinding modules. Sorry. " + lf;
 		s = s + "- 05.01.2011 / Refactoring of the backend. Adding missing comments (english/german). Deleting the " + lf;
 		s = s + "            	      old stuff for generating the PrimaryKey for different databases independent from " + lf;

@@ -30,12 +30,12 @@ import org.zkoss.zul.Textbox;
  * checking that the reTyped password is same as first written password.<br>
  * 
  * <pre>
- * call from java: usrPasswordRetype.setConstraint(new
- * NoEmptyAndEqualStringsConstraint(this.usrPassword));
+ * call from java: 
+ * usrPassword.setConstraint("NO EMPTY");
+ * usrPasswordRetype.setConstraint(new NoEmptyAndEqualStringsConstraint(this.usrPassword));
  * </pre>
  * 
- * @author sgerth
- * 
+ * @author Stephan Gerth
  */
 public class NoEmptyAndEqualStringsConstraint implements Constraint, java.io.Serializable {
 

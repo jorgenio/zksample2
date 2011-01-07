@@ -250,7 +250,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	public void onClose$userDialogWindow(Event event) throws Exception {
 		// logger.debug(event.toString());
 
-		doClose();
+		doClose(event);
 	}
 
 	/**
@@ -332,7 +332,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		try {
-			doClose();
+			doClose(event);
 		} catch (final Exception e) {
 			// close anyway
 			userDialogWindow.onClose();
@@ -351,7 +351,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * the components and ask the user if saving the modifications. <br>
 	 * 
 	 */
-	private void doClose() throws Exception {
+	private void doClose(Event event) throws Exception {
 
 		if (isDataChanged()) {
 
@@ -603,7 +603,6 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		usrPasswordRetype.setConstraint(new NoEmptyAndEqualStringsConstraint(this.usrPassword));
 		usrFirstname.setConstraint("NO EMPTY");
 		usrLastname.setConstraint("NO EMPTY");
-
 	}
 
 	/**

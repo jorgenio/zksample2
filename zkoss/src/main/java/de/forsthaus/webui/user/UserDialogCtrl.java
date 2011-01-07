@@ -185,10 +185,6 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 			listBoxUser = null;
 		}
 
-		// Set the ListModel and the itemRenderer.
-		listBoxDetails_UserRoles.setModel(new ListModelList(getUserService().getRolesByUser(this.user)));
-		listBoxDetails_UserRoles.setItemRenderer(new UserRolesListModelItemRenderer());
-
 		// +++++++++ DropDown ListBox
 		// set listModel and itemRenderer for the dropdown listbox
 		lbox_usrLocale.setModel(new ListModelList(getUserService().getAllLanguages()));
@@ -197,9 +193,18 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// if available, select the object
 		ListModelList lml = (ListModelList) lbox_usrLocale.getModel();
 
+		/**
+		 * check if the user is new ( means: userID == Long.MIN_VALUE )<br>
+		 * If new than it's not a transient hibernate object and an error occur
+		 * by using this ID for a hibernate query<br>
+		 */
 		if (user.isNew()) {
 			lbox_usrLocale.setSelectedIndex(-1);
 		} else {
+			// Set the ListModel and the itemRenderer.
+			listBoxDetails_UserRoles.setModel(new ListModelList(getUserService().getRolesByUser(getUser())));
+			listBoxDetails_UserRoles.setItemRenderer(new UserRolesListModelItemRenderer());
+
 			if (!StringUtils.isEmpty(user.getUsrLocale())) {
 				Language lang = getUserService().getLanguageByLocale(user.getUsrLocale());
 				lbox_usrLocale.setSelectedIndex(lml.indexOf(lang));

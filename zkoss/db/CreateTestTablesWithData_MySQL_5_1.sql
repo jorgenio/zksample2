@@ -2,139 +2,53 @@
 /* DBMS name:      MySQL 5.1                                    */
 /* Thanks to AndyX                                              */
 /* Created on:     31.08.2010 13:07:33                          */
+/* Changes:        07.Jan.2011 /AndyX                           */
 /*==============================================================*/
 /*
 drop database if exists test_db;
 create database test_db;
 */
+
 use test_db;
 
+drop table if exists auftragposition;
 drop table if exists auftrag;
+drop table if exists artikel;
 drop table if exists kunde;
 drop table if exists branche;
-drop table if exists artikel;
-drop table if exists auftragposition;
 drop table if exists filiale;
-DROP TABLE IF EXISTS calendar_event;
-
-drop table if exists sec_user;
-drop table if exists sec_group;
+drop table if exists calendar_event;
+drop table if exists youtube_link;
+drop table if exists guestbook;
 drop table if exists sec_groupright;
-drop table if exists sec_loginlog;
-drop table if exists sec_right;
-drop table if exists sec_role;
 drop table if exists sec_rolegroup;
 drop table if exists sec_userrole;
-
-drop table if exists sys_countrycode;
+drop table if exists sec_right;
+drop table if exists sec_role;
+drop table if exists sec_group;
+drop table if exists sec_user;
+drop table if exists sec_loginlog;
 drop table if exists log_ip2country;
+drop table if exists sys_countrycode;
+drop table if exists sys_ip4city;
 drop table if exists ipc_ip2country;
-drop table if exists guestbook;
-drop table if exists ipc_ip4country;
 drop table if exists hibernate_entity_statistics;
 drop table if exists hibernate_statistics;
 
-drop table if exists youtube_link;
 
-drop table if exists sequenztable;
-CREATE TABLE IF NOT EXISTS sequenztable (
-  id int(11) NOT NULL,
-  PRIMARY KEY (id)
-) ENGINE=MyISAM;
-
-
-INSERT INTO sequenztable  VALUES (50000);
-
-
-DELIMITER $$
-DROP FUNCTION IF EXISTS get_nextid;
-CREATE FUNCTION get_nextid()
-RETURNS INT
-BEGIN
-DECLARE nextid INT;
-update sequenztable set id = id + 1;
-select id into nextid from sequenztable;
-RETURN nextid;
-END$$
-DELIMITER ;
-
-DROP VIEW IF EXISTS nextidview;  
-CREATE VIEW nextidview 
-AS 
-SELECT get_nextid() as nextval ;
-
-
-
-/*==============================================================*/
-/* Table: youtube_link                                          */
-/*==============================================================*/
-create table youtube_link (
-   ytb_id               bigint                 not null,
-   ytb_title            varchar(100)           null,
-   ytb_url              varchar(300)           not null,
-   version              int                    not null default 0,
-   primary key (ytb_id)
-);
-
-
-
-/*==============================================================*/
-/* Table: Branche                                               */
-/*==============================================================*/
-create table Branche
-(
-   bra_id               bigint not null,
-   bra_nr               varchar(20),
-   bra_bezeichnung      varchar(30) not null,
-   version              int not null default 0,
-   primary key (bra_id)
-);
-
-
-/*==============================================================*/
-/* Index: idx_bra_id                                            */
-/*==============================================================*/
-create unique index idx_bra_id on Branche
-(
-   bra_id
-);
-
-/*==============================================================*/
-/* Index: idx_bra_bezeichnung                                   */
-/*==============================================================*/
-create unique index idx_bra_bezeichnung on Branche
-(
-   bra_bezeichnung
-);
 
 /*==============================================================*/
 /* Table: artikel                                               */
 /*==============================================================*/
 create table artikel
 (
-   art_id               bigint not null,
+   art_id               int not null auto_increment,
    art_kurzbezeichnung  varchar(50) not null,
    art_langbezeichnung  text,
    art_nr               varchar(20) not null,
-   art_preis            numeric(12,2) not null default 0.00,
+   art_preis            float(12,2) not null default 0.00,
    version              int not null default 0,
    primary key (art_id)
-);
-
-/*==============================================================*/
-/* Index: idx_art_id                                            */
-/*==============================================================*/
-create unique index idx_art_id on artikel
-(
-   art_id
-);
-
-/*==============================================================*/
-/* Index: idx_art_nr                                            */
-/*==============================================================*/
-create unique index idx_art_nr on artikel
-(
-   art_nr
 );
 
 /*==============================================================*/
@@ -150,8 +64,8 @@ create index idx_art_bezeichnung on artikel
 /*==============================================================*/
 create table auftrag
 (
-   auf_id               bigint not null,
-   auf_kun_id           bigint not null,
+   auf_id               int not null auto_increment,
+   auf_kun_id           int not null,
    auf_nr               varchar(20) not null,
    auf_bezeichnung      varchar(50),
    version              int not null default 0,
@@ -159,93 +73,57 @@ create table auftrag
 );
 
 /*==============================================================*/
-/* Index: ix_auf_id                                             */
-/*==============================================================*/
-create unique index ix_auf_id on auftrag
-(
-   auf_id
-);
-
-/*==============================================================*/
-/* Index: ix_auf_kun_id                                         */
-/*==============================================================*/
-create index ix_auf_kun_id on auftrag
-(
-   auf_kun_id
-);
-
-/*==============================================================*/
-/* Index: ix_auf_nr                                             */
-/*==============================================================*/
-create unique index ix_auf_nr on auftrag
-(
-   auf_nr
-);
-
-/*==============================================================*/
 /* Table: auftragposition                                       */
 /*==============================================================*/
 create table auftragposition
 (
-   aup_id               bigint not null,
-   aup_auf_id           bigint not null,
-   art_id               bigint,
+   aup_id               int not null auto_increment,
+   aup_auf_id           int not null,
+   art_id               int,
    aup_position         int,
-   aup_menge            numeric(12,2),
-   aup_einzelwert       numeric(12,2),
-   aup_gesamtwert       numeric(12,2),
+   aup_menge            float(12,2),
+   aup_einzelwert       float(12,2),
+   aup_gesamtwert       float(12,2),
    version              int not null default 0,
    primary key (aup_id)
 );
 
 /*==============================================================*/
-/* Index: ix_aup_auf_id                                         */
+/* Table: branche                                               */
 /*==============================================================*/
-create index ix_aup_auf_id on auftragposition
+create table branche
 (
-   aup_auf_id
+   bra_id               int not null auto_increment,
+   bra_nr               varchar(20),
+   bra_bezeichnung      varchar(30) not null,
+   version              int not null default 0,
+   primary key (bra_id)
 );
-
-/*==============================================================*/
-/* Index: ix_aup_id                                             */
-/*==============================================================*/
-create unique index ix_aup_id on auftragposition
-(
-   aup_id
-);
-
 
 /*==============================================================*/
 /* Table: calendar_event                                        */
 /*==============================================================*/
-create table calendar_event (
-   cle_id               bigint               not null,
-   cle_title            VARCHAR(20)          null,
-   cle_content          VARCHAR(300)         not null,
-   cle_begin_date       TIMESTAMP            not null,
-   cle_end_date         TIMESTAMP            not null,
-   cle_header_color     VARCHAR(10)          null,
-   cle_content_color    VARCHAR(10)          null,
-   cle_usr_id           bigint               not null,
-   cle_locked           BOOL                 null default false,
-   version              int                  not null default 0,
+create table calendar_event
+(
+   cle_id               int not null auto_increment,
+   cle_title            varchar(20),
+   cle_content          varchar(300) not null,
+   cle_begin_date       timestamp not null,
+   cle_end_date         timestamp not null,
+   cle_header_color     varchar(10),
+   cle_content_color    varchar(10),
+   cle_usr_id           int not null,
+   cle_locked           tinyint(1) default 0,
+   version              int not null default 0,
    primary key (cle_id)
 );
-
-/*==============================================================*/
-/* Index: idx_cle_id                                            */
-/*==============================================================*/
-create unique index idx_cle_id on calendar_event (
-cle_id
-);
-
 
 /*==============================================================*/
 /* Table: filiale                                               */
 /*==============================================================*/
 create table filiale
 (
-   fil_id               bigint not null,
+   fil_id               int not null auto_increment,
    fil_nr               varchar(20) not null,
    fil_bezeichnung      varchar(50),
    fil_name1            varchar(50),
@@ -264,11 +142,85 @@ create index ix_fil_bezeichnung on filiale
 );
 
 /*==============================================================*/
-/* Index: ix_fil_nr                                             */
+/* Table: guestbook                                             */
 /*==============================================================*/
-create unique index ix_fil_nr on filiale
+create table guestbook
 (
-   fil_nr
+   gub_id               int not null auto_increment,
+   gub_subject          varchar(40) not null,
+   gub_date             timestamp not null,
+   gub_usr_name         varchar(40) not null,
+   gub_text             text,
+   version              int not null default 0,
+   primary key (gub_id)
+);
+
+/*==============================================================*/
+/* Table: hibernate_entity_statistics                           */
+/*==============================================================*/
+create table hibernate_entity_statistics
+(
+   id                   int not null auto_increment,
+   hibernateentitystatisticsid bigint(20) not null,
+   entityname           text not null,
+   loadcount            int not null,
+   updatecount          int not null,
+   insertcount          int not null,
+   deletecount          int not null,
+   fetchcount           int not null,
+   optimisticfailurecount int not null,
+   primary key (id)
+);
+
+/*==============================================================*/
+/* Index: fki_                                                  */
+/*==============================================================*/
+create index fki_ on hibernate_entity_statistics
+(
+   hibernateentitystatisticsid
+);
+
+/*==============================================================*/
+/* Table: hibernate_statistics                                  */
+/*==============================================================*/
+create table hibernate_statistics
+(
+   id                   int not null auto_increment,
+   flushcount           int not null,
+   preparestatementcount int not null,
+   entityloadcount      int not null,
+   entityupdatecount    int not null,
+   entityinsertcount    int not null,
+   entitydeletecount    int not null,
+   entityfetchcount     int not null,
+   collectionloadcount  int not null,
+   collectionupdatecount int not null,
+   collectionremovecount int not null,
+   collectionrecreatecount int not null,
+   collectionfetchcount int not null,
+   queryexecutioncount  int not null,
+   queryexecutionmaxtime int not null,
+   optimisticfailurecount int not null,
+   queryexecutionmaxtimequerystring text,
+   callmethod           text not null,
+   javafinishms         bigint(20) not null,
+   finishtime           timestamp not null,
+   primary key (id)
+);
+
+/*==============================================================*/
+/* Table: ipc_ip2country                                        */
+/*==============================================================*/
+create table ipc_ip2country
+(
+   ipc_id               int not null auto_increment,
+   ipc_ip_from          int,
+   ipc_ip_to            int,
+   ipc_country_code2    varchar(2),
+   ipc_country_code3    varchar(3),
+   ipc_country_name     varchar(50),
+   version              int not null default 0,
+   primary key (ipc_id)
 );
 
 /*==============================================================*/
@@ -276,33 +228,25 @@ create unique index ix_fil_nr on filiale
 /*==============================================================*/
 create table kunde
 (
-   kun_id               bigint not null,
-   kun_fil_id           bigint not null,
-   kun_bra_id           bigint,
+   kun_id               int not null auto_increment,
+   kun_fil_id           int not null,
+   kun_bra_id           int,
    kun_nr               varchar(20) not null,
    kun_matchcode        varchar(20),
    kun_name1            varchar(50),
    kun_name2            varchar(50),
    kun_ort              varchar(50),
-   kun_mahnsperre       bool,
+   kun_mahnsperre       tinyint(1),
    version              int not null default 0,
    primary key (kun_id)
 );
 
 /*==============================================================*/
-/* Index: ix_kun_id                                             */
+/* Index: ix_kun_matchcode                                      */
 /*==============================================================*/
-create unique index ix_kun_id on kunde
+create index ix_kun_matchcode on kunde
 (
-   kun_id
-);
-
-/*==============================================================*/
-/* Index: ix_kun_nr                                             */
-/*==============================================================*/
-create unique index ix_kun_nr on kunde
-(
-   kun_nr
+   kun_matchcode
 );
 
 /*==============================================================*/
@@ -322,14 +266,6 @@ create index ix_kun_name2 on kunde
 );
 
 /*==============================================================*/
-/* Index: ix_kun_matchcode                                      */
-/*==============================================================*/
-create index ix_kun_matchcode on kunde
-(
-   kun_matchcode
-);
-
-/*==============================================================*/
 /* Index: ix_kun_ort                                            */
 /*==============================================================*/
 create index ix_kun_ort on kunde
@@ -338,85 +274,61 @@ create index ix_kun_ort on kunde
 );
 
 /*==============================================================*/
+/* Table: log_ip2country                                        */
+/*==============================================================*/
+create table log_ip2country
+(
+   i2c_id               int not null auto_increment,
+   ccd_id               int,
+   i2c_city             varchar(50),
+   i2c_latitude         float,
+   i2c_longitude        float,
+   version              int default 0,
+   primary key (i2c_id)
+);
+
+
+/*==============================================================*/
 /* Table: sec_group                                             */
 /*==============================================================*/
 create table sec_group
 (
-   grp_id               bigint not null,
+   grp_id               int not null auto_increment,
    grp_shortdescription varchar(100) not null,
    grp_longdescription  varchar(1000),
    version              int not null default 0,
    primary key (grp_id)
 );
 
-/*==============================================================*/
-/* Index: idx_grp_id                                            */
-/*==============================================================*/
-create unique index idx_grp_id on sec_group
-(
-   grp_id
-);
-
-/*==============================================================*/
-/* Index: idx_grp_shortdescription                              */
-/*==============================================================*/
-create unique index idx_grp_shortdescription on sec_group
-(
-   grp_shortdescription
-);
 
 /*==============================================================*/
 /* Table: sec_groupright                                        */
 /*==============================================================*/
 create table sec_groupright
 (
-   gri_id               bigint not null,
-   grp_id               bigint not null,
-   rig_id               bigint not null,
+   gri_id               int not null auto_increment,
+   grp_id               int not null,
+   rig_id               int not null,
    version              int not null default 0,
    primary key (gri_id)
 );
 
-/*==============================================================*/
-/* Index: idx_gri_id                                            */
-/*==============================================================*/
-create unique index idx_gri_id on sec_groupright
-(
-   gri_id
-);
-
-/*==============================================================*/
-/* Index: idx_gri_grprig                                        */
-/*==============================================================*/
-create unique index idx_gri_grprig on sec_groupright
-(
-   grp_id,
-   rig_id
-);
 
 /*==============================================================*/
 /* Table: sec_loginlog                                          */
 /*==============================================================*/
 create table sec_loginlog
 (
-   lgl_id               bigint not null,
-   i2c_id               INT  ,
+   lgl_id               int not null auto_increment,
+   i2c_id               int,
    lgl_loginname        varchar(50) not null,
    lgl_logtime          timestamp not null,
    lgl_ip               varchar(19),
-   lgl_browsertype      VARCHAR(40)          null,
+   lgl_browsertype      varchar(40),
    lgl_status_id        int not null,
    lgl_sessionid        varchar(50),
-   version              INT not null default 0,
-   constraint PK_SEC_LOGINLOG primary key (lgl_id)
-);
-
-/*==============================================================*/
-/* Index: idx_lgl_id                                            */
-/*==============================================================*/
-create unique index idx_lgl_id on sec_loginlog
-(
-   lgl_id
+   version              int not null default 0,
+   primary key (lgl_id)
 );
 
 /*==============================================================*/
@@ -432,19 +344,11 @@ create index idx_lgl_logtime on sec_loginlog
 /*==============================================================*/
 create table sec_right
 (
-   rig_id               bigint not null,
+   rig_id               int not null auto_increment,
    rig_type             int default 1,
    rig_name             varchar(50) not null,
    version              int not null default 0,
    primary key (rig_id)
-);
-
-/*==============================================================*/
-/* Index: idx_rig_id                                            */
-/*==============================================================*/
-create unique index idx_rig_id on sec_right
-(
-   rig_id
 );
 
 /*==============================================================*/
@@ -456,377 +360,149 @@ create index idx_rig_type on sec_right
 );
 
 /*==============================================================*/
-/* Index: idx_rig_name                                          */
-/*==============================================================*/
-create unique index idx_rig_name on sec_right
-(
-   rig_name
-);
-
-/*==============================================================*/
 /* Table: sec_role                                              */
 /*==============================================================*/
 create table sec_role
 (
-   rol_id               bigint not null,
+   rol_id               int not null auto_increment,
    rol_shortdescription varchar(100) not null,
    rol_longdescription  varchar(1000),
    version              int not null default 0,
    primary key (rol_id)
 );
 
-alter table sec_role comment 'Defines the roles that are used in the application.';
-
-/*==============================================================*/
-/* Index: idx_role_id                                           */
-/*==============================================================*/
-create unique index idx_role_id on sec_role
-(
-   rol_id
-);
-
-/*==============================================================*/
-/* Index: idx_role_shortdescription                             */
-/*==============================================================*/
-create unique index idx_role_shortdescription on sec_role
-(
-   rol_shortdescription
-);
 
 /*==============================================================*/
 /* Table: sec_rolegroup                                         */
 /*==============================================================*/
 create table sec_rolegroup
 (
-   rlg_id               bigint not null,
-   grp_id               bigint not null,
-   rol_id               bigint not null,
+   rlg_id               int not null auto_increment,
+   grp_id               int not null,
+   rol_id               int not null,
    version              int not null default 0,
    primary key (rlg_id)
 );
 
-/*==============================================================*/
-/* Index: idx_rlg_id                                            */
-/*==============================================================*/
-create unique index idx_rlg_id on sec_rolegroup
-(
-   rlg_id
-);
-
-/*==============================================================*/
-/* Index: idx_rlg_grprol                                        */
-/*==============================================================*/
-create unique index idx_rlg_grprol on sec_rolegroup
-(
-   grp_id,
-   rol_id
-);
 
 /*==============================================================*/
 /* Table: sec_user                                              */
 /*==============================================================*/
 create table sec_user
 (
-   usr_id               bigint not null,
+   usr_id               int not null auto_increment,
    usr_loginname        varchar(50) not null,
    usr_password         varchar(50) not null,
    usr_lastname         varchar(50),
    usr_firstname        varchar(50),
    usr_email            varchar(200),
    usr_locale           varchar(5),
-   usr_enabled          bool not null default FALSE,
-   usr_accountNonExpired bool not null default TRUE,
-   usr_credentialsNonExpired bool not null default TRUE,
-   usr_accountNonLocked bool not null default TRUE,
+   usr_enabled          tinyint(1) not null default 0,
+   usr_accountNonExpired tinyint(1) not null default 1,
+   usr_credentialsNonExpired tinyint(1) not null default 1,
+   usr_accountNonLocked tinyint(1) not null default 1,
    usr_token            varchar(20),
    version              int not null default 0,
    primary key (usr_id)
 );
 
-/*==============================================================*/
-/* Index: idx_usr_id                                            */
-/*==============================================================*/
-create unique index idx_usr_id on sec_user
-(
-   usr_id
-);
-
-/*==============================================================*/
-/* Index: idx_usr_loginname                                     */
-/*==============================================================*/
-create unique index idx_usr_loginname on sec_user
-(
-   usr_loginname
-);
 
 /*==============================================================*/
 /* Table: sec_userrole                                          */
 /*==============================================================*/
 create table sec_userrole
 (
-   urr_id               bigint not null,
-   usr_id               bigint not null,
-   rol_id               bigint not null,
+   urr_id               int not null auto_increment,
+   usr_id               int not null,
+   rol_id               int not null,
    version              int not null default 0,
    primary key (urr_id)
 );
 
-alter table sec_userrole comment 'Holdes the Roles that a user have.';
-
-/*==============================================================*/
-/* Index: idx_urr_id                                            */
-/*==============================================================*/
-create unique index idx_urr_id on sec_userrole
-(
-   urr_id
-);
-
-/*==============================================================*/
-/* Index: idx_urr_usrrol                                        */
-/*==============================================================*/
-create unique index idx_urr_usrrol on sec_userrole
-(
-   usr_id,
-   rol_id
-);
-
-
 /*==============================================================*/
 /* Table: sys_countrycode                                       */
 /*==============================================================*/
-create table sys_countrycode (
-   ccd_id               INT                 not null,
-   ccd_name             VARCHAR(48)          null,
-   ccd_code2            VARCHAR(2)           not null,
-   version              INT                 null default 0,
-   constraint PK_SYS_COUNTRYCODE primary key (ccd_id)
-);
-
-create table log_ip2country (
-   i2c_id               INT                 not null,
-   ccd_id               INT                ,
-   i2c_city             VARCHAR(50)         ,
-   i2c_latitude         FLOAT               ,
-   i2c_longitude        FLOAT               ,
-   version              INT                 default 0,
-   constraint PK_LOG_IP2COUNTRY primary key (i2c_id)
+create table sys_countrycode
+(
+   ccd_id               int not null auto_increment,
+   ccd_name             varchar(48),
+   ccd_code2            varchar(2) not null,
+   version              int default 0,
+   primary key (ccd_id)
 );
 
 /*==============================================================*/
-/* Table: guestbook                                             */
+/* Table: sys_ip4city                                           */
 /*==============================================================*/
-create table guestbook (
-   gub_id               INT                 not null,
-   gub_subject          VARCHAR(40)          not null,
-   gub_date             TIMESTAMP            not null,
-   gub_usr_name         VARCHAR(40)          not null,
-   gub_text             TEXT                 null,
-   version              INT                 not null default 0,
-   constraint PK_GUESTBOOK primary key (gub_id)
+create table sys_ip4city
+(
+   i4ci_id              int not null auto_increment,
+   i4ci_ip              int,
+   i4ci_city            varchar(50),
+   i4ci_latitude        float,
+   i4ci_longitude       float,
+   version              int default 0,
+   primary key (i4ci_id)
 );
 
 /*==============================================================*/
-/* Table: ipc_ip4country                                        */
+/* Table: youtube_link                                          */
 /*==============================================================*/
-create table ipc_ip4country (
-   ipc_id               INT                 not null,
-   ipc_ip_from          INT                 ,
-   ipc_ip_to            INT                 ,
-   ipc_country_code2    VARCHAR(2)          ,
-   ipc_country_code3    VARCHAR(3)          ,
-   ipc_country_name     VARCHAR(50)         ,
-   version              INT                 not null default 0,
-   constraint PK_ipc_ip4country primary key (ipc_id)
+create table youtube_link
+(
+   ytb_id               int not null auto_increment,
+   ytb_title            varchar(100),
+   ytb_url              varchar(300) not null,
+   version              int not null default 0,
+   primary key (ytb_id)
 );
-
-
-/*==============================================================*/
-/* Table: ipc_ip2country                                        */
-/*==============================================================*/
-create table ipc_ip2country (
-   ipc_id               INT                 not null,
-   ipc_ip_from          INT                 null,
-   ipc_ip_to            INT                 null,
-   ipc_country_code2    VARCHAR(2)           null,
-   ipc_country_code3    VARCHAR(3)           null,
-   ipc_country_name     VARCHAR(50)          null,
-   version              INT4                 not null default 0,
-   constraint PK_IPC_IP2COUNTRY primary key (ipc_id)
-);
-
-
-/*==============================================================*/
-/* Index: idx_ipc_id                                            */
-/*==============================================================*/
-create unique index idx_ipc_id on ipc_ip2country (
-ipc_id
-);
-
-/*==============================================================*/
-/* Index: idx_ipc_ip_from                                       */
-/*==============================================================*/
-create  index idx_ipc_ip_from on ipc_ip2country (
-ipc_ip_from
-);
-
-/*==============================================================*/
-/* Index: idx_ipc_ip_to                                         */
-/*==============================================================*/
-create  index idx_ipc_ip_to on ipc_ip2country (
-ipc_ip_to
-);
-
-/*==============================================================*/
-/* Index: idx_ipc_country_code2                                 */
-/*==============================================================*/
-create  index idx_ipc_country_code2 on ipc_ip2country (
-ipc_country_code2
-);
-
-/*==============================================================*/
-/* Index: idx_ipc_country_code3                                 */
-/*==============================================================*/
-create  index idx_ipc_country_code3 on ipc_ip2country (
-ipc_country_code3
-);
-
-/*==============================================================*/
-/* Index: idx_ipc_country_name                                  */
-/*==============================================================*/
-create  index idx_ipc_country_name on ipc_ip2country (
-ipc_country_name
-);
-
-
 
 alter table auftrag add constraint ref_auf_to_kun foreign key (auf_kun_id)
-      references kunde (kun_id) on delete cascade on update cascade;
+      references kunde (kun_id);
 
 alter table auftragposition add constraint ref_aup_to_art foreign key (art_id)
-      references artikel (art_id) on delete restrict on update restrict;
+      references artikel (art_id);
 
 alter table auftragposition add constraint ref_aup_to_auf foreign key (aup_auf_id)
-      references auftrag (auf_id) on delete cascade on update cascade;
+      references auftrag (auf_id);
 
 alter table kunde add constraint ref_kun_to_bra foreign key (kun_bra_id)
-      references Branche (bra_id) on delete restrict on update restrict;
+      references branche (bra_id);
 
 alter table kunde add constraint ref_kun_to_fil foreign key (kun_fil_id)
-      references filiale (fil_id) on delete cascade on update cascade;
+      references filiale (fil_id);
 
 alter table sec_groupright add constraint ref_gri_to_grp foreign key (grp_id)
-      references sec_group (grp_id) on delete restrict on update restrict;
+      references sec_group (grp_id);
 
 alter table sec_groupright add constraint ref_gri_to_rig foreign key (rig_id)
-      references sec_right (rig_id) on delete restrict on update restrict;
+      references sec_right (rig_id);
 
 alter table sec_rolegroup add constraint ref_rlg_to_grp foreign key (grp_id)
-      references sec_group (grp_id) on delete restrict on update restrict;
+      references sec_group (grp_id);
 
 alter table sec_rolegroup add constraint ref_rlg_to_rol foreign key (rol_id)
-      references sec_role (rol_id) on delete restrict on update restrict;
+      references sec_role (rol_id);
 
 alter table sec_userrole add constraint ref_aut_to_rol foreign key (rol_id)
-      references sec_role (rol_id) on delete restrict on update restrict;
+      references sec_role (rol_id);
 
 alter table sec_userrole add constraint ref_aut_to_usr foreign key (usr_id)
-      references sec_user (usr_id) on delete restrict on update restrict;
+      references sec_user (usr_id);
 
-
+alter table log_ip2country add constraint ref_i2c_to_ccd foreign key (ccd_id)
+      references sys_countrycode (ccd_id);      
       
+alter table sec_loginlog add constraint ref_lgl_to_i2c foreign key (i2c_id)
+      references log_ip2country (i2c_id);     
       
-      
-/********** Hibernate DB Performance Logging ****************/
-/**** SEQUENCE FOR Hibernate DB performance logging****/
-/*
-      DROP TABLE IF EXISTS hibernate_statistic_key;
-CREATE TABLE IF NOT EXISTS hibernate_statistic_key(
-  id int(11) NOT NULL,
-  PRIMARY KEY (id)
-) ENGINE=MyISAM;
-
-INSERT INTO hibernate_statistic_key  VALUES (1);
-
-DROP FUNCTION IF EXISTS hibernate_statistic_sequence;
-
-DELIMITER $$
-
-CREATE FUNCTION hibernate_statistic_sequence()
-RETURNS INT
-BEGIN
-DECLARE nextid INT;
-update hibernate_statistic_sequence set id = id + 1;
-select id into nextid from hibernate_statistic_key;
-RETURN nextid;
-END$$
-DELIMITER ;
-
-DROP VIEW IF EXISTS hibernate_statistic_sequence;  
-CREATE VIEW hibernate_statistic_sequence 
-AS 
-SELECT hibernate_statistic_sequence() ;
-*/
-      
-/*==============================================================*/
-/* Table: Hibernate_Statistics                                  */
-/*==============================================================*/
-CREATE TABLE hibernate_statistics
-(
-  id INT NOT NULL auto_increment,
-  flushcount integer NOT NULL,
-  preparestatementcount integer NOT NULL,
-  entityloadcount integer NOT NULL,
-  entityupdatecount integer NOT NULL,
-  entityinsertcount integer NOT NULL,
-  entitydeletecount integer NOT NULL,
-  entityfetchcount integer NOT NULL,
-  collectionloadcount integer NOT NULL,
-  collectionupdatecount integer NOT NULL,
-  collectionremovecount integer NOT NULL,
-  collectionrecreatecount integer NOT NULL,
-  collectionfetchcount integer NOT NULL,
-  queryexecutioncount integer NOT NULL,
-  queryexecutionmaxtime integer NOT NULL,
-  optimisticfailurecount integer NOT NULL,
-  queryexecutionmaxtimequerystring text,
-  callmethod text NOT NULL,
-  javafinishms bigint NOT NULL,
-  finishtime TIMESTAMP NOT NULL,
-  CONSTRAINT hibernatestatistics_pkey PRIMARY KEY (id)
-);
-
-/*==============================================================*/
-/* Table: Hibernate_                                               */
-/*==============================================================*/
-CREATE TABLE hibernate_entity_statistics
-(
-  id INT NOT NULL auto_increment,
-  hibernateentitystatisticsid bigint NOT NULL,
-  entityname text NOT NULL,
-  loadcount integer NOT NULL,
-  updatecount integer NOT NULL,
-  insertcount integer NOT NULL,
-  deletecount integer NOT NULL,
-  fetchcount integer NOT NULL,
-  optimisticfailurecount integer NOT NULL,
-  CONSTRAINT hibernateentitystatistics_pkey PRIMARY KEY (id)
-);
-
-CREATE INDEX fki_
-  ON hibernate_entity_statistics (
-  hibernateentitystatisticsid
-  );
-  
-/*************End Hibernate Statistics **********************/
-      
-      
-
 /******************** TEST DATA ********************/
 
 
 /******************** Filiale Daten ********************/
-INSERT INTO FILIALE (FIL_ID, FIL_NR, FIL_BEZEICHNUNG,FIL_NAME1,FIL_NAME2,FIL_ORT,VERSION)
-values (1,'0001','Filiale Berlin','Hï¿½rmann Gmbh','Personaldienstleistungen','Berlin',0);
+INSERT INTO FILIALE (FIL_ID, FIL_NR, FIL_BEZEICHNUNG,FIL_NAME1,FIL_NAME2,FIL_ORT,VERSION) values
+(1,'0001','Filiale Muenchen','Hoermann Gmbh','Personaldienstleistungen','Muenchen',0),
+(2,'0002','Filiale Berlin',  'Hoermann Gmbh','Personaldienstleistungen','Berlin',0);
 
 /******************** Security: USERS ********************/  
 INSERT INTO SEC_USER (USR_ID, USR_LOGINNAME, USR_PASSWORD, USR_LASTNAME, USR_FIRSTNAME, USR_EMAIL, USR_LOCALE, USR_ENABLED, USR_ACCOUNTNONEXPIRED, USR_CREDENTIALSNONEXPIRED, USR_ACCOUNTNONLOCKED, USR_TOKEN,  VERSION) values 
@@ -867,7 +543,7 @@ INSERT INTO SEC_USERROLE (URR_ID, USR_ID, ROL_ID, VERSION) values
 /******************** Security: SEC_GROUPS ********************/  
 INSERT INTO SEC_GROUP (GRP_ID, GRP_SHORTDESCRIPTION, GRP_LONGDESCRIPTION, VERSION) values
 (13001, 'Headoffice Supervisor Group', 'kjhf ff hgfd', 0),
-(13002, 'common Admin Group / user accounts', 'create/modify user accounts', 0),
+(13002, 'Admin Group - user accounts', 'create/modify user accounts', 0),
 (13003, 'Guest Group', 'Minimal Rights for the guests', 0),
 (13004, 'Admin Group - user rights', 'edit/modify user rights', 0),
 /* Customers */
@@ -1038,6 +714,7 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15015, 1, 'menuCat_UserRights', 0),
 (15016, 2, 'menuItem_Administration_LoginsLog', 0),
 (15017, 2, 'menuItem_Administration_HibernateStats', 0),
+(15018, 2, 'menu_Item_Calendar', 0),
 
 /* Pages = Type(0) */
 /* --> Page Customer */
@@ -1047,7 +724,7 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15102, 0, 'orderListWindow', 0),
 (15103, 0, 'orderDialogWindow', 0),
 /* --> Page Articles */
-(15104, 0, 'window_ArticlesList', 0),
+(15104, 0, 'windowArticlesList', 0),
 (15105, 0, 'window_ArticlesDialog', 0),
 /* --> Page Branches */
 (15106, 0, 'window_BranchesList', 0),
@@ -1150,17 +827,15 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 /* BRANCHES */
 /* branchListWindow Buttons*/
 /* --> button_BranchList_btnHelp */
-(15500, 0, 'button_BranchList_btnHelp', 0),
-(15501, 0, 'button_BranchList_NewBranch', 0),
-(15502, 0, 'button_BranchList_PrintBranches', 0),
-(15503, 0, 'button_BranchList_Search_BranchName', 0),
+(15502, 0, 'button_BranchMain_PrintBranches', 0),
+(15503, 0, 'button_BranchMain_Search_BranchName', 0),
 /* branchDialogWindow BUTTONS */
-(15510, 6, 'button_BranchDialog_btnHelp', 0),
-(15511, 6, 'button_BranchDialog_btnNew', 0),
-(15512, 6, 'button_BranchDialog_btnEdit', 0),
-(15513, 6, 'button_BranchDialog_btnDelete', 0),
-(15514, 6, 'button_BranchDialog_btnSave', 0),
-(15515, 6, 'button_BranchDialog_btnClose', 0),
+(15510, 6, 'button_BranchMain_btnHelp', 0),
+(15511, 6, 'button_BranchMain_btnNew', 0),
+(15512, 6, 'button_BranchMain_btnEdit', 0),
+(15513, 6, 'button_BranchMain_btnDelete', 0),
+(15514, 6, 'button_BranchMain_btnSave', 0),
+(15515, 6, 'button_BranchMain_btnClose', 0),
 /* ARTICLES */
 /* window_ArticlesList Buttons*/
 (15530, 6, 'button_ArticlesList_btnHelp', 0),
@@ -1178,20 +853,17 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 /* OFFICES */
 /* window_OfficeList Buttons*/
 /* --> button_BranchList_btnHelp */
-(15600, 6, 'button_OfficeList_btnHelp', 0),
-(15601, 6, 'button_OfficeList_NewOffice', 0),
 (15602, 6, 'button_OfficeList_PrintList', 0),
 (15603, 6, 'button_OfficeList_SearchNo', 0),
 (15604, 6, 'button_OfficeList_SearchName', 0),
 (15605, 6, 'button_OfficeList_SearchCity', 0),
 /* window_OfficeDialog BUTTONS */
-(15610, 6, 'button_OfficeDialog_PrintOffice', 0),
-(15611, 6, 'button_OfficeDialog_btnHelp', 0),
-(15612, 6, 'button_OfficeDialog_btnNew', 0),
-(15613, 6, 'button_OfficeDialog_btnEdit', 0),
-(15614, 6, 'button_OfficeDialog_btnDelete', 0),
-(15615, 6, 'button_OfficeDialog_btnSave', 0),
-(15616, 6, 'button_OfficeDialog_btnClose', 0),
+(15611, 6, 'button_OfficeMain_btnHelp', 0),
+(15612, 6, 'button_OfficeMain_btnNew', 0),
+(15613, 6, 'button_OfficeMain_btnEdit', 0),
+(15614, 6, 'button_OfficeMain_btnDelete', 0),
+(15615, 6, 'button_OfficeMain_btnSave', 0),
+(15616, 6, 'button_OfficeMain_btnClose', 0),
 
 /* Method/Event = Type(3) */
 /* --> CustomerList BUTTON */
@@ -1242,7 +914,6 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14014, 13002, 15014, 0),
 (14015, 13002, 15015, 0),
 (14016, 13002, 15016, 0),
-/* Hibernate Statistic */
 (14017, 13002, 15017, 0),
 
 /* New */
@@ -1488,8 +1159,6 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14501, 13020, 15005, 0),
 /* Right: page_BranchesList */
 (14502, 13020, 15106, 0),
-/* Right: button_BranchList_btnHelp */
-(14503, 13020, 15500, 0),
 /* Right: button_BranchList_PrintBranches */
 (14504, 13020, 15502, 0),
 /* Right: button_BranchList_Search_BranchName */
@@ -1502,8 +1171,6 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14509, 13020, 15515, 0),
 
 /* Group: Branch_New */
-/* Right: button_BranchList_NewBranch */
-(14510, 13021, 15501, 0),
 /* Right: button_BranchDialog_btnNew */
 (14511, 13021, 15511, 0),
 /* Right: button_BranchDialog_btnSave */
@@ -1537,6 +1204,12 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14546, 13030, 15540, 0),
 /* Right: button_ArticlesDialog_btnClose */
 (14547, 13030, 15545, 0),
+/* Right: button_ArticleList_SearchArticleID */
+(14548, 13030, 15533, 0),
+/* Right: button_ArticleList_SearchName */
+(14549, 13030, 15534, 0),
+
+
 
 /* Group: Articles_New */
 /* Right: button_ArticleList_NewArticle */
@@ -1564,8 +1237,6 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14571, 13040, 15006, 0),
 /* Right: window_OfficesList */
 (14572, 13040, 15108, 0),
-/* Right: button_OfficeList_btnHelp */
-(14573, 13040, 15600, 0),
 /* Right: button_OfficeList_PrintList */
 (14574, 13040, 15602, 0),
 /* Right: button_OfficeList_SearchNo */
@@ -1580,12 +1251,8 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14579, 13040, 15611, 0),
 /* Right: button_OfficeDialog_btnClose */
 (14580, 13040, 15616, 0),
-/* Right: button_OfficeDialog_PrintOffice */
-(14581, 13040, 15610, 0),
 
 /* Group: Offices_New */
-/* Right: button_OfficeList_NewOffice */
-(14585, 13041, 15601, 0),
 /* Right: button_OfficeDialog_btnNew */
 (14586, 13041, 15612, 0),
 /* Right: button_OfficeDialog_btnSave */
@@ -1692,7 +1359,7 @@ INSERT INTO BRANCHE (BRA_ID, BRA_NR, BRA_BEZEICHNUNG, VERSION) VALUES
 
 /******************** Kunden Daten ********************/
 INSERT INTO KUNDE (KUN_ID,KUN_FIL_ID,KUN_BRA_ID, KUN_NR, KUN_MATCHCODE,KUN_NAME1,KUN_NAME2,KUN_ORT,KUN_MAHNSPERRE,VERSION) VALUES 
-(20,1,1000, '20', 'MUELLER','--> Mueller','Elektroinstallationen','Freiburg',true,0),
+(20,1,1000, '20', 'MUELLER','--> MUEller','Elektroinstallationen','Freiburg',true,0),
 (21,1,1000, '21', 'HUBER','--> Huber','Elektroinstallationen','Oberursel',true,0),
 (22,1,1000, '22', 'SIEMENS','Siemens AG','Elektroinstallationen','Braunschweig',false,0),
 (23,1,1000, '23', 'AEG','AEG','Elektroinstallationen','Stuttgart',false,0),
@@ -1737,7 +1404,7 @@ INSERT INTO ARTIKEL (ART_ID,ART_KURZBEZEICHNUNG,ART_LANGBEZEICHNUNG,ART_NR,ART_P
 (3002,'Luesterklemmen 10-fach, bis 1.5mm','Luesterklemmen, grau, bis Querschnitt 1.5mm','LUESTER1002',0.78,0),
 (3003,'Euro-Platine','Euro-Platine fuer Versuchsaufbauten','PLAT3003',2.34,0),
 (3004,'Leuchtmittel 22 Watt','Leuchtmittel 22 Watt Sparlampe weiss, mittlere Lebensdauer ca. 6000 Std.','SPARLA3004',2.84,0),
-(3005,'Leuchte einzel bis 100 Watt','Hngeleuchte einzel, Farbe=grau, bis 100 Watt','LEU3005',32.00,0),
+(3005,'Leuchte einzel bis 100 Watt','Haengeleuchte einzel, Farbe=grau, bis 100 Watt','LEU3005',32.00,0),
 (3006,'5-adriges Kabel 1,5mm','mehradriges Kabel, 5 Adern, Farbe=grau, Querschnitt= 1,5 mm','MK3006',0.22, 0),
 (3007,'Kabelbinder 12cm','Kabelbinder, Menge: 100 Stk. Lnge: 12 cm, Farbe: weiss','KB3007',1.34, 0),
 (3008,'Kabelverschraubung DN 17','Kabelverschraubung Messing verchromt DN 17','KS3008',2.90,0),
@@ -2033,17 +1700,18 @@ INSERT INTO sys_countrycode(CCD_ID, CCD_NAME, CCD_CODE2, VERSION) VALUES
 (250,'MONTENEGRO','ME', 0);
 
 /******************** YouTube Music Links ********************/
-INSERT INTO youtube_link (ytb_id, ytb_title, ytb_url, version) VALUES 
-(  1, 'Loquat - Swing Set Chain',                                 'http://www.youtube.com/embed/51G24IVfcaI', 0),
-(  2, 'Empire of the Sun - We Are The People',                    'http://www.youtube.com/embed/Tj_Nlm0871E', 0),
-(  3, 'Loquat - Harder Hit',                                      'http://www.youtube.com/watch?v=aoHUb2r8q-g&feature=rec-LGOUT-exp_fresh+div-1r-3-HM', 0),
-(  4, 'THIN LIZZY - Still in Love With You',                      'http://www.youtube.com/watch?v=oHUWXjNU0aM', 0),
-(  5, 'Gary Moore with Phil Lynnot - Parisienne Walkways (live)', 'http://www.youtube.com/embed/18FgnFVm5k0', 0),
-(  6, 'Talking Heads - This must be the place',                   'http://www.youtube.com/embed/TTPqPZzH-LA', 0),
-(  7, 'John Cale and Brian Eno - Spinning away',                  'http://www.youtube.com/embed/-INeMspNSQ0', 0),
-(  8, 'Metric - Joyride',                                         'http://www.youtube.com/embed/F0ZL5YWP5I8', 0),
-(  9, 'Medina - Kun For Mig + Ensome',                            'http://www.youtube.com/embed/5Gf004et0SI', 0),
-( 10, 'Paris - Captain Morgan',                                   'http://www.youtube.com/embed/o6Eq1bH-qA0', 0);
+INSERT INTO youtube_link(ytb_id, ytb_title, ytb_url, version) VALUES 
+(  1, 'Loquat - Swing Set Chain',                                 'http://www.youtube.com/embed/51G24IVfcaI',   0),
+(  2, 'Empire of the Sun - We Are The People',                    'http://www.youtube.com/embed/1uPL5twyQOw',   0),
+(  3, 'Loquat - Harder Hit',                                      'http://www.youtube.com/watch?v=aoHUb2r8q-g',   0),
+(  4, 'THIN LIZZY - Still in Love With You',                      'http://www.youtube.com/embed/oHUWXjNU0aM', 0),
+(  5, 'THIN LIZZY - Whiskey in the jar (1973)',                   'http://www.youtube.com/embed/-M2jSzLBzK4', 0),
+(  6, 'Gary Moore with Phil Lynnot - Parisienne Walkways (live)', 'http://www.youtube.com/embed/18FgnFVm5k0',   0),
+(  7, 'Talking Heads - This must be the place',                   'http://www.youtube.com/embed/TTPqPZzH-LA',   0),
+(  8, 'John Cale and Brian Eno - Spinning away',                  'http://www.youtube.com/embed/-INeMspNSQ0',   0),
+(  9, 'Metric - Joyride',                                         'http://www.youtube.com/embed/F0ZL5YWP5I8',   0),
+( 10, 'Medina - Kun For Mig + Ensome',                            'http://www.youtube.com/embed/5Gf004et0SI',   0),
+( 11, 'Paris - Captain Morgan',                                   'http://www.youtube.com/embed/o6Eq1bH-qA0',   0);
 
 
  /* fill sample logins */
@@ -2066,5 +1734,4 @@ INSERT INTO sec_loginlog(lgl_id, i2c_id, lgl_loginname,lgl_logtime, lgl_ip, lgl_
 (16, NULL, 'headoffice', '2009-01-01 17:22:33', '89.218.26.20', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
 (17, NULL, 'headoffice', '2009-01-01 17:22:33', '118.68.97.45', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
 (18, NULL, 'admin', '2009-01-01 17:22:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0);
-
 

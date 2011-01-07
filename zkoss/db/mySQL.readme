@@ -1,21 +1,99 @@
-05.01.2011/sge the script is not updated for work with the hibernate sequences
+05.01.2011/sge the script are now updated for let hibernate working with sequences.
 
 Thanks to Andyx. 
-
 He makes the modifications that zksample2 runs with a mySQL 5.1 database.
 
-Involved files where you must do uncomment lines.
 
-Project: spring-hibernate-backend:
-src/main/resources/
---> de/forsthaus/backend/model/HibernateEntityStatistics.hbm.xml
---> de/forsthaus/backend/model/HibernateStatistics.hbm.xml
+1. Create mySQL database "test_db"
+================================== 
+Project: Find the script in project: zkoss: /db
+File:    CreateTestTablesWithData_MySQL_5_1.sql( run these script in your mySQL admin tool )
 
-Project: zkoss:
-src/main/resources/
---> customize-applicationContext.xml
+
+2. Change key 'generator' in the hibernatemapping files with "native" 
+=====================================================================
+Project: spring-hibernate-backend: 
+Files:   src/main/resources/de/forsthaus/backend/model/
+(see sample code below)
+
+--> Article.hbm.xml
+--> Branche.hbm.xml
+--> CountryCode.hbm.xml
+--> Customer.hbm.xml
+--> GuestBook.hbm.xml
+--> HibernateEntityStatistics.hbm.xml
+--> HibernateStatistics.hbm.xml
+--> Ip2Country.hbm.xml
+--> Ip4Country.hbm.xml
+--> IpToCountry.hbm.xml
+--> MyCalendarEvent.hbm.xml
+--> Office.hbm.xml
+--> Order.hbm.xml
+--> Orderposition.hbm.xml
+--> SecGroup.hbm.xml
+--> SecGroupright.hbm.xml
+--> SecLoginlog.hbm.xml
+--> SecRight.hbm.xml
+--> SecRole.hbm.xml
+--> SecRolegroup.hbm.xml
+--> SecUser.hbm.xml
+--> SecUserrole.hbm.xml
+
+sample code for made the changes:
+---------------------------------
+OLD:
+	<id name="id" type="long"> <column name="art_id" /> 
+	    <generator class="assigned" /> 
+	</id>
+
+Change to:
+    <id name="id" type="long">
+		<column name="art_id" />
+		<generator class="native" />				
+		</generator>
+	</id>
+
+
+3. Bean Class have changed SysCountryCode to CountryCode
+=========================================================
+So the bean name is renamed in the HQL Query statement to 'CountryCode'
+
+Project: spring-hibernate-backend: src/main/java/de/forsthaus/backend/dao/impl
+-->SecLoginlogDAOImpl.java
+		String str1 = " SELECT distinct (sys_countrycode.ccdCode2), sys_countrycode.ccdName, count(*) as count ";
+		String str2 = " FROM Ip2Country AS log_ip2country, CountryCode AS sys_countrycode ";
+		String str3 = " WHERE log_ip2country.countryCode = sys_countrycode.id ";
+		String str4 = " GROUP BY sys_countrycode.ccdCode2, sys_countrycode.ccdName ORDER BY count(*) desc ";
+
+
+		String str1 = " SELECT distinct (sys_countrycode.ccdCode2), sys_countrycode.ccdName, count(*) as count ";
+		String str2 = " FROM Ip2Country AS log_ip2country, CountryCode AS sys_countrycode ";
+		String str3 = " , SecLoginlog as secLoginLog ";
+		String str4 = " WHERE secLoginLog.ip2Country = log_ip2country.id ";
+		String str5 = " AND log_ip2country.countryCode = sys_countrycode.id ";
+		String str6 = " AND secLoginLog.lglLogtime BETWEEN ? and ? ";
+		String str7 = " GROUP BY countrycode.ccdCode2, countrycode.ccdName ORDER BY count(*) desc ";
+
+
+		String str1 = " SELECT DISTINCT (sys_countrycode.ccdCode2), sys_countrycode.ccdName, count(*) as count ";
+		String str2 = " FROM Ip2Country AS log_ip2country, CountryCode AS sys_countrycode ";
+		String str3 = " , SecLoginlog as secLoginLog ";
+		String str4 = " WHERE secLoginLog.ip2Country = log_ip2country.id ";
+		String str5 = " AND log_ip2country.countryCode = sys_countrycode.id ";
+		String str6 = " AND secLoginLog.lglLogtime BETWEEN ? AND ? ";
+		String str7 = " GROUP BY countrycode.ccdCode2, countrycode.ccdName ORDER BY count(*) desc ";
+
+
+
+4. Change configuration to use mysql
+====================================
+Project: spring-hibernate-backend: 
+Files:   src/test/resources/
+--> customize-applicationContext-test.xml  delete <!-- bean id="nextidviewDAO" clas .....-->
 --> jdbc-properties
 
-/db
-CreateTestTablesWithDataMySQL_5_1.sql ( run these script in your mySQL admin tool )
+Project: zkoss: src/main/resources/
+--> jdbc-properties
+
+
 

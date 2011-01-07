@@ -336,7 +336,6 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		} catch (final Exception e) {
 			// close anyway
 			userDialogWindow.onClose();
-			// Messagebox.show(e.toString());
 		}
 	}
 

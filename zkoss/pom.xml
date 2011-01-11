@@ -20,7 +20,10 @@
 			<id>zk ee evaluation repository</id>
 			<url>http://mavensync.zkoss.org/zk/ee-eval/</url>
 		</repository>
-
+		<repository>
+			<id>com.springsource.repository.bundles.release</id>
+			<url>http://repository.springsource.com/maven/bundles/release/</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
@@ -151,12 +154,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
+			<artifactId>org.springframework.aop</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
+			<artifactId>org.springframework.transaction</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
@@ -167,7 +170,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
+			<artifactId>org.springframework.context</artifactId>
 			<version>${spring.version}</version>
 			<type>jar</type>
 		</dependency>
@@ -211,7 +214,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
+			<artifactId>org.springframework.orm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
@@ -279,7 +282,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<zkosslibs>${basedir}/src/main/webapp/WEB-INF/lib/</zkosslibs>
-		<spring.version>3.0.1.RELEASE</spring.version>
+		<spring.version>3.0.2.RELEASE</spring.version>
 		<springsecurity.version>3.0.2.RELEASE</springsecurity.version>
 		<zkoss.version>5.0.4</zkoss.version>
 	</properties>

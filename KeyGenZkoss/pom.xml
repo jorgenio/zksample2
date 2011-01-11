@@ -4,6 +4,7 @@
 	<groupId>de.daibutsu</groupId>
 	<artifactId>KeyGenZkoss</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>${project.artifactId}->${project.version}</name>
 	<url>http://sourceforge.net/projects/zksample2/</url>
 	<issueManagement>

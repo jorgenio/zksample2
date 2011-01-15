@@ -85,6 +85,9 @@
 								src="/images/framework_icons/dynamicJasper_153x34.gif"
 								tooltiptext="DynamicJasper" />
 							<image
+								src="/images/framework_icons/jfree_chart_128x34.gif"
+								tooltiptext="JFreeChart" />
+							<image
 								src="/images/framework_icons/postgresql_98x34.gif"
 								tooltiptext="PostgreSQL" />
 						</hbox>

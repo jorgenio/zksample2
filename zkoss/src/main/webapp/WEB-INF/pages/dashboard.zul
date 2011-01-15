@@ -12,6 +12,8 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 15.01.2011 / First basic Implementation of the zk spreadsheet 2.0 . " + lf;
+		s = s + "- 15.01.2011 / Updated zk version to 5.0.6.FL20110112 " + lf;
 		s = s + "- 07.01.2011 / Thanks to AndyX for making the changes in the script-files for mySQL 5.1. " + lf;
 		s = s + "- 06.01.2011 / Bugfixes in the annotated databinding modules. Sorry. " + lf;
 		s = s + "- 05.01.2011 / Refactoring of the backend. Adding missing comments (english/german). Deleting the " + lf;
@@ -241,7 +243,7 @@
 								<caption
 									style="color: #000000; font-weight:bold;"
 									image="/images/icons/new_icons_10.gif"
-									label="NEW !!!  Added the first Dashboard module." />
+									label="NEW !!!  Updated zk 5.0.6 and added zk spreadsheet 2.0." />
 
 								<textbox height="100%" width="99.5%"
 									multiline="true" rows="28" readonly="true"

@@ -14,7 +14,7 @@
 		iconName="/images/icons/calendar1_16x16.gif" />
 	<!-- Spreadsheet -->
 	<menuItem id="menu_Item_SpreadSheet" zulNavigation="/WEB-INF/pages/spreadsheet/spreadsheet.zul"
-		iconName="/images/icons/calendar1_16x16.gif" />
+		iconName="/images/icons/spreadsheet_16x16.png" />
 
 	<!-- Old OfficeDataMenuTree -->
 	<menu id="menu_Category_ReadMe" rightName="" open="true">

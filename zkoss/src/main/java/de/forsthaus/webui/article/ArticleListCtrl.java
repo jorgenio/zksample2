@@ -127,7 +127,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 		if (arg.containsKey("ModuleMainController")) {
 			setArticleMainCtrl((ArticleMainCtrl) arg.get("ModuleMainController"));
 
-			// SET THIS CONTROLLER TO THE MainController
+			// SET THIS CONTROLLER TO THE module's Parent/MainController
 			getArticleMainCtrl().setArticleListCtrl(this);
 
 			// Get the selected object.

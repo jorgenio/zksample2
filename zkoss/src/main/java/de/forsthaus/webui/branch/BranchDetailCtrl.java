@@ -87,7 +87,7 @@ public class BranchDetailCtrl extends GFCBaseCtrl implements Serializable {
 		if (this.arg.containsKey("ModuleMainController")) {
 			setBranchMainCtrl((BranchMainCtrl) this.arg.get("ModuleMainController"));
 
-			// SET THIS CONTROLLER TO THE MainController
+			// SET THIS CONTROLLER TO THE module's Parent/MainController
 			getBranchMainCtrl().setBranchDetailCtrl(this);
 
 			// Get the selected object.

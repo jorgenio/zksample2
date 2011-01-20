@@ -126,7 +126,7 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 		if (arg.containsKey("ModuleMainController")) {
 			setOfficeMainCtrl((OfficeMainCtrl) arg.get("ModuleMainController"));
 
-			// SET THIS CONTROLLER TO THE MainController
+			// SET THIS CONTROLLER TO THE module's Parent/MainController
 			getOfficeMainCtrl().setOfficeListCtrl(this);
 
 			// Get the selected object.

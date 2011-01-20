@@ -111,7 +111,7 @@ public class OfficeDetailCtrl extends GFCBaseCtrl implements Serializable {
 		if (arg.containsKey("ModuleMainController")) {
 			setOfficeMainCtrl((OfficeMainCtrl) arg.get("ModuleMainController"));
 
-			// SET THIS CONTROLLER TO THE MainController
+			// SET THIS CONTROLLER TO THE module's Parent/MainController
 			getOfficeMainCtrl().setOfficeDetailCtrl(this);
 
 			// Get the selected object.

@@ -100,7 +100,7 @@ public class MainMenuCtrl extends WindowBaseCtrl implements Serializable {
 		 */
 		if (args.containsKey("indexController")) {
 			setIndexCtrl((IndexCtrl) args.get("indexController"));
-			// SET THIS CONTROLLER TO THE MainController
+			// SET THIS CONTROLLER TO THE module's Parent/MainController
 			getIndexCtrl().setMainMenuCtrl(this);
 		}
 

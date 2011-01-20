@@ -91,7 +91,7 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 		if (arg.containsKey("ModuleMainController")) {
 			setArticleMainCtrl((ArticleMainCtrl) arg.get("ModuleMainController"));
 
-			// SET THIS CONTROLLER TO THE MainController
+			// SET THIS CONTROLLER TO THE module's Parent/MainController
 			getArticleMainCtrl().setArticleDetailCtrl(this);
 
 			// Get the selected object.

@@ -121,7 +121,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 		if (arg.containsKey("ModuleMainController")) {
 			setBranchMainCtrl((BranchMainCtrl) arg.get("ModuleMainController"));
 
-			// SET THIS CONTROLLER TO THE MainController
+			// SET THIS CONTROLLER TO THE module's Parent/MainController
 			getBranchMainCtrl().setBranchListCtrl(this);
 
 			// Get the selected object.

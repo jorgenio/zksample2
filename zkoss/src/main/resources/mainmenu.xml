@@ -4,7 +4,7 @@
 	<!-- ######################################################### -->
 	<!-- #################### possible Tags ###################### -->
 	<!-- ######################################################### -->
-	<!-- menu :          a parent menu that have a child node      -->
+	<!-- menu :          a parent menu that have child nodes       -->
 	<!-- menuItem :      the menu item                             -->
 	<!-- zulNavigation : the path to the zul-file                  -->
 	<!-- iconName :      the path to an icon                       -->

@@ -401,7 +401,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 			// refresh all dataBinder related controllers/components
 			getBranchDetailCtrl().getBinder().loadAll();
 
-			// set edit-Mode
+			// set editable Mode
 			getBranchDetailCtrl().doReadOnlyMode(true);
 
 			this.btnCtrlBranch.setInitEdit();
@@ -592,7 +592,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		getBranchDetailCtrl().setSelectedBranche(getSelectedBranche());
 		getBranchDetailCtrl().getBinder().loadAll();
 
-		// set edit-Mode
+		// set editable Mode
 		getBranchDetailCtrl().doReadOnlyMode(false);
 
 		// set the ButtonStatus to New-Mode

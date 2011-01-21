@@ -453,7 +453,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 			// refresh all dataBinder related controllers/components
 			getArticleDetailCtrl().getBinder().loadAll();
 
-			// set edit-Mode
+			// set editable Mode
 			getArticleDetailCtrl().doReadOnlyMode(true);
 
 			btnCtrlArticle.setInitEdit();
@@ -646,7 +646,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		getArticleDetailCtrl().setSelectedArticle(getSelectedArticle());
 		getArticleDetailCtrl().getBinder().loadAll();
 
-		// set edit-Mode
+		// set editable Mode
 		getArticleDetailCtrl().doReadOnlyMode(false);
 
 		// set the ButtonStatus to New-Mode

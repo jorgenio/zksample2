@@ -465,7 +465,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 			// refresh all dataBinder related controllers/components
 			getOfficeDetailCtrl().getBinder().loadAll();
 
-			// set edit-Mode
+			// set editable Mode
 			getOfficeDetailCtrl().doReadOnlyMode(true);
 
 			btnCtrlOffice.setInitEdit();
@@ -681,7 +681,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		getOfficeDetailCtrl().setSelectedOffice(getSelectedOffice());
 		getOfficeDetailCtrl().getBinder().loadAll();
 
-		// set edit-Mode
+		// set editable Mode
 		getOfficeDetailCtrl().doReadOnlyMode(false);
 
 		// set the ButtonStatus to New-Mode

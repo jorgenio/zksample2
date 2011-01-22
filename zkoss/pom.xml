@@ -189,7 +189,7 @@
 		<dependency>
 			<groupId>com.trg</groupId>
 			<artifactId>trg-search</artifactId>
-			<version>0.4.3</version>
+			<version>0.5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>

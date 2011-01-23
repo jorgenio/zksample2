@@ -2046,17 +2046,35 @@ INSERT INTO sys_countrycode(CCD_ID, CCD_NAME, CCD_CODE2, VERSION) VALUES
 
 /******************** YouTube Music Links ********************/
 INSERT INTO youtube_link(ytb_id, ytb_title, ytb_url, version) VALUES 
-(  1, 'Loquat - Swing Set Chain',                                 'http://www.youtube.com/embed/51G24IVfcaI',   0),
-(  2, 'Empire of the Sun - We Are The People',                    'http://www.youtube.com/embed/1uPL5twyQOw',   0),
-(  3, 'Loquat - Harder Hit',                                      'http://www.youtube.com/watch?v=aoHUb2r8q-g',   0),
-(  4, 'THIN LIZZY - Still in Love With You',                      'http://www.youtube.com/embed/oHUWXjNU0aM', 0),
-(  5, 'THIN LIZZY - Whiskey in the jar (1973)',                   'http://www.youtube.com/embed/-M2jSzLBzK4', 0),
-(  6, 'Gary Moore with Phil Lynnot - Parisienne Walkways (live)', 'http://www.youtube.com/embed/18FgnFVm5k0',   0),
-(  7, 'Talking Heads - This must be the place',                   'http://www.youtube.com/embed/TTPqPZzH-LA',   0),
-(  8, 'John Cale and Brian Eno - Spinning away',                  'http://www.youtube.com/embed/-INeMspNSQ0',   0),
-(  9, 'Metric - Joyride',                                         'http://www.youtube.com/embed/F0ZL5YWP5I8',   0),
-( 10, 'Medina - Kun For Mig + Ensome',                            'http://www.youtube.com/embed/5Gf004et0SI',   0),
-( 11, 'Paris - Captain Morgan',                                   'http://www.youtube.com/embed/o6Eq1bH-qA0',   0);
+(  1, 'Loquat - Swing Set Chain',                                                'http://www.youtube.com/embed/51G24IVfcaI',   0),
+(  2, 'Empire of the Sun - We Are The People',                                   'http://www.youtube.com/embed/1uPL5twyQOw',   0),
+(  3, 'Loquat - Harder Hit',                                                     'http://www.youtube.com/watch?v=aoHUb2r8q-g', 0),
+(  4, 'THIN LIZZY - Still in Love With You',                                     'http://www.youtube.com/embed/oHUWXjNU0aM',   0),
+(  5, 'THIN LIZZY - Whiskey in the jar (1973)',                                  'http://www.youtube.com/embed/-M2jSzLBzK4',   0),
+(  6, 'Gary Moore with Phil Lynnot - Parisienne Walkways (live)',                'http://www.youtube.com/embed/18FgnFVm5k0',   0),
+(  7, 'Talking Heads - This must be the place',                                  'http://www.youtube.com/embed/TTPqPZzH-LA',   0),
+(  8, 'John Cale and Brian Eno - Spinning away',                                 'http://www.youtube.com/embed/-INeMspNSQ0',   0),
+(  9, 'Metric - Joyride',                                                        'http://www.youtube.com/embed/F0ZL5YWP5I8',   0),
+( 10, 'Medina - Kun For Mig + Ensome',                                           'http://www.youtube.com/embed/5Gf004et0SI',   0),
+( 11, 'Paris - Captain Morgan',                                                  'http://www.youtube.com/embed/o6Eq1bH-qA0',   0),
+( 12, 'Al Corley - Square Rooms',                                                'http://www.youtube.com/embed/6VgR8XT1w8I',   0),
+( 13, 'Al Corley - Cold Dresses',                                                'http://www.youtube.com/embed/lY3prM3e4xk',   0),
+( 14, 'Victoria S - One in a Million',                                           'http://www.youtube.com/embed/3YdGVDvrmQ0',   0),
+( 15, 'Unknown Cases - MaSimBaBelle (Final Mix) Play it very loud :-) ',         'http://www.youtube.com/embed/WhXnEWNEflA',   0),
+( 16, 'Heli Deinboek - Oh Suzy du! ',                                            'http://www.youtube.com/embed/qBzTINSsj_Q',   0),
+( 17, 'Stefanie Heinzmann - Unforgiven ',                                        'http://www.youtube.com/embed/AOQG5CyiOkg',   0),
+( 18, 'DJ Tiesto feat. Andain - Beautiful Things',                               'http://www.youtube.com/embed/5OhaQ2ej63Q',   0),
+( 19, 'DJ Tiesto feat. Kane - Rain Dowen On Me | Must see',                      'http://www.youtube.com/embed/wZHCocBkZFo',   0),
+( 20, 'DJ Tiesto -  Tiesto Power Mix | One of the best !!!!',                    'http://www.youtube.com/embed/BZmE3fUKU5U',   0),
+( 21, 'Dj Rui Da Silva vs. Dj Tiesto - Touch Me',                                'http://www.youtube.com/embed/bjla29Y1I5g',   0),
+( 22, 'DJ Tiesto feat. Calvin Harris - Century  | ... I love this song',         'http://www.youtube.com/embed/XdRk_lbR5fk',   0),
+( 23, 'Supergrass - Alright | Do you feel it :-)  ',                             'http://www.youtube.com/embed/h9nY9axjaWo',   0),
+( 24, 'Mott the Hoople, David Bowie (Live) - All the Young Dudes  | yeah, the good old times...',  'http://www.youtube.com/embed/N-9F_z0B2TA',   0),
+( 25, 'Vanilla Fudge - You Keep Me Hangin On  | remember you ? yeah, really old stuff',            'http://www.youtube.com/embed/ifpmXmsecrU',   0),
+( 26, 'Procol Harum - A Whiter Shade Of Pale  | The absolute kings of feelings and tears...',      'http://www.youtube.com/embed/Mb3iPP-tHdA',   0),
+( 27, 'Joe Cocker Nightcalls Live Dortmund `92  | I have had cards for the concert in munich ',        'http://www.youtube.com/embed/q8RC01FsDtg',   0),
+( 28, 'Depeche Mode (LIVE - Paris 2001) - Enjoy The Silence   | Wow, think you are in the middle... ', 'http://www.youtube.com/embed/qwBOE3oV4gs',   0);
+
 
 
  /* fill sample logins */

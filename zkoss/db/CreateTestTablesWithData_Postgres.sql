@@ -2247,7 +2247,7 @@ INSERT INTO youtube_link(ytb_id, ytb_title, ytb_url, version) VALUES
 ( 25, 'Vanilla Fudge - You Keep Me Hangin On  | remember you ? yeah, really old stuff',            'http://www.youtube.com/embed/ifpmXmsecrU',   0),
 ( 26, 'Procol Harum - A Whiter Shade Of Pale  | The absolute kings of feelings and tears...',      'http://www.youtube.com/embed/Mb3iPP-tHdA',   0),
 ( 27, 'Joe Cocker Nightcalls Live Dortmund `92  | I have had cards for the concert in munich ',        'http://www.youtube.com/embed/q8RC01FsDtg',   0),
-( 28, 'Depeche Mode (LIVE - Paris 2001) - Enjoy The Silence   | Wow, think you are in the middle... ', 'http://www.youtube.com/embed/qwBOE3oV4gs',   0);
+( 28, 'Depeche Mode (LIVE - Paris 2001) - Enjoy The Silence   | Wow, think you are in the middle... ', 'http://www.youtube.com/embed/GnFWXPM7Rno',   0);
 
 
 

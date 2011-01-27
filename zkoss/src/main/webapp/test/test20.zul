@@ -1,0 +1,730 @@
+ <window border="normal" title="Some title" closable="true" contentStyle="overflow:auto;" height="100.0%" mode="embedded" width="700px">
+        <hlayout >
+            <cell  width="200.0px"/>
+            <grid   sizedByContent="false">
+                <columns  sizable="true">
+                    <column align="center"  sort="auto" width="90.0px"/>
+                    <column align="center"  sort="auto" width="50.0px"/>
+                    <column align="center"  sort="auto" width="90.0px"/>
+                    <column align="center"  sort="auto" width="50.0px"/>
+                    <column align="center"  sort="auto" width="90.0px"/>
+                    <column align="center"  sort="auto" width="50.0px"/>
+                    <column align="center"  sort="auto" width="90.0px"/>
+                </columns>
+                <rows >
+                    <row >
+                        <button hflex="1"  label="A" style="background:green;" onClick='alert( "Green!" );'/>
+                        <image  src="skin/actions/go-next.png"/>
+                        <button hflex="1"  label="B" style="background:yellow;" onClick='alert( "Yellow!" );'/>
+                        <image  src="skin/actions/go-next.png"/>
+                        <button hflex="1"  label="C" style="background:red" onClick='alert( "Red!" );'/>
+                        <image  src="skin/actions/go-next.png"/>
+                        <button hflex="1"  label="D" style="background:red" onClick='alert( "Red!" );'/>
+                    </row>
+                </rows>
+            </grid>
+        </hlayout>
+        <hlayout  visible="false">
+            <cell  width="200.0px"/>
+            <grid   sizedByContent="false">
+                <columns  sizable="true">
+                    <column align="center"  sort="auto" width="90.0px"/>
+                    <column align="center"  sort="auto" width="50.0px"/>
+                    <column align="center"  sort="auto" width="90.0px"/>
+                    <column align="center"  sort="auto" width="50.0px"/>
+                    <column align="center"  sort="auto" width="90.0px"/>
+                    <column align="center"  sort="auto" width="50.0px"/>
+                    <column align="center"  sort="auto" width="90.0px"/>
+                </columns>
+                <rows >
+                    <row >
+                        <button hflex="1"  label="A" style="background:green;"/>
+                        <image  src="skin/actions/go-next.png"/>
+                        <button  label="B" style="background:green;"/>
+                        <image  src="skin/actions/go-next.png"/>
+                        <button hflex="1"  label="C" style="background:yellow;"/>
+                        <image  src="skin/actions/go-next.png"/>
+                        <button hflex="1"  label="D" style="background:red;"/>
+                    </row>
+                </rows>
+            </grid>
+        </hlayout>
+        <grid   sizedByContent="false">
+            <columns  sizable="true">
+                <column  sort="auto"/>
+            </columns>
+            <rows >
+                <row >
+                    <vlayout >
+                        <grid   sizedByContent="false">
+                            <columns  sizable="true">
+                                <column  sort="auto" width="100.0px"/>
+                                <column  sort="auto" width="250.0px"/>
+                                <column  sort="auto" width="110.0px"/>
+                                <column  sort="auto" width="80.0px"/>
+                                <column  sort="auto" width="150.0px"/>
+                                <column  sort="auto" width="90.0px"/>
+                            </columns>
+                            <rows >
+                                <row >
+                                    <label  value="Nombre"/>
+                                    <textbox hflex="1"  maxlength="100" readonly="true"  />
+                                    <hlayout >
+                                        <cell  width="20.0px"/>
+                                        <label  value="Nº proveedor" width="90.0px"/>
+                                    </hlayout>
+                                    <longbox hflex="1"  readonly="true"  />
+                                    <hlayout >
+                                        <cell  width="20.0px"/>
+                                        <label  value="Estado" width="40.0px"/>
+                                        <textbox hflex="1"  readonly="true"   width="80.0px"/>
+                                    </hlayout>
+                                    <datebox hflex="1"  readonly="true"  />
+                                </row>
+                                <row >
+                                    <label  value="Nombre Legal"/>
+                                    <textbox hflex="1"  maxlength="100" readonly="true"  />
+                                    <hlayout >
+                                        <cell  width="20.0px"/>
+                                        <label  value="CIF/NIF" width="90.0px"/>
+                                    </hlayout>
+                                    <textbox hflex="1"  maxlength="15" readonly="true"  />
+                                    <hlayout >
+                                        <cell  width="20.0px"/>
+                                        <label  value="Fecha de alta" width="90.0px"/>
+                                    </hlayout>
+                                    <datebox hflex="1"  readonly="true"   width="110.0px"/>
+                                </row>
+                                <row >
+                                    <label  value="Direccion 1"/>
+                                    <cell >
+                                        <textbox hflex="1"  readonly="true"  />
+                                    </cell>
+                                    <cell />
+                                    <cell />
+                                    <hlayout >
+                                        <cell  width="20.0px"/>
+                                        <label  value="F. Ultima Oper." width="90.0px"/>
+                                    </hlayout>
+                                    <datebox hflex="1"  readonly="true"   width="110.0px"/>
+                                </row>
+                                <row >
+                                    <label  value="Direccion 2"/>
+                                    <cell >
+                                        <textbox hflex="1"  readonly="true"  />
+                                    </cell>
+                                    <cell colspan="4" />
+                                </row>
+                                <row >
+                                    <label  value="Jerarquía"/>
+                                    <textbox hflex="1"  readonly="true"  />
+                                    <cell />
+                                    <cell colspan="4"  rowspan="2">
+                                        <grid   sizedByContent="false">
+                                            <columns  sizable="true">
+                                                <column align="center"  sort="auto" width="54.0px"/>
+                                                <column align="center"  sort="auto" width="54.0px"/>
+                                                <column align="center"  sort="auto" width="54.0px"/>
+                                                <column align="center"  sort="auto" width="54.0px"/>
+                                                <column align="center"  sort="auto" width="54.0px"/>
+                                            </columns>
+                                            <rows >
+                                                <row >
+                                                    <label  value="Est. "/>
+                                                    <label  value="Est. "/>
+                                                    <label  value="Operac."/>
+                                                    <label  value="Mora "/>
+                                                    <label  value="Incidenc."/>
+                                                </row>
+                                                <row >
+                                                    <image  src="skin/colors/color-grey-round.png"/>
+                                                    <image  src="skin/colors/color-grey-round.png"/>
+                                                    <image  src="skin/colors/color-grey-round.png"/>
+                                                    <image  src="skin/colors/color-grey-round.png"/>
+                                                    <image  src="skin/colors/color-grey-round.png"/>
+                                                </row>
+                                            </rows>
+                                        </grid>
+                                    </cell>
+                                </row>
+                                <row >
+                                    <label  value="Comercial "/>
+                                    <textbox hflex="1"  maxlength="63" readonly="true"  />
+                                    <cell />
+                                </row>
+                                <row >
+                                    <label  value="Oficina"/>
+                                    <textbox hflex="1"  readonly="true"  />
+                                    <hlayout >
+                                        <cell  width="20.0px"/>
+                                        <label  value="Gestor" width="90.0px"/>
+                                    </hlayout>
+                                    <cell colspan="2" >
+                                        <textbox hflex="1"  maxlength="63" readonly="true"  />
+                                    </cell>
+                                </row>
+                            </rows>
+                        </grid>
+                        <cell align="right" >
+                            <button  image="skin/actions/document-open.png" label="Abrir PERS" mold="trendy" visible="false"/>
+                            <button  image="skin/apps/accessories-text-editor.png" label="Modificar" mold="trendy"/>
+                        </cell>
+                        <cell align="center" >
+                            <button  image="skin/actions/list-add.png" label="Asignar Productos" mold="trendy"/>
+                            <button  image="skin/actions/list-add.png" label="Exención Documentación" mold="trendy"/>
+                            <button  image="skin/actions/list-add.png" label="Exención Información" mold="trendy"/>
+                            <button  image="skin/actions/list-add.png" label="Rappel" mold="trendy"/>
+                            <button  image="skin/actions/list-add.png" label="Objetivo" mold="trendy" popup="g1011711112c3e0cfd12d0384f753800013295"/>
+                        </cell>
+                        <separator bar="false" />
+                        <tabbox height="380.0px" >
+                            <tabs >
+                                <tab closable="false"  label="Datos generales" selected="false"/>
+                                <tab closable="false"  label="Acuerdos" selected="false"/>
+                                <tab closable="false"  label="Posición" selected="false"/>
+                                <tab closable="false"  label="Resumen" selected="false"/>
+                                <tab closable="false"  label="Objetivos" selected="false"/>
+                                <tab closable="false"  label="Vendedores" selected="false"/>
+                                <tab closable="false"  label="Jerarquía" selected="false"/>
+                                <tab closable="false"  label="10 Ultimas Operaciones" selected="false"/>
+                                <tab closable="false"  label="10 Ultimas Incidencias" selected="false"/>
+                            </tabs>
+                            <tabpanels >
+                                <tabpanel height="200.0px" >
+                                    <separator bar="false" />
+                                    <grid   sizedByContent="false" width="855.0px">
+                                        <columns  sizable="true">
+                                            <column  sort="auto" width="100.0px"/>
+                                            <column  sort="auto" width="165.0px"/>
+                                            <column  sort="auto" width="120.0px"/>
+                                            <column  sort="auto" width="230.0px"/>
+                                            <column  sort="auto" width="140.0px"/>
+                                            <column  sort="auto" width="100.0px"/>
+                                        </columns>
+                                        <rows >
+                                            <row >
+                                                <label  value="Nacionalidad"/>
+                                                <textbox hflex="1"  readonly="true"  />
+                                                <hlayout >
+                                                    <cell  width="20.0px"/>
+                                                    <label  value="Residencia" width="100.0px"/>
+                                                </hlayout>
+                                                <textbox hflex="1"  readonly="true"  />
+                                                <hlayout >
+                                                    <cell  width="20.0px"/>
+                                                    <label  value="Sexo/tipo Sociedad" width="120.0px"/>
+                                                </hlayout>
+                                                <textbox hflex="1"  readonly="true"  />
+                                            </row>
+                                            <row >
+                                                <label  value="Teléfono"/>
+                                                <textbox hflex="1"  maxlength="9" readonly="true"  />
+                                                <hlayout >
+                                                    <cell  width="20.0px"/>
+                                                    <label  value="Horas Contacto" width="100.0px"/>
+                                                </hlayout>
+                                                <textbox hflex="1"  maxlength="100" readonly="true"  />
+                                            </row>
+                                            <row >
+                                                <label  value="Movil"/>
+                                                <textbox hflex="1"  maxlength="25" readonly="true"  />
+                                                <hlayout >
+                                                    <cell  width="20.0px"/>
+                                                    <label  value="E-mail" width="100.0px"/>
+                                                </hlayout>
+                                                <textbox hflex="1"  maxlength="250" readonly="true"  />
+                                            </row>
+                                            <row >
+                                                <label  value="Fax"/>
+                                                <textbox hflex="1"  maxlength="25" readonly="true"  />
+                                                <hlayout >
+                                                    <cell  width="20.0px"/>
+                                                    <label  value="Página Web" width="100.0px"/>
+                                                </hlayout>
+                                                <textbox hflex="1"  maxlength="250" readonly="true"  />
+                                            </row>
+                                            <row >
+                                                <label  value="Tipo Comercio"/>
+                                                <textbox hflex="1"  readonly="true"  />
+                                                <hlayout >
+                                                    <cell  width="20.0px"/>
+                                                    <label  value="Tipo Venta" width="100.0px"/>
+                                                </hlayout>
+                                                <textbox hflex="1"  readonly="true"  />
+                                                <hlayout >
+                                                    <cell  width="20.0px"/>
+                                                    <label  value="Grupo" width="120.0px"/>
+                                                </hlayout>
+                                                <textbox hflex="1"  readonly="true"  />
+                                            </row>
+                                            <row >
+                                                <label  value="CCC"/>
+                                                <textbox hflex="1"  maxlength="20" readonly="true"  />
+                                            </row>
+                                        </rows>
+                                    </grid>
+                                </tabpanel>
+                                <tabpanel >
+                                    <radiogroup  orient="horizontal">
+                                        <radio checked="false"  label="Productos"/>
+                                        <radio checked="false"  label="Exención Docum"/>
+                                        <radio checked="false"  label="Exención Información"/>
+                                        <radio checked="false"  label="Rappel"/>
+                                        <radio checked="false"  label="Campañas"/>
+                                    </radiogroup>
+                                    <separator bar="false" />
+                                    <groupbox closable="true"  open="true" visible="false">
+                                        <caption  label="Productos"/>
+                                        <listbox checkmark="true"   mold="paging" multiple="true" pageSize="10"   sizedByContent="true" >
+                                            <listhead  sizable="true">
+                                                <listheader  label="Producto"   width="175.0px"/>
+                                                <listheader align="center"  label="De Campaña"  />
+                                                <listheader align="center"  label="De Jerarquía"  />
+                                                <listheader align="center"  label="TIN/TIR"  />
+                                                <listheader align="center"  label="Plazo"  />
+                                                <listheader align="center"  label="Carencia"  />
+                                                <listheader align="center"  label="% comisión apertura"  />
+                                                <listheader align="center"  label="Gastos Formalización"  />
+                                                <listheader  label="Rappel"  />
+                                                <listheader align="center"  label="Seguro"  />
+                                            </listhead>
+                                        </listbox>
+                                        <separator bar="false" />
+                                        <grid   sizedByContent="false">
+                                            <columns  sizable="true">
+                                                <column align="right"  sort="auto"/>
+                                            </columns>
+                                            <rows >
+                                                <row >
+                                                    <cell height="30.0px" >
+                                                        <label  value="Acción múltiple:"/>
+                                                        <combobox  open="false"  >
+                                                            <comboitem    />
+                                                            <comboitem    />
+                                                            <comboitem    />
+                                                        </combobox>
+                                                        <button  label="Ejecutar" mold="trendy"/>
+                                                    </cell>
+                                                </row>
+                                            </rows>
+                                        </grid>
+                                    </groupbox>
+                                    <groupbox closable="true"  open="true" visible="false">
+                                        <caption  label="Exención Documentación"/>
+                                    </groupbox>
+                                    <groupbox closable="true"  open="true" visible="false">
+                                        <caption  label="Exención Información"/>
+                                    </groupbox>
+                                    <groupbox closable="true"  open="true" visible="false">
+                                        <caption  label="Rappel"/>
+                                        <listbox checkmark="true"   mold="paging" multiple="true" pageSize="10"   sizedByContent="true" >
+                                            <listhead  sizable="true">
+                                                <listheader  label="Producto"   width="180.0px"/>
+                                                <listheader align="center"  label="De Campaña"  />
+                                                <listheader align="center"  label="De Jerarquía"  />
+                                                <listheader align="center"  label="TIN/TIR"  />
+                                                <listheader align="center"  label="Plazo"  />
+                                                <listheader align="center"  label="Carencia"  />
+                                                <listheader align="center"  label="% Comisión apertura"  />
+                                                <listheader align="center"  label="Gastos Formalización"  />
+                                                <listheader align="center"  label="Rappel"  />
+                                                <listheader align="center"  label="Seguro"  />
+                                            </listhead>
+                                        </listbox>
+                                        <separator bar="false" />
+                                        <grid   sizedByContent="false">
+                                            <columns  sizable="true">
+                                                <column align="right"  sort="auto"/>
+                                            </columns>
+                                            <rows >
+                                                <row  width="30.0px">
+                                                    <cell height="30.0px" >
+                                                        <label  value="Acción múltiple:"/>
+                                                        <combobox  open="false"  >
+                                                            <comboitem    />
+                                                            <comboitem    />
+                                                            <comboitem    />
+                                                        </combobox>
+                                                        <button  label="Ejecutar" mold="trendy"/>
+                                                    </cell>
+                                                </row>
+                                            </rows>
+                                        </grid>
+                                    </groupbox>
+                                    <groupbox closable="true"  open="true" visible="false">
+                                        <caption  label="Campañas"/>
+                                        <listbox checkmark="true"   mold="paging" multiple="true" pageSize="10"  rows="10"  sizedByContent="true" >
+                                            <listhead  sizable="true">
+                                                <listheader  label="ID"  />
+                                                <listheader  label="De Jerarquía"  />
+                                                <listheader  label="Fecha D"  />
+                                                <listheader  label="Estado"  />
+                                                <listheader  label="F. Inicio"  />
+                                                <listheader  label="F. Final"  />
+                                                <listheader  label="Descripción"  />
+                                            </listhead>
+                                        </listbox>
+                                    </groupbox>
+                                </tabpanel>
+                                <tabpanel >
+                                    <listbox autopaging="true"   mold="paging" pageSize="10"  rows="10" sizedByContent="true"  width="900.0px">
+                                        <listhead  sizable="true">
+                                            <listheader  label="Cuenta"  />
+                                            <listheader  label="Producto"  />
+                                            <listheader  label="Titular"  />
+                                            <listheader  label="Núm.propiet."  />
+                                            <listheader  label="Núm.avalistas"  />
+                                            <listheader  label="Indic.titulizada"  />
+                                            <listheader  label="Cubo"  />
+                                            <listheader  label="Días descub."  />
+                                            <listheader  label="Saldo aparente"  />
+                                            <listheader  label="Saldo irregular"  />
+                                            <listheader  label="Últ.gestión"  />
+                                            <listheader  label="Estado"  />
+                                            <listheader  label="Fase"  />
+                                            <listheader  label="Unidad gestión"  />
+                                            <listheader  label="Quién gestiona"  />
+                                            <listheader  label="Tarjeta"  />
+                                            <listheader  label="Inicio descubierto"  />
+                                        </listhead>
+                                    </listbox>
+                                </tabpanel>
+                                <tabpanel >
+                                    <grid   sizedByContent="false" width="730.0px">
+                                        <columns  sizable="true">
+                                            <column  sort="auto" width="100.0px"/>
+                                            <column  sort="auto" width="350.0px"/>
+                                            <column  sort="auto" width="280.0px"/>
+                                        </columns>
+                                        <rows >
+                                            <row >
+                                                <label  value="Estado "/>
+                                                <hlayout >
+                                                    <textbox  readonly="true"   width="80.0px"/>
+                                                    <button  label="Ver" mold="trendy"/>
+                                                </hlayout>
+                                            </row>
+                                            <row >
+                                                <label  value="Estado "/>
+                                                <hlayout >
+                                                    <textbox  readonly="true"   width="80.0px"/>
+                                                    <button  label="Ver" mold="trendy"/>
+                                                </hlayout>
+                                            </row>
+                                            <row >
+                                                <label  value="Nota"/>
+                                                <cell colspan="2" >
+                                                    <textbox hflex="1"  readonly="true"  />
+                                                </cell>
+                                            </row>
+                                        </rows>
+                                    </grid>
+                                    <separator bar="false" />
+                                    <hlayout >
+                                        <cell  width="97.0px"/>
+                                        <grid   sizedByContent="false" width="630.0px">
+                                            <auxhead >
+                                                <auxheader align="center" colspan="2"    />
+                                                <auxheader align="center" colspan="2"    />
+                                                <auxheader align="center" colspan="2"    />
+                                            </auxhead>
+                                            <columns  sizable="true">
+                                                <column align="center"  label="Nº" width="105.0px"/>
+                                                <column align="center"  label="%" width="105.0px"/>
+                                                <column align="center"  label="Nº" width="105.0px"/>
+                                                <column align="center"  label="%" width="105.0px"/>
+                                                <column align="center"  label="Nº" width="105.0px"/>
+                                                <column align="center"  label="%" width="105.0px"/>
+                                            </columns>
+                                            <rows />
+                                        </grid>
+                                    </hlayout>
+                                    <grid   sizedByContent="false" width="730.0px">
+                                        <columns  sizable="true">
+                                            <column  sort="auto" width="100.0px"/>
+                                            <column align="center"  sort="auto" width="105.0px"/>
+                                            <column align="center"  sort="auto" width="105.0px"/>
+                                            <column align="center"  sort="auto" width="105.0px"/>
+                                            <column align="center"  sort="auto" width="105.0px"/>
+                                            <column align="center"  sort="auto" width="105.0px"/>
+                                            <column align="center"  sort="auto" width="105.0px"/>
+                                        </columns>
+                                        <rows >
+                                            <row >
+                                                <label  style="font-weight:bold" value="OPERACIONES"/>
+                                            </row>
+                                            <row >
+                                                <label  value="Solicitadas"/>
+                                                <label   />
+                                                <label />
+                                                <label   />
+                                                <label />
+                                                <label   />
+                                                <label />
+                                            </row>
+                                            <row >
+                                                <label  value="Aprobadas"/>
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                            </row>
+                                            <row >
+                                                <label  value="Formalizadas"/>
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                            </row>
+                                            <row >
+                                                <label  style="font-weight:bold" value="MORA "/>
+                                            </row>
+                                            <row >
+                                                <label  value="Mora"/>
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                            </row>
+                                            <row >
+                                                <label  value="Excedido"/>
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                            </row>
+                                            <row >
+                                                <label  style="font-weight:bold" value="INCIDENCIAS"/>
+                                            </row>
+                                            <row >
+                                                <label  value="Gravedad D"/>
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                            </row>
+                                            <row >
+                                                <label  value="Gravedad Media"/>
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                            </row>
+                                            <row >
+                                                <label  value="Gravedad Baja"/>
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                            </row>
+                                        </rows>
+                                    </grid>
+                                </tabpanel>
+                                <tabpanel >
+                                    <grid   sizedByContent="false" width="870.0px">
+                                        <columns  sizable="true">
+                                            <column align="left"  width="150.0px"/>
+                                            <column align="center"  label="Nº de Operaciones" style="text-align:center" width="120.0px"/>
+                                            <column align="center"  label="Volumen" style="text-align=","" width="120.0px"/>
+                                            <column align="center"  label="Importe medio" style="text-align:center" width="120.0px"/>
+                                            <column align="center"  label="Ratio Trnsf." style="text-align:center" width="120.0px"/>
+                                            <column align="center"  label="% cumplimiento" style="text-align:center" width="120.0px"/>
+                                            <column align="center"  label="Indicador" style="text-align:center" width="120.0px"/>
+                                        </columns>
+                                        <rows >
+                                            <row align="right" >
+                                                <label  value="Operaciones Mes"/>
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <separator bar="false" />
+                                            </row>
+                                            <row align="right" >
+                                                <label  value="Operaciones Año"/>
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <separator bar="false" />
+                                            </row>
+                                            <row align="right" >
+                                                <label  value="Objetivo Anual"/>
+                                                <separator bar="false" />
+                                                <label   />
+                                                <separator bar="false" />
+                                                <separator bar="false" />
+                                                <label   />
+                                            </row>
+                                            <row align="right" >
+                                                <label  value="Operaciones en Mora"/>
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <separator bar="false" />
+                                                <separator bar="false" />
+                                            </row>
+                                            <row align="right" >
+                                                <label  value="Operaciones en Cubo3"/>
+                                                <label   />
+                                                <label   />
+                                                <label   />
+                                                <separator bar="false" />
+                                                <separator bar="false" />
+                                            </row>
+                                            <row align="right" >
+                                                <label  value="TIR"/>
+                                                <label   />
+                                                <separator bar="false" />
+                                                <separator bar="false" />
+                                                <separator bar="false" />
+                                                <separator bar="false" />
+                                            </row>
+                                            <row align="right" >
+                                                <label  value="CanSuma 3"/>
+                                                <label   />
+                                                <label   />
+                                                <separator bar="false" />
+                                                <separator bar="false" />
+                                                <label   />
+                                            </row>
+                                            <row align="right" >
+                                                <label  value="CanSuma 6"/>
+                                                <label   />
+                                                <label   />
+                                                <separator bar="false" />
+                                                <separator bar="false" />
+                                                <label   />
+                                            </row>
+                                            <row align="right" >
+                                                <label  value="CanSuma 12"/>
+                                                <label   />
+                                                <label   />
+                                                <separator bar="false" />
+                                                <separator bar="false" />
+                                                <label   />
+                                            </row>
+                                            <row align="right" >
+                                                <label  value="Nº de Incidencias Graves"/>
+                                                <label   />
+                                                <separator bar="false" />
+                                                <separator bar="false" />
+                                                <separator bar="false" />
+                                                <label   />
+                                            </row>
+                                            <row align="right" >
+                                                <label  value="Nº de Incidencias Medias"/>
+                                                <label   />
+                                                <separator bar="false" />
+                                                <separator bar="false" />
+                                                <separator bar="false" />
+                                                <label   />
+                                            </row>
+                                            <row align="right" >
+                                                <label  value="Nº de Incidencias Leves"/>
+                                                <label   />
+                                                <separator bar="false" />
+                                                <separator bar="false" />
+                                                <separator bar="false" />
+                                                <label   />
+                                            </row>
+                                        </rows>
+                                    </grid>
+                                </tabpanel>
+                                <tabpanel >
+                                    <listbox checkmark="true"   mold="paging" multiple="true" pageSize="10"  rows="10"  sizedByContent="false" >
+                                        <listhead  sizable="true">
+                                            <listheader  label="Comercial"   width="200.0px"/>
+                                            <listheader  label="Tipo"   width="90.0px"/>
+                                            <listheader  label="Estado"   width="60.0px"/>
+                                            <listheader  label="Fecha"   width="90.0px"/>
+                                            <listheader  label="Información" width="50.0px"/>
+                                            <listheader  label="Teléfono"   width="100.0px"/>
+                                            <listheader  label="Movil"   width="100.0px"/>
+                                            <listheader  label="Email"  />
+                                        </listhead>
+                                    </listbox>
+                                    <separator bar="false" />
+                                    <hlayout >
+                                        <button disabled="true"  image="skin/actions/list-remove.png" label="Baja vendedor" mold="trendy"/>
+                                        <button  image="skin/actions/list-add.png" label="D vendedor" mold="trendy"/>
+                                        <button disabled="true"  label="Modificar vendedor" mold="trendy"/>
+                                    </hlayout>
+                                </tabpanel>
+                                <tabpanel >
+                                    <grid  sizedByContent="false">
+                                        <columns  sizable="true">
+                                            <column  label="Num Proveedor"/>
+                                            <column  label="Nombre Comercial"/>
+                                            <column  label="Fecha D"/>
+                                            <column  label="Fecha Estado"/>
+                                            <column  label="Estado"/>
+                                            <column  label="Fecha Ultima Operación"/>
+                                        </columns>
+                                        <rows />
+                                    </grid>
+                                    <tree     sizedByContent="false" />
+                                    <tree     sizedByContent="false" />
+                                </tabpanel>
+                                <tabpanel >
+                                    <listbox checkmark="true"   mold="paging" multiple="true" pageSize="10"  rows="10"  sizedByContent="true" >
+                                        <listhead  sizable="true">
+                                            <listheader  label="Fecha"   width="100.0px"/>
+                                            <listheader  label="Estado"   width="100.0px"/>
+                                            <listheader  label="F. Formalización"   width="100.0px"/>
+                                            <listheader  label="Cliente"   width="100.0px"/>
+                                            <listheader  label="Producto"   width="100.0px"/>
+                                            <listheader  label="Plazo"   width="100.0px"/>
+                                            <listheader  label="Credito"   width="100.0px"/>
+                                            <listheader  label="Compra"   width="100.0px"/>
+                                            <listheader  label="Tasa Dto."   width="100.0px"/>
+                                        </listhead>
+                                    </listbox>
+                                    <separator bar="false" />
+                                    <button  label="Listar más Operaciones" mold="trendy"/>
+                                </tabpanel>
+                                <tabpanel >
+                                    <listbox checkmark="true"   mold="paging" multiple="true" pageSize="10"  rows="10"  sizedByContent="false" >
+                                        <listhead  sizable="true">
+                                            <listheader  label="Oficina"  />
+                                            <listheader  label="Usuario"   width="200.0px"/>
+                                            <listheader  label="Fecha"   width="90.0px"/>
+                                            <listheader  label="Tipo"  />
+                                            <listheader  label="Asunto"  />
+                                            <listheader  label="Nº Operación"  />
+                                            <listheader  label="Cliente"  />
+                                            <listheader  label="Comentario"   width="250.0px"/>
+                                        </listhead>
+                                    </listbox>
+                                    <separator bar="false" />
+                                    <button  label="Listar más Incidencias" mold="trendy"/>
+                                </tabpanel>
+                            </tabpanels>
+                        </tabbox>
+                    </vlayout>
+                </row>
+                <row >
+                    <cell align="right" >
+                        <button  image="skin/actions/system-log-out.png" label="Salir" mold="trendy"/>
+                        <button  image="skin/actions/process-stop.png" label="Rechazar" mold="trendy" visible="false"/>
+                        <button  image="skin/actions/go-next.png" label="Aceptar" mold="trendy" visible="false"/>
+                        <button  image="skin/actions/go-next.png" label="Seguir" mold="trendy" visible="false"/>
+                    </cell>
+                </row>
+            </rows>
+        </grid>
+    </window>

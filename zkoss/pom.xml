@@ -236,6 +236,10 @@
 					<artifactId>spring-security-openid</artifactId>
 					<groupId>org.springframework.security</groupId>
 				</exclusion>
+				<exclusion>
+					<artifactId>spring-context-support</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>

@@ -34,6 +34,7 @@ public class YoutubeLink implements java.io.Serializable, Entity {
 	private long id = Long.MIN_VALUE;
 
 	private int version;
+	private String interpret = "";
 	private String title = "";
 	private String url = "";
 
@@ -49,8 +50,9 @@ public class YoutubeLink implements java.io.Serializable, Entity {
 		this.url = url;
 	}
 
-	public YoutubeLink(long id, String title, String url) {
+	public YoutubeLink(long id, String interpret, String title, String url) {
 		this.setId(id);
+		this.interpret = interpret;
 		this.title = title;
 		this.url = url;
 	}
@@ -69,6 +71,14 @@ public class YoutubeLink implements java.io.Serializable, Entity {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+
+	public void setInterpret(String interpret) {
+		this.interpret = interpret;
+	}
+
+	public String getInterpret() {
+		return interpret;
 	}
 
 	public void setTitle(String title) {

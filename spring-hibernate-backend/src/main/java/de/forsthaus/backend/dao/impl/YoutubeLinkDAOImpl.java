@@ -43,7 +43,7 @@ public class YoutubeLinkDAOImpl extends BasisDAO<YoutubeLink> implements Youtube
 	@Override
 	public List<YoutubeLink> getAllYoutubeLinks() {
 		DetachedCriteria criteria = DetachedCriteria.forClass(YoutubeLink.class);
-		criteria.addOrder(Order.asc("title"));
+		criteria.addOrder(Order.asc("interpret"));
 
 		return getHibernateTemplate().findByCriteria(criteria);
 	}
@@ -52,7 +52,7 @@ public class YoutubeLinkDAOImpl extends BasisDAO<YoutubeLink> implements Youtube
 	@Override
 	public ResultObject getAllYoutubeLinks(int start, int pageSize) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(YoutubeLink.class);
-		criteria.addOrder(Order.asc("title"));
+		criteria.addOrder(Order.asc("interpret"));
 
 		int totalCount = getHibernateTemplate().findByCriteria(criteria).size();
 

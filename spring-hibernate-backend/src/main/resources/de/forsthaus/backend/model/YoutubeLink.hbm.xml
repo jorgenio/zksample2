@@ -23,8 +23,11 @@
 
 		<version name="version" column="VERSION" type="integer" />
 
+		<property name="interpret" type="string">
+			<column name="ytb_interpret" length="50" />
+		</property>
 		<property name="title" type="string">
-			<column name="ytb_title" length="100" />
+			<column name="ytb_title" length="50" />
 		</property>
 		<property name="url" type="string">
 			<column name="ytb_url" length="300" not-null="true" unique="true" />

@@ -188,7 +188,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.trg</groupId>
-			<artifactId>trg-search</artifactId>
+			<artifactId>trg-search-hibernate</artifactId>
 			<version>0.5.1</version>
 		</dependency>
 		<dependency>

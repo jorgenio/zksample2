@@ -249,11 +249,13 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 		// the windows title
 		private String _title = Labels.getLabel("btnSelectYoutubeSong.tooltiptext");
 		// 1. Listheader
-		private String _listHeader1 = Labels.getLabel("dashboard.youtube.songtitle");
+		private String _listHeader1 = Labels.getLabel("dashboard.youtube.interpret");
+		// 2. Listheader
+		private String _listHeader2 = Labels.getLabel("dashboard.youtube.songtitle");
 		// the windows height
 		private int _height = 400;
 		// the windows width
-		private int _width = 350;
+		private int _width = 480;
 
 		// the returned bean object
 		private YoutubeLink youtubeLink = null;
@@ -326,14 +328,23 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 			listbox.setParent(center);
 			listbox.setItemRenderer(new SearchBoxItemRenderer());
 
+			// 1. Listheader
 			Listhead listhead = new Listhead();
 			listhead.setParent(listbox);
-			Listheader listheader = new Listheader();
+			Listheader listheader;
+			listheader = new Listheader();
 			listheader.setSclass("FDListBoxHeader1");
 			listheader.setParent(listhead);
 			listheader.setLabel(_listHeader1);
+			listhead.setWidth("50%");
+			// 2. Listheader
+			listheader = new Listheader();
+			listheader.setSclass("FDListBoxHeader1");
+			listheader.setParent(listhead);
+			listheader.setLabel(_listHeader2);
+			listhead.setWidth("50%");
 
-			// Model
+			// set the Model by filling with DB data
 			listbox.setModel(new ListModelList(getYoutubeLinkService().getAllYoutubeLinks()));
 
 			try {
@@ -357,7 +368,10 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 
 				YoutubeLink youtubeLink = (YoutubeLink) data;
 
-				Listcell lc = new Listcell(youtubeLink.getTitle());
+				Listcell lc;
+				lc = new Listcell(youtubeLink.getInterpret());
+				lc.setParent(item);
+				lc = new Listcell(youtubeLink.getTitle());
 				lc.setParent(item);
 
 				item.setAttribute("data", data);

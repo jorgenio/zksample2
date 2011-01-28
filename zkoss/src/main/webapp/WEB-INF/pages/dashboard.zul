@@ -12,6 +12,8 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 28.01.2011 / Separate Fields for interpret / song title in the youTube Dashboard module. " + lf;
+		s = s + "- 27.01.2011 / Updated the Hibernate-Generic-DAO lib to version 0.5.1 . " + lf;
 		s = s + "- 15.01.2011 / First basic Implementation of the zk spreadsheet 2.0 . " + lf;
 		s = s + "- 15.01.2011 / Updated zk version to 5.0.6.FL20110112 " + lf;
 		s = s + "- 07.01.2011 / Thanks to AndyX for making the changes in the script-files for mySQL 5.1. " + lf;
@@ -302,7 +304,7 @@
 								label="Hibernate-Generic-DAO" />
 
 							<textbox width="98%"
-								value="We used the search object from this framework and the hql code generator for our PagedListWrapper. Version = 0.4.3"
+								value="We used the search object from this framework and the hql code generator for our PagedListWrapper. Version = 0.5.1"
 								rows="3" multiline="true" readonly="true"
 								style="font-family: verdana; border: none; background-color: white;">
 							</textbox>

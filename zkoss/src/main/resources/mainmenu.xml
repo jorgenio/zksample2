@@ -4,12 +4,14 @@
 	<!-- ######################################################### -->
 	<!-- #################### possible Tags ###################### -->
 	<!-- ######################################################### -->
-	<!-- menu :          a parent menu that have child nodes       -->
-	<!-- menuItem :      the menu item                             -->
-	<!-- zulNavigation : the path to the zul-file                  -->
-	<!-- iconName :      the path to an icon                       -->
-	<!-- rightName :     if it declared, than the rightname        -->
-	<!-- open :          (true/false opens a menu at creation time -->
+	<!-- menu:           a parent menu that have child nodes.      -->
+	<!-- menuItem:       the menu item.                            -->
+	<!-- zulNavigation:  the path and name of the zul-file.        -->
+	<!-- iconName:       the path and name to an icon.             -->
+	<!-- rightName:      if it's declared, than the rightname must -->
+	<!--                 be the same as in the securityContext for -->
+	<!--                 creating this menuitem.                   -->
+	<!-- open:           (true/false opens a menu at creation time -->
 	<!-- ######################################################### -->
 
 	<!-- DON'T CHANGE THE ID FOR the Dashboard menu entry -->

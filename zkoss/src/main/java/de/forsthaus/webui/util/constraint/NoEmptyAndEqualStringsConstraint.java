@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Zksample2.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
-package de.forsthaus.webui.util;
+package de.forsthaus.webui.util.constraint;
 
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
@@ -51,6 +51,11 @@ public class NoEmptyAndEqualStringsConstraint implements Constraint, java.io.Ser
 	public void validate(Component comp, Object value) throws WrongValueException {
 
 		if (comp instanceof Textbox) {
+
+			// Skip, if disabled
+			if (((Textbox) comp).isDisabled() == true) {
+				return;
+			}
 
 			final String enteredValue = (String) value;
 

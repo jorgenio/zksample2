@@ -49,8 +49,8 @@ import de.forsthaus.webui.user.model.UserRolesListModelItemRenderer;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
-import de.forsthaus.webui.util.NoEmptyAndEqualStringsConstraint;
 import de.forsthaus.webui.util.ZksampleMessageUtils;
+import de.forsthaus.webui.util.constraint.NoEmptyAndEqualStringsConstraint;
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>

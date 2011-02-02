@@ -2075,8 +2075,8 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 26, 'Procol Harum',                        'A Whiter Shade Of Pale',          'http://www.youtube.com/embed/Mb3iPP-tHdA',   0),
 ( 27, 'Joe Cocker  (Live Dortmund `92)',     'Nightcalls ',                     'http://www.youtube.com/embed/q8RC01FsDtg',   0),
 ( 28, 'September',                           'Cry for you',                     'http://www.youtube.com/embed/pxu6iQ28arw',   0),
-( 29, 'Depeche Mode (LIVE - Paris 2001)',    'Enjoy The Silence',               'http://www.youtube.com/embed/GnFWXPM7Rno',   0);
-
+( 29, 'Depeche Mode (LIVE - Paris 2001)',    'Enjoy The Silence',               'http://www.youtube.com/embed/GnFWXPM7Rno',   0),
+( 30, 'DJ Tiesto feat. cary brothers',       'Here on earth',                   'http://www.youtube.com/embed/nlh72zBy5Nw',   0);
 
 
  /* fill sample logins */

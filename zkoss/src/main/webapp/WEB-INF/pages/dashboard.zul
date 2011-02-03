@@ -12,6 +12,7 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 03.02.2011 / Updated zk version to 5.0.6.FL20110202  " + lf;
 		s = s + "- 28.01.2011 / Separate Fields for interpret / song title in the youTube Dashboard module. " + lf;
 		s = s + "- 27.01.2011 / Updated the Hibernate-Generic-DAO lib to version 0.5.1 . " + lf;
 		s = s + "- 15.01.2011 / First basic Implementation of the zk spreadsheet 2.0 . " + lf;

@@ -49,7 +49,6 @@ import org.zkoss.zul.Window;
 
 import de.forsthaus.backend.model.YoutubeLink;
 import de.forsthaus.backend.service.YoutubeLinkService;
-import de.forsthaus.webui.util.searchdialogs.BranchSimpleSearchListBox;
 
 /**
  * EN: <b>YouTube iFrame</b> for the dashboard.<br>
@@ -243,7 +242,7 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 	public static class YoutubeLinkSelectListBox extends Window implements Serializable {
 
 		private static final long serialVersionUID = 1L;
-		private static final Logger logger = Logger.getLogger(BranchSimpleSearchListBox.class);
+		private static final Logger logger = Logger.getLogger(YoutubeLinkSelectListBox.class);
 
 		private Listbox listbox;
 		// the windows title
@@ -369,6 +368,7 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 				YoutubeLink youtubeLink = (YoutubeLink) data;
 
 				Listcell lc;
+
 				lc = new Listcell(youtubeLink.getInterpret());
 				lc.setParent(item);
 				lc = new Listcell(youtubeLink.getTitle());

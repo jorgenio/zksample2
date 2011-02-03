@@ -20,32 +20,18 @@ package de.forsthaus.webui.spreadsheet;
 
 import java.io.Serializable;
 import java.text.ParseException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.calendar.Calendars;
-import org.zkoss.calendar.event.CalendarsEvent;
-import org.zkoss.calendar.impl.SimpleCalendarModel;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Div;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.West;
 import org.zkoss.zul.Window;
 
-import de.forsthaus.backend.model.MyCalendarEvent;
-import de.forsthaus.backend.model.SecUser;
-import de.forsthaus.backend.service.MyCalendarEventService;
-import de.forsthaus.policy.model.UserImpl;
-import de.forsthaus.webui.calendar.model.CalendarDateFormatter;
-import de.forsthaus.webui.calendar.model.MySimpleCalendarEvent;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.ZksampleMessageUtils;
 

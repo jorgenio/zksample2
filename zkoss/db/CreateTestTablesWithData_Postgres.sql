@@ -2254,7 +2254,20 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 31, 'DJ Tiesto feat. Emily Haines',            'Knock you out',                   'http://www.youtube.com/embed/fM8zIyspZ24',   0),
 ( 32, 'DJ Tiesto feat. Christian Burns',         'In the dark',                     'http://www.youtube.com/embed/McWPLj6h4Fk',   0),
 ( 33, 'Armin van Buuren feat. Christian Burns',  'This Light Between Us',           'http://www.youtube.com/embed/T8GHg9v5CeA',   0),
-( 34, 'Armin van Buuren feat. Sharon den Adel',  'In and Out of Love',              'http://www.youtube.com/embed/TxvpctgU_s8',   0);
+( 34, 'Armin van Buuren feat. Sharon den Adel',  'In and Out of Love',              'http://www.youtube.com/embed/TxvpctgU_s8',   0),
+( 35, 'MIA (Live)',                              'Tanz der Moleküle',               'http://www.youtube.com/embed/1uBaPOoQc8Q',   0),
+( 36, 'MIA (Live Austria 2008)',                 '100 Prozent',                     'http://www.youtube.com/embed/sbSF4GRv56o',   0),
+( 37, 'MIA (Live Austria 2008)',                 'Hungriges Herz',                  'http://www.youtube.com/embed/EQX2g-XSy6I',   0),
+( 38, 'Klee',                                    'Erinner Dich',                    'http://www.youtube.com/embed/2y_mmfxT6qI',   0),
+( 39, 'Freur (Live 1983)',                       'Doot Doot',                       'http://www.youtube.com/embed/u5QRT1CbMN0',   0),
+( 40, 'David Bowie (Live Paris 2002)',           'Ashes to Ashes',                  'http://www.youtube.com/embed/81_Jm-P83FA',   0),
+( 41, 'David Bowie (Live Paris 2002)',           'China Girl',                      'http://www.youtube.com/embed/OW7DFXq-cdg',   0),
+( 42, 'David Bowie (Live Paris 2002)',           'Heroes',                          'http://www.youtube.com/embed/dTOppbFKWko',   0),
+( 43, 'David Bowie (Live Germany 1978)',         'Rebel Rebel',                     'http://www.youtube.com/embed/pUAAU5g_ZEc',   0),
+( 44, 'Kate Havnevik',                           'Kaleidoscope',                    'http://www.youtube.com/embed/1C8GobS1WE8',   0),
+( 45, 'Joe Satriani (Live San Franciso 2006)',   'Until we say goodbye',            'http://www.youtube.com/embed/hAY3WeZovGk',   0),
+( 46, 'Joe Satriani (Live San Franciso 2006)',   'The Crush of Love',               'http://www.youtube.com/embed/dB1WsWi4EEY',   0);
+
 
 
 /* http://www.youtube.com/watch?v=xOzhgu0fb4M&feature=channel */

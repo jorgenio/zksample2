@@ -23,8 +23,8 @@ import java.math.BigDecimal;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * EN: Model class for the <b>Orderposition table</b>.<br>
- * DE: Model Klasse fuer die <b>Auftraegspositionen</b> Tabelle.<br>
+ * EN: Model class for <b>Orderposition</b>.<br>
+ * DE: Model Klasse fuer <b>Auftraegsposition</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

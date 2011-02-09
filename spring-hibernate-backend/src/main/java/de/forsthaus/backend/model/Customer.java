@@ -24,8 +24,8 @@ import java.util.Set;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * EN: Model class for the <b>Customer</b> table.<br>
- * DE: Model Klasse fuer die <b>Kunden</b> Tabelle.<br>
+ * EN: Model class for <b>Customer</b>.<br>
+ * DE: Model Klasse fuer <b>Kunde</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

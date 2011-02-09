@@ -25,8 +25,8 @@ import java.util.Set;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * EN: Model class for the <b>Ip2Country</b> table.<br>
- * DE: Model Klasse fuer die <b>Ip2Country</b> Tabelle.<br>
+ * EN: Model class for <b>Ip2Country</b>.<br>
+ * DE: Model Klasse fuer <b>Ip2Country</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

@@ -25,8 +25,8 @@ import java.util.Set;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * EN: Model class for the <b>SysCountryCode table</b>.<br>
- * DE: Model Klasse fuer die <b>SysCountryCode</b> Tabelle.<br>
+ * EN: Model class for <b>SysCountryCode</b>.<br>
+ * DE: Model Klasse fuer <b>SysCountryCode</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

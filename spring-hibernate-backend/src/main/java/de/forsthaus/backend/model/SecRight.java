@@ -24,8 +24,8 @@ import java.util.Set;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * EN: Model class for the <b>SecRight</b> table.<br>
- * DE: Model Klasse fuer die <b>Rechte</b> Tabelle.<br>
+ * EN: Model class for <b>SecRight</b>.<br>
+ * DE: Model Klasse fuer <b>Recht</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

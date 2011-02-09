@@ -24,8 +24,8 @@ import java.util.Set;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * EN: Model class for the <b>Order</b> table.<br>
- * DE: Model Klasse fuer die <b>Auftraege</b> Tabelle.<br>
+ * EN: Model class for <b>Order</b>.<br>
+ * DE: Model Klasse fuer <b>Auftrag</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

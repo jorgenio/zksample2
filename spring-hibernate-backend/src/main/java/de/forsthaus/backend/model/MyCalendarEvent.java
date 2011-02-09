@@ -23,8 +23,8 @@ import java.util.Date;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * EN: Model class for the <b>Calendar Event</b> table.<br>
- * DE: Model Klasse fuer die <b>Kalender Termin</b> Tabelle.<br>
+ * EN: Model class for <b>Calendar Event</b>.<br>
+ * DE: Model Klasse fuer <b>Kalender Termin</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

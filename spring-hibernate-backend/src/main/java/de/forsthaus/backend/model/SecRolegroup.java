@@ -21,8 +21,8 @@ package de.forsthaus.backend.model;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * EN: Model class for the <b>SecRolegroup</b> table.<br>
- * DE: Model Klasse fuer die <b>RolenGruppen</b> Tabelle.<br>
+ * EN: Model class for <b>SecRolegroup</b>.<br>
+ * DE: Model Klasse fuer <b>RolenGruppe</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

@@ -21,8 +21,8 @@ package de.forsthaus.backend.model;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * EN: Model class for the <b>Youtube_link</b> table.<br>
- * DE: Model Klasse fuer die <b>Youtube_link</b> Tabelle.<br>
+ * EN: Model class for <b>Youtube_link</b>.<br>
+ * DE: Model Klasse fuer <b>Youtube_link</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

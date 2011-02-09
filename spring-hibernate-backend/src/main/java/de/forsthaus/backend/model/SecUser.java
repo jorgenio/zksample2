@@ -24,8 +24,8 @@ import java.util.Set;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * EN: Model class for the <b>SecUser</b> table.<br>
- * DE: Model Klasse fuer die <b>User</b> Tabelle.<br>
+ * EN: Model class for <b>SecUser</b>.<br>
+ * DE: Model Klasse fuer <b>User</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

@@ -24,8 +24,8 @@ import java.util.Set;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * EN: Model class for the <b>SecRole</b> table.<br>
- * DE: Model Klasse fuer die <b>Rollen</b> Tabelle.<br>
+ * EN: Model class for <b>SecRole</b>.<br>
+ * DE: Model Klasse fuer <b>Rolle</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

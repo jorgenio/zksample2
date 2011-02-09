@@ -23,8 +23,8 @@ import java.util.Date;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * EN: Model class for the <b>Guestbook table</b>.<br>
- * DE: Model Klasse fuer die <b>Gaestebuch</b> Tabelle.<br>
+ * EN: Model class for <b>Guestbook</b>.<br>
+ * DE: Model Klasse fuer <b>Gaestebuch</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

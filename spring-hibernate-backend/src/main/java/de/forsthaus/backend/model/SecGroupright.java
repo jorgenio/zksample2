@@ -21,8 +21,8 @@ package de.forsthaus.backend.model;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * EN: Model class for the <b>SecGroupright</b> table.<br>
- * DE: Model Klasse fuer die <b>Gruppenrechte</b> Tabelle.<br>
+ * EN: Model class for <b>SecGroupright</b>.<br>
+ * DE: Model Klasse fuer <b>Gruppenrechte</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

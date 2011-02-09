@@ -22,9 +22,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * Model class for <b>ChartData</b>.<br>
+ * EN: Model class for <b>ChartData</b>.<br>
+ * DE: Model Klasse fuer <b>ChartData</b>.<br>
  * <br>
- * This class have no corespondant table in the database.<br>
+ * This class have no corresponding table in the database.<br>
  * It's used only for creating data for the charts because no of the <br>
  * sample tables/data fit the needs to charting.<br>
  * 

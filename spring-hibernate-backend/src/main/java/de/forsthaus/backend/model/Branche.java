@@ -24,8 +24,8 @@ import java.util.Set;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * EN: Model class for the <b>Branch table</b>.<br>
- * DE: Model Klasse fuer die <b>Branchen</b> Tabelle.<br>
+ * EN: Model class for <b>Branch</b>.<br>
+ * DE: Model Klasse fuer <b>Branche</b>.<br>
  * 
  * @author bbruhns
  * @author sgerth

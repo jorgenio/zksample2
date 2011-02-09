@@ -187,7 +187,7 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 
 		if (youtubeLink != null) {
 			// set the title
-			gb.setTooltiptext(youtubeLink.getInterpret() + "\n" + " * " + youtubeLink.getTitle() + " * ");
+			gb.setTooltiptext(youtubeLink.getInterpret() + "\n" + " - " + youtubeLink.getTitle() + " - ");
 			// clear all old stuff
 			iFrame.getChildren().clear();
 			// set the URL
@@ -213,7 +213,7 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 
 				if (youtubeLink != null) {
 					// set the title
-					gb.setTooltiptext(youtubeLink.getInterpret() + "\n" + " * " + youtubeLink.getTitle() + " * ");
+					gb.setTooltiptext(youtubeLink.getInterpret() + "\n" + " - " + youtubeLink.getTitle() + " - ");
 					// clear all old stuff
 					iFrame.getChildren().clear();
 					// set the URL

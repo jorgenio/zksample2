@@ -224,6 +224,26 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 		}
 	}
 
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
+	public void setModulHeight(int modulHeight) {
+		this.modulHeight = modulHeight;
+	}
+
+	public int getModulHeight() {
+		return modulHeight;
+	}
+
+	public void setiFrame(Iframe iFrame) {
+		this.iFrame = iFrame;
+	}
+
+	public Iframe getiFrame() {
+		return iFrame;
+	}
+
 	/**
 	 * This class creates a modal window as a dialog in which the user <br>
 	 * can search and select a youtubeLink object. By onClosing this box
@@ -436,27 +456,6 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 			this.youtubeLinkService = youtubeLinkService;
 		}
 	}
-
 	// +++ END inner class YoutubeLinkSelectListBox +++ //
-
-	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
-	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
-	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
-
-	public void setModulHeight(int modulHeight) {
-		this.modulHeight = modulHeight;
-	}
-
-	public int getModulHeight() {
-		return modulHeight;
-	}
-
-	public void setiFrame(Iframe iFrame) {
-		this.iFrame = iFrame;
-	}
-
-	public Iframe getiFrame() {
-		return iFrame;
-	}
 
 }

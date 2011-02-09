@@ -23,7 +23,8 @@ import java.util.Date;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * Model class for the <b>SecLoginlog table</b>.<br>
+ * EN: Model class for the <b>SecLoginlog</b> table.<br>
+ * DE: Model Klasse fuer die <b>Login Log</b> Tabelle.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -77,10 +78,18 @@ public class SecLoginlog implements java.io.Serializable, Entity {
 		return id;
 	}
 
+	/**
+	 * EN: Hibernate version field. Do not touch this!.<br>
+	 * DE: Hibernate Versions Info. Bitte nicht benutzen!<br>
+	 */
 	public void setVersion(int version) {
 		this.version = version;
 	}
 
+	/**
+	 * EN: Hibernate version field. Do not touch this!.<br>
+	 * DE: Hibernate Versions Info. Bitte nicht benutzen!<br>
+	 */
 	public int getVersion() {
 		return version;
 	}

@@ -62,6 +62,22 @@ public class IpToCountry implements Serializable, Entity {
 		return id;
 	}
 
+	/**
+	 * EN: Hibernate version field. Do not touch this!.<br>
+	 * DE: Hibernate Versions Info. Bitte nicht benutzen!<br>
+	 */
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	/**
+	 * EN: Hibernate version field. Do not touch this!.<br>
+	 * DE: Hibernate Versions Info. Bitte nicht benutzen!<br>
+	 */
+	public int getVersion() {
+		return version;
+	}
+
 	public void setIpcIpFrom(String ipcIpFrom) {
 		this.ipcIpFrom = Long.parseLong(ipcIpFrom);
 	}
@@ -108,14 +124,6 @@ public class IpToCountry implements Serializable, Entity {
 
 	public String getIpcCountryName() {
 		return ipcCountryName;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
-	public int getVersion() {
-		return version;
 	}
 
 	@Override

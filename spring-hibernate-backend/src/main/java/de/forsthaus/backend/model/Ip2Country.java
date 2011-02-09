@@ -25,7 +25,8 @@ import java.util.Set;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * Model class for the <b>Ip2Country table</b>.<br>
+ * EN: Model class for the <b>Ip2Country</b> table.<br>
+ * DE: Model Klasse fuer die <b>Ip2Country</b> Tabelle.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -61,6 +62,22 @@ public class Ip2Country implements Serializable, Entity {
 		return id;
 	}
 
+	/**
+	 * EN: Hibernate version field. Do not touch this!.<br>
+	 * DE: Hibernate Versions Info. Bitte nicht benutzen!<br>
+	 */
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	/**
+	 * EN: Hibernate version field. Do not touch this!.<br>
+	 * DE: Hibernate Versions Info. Bitte nicht benutzen!<br>
+	 */
+	public int getVersion() {
+		return version;
+	}
+
 	public void setCountryCode(CountryCode countryCode) {
 		this.countryCode = countryCode;
 	}
@@ -91,14 +108,6 @@ public class Ip2Country implements Serializable, Entity {
 
 	public Float getI2cLongitude() {
 		return i2cLongitude;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
-	public int getVersion() {
-		return version;
 	}
 
 	public void setSecLoginlogs(Set<SecLoginlog> secLoginlogs) {

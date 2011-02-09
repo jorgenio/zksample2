@@ -23,7 +23,8 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * Model class for the <b>Ip4Country table</b>.<br>
+ * EN: Model class for the <b>Ip4Country table</b> table.<br>
+ * DE: Model Klasse fuer die <b>Ip4Country</b> Tabelle.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -63,6 +64,22 @@ public class Ip4Country implements Serializable, Entity {
 		return id;
 	}
 
+	/**
+	 * EN: Hibernate version field. Do not touch this!.<br>
+	 * DE: Hibernate Versions Info. Bitte nicht benutzen!<br>
+	 */
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	/**
+	 * EN: Hibernate version field. Do not touch this!.<br>
+	 * DE: Hibernate Versions Info. Bitte nicht benutzen!<br>
+	 */
+	public int getVersion() {
+		return version;
+	}
+
 	public void setI4coIp(long i4coIp) {
 		this.i4coIp = i4coIp;
 	}
@@ -77,14 +94,6 @@ public class Ip4Country implements Serializable, Entity {
 
 	public long getI4coCcdId() {
 		return i4coCcdId;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
-	public int getVersion() {
-		return version;
 	}
 
 	@Override

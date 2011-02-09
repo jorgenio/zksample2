@@ -65,10 +65,18 @@ public class YoutubeLink implements java.io.Serializable, Entity {
 		this.id = id;
 	}
 
+	/**
+	 * EN: Hibernate version field. Do not touch this!.<br>
+	 * DE: Hibernate Versions Info. Bitte nicht benutzen!<br>
+	 */
 	public int getVersion() {
 		return this.version;
 	}
 
+	/**
+	 * EN: Hibernate version field. Do not touch this!.<br>
+	 * DE: Hibernate Versions Info. Bitte nicht benutzen!<br>
+	 */
 	public void setVersion(int version) {
 		this.version = version;
 	}

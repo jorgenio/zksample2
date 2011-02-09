@@ -25,7 +25,8 @@ import java.util.Set;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * Model class for the <b>SysCountryCode table</b>.<br>
+ * EN: Model class for the <b>SysCountryCode table</b>.<br>
+ * DE: Model Klasse fuer die <b>SysCountryCode</b> Tabelle.<br>
  * 
  * @author bbruhns
  * @author sgerth
@@ -61,6 +62,22 @@ public class CountryCode implements Serializable, Entity {
 		return id;
 	}
 
+	/**
+	 * EN: Hibernate version field. Do not touch this!.<br>
+	 * DE: Hibernate Versions Info. Bitte nicht benutzen!<br>
+	 */
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	/**
+	 * EN: Hibernate version field. Do not touch this!.<br>
+	 * DE: Hibernate Versions Info. Bitte nicht benutzen!<br>
+	 */
+	public int getVersion() {
+		return version;
+	}
+
 	public void setCcdCode2(String ccdCode2) {
 		this.ccdCode2 = ccdCode2;
 	}
@@ -75,14 +92,6 @@ public class CountryCode implements Serializable, Entity {
 
 	public String getCcdName() {
 		return ccdName;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
-	public int getVersion() {
-		return version;
 	}
 
 	public void setIp2Countries(Set<Ip2Country> ip2Countries) {

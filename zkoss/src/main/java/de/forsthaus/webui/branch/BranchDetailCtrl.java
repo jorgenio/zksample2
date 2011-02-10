@@ -119,6 +119,12 @@ public class BranchDetailCtrl extends GFCBaseCtrl implements Serializable {
 		this.binder.loadAll();
 
 		doFitSize(event);
+
+		// Testing for JAVA BUG !!!
+		// http://www.heise.de/security/meldung/Oracle-warnt-vor-Java-Schwachstelle-1185967.html
+		// System.out.println("HotorNot:");
+		// double d = Double.parseDouble("2.2250738585072012e-308");
+		// System.out.println("Value: " + d);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //

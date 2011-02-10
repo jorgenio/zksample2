@@ -249,7 +249,7 @@
 									label="NEW !!!  Updated zk 5.0.6 and added zk spreadsheet 2.0." />
 
 								<textbox height="100%" width="99.5%"
-									multiline="true" rows="28" readonly="true"
+									multiline="true" rows="20" readonly="true"
 									style="font-family: verdana; border: none; background-color: white;"
 									value="${s}" />
 							</groupbox>

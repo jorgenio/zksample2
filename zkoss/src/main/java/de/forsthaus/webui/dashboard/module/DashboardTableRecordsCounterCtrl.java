@@ -351,9 +351,6 @@ public class DashboardTableRecordsCounterCtrl extends Div implements Serializabl
 			addNewRow(rows, Labels.getLabel("table.youtube_links"), map.get("YouTubeLinks"));
 		}
 
-		if (map.containsKey("Article")) {
-			addNewRow(rows, Labels.getLabel("table.prg_article"), map.get("Article"));
-		}
 	}
 
 	/**

@@ -23,7 +23,7 @@
 						<panel border="none">
 							<panelchildren>
 
-								<groupbox mold="3d">
+								<groupbox mold="3d" closable="false">
 									<caption
 										image="/images/icons/view.gif"
 										label="${c:l('common.Details')}" />

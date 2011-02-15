@@ -79,7 +79,8 @@
 										<panel border="none">
 											<panelchildren>
 
-												<groupbox mold="3d">
+												<groupbox mold="3d"
+													closable="false">
 													<caption
 														image="/images/icons/view.gif"
 														label="${c:l('panel_UserDialog_AccountDetails.title')}" />
@@ -173,7 +174,8 @@
 											id="panel_UserDialog_Status" border="none">
 											<panelchildren>
 
-												<groupbox mold="3d">
+												<groupbox mold="3d"
+													closable="false">
 													<caption
 														image="/images/icons/view.gif" label="Status" />
 
@@ -230,7 +232,8 @@
 											id="panel_UserDialog_SecurityToken" border="none">
 											<panelchildren>
 
-												<groupbox mold="3d">
+												<groupbox mold="3d"
+													closable="false">
 													<caption
 														image="/images/icons/view.gif"
 														label="${c:l('panel_UserDialog_SecurityToken.title')}" />
@@ -263,7 +266,8 @@
 										<panel border="none">
 											<panelchildren>
 
-												<groupbox mold="3d">
+												<groupbox mold="3d"
+													closable="false">
 													<caption
 														image="/images/icons/view.gif"
 														label="${c:l('panel_UserDialog_GrantedRoles.title')}" />

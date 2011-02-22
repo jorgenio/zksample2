@@ -173,11 +173,11 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 	 * @throws Exception
 	 */
 	public void onCreate$orderPositionDialogWindow(Event event) throws Exception {
-		/* set comps cisible dependent of the users rights */
+		/* set components visible dependent of the users rights */
 		doCheckRights();
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_RightPrefix, true, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_RightPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);

@@ -98,7 +98,6 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	protected Button btnDelete; // autowired
 	protected Button btnSave; // autowired
 	protected Button btnCancel; // autowired
-	protected Button btnClose; // autowired
 
 	protected Button btnHelp;
 
@@ -151,7 +150,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		windowOfficeMain.setContentStyle("padding:0px;");
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrlOffice = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, false, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+		btnCtrlOffice = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel);
 
 		doCheckRights();
 
@@ -805,7 +804,6 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		btnEdit.setVisible(workspace.isAllowed("button_OfficeMain_btnEdit"));
 		btnDelete.setVisible(workspace.isAllowed("button_OfficeMain_btnDelete"));
 		btnSave.setVisible(workspace.isAllowed("button_OfficeMain_btnSave"));
-		btnClose.setVisible(workspace.isAllowed("button_OfficeMain_btnClose"));
 
 	}
 

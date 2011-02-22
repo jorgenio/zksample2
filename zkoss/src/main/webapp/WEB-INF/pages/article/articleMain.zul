@@ -76,8 +76,6 @@
 						tooltiptext="${c:l('btnSave.tooltiptext')}" />
 					<button id="btnCancel" height="24px"
 						tooltiptext="${c:l('btnCancel.tooltiptext')}" />
-					<button id="btnClose" height="24px"
-						tooltiptext="${c:l('btnClose.tooltiptext')}" />
 				</toolbar>
 			</hbox>
 		</div>

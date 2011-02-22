@@ -20,6 +20,7 @@ package de.forsthaus.webui.util;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.zkoss.zul.Button;
@@ -27,15 +28,15 @@ import org.zkoss.zul.Button;
 import de.forsthaus.UserWorkspace;
 
 /**
- * Button controller for the buttons in the dialog windows. <br>
+ * Button controller for the CRUD buttons. <br>
  * <br>
  * Works by calling the setBtnStatus_xxx where xxx is the kind of pressed <br>
  * button action, i.e. new delete or save. After calling these methods <br>
  * all buttons are disabled/enabled or visible/not visible by <br>
  * param disableButtons. <br>
  * <br>
- * disableButtons = true --> Buttons are disabled/enabled <br>
- * disableButtons = false --> Buttons are visible/not visible <br>
+ * buttonsModeDisable = true --> Buttons are disabled/enabled <br>
+ * buttonsModeDisable = false --> Buttons are visible/not visible <br>
  * 
  * 
  * @changes 03/25/2009 sge Extended for security. So we need a right prefix.<br>
@@ -47,9 +48,12 @@ import de.forsthaus.UserWorkspace;
  *          02/04/2010 sge added a Cancel Button.<br>
  *          07/01/2010 sge added a constructor parameter for let the CloseButton
  *          appears or not. (Dialogs=Yes / DetailView = No).<br>
+ *          02/22/2011 sge Extended for disable(true/false) all buttons.<br>
+ *          added a second constructor for working with/without CloseButton.<br>
+ *          which is used in ModalWindows.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
 public class ButtonStatusCtrl implements Serializable {
 
@@ -71,13 +75,16 @@ public class ButtonStatusCtrl implements Serializable {
 	 * true = disable the button <br>
 	 * false = make the button unvisible<br>
 	 */
-	private final boolean disableButtons = false;
+	private final boolean buttonsModeDisable = false;
 
 	/** with close button */
-	boolean closeButton = true;
+	private boolean closeButton = true;
+
+	/** is the BtnController active ? */
+	private boolean active = true;
 
 	/**
-	 * Constructor
+	 * Constructor without CLOSE button.
 	 * 
 	 * @param btnNew
 	 *            (New Button)
@@ -87,15 +94,45 @@ public class ButtonStatusCtrl implements Serializable {
 	 *            (Delete Button)
 	 * @param btnSave
 	 *            (Save Button)
+	 * @param btnCancel
+	 *            (Cancel Button)
+	 */
+	public ButtonStatusCtrl(UserWorkspace userWorkspace, String rightPrefix, Button btnNew, Button btnEdit, Button btnDelete, Button btnSave, Button btnCancel) {
+		super();
+		this.workspace = userWorkspace;
+		this._rightPrefix = rightPrefix + "btn";
+		this.closeButton = false;
+
+		buttons.put(ButtonEnum.New, btnNew);
+		buttons.put(ButtonEnum.Edit, btnEdit);
+		buttons.put(ButtonEnum.Delete, btnDelete);
+		buttons.put(ButtonEnum.Save, btnSave);
+		buttons.put(ButtonEnum.Cancel, btnCancel);
+
+		setBtnImages();
+	}
+
+	/**
+	 * Constructor with CLOSE button.
+	 * 
+	 * @param btnNew
+	 *            (New Button)
+	 * @param btnEdit
+	 *            (Edit Button)
+	 * @param btnDelete
+	 *            (Delete Button)
+	 * @param btnSave
+	 *            (Save Button)
+	 * @param btnCancel
+	 *            (Cancel Button)
 	 * @param btnClose
 	 *            (Close Button)
 	 */
-	public ButtonStatusCtrl(UserWorkspace userWorkspace, String rightPrefix, boolean withCloseBtn, Button btnNew, Button btnEdit, Button btnDelete, Button btnSave, Button btnCancel, Button btnClose) {
+	public ButtonStatusCtrl(UserWorkspace userWorkspace, String rightPrefix, Button btnNew, Button btnEdit, Button btnDelete, Button btnSave, Button btnCancel, Button btnClose) {
 		super();
 		this.workspace = userWorkspace;
-
 		this._rightPrefix = rightPrefix + "btn";
-		this.closeButton = withCloseBtn;
+		this.closeButton = true;
 
 		buttons.put(ButtonEnum.New, btnNew);
 		buttons.put(ButtonEnum.Edit, btnEdit);
@@ -108,7 +145,7 @@ public class ButtonStatusCtrl implements Serializable {
 	}
 
 	/**
-	 * Set the images fore the buttons.<br>
+	 * Set the images for the buttons.<br>
 	 */
 	private void setBtnImages() {
 		String imagePath = "/images/icons/";
@@ -118,14 +155,18 @@ public class ButtonStatusCtrl implements Serializable {
 		setImage(ButtonEnum.Delete, imagePath + "btn_delete2_16x16.gif");
 		setImage(ButtonEnum.Save, imagePath + "btn_save2_16x16.gif");
 		setImage(ButtonEnum.Cancel, imagePath + "btn_cancel2_16x16.gif");
-		setImage(ButtonEnum.Close, imagePath + "btn_exitdoor2_16x16.gif");
+
+		if (closeButton) {
+			setImage(ButtonEnum.Close, imagePath + "btn_exitdoor2_16x16.gif");
+		}
+
 	}
 
 	/**
 	 * Set all Buttons for the Mode NEW is pressed. <br>
 	 */
 	public void setBtnStatus_New() {
-		if (disableButtons) {
+		if (buttonsModeDisable) {
 			setDisabled(ButtonEnum.New, true);
 			setDisabled(ButtonEnum.Edit, true);
 			setDisabled(ButtonEnum.Delete, true);
@@ -133,8 +174,6 @@ public class ButtonStatusCtrl implements Serializable {
 			setDisabled(ButtonEnum.Cancel, false);
 			if (closeButton) {
 				setDisabled(ButtonEnum.Close, false);
-			} else {
-				setVisible(ButtonEnum.Close, false);
 			}
 
 		} else {
@@ -145,8 +184,6 @@ public class ButtonStatusCtrl implements Serializable {
 			setVisible(ButtonEnum.Cancel, true);
 			if (closeButton) {
 				setVisible(ButtonEnum.Close, true);
-			} else {
-				setVisible(ButtonEnum.Close, false);
 			}
 		}
 	}
@@ -155,7 +192,7 @@ public class ButtonStatusCtrl implements Serializable {
 	 * Set all Buttons for the Mode EDIT is pressed. <br>
 	 */
 	public void setBtnStatus_Edit() {
-		if (disableButtons) {
+		if (buttonsModeDisable) {
 			setDisabled(ButtonEnum.New, true);
 			setDisabled(ButtonEnum.Edit, true);
 			setDisabled(ButtonEnum.Delete, true);
@@ -163,8 +200,6 @@ public class ButtonStatusCtrl implements Serializable {
 			setDisabled(ButtonEnum.Cancel, false);
 			if (closeButton) {
 				setDisabled(ButtonEnum.Close, false);
-			} else {
-				setVisible(ButtonEnum.Close, false);
 			}
 		} else {
 			setVisible(ButtonEnum.New, false);
@@ -174,8 +209,6 @@ public class ButtonStatusCtrl implements Serializable {
 			setVisible(ButtonEnum.Cancel, true);
 			if (closeButton) {
 				setVisible(ButtonEnum.Close, true);
-			} else {
-				setVisible(ButtonEnum.Close, false);
 			}
 		}
 	}
@@ -200,7 +233,7 @@ public class ButtonStatusCtrl implements Serializable {
 	 * shows data. <br>
 	 */
 	public void setInitEdit() {
-		if (disableButtons) {
+		if (buttonsModeDisable) {
 			setDisabled(ButtonEnum.New, false);
 			setDisabled(ButtonEnum.Edit, false);
 			setDisabled(ButtonEnum.Delete, false);
@@ -208,8 +241,6 @@ public class ButtonStatusCtrl implements Serializable {
 			setDisabled(ButtonEnum.Cancel, false);
 			if (closeButton) {
 				setDisabled(ButtonEnum.Close, false);
-			} else {
-				setVisible(ButtonEnum.Close, false);
 			}
 		} else {
 			setVisible(ButtonEnum.New, true);
@@ -219,8 +250,6 @@ public class ButtonStatusCtrl implements Serializable {
 			setVisible(ButtonEnum.Cancel, true);
 			if (closeButton) {
 				setVisible(ButtonEnum.Close, true);
-			} else {
-				setVisible(ButtonEnum.Close, false);
 			}
 		}
 	}
@@ -231,7 +260,7 @@ public class ButtonStatusCtrl implements Serializable {
 	 * and have no data. <br>
 	 */
 	public void setInitNew() {
-		if (disableButtons) {
+		if (buttonsModeDisable) {
 			setDisabled(ButtonEnum.New, true);
 			setDisabled(ButtonEnum.Edit, true);
 			setDisabled(ButtonEnum.Delete, true);
@@ -239,8 +268,6 @@ public class ButtonStatusCtrl implements Serializable {
 			setDisabled(ButtonEnum.Cancel, false);
 			if (closeButton) {
 				setDisabled(ButtonEnum.Close, false);
-			} else {
-				setVisible(ButtonEnum.Close, false);
 			}
 		} else {
 			setVisible(ButtonEnum.New, false);
@@ -250,8 +277,6 @@ public class ButtonStatusCtrl implements Serializable {
 			setVisible(ButtonEnum.Cancel, true);
 			if (closeButton) {
 				setVisible(ButtonEnum.Close, true);
-			} else {
-				setVisible(ButtonEnum.Close, false);
 			}
 		}
 	}
@@ -275,12 +300,17 @@ public class ButtonStatusCtrl implements Serializable {
 	 *            True or False
 	 */
 	private void setVisible(ButtonEnum b, boolean visible) {
-		if (visible) {
-			if (workspace.isAllowed(_rightPrefix + b.name())) {
+
+		// check first if the ButtonController is active
+		if (isActive()) {
+
+			if (visible) {
+				if (workspace.isAllowed(_rightPrefix + b.name())) {
+					buttons.get(b).setVisible(visible);
+				}
+			} else {
 				buttons.get(b).setVisible(visible);
 			}
-		} else {
-			buttons.get(b).setVisible(visible);
 		}
 	}
 
@@ -292,12 +322,64 @@ public class ButtonStatusCtrl implements Serializable {
 	 *            True or False
 	 */
 	private void setDisabled(ButtonEnum b, boolean disabled) {
-		if (disabled) {
-			buttons.get(b).setDisabled(disabled);
-		} else {
-			if (workspace.isAllowed(_rightPrefix + b.name())) {
+
+		// check first if the ButtonController is active
+		if (isActive()) {
+
+			if (disabled) {
 				buttons.get(b).setDisabled(disabled);
+			} else {
+				if (workspace.isAllowed(_rightPrefix + b.name())) {
+					buttons.get(b).setDisabled(disabled);
+				}
 			}
 		}
 	}
+
+	/**
+	 * Sets all buttons disabled/visible.<br>
+	 * 
+	 * @param activate
+	 *            True or False
+	 */
+	@SuppressWarnings("unchecked")
+	public void setActivateAll(boolean activate) {
+
+		Iterator it = buttons.entrySet().iterator();
+
+		while (it.hasNext()) {
+			Map.Entry pairs = (Map.Entry) it.next();
+			// System.out.println(pairs.getKey() + " = " + pairs.getValue());
+
+			if (buttonsModeDisable == true)
+				((Button) pairs.getValue()).setDisabled(activate);
+			else if (buttonsModeDisable == false)
+				((Button) pairs.getValue()).setVisible(activate);
+
+		}
+
+		setActive(activate);
+
+	}
+
+	/**
+	 * Set this ButtonController active. <br>
+	 * Means show the Buttons.<br>
+	 * 
+	 * @param active
+	 */
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	/**
+	 * Is this ButtonController active? <br>
+	 * Means does it shows the Buttons? <br>
+	 * 
+	 * @return
+	 */
+	public boolean isActive() {
+		return active;
+	}
+
 }

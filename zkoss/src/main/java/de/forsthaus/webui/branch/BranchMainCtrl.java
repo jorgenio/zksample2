@@ -98,7 +98,6 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	protected Button btnDelete; // autowired
 	protected Button btnSave; // autowired
 	protected Button btnCancel; // autowired
-	protected Button btnClose; // autowired
 
 	protected Button btnHelp;
 
@@ -151,7 +150,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// create the Button Controller. Disable not used buttons during working
-		this.btnCtrlBranch = new ButtonStatusCtrl(getUserWorkspace(), this.btnCtroller_ClassPrefix, false, this.btnNew, this.btnEdit, this.btnDelete, this.btnSave, this.btnCancel, this.btnClose);
+		this.btnCtrlBranch = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel);
 
 		doCheckRights();
 
@@ -717,7 +716,6 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		this.btnEdit.setVisible(workspace.isAllowed("button_BranchMain_btnEdit"));
 		this.btnDelete.setVisible(workspace.isAllowed("button_BranchMain_btnDelete"));
 		this.btnSave.setVisible(workspace.isAllowed("button_BranchMain_btnSave"));
-		this.btnClose.setVisible(workspace.isAllowed("button_BranchMain_btnClose"));
 
 		this.button_BranchMain_PrintBranches.setVisible(workspace.isAllowed("button_BranchMain_PrintBranches"));
 		this.button_BranchMain_Search_BranchName.setVisible(workspace.isAllowed("button_BranchMain_Search_BranchName"));

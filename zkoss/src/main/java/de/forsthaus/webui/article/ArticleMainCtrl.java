@@ -103,7 +103,6 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	protected Button btnDelete; // autowired
 	protected Button btnSave; // autowired
 	protected Button btnCancel; // autowired
-	protected Button btnClose; // autowired
 
 	protected Button btnHelp;
 
@@ -157,7 +156,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	public void onCreate$windowArticleMain(Event event) throws Exception {
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrlArticle = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, false, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+		btnCtrlArticle = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel);
 
 		doCheckRights();
 

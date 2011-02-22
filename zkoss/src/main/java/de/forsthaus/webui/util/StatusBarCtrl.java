@@ -39,7 +39,7 @@ import org.zkoss.zul.Window;
  * Works with the EventQueues mechanism of zk. ALl needed components are created
  * in this class. In the zul-template declare only this controller with 'apply'
  * to a winStatusBar window component.<br>
- * 
+ * 2
  * Declaration in the zul-file:<br>
  * 
  * <pre>

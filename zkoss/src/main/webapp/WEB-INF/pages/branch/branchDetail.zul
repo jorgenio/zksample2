@@ -26,7 +26,7 @@
 								<groupbox mold="3d" closable="false">
 									<caption
 										image="/images/icons/view.gif"
-										label="§{c:l('common.Details')}" />
+										label="${c:l('common.Details')}" />
 
 									<grid sclass="GridLayoutNoBorder"
 										fixedLayout="true"

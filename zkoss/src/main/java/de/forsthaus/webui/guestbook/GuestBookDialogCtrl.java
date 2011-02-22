@@ -121,7 +121,7 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void onCreate$window_GuestBookDialog(Event event) throws Exception {
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
 		/* set components visible dependent of the users rights */
 		doCheckRights();

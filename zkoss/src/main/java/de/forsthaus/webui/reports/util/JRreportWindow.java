@@ -77,8 +77,7 @@ public class JRreportWindow extends Window implements Serializable {
 	 * @param ds
 	 * @param type
 	 */
-	public JRreportWindow(Component parent, boolean modal, HashMap<String, Object> reportParams, String reportPathName,
-			JRDataSource ds, String type) {
+	public JRreportWindow(Component parent, boolean modal, HashMap<String, Object> reportParams, String reportPathName, JRDataSource ds, String type) {
 		super();
 		this.parent = parent;
 		this.modal = modal;
@@ -175,11 +174,9 @@ public class JRreportWindow extends Window implements Serializable {
 			logger.debug("detach Report and close ReportWindow [" + this + "]");
 		}
 
-		this.window.removeEventListener("onClose", new OnCloseReportEventListener());
-
 		// TODO check this
-		this.report.detach();
-		this.window.getChildren().clear();
+		// this.report.detach();
+		// this.window.getChildren().clear();
 		this.window.onClose();
 
 	}

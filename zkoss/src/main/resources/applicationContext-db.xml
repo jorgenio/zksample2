@@ -39,6 +39,9 @@
 		thread, and configuration does not allow creation of non-transactional
 		one here
 	-->
+	<!-- HibernateTemplate handles this on its own, but when    -->
+	<!-- using Hibernate sessions directly, declare a           -->
+	<!-- TransactionManager                                     -->
 	<!-- ====================================================== -->
 	<aop:config>
 		<aop:pointcut id="guiServiceMethods"
@@ -58,6 +61,7 @@
 
 	<!-- ====================================================== -->
 	<!--             Define the transaction manager             -->
+	<!--    A PlatformTransactionManager is still required      -->
 	<!-- ====================================================== -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">

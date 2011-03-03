@@ -23,6 +23,23 @@
 	<!--         Define Aspect pointcuts and advisors           -->
 	<!--               for the transaction scopes.              -->
 	<!-- ====================================================== -->
+	<!--   We need such an properly configured transcaction     -->
+	<!-- management too if we using Hibernate sessions directly.-->
+	<!-- Our PagedListWrapper classes are using the             -->
+	<!-- Hibernate-Generic-Dao framework who calls a session    -->
+	<!-- method like:                                           -->
+	<!--
+		sessionFactory.getCurrentSession().createQuery("FROM User")
+		.setMaxResults(10).setFirstResult(10).list();
+	-->
+	<!-- for getting paged data.                                -->
+	<!-- Without that declarartion we became an error like:     -->
+	<!--
+		org.hibernate.HibernateException: No Hibernate Session bound to
+		thread, and configuration does not allow creation of non-transactional
+		one here
+	-->
+	<!-- ====================================================== -->
 	<aop:config>
 		<aop:pointcut id="guiServiceMethods"
 			expression="execution(* de.forsthaus.gui.service.*.*(..))" />
@@ -34,10 +51,10 @@
 		<aop:advisor advice-ref="serviceTxAdvice" pointcut-ref="guiServiceMethods" />
 		<aop:advisor advice-ref="serviceTxAdvice" pointcut-ref="serviceMethods" />
 		<!--
-			<aop:advisor advice-ref="serviceTxAdvice"
-			pointcut-ref="daoMethods" />
+			<aop:advisor advice-ref="serviceTxAdvice" pointcut-ref="daoMethods"
+			/>
 		-->
-	</aop:config> 
+	</aop:config>
 
 	<!-- ====================================================== -->
 	<!--             Define the transaction manager             -->

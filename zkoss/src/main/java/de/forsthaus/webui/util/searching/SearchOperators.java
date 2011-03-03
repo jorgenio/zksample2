@@ -25,14 +25,20 @@ import java.util.List;
 import com.trg.search.Filter;
 
 /**
- * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
- * This class represents a few types of search operators <br>
+ * EN: This class represents a few <b>types of search operators</b>
  * corresponding to the com.trg.search.Search.java class. <br>
  * from the Hibernate-Generic-DAO framework. <br>
  * <br>
  * The domain model have no corresponding table in a database and has a fixed
- * length of records that should see as the search operators of what to search. <br>
- * It's used only for showing the several operators in a dropdown list. <br>
+ * length of records that should see as the search operators of what to search.
+ * It's used only for showing the several operators in a dropDown list. <br>
+ * <br>
+ * DE: Diese Klasse representiert einige <b>Typen von Suche Operatoren</b> die
+ * mit denen der com.trg.search.Search.java Klasse aus dem Hibernate-Generic-DAO
+ * Framework korrespondieren. <br>
+ * Diese Domain-Model Klasse hat keine Tabelle als Gegenstueck. Es wird
+ * lediglich benoetigt um die Such-Operatoren in einer DropDown Liste (Listbox)
+ * zur Auswahl anzuzeigen. <br>
  * <br>
  * Int | sign | search operator <br>
  * ------------------------------------------<br>
@@ -47,10 +53,11 @@ import com.trg.search.Filter;
  *<br>
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
  * 
+ * @author Stephan Gerth
+ * 
  * @changes 05/15/2009: sge Migrating the list models for paging. <br>
  *          07/24/2009: sge changes for clustering.<br>
  * 
- * @author sgerth
  */
 public class SearchOperators implements Serializable {
 

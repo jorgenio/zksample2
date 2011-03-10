@@ -98,11 +98,6 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	private static final long serialVersionUID = -546886879998950467L;
 	private static final Logger logger = Logger.getLogger(SecGrouprightCtrl.class);
 
-	private transient PagedListWrapper<SecGroup> plwSecGroups;
-	private transient PagedListWrapper<SecRight> plwSecRights;
-
-	private transient SecGroup selectedGroup;
-
 	/*
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * All the components that are defined here and have a corresponding
@@ -162,6 +157,11 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	public void setCountRowsRightDetails(int countRowsRightDetails) {
 		this.countRowsRightDetails = countRowsRightDetails;
 	}
+
+	private transient PagedListWrapper<SecGroup> plwSecGroups;
+	private transient PagedListWrapper<SecRight> plwSecRights;
+
+	private transient SecGroup selectedGroup;
 
 	// ServiceDAOs / Domain Classes
 	private transient SecurityService securityService;

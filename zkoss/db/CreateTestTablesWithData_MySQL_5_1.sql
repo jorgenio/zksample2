@@ -1750,8 +1750,8 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 46, 'Joe Satriani (Live San Franciso 2006)',    'The Crush of Love',               'http://www.youtube.com/embed/dB1WsWi4EEY',   0),
 ( 47, 'French Kiss (Live aux Francofolies 2009)', 'Le Soupir',                       'http://www.youtube.com/embed/YziA45xILWU',   0),
 ( 48, 'CHAKA KHAN (Live)',                        'Ain''t nobody',                   'http://www.youtube.com/embed/6eDSIj_iozA',   0),
-( 49, 'Madita',                                   'Ceylon',                          'http://www.youtube.com/embed/6qzMxqzS-bg',   0);
-
+( 49, 'Madita',                                   'Ceylon',                          'http://www.youtube.com/embed/6qzMxqzS-bg',   0),
+( 50, 'The Crystal Method',                       'Starting over. Play it loud :-)', 'http://www.youtube.com/embed/pMGJ3cVvIrY',   0);
 
  
 

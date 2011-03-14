@@ -25,7 +25,10 @@ import de.forsthaus.backend.service.PagedListService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 
 /**
- * Helper class for getting a paged record list that can be sorted by DB. <br>
+ * Helper class for getting a paged record list that are be sorted on the
+ * database and reacts on clicking the listheaders. <br>
+ * Look at the <b>OnSortEventListener</b> and <b>OnPagingEventListener</b>.<br>
+ * <br>
  * This class works with a BindingListModelList for working with the zk's
  * databinding mechanism. <br>
  * 
@@ -40,7 +43,7 @@ import de.forsthaus.backend.util.HibernateSearchObject;
  * @changes 05/02/2010: sge Changed to BindingListModelList.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
 public class PagedBindingListWrapper<E> extends BindingListModelList implements Serializable {
 

@@ -41,8 +41,9 @@ import de.forsthaus.backend.service.PagedListService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 
 /**
- * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
- * Helper class for getting a paged record list that can be sorted by DB. <br>
+ * Helper class for getting a paged record list that are be sorted on the
+ * database and reacts on clicking the listheaders. <br>
+ * Look at the <b>OnSortEventListener</b> and <b>OnPagingEventListener</b>.<br>
  * <br>
  * 
  * All not used Listheaders must me declared as: <br>
@@ -56,7 +57,7 @@ import de.forsthaus.backend.util.HibernateSearchObject;
  * @changes 07/24/2009: sge changes for clustering.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
 public class PagedListWrapper<E> extends ListModelList implements Serializable {
 

@@ -34,8 +34,8 @@ import de.forsthaus.backend.service.PagedListService;
 import de.forsthaus.backend.util.HibernateSearchObject;
 
 /**
- * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
  * Helper class for getting a paged record list that can be sorted by DB. <br>
+ * Look at the <b>OnPagingEventListener</b>.<br>
  * <br>
  * 
  * All not used Listheaders must me declared as: <br>
@@ -49,7 +49,7 @@ import de.forsthaus.backend.util.HibernateSearchObject;
  * @changes 07/24/2009: sge changes for clustering.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
 public class PagedGridWrapper<E> extends ListModelList implements Serializable {
 

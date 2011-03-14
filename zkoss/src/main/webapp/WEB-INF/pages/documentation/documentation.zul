@@ -62,6 +62,7 @@
 				<!-- CRUD BUTTONS -->
 				<toolbar align="end"
 					style="float:right; border-style: none;">
+					Please wait...  Downloading of that pdf-file takes a while.
 				</toolbar>
 
 			</hbox>

@@ -18,6 +18,7 @@
  */
 package de.forsthaus.webui.util.constraint;
 
+import org.apache.commons.lang.StringUtils;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.WrongValueException;
@@ -32,7 +33,14 @@ import org.zkoss.zul.Textbox;
  * <pre>
  * call from java: 
  * usrPassword.setConstraint("NO EMPTY");
- * usrPasswordRetype.setConstraint(new NoEmptyAndEqualStringsConstraint(this.usrPassword));
+ * usrPasswordRetype.setConstraint(new NoEmptyAndEqualStringsConstraint(txtbox_usrPassword));
+ * </pre>
+ * 
+ * <pre>
+ * declaration in zuml: 
+ * < zscript >	
+ * packageName NoEmptyAndEqualStringsConstraint cc = new packageName.NoEmptyAndEqualStringsConstraint(  txtb_User_Password  ); <==
+ * < / zscript >
  * </pre>
  * 
  * @author Stephan Gerth
@@ -52,24 +60,24 @@ public class NoEmptyAndEqualStringsConstraint implements Constraint, java.io.Ser
 
 		if (comp instanceof Textbox) {
 
+			final String enteredValue = (String) value;
+
 			// Skip, if disabled
-			if (((Textbox) comp).isDisabled() == true) {
+			if (((Textbox) comp).isDisabled()) {
 				return;
 			}
 
-			final String enteredValue = (String) value;
-
 			if (compareComponent instanceof Textbox) {
-				if (enteredValue.isEmpty()) {
-					throw new WrongValueException(comp, Labels.getLabel("message.error.CannotBeEmpty"));
+
+				if (StringUtils.isEmpty(enteredValue)) {
+					throw new WrongValueException(comp, Labels.getLabel("message.Error.CannotBeEmpty"));
 				}
 
 				final String comparedValue = ((Textbox) compareComponent).getValue();
 				if (!enteredValue.equals(comparedValue)) {
-					throw new WrongValueException(comp, Labels.getLabel("message.error.RetypedPasswordMustBeSame"));
+					throw new WrongValueException(comp, Labels.getLabel("message.Error.RetypedPasswordMustBeSame"));
 				}
 			}
 		}
 	}
-
 }

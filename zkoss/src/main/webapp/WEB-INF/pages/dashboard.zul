@@ -12,7 +12,7 @@
 	{
 		lf = "\n";
 		s = "";
-		s = s + "- 19.03.2011 / Removing the spreadsheet. We will waiting until it's offered for a maven build. " + lf;
+		s = s + "- 19.03.2011 / Removing the spreadsheet. We will waiting until it's offered for a maven build system. " + lf;
 		s = s + "- 22.02.2011 / Modifications in the CRUD ButtonController.  " + lf;
 		s = s + "- 03.02.2011 / Updated zk version to 5.0.6.FL20110202  " + lf;
 		s = s + "- 28.01.2011 / Separate Fields for interpret / song title in the youTube Dashboard module. " + lf;

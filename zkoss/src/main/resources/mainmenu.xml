@@ -25,8 +25,11 @@
 	<menuItem id="menu_Item_Calendar" zulNavigation="/WEB-INF/pages/calendar/calendar.zul"
 		iconName="/images/icons/calendar1_16x16.gif" />
 	<!-- Spreadsheet -->
-	<menuItem id="menu_Item_SpreadSheet" zulNavigation="/WEB-INF/pages/spreadsheet/spreadsheet.zul"
+	<!-- closed, until the spreadsheet jar's are in the maven repo
+		<menuItem id="menu_Item_SpreadSheet"
+		zulNavigation="/WEB-INF/pages/spreadsheet/spreadsheet.zul"
 		iconName="/images/icons/spreadsheet_16x16.png" />
+	-->
 
 	<!-- ReadMe MenuTree -->
 	<menu id="menu_Category_ReadMe" rightName="" open="true">

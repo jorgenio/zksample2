@@ -263,55 +263,6 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zss</artifactId>
-			<version>2.0.1</version>
-			<scope>system</scope>
-			<systemPath>${zkosslibs}zss.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>org.zkoss.zpoi</groupId>
-			<artifactId>zpoi</artifactId>
-			<version>2.0.1</version>
-			<scope>system</scope>
-			<systemPath>${zkosslibs}zpoi.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>ork.zkoss.zssex</groupId>
-			<artifactId>ssex</artifactId>
-			<version>2.0.1</version>
-			<scope>system</scope>
-			<systemPath>${zkosslibs}zssex.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>org.zkoss.zssjsf</groupId>
-			<artifactId>zssjsf</artifactId>
-			<version>2.0.1</version>
-			<scope>system</scope>
-			<systemPath>${zkosslibs}zssjsf.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>org.zkoss.zssjsp</groupId>
-			<artifactId>zssjsp</artifactId>
-			<version>2.0.1</version>
-			<scope>system</scope>
-			<systemPath>${zkosslibs}zssjsp.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>org.zkoss.zsspdf</groupId>
-			<artifactId>zsspdf</artifactId>
-			<version>2.0.0</version>
-			<scope>system</scope>
-			<systemPath>${zkosslibs}zsspdf.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>org.zkoss.zsstest</groupId>
-			<artifactId>zsstest</artifactId>
-			<version>2.0.1</version>
-			<scope>system</scope>
-			<systemPath>${zkosslibs}zsstest.jar</systemPath>
-		</dependency>
 	</dependencies>
 	<url>http://sourceforge.net/projects/zksample2/</url>
 	<issueManagement>

@@ -12,6 +12,7 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 19.03.2011 / Removing the spreadsheet. We will waiting until it's offered for a maven build. " + lf;
 		s = s + "- 22.02.2011 / Modifications in the CRUD ButtonController.  " + lf;
 		s = s + "- 03.02.2011 / Updated zk version to 5.0.6.FL20110202  " + lf;
 		s = s + "- 28.01.2011 / Separate Fields for interpret / song title in the youTube Dashboard module. " + lf;
@@ -247,7 +248,7 @@
 								<caption
 									style="color: #000000; font-weight:bold;"
 									image="/images/icons/new_icons_10.gif"
-									label="NEW !!!  Updated zk 5.0.6 and added zk spreadsheet 2.0." />
+									label="NEW !!!  Updated zk 5.0.6 " />
 
 								<textbox height="100%" width="99.5%"
 									multiline="true" rows="20" readonly="true"

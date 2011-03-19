@@ -130,11 +130,6 @@
 		<property name="calendarEventService" ref="calendarEventService" />
 	</bean>
 
-	<!-- Spreadsheet / Tabellenkalkulation -->
-	<bean id="spreadsheetMainCtrl" class="de.forsthaus.webui.spreadsheet.SpreadsheetMainCtrl"
-		parent="basisCtrl" scope="prototype">
-	</bean>
-
 
 	<!-- Documentation / Dokumentation -->
 	<bean id="documentationCtrl" class="de.forsthaus.webui.documentation.DocumentationCtrl"
@@ -189,11 +184,11 @@
 	</bean>
 
 	<!-- Users -->
-	<bean id="userListCtrl" class="de.forsthaus.webui.user.UserListCtrl"
+	<bean id="userListCtrl" class="de.forsthaus.webui.security.user.UserListCtrl"
 		parent="basisCtrl" scope="prototype">
 		<property name="userService" ref="userService" />
 	</bean>
-	<bean id="userDialogCtrl" class="de.forsthaus.webui.user.UserDialogCtrl"
+	<bean id="userDialogCtrl" class="de.forsthaus.webui.security.user.UserDialogCtrl"
 		parent="basisCtrl" scope="prototype">
 		<property name="userService" ref="userService" />
 	</bean>
@@ -369,6 +364,13 @@
 		Login Dialog <bean id="zkLoginDialogCtrl"
 		class="de.forsthaus.webui.login.ZkLoginDialogCtrl" parent="basisCtrl"
 		scope="prototype"> </bean>
+	-->
+
+	<!-- Spreadsheet / Tabellenkalkulation -->
+	<!--
+		<bean id="spreadsheetMainCtrl"
+		class="de.forsthaus.webui.spreadsheet.SpreadsheetMainCtrl"
+		parent="basisCtrl" scope="prototype"> </bean>
 	-->
 
 

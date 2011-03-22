@@ -24,22 +24,19 @@
 
 
 		<paging id="paging_HibernateStatisticList" />
-		<grid id="gridHibernateStatisticList" fixedLayout="false">
+		<grid id="gridHibernateStatisticList" fixedLayout="true">
 			<columns>
 				<column width="30px" />
-				<column width="60%"
+				<column width="50%"
 					label="${c:l('gridHibernateStatistic.column.label.methodname')}" />
 				<column
 					label="${c:l('gridHibernateStatistic.column.label.javaDurationTime')}"
 					width="20%" />
 				<column
 					label="${c:l('gridHibernateStatistic.column.label.dateTime')}"
-					width="20%" />
+					width="30%" />
 			</columns>
-			<rows>
-
-
-			</rows>
+			<rows></rows>
 		</grid>
 	</window>
 

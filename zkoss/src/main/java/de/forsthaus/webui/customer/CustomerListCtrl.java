@@ -23,19 +23,25 @@ import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.access.annotation.Secured;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.ForwardEvent;
+import org.zkoss.zk.ui.event.MouseEvent;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.FieldComparator;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Paging;
 import org.zkoss.zul.Panel;
+import org.zkoss.zul.Popup;
 import org.zkoss.zul.Window;
 
 import de.forsthaus.UserWorkspace;
@@ -107,6 +113,10 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	private transient CustomerService customerService;
 	private transient BrancheService brancheService;
 
+	// Test Popup on a listcell
+	private Popup popup = null;
+	private Label popLabel = null;
+
 	/**
 	 * default constructor.<br>
 	 */
@@ -173,6 +183,39 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		getPagedListWrapper().init(searchObj, listBoxCustomer, pagingCustomerList);
 		// set the itemRenderer
 		listBoxCustomer.setItemRenderer(new CustomerListModelItemRenderer());
+	}
+
+	/**
+	 * Test method for showing how to popup on a listcell.<br>
+	 * 
+	 * @param event
+	 */
+	public void onMouseOver(MouseEvent event) {
+
+		// System.out.println("current target : " + event.getTarget());
+
+		Component comp = event.getTarget();
+
+		if (comp instanceof Listcell) {
+
+			// System.out.println(comp.toString());
+			// System.out.println(((Listcell) comp).getLabel().toString());
+
+			if (popup == null) {
+				popup = new Popup();
+				popup.setParent(window_customerList);
+				popup.setWidth("100px");
+				popup.setHeight("100px");
+				popup.open(window_customerList);
+				popLabel = new Label();
+				popLabel.setParent(popup);
+				popLabel.setValue(((Listcell) comp).getLabel().toString());
+			} else {
+				popup.close();
+				popLabel.setValue(((Listcell) comp).getLabel().toString());
+				popup.open(window_customerList);
+			}
+		}
 	}
 
 	/**

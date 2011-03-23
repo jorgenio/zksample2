@@ -1752,7 +1752,8 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 48, 'CHAKA KHAN (Live)',                        'Ain''t nobody',                   'http://www.youtube.com/embed/6eDSIj_iozA',   0),
 ( 49, 'Madita',                                   'Ceylon',                          'http://www.youtube.com/embed/6qzMxqzS-bg',   0),
 ( 50, 'The Crystal Method',                       'Starting over. Play it loud :-)', 'http://www.youtube.com/embed/pMGJ3cVvIrY',   0),
-( 51, 'Jessie J. feat. B.o.B.',                   'Price Tag',                       'http://www.wat.tv/video/jessie-price-tag-feat-o-3bosb_2zicp_.html',   0);
+( 51, 'Jessie J. feat. B.o.B.',                   'Price Tag',                       'http://www.wat.tv/video/jessie-price-tag-feat-o-3bosb_2zicp_.html',   0),
+( 52, 'THE Heavy (Live 2009)',                    'Short Change HeroPrice Tag',      'http://www.youtube.com/embed/Kqxe31ICFZk',   0);
 
  
 

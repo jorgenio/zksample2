@@ -59,6 +59,20 @@
 		-->
 	</aop:config>
 
+
+	<!-- ====================================================== -->
+	<!--    Provides exception translation from Hibernate to    -->
+	<!--          Spring vendor independent exceptions          -->
+	<!--           means Spring DataAccessExceptions            -->
+	<!-- Works together with Annotated DAOImpl classes like:    -->
+	<!-- @Repository                                            -->
+	<!-- public class UserDAOImpl extends BasisDAO<SecUser>     -->
+	<!--             implements UserDAO                         -->
+	<!-- ====================================================== -->
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+
 	<!-- ====================================================== -->
 	<!--             Define the transaction manager             -->
 	<!--    A PlatformTransactionManager is still required      -->
@@ -67,6 +81,7 @@
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+
 
 	<!-- ====================================================== -->
 	<!--        Define the property placeholder configurer      -->

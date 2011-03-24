@@ -12,6 +12,9 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 24.03.2011 / Extended the DAOImpl classes for the @Repository Annotation in conjunction with a new " + lf;
+		s = s + "            	      entry in the application-context-db.xml configuration file. These let spring  " + lf;
+		s = s + "            	      convert the vendor dependent Hibernate Exceptions in common dataAccessExceptions.  " + lf;
 		s = s + "- 19.03.2011 / Removing the spreadsheet. We will waiting until it's offered for a maven build system. " + lf;
 		s = s + "- 22.02.2011 / Modifications in the CRUD ButtonController.  " + lf;
 		s = s + "- 03.02.2011 / Updated zk version to 5.0.6.FL20110202  " + lf;

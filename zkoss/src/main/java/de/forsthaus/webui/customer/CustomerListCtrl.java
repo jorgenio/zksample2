@@ -28,7 +28,6 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.event.MouseEvent;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;

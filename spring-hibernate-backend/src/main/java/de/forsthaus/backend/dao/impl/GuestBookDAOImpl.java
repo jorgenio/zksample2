@@ -19,6 +19,7 @@
 package de.forsthaus.backend.dao.impl;
 
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.stereotype.Repository;
 
 import de.forsthaus.backend.dao.GuestBookDAO;
 import de.forsthaus.backend.model.GuestBook;
@@ -28,8 +29,9 @@ import de.forsthaus.backend.model.GuestBook;
  * DE: DAO Methoden Implementierung fuer die <b>Guestbook</b> Model Klasse.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
+@Repository
 public class GuestBookDAOImpl extends BasisDAO<GuestBook> implements GuestBookDAO {
 
 	@Override

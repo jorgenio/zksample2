@@ -19,6 +19,7 @@
 package de.forsthaus.backend.dao.impl;
 
 import org.hibernate.LockMode;
+import org.springframework.stereotype.Repository;
 
 import de.forsthaus.backend.dao.HibernateStatisticsDao;
 import de.forsthaus.backend.model.HibernateStatistics;
@@ -27,6 +28,7 @@ import de.forsthaus.backend.model.HibernateStatistics;
  * @author bbruhns
  * 
  */
+@Repository
 public class HibernateStatisticsDaoImpl extends BasisDAO<HibernateStatistics> implements HibernateStatisticsDao {
 
 	/*
@@ -47,11 +49,14 @@ public class HibernateStatisticsDaoImpl extends BasisDAO<HibernateStatistics> im
 
 		int countDeletedRecords = 0;
 
-//		int u = DataAccessUtils.intResult(getHibernateTemplate().find("select min(id) from  HibernateStatistics"));
+		// int u =
+		// DataAccessUtils.intResult(getHibernateTemplate().find("select min(id) from  HibernateStatistics"));
 		// int i1 =
 		// getHibernateTemplate().bulkUpdate("delete from HibernateEntityStatistics");
-//		int i2 = getHibernateTemplate().bulkUpdate("delete from HibernateStatistics where id > " + u + 1000 + "");
-//		countDeletedRecords = i2;
+		// int i2 =
+		// getHibernateTemplate().bulkUpdate("delete from HibernateStatistics where id > "
+		// + u + 1000 + "");
+		// countDeletedRecords = i2;
 
 		return countDeletedRecords;
 	}

@@ -27,6 +27,7 @@ import org.hibernate.criterion.Restrictions;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Month;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.stereotype.Repository;
 
 import de.forsthaus.backend.bean.DummyBean;
 import de.forsthaus.backend.bean.ListLongSumBean;
@@ -40,8 +41,9 @@ import de.forsthaus.backend.util.CustomDataAccessUtils;
  * DE: DAO Methoden Implementierung fuer die <b>SecLoginlog</b> Model Klasse.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
+@Repository
 public class SecLoginlogDAOImpl extends BasisDAO<SecLoginlog> implements SecLoginlogDAO {
 
 	@Override

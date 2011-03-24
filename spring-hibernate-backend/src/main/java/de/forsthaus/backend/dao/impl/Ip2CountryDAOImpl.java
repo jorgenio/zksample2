@@ -21,6 +21,7 @@ package de.forsthaus.backend.dao.impl;
 import java.util.List;
 
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.stereotype.Repository;
 
 import de.forsthaus.backend.dao.Ip2CountryDAO;
 import de.forsthaus.backend.model.Ip2Country;
@@ -31,8 +32,9 @@ import de.forsthaus.backend.util.IpLocator;
  * DE: DAO Methoden Implementierung fuer die <b>Ip2Country</b> Model Klasse.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
+@Repository
 public class Ip2CountryDAOImpl extends BasisDAO<Ip2Country> implements Ip2CountryDAO {
 
 	@Override

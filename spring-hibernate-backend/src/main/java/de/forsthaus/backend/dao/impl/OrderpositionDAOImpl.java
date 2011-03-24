@@ -24,6 +24,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.stereotype.Repository;
 
 import de.forsthaus.backend.dao.OrderpositionDAO;
 import de.forsthaus.backend.model.Order;
@@ -34,8 +35,9 @@ import de.forsthaus.backend.model.Orderposition;
  * DE: DAO Methoden Implementierung fuer die <b>Orderposition</b> Model Klasse.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
+@Repository
 public class OrderpositionDAOImpl extends BasisDAO<Orderposition> implements OrderpositionDAO {
 
 	@Override

@@ -19,6 +19,7 @@
 package de.forsthaus.backend.dao.impl;
 
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.stereotype.Repository;
 
 import de.forsthaus.backend.dao.Ip4CountryDAO;
 import de.forsthaus.backend.model.Ip4Country;
@@ -28,8 +29,9 @@ import de.forsthaus.backend.model.Ip4Country;
  * DE: DAO Methoden Implementierung fuer die <b>Ip4Country</b> Model Klasse.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
+@Repository
 public class Ip4CountryDAOImpl extends BasisDAO<Ip4Country> implements Ip4CountryDAO {
 
 	@Override

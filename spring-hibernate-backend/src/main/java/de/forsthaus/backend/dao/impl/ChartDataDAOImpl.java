@@ -24,6 +24,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import de.forsthaus.backend.dao.ChartDataDAO;
 import de.forsthaus.backend.model.ChartData;
 
@@ -32,8 +34,9 @@ import de.forsthaus.backend.model.ChartData;
  * DE: DAO Methoden Implementierung fuer die <b>ChartData</b> Model Klasse.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
+@Repository
 public class ChartDataDAOImpl implements ChartDataDAO {
 
 	@Override

@@ -24,6 +24,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.stereotype.Repository;
 
 import de.forsthaus.backend.dao.SecRoleDAO;
 import de.forsthaus.backend.model.SecRole;
@@ -34,8 +35,9 @@ import de.forsthaus.backend.model.SecUser;
  * DE: DAO Methoden Implementierung fuer die <b>SecRole</b> Model Klasse.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
+@Repository
 public class SecRoleDAOImpl extends BasisDAO<SecRole> implements SecRoleDAO {
 
 	@Override

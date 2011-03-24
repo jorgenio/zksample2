@@ -26,6 +26,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.stereotype.Repository;
 
 import de.forsthaus.backend.dao.ArticleDAO;
 import de.forsthaus.backend.model.Article;
@@ -35,8 +36,9 @@ import de.forsthaus.backend.model.Article;
  * DE: DAO Methoden Implementierung fuer die <b>Article</b> Model Klasse.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
+@Repository
 public class ArticleDAOImpl extends BasisDAO<Article> implements ArticleDAO, InitializingBean {
 
 	@Override

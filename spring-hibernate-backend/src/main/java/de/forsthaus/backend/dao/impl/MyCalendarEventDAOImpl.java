@@ -25,6 +25,7 @@ import org.hibernate.FetchMode;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.stereotype.Repository;
 
 import de.forsthaus.backend.dao.MyCalendarEventDAO;
 import de.forsthaus.backend.model.MyCalendarEvent;
@@ -34,8 +35,9 @@ import de.forsthaus.backend.model.MyCalendarEvent;
  * DE: DAO Methoden Implementierung fuer die <b>Calendar Event</b> Model Klasse.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
+@Repository
 public class MyCalendarEventDAOImpl extends BasisDAO<MyCalendarEvent> implements MyCalendarEventDAO {
 
 	@Override

@@ -24,6 +24,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.stereotype.Repository;
 
 import de.forsthaus.backend.dao.OfficeDAO;
 import de.forsthaus.backend.model.Office;
@@ -33,8 +34,9 @@ import de.forsthaus.backend.model.Office;
  * DE: DAO Methoden Implementierung fuer die <b>Office</b> Model Klasse.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
+@Repository
 public class OfficeDAOImpl extends BasisDAO<Office> implements OfficeDAO {
 
 	@Override

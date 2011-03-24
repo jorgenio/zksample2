@@ -25,6 +25,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.stereotype.Repository;
 
 import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.dao.YoutubeLinkDAO;
@@ -35,8 +36,9 @@ import de.forsthaus.backend.model.YoutubeLink;
  * DE: DAO Methoden Implementierung fuer die <b>YoutubeLink</b> Model Klasse.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
+@Repository
 public class YoutubeLinkDAOImpl extends BasisDAO<YoutubeLink> implements YoutubeLinkDAO {
 
 	@SuppressWarnings("unchecked")

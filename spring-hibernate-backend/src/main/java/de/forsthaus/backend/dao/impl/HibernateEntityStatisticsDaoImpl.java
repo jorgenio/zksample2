@@ -18,6 +18,8 @@
  */
 package de.forsthaus.backend.dao.impl;
 
+import org.springframework.stereotype.Repository;
+
 import de.forsthaus.backend.dao.HibernateEntityStatisticsDao;
 import de.forsthaus.backend.model.HibernateEntityStatistics;
 
@@ -25,5 +27,6 @@ import de.forsthaus.backend.model.HibernateEntityStatistics;
  * @author bbruhns
  * 
  */
+@Repository
 public class HibernateEntityStatisticsDaoImpl extends BasisDAO<HibernateEntityStatistics> implements HibernateEntityStatisticsDao {
 }

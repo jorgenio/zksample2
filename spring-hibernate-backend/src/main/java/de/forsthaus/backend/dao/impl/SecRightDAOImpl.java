@@ -25,6 +25,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.stereotype.Repository;
 
 import de.forsthaus.backend.dao.SecRightDAO;
 import de.forsthaus.backend.model.SecGroupright;
@@ -40,9 +41,9 @@ import de.forsthaus.backend.model.SecUser;
  * >SQL-Injection</a>
  * 
  * @author bbruhns
- * @author sgerth
- * @deprecated
+ * @author Stephan Gerth
  */
+@Repository
 @Deprecated
 public class SecRightDAOImpl extends BasisDAO<SecRight> implements SecRightDAO {
 

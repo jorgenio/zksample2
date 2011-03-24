@@ -25,6 +25,7 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Repository;
 
 import de.forsthaus.backend.dao.LanguageDAO;
 import de.forsthaus.backend.model.Language;
@@ -36,8 +37,9 @@ import de.forsthaus.backend.model.Language;
  * NOT USED AT TIME !!!<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
+@Repository
 public class LanguageDAOImpl implements LanguageDAO {
 	private static final List<Language> LANGUAGES;
 	static {

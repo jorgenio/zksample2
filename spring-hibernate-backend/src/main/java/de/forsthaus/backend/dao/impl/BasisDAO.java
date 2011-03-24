@@ -23,11 +23,13 @@ import java.util.Collection;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateOperations;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author bbruhns
- * 
+ * @changes Stephan Gerth
  */
+@Repository
 public abstract class BasisDAO<T> {
 	private HibernateOperations hibernateTemplate;
 

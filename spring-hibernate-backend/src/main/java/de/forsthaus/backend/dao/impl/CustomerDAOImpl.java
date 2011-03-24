@@ -27,6 +27,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.stereotype.Repository;
 
 import de.forsthaus.backend.dao.CustomerDAO;
 import de.forsthaus.backend.model.Branche;
@@ -37,8 +38,9 @@ import de.forsthaus.backend.model.Customer;
  * DE: DAO Methoden Implementierung fuer die <b>Customers</b> Model Klasse.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
+@Repository
 public class CustomerDAOImpl extends BasisDAO<Customer> implements CustomerDAO {
 
 	private static Logger logger = Logger.getLogger(CustomerDAOImpl.class);

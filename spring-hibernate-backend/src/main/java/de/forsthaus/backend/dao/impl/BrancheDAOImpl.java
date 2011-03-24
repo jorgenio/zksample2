@@ -27,6 +27,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.stereotype.Repository;
 
 import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.dao.BrancheDAO;
@@ -37,8 +38,9 @@ import de.forsthaus.backend.model.Branche;
  * DE: DAO Methoden Implementierung fuer die <b>Branche</b> Model Klasse.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
+@Repository
 public class BrancheDAOImpl extends BasisDAO<Branche> implements BrancheDAO {
 
 	@Override

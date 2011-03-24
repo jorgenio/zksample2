@@ -23,6 +23,7 @@ import java.util.List;
 import org.hibernate.NonUniqueResultException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 import com.trg.search.ExampleOptions;
 import com.trg.search.Filter;
@@ -36,6 +37,7 @@ import de.forsthaus.backend.dao.HibernateSearchSupport;
  * @author bbruhns
  * 
  */
+@Repository
 public class HibernateSearchSupportImpl implements HibernateSearchSupport {
 	private HibernateSearchProcessor hibernateSearchProcessor;
 

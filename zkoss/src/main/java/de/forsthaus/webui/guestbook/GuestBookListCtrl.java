@@ -227,7 +227,7 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 
 		if (item != null) {
 
-			GuestBook aGuestBook = (GuestBook) item.getAttribute("data");
+			GuestBook aGuestBook = (GuestBook) item.getValue();
 
 			// CAST AND STORE THE SELECTED OBJECT
 			textbox_GuestBook_gubText.setValue(aGuestBook.getGubText());
@@ -266,7 +266,7 @@ public class GuestBookListCtrl extends GFCBaseListCtrl<GuestBook> implements Ser
 
 		if (item != null) {
 			// CAST AND STORE THE SELECTED OBJECT
-			GuestBook aGuestBook = (GuestBook) item.getAttribute("data");
+			GuestBook aGuestBook = (GuestBook) item.getValue();
 
 			showDetailView(aGuestBook);
 		}

@@ -20,6 +20,7 @@ package de.forsthaus.webui.customer;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.access.annotation.Secured;
@@ -31,7 +32,9 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.event.MouseEvent;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Div;
 import org.zkoss.zul.FieldComparator;
+import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
@@ -42,6 +45,7 @@ import org.zkoss.zul.Paging;
 import org.zkoss.zul.Panel;
 import org.zkoss.zul.Popup;
 import org.zkoss.zul.Window;
+import org.zkoss.zul.Vbox;
 
 import de.forsthaus.UserWorkspace;
 import de.forsthaus.backend.model.Customer;
@@ -115,6 +119,8 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	// Test Popup on a listcell
 	private Popup popup = null;
 	private Label popLabel = null;
+	private Vbox vbox = null;
+	private Hbox titleBox = null;
 
 	/**
 	 * default constructor.<br>
@@ -186,35 +192,79 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 
 	/**
 	 * Test method for showing how to popup on a listcell.<br>
+	 * Extended. Now, it get the ListItem's parent and iterate through a list of
+	 * its listcells and show the value for each.
 	 * 
 	 * @param event
 	 */
-	public void onMouseOver(MouseEvent event) {
+	public void onMouseOverListCell(MouseEvent event) {
 
 		// System.out.println("current target : " + event.getTarget());
+		if (popup == null) {
+			popup = new Popup();
+			popup.setSclass("myPopup");
+			popup.setParent(window_customerList);
+			// popup.setWidth("200px");
+			vbox = new Vbox();
+			vbox.setStyle("padding: 0px;");
+			vbox.setParent(popup);
+			// clear old stuff
+			vbox.getChildren().clear();
+			titleBox = new Hbox();
+			titleBox.setHeight("15px");
+			titleBox.setWidth("100%");
+			titleBox.setStyle("background-color: red;");
+			titleBox.setParent(vbox);
+			popLabel = new Label();
+			popLabel.setParent(titleBox);
+			popLabel.setValue("Customer Details");
+			popLabel.setStyle("color: white; ");
+
+		} else {
+			// clear old stuff
+			vbox.getChildren().clear();
+			titleBox = new Hbox();
+			titleBox.setHeight("15px");
+			titleBox.setWidth("100%");
+			titleBox.setStyle("background-color: red;");
+			titleBox.setParent(vbox);
+			popLabel = new Label();
+			popLabel.setParent(titleBox);
+			popLabel.setValue("Customer Details");
+			popLabel.setStyle("color: white; ");
+			popup.close();
+		}
 
 		Component comp = event.getTarget();
 
 		if (comp instanceof Listcell) {
 
-			// System.out.println(comp.toString());
-			// System.out.println(((Listcell) comp).getLabel().toString());
+			System.out.println("1: " + comp.toString());
+			System.out.println("2: " + ((Listcell) comp).getLabel().toString());
+			System.out.println("3: " + comp.getParent().toString());
 
-			if (popup == null) {
-				popup = new Popup();
-				popup.setParent(window_customerList);
-				popup.setWidth("100px");
-				popup.setHeight("100px");
-				popup.open(window_customerList);
-				popLabel = new Label();
-				popLabel.setParent(popup);
-				popLabel.setValue(((Listcell) comp).getLabel().toString());
-			} else {
-				popup.close();
-				popLabel.setValue(((Listcell) comp).getLabel().toString());
-				popup.open(window_customerList);
+			// get the parent object of the listcell, should be a listitem
+			Component parentComponent = comp.getParent();
+			if (parentComponent instanceof Listitem) {
+
+				// get a list of listcell that resides in the listItem
+				List list = parentComponent.getChildren();
+
+				// for all listcells we add a label with its value
+				for (Object object : list) {
+					if (object instanceof Listcell) {
+						popLabel = new Label();
+						popLabel.setParent(vbox);
+						popLabel.setValue(((Listcell) object).getLabel().toString());
+					}
+
+				}
 			}
+
 		}
+
+		popup.open(window_customerList);
+
 	}
 
 	/**

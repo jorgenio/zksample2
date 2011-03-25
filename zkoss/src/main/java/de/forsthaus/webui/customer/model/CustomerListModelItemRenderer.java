@@ -56,7 +56,7 @@ public class CustomerListModelItemRenderer implements ListitemRenderer, Serializ
 		lc.setParent(item);
 		lc = new Listcell(customer.getKunOrt());
 		lc.setParent(item);
-		ComponentsCtrl.applyForward(lc, "onMouseOver=onMouseOver");
+		ComponentsCtrl.applyForward(lc, "onMouseOver=onMouseOverListCell");
 
 		lc = new Listcell();
 		final Checkbox cb = new Checkbox();

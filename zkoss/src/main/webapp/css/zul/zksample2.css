@@ -116,6 +116,12 @@ tr.z-row td.z-row-inner {
 	border-style: none;
 }
 
+/* ------------------- Popup in Customerlist -------------------- */
+.myPopup .z-popup .z-popup-cm {
+padding: 0px;
+}
+
+
 .z-slider-sphere-hor,.z-slider-scale,.z-slider-hor,.z-slider-sphere-hor-center,.z-slider-scale-center,.z-slider-hor-center
 	{
 	background: transparent no-repeat 0 top;

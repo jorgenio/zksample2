@@ -34,17 +34,11 @@
 		<listitem forEach="${allEvents}" value="${each}">
 			<listcell label="${each.lglIp}" />
 
-			<listcell label="${datestr}">
-				<zscript >
-	Date dt = each.lglLogtime;
-	System.out.println(each);
-	String datestr = new SimpleDateFormat("yyyy/MM/dd").format((de.forsthaus.backend.model.SecLoginlog) each.lglLogtime);
+			<zscript >
+	String datestr = new SimpleDateFormat("yyyy/MM/dd").format(self.value.lglLogtime);
 </zscript>
-			</listcell>
 
-			<!-- 
 			<listcell label="${datestr}" />
-			-->
 		</listitem>
 	</listbox>
 </zk>

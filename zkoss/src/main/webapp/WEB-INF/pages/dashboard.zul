@@ -12,6 +12,9 @@
 	{
 		lf = "\n";
 		s = "";
+		s = s + "- 29.03.2011 / Some code refactorings about the localized DataAccessExceptions and correcting " + lf;
+		s = s + "            	      the DAO and Service bean scopes in the backend. Writing a new Chapter for  " + lf;
+		s = s + "            	      scopes in the Zksample2 documentation. " + lf;
 		s = s + "- 24.03.2011 / Extended the DAOImpl classes for the @Repository Annotation in conjunction with a new " + lf;
 		s = s + "            	      entry in the application-context-db.xml configuration file. These let spring  " + lf;
 		s = s + "            	      convert the vendor dependent Hibernate Exceptions in common dataAccessExceptions.  " + lf;

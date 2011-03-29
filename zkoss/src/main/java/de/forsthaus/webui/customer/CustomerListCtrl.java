@@ -239,9 +239,10 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 
 		if (comp instanceof Listcell) {
 
-			System.out.println("1: " + comp.toString());
-			System.out.println("2: " + ((Listcell) comp).getLabel().toString());
-			System.out.println("3: " + comp.getParent().toString());
+			// System.out.println("1: " + comp.toString());
+			// System.out.println("2: " + ((Listcell)
+			// comp).getLabel().toString());
+			// System.out.println("3: " + comp.getParent().toString());
 
 			// get the parent object of the listcell, should be a listitem
 			Component parentComponent = comp.getParent();

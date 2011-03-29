@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.dao.DataAccessException;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
@@ -435,8 +436,9 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 * 
 	 * @param event
 	 * @throws InterruptedException
+	 * @throws InterruptedException
 	 */
-	public void onClick$btnSave(Event event) {
+	public void onClick$btnSave(Event event) throws InterruptedException {
 		// logger.debug(event.toString());
 
 		doSave();
@@ -518,9 +520,11 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 	 * 3. if newly than get a new object first and <b>save</b> it to DB. <br>
 	 * 4. for each 'unchecked item' we must check if it newly unchecked <br>
 	 * 5. if newly unchecked we must <b>delete</b> this item from DB. <br>
+	 * 
+	 * @throws InterruptedException
 	 */
 	@SuppressWarnings("unchecked")
-	public void doSave() {
+	public void doSave() throws InterruptedException {
 
 		List<Listitem> li = null;
 
@@ -558,7 +562,11 @@ public class SecGrouprightCtrl extends GFCBaseCtrl implements Serializable, Sele
 					}
 
 					// save to DB
-					getSecurityService().saveOrUpdate(groupRight);
+					try {
+						getSecurityService().saveOrUpdate(groupRight);
+					} catch (DataAccessException e) {
+						ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
+					}
 
 				} else if (cb.isChecked() == false) {
 

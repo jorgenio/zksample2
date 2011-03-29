@@ -304,12 +304,8 @@ public class AddGrouprightDialogCtrl extends GFCBaseCtrl implements Serializable
 			// save it to database
 			try {
 				getSecurityService().saveOrUpdate(groupRight);
-			} catch (final DataAccessException e) {
-				String message = e.getMessage();
-				// String message = e.getCause().getMessage();
-				String title = Labels.getLabel("message.Error");
-				MultiLineMessageBox.doSetTemplate();
-				MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+			} catch (DataAccessException e) {
+				ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
 
 				btnCtrl.setBtnStatus_Save();
 			}

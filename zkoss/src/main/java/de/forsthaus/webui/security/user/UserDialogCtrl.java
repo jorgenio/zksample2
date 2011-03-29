@@ -732,8 +732,13 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 						ZksampleMessageUtils.doShowNotAllowedForDemoRecords();
 						return;
 					} else {
+
 						// delete from database
-						getUserService().delete(anUser);
+						try {
+							getUserService().delete(anUser);
+						} catch (DataAccessException e) {
+							ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
+						}
 
 						// now synchronize the listBox
 						final ListModelList lml = (ListModelList) listBoxUser.getListModel();
@@ -821,12 +826,8 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// save it to database
 		try {
 			getUserService().saveOrUpdate(anUser);
-		} catch (final DataAccessException e) {
-			String message = e.getMessage();
-			// String message = e.getCause().getMessage();
-			String title = Labels.getLabel("message.Error");
-			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+		} catch (DataAccessException e) {
+			ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
 
 			// Reset to init values
 			doResetInitValues();

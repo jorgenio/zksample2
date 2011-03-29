@@ -476,16 +476,25 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 			public void onEvent(Event evt) {
 				switch (((Integer) evt.getData()).intValue()) {
 				case MultiLineMessageBox.YES:
-					delete();
+					try {
+						delete();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				case MultiLineMessageBox.NO:
 					break; //
 				}
 			}
 
-			private void delete() {
+			// delete from database
+			private void delete() throws InterruptedException {
 
-				// delete from database
-				getSecurityService().delete(aRight);
+				try {
+					getSecurityService().delete(aRight);
+				} catch (DataAccessException e) {
+					ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
+				}
 
 				// now synchronize the listBox
 				final ListModelList lml = (ListModelList) listBoxSecRights.getListModel();
@@ -602,12 +611,8 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// save it to database
 		try {
 			getSecurityService().saveOrUpdate(aRight);
-		} catch (final DataAccessException e) {
-			String message = e.getMessage();
-			// String message = e.getCause().getMessage();
-			String title = Labels.getLabel("message.Error");
-			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+		} catch (DataAccessException e) {
+			ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
 
 			// Reset to init values
 			doResetInitValues();

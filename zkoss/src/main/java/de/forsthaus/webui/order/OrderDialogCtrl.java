@@ -659,16 +659,25 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 			public void onEvent(Event evt) {
 				switch (((Integer) evt.getData()).intValue()) {
 				case MultiLineMessageBox.YES:
-					delete();
+					try {
+						delete();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				case MultiLineMessageBox.NO:
 					break; //
 				}
 			}
 
-			private void delete() {
+			// delete from database
+			private void delete() throws InterruptedException {
 
-				// delete from database
-				getOrderService().delete(order);
+				try {
+					getOrderService().delete(order);
+				} catch (DataAccessException e) {
+					ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
+				}
 
 				// now synchronize the listBox in the parent zul-file
 				ListModelList lml = (ListModelList) listBoxOrder.getListModel();
@@ -791,12 +800,8 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// save it to database
 		try {
 			getOrderService().saveOrUpdate(anOrder);
-		} catch (final DataAccessException e) {
-			String message = e.getMessage();
-			// String message = e.getCause().getMessage();
-			String title = Labels.getLabel("message.Error");
-			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+		} catch (DataAccessException e) {
+			ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
 
 			// Reset to init values
 			doResetInitValues();

@@ -68,6 +68,13 @@
 	<!-- @Repository                                            -->
 	<!-- public class UserDAOImpl extends BasisDAO<SecUser>     -->
 	<!--             implements UserDAO                         -->
+	<!--	                                                    -->
+	<!--   try {                                                -->
+	<!--	  Service.save(entity);                             -->
+	<!--   } catch (DataAccessException e) {                    -->
+	<!--	  System.out.println( e.getMostSpecificCause().toString() ); -->
+	<!--   }                                                    -->
+	<!--                                                        -->
 	<!-- ====================================================== -->
 	<bean
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />

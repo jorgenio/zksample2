@@ -320,12 +320,8 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 					try {
 						// save to DB
 						getSecurityService().saveOrUpdate(aRoleGroup);
-					} catch (final DataAccessException e) {
-						String message = e.getMessage();
-						// String message = e.getCause().getMessage();
-						String title = Labels.getLabel("message.Error");
-						MultiLineMessageBox.doSetTemplate();
-						MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+					} catch (DataAccessException e) {
+						ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
 					}
 
 				} else if (cb.isChecked() == false) {

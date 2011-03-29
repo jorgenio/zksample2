@@ -501,16 +501,25 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 			public void onEvent(Event evt) {
 				switch (((Integer) evt.getData()).intValue()) {
 				case MultiLineMessageBox.YES:
-					deleteBranch();
+					try {
+						deleteBranch();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				case MultiLineMessageBox.NO:
 					break; //
 				}
 			}
 
-			private void deleteBranch() {
+			// delete from database
+			private void deleteBranch() throws InterruptedException {
 
-				// delete from database
-				getguestBookService().delete(guestBook);
+				try {
+					getguestBookService().delete(guestBook);
+				} catch (DataAccessException e) {
+					ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
+				}
 
 				// now synchronize the branches listBox
 				final ListModelList lml = (ListModelList) listbox_GuestBookList.getListModel();
@@ -618,11 +627,8 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 		// save it to database
 		try {
 			getguestBookService().saveOrUpdate(aGuestBook);
-		} catch (final DataAccessException e) {
-			final String message = e.getMessage();
-			final String title = Labels.getLabel("message.Error");
-			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+		} catch (DataAccessException e) {
+			ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
 
 			// Reset to init values
 			doResetInitValues();

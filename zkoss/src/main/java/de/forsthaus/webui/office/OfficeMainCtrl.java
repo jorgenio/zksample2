@@ -547,14 +547,19 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 				public void onEvent(Event evt) {
 					switch (((Integer) evt.getData()).intValue()) {
 					case MultiLineMessageBox.YES:
-						deleteBean();
+						try {
+							deleteBean();
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						break; //
 					case MultiLineMessageBox.NO:
 						break; //
 					}
 				}
 
-				private void deleteBean() {
+				private void deleteBean() throws InterruptedException {
 
 					/**
 					 * Do not allow to modify the demo offices
@@ -568,7 +573,11 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 						}
 
 					} else {
-						getOfficeService().delete(anOffice);
+						try {
+							getOfficeService().delete(anOffice);
+						} catch (DataAccessException e) {
+							ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
+						}
 					}
 				}
 
@@ -628,11 +637,8 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 			String str = getSelectedOffice().getFilBezeichnung();
 			EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeSelectedObject", null, str));
 
-		} catch (final DataAccessException e) {
-			String message = e.getMessage();
-			String title = Labels.getLabel("message.Error");
-			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+		} catch (DataAccessException e) {
+			ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
 
 			// Reset to init values
 			doResetToInitValues();
@@ -670,7 +676,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		/** !!! DO NOT BREAK THE TIERS !!! */
 		// We don't create a new DomainObject() in the frontend.
 		// We GET it from the backend.
-		Office anOffice = getOfficeService().getNewOffice();
+		final Office anOffice = getOfficeService().getNewOffice();
 
 		// set the beans in the related databinded controllers
 		getOfficeDetailCtrl().setOffice(anOffice);

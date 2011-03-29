@@ -788,16 +788,25 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 			public void onEvent(Event evt) {
 				switch (((Integer) evt.getData()).intValue()) {
 				case MultiLineMessageBox.YES:
-					deleteCustomer();
+					try {
+						deleteCustomer();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				case MultiLineMessageBox.NO:
 					break; //
 				}
 			}
 
-			private void deleteCustomer() {
+			// delete from database
+			private void deleteCustomer() throws InterruptedException {
 
-				// delete from database
-				getCustomerService().delete(aCustomer);
+				try {
+					getCustomerService().delete(aCustomer);
+				} catch (DataAccessException e) {
+					ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
+				}
 
 				// ++ create the searchObject and init sorting ++ //
 				final HibernateSearchObject<Customer> soCustomer = new HibernateSearchObject<Customer>(Customer.class, getCustomerListCtrl().getCountRows());
@@ -963,12 +972,8 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 			// if something is changed during the save process
 			doWriteBeanToComponents(aCustomer);
 
-		} catch (final DataAccessException e) {
-			final String message = e.getMessage();
-			// String message = e.getCause().getMessage();
-			final String title = Labels.getLabel("message.Error");
-			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+		} catch (DataAccessException e) {
+			ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
 
 			// Reset to init values
 			doResetInitValues();

@@ -483,16 +483,26 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 				public void onEvent(Event evt) {
 					switch (((Integer) evt.getData()).intValue()) {
 					case MultiLineMessageBox.YES:
-						deleteBean();
+						try {
+							deleteBean();
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						break; //
 					case MultiLineMessageBox.NO:
 						break; //
 					}
 				}
 
-				private void deleteBean() {
-					// delete from database
-					getBrancheService().delete(aBranche);
+				// delete from database
+				private void deleteBean() throws InterruptedException {
+					try {
+						getBrancheService().delete(aBranche);
+					} catch (DataAccessException e) {
+						ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
+					}
+
 				}
 
 			}
@@ -540,10 +550,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 			EventQueues.lookup("selectedObjectEventQueue", EventQueues.DESKTOP, true).publish(new Event("onChangeSelectedObject", null, str));
 
 		} catch (final DataAccessException e) {
-			final String message = e.getMessage();
-			final String title = Labels.getLabel("message.Error");
-			MultiLineMessageBox.doSetTemplate();
-			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "ERROR", true);
+			ZksampleMessageUtils.showErrorMessage(e.getMostSpecificCause().toString());
 
 			// Reset to init values
 			doResetToInitValues();
@@ -562,8 +569,9 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * 
 	 * @param event
 	 * @throws InterruptedException
+	 * @throws InterruptedException
 	 */
-	private void doNew(Event event) {
+	private void doNew(Event event) throws InterruptedException {
 		// logger.debug(event.toString());
 
 		// check first, if the tabs are created

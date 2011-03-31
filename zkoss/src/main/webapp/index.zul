@@ -47,7 +47,7 @@
 
 						<vlayout>
 							<label width="100%" style="font-size: 16px"
-								value="ZK sample application.  ( NEW!!! Updated to ZK 5.0.6 FL.20110223 )" />
+								value="ZK sample application.  ( NEW!!! Updated to ZK 5.0.6 )" />
 							<label width="100%" style="font-size: 10px"
 								multiline="true"
 								value="Zksample2 is a demo application that shows the integration of the zk AJAX web framework with several common used frameworks for database access, middle ware, security and reporting. Read more after loggin in." />

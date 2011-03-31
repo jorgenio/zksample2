@@ -116,9 +116,9 @@ tr.z-row td.z-row-inner {
 	border-style: none;
 }
 
-/* ------------------- Popup in Customerlist -------------------- */
+/* --------------------- Popup in Customerlist --------------------- */
 .myPopup .z-popup .z-popup-cm {
-padding: 0px;
+padding: 0px 0px;
 }
 
 

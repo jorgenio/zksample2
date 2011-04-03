@@ -234,6 +234,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 	public void onSelect$listBoxBranch(Event event) {
 		// logger.debug(event.toString());
 
+		// selectedBranche is filled by annotated databinding mechanism
 		final Branche aBranche = getSelectedBranche();
 
 		if (aBranche == null) {

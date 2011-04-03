@@ -242,6 +242,7 @@ public class ArticleListCtrl extends GFCBaseListCtrl<Article> implements Seriali
 	public void onSelect$listBoxArticle(Event event) {
 		// logger.debug(event.toString());
 
+		// selectedArticle is filled by annotated databinding mechanism
 		Article anArticle = getSelectedArticle();
 
 		if (anArticle == null) {

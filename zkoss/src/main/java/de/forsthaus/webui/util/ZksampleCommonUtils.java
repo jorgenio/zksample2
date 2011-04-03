@@ -26,7 +26,7 @@ public class ZksampleCommonUtils implements Serializable {
 	}
 
 	/**
-	 * EN: Creates the TapPanels Content from a loaded zul-template. The caller
+	 * EN: Creates the TapPanels content from a loaded zul-template. The called
 	 * mainController can be overhanded.<br>
 	 * DE: Erzeugt den Inhalt des tabPanels aus einer zul-Datei. Der aufrufende
 	 * MainController selbst kann übergeben werden.

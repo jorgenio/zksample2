@@ -245,6 +245,7 @@ public class OfficeListCtrl extends GFCBaseListCtrl<Office> implements Serializa
 	public void onSelect$listBoxOffice(Event event) {
 		// logger.debug(event.toString());
 
+		// selectedOffice is filled by annotated databinding mechanism
 		Office anOffice = getSelectedOffice();
 
 		if (anOffice == null) {

@@ -76,18 +76,17 @@
 
 
 							<div align="right" style="float: right">
-								<vbox>
+								<vlayout>
 
 									<div align="right"
 										style="float: right">
 										<!-- USER-BAR. Comps are created in the Controller -->
 										<window id="winUserBar"
-											apply="${userBarCtrl}" border="none" width="100%"
-											height="100%" />
+											apply="${userBarCtrl}" border="none" />
 									</div>
 
 									<div align="right"
-										style="float: right; padding-bottom: 3px;">
+										style="float: right;">
 										<hbox pack="end">
 											<toolbarbutton
 												id="btnIndexMySettings" label="${c:l('common.MySettings')}"
@@ -101,7 +100,7 @@
 										</hbox>
 									</div>
 
-								</vbox>
+								</vlayout>
 							</div>
 
 						</div>

@@ -29,6 +29,7 @@ import org.zkoss.zk.ui.event.EventQueues;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Space;
 import org.zkoss.zul.Window;
 
 /**
@@ -61,8 +62,7 @@ import org.zkoss.zul.Window;
  * call in java to actualize a columns label:
  * 
  * <pre>
- * EventQueues.lookup(&quot;userNameEventQueue&quot;, EventQueues.DESKTOP, true).publish(
- * 		new Event(&quot;onChangeSelectedObject&quot;, null, &quot;new Value&quot;));
+ * EventQueues.lookup(&quot;userNameEventQueue&quot;, EventQueues.DESKTOP, true).publish(new Event(&quot;onChangeSelectedObject&quot;, null, &quot;new Value&quot;));
  * </pre>
  * 
  * Spring bean declaration:
@@ -162,31 +162,37 @@ public class UserBarCtrl extends GenericForwardComposer implements Serializable 
 	 */
 	public void onCreate$winUserBar(Event event) {
 
-		this.winUserBar.setBorder("none");
+		Space space;
 
-		final Hbox hbox = new Hbox();
-		hbox.setParent(this.winUserBar);
+		winUserBar.setBorder("none");
 
-		this.userLabel = new Label();
-		this.userLabel.setStyle("padding-right: 5px; text-align: right;");
-		this.userLabel.setParent(hbox);
-		this.userLabelText = new Label();
-		this.userLabelText.setStyle("padding-right: 5px; text-align: right; color: blue;");
-		this.userLabelText.setParent(hbox);
+		Hbox hbox = new Hbox();
+		hbox.setParent(winUserBar);
 
-		this.tenantLabel = new Label();
-		this.tenantLabel.setStyle("padding-right: 5px; text-align: right;");
-		this.tenantLabel.setParent(hbox);
-		this.tenantLabelText = new Label();
-		this.tenantLabelText.setStyle("padding-right: 5px; text-align: right; color: blue;");
-		this.tenantLabelText.setParent(hbox);
+		userLabel = new Label();
+		userLabel.setStyle("text-align: right; font-size: 10px;");
+		userLabel.setParent(hbox);
+		userLabelText = new Label();
+		userLabelText.setStyle("padding-left: 2px; text-align: right; color: blue; font-size: 10px;");
+		userLabelText.setParent(hbox);
 
-		this.officeLabel = new Label();
-		this.officeLabel.setStyle("padding-right: 5px; text-align: right;");
-		this.officeLabel.setParent(hbox);
-		this.officeLabelText = new Label();
-		this.officeLabelText.setStyle("padding-right: 5px; text-align: right; color: blue;");
-		this.officeLabelText.setParent(hbox);
+		tenantLabel = new Label();
+		tenantLabel.setStyle("text-align: right; font-size: 10px;");
+		tenantLabel.setParent(hbox);
+		tenantLabelText = new Label();
+		tenantLabelText.setStyle("padding-left: 2px; text-align: right; color: blue; font-size: 10px;");
+		tenantLabelText.setParent(hbox);
+
+		officeLabel = new Label();
+		officeLabel.setStyle("text-align: right; font-size: 10px;");
+		officeLabel.setParent(hbox);
+		officeLabelText = new Label();
+		officeLabelText.setStyle("padding-left: 2px; text-align: right; color: blue; font-size: 10px;");
+		officeLabelText.setParent(hbox);
+
+		space = new Space();
+		space.setWidth("5px");
+		space.setParent(hbox);
 	}
 
 	/**

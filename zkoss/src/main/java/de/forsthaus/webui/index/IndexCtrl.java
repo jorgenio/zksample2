@@ -182,8 +182,6 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 */
 	public void onClick$btnLogout() throws IOException {
-		// logger.debug(event.toString());
-
 		getUserWorkspace().doLogout(); // logout.
 	}
 

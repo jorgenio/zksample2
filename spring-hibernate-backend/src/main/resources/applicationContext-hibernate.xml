@@ -281,6 +281,7 @@
 		<property name="ipToCountryDAO" ref="ipToCountryDAO" />
 		<property name="calendarEventDAO" ref="calendarEventDAO" />
 		<property name="youtubeLinkDAO" ref="youtubeLinkDAO" />
+		<property name="hibernateStatisticsDao" ref="hibernateStatisticsDao" />
 	</bean>
 
 </beans>

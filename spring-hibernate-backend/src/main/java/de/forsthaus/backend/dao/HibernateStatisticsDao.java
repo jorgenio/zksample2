@@ -44,4 +44,12 @@ public interface HibernateStatisticsDao {
 	 */
 	public int deleteAllRecords();
 
+	/**
+	 * EN: Get the count of all Hibernate Statistics.<br>
+	 * DE: Gibt die Anzahl aller Hibernate Statistik Eintraege zurueck.<br>
+	 * 
+	 * @return int
+	 */
+	public int getCountAllHibernateStatistics();
+
 }

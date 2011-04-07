@@ -8,6 +8,7 @@ import de.forsthaus.backend.dao.BrancheDAO;
 import de.forsthaus.backend.dao.CountryCodeDAO;
 import de.forsthaus.backend.dao.CustomerDAO;
 import de.forsthaus.backend.dao.GuestBookDAO;
+import de.forsthaus.backend.dao.HibernateStatisticsDao;
 import de.forsthaus.backend.dao.IpToCountryDAO;
 import de.forsthaus.backend.dao.MyCalendarEventDAO;
 import de.forsthaus.backend.dao.OfficeDAO;
@@ -54,6 +55,15 @@ public class CommonServiceImpl implements CommonService {
 	private CountryCodeDAO countryCodeDAO;
 	private MyCalendarEventDAO calendarEventDAO;
 	private YoutubeLinkDAO youtubeLinkDAO;
+	private HibernateStatisticsDao hibernateStatisticsDao;
+
+	public void setHibernateStatisticsDao(HibernateStatisticsDao hibernateStatisticsDao) {
+		this.hibernateStatisticsDao = hibernateStatisticsDao;
+	}
+
+	public HibernateStatisticsDao getHibernateStatisticsDao() {
+		return hibernateStatisticsDao;
+	}
 
 	public YoutubeLinkDAO getYoutubeLinkDAO() {
 		return youtubeLinkDAO;
@@ -239,6 +249,7 @@ public class CommonServiceImpl implements CommonService {
 		map.put("IpToCountry", getIpToCountryDAO().getCountAllIpToCountries());
 		map.put("CalendarEvents", getCalendarEventDAO().getCountAllCalendarEvents());
 		map.put("YouTubeLinks", getYoutubeLinkDAO().getCountAllYoutubeLinks());
+		map.put("HibernateStatistics", getHibernateStatisticsDao().getCountAllHibernateStatistics());
 		return map;
 	}
 

@@ -19,6 +19,7 @@
 package de.forsthaus.backend.dao.impl;
 
 import org.hibernate.LockMode;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 
 import de.forsthaus.backend.dao.HibernateStatisticsDao;
@@ -59,5 +60,11 @@ public class HibernateStatisticsDaoImpl extends BasisDAO<HibernateStatistics> im
 		// countDeletedRecords = i2;
 
 		return countDeletedRecords;
+	}
+
+	@Override
+	public int getCountAllHibernateStatistics() {
+		return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from HibernateStatistics"));
+
 	}
 }

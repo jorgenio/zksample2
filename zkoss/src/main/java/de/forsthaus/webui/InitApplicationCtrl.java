@@ -298,18 +298,18 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		 */
 		final Map<String, Object> map = getCommonService().getAllTablesRecordCounts();
 
+		if (map.containsKey("HibernateStatistics")) {
+			addNewRow(rows, Labels.getLabel("table.hibernate_entity_statistics"), map.get("HibernateStatistics"));
+		}
 		if (map.containsKey("Customer")) {
 			addNewRow(rows, "Customer", map.get("Customer"));
 		}
-
 		if (map.containsKey("Branch")) {
 			addNewRow(rows, "Branch", map.get("Branch"));
 		}
-
 		if (map.containsKey("Offices")) {
 			addNewRow(rows, "Offices", map.get("Offices"));
 		}
-
 		if (map.containsKey("Article")) {
 			addNewRow(rows, "Article", map.get("Article"));
 		}

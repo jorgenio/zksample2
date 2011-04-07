@@ -293,6 +293,11 @@ public class DashboardTableRecordsCounterCtrl extends Div implements Serializabl
 		CommonService service = (CommonService) SpringUtil.getBean("commonService");
 		final Map<String, Object> map = service.getAllTablesRecordCounts();
 
+		
+		
+		if (map.containsKey("HibernateStatistics")) {
+			addNewRow(rows, Labels.getLabel("table.hibernate_entity_statistics"), map.get("HibernateStatistics"));
+		}
 		if (map.containsKey("Customer")) {
 			addNewRow(rows, Labels.getLabel("table.customer"), map.get("Customer"));
 		}

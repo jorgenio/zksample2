@@ -856,8 +856,12 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 
 		// set the value of the records to the label. The Label ID is created
 		// dynamically in the method 'addNewRow()'
-		final Label label = (Label) this.startWindow.getFellowIfAny("label_RecordCount_Customer");
-		label.setValue(String.valueOf(getTotalCountRecordsForCustomer()));
+		// final Label label = (Label)
+		// this.startWindow.getFellowIfAny("label_RecordCount_Customer");
+		// label.setValue(String.valueOf(getTotalCountRecordsForCustomer()));
+
+		tableChildrenRecords.getChildren().clear();
+		countDemoData();
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

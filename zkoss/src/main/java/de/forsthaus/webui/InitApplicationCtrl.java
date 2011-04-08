@@ -816,7 +816,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	public void createDemoCustomers(int newRecords) throws InterruptedException {
 
 		/* check if over 200.000 records in DB */
-		if (getTotalCountRecordsForCustomer() >= 120000) {
+		if (getTotalCountRecordsForCustomer() >= 250000) {
 
 			// close the echo event bussy message
 			Clients.showBusy("", false); // close the message

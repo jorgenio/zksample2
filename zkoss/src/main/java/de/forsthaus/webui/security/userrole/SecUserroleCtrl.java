@@ -373,12 +373,12 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 
 		// Set the ListModel.
 		getPlwSecRoles().init(soSecRole, listBoxSecRoles, paging_ListBoxSecRoles);
-
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+
 	public int getCountRowsSecUser() {
 		return this.countRowsSecUser;
 	}

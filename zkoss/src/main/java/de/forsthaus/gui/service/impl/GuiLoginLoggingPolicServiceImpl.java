@@ -38,7 +38,7 @@ import de.forsthaus.gui.service.GuiLoginLoggingPolicService;
  * 
  * @changes: 10/07/2010: sge added the users browserType.
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
 public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicService {
 
@@ -99,14 +99,6 @@ public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicServ
 		// saveCompleteIPDataFromLookUpHost(log);
 	}
 
-	public LoginLoggingService getLoginLoggingService() {
-		return this.loginLoggingService;
-	}
-
-	public void setLoginLoggingService(LoginLoggingService loginLoggingService) {
-		this.loginLoggingService = loginLoggingService;
-	}
-
 	/**
 	 * Get the IP data from the local IpToCountry table. <br>
 	 * This data can later be extended by a update routine against the HostIP
@@ -146,6 +138,14 @@ public class GuiLoginLoggingPolicServiceImpl implements GuiLoginLoggingPolicServ
 	// #########################################################################
 	// ############################# Getter / Setter ###########################
 	// #########################################################################
+
+	public LoginLoggingService getLoginLoggingService() {
+		return this.loginLoggingService;
+	}
+
+	public void setLoginLoggingService(LoginLoggingService loginLoggingService) {
+		this.loginLoggingService = loginLoggingService;
+	}
 
 	public CountryCodeService getCountryCodeService() {
 		return countryCodeService;

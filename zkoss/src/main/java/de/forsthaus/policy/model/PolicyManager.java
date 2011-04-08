@@ -35,10 +35,11 @@ import de.forsthaus.backend.model.SecUser;
 import de.forsthaus.backend.service.UserService;
 
 /**
- * This class implements the spring-security UserDetailService.<br>
- * It's been configured in the spring security xml contextfile.<br>
+ * This class implements the spring-security UserDetailService Interface.<br>
+ * It's been configured in the 'springSecurityContext.xml'.<br>
  * 
  * @author bbruhns
+ * @author Stephan Gerth
  * @see de.forsthaus.policy
  */
 public class PolicyManager implements UserDetailsService, Serializable {
@@ -46,8 +47,8 @@ public class PolicyManager implements UserDetailsService, Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(PolicyManager.class);
 
+	// the service from which we get the data
 	private transient UserService userService;
-	public UserDetails _userDetails;
 
 	@Override
 	public UserDetails loadUserByUsername(String userId) {
@@ -76,11 +77,7 @@ public class PolicyManager implements UserDetailsService, Serializable {
 			logger.debug("Rights for '" + user.getUsrLoginname() + "' (ID: " + user.getId() + ") evaluated. [" + this + "]");
 		}
 
-		// neu wegen clustering ?
-		this._userDetails = userDetails;
-
 		return userDetails;
-
 	}
 
 	/**
@@ -104,18 +101,24 @@ public class PolicyManager implements UserDetailsService, Serializable {
 	 */
 	private Collection<GrantedAuthority> getGrantedAuthority(SecUser user) {
 
-		// get the list of rights for a specified user.
+		// get the list of rights for a specified user from db.
 		final Collection<SecRight> rights = getUserService().getRightsByUser(user);
 
-		final ArrayList<GrantedAuthority> rechteGrantedAuthorities = new ArrayList<GrantedAuthority>(rights.size());
+		// create the list for the spring grantedRights
+		final ArrayList<GrantedAuthority> rightsGrantedAuthorities = new ArrayList<GrantedAuthority>(rights.size());
 
-		// now create for all rights a GrantedAuthority
+		// now create for all rights a GrantedAuthority entry
 		// and fill the GrantedAuthority List with these authorities.
 		for (final SecRight right : rights) {
-			rechteGrantedAuthorities.add(new GrantedAuthorityImpl(right.getRigName()));
+			rightsGrantedAuthorities.add(new GrantedAuthorityImpl(right.getRigName()));
 		}
-		return rechteGrantedAuthorities;
+
+		return rightsGrantedAuthorities;
 	}
+
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
+	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
+	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 	public UserService getUserService() {
 		return this.userService;
@@ -125,7 +128,4 @@ public class PolicyManager implements UserDetailsService, Serializable {
 		this.userService = userService;
 	}
 
-	public void test() {
-		System.out.println("PolicyManager.test() -> " + loadUserByUsername("user"));
-	}
 }

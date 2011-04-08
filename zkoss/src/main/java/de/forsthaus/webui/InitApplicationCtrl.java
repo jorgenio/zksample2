@@ -19,7 +19,9 @@
 package de.forsthaus.webui;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.Random;
@@ -48,6 +50,7 @@ import org.zkoss.zul.DialModelScale;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Groupbox;
+import org.zkoss.zul.Html;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.North;
 import org.zkoss.zul.Panel;
@@ -654,17 +657,52 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	 * @param value
 	 */
 	private void addNewRow(Rows rowParent, String tableName, Object value) {
-		Row row;
-		Label label_TableName;
-		Label label_RecordCount;
+//		Row row;
+//		Label label_TableName;
+//		Label label_RecordCount;
+//
+//		row = new Row();
+//		label_TableName = new Label(tableName);
+//		label_TableName.setParent(row);
+//		label_RecordCount = new Label(String.valueOf(value));
+//		label_RecordCount.setId("label_RecordCount_" + tableName);
+//		label_RecordCount.setStyle("text-align: right;");
+//		label_RecordCount.setParent(row);
+//		row.setParent(rowParent);
 
-		row = new Row();
-		label_TableName = new Label(tableName);
-		label_TableName.setParent(row);
-		label_RecordCount = new Label(String.valueOf(value));
-		label_RecordCount.setId("label_RecordCount_" + tableName);
-		label_RecordCount.setParent(row);
+		Row row = new Row();
+
+		Html html_TableName = new Html(tableName);
+		html_TableName.setStyle("padding-left: 5px;");
+		Div divKey = new Div();
+		divKey.setAlign("left");
+		divKey.appendChild(html_TableName);
+
+		Html html_RecordCount = null;
+
+		if (value instanceof BigDecimal) {
+			BigDecimal myDec = (BigDecimal) value;
+			myDec = myDec.setScale(2, BigDecimal.ROUND_HALF_UP);
+
+			// Format the value to money
+			NumberFormat formatter = new DecimalFormat("#,##0.00");
+			String money = formatter.format(myDec);
+
+			html_RecordCount = new Html(money);
+		} else if (value instanceof Integer) {
+			html_RecordCount = new Html(String.valueOf(value));
+		} else
+			html_RecordCount = new Html(String.valueOf(value));
+
+		html_RecordCount.setStyle("padding-right: 5px;");
+		Div divValue = new Div();
+		divValue.setAlign("right");
+		divValue.appendChild(html_RecordCount);
+
+		row.appendChild(divKey);
+		row.appendChild(divValue);
 		row.setParent(rowParent);
+	
 	}
 
 	/**

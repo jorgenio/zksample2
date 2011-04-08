@@ -657,18 +657,18 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	 * @param value
 	 */
 	private void addNewRow(Rows rowParent, String tableName, Object value) {
-//		Row row;
-//		Label label_TableName;
-//		Label label_RecordCount;
-//
-//		row = new Row();
-//		label_TableName = new Label(tableName);
-//		label_TableName.setParent(row);
-//		label_RecordCount = new Label(String.valueOf(value));
-//		label_RecordCount.setId("label_RecordCount_" + tableName);
-//		label_RecordCount.setStyle("text-align: right;");
-//		label_RecordCount.setParent(row);
-//		row.setParent(rowParent);
+		// Row row;
+		// Label label_TableName;
+		// Label label_RecordCount;
+		//
+		// row = new Row();
+		// label_TableName = new Label(tableName);
+		// label_TableName.setParent(row);
+		// label_RecordCount = new Label(String.valueOf(value));
+		// label_RecordCount.setId("label_RecordCount_" + tableName);
+		// label_RecordCount.setStyle("text-align: right;");
+		// label_RecordCount.setParent(row);
+		// row.setParent(rowParent);
 
 		Row row = new Row();
 
@@ -702,7 +702,7 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 		row.appendChild(divKey);
 		row.appendChild(divValue);
 		row.setParent(rowParent);
-	
+
 	}
 
 	/**
@@ -816,12 +816,12 @@ public class InitApplicationCtrl extends WindowBaseCtrl implements Serializable 
 	public void createDemoCustomers(int newRecords) throws InterruptedException {
 
 		/* check if over 200.000 records in DB */
-		if (getTotalCountRecordsForCustomer() >= 80000) {
+		if (getTotalCountRecordsForCustomer() >= 120000) {
 
 			// close the echo event bussy message
 			Clients.showBusy("", false); // close the message
 
-			final String message = Labels.getLabel("Demo.not_more_than_80000_records");
+			final String message = Labels.getLabel("Demo.not_more_than_xxx_records");
 			final String title = Labels.getLabel("message.Information");
 			MultiLineMessageBox.doSetTemplate();
 			MultiLineMessageBox.show(message, title, MultiLineMessageBox.OK, "INFORMATION", true);

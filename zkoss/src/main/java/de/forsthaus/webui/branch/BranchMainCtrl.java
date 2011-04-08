@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.access.annotation.Secured;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Path;
@@ -259,6 +260,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 * @throws InterruptedException
 	 */
+	// @Secured( { "button_BranchMain_btnNew" })
 	public void onClick$btnNew(Event event) throws InterruptedException {
 		doNew(event);
 	}

@@ -86,6 +86,7 @@ abstract public class GFCBaseCtrl extends GenericForwardComposer implements Seri
 	/**
 	 * With this method we get the @Secured Annotation for a method.<br>
 	 * Captured the method call and check if it's allowed. <br>
+	 * sample: @Secured({"rightName"})
 	 * 
 	 * @param mtd
 	 */

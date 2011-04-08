@@ -13,7 +13,7 @@
 		lf = "\n";
 		s = "";
 		s = s + "- 08.04.2011 / Added the counter for the HibernateStatistic table records and new youTube musics. " + lf;
-		s = s + "            	      So the Hibernate Performance Stats run away, we maximized the customers to 250.000  " + lf;
+		s = s + "            	      So the Hibernate Performance Stats run away, we maximized the possible customers to 250.000  " + lf;
 		s = s + "- 29.03.2011 / Some code refactorings about the localized DataAccessExceptions and correcting " + lf;
 		s = s + "            	      the DAO and Service bean scopes in the backend. Writing a new Chapter for  " + lf;
 		s = s + "            	      scopes in the Zksample2 documentation. " + lf;

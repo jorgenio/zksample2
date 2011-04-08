@@ -319,20 +319,20 @@ public class DashboardTableRecordsCounterCtrl extends Div implements Serializabl
 		if (map.containsKey("GuestBook")) {
 			addNewRow(rows, Labels.getLabel("table.guestbook"), map.get("GuestBook"));
 		}
-		if (map.containsKey("SecGroup")) {
-			addNewRow(rows, Labels.getLabel("table.sec_group"), map.get("SecGroup"));
+		if (map.containsKey("SecRight")) {
+			addNewRow(rows, Labels.getLabel("table.sec_right"), map.get("SecRight"));
 		}
 		if (map.containsKey("SecGroupright")) {
 			addNewRow(rows, Labels.getLabel("table.sec_groupright"), map.get("SecGroupright"));
 		}
-		if (map.containsKey("SecRight")) {
-			addNewRow(rows, Labels.getLabel("table.sec_right"), map.get("SecRight"));
-		}
-		if (map.containsKey("SecRole")) {
-			addNewRow(rows, Labels.getLabel("table.sec_role"), map.get("SecRole"));
+		if (map.containsKey("SecGroup")) {
+			addNewRow(rows, Labels.getLabel("table.sec_group"), map.get("SecGroup"));
 		}
 		if (map.containsKey("SecRolegroup")) {
 			addNewRow(rows, Labels.getLabel("table.sec_rolegroup"), map.get("SecRolegroup"));
+		}
+		if (map.containsKey("SecRole")) {
+			addNewRow(rows, Labels.getLabel("table.sec_role"), map.get("SecRole"));
 		}
 		if (map.containsKey("SecUserrole")) {
 			addNewRow(rows, Labels.getLabel("table.sec_userrole"), map.get("SecUserrole"));

@@ -2273,7 +2273,8 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 50, 'The Crystal Method',                       'Starting over. Play it loud :-)', 'http://www.youtube.com/embed/pMGJ3cVvIrY',   0),
 ( 51, 'Jessie J. feat. B.o.B.',                   'Price Tag',                       'http://www.wat.tv/video/jessie-price-tag-feat-o-3bosb_2zicp_.html',   0),
 ( 52, 'THE Heavy (Live 2009)',                    'Short Change HeroPrice Tag',      'http://www.youtube.com/embed/Kqxe31ICFZk',   0),
-( 53, 'Grace Potter and Joe Satriani (Live)',     'Cortez the Killer',               'http://www.youtube.com/embed/paeNnR33i5Q',   0);
+( 53, 'Grace Potter and Joe Satriani (Live)',     'Cortez the Killer',               'http://www.youtube.com/embed/paeNnR33i5Q',   0),
+( 54, 'Edie Brickell (Live)',                     'what i am',                       'http://www.youtube.com/embed/uGjh6duUPXc',   0);
 
 
 

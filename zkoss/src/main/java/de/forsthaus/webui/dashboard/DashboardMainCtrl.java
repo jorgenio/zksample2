@@ -26,6 +26,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Window;
 
+import de.forsthaus.webui.dashboard.module.DashboardBBCNewsCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardTableRecordsCounterCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardYoutubeVideoCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
@@ -57,7 +58,9 @@ public class DashboardMainCtrl extends GFCBaseCtrl implements Serializable {
 
 	protected Div divTableRecordCounter; // autowired
 
+	// workaraound until all is refactored as DashBoardModules
 	protected Div divYouTube; // autowired
+	protected Div divBBCNews; // autowired
 
 	/**
 	 * default constructor.<br>
@@ -115,9 +118,9 @@ public class DashboardMainCtrl extends GFCBaseCtrl implements Serializable {
 		// 600000));
 
 		divYouTube.appendChild(DashboardYoutubeVideoCtrl.show(198));
+		divBBCNews.appendChild(DashboardBBCNewsCtrl.show(480, "no"));
 
 	}
-
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 	// +++++++++++++++++ Business Logic ++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //

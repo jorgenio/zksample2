@@ -102,7 +102,7 @@ public class DashboardBBCNewsCtrl extends Div implements Serializable {
 		gb.setClosable(false);
 		gb.setParent(win);
 		Caption cap = new Caption();
-		cap.setImage("/images/icons/new_icons_10.gif");
+		cap.setImage("/images/icons/create_doc_16x16.gif");
 		cap.setLabel("BBC News");
 		cap.setStyle("padding: 0px;");
 		cap.setParent(gb);

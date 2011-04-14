@@ -103,8 +103,6 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 		doDemoMode();
 
-		// this.label_AppName.setValue(this.appName);
-
 		/**
 		 * public Day(int day, int month, int year)Constructs a new one day time
 		 * period.

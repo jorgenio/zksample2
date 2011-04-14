@@ -38,7 +38,7 @@ import de.forsthaus.webui.util.GFCBaseCtrl;
  * zul-file: /WEB-INF/pages/dashboard.zul.<br>
  *<br>
  * 
- * @author sGerth
+ * @author Stephan Gerth
  */
 public class DashboardMainCtrl extends GFCBaseCtrl implements Serializable {
 

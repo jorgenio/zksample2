@@ -23,7 +23,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
-import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.Bandbox;
 import org.zkoss.zul.Button;
@@ -47,7 +46,6 @@ import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.webui.security.right.model.SecRightListModelItemRenderer;
 import de.forsthaus.webui.util.ButtonStatusCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
-import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.ZksampleMessageUtils;
 import de.forsthaus.webui.util.pagging.PagedListWrapper;
 

@@ -32,7 +32,6 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.event.MouseEvent;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Div;
 import org.zkoss.zul.FieldComparator;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Intbox;
@@ -44,8 +43,8 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Paging;
 import org.zkoss.zul.Panel;
 import org.zkoss.zul.Popup;
-import org.zkoss.zul.Window;
 import org.zkoss.zul.Vbox;
+import org.zkoss.zul.Window;
 
 import de.forsthaus.UserWorkspace;
 import de.forsthaus.backend.model.Customer;

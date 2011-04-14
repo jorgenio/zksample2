@@ -23,7 +23,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
-import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
@@ -50,7 +49,6 @@ import de.forsthaus.webui.security.groupright.SecGrouprightCtrl;
 import de.forsthaus.webui.security.userrole.model.SecUserroleRoleListModelItemRenderer;
 import de.forsthaus.webui.security.userrole.model.SecUserroleUserListModelItemRenderer;
 import de.forsthaus.webui.util.GFCBaseCtrl;
-import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.SelectionCtrl;
 import de.forsthaus.webui.util.ZksampleMessageUtils;
 import de.forsthaus.webui.util.pagging.PagedListWrapper;

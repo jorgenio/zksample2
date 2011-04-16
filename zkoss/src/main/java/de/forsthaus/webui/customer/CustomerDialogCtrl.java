@@ -841,6 +841,9 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	private void doNew() {
 
+		// remember the old vars
+		doStoreInitValues();
+
 		/** !!! DO NOT BREAK THE TIERS !!! */
 		// we don't create a new Kunde() in the frontend.
 		// we get it from the backend.
@@ -851,13 +854,10 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 		aCustomer.setOffice(getUserWorkspace().getOffice());
 		setCustomer(aCustomer);
 
-		doClear(); // clear all commponents
 		doEdit(); // edit mode
+		doClear(); // clear all commponents
 
 		btnCtrl.setBtnStatus_New();
-
-		// remember the old vars
-		doStoreInitValues();
 
 		// setFocus
 		kunNr.focus();

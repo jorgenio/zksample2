@@ -1889,5 +1889,5 @@ INSERT INTO app_news (
 (   83, '2011-03-29', 'Some code refactorings about the localized DataAccessExceptions and correcting the DAO and Service bean scopes in the backend. Writing a new Chapter for scopes in the Zksample2 documentation. ',  0),
 (   84, '2011-04-08', 'Added the counter for the HibernateStatistic table records and new youTube musics. So the Hibernate Performance Stats runs us away, we maximized the possible customers too up to 250.000  ',  0),
 (   85, '2011-04-14', 'Inspired by the BusinessPortalLayout we spend a new DashboardModule for BBCNews. ',  0),
-(   86, '2011-04-17', 'Added a new DashboardModule for the application history of changes. ',  0);
+(   86, '2011-04-17', 'Added a new DashboardModule for the applications history of changes. Therefore added new model/dao/service stuff. ',  0);
 

@@ -8,6 +8,23 @@ taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 	/* 0 padding on top and bottom and 0 padding on right and left */
 }
 
+/************************** G R I D ************************/
+/* Make Plain Grid + smaller comps + Padding */
+	/* "overflow:hidden ;" not working in Chrome/Safari */
+.GridLayoutSmartBorderDashed tr.z-row td.z-row-inner,.GridLayoutSmartBorderDashed tr.z-row,div.z-grid-body.GridLayoutSmartBorderDashed,div.z-cell.GridLayoutSmartBorderDashed,div.z-grid.GridLayoutSmartBorderDashed
+	{
+	zoom: 1;
+	overflow: hidden;
+	background: white;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: 1px solid;
+	border-bottom-color: silver;
+	border-bottom-style: dashed;
+	padding: 1px;
+}
+
 /*********************** L I S T B O X *********************/
 /* Listbox Header 1 */
 .FDListBoxHeader1 {

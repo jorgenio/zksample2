@@ -84,13 +84,13 @@ public class DashboardBBCNewsCtrl extends Div implements Serializable {
 
 		setModulHeight(modulHeight);
 		setScrolling(scrolling);
-		createModul();
+		createComponents();
 	}
 
 	/**
 	 * Creates the components.<br>
 	 */
-	private void createModul() {
+	private void createComponents() {
 
 		/**
 		 * !! Windows as NameSpaceContainer to prevent not unique id's error

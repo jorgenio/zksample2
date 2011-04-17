@@ -101,7 +101,7 @@ public class DashboardTableRecordsCounterCtrl extends Div implements Serializabl
 		super();
 
 		setModulHeight(modulHeight);
-		createModul();
+		createComponents();
 	}
 
 	/**
@@ -141,7 +141,7 @@ public class DashboardTableRecordsCounterCtrl extends Div implements Serializabl
 			createServerPushTimer();
 		}
 
-		createModul();
+		createComponents();
 	}
 
 	/**
@@ -174,7 +174,7 @@ public class DashboardTableRecordsCounterCtrl extends Div implements Serializabl
 	/**
 	 * Creates the components..<br>
 	 */
-	private void createModul() {
+	private void createComponents() {
 
 		/**
 		 * !! Windows as NameSpaceContainer to prevent not unique id's error

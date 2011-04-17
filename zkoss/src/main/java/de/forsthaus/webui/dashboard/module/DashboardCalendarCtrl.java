@@ -76,13 +76,13 @@ public class DashboardCalendarCtrl extends Div implements Serializable {
 		super();
 
 		setModulHeight(modulHeight);
-		createModul();
+		createComponents();
 	}
 
 	/**
 	 * Creates the components.<br>
 	 */
-	private void createModul() {
+	private void createComponents() {
 
 		/**
 		 * !! Windows as NameSpaceContainer to prevent not unique id's error

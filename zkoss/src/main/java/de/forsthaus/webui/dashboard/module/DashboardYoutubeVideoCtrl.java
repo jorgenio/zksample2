@@ -101,13 +101,13 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 		super();
 
 		setModulHeight(modulHeight);
-		createModul();
+		createComponents();
 	}
 
 	/**
 	 * Creates the components.<br>
 	 */
-	private void createModul() {
+	private void createComponents() {
 
 		/**
 		 * !! Window as NameSpaceContainer to prevent the 'not unique id' error

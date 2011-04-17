@@ -32,74 +32,6 @@
 	}
 ]]></zscript>
 
-		<tablelayout columns="3" width="100%">
-
-			<tablechildren rowspan="1" width="35%">
-				<panel title="" border="none">
-					<panelchildren>
-
-						<groupbox mold="3d" closable="false">
-							<caption
-								style="color: #000000; font-weight:bold;"
-								image="/images/zkpowered_16x16.png"
-								label="Welcome to the ZKsample2 application." />
-
-							<textbox rows="6" multiline="true"
-								width="98%" readonly="true"
-								style="font-family: verdana; border: none; background-color: white;"
-								value="Stored users are  (username/password):&#13;&#13;admin / admin (full access)&#13;user1 / user1 (full access to the office data)&#13;user2 / user2 (restricted access to the office data. Only view mode.)&#13;headoffice / headoffice (full access to the main data.">
-							</textbox>
-						</groupbox>
-
-					</panelchildren>
-				</panel>
-			</tablechildren>
-
-			<tablechildren rowspan="1" width="35%">
-				<panel border="none">
-					<panelchildren>
-
-						<groupbox mold="3d" closable="false">
-							<caption
-								style="color: #000000; font-weight:bold;"
-								image="/images/icons/about1_16x16.gif"
-								label="Sources available !" />
-
-							<textbox rows="6" multiline="true"
-								width="98%" readonly="true"
-								style="font-family: verdana; border: none; background-color: white;"
-								value="Sources are available as Eclipse Projects. &#13;&#13;Read this thread: http://zkoss.org/forum/listComment/10986  ">
-							</textbox>
-						</groupbox>
-
-					</panelchildren>
-				</panel>
-
-			</tablechildren>
-
-			<tablechildren rowspan="1" width="30%">
-				<panel border="none">
-					<panelchildren>
-
-						<groupbox mold="3d" closable="false">
-							<caption
-								style="color: #000000; font-weight:bold;"
-								image="/images/icons/daysort16x16.gif"
-								label="Need help by your zk projects ?" />
-
-							<textbox rows="6" multiline="true"
-								width="98%" readonly="true"
-								style="font-family: verdana; border: none; color: blue; background-color: white; "
-								value="You can hire us worldwide ! &#13;&#13;Please contact us under zk(at)forsthaus(dot)de ">
-							</textbox>
-						</groupbox>
-
-					</panelchildren>
-				</panel>
-
-			</tablechildren>
-		</tablelayout>
-
 		<hbox align="stretch" pack="stretch" sclass="FDCenterNoBorder"
 			width="100%">
 
@@ -109,27 +41,48 @@
 					<div id="divDashboardCenter">
 
 						<!-- Here comes the CENTER modules  -->
-						<!-- divWelcomeCenter.appendChild(DashboardNewsCtrl.show());  -->
-
-						<div id="divAppNews" />
-						<div id="divTableRecordCounter" />
-
-						<div>
-							<groupbox mold="3d">
-								<caption
-									style="color: #000000; font-weight:bold;"
-									image="/images/icons/method_16x16.gif"
-									label="What's in it and sample data." />
-
-								<textbox height="100%" width="99.5%"
-									multiline="true" rows="10" readonly="true"
-									style="font-family: verdana; border: none; background-color: white;"
-									value="${t}" />
-							</groupbox>
-						</div>
-
+						<!-- i.e. divDashboardCenter.appendChild(DashboardNewsCtrl.show());  -->
 
 					</div>
+
+					<div>
+						<groupbox mold="3d">
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/icons/method_16x16.gif"
+								label="What's in it and sample data." />
+
+							<textbox height="100%" width="99.5%"
+								multiline="true" rows="10" readonly="true"
+								style="font-family: verdana; border: none; background-color: white;"
+								value="${t}" />
+						</groupbox>
+					</div>
+
+					<div>
+						<groupbox mold="3d" closable="false">
+							<caption
+								style="color: #000000; font-weight:bold;"
+								image="/images/icons/about1_16x16.gif"
+								label="Sources available !" />
+
+							<textbox rows="6" multiline="true"
+								width="98%" readonly="true"
+								style="font-family: verdana; border: none; background-color: white;"
+								value="You can hire us worldwide ! &#13;&#13;Please contact us under zk(at)forsthaus(dot)de&#13;&#13; Sources are available as Eclipse Projects. Read this thread: http://zkoss.org/forum/listComment/10986  ">
+							</textbox>
+							<separator />
+
+							<textbox rows="6" multiline="true"
+								width="98%" readonly="true"
+								style="font-family: verdana; border: none; background-color: white;"
+								value="Stored users are  (username/password):&#13;&#13;admin / admin (full access)&#13;user1 / user1 (full access to the office data)&#13;user2 / user2 (restricted access to the office data. Only view mode.)&#13;headoffice / headoffice (full access to the main data.">
+							</textbox>
+
+						</groupbox>
+					</div>
+
+
 				</vbox>
 			</cell>
 
@@ -143,81 +96,83 @@
 						<div id="divYouTube" />
 						<div id="divBBCNews" />
 
-						<groupbox mold="3d">
+						<!-- 
+							<groupbox mold="3d">
 							<caption
-								style="color: #000000; font-weight:bold;"
-								image="/images/hibernate_icon_16x16.png"
-								label="Hibernate (Backend)" />
-
+							style="color: #000000; font-weight:bold;"
+							image="/images/hibernate_icon_16x16.png"
+							label="Hibernate (Backend)" />
+							
 							<textbox width="98%"
-								value="As ORM (Object relational mapper) we use the Hibernate Framework. Used version = 3.3.1 GA"
-								rows="3" multiline="true" readonly="true"
-								style="font-family: verdana; border: none; background-color: white;">
+							value="As ORM (Object relational mapper) we use the Hibernate Framework. Used version = 3.3.1 GA"
+							rows="3" multiline="true" readonly="true"
+							style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
-						</groupbox>
-
-						<groupbox mold="3d">
+							</groupbox>
+							
+							<groupbox mold="3d">
 							<caption
-								style="color: #000000; font-weight:bold;"
-								image="/images/hibernate_icon_16x16.png"
-								label="Hibernate-Generic-DAO" />
-
+							style="color: #000000; font-weight:bold;"
+							image="/images/hibernate_icon_16x16.png"
+							label="Hibernate-Generic-DAO" />
+							
 							<textbox width="98%"
-								value="We used the search object from this framework and the hql code generator for our PagedListWrapper. Version = 0.5.1"
-								rows="3" multiline="true" readonly="true"
-								style="font-family: verdana; border: none; background-color: white;">
+							value="We used the search object from this framework and the hql code generator for our PagedListWrapper. Version = 0.5.1"
+							rows="3" multiline="true" readonly="true"
+							style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
-						</groupbox>
-
-						<groupbox mold="3d">
+							</groupbox>
+							
+							<groupbox mold="3d">
 							<caption
-								style="color: #000000; font-weight:bold;"
-								image="/images/spring_source_x16.png"
-								label="Spring Integration (Backend) + (Frontend)" />
-
+							style="color: #000000; font-weight:bold;"
+							image="/images/spring_source_x16.png"
+							label="Spring Integration (Backend) + (Frontend)" />
+							
 							<textbox width="98%"
-								value="Integration of the spring-framework with spring managed Services and DAOs in the backend and managed controllers/composers in the frontend. Used version = 3.0.1"
-								rows="4" multiline="true" readonly="true"
-								style="font-family: verdana; border: none; background-color: white;">
+							value="Integration of the spring-framework with spring managed Services and DAOs in the backend and managed controllers/composers in the frontend. Used version = 3.0.1"
+							rows="4" multiline="true" readonly="true"
+							style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
-						</groupbox>
-
-						<groupbox mold="3d">
+							</groupbox>
+							
+							<groupbox mold="3d">
 							<caption
-								style="color: #000000; font-weight:bold;"
-								image="/images/spring_source_x16.png" label="Spring-Security" />
-
+							style="color: #000000; font-weight:bold;"
+							image="/images/spring_source_x16.png" label="Spring-Security" />
+							
 							<textbox width="98%"
-								value="Access management with spring-security.  We extended it for a group and group-rights. All security dependent entries are stored in the database. Userroles/Roles/RoleGroups are customizable on runtime.  Used version = 3.0.2"
-								rows="3" multiline="true" readonly="true"
-								style="font-family: verdana; border: none; background-color: white;">
+							value="Access management with spring-security.  We extended it for a group and group-rights. All security dependent entries are stored in the database. Userroles/Roles/RoleGroups are customizable on runtime.  Used version = 3.0.2"
+							rows="3" multiline="true" readonly="true"
+							style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
-						</groupbox>
-
-						<groupbox mold="3d">
+							</groupbox>
+							
+							<groupbox mold="3d">
 							<caption
-								style="color: #000000; font-weight:bold;"
-								image="/images/spring_source_x16.png" label="Spring-AOP" />
-
+							style="color: #000000; font-weight:bold;"
+							image="/images/spring_source_x16.png" label="Spring-AOP" />
+							
 							<textbox width="98%"
-								value="We use spring-aop for the database transaction management."
-								rows="2" multiline="true" readonly="true"
-								style="font-family: verdana; border: none; background-color: white;">
+							value="We use spring-aop for the database transaction management."
+							rows="2" multiline="true" readonly="true"
+							style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
-						</groupbox>
-
-						<groupbox mold="3d">
+							</groupbox>
+							
+							<groupbox mold="3d">
 							<caption
-								style="color: #000000; font-weight:bold;"
-								image="/images/jasperReport_16x16.gif"
-								label="Jasper Reports + DynamicJasper lib" />
-
+							style="color: #000000; font-weight:bold;"
+							image="/images/jasperReport_16x16.gif"
+							label="Jasper Reports + DynamicJasper lib" />
+							
 							<textbox width="98%"
-								value="JasperReports(v3.5.0). DynamicJasper(v3.0.13) " rows="3"
-								multiline="true" readonly="true"
-								style="font-family: verdana; border: none; background-color: white;">
+							value="JasperReports(v3.5.0). DynamicJasper(v3.0.13) " rows="3"
+							multiline="true" readonly="true"
+							style="font-family: verdana; border: none; background-color: white;">
 							</textbox>
-						</groupbox>
+							</groupbox>
+						-->
 
 					</div>
 				</vbox>

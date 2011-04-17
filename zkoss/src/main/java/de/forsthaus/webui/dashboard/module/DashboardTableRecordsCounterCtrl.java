@@ -1,7 +1,8 @@
 /**
  * Copyright 2010 the original author or authors.
  * 
- * This file is part of Zksample2. http://zksample2.sourceforge.net/
+ * This file is part of openTruuls™. http://www.opentruuls.org/ and 
+ * have the permission to be integrated in the zksample2 demo application.
  *
  * Zksample2 is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

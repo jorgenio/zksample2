@@ -28,6 +28,7 @@ import org.zkoss.zul.Window;
 
 import de.forsthaus.webui.dashboard.module.DashboardApplicationNewsListCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardBBCNewsCtrl;
+import de.forsthaus.webui.dashboard.module.DashboardCalendarCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardTableRecordsCounterCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardYoutubeVideoCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
@@ -54,15 +55,8 @@ public class DashboardMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 */
 	protected Window windowDashboard; // autowired
-	// protected Div divDashboardCenter; // autowired
-	// protected Div divDashboardEast; // autowired
-
-	// workaraound until all is refactored as DashBoardModules
-	protected Div divTableRecordCounter; // autowired
-	protected Div divAppNews; // autowired
-
-	protected Div divYouTube; // autowired
-	protected Div divBBCNews; // autowired
+	protected Div divDashboardCenter; // autowired
+	protected Div divDashboardEast; // autowired
 
 	/**
 	 * default constructor.<br>
@@ -96,32 +90,19 @@ public class DashboardMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$windowDashboard(Event event) throws Exception {
-		// logger.debug(event.toString());
 
 		/**
 		 * CENTER area
 		 */
-		// divDashboardCenter.appendChild(DashboardNewsFromHtmlFileCtrl.show(200,
-		// true, 600000));
-		divAppNews.appendChild(DashboardApplicationNewsListCtrl.show(350, true, 600000));
-		divTableRecordCounter.appendChild(DashboardTableRecordsCounterCtrl.show(200, true, 600000));
-		// divDashboardCenter.appendChild(DashboardPendingJobsCtrl.show(80,
-		// true, 600000));
-		// divDashboardCenter.appendChild(DashboardSampleCtrl.show(60, true,
-		// 600000));
+		divDashboardCenter.appendChild(DashboardApplicationNewsListCtrl.show(250, true, 600000));
+		divDashboardCenter.appendChild(DashboardTableRecordsCounterCtrl.show(200, true, 600000));
 
 		/**
 		 * EAST area
 		 */
-		// divDashboardEast.appendChild(DashboardCalendarCtrl.show(146));
-		// divDashboardEast.appendChild(DashboardDatetingCtrl.show(45));
-		// divDashboardEast.appendChild(DashboardFinancialInfoCtrl.show(100));
-		// divDashboardEast.appendChild(DashboardOrderAndOfferInfoCtrl.show(80));
-		// divDashboardEast.appendChild(DashboardMessagesCtrl.show(45, true,
-		// 600000));
-
-		divYouTube.appendChild(DashboardYoutubeVideoCtrl.show(198));
-		divBBCNews.appendChild(DashboardBBCNewsCtrl.show(480, "no"));
+		divDashboardEast.appendChild(DashboardCalendarCtrl.show(146));
+		divDashboardEast.appendChild(DashboardYoutubeVideoCtrl.show(198));
+		divDashboardEast.appendChild(DashboardBBCNewsCtrl.show(480, "no"));
 
 	}
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //

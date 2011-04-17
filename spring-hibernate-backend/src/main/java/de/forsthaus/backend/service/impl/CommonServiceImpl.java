@@ -3,6 +3,7 @@ package de.forsthaus.backend.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.forsthaus.backend.dao.ApplicationNewsDAO;
 import de.forsthaus.backend.dao.ArticleDAO;
 import de.forsthaus.backend.dao.BrancheDAO;
 import de.forsthaus.backend.dao.CountryCodeDAO;
@@ -55,7 +56,16 @@ public class CommonServiceImpl implements CommonService {
 	private CountryCodeDAO countryCodeDAO;
 	private MyCalendarEventDAO calendarEventDAO;
 	private YoutubeLinkDAO youtubeLinkDAO;
+	private ApplicationNewsDAO applicationNewsDAO;
 	private HibernateStatisticsDao hibernateStatisticsDao;
+
+	public ApplicationNewsDAO getApplicationNewsDAO() {
+		return applicationNewsDAO;
+	}
+
+	public void setApplicationNewsDAO(ApplicationNewsDAO applicationNewsDAO) {
+		this.applicationNewsDAO = applicationNewsDAO;
+	}
 
 	public void setHibernateStatisticsDao(HibernateStatisticsDao hibernateStatisticsDao) {
 		this.hibernateStatisticsDao = hibernateStatisticsDao;
@@ -250,6 +260,7 @@ public class CommonServiceImpl implements CommonService {
 		map.put("CalendarEvents", getCalendarEventDAO().getCountAllCalendarEvents());
 		map.put("YouTubeLinks", getYoutubeLinkDAO().getCountAllYoutubeLinks());
 		map.put("HibernateStatistics", getHibernateStatisticsDao().getCountAllHibernateStatistics());
+		map.put("ApplicationNews", getApplicationNewsDAO().getCountAllApplicationNews());
 		return map;
 	}
 

@@ -59,6 +59,8 @@
 				</value>
 				<value>de/forsthaus/backend/model/YoutubeLink.hbm.xml
 				</value>
+				<value>de/forsthaus/backend/model/ApplicationNews.hbm.xml
+				</value>
 			</list>
 		</property>
 	</bean>
@@ -156,6 +158,9 @@
 		parent="basisDAO" />
 
 	<bean id="youtubeLinkDAO" class="de.forsthaus.backend.dao.impl.YoutubeLinkDAOImpl"
+		parent="basisDAO" />
+
+	<bean id="applicationNewsDAO" class="de.forsthaus.backend.dao.impl.ApplicationNewsDAOImpl"
 		parent="basisDAO" />
 
 	<!-- ====================================================== -->
@@ -261,6 +266,11 @@
 		<property name="youtubeLinkDAO" ref="youtubeLinkDAO" />
 	</bean>
 
+	<bean name="applicationNewsService"
+		class="de.forsthaus.backend.service.impl.ApplicationNewsServiceImpl">
+		<property name="applicationNewsDAO" ref="applicationNewsDAO" />
+	</bean>
+
 	<bean name="commonService" class="de.forsthaus.backend.service.impl.CommonServiceImpl">
 		<property name="customerDAO" ref="customerDAO" />
 		<property name="officeDAO" ref="officeDAO" />
@@ -281,6 +291,7 @@
 		<property name="ipToCountryDAO" ref="ipToCountryDAO" />
 		<property name="calendarEventDAO" ref="calendarEventDAO" />
 		<property name="youtubeLinkDAO" ref="youtubeLinkDAO" />
+		<property name="applicationNewsDAO" ref="applicationNewsDAO" />
 		<property name="hibernateStatisticsDao" ref="hibernateStatisticsDao" />
 	</bean>
 

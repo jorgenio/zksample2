@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="de.forsthaus.backend.model.ApplicationNews" table="app_news">
+
+		<id name="id" type="long">
+			<column name="anw_id" />
+			<generator class="sequence">
+				<param name="sequence">app_news_seq</param>
+				<!--
+					for mySQL use generator class="native" <generator class="native" />
+				-->
+			</generator>
+		</id>
+
+		<version name="version" column="VERSION" type="integer" />
+
+		<property name="date" type="timestamp">
+			<column name="anw_date" length="29" not-null="true" />
+		</property>
+		<property name="text" type="string">
+			<column name="anw_text" length="1000" />
+		</property>
+	</class>
+</hibernate-mapping>

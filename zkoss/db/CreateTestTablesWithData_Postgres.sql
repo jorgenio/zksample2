@@ -105,6 +105,10 @@ DROP SEQUENCE IF EXISTS hibernate_statistics_seq;
  
  DROP TABLE IF EXISTS calendar_event cascade;
  DROP SEQUENCE IF EXISTS calendar_event_seq;
+ 
+ DROP TABLE IF EXISTS app_news cascade;
+ DROP SEQUENCE IF EXISTS app_news_seq;
+ 
  */
 
 /*==============================================================*/
@@ -171,6 +175,32 @@ CREATE INDEX fki_
   (hibernateentitystatisticsid);
 
 
+/*==============================================================*/
+/* Table: app_news                                              */
+/*==============================================================*/
+create table app_news (
+   anw_id               INT8                 not null,
+   anw_text             VARCHAR(1000)         null,
+   anw_date             DATE                 not null,
+   version              INT4                 not null default 0,
+   constraint PK_APP_NEWS primary key (anw_id)
+)
+without oids;
+
+comment on table app_news is
+'table for holding the application news.';
+
+-- set table ownership
+alter table app_news owner to toledo
+;
+/*==============================================================*/
+/* Index: Index_app_news_id                                     */
+/*==============================================================*/
+create unique index Index_app_news_id on app_news (
+anw_id
+);
+  
+  
 /*==============================================================*/
 /* Table: youtube_link                                          */
 /*==============================================================*/
@@ -2277,10 +2307,7 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 54, 'Edie Brickell (Live)',                     'what i am',                       'http://www.youtube.com/embed/uGjh6duUPXc',   0);
 
 
-
-
-
- /* fill sample logins */
+/* fill sample logins */
 INSERT INTO sec_loginlog(lgl_id, i2c_id, lgl_loginname,lgl_logtime, lgl_ip, lgl_status_id,lgl_sessionid, VERSION) VALUES 
 ( 1, NULL, 'admin', '2009-01-01 13:52:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
 ( 2, NULL, 'user1', '2009-01-01 10:12:33', '203.237.141.216', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
@@ -2300,6 +2327,100 @@ INSERT INTO sec_loginlog(lgl_id, i2c_id, lgl_loginname,lgl_logtime, lgl_ip, lgl_
 (16, NULL, 'headoffice', '2009-01-01 17:22:33', '89.218.26.20', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
 (17, NULL, 'headoffice', '2009-01-01 17:22:33', '118.68.97.45', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
 (18, NULL, 'admin', '2009-01-01 17:22:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0);
+
+/* fill application history for changes */
+INSERT INTO app_news (
+   anw_id,
+   anw_date,
+   anw_text,
+   version) values
+(    1, '2009-05-02', 'All listboxes are now working with paging and sorting described in our smalltalk. ([Performance] Paging and Sorting with a Filter Object). Link: http://docs.zkoss.org/wiki/Paging_Sorting_with_a_filter_object',  0),
+(    2, '2009-05-15', 'Updated to ZKoss version 3.6.1.',  0),
+(    3, '2009-06-11', 'Updated to ZKoss version 3.6.2.',  0),
+(    4, '2009-06-29', 'Updated to new gray theme "plomo.jar" from here: (thanks to jlcasas).  http://www.zkoss.org/forum/listComment/6927/ ',  0),
+(    5, '2009-06-30', 'Added a guestbook. Please leave your comments here. ',  0),
+(    6, '2009-08-02', 'Listheaders now fixed by scrolling through a list. ',  0),
+(    7, '2009-08-04', 'Update to ZKoss version 3.6.3. (compiled from source). ',  0),
+(    8, '2009-08-25', 'Update to ZKoss version 3.6.3. FL-2009-08-20 ',  0),
+(    9, '2009-09-10', 'Added a pie chart to the customer dialog. See tab "Chart". Data created for custoNo "20" and "21" ',  0),
+(   10, '2009-09-17', 'Added several new chart typs and icons. ',  0),
+(   11, '2009-09-29', 'Added a timer in the main borderlayout south area for date/time.',  0),
+(   12, '2009-10-12', 'allow changing between treeMenu and PullDownMenu (Thanks to Björn for codes !). Modifications ',  0),
+(   13, '2009-10-21', 'updating to ZK version 3.6.3 FL 2009-10-16 ',  0),
+(   14, '2009-10-23', 'Updating to ZK version 3.6.3 FL 2009-10-23 ',  0),
+(   15, '2009-10-23', '======>> LAST checkin of the project code in Subversion on code.google as "zk_sample_gui" ',  0),
+(   16, '2009-11-13', 'ZkSample2 is now the new project name. ',  0),
+(   17, '2009-11-14', 'Refactoring to a spring-managed frontend. Spring-Security can now work with the Annotation @Secured() for securing methods.  Added a simulation of a one-time password tokenizer. (Thanks to Björn for codes !) Added ListFooters in ORDERS module. Clearing some code. Bugfixes. ',  0),
+(   18, '2009-11-20', 'Ip2Country locator new in the Login log.',  0),
+(   19, '2009-11-22', 'Second Ip2Country locator from a webService implemented.',  0),
+(   20, '2009-12-03', 'Refactoring all Domain/DAO/Service Classes to english names.',  0),
+(   21, '2009-12-07', 'Moved in all dialog windows the CRUD buttons as imageButtons to the toolbar. ',  0),
+(   22, '2009-12-08', 'Replaced the last digits from the Users IP with "xxx" in the gui loginLog list because privacy. ',  0),
+(   23, '2009-12-13', 'Tree Menu entries are now openend in Tabs.',  0),
+(   24, '2009-12-15', 'Clearing code from old 3.5.x stuff. doOnCreateCommon() in base controllers not used anymore.',  0),
+(   25, '2009-12-19', 'Splitted the LoginLog module to 3 zul''s + 3 controllers. Added some statistics',  0),
+(   26, '2009-12-22', 'Finished the basic Login Statistic. Hard work!!! Björn writes a mapper that maps the HQL aggregate fields to domain bean properties. Many thanks. ',  0),
+(   27, '2009-12-27', 'Changed the complete update mechanism for the ip geo data, because problems on the linux ''server with too many open files'', when calling the Locator Web Service in a loop. Now we imported the geo data from a cvs into a table and can use it from there early by the login process.',  0),
+(   28, '2010-01-04', 'We fix the ''too many open files'' on server. Bad boys attack it! Re-using the webservice for getting the geo-data',  0),
+(   29, '2010-01-12', 'We work hardly on the last pages of the documentation. The countdown for checkin is running.',  0),
+(   30, '2010-01-17', 'Today we checked in this Zksample2 application on SourceForge.net. See thread under http://zkoss.org/forum/listComment/10986 ',  0),
+(   31, '2010-01-29', 'Changed the style of the address tab in customers dialog. Changed to comboboxes with icons.',  0),
+(   32, '2010-02-04', 'Implementation of the missing Cancel Button in all dialogs.',  0),
+(   33, '2010-02-06', 'Updated to the Spring3 framework.',  0),
+(   34, '2010-03-02', 'Several design changes. Bugfixes.',  0),
+(   35, '2010-03-09', 'Added on all listpages a refresh button (next help button ) for resizing the listbox and recalculate their pagesize for adjusting if the browser size is changed.',  0),
+(   36, '2010-03-20', 'Changed the design for the menu and module content area. Hope it''s nice.',  0),
+(   37, '2010-04-20', 'Improved speed for the entry page by done the counting of all table recordCounts in one transaction.',  0),
+(   38, '2010-05-02', 'Added a first Grid in Grid View for the Hibernate Statistic DB transactions, which is implemented by a Spring Aspect. The view will following in the  next days. The HibernateStatistics measures the time that a DB call needs and shows all dependend model beans.',  0),
+(   39, '2010-05-04', 'Zksample2 v2.1 is available on sourceForge.net as ready to use war-file.',  0),
+(   40, '2010-05-18', 'Added a PagedBindingListWrapper ( paging/sorting/searching on DB-side ) for the listbox component that can work with zk''s DataBinding mechanism. So the Branch module works now complete databinded. The same for the grid will follow next times.',  0),
+(   41, '2010-05-20', 'Added ECHO EVENTs. The long running process of inserting sample customer records now running in an echo event and shows a localized busy message during the process. DOCUMENTATION updated.',  0),
+(   42, '2010-05-21', 'Fixing bug in the flow logic of the echo events and an additional modal message.',  0),
+(   43, '2010-06-03', 'Replacement of the old serverPush mechanism working with a WorkerThread new to work with a timer. Because this application is spring managed. So our Database transactions are spring managed too. So we are not able to start the WorkerThread in such a session context for calling DB methods. Further it''s limit to 5 calls and self stopped, as long as we logged all DB calls (Hibernate Statistic).',  0),
+(   44, '2010-06-29', 'Added a new modal SearchListboxDialog that gives back an OBJECT. Called SimpleSearchBox. We implemented it in the Customer AdressModule for selecting a branch (BranchSimpleSearchBox.java).',  0),
+(   45, '2010-06-30', 'Added TWO more SearchListDialog skeletons. Now we have: 1.) SimpleSearchListBox: ZK paging on ServerSide.  2.) AdvancedSearchListBox: DB Paging on Database;  3.) ExtendedSearchListBox: DB Paging + one data limiting feature. All three SearchDialogs are implemented in the CustomerDialog module for selecting a branch. ',  0),
+(   46, '2010-06-30', '====== Last Zksample2 version who''s based on zk 3.6.3 =======',  0),
+(   47, '2010-07-01', 'Updated the zk framework version to 5.0.3. ',  0),
+(   48, '2010-07-02', 'Added a new StatusBarController with the new EventQueues in zk5 that works like a global listener.  Added a new UserBarController with the new EventQueues in zk5 that works like a global listener.',  0),
+(   49, '2010-07-04', 'Begin to modifying some modules to work completely with Annotated Databinding mechanism. Decreasing absolut the LoC. These annotated databinded modules have an (adb) after the menu text. All modules who have more than one TAB became a mainModuleController for holding the shared models and beans for all related tabControllers. Read the docu for best Practice on sharing the models and not the binder. Working with an additional css file, declared in the web.xml. ',  0),
+(   50, '2010-07-06', 'Checkin of the new Zksample2 based on zk 5.0.3 in /trunk. More changes comes in the next days.',  0),
+(   51, '2010-07-09', 'First JasperReport build with the great DynamicJasper framework. Only pure Java, no XML. Report is placed in the Article module. More advanced reports are coming in the next days.',  0),
+(   52, '2010-07-10', 'Added two more reports ( OfficeList and BranchesList ), every report needs only 10 min. for adopting from an existing one. A lot of design changes in the Administrator sections for the next coming databinding restructuring.',  0),
+(   53, '2010-08-11', 'Added new reports for printing: User-List / Security: Rights-List; Group-List; Roles-List. Some of these report uses the DynamicReportBuilder from DynamicJasper wich allows more control over the report. Additionally we shows in it how to use a CustomExpression. ',  0),
+(   54, '2010-08-18', 'Added a new report for printing an Order with it''s positions. Shows how to add a grandTotal sum. ',  0),
+(   55, '2010-08-23', 'Begin implementation of the ZK Calendar component.',  0),
+(   56, '2010-08-25', 'Updated the doc for the StatusBarController and begin with DynamicJasper. Some code refactorings.',  0),
+(   57, '2010-08-27', 'Implemented a first simple messaging system. You can send system wide messages. Incoming messages are visualized with a blinking icon in the left bottom corner. ',  0),
+(   58, '2010-09-01', 'Added a modified script file for runing zksample2 with a mySQL 5.1 database. Thanks to ''Andyx''. Read about needed modifications in project zkoss ~/db/mySQL.readme. ',  0),
+(   59, '2010-09-07', 'Updated to zk version 5.0.4 ',  0),
+(   60, '2010-09-12', 'Updated libs to zk calendar 2.1 (Freshly 12.09.2010) because a init problem. ',  0),
+(   61, '2010-09-15', 'Preparing the calendar for create/edit/update events and implemented a DateFormatter for this.',  0),
+(   62, '2010-09-17', 'Adding the backend classes for the calendar. Calendar is now Database driven.',  0),
+(   63, '2010-09-25', 'Adding a new menu entry for opening our blog. ',  0),
+(   64, '2010-10-20', 'SourceForge have changed the documentation address. ',  0),
+(   65, '2010-11-02', 'Informing the users, that loading the documentation in an iFrame is in progress. Thanks to Tomek. http://www.zkoss.org/forum/listComment/13738. ',  0),
+(   66, '2010-11-05', 'Added a YouTube video iFrame where we would stream weekely our most loved music.',  0),
+(   67, '2010-11-08', 'For guys who would build this app from source, we have added a workaround for the JasperReport failure by the maven-build process for this project. See /src/test/resources/readme.txt. Seems this failure comes from the maven3 conversion of JasperReports. Hope the guys repair the corrupt file expressly.',  0),
+(   68, '2010-12-15', 'Added the first DashBoard Module. The welcome.zul is renamed to dashboard.zul . This DashBoard module is for selecting a youTube video from a db list. Have fun.',  0),
+(   69, '2010-12-16', 'Added the missing methode for randomly selecting a song by the first creation of the Dashboard.  ',  0),
+(   70, '2010-12-20', 'Added the second Dashboard module for showing the data inventory. This module have an build in timer for self refreshing which can be activated at creation time. Setup a new zul skeleton for the dashboard. Thanks Madruga and SimonPay for ''pack/stretch'' help. ',  0),
+(   71, '2011-01-04', 'Extend the menu taglib used in the mainmenu.xml for the tag ''open''. Now we can open/close a menuItem at creation time. Splash out an ''about'' screen.',  0),
+(   72, '2011-01-05', 'Refactoring of the backend. Adding missing comments (english/german). Deleting the old stuff for generating the PrimaryKey for different databases independent from hibernate. Now it works with hibernate controlled sequences or autoIncremented fields.',  0),
+(   73, '2011-01-06', 'Bugfixes in the annotated databinding modules. Sorry. ',  0),
+(   74, '2011-01-07', 'Thanks to AndyX for making the changes in the script-files for mySQL 5.1. ',  0),
+(   75, '2011-01-15', 'Updated zk version to 5.0.6.FL20110112 ',  0),
+(   76, '2011-01-15', 'First basic Implementation of the zk spreadsheet 2.0 . ',  0),
+(   77, '2011-01-27', 'Updated the Hibernate-Generic-DAO lib to version 0.5.1 . ',  0),
+(   78, '2011-01-28', 'Separate Fields for interpret / song title in the youTube Dashboard module. ',  0),
+(   79, '2011-02-03', 'Updated zk version to 5.0.6.FL20110202  ',  0),
+(   80, '2011-02-22', 'Modifications in the CRUD ButtonController.',  0),
+(   81, '2011-03-19', 'Removing the spreadsheet. We will waiting until it''s offered for a maven build system. ',  0),
+(   82, '2011-03-24', 'Extended the DAOImpl classes for the @Repository Annotation in conjunction with a new entry in the application-context-db.xml configuration file. These let spring convert the vendor dependent Hibernate Exceptions in common dataAccessExceptions. ',  0),
+(   83, '2011-03-29', 'Some code refactorings about the localized DataAccessExceptions and correcting the DAO and Service bean scopes in the backend. Writing a new Chapter for scopes in the Zksample2 documentation. ',  0),
+(   84, '2011-04-08', 'Added the counter for the HibernateStatistic table records and new youTube musics. So the Hibernate Performance Stats runs us away, we maximized the possible customers too up to 250.000  ',  0),
+(   85, '2011-04-14', 'Inspired by the BusinessPortalLayout we spend a new DashboardModule for BBCNews. ',  0),
+(   86, '2011-04-17', 'Added a new DashboardModule for the application history of changes. ',  0);
+
 
 
 /* create the sequences */
@@ -2374,6 +2495,10 @@ ALTER SEQUENCE guestbook_seq OWNER TO toledo;
 
 CREATE SEQUENCE calendar_event_seq START 100000;
 ALTER SEQUENCE calendar_event_seq OWNER TO toledo;
+
+CREATE SEQUENCE app_news_seq START 100000;
+ALTER SEQUENCE app_news_seq OWNER TO toledo;
+
  */
 
 

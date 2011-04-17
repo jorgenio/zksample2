@@ -293,8 +293,6 @@ public class DashboardTableRecordsCounterCtrl extends Div implements Serializabl
 		CommonService service = (CommonService) SpringUtil.getBean("commonService");
 		final Map<String, Object> map = service.getAllTablesRecordCounts();
 
-		
-		
 		if (map.containsKey("HibernateStatistics")) {
 			addNewRow(rows, Labels.getLabel("table.hibernate_entity_statistics"), map.get("HibernateStatistics"));
 		}
@@ -354,6 +352,9 @@ public class DashboardTableRecordsCounterCtrl extends Div implements Serializabl
 		}
 		if (map.containsKey("YouTubeLinks")) {
 			addNewRow(rows, Labels.getLabel("table.youtube_links"), map.get("YouTubeLinks"));
+		}
+		if (map.containsKey("ApplicationNews")) {
+			addNewRow(rows, Labels.getLabel("table.app_news"), map.get("ApplicationNews"));
 		}
 
 	}

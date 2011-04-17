@@ -26,6 +26,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Window;
 
+import de.forsthaus.webui.dashboard.module.DashboardApplicationNewsListCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardBBCNewsCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardTableRecordsCounterCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardYoutubeVideoCtrl;
@@ -56,9 +57,10 @@ public class DashboardMainCtrl extends GFCBaseCtrl implements Serializable {
 	// protected Div divDashboardCenter; // autowired
 	// protected Div divDashboardEast; // autowired
 
-	protected Div divTableRecordCounter; // autowired
-
 	// workaraound until all is refactored as DashBoardModules
+	protected Div divTableRecordCounter; // autowired
+	protected Div divAppNews; // autowired
+
 	protected Div divYouTube; // autowired
 	protected Div divBBCNews; // autowired
 
@@ -101,6 +103,7 @@ public class DashboardMainCtrl extends GFCBaseCtrl implements Serializable {
 		 */
 		// divDashboardCenter.appendChild(DashboardNewsFromHtmlFileCtrl.show(200,
 		// true, 600000));
+		divAppNews.appendChild(DashboardApplicationNewsListCtrl.show(350));
 		divTableRecordCounter.appendChild(DashboardTableRecordsCounterCtrl.show(200, true, 600000));
 		// divDashboardCenter.appendChild(DashboardPendingJobsCtrl.show(80,
 		// true, 600000));

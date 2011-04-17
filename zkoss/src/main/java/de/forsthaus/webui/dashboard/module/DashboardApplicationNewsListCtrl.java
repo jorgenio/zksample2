@@ -135,12 +135,12 @@ public class DashboardApplicationNewsListCtrl extends Div implements Serializabl
 		listhead.setParent(listbox);
 
 		Listheader listheader1 = new Listheader();
-		listheader1.setWidth("10%");
+		listheader1.setWidth("100px");
 		listheader1.setHeight("0px");
 		listheader1.setParent(listhead);
 
 		Listheader listheader2 = new Listheader();
-		listheader2.setWidth("90%");
+		listheader2.setWidth("100%");
 		listheader1.setHeight("0px");
 		listheader2.setParent(listhead);
 

@@ -14,7 +14,8 @@
 			<north height="100%"
 				style="border: 0px;  background-color: #D6DCDE;" flex="true">
 
-				<groupbox id="groupbox_menu" mold="3d" height="100%"
+				<groupbox id="groupbox_menu" mold="3d" closable="false"
+					height="100%"
 					contentStyle="background-color: white; overflow:auto">
 					<caption style="color: #000000; font-weight: bold;"
 						label="${c:l('menuTitle')}" />

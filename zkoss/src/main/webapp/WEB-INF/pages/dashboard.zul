@@ -38,7 +38,7 @@
 				<panel title="" border="none">
 					<panelchildren>
 
-						<groupbox mold="3d">
+						<groupbox mold="3d" closable="false">
 							<caption
 								style="color: #000000; font-weight:bold;"
 								image="/images/zkpowered_16x16.png"
@@ -59,7 +59,7 @@
 				<panel border="none">
 					<panelchildren>
 
-						<groupbox mold="3d">
+						<groupbox mold="3d" closable="false">
 							<caption
 								style="color: #000000; font-weight:bold;"
 								image="/images/icons/about1_16x16.gif"
@@ -81,7 +81,7 @@
 				<panel border="none">
 					<panelchildren>
 
-						<groupbox mold="3d">
+						<groupbox mold="3d" closable="false">
 							<caption
 								style="color: #000000; font-weight:bold;"
 								image="/images/icons/daysort16x16.gif"

@@ -126,7 +126,7 @@
 				<div id="divCenter">
 
 					<groupbox id="groupbox_menu" mold="3d"
-						sclass="myGroupBoxContentArea">
+						closable="false" sclass="myGroupBoxContentArea">
 						<caption
 							style="color: #000000; font-weight: bold;"
 							label="${c:l('workplace')}" />

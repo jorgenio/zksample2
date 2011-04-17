@@ -103,7 +103,7 @@ public class DashboardMainCtrl extends GFCBaseCtrl implements Serializable {
 		 */
 		// divDashboardCenter.appendChild(DashboardNewsFromHtmlFileCtrl.show(200,
 		// true, 600000));
-		divAppNews.appendChild(DashboardApplicationNewsListCtrl.show(350));
+		divAppNews.appendChild(DashboardApplicationNewsListCtrl.show(350, true, 600000));
 		divTableRecordCounter.appendChild(DashboardTableRecordsCounterCtrl.show(200, true, 600000));
 		// divDashboardCenter.appendChild(DashboardPendingJobsCtrl.show(80,
 		// true, 600000));

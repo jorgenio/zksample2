@@ -22,11 +22,16 @@ import java.io.Serializable;
 
 import org.zkoss.spring.SpringUtil;
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Path;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Borderlayout;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Caption;
 import org.zkoss.zul.Center;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Groupbox;
+import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
@@ -35,6 +40,9 @@ import org.zkoss.zul.Listhead;
 import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
+import org.zkoss.zul.Paging;
+import org.zkoss.zul.Timer;
+import org.zkoss.zul.Toolbar;
 import org.zkoss.zul.Window;
 
 import de.forsthaus.backend.model.ApplicationNews;
@@ -60,6 +68,13 @@ public class DashboardApplicationNewsListCtrl extends Div implements Serializabl
 
 	// the height of this dashboard module
 	private int modulHeight;
+
+	// flag for using a timer
+	private boolean timerControl;
+	// delay of the timer
+	private int delay;
+	// ZK Timer component
+	private Timer moduleTimer;
 	// Listbox
 	private Listbox listbox;
 	// the Service
@@ -91,6 +106,73 @@ public class DashboardApplicationNewsListCtrl extends Div implements Serializabl
 	}
 
 	/**
+	 * The static call method.
+	 * 
+	 * @param modulHeight
+	 *            The height of this dashboard module
+	 * @param timer
+	 *            true or false
+	 * @param delay
+	 *            in milliseconds
+	 * @return the module as DIV.
+	 */
+	public static Div show(int modulHeight, boolean timer, int delay) {
+		return new DashboardApplicationNewsListCtrl(modulHeight, timer, delay);
+	}
+
+	/**
+	 * Private Constructor. So it can only be created with the static show()
+	 * method.<br>
+	 * 
+	 * @param modulHeight
+	 *            The height of this dashboard module
+	 * @param timer
+	 *            true or false
+	 * @param delay
+	 *            in milliseconds
+	 */
+	private DashboardApplicationNewsListCtrl(int modulHeight, boolean timer, int delay) {
+		super();
+
+		setModulHeight(modulHeight);
+		setTimerControl(timer);
+		setDelay(delay);
+
+		if (isTimerControl()) {
+			createServerPushTimer();
+		}
+
+		createModul();
+	}
+
+	/**
+	 * Creates the Timer for the serverPush mechanism. In it we call to
+	 * different DB methods for showing different result sets.
+	 */
+	private void createServerPushTimer() {
+
+		this.moduleTimer = new Timer();
+		// timer doesn't work without a page as parent
+		Window win = (Window) Path.getComponent("/outerIndexWindow");
+		this.moduleTimer.setPage(win.getPage());
+
+		this.moduleTimer.setDelay(getDelay());
+		this.moduleTimer.setRepeats(true);
+		this.moduleTimer.addEventListener("onTimer", new EventListener() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+				doReadData();
+			}
+		});
+
+		// start the timer
+		if (this.moduleTimer != null) {
+			this.moduleTimer.setRunning(true);
+		}
+	}
+
+	/**
 	 * Creates the components..<br>
 	 */
 	private void createModul() {
@@ -112,6 +194,60 @@ public class DashboardApplicationNewsListCtrl extends Div implements Serializabl
 		cap.setLabel(Labels.getLabel("common.Application.History"));
 		cap.setStyle("padding: 0px;");
 		cap.setParent(gb);
+
+		// Buttons Toolbar/Timer
+		Div div = new Div();
+		div.setSclass("z-toolbar");
+		div.setStyle("padding: 0px");
+		div.setParent(cap);
+		Hbox hbox = new Hbox();
+		hbox.setPack("stretch");
+		hbox.setSclass("hboxRemoveWhiteStrips");
+		hbox.setWidth("100%");
+		hbox.setParent(div);
+		Toolbar toolbarRight = new Toolbar();
+		toolbarRight.setAlign("end");
+		toolbarRight.setStyle("float:right; border-style: none;");
+		toolbarRight.setParent(hbox);
+
+		Hbox hboxBtn = new Hbox();
+		hboxBtn.setSclass("hboxRemoveWhiteStrips");
+		hboxBtn.setWidth("100%");
+		hboxBtn.setParent(toolbarRight);
+
+//		Paging paging = new Paging();
+//		paging.setParent(hboxBtn);
+//		paging.setDetailed(true);
+
+		if (isTimerControl()) {
+			Button btnTimer = new Button();
+			btnTimer.setId("btnTimer");
+			btnTimer.setHeight("22px");
+			btnTimer.setImage("/images/icons/clock1_16x16.gif");
+
+			// convert to seconds
+			int seconds = (int) Math.round(getDelay() / 1000);
+
+			if (seconds > 60) {
+				// convert to minutes and set localization to minutes
+				int minutes = (int) Math.round((getDelay() / 1000) / 60);
+				btnTimer.setTooltiptext(Labels.getLabel("btnTimer.tooltiptext") + " " + minutes + " " + Labels.getLabel("common.Minutes"));
+			} else
+				// set localization to seconds
+				btnTimer.setTooltiptext(Labels.getLabel("btnTimer.tooltiptext") + " " + seconds + " " + Labels.getLabel("common.Seconds"));
+
+			btnTimer.addEventListener("onClick", new BtnClickListener());
+			btnTimer.setParent(hboxBtn);
+		}
+
+		Button btnRefresh = new Button();
+		btnRefresh.setId("btnRefresh");
+		btnRefresh.setHeight("22px");
+		btnRefresh.setLabel("!");
+		btnRefresh.setTooltiptext(Labels.getLabel("btnRefresh.tooltiptext"));
+		btnRefresh.addEventListener("onClick", new BtnClickListener());
+		btnRefresh.setParent(hboxBtn);
+		// END Buttons Toolbar/Timer
 
 		// body
 		Borderlayout bl = new Borderlayout();
@@ -186,6 +322,22 @@ public class DashboardApplicationNewsListCtrl extends Div implements Serializabl
 		}
 	}
 
+	/**
+	 * Inner onBtnClick Listener class.<br>
+	 * 
+	 * @author sGerth
+	 */
+	private final class BtnClickListener implements EventListener {
+		@Override
+		public void onEvent(Event event) throws Exception {
+
+			// check which button is pressed
+			if (event.getTarget().getId().equalsIgnoreCase("btnRefresh")) {
+				doReadData();
+			}
+		}
+	}
+
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 	// ++++++++++++++++ Setter/Getter ++++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -207,6 +359,31 @@ public class DashboardApplicationNewsListCtrl extends Div implements Serializabl
 
 	public void setApplicationNewsService(ApplicationNewsService applicationNewsService) {
 		this.applicationNewsService = applicationNewsService;
+	}
+
+	// Timer stuff
+	public void setDelay(int delay) {
+		this.delay = delay;
+	}
+
+	public int getDelay() {
+		return delay;
+	}
+
+	public void setTimerControl(boolean timerControl) {
+		this.timerControl = timerControl;
+	}
+
+	public boolean isTimerControl() {
+		return timerControl;
+	}
+
+	public void setModuleTimer(Timer moduleTimer) {
+		this.moduleTimer = moduleTimer;
+	}
+
+	public Timer getModuleTimer() {
+		return moduleTimer;
 	}
 
 }

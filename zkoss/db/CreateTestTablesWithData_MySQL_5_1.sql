@@ -1773,7 +1773,25 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 51, 'Jessie J. feat. B.o.B.',                   'Price Tag',                       'http://www.wat.tv/video/jessie-price-tag-feat-o-3bosb_2zicp_.html',   0),
 ( 52, 'THE Heavy (Live 2009)',                    'Short Change HeroPrice Tag',      'http://www.youtube.com/embed/Kqxe31ICFZk',   0),
 ( 53, 'Grace Potter and Joe Satriani (Live)',     'Cortez the Killer',               'http://www.youtube.com/embed/paeNnR33i5Q',   0),
-( 54, 'Edie Brickell (Live)',                     'what i am',                       'http://www.youtube.com/embed/uGjh6duUPXc',   0);
+( 54, 'Edie Brickell (Live)',                     'what i am',                       'http://www.youtube.com/embed/uGjh6duUPXc',   0),
+( 55, 'Dire Strait & Eric Clapton (Live Wembley 1988)', 'Brothers in arms',          'http://www.youtube.com/embed/kAl5jucOgro',   0),
+( 56, 'Buckethead live',                          'Padmasana',                       'http://www.youtube.com/embed/C-2w9b8i7GU',   0),
+( 57, 'Brian Ferry - Roxy Music',                 'More than this',                  'http://www.outube.com/embed/UrtRYmJ9u_8',    0),
+( 58, 'Brian Ferry - Roxy Music live 1979',       'Dance away',                      'http://www.youtube.com/embed/OA99t2PZbxg',   0),
+( 59, 'Brian Ferry - Roxy Music 1985',            'Slave to love',                   'http://www.youtube.com/embed/lkN6l764NT8',   0),
+( 60, 'Neil Young  (Live Rust)',                  'Like A Hurricane',                'http://www.youtube.com/embed/7KxiEjPCXA8',   0),
+( 61, 'Neil Young  (Live Rust)',                  'Cortez The Killer',               'http://www.youtube.com/embed/6GDIkb5CDUY',   0),
+( 62, 'Neil Young  (Live Rust)',                  'Southern man',                    'http://www.youtube.com/embed/kVRxdPWV3RM',   0),
+( 63, 'Nina Hagen (1979 - Cha Cha Soundtrack)',   'Herrman''s Door',                 'http://www.youtube.com/embed/tn5RVU8b7IE',   0),
+( 64, 'Keith Richards',                           'Hate It When You Leave',          'http://www.youtube.com/embed/lAJUt1C923Q',   0),
+( 65, 'Vargo',                                    'Talking one language',            'http://www.youtube.com/embed/fER_7R686Vc',   0),
+( 66, 'Vargo',                                    'The Moment',                      'http://www.youtube.com/embed/fYqEn10U6vM',   0),
+( 67, 'Vargo',                                    'Infinity',                        'http://www.youtube.com/embed/jJ2Yhqezmho',   0),
+( 68, 'Frou Frou (is 100% better on CD)',         'Let go',                          'http://www.youtube.com/embed/MX8UYHGbndY',   0),
+( 69, 'Frou Frou live (is 100% better on CD)',    'Breate in',                       'http://www.youtube.com/embed/F4vTjoPFGbA',   0),
+( 70, 'Frou Frou live (is 100% better on CD)',    'It''s good to be in love',        'http://www.youtube.com/embed/xRwwlsevNLs',   0),
+( 71, 'Frou Frou Cover  (please hear the original CD)', 'Hear me out',               'http://v.youku.com/v_show/id_XMjMxMzUzNzI4.html',   0);
+
 
  
 

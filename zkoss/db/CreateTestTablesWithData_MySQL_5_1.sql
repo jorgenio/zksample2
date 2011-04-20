@@ -1792,11 +1792,11 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 70, 'Frou Frou live (is 100% better on CD)',    'It''s good to be in love',        'http://www.youtube.com/embed/xRwwlsevNLs',   0),
 ( 71, 'Frou Frou Cover  (please hear the original CD)', 'Hear me out',               'http://v.youku.com/v_show/id_XMjMxMzUzNzI4.html',   0),
 ( 72, 'Bullmeister',                              'Girls Beautiful',                 'http://www.youtube.com/embed/7JNSeDKQPQQ',   0),
-( 72, 'Lady Gaga vs. Ne-Yo (Preliminary Mix) Mashup 2010',  'Beautiful Monster',     'http://www.youtube.com/embed/zSjclviKmK0',   0),
-( 73, 'Ne-yo ft Lady Gaga (Craig Vanity FIXED Mash 2.0)',   'Beautiful Monster',     'http://www.youtube.com/embed/rzQj3NSGXT0',   0);
+( 73, 'Lady Gaga vs. Ne-Yo (Preliminary Mix) Mashup 2010',  'Beautiful Monster',     'http://www.youtube.com/embed/zSjclviKmK0',   0),
+( 74, 'Ne-yo ft Lady Gaga (Craig Vanity FIXED Mash 2.0)',   'Beautiful Monster',     'http://www.youtube.com/embed/rzQj3NSGXT0',   0);
 
 
- 
+
 
  /* fill sample logins */
 INSERT INTO sec_loginlog(lgl_id, i2c_id, lgl_loginname,lgl_logtime, lgl_ip, lgl_status_id,lgl_sessionid, VERSION) VALUES 
@@ -1910,5 +1910,6 @@ INSERT INTO app_news (
 (   83, '2011-03-29', 'Some code refactorings about the localized DataAccessExceptions and correcting the DAO and Service bean scopes in the backend. Writing a new Chapter for scopes in the Zksample2 documentation. ',  0),
 (   84, '2011-04-08', 'Added the counter for the HibernateStatistic table records and new youTube musics. So the Hibernate Performance Stats runs us away, we maximized the possible customers too up to 250.000  ',  0),
 (   85, '2011-04-14', 'Inspired by the BusinessPortalLayout we spend a new DashboardModule for BBCNews. ',  0),
-(   86, '2011-04-17', 'Added a new DashboardModule for the applications history of changes. Therefore added new model/dao/service stuff. ',  0);
+(   86, '2011-04-17', 'Added a new DashboardModule for the applications history of changes. Therefore added new model/dao/service stuff. ',  0),
+(   87, '2011-04-20', 'Added much more music (vids). Give ''Bullmeister'' a change. Ne-Yo''s original song ''Beautiful Monster'' is not available in my country. So there are re-mixes. Seems we must implement a search for interprets or titles.  Feedback in the Guestbook please :-). ',  0);
 

@@ -1790,7 +1790,10 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 68, 'Frou Frou (is 100% better on CD)',         'Let go',                          'http://www.youtube.com/embed/MX8UYHGbndY',   0),
 ( 69, 'Frou Frou live (is 100% better on CD)',    'Breate in',                       'http://www.youtube.com/embed/F4vTjoPFGbA',   0),
 ( 70, 'Frou Frou live (is 100% better on CD)',    'It''s good to be in love',        'http://www.youtube.com/embed/xRwwlsevNLs',   0),
-( 71, 'Frou Frou Cover  (please hear the original CD)', 'Hear me out',               'http://v.youku.com/v_show/id_XMjMxMzUzNzI4.html',   0);
+( 71, 'Frou Frou Cover  (please hear the original CD)', 'Hear me out',               'http://v.youku.com/v_show/id_XMjMxMzUzNzI4.html',   0),
+( 72, 'Bullmeister',                              'Girls Beautiful',                 'http://www.youtube.com/embed/7JNSeDKQPQQ',   0),
+( 72, 'Lady Gaga vs. Ne-Yo (Preliminary Mix) Mashup 2010',  'Beautiful Monster',     'http://www.youtube.com/embed/zSjclviKmK0',   0),
+( 73, 'Ne-yo ft Lady Gaga (Craig Vanity FIXED Mash 2.0)',   'Beautiful Monster',     'http://www.youtube.com/embed/rzQj3NSGXT0',   0);
 
 
  

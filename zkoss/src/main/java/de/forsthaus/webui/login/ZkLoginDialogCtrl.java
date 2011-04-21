@@ -41,6 +41,9 @@ import de.forsthaus.webui.util.ZksampleDateFormat;
  * This is the controller class for the /WEB-INF/zkloginDialog.zul file.<br>
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
  * 
+ * The Login action is defined in the zul-file where the login Button is from
+ * html type 'submit'.
+ * 
  * @author bbruhns
  * @author sgerth
  */

@@ -2327,7 +2327,8 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 72, 'Bullmeister',                              'Girls Beautiful',                 'http://www.youtube.com/embed/7JNSeDKQPQQ',   0),
 ( 73, 'Lady Gaga vs. Ne-Yo (Preliminary Mix) Mashup 2010',  'Beautiful Monster',     'http://www.youtube.com/embed/zSjclviKmK0',   0),
 ( 74, 'Ne-yo ft Lady Gaga (Craig Vanity FIXED Mash 2.0)',   'Beautiful Monster',     'http://www.youtube.com/embed/rzQj3NSGXT0',   0),
-( 75, 'Don''t know the band ?)',                  'Cry for you',                     'http://www.youtube.com/embed/WMJD_c-WxPg',   0);
+( 75, 'Andy Timmons)',                            'Cry for you',                     'http://www.youtube.com/embed/WMJD_c-WxPg',   0),
+( 76, 'Old stars)',                               'While m guitar gently weeps',     'http://www.youtube.com/embed/ifp_SVrlurY',   0);
 
 
 

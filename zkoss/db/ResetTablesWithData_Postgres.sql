@@ -26,7 +26,9 @@ DELETE FROM youtube_link;
 DELETE  FROM  hibernate_entity_statistics cascade;
 DELETE  FROM  hibernate_statistics cascade;
 
-commit;
+/* 
+ * commit;
+ */ 
 
 /* not deleted tables for holding the history of the sample data access */
 /*
@@ -46,12 +48,12 @@ commit;
 
 
 /******************** Filiale Daten ********************/
-INSERT INTO FILIALE (FIL_ID, FIL_NR, FIL_BEZEICHNUNG,FIL_NAME1,FIL_NAME2,FIL_ORT,VERSION) values
+INSERT INTO filiale (FIL_ID, FIL_NR, FIL_BEZEICHNUNG,FIL_NAME1,FIL_NAME2,FIL_ORT,VERSION) values
 (1,'0001','Filiale Muenchen','Hoermann Gmbh','Personaldienstleistungen','Muenchen',0),
 (2,'0002','Filiale Berlin',  'Hoermann Gmbh','Personaldienstleistungen','Berlin',0);
 
 /******************** Security: USERS ********************/  
-INSERT INTO SEC_USER (USR_ID, USR_LOGINNAME, USR_PASSWORD, USR_LASTNAME, USR_FIRSTNAME, USR_EMAIL, USR_LOCALE, USR_ENABLED, USR_ACCOUNTNONEXPIRED, USR_CREDENTIALSNONEXPIRED, USR_ACCOUNTNONLOCKED, USR_TOKEN,  VERSION) values 
+INSERT INTO sec_user (USR_ID, USR_LOGINNAME, USR_PASSWORD, USR_LASTNAME, USR_FIRSTNAME, USR_EMAIL, USR_LOCALE, USR_ENABLED, USR_ACCOUNTNONEXPIRED, USR_CREDENTIALSNONEXPIRED, USR_ACCOUNTNONLOCKED, USR_TOKEN,  VERSION) values 
 (10, 'guest', 'guest', 'guestFirstname', 'guestlastname', 'guest@web.de', NULL, true, true, true, true, null, 0),
 (11, 'admin', 'admin', 'Visor', 'Super', 'admin@web.de', NULL, true, true, true, true, null, 0),
 (12, 'user1', 'user1', 'Kingsley', 'Ben', 'B.Kingsley@web.de', NULL, true, true, true, true, null, 0),
@@ -59,7 +61,7 @@ INSERT INTO SEC_USER (USR_ID, USR_LOGINNAME, USR_PASSWORD, USR_LASTNAME, USR_FIR
 (14, 'user2', 'user2', 'Kingdom', 'Marta', 'M.Kingdom@web.de', NULL, true, true, true, true, null, 0);
 
 /******************** Security: ROLES ********************/  
-INSERT INTO SEC_ROLE (ROL_ID, ROL_SHORTDESCRIPTION, ROL_LONGDESCRIPTION, VERSION) values
+INSERT INTO sec_role (ROL_ID, ROL_SHORTDESCRIPTION, ROL_LONGDESCRIPTION, VERSION) values
 (10000,'ROLE_ADMIN','Administrator Role', 0),
 (10002,'ROLE_OFFICE_ALL_RIGHTS','Office User role with all rights granted.', 0),
 (10003,'ROLE_GUEST','Guest Role', 0),
@@ -69,7 +71,7 @@ INSERT INTO SEC_ROLE (ROL_ID, ROL_SHORTDESCRIPTION, ROL_LONGDESCRIPTION, VERSION
 
 /******************** Security: USER-ROLES ********************/  
 /* Guest account authorities */
-INSERT INTO SEC_USERROLE (URR_ID, USR_ID, ROL_ID, VERSION) values
+INSERT INTO sec_userrole (URR_ID, USR_ID, ROL_ID, VERSION) values
 (11000, 10, 10003, 0),
 /* User1 Usr-Id: 12 */
 (11001, 12, 10002, 0),
@@ -77,7 +79,7 @@ INSERT INTO SEC_USERROLE (URR_ID, USR_ID, ROL_ID, VERSION) values
 (11010, 13, 10005, 0);
 
 /* Admin Usr-ID: 11 */
-INSERT INTO SEC_USERROLE (URR_ID, USR_ID, ROL_ID, VERSION) values
+INSERT INTO sec_userrole (URR_ID, USR_ID, ROL_ID, VERSION) values
 (11003, 11, 10000, 0),
 (11005, 11, 10002, 0),
 (11006, 11, 10003, 0),
@@ -87,7 +89,7 @@ INSERT INTO SEC_USERROLE (URR_ID, USR_ID, ROL_ID, VERSION) values
 (11007, 14, 10004, 0);
 
 /******************** Security: SEC_GROUPS ********************/  
-INSERT INTO SEC_GROUP (GRP_ID, GRP_SHORTDESCRIPTION, GRP_LONGDESCRIPTION, VERSION) values
+INSERT INTO sec_group (GRP_ID, GRP_SHORTDESCRIPTION, GRP_LONGDESCRIPTION, VERSION) values
 (13001, 'Headoffice Supervisor Group', 'kjhf ff hgfd', 0),
 (13002, 'Admin Group - user accounts', 'create/modify user accounts', 0),
 (13003, 'Guest Group', 'Minimal Rights for the guests', 0),
@@ -136,7 +138,7 @@ INSERT INTO SEC_GROUP (GRP_ID, GRP_SHORTDESCRIPTION, GRP_LONGDESCRIPTION, VERSIO
 /******************** Security: SEC_ROLE-GROUPS ********************/  
 /* ROLE_OFFICE_ALL_RIGHTS */
 /* Group: Customers_View */
-INSERT INTO SEC_ROLEGROUP (RLG_ID, GRP_ID, ROL_ID, VERSION) values 
+INSERT INTO sec_rolegroup (RLG_ID, GRP_ID, ROL_ID, VERSION) values 
 (12000, 13000, 10002, 0),
 /* Group: Customers_New */
 (12001, 13008, 10002, 0),
@@ -241,7 +243,7 @@ INSERT INTO SEC_ROLEGROUP (RLG_ID, GRP_ID, ROL_ID, VERSION) values
 
 
 /******************** Security: SEC_RIGHTS ********************/  
-INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
+INSERT INTO sec_right (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15000, 1, 'menuCat_OfficeData', 0),
 (15001, 2, 'menuItem_OfficeData_Customers', 0),
 (15002, 2, 'menuItem_OfficeData_Orders', 0),
@@ -444,7 +446,7 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 
 /******************** Security: SEC_GROUP-RIGHTS ********************/  
 /* Headoffice Supervisor Group*/
-INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values 
+INSERT INTO sec_groupright (GRI_ID, GRP_ID, RIG_ID, VERSION) values 
 (14003, 13001, 15003, 0),
 (14004, 13001, 15004, 0),
 (14005, 13001, 15005, 0),
@@ -864,7 +866,7 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14626, 13072, 15776, 0);
 
 /******************** Branche Daten ********************/
-INSERT INTO BRANCHE (BRA_ID,BRA_BEZEICHNUNG, VERSION) VALUES
+INSERT INTO branche (BRA_ID,BRA_BEZEICHNUNG, VERSION) VALUES
 (1000,  'Elektro',0),
 (1001,  'Maler',0),
 (1002,  'Holzverabeitung',0),
@@ -904,7 +906,7 @@ INSERT INTO BRANCHE (BRA_ID,BRA_BEZEICHNUNG, VERSION) VALUES
 (1037,  'Spedition',0);
 
 /******************** Kunden Daten ********************/
-INSERT INTO KUNDE (KUN_ID,KUN_FIL_ID,KUN_BRA_ID, KUN_NR, KUN_MATCHCODE,KUN_NAME1,KUN_NAME2,KUN_ORT,KUN_MAHNSPERRE,VERSION) VALUES 
+INSERT INTO kunde (KUN_ID,KUN_FIL_ID,KUN_BRA_ID, KUN_NR, KUN_MATCHCODE,KUN_NAME1,KUN_NAME2,KUN_ORT,KUN_MAHNSPERRE,VERSION) VALUES 
 (20,1,1000, '20', 'MUELLER','--> Mueller Demo-Data','Elektroinstallationen','Freiburg',true,0),
 (21,1,1000, '21', 'HUBER','--> Huber Demo-Data','Elektroinstallationen','Oberursel',true,0),
 (22,1,1000, '22', 'SIEMENS','Siemens AG','Elektroinstallationen','Braunschweig',false,0),
@@ -933,8 +935,8 @@ INSERT INTO KUNDE (KUN_ID,KUN_FIL_ID,KUN_BRA_ID, KUN_NR, KUN_MATCHCODE,KUN_NAME1
 (2009,1,1000, '2009', 'HESSING','Mario Hessing GmbH','Elektroinstallationen','Rheinweiler',false,0),
 (2010,1,1000, '2010', 'FREIBERG','Werner Freiberg GmbH','Elektroinstallationen','Rheinstetten',false,0);
 
-/******************** Auftrag Daten ********************/
-INSERT INTO AUFTRAG (AUF_ID,AUF_KUN_ID, AUF_NR, AUF_BEZEICHNUNG, VERSION) VALUES
+/*************** Order data / Auftrag Daten ********************/
+INSERT INTO auftrag (AUF_ID,AUF_KUN_ID, AUF_NR, AUF_BEZEICHNUNG, VERSION) VALUES
 (40, 20, 'AUF-40', 'EGRH Modul1',0),
 (41, 20, 'AUF-41', 'OMEGA Modul2',0),
 (42, 20, 'AUF-42', 'Keller',0),
@@ -943,8 +945,8 @@ INSERT INTO AUFTRAG (AUF_ID,AUF_KUN_ID, AUF_NR, AUF_BEZEICHNUNG, VERSION) VALUES
 (45, 21, 'AUF-45', 'Renovierung Hochhaus Ilsestrasse 5',0),
 (46, 21, 'AUF-46', 'Verteilerschrank Umbau; Fa. Kloeckner EHG',0);
 
-/******************** Artikel Daten ********************/
-INSERT INTO ARTIKEL (ART_ID,ART_KURZBEZEICHNUNG,ART_LANGBEZEICHNUNG,ART_NR,ART_PREIS,VERSION) VALUES 
+/*************** Article data / Artikel Daten ********************/
+INSERT INTO artikel (ART_ID,ART_KURZBEZEICHNUNG,ART_LANGBEZEICHNUNG,ART_NR,ART_PREIS,VERSION) VALUES 
 (3000,'Kabelverschraubung DN 27','Kabelverschraubung Messing verchromt DN 27','KS3000',4.23,0),
 (3001,'3-adriges Kabel 1,5mm ','mehradriges Kabel, 3 Adern, Farbe=grau, Querschnitt= 1,5 mm','MK3001',0.12,0),
 (3002,'Luesterklemmen 10-fach, bis 1.5mm','Luesterklemmen, grau, bis Querschnitt 1.5mm','LUESTER1002',0.78,0),
@@ -961,9 +963,9 @@ INSERT INTO ARTIKEL (ART_ID,ART_KURZBEZEICHNUNG,ART_LANGBEZEICHNUNG,ART_NR,ART_P
 
 
 
-/******************** Auftrag Positionen Daten ********************/
+/***********Order Positions / Auftrag Positionen Daten ********************/
 /* Auftrag: 40 */
-INSERT INTO AUFTRAGPOSITION (AUP_ID, AUP_AUF_ID, ART_ID, AUP_POSITION, AUP_MENGE, AUP_EINZELWERT, AUP_GESAMTWERT, VERSION) VALUES 
+INSERT INTO auftragposition (AUP_ID, AUP_AUF_ID, ART_ID, AUP_POSITION, AUP_MENGE, AUP_EINZELWERT, AUP_GESAMTWERT, VERSION) VALUES 
 (60,40, 3000, 1, 240, 1.20, 288.00, 0),
 (61,40, 3001, 2, 1200, 0.45, 540.00, 0),
 (62,40, 3002, 3, 40, 0.20, 8.00, 0),
@@ -971,7 +973,7 @@ INSERT INTO AUFTRAGPOSITION (AUP_ID, AUP_AUF_ID, ART_ID, AUP_POSITION, AUP_MENGE
 (64,40, 3004, 5, 20, 4.30, 86.00, 0),
 (65,40, 3005, 6, 15, 40.00, 600.00, 0);
 /* Auftrag: 41 */
-INSERT INTO AUFTRAGPOSITION (AUP_ID, AUP_AUF_ID, ART_ID, AUP_POSITION, AUP_MENGE, AUP_EINZELWERT, AUP_GESAMTWERT, VERSION) VALUES
+INSERT INTO auftragposition (AUP_ID, AUP_AUF_ID, ART_ID, AUP_POSITION, AUP_MENGE, AUP_EINZELWERT, AUP_GESAMTWERT, VERSION) VALUES
 (66,41, 3005, 1, 18, 40.00, 720.00, 0),
 (67,41, 3006, 2, 800 , 0.45, 360.00, 0),
 (68,41, 3002, 3, 40, 0.20, 8.00, 0),
@@ -1043,8 +1045,32 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 47, 'French Kiss (Live aux Francofolies 2009)', 'Le Soupir',                       'http://www.youtube.com/embed/YziA45xILWU',   0),
 ( 48, 'CHAKA KHAN (Live)',                        'Ain''t nobody',                   'http://www.youtube.com/embed/6eDSIj_iozA',   0),
 ( 49, 'Madita',                                   'Ceylon',                          'http://www.youtube.com/embed/6qzMxqzS-bg',   0),
-( 50, 'The Crystal Method',                       'Starting over. Play it loud :-)', 'http://www.youtube.com/embed/pMGJ3cVvIrY',   0);
-
+( 50, 'The Crystal Method',                       'Starting over. Play it loud :-)', 'http://www.youtube.com/embed/pMGJ3cVvIrY',   0),
+( 51, 'Jessie J. feat. B.o.B.',                   'Price Tag',                       'http://www.wat.tv/video/jessie-price-tag-feat-o-3bosb_2zicp_.html',   0),
+( 52, 'THE Heavy (Live 2009)',                    'Short Change HeroPrice Tag',      'http://www.youtube.com/embed/Kqxe31ICFZk',   0),
+( 53, 'Grace Potter and Joe Satriani (Live)',     'Cortez the Killer',               'http://www.youtube.com/embed/paeNnR33i5Q',   0),
+( 54, 'Edie Brickell (Live)',                     'what i am',                       'http://www.youtube.com/embed/uGjh6duUPXc',   0),
+( 55, 'Dire Strait & Eric Clapton (Live Wembley 1988)', 'Brothers in arms',          'http://www.youtube.com/embed/kAl5jucOgro',   0),
+( 56, 'Buckethead live',                          'Padmasana',                       'http://www.youtube.com/embed/C-2w9b8i7GU',   0),
+( 57, 'Brian Ferry - Roxy Music',                 'More than this',                  'http://www.outube.com/embed/UrtRYmJ9u_8',    0),
+( 58, 'Brian Ferry - Roxy Music live 1979',       'Dance away',                      'http://www.youtube.com/embed/OA99t2PZbxg',   0),
+( 59, 'Brian Ferry - Roxy Music 1985',            'Slave to love',                   'http://www.youtube.com/embed/lkN6l764NT8',   0),
+( 60, 'Neil Young  (Live Rust)',                  'Like A Hurricane',                'http://www.youtube.com/embed/7KxiEjPCXA8',   0),
+( 61, 'Neil Young  (Live Rust)',                  'Cortez The Killer',               'http://www.youtube.com/embed/6GDIkb5CDUY',   0),
+( 62, 'Neil Young  (Live Rust)',                  'Southern man',                    'http://www.youtube.com/embed/kVRxdPWV3RM',   0),
+( 63, 'Nina Hagen (1979 - Cha Cha Soundtrack)',   'Herrman''s Door',                 'http://www.youtube.com/embed/tn5RVU8b7IE',   0),
+( 64, 'Keith Richards',                           'Hate It When You Leave',          'http://www.youtube.com/embed/lAJUt1C923Q',   0),
+( 65, 'Vargo',                                    'Talking one language',            'http://www.youtube.com/embed/fER_7R686Vc',   0),
+( 66, 'Vargo',                                    'The Moment',                      'http://www.youtube.com/embed/fYqEn10U6vM',   0),
+( 67, 'Vargo',                                    'Infinity',                        'http://www.youtube.com/embed/jJ2Yhqezmho',   0),
+( 68, 'Frou Frou (is 100% better on CD)',         'Let go',                          'http://www.youtube.com/embed/MX8UYHGbndY',   0),
+( 69, 'Frou Frou live (is 100% better on CD)',    'Breate in',                       'http://www.youtube.com/embed/F4vTjoPFGbA',   0),
+( 70, 'Frou Frou live (is 100% better on CD)',    'It''s good to be in love',        'http://www.youtube.com/embed/xRwwlsevNLs',   0),
+( 71, 'Frou Frou Cover  (please hear the original CD)', 'Hear me out',               'http://v.youku.com/v_show/id_XMjMxMzUzNzI4.html',   0),
+( 72, 'Bullmeister',                              'Girls Beautiful',                 'http://www.youtube.com/embed/7JNSeDKQPQQ',   0),
+( 73, 'Lady Gaga vs. Ne-Yo (Preliminary Mix) Mashup 2010',  'Beautiful Monster',     'http://www.youtube.com/embed/zSjclviKmK0',   0),
+( 74, 'Ne-yo ft Lady Gaga (Craig Vanity FIXED Mash 2.0)',   'Beautiful Monster',     'http://www.youtube.com/embed/rzQj3NSGXT0',   0),
+( 75, 'Don''t know the band ?)',                  'Cry for you',                     'http://www.youtube.com/embed/WMJD_c-WxPg',   0);
 
 
 /* create the sequences */
@@ -1064,6 +1090,7 @@ ALTER SEQUENCE sec_right_seq RESTART WITH 100000;
 ALTER SEQUENCE sys_countrycode_seq RESTART WITH 300;
 ALTER SEQUENCE sys_ip4country_seq RESTART WITH 100000;
 ALTER SEQUENCE youtube_link_seq RESTART WITH 100000;
+/*ALTER SEQUENCE app_news_seq RESTART WITH 100000;*/
 ALTER SEQUENCE hibernate_entity_statistics_seq RESTART WITH 100000;
 ALTER SEQUENCE hibernate_statistics_seq RESTART WITH 100000;
 

@@ -80,6 +80,9 @@ DROP SEQUENCE IF EXISTS sys_ip4country_seq;
 DROP TABLE IF EXISTS youtube_link cascade;
 DROP SEQUENCE IF EXISTS youtube_link_seq;
 
+DROP TABLE IF EXISTS app_news cascade;
+DROP SEQUENCE IF EXISTS app_news_seq;
+ 
 /* hibernate performance statistics */
 DROP TABLE IF EXISTS hibernate_entity_statistics cascade;
 DROP SEQUENCE IF EXISTS hibernate_entity_statistics_seq;
@@ -106,8 +109,7 @@ DROP SEQUENCE IF EXISTS hibernate_statistics_seq;
  DROP TABLE IF EXISTS calendar_event cascade;
  DROP SEQUENCE IF EXISTS calendar_event_seq;
  
- DROP TABLE IF EXISTS app_news cascade;
- DROP SEQUENCE IF EXISTS app_news_seq;
+ 
  
  */
 
@@ -2324,7 +2326,8 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 71, 'Frou Frou Cover  (please hear the original CD)', 'Hear me out',               'http://v.youku.com/v_show/id_XMjMxMzUzNzI4.html',   0),
 ( 72, 'Bullmeister',                              'Girls Beautiful',                 'http://www.youtube.com/embed/7JNSeDKQPQQ',   0),
 ( 73, 'Lady Gaga vs. Ne-Yo (Preliminary Mix) Mashup 2010',  'Beautiful Monster',     'http://www.youtube.com/embed/zSjclviKmK0',   0),
-( 74, 'Ne-yo ft Lady Gaga (Craig Vanity FIXED Mash 2.0)',   'Beautiful Monster',     'http://www.youtube.com/embed/rzQj3NSGXT0',   0);
+( 74, 'Ne-yo ft Lady Gaga (Craig Vanity FIXED Mash 2.0)',   'Beautiful Monster',     'http://www.youtube.com/embed/rzQj3NSGXT0',   0),
+( 75, 'Don''t know the band ?)',                  'Cry for you',                     'http://www.youtube.com/embed/WMJD_c-WxPg',   0);
 
 
 
@@ -2495,6 +2498,9 @@ ALTER SEQUENCE sys_ip4country_seq OWNER TO toledo;
 
 CREATE SEQUENCE youtube_link_seq START 100000;
 ALTER SEQUENCE youtube_link_seq OWNER TO toledo;
+
+CREATE SEQUENCE app_news_seq START 100000;
+ALTER SEQUENCE app_news_seq OWNER TO toledo;
 
 CREATE SEQUENCE hibernate_entity_statistics_seq START 100000;
 ALTER SEQUENCE hibernate_entity_statistics_seq OWNER TO toledo;

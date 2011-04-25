@@ -2304,7 +2304,7 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 49, 'Madita',                                   'Ceylon',                          'http://www.youtube.com/embed/6qzMxqzS-bg',   0),
 ( 50, 'The Crystal Method',                       'Starting over. Play it loud :-)', 'http://www.youtube.com/embed/pMGJ3cVvIrY',   0),
 ( 51, 'Jessie J. feat. B.o.B.',                   'Price Tag',                       'http://www.wat.tv/video/jessie-price-tag-feat-o-3bosb_2zicp_.html',   0),
-( 52, 'THE Heavy (Live 2009)',                    'Short Change HeroPrice Tag',      'http://www.youtube.com/embed/Kqxe31ICFZk',   0),
+( 52, 'THE Heavy (Live 2009)',                    'Short Change Hero',               'http://www.youtube.com/embed/Kqxe31ICFZk',   0),
 ( 53, 'Grace Potter and Joe Satriani (Live)',     'Cortez the Killer',               'http://www.youtube.com/embed/paeNnR33i5Q',   0),
 ( 54, 'Edie Brickell (Live)',                     'what i am',                       'http://www.youtube.com/embed/uGjh6duUPXc',   0),
 ( 55, 'Dire Strait & Eric Clapton (Live Wembley 1988)', 'Brothers in arms',          'http://www.youtube.com/embed/kAl5jucOgro',   0),
@@ -2328,7 +2328,7 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 73, 'Lady Gaga vs. Ne-Yo (Preliminary Mix) Mashup 2010',  'Beautiful Monster',     'http://www.youtube.com/embed/zSjclviKmK0',   0),
 ( 74, 'Ne-yo ft Lady Gaga (Craig Vanity FIXED Mash 2.0)',   'Beautiful Monster',     'http://www.youtube.com/embed/rzQj3NSGXT0',   0),
 ( 75, 'Andy Timmons)',                            'Cry for you',                     'http://www.youtube.com/embed/WMJD_c-WxPg',   0),
-( 76, 'Old stars)',                               'While m guitar gently weeps',     'http://www.youtube.com/embed/ifp_SVrlurY',   0);
+( 76, 'Old stars)',                               'While my guitar gently weeps',    'http://www.youtube.com/embed/ifp_SVrlurY',   0);
 
 
 

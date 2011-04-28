@@ -10,6 +10,7 @@ import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.EventQueues;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
@@ -72,7 +73,7 @@ import de.forsthaus.policy.model.UserImpl;
  * 
  * since: zk 5.0.0
  * 
- * @author sgerth
+ * @author Stephan Gerth
  * 
  */
 public class MessageBarCtrl extends GenericForwardComposer implements Serializable {
@@ -144,11 +145,16 @@ public class MessageBarCtrl extends GenericForwardComposer implements Serializab
 
 					/**
 					 * If you whish to inform smartly of incoming message than
-					 * uncomment the next line for a only blinking Icon.
+					 * uncomment the next line for only a blinking Icon.
 					 */
 					// MessageBarCtrl.this.btnOpenMsg.setImage("/images/icons/incoming_message1_16x16.gif");
 				} else {
-					((Textbox) getMsgWindow().getFellow("tb")).setValue(getMsg());
+					Textbox t = ((Textbox) getMsgWindow().getFellow("tb"));
+					t.setValue(getMsg());
+					// SCROLL the text to the last Message.
+					Clients.evalJavaScript("scrollTextbox('" + t.getUuid() + "')");
+//					int stPos = t.getText().length();
+//					t.setSelectionRange(stPos, getMsg().length() - 1);
 				}
 			}
 		});

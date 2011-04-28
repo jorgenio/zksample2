@@ -13,6 +13,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
+	<script type="text/javascript">
+		<!-- Function for scrolling the text -->
+		<!-- thanks to dagarwal82; http://www.zkoss.org/forum/listComment/16011 -->
+		<![CDATA[ function scrollTextbox(txtBox) { var txtEle =
+		document.getElementById(txtBox); txtEle.scrollTop =
+		txtEle.scrollHeight; } ]]>
+	</script>
+
 	<window id="outerIndexWindow" apply="${indexCtrl}" border="none"
 		width="100%" height="100%">
 
@@ -156,6 +164,13 @@
 					<borderlayout width="100%" height="22px">
 
 						<west border="none" width="50px">
+
+							<!-- 
+								function scrolltxt(txt) { var txtEle =
+								document.getElementById(txtBox);
+								txtEle.scrollTop = txtEle.scrollHeight; }
+							-->
+
 							<!-- The MessageBar. Comps are created in the Controller -->
 							<window id="winMessageBar"
 								apply="${messageBarCtrl}" border="none" width="50px"

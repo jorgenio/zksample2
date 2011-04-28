@@ -223,7 +223,7 @@ public class SecGroupListCtrl extends GFCBaseListCtrl<SecGroup> implements Seria
 
 		// call the zul-file with the parameters packed in a map
 		try {
-			Executions.createComponents("/WEB-INF/pages/sec_group/secGroupDialog.zul", null, map);
+			Executions.createComponents("/WEB-INF/pages/sec_group/secGroupDialog.zul", secGroupListWindow, map);
 		} catch (final Exception e) {
 			logger.error("onOpenWindow:: error opening window / " + e.getMessage());
 

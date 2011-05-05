@@ -30,14 +30,25 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * The domain model have no corresponding table in a database and has a fixed
  * length of records that should see as the types of login status. <br>
  * <br>
- * Int | Type <br>
- * --------------------------<br>
- * 0 | login failed <br>
- * 1 | login <br>
- * 2 | logout <br>
+ *  <p>
+ <table border=0 cellspacing=3 cellpadding=0>
+
+     <tr bgcolor="#ccccff">
+         <th align=left>Int
+         <th align=left>Status
+     <tr>
+         <td><code>0</code>
+         <td>login failed
+     <tr bgcolor="#eeeeff">
+         <td><code>1</code>
+         <td>login
+     <tr>
+         <td><code>2</code>
+         <td>logout
+  </table>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
 public class LoginStatus implements Serializable {
 

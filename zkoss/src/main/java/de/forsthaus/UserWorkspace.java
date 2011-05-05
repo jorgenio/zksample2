@@ -102,6 +102,7 @@ public class UserWorkspace implements Serializable, DisposableBean {
 		// s.invalidate();
 		/* ++++++ Kills the zk session +++++ */
 		// Sessions.getCurrent().invalidate();
+
 		Executions.sendRedirect("/j_spring_logout");
 
 	}

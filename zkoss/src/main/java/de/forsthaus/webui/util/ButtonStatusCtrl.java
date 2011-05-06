@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.opentruuls.base.webui.util.ButtonStatusCtrl.ButtonEnum;
 import org.zkoss.zul.Button;
 
 import de.forsthaus.UserWorkspace;
@@ -51,6 +52,7 @@ import de.forsthaus.UserWorkspace;
  *          02/22/2011 sge Extended for disable(true/false) all buttons.<br>
  *          added a second constructor for working with/without CloseButton.<br>
  *          which is used in ModalWindows.<br>
+ *          04/26/2011 sge Extended for let a button be null.<br>
  * 
  * @author bbruhns
  * @author Stephan Gerth
@@ -82,6 +84,9 @@ public class ButtonStatusCtrl implements Serializable {
 
 	/** is the BtnController active ? */
 	private boolean active = true;
+
+	/** is the security active ? */
+	private boolean securityActive = true;
 
 	/**
 	 * Constructor without CLOSE button.
@@ -289,7 +294,9 @@ public class ButtonStatusCtrl implements Serializable {
 	 *            path and image name
 	 */
 	private void setImage(ButtonEnum b, String imagePath) {
-		buttons.get(b).setImage(imagePath);
+		if (buttons.get(b) != null) {
+			buttons.get(b).setImage(imagePath);
+		}
 	}
 
 	/**
@@ -304,12 +311,19 @@ public class ButtonStatusCtrl implements Serializable {
 		// check first if the ButtonController is active
 		if (isActive()) {
 
-			if (visible) {
-				if (workspace.isAllowed(_rightPrefix + b.name())) {
+			// check if the button is declared
+			if (buttons.get(b) != null) {
+
+				if (visible) {
+					if (isSecurityActive()) {
+						if (workspace.isAllowed(_rightPrefix + b.name())) {
+							buttons.get(b).setVisible(visible);
+						}
+					} else
+						buttons.get(b).setVisible(visible);
+				} else {
 					buttons.get(b).setVisible(visible);
 				}
-			} else {
-				buttons.get(b).setVisible(visible);
 			}
 		}
 	}
@@ -326,11 +340,18 @@ public class ButtonStatusCtrl implements Serializable {
 		// check first if the ButtonController is active
 		if (isActive()) {
 
-			if (disabled) {
-				buttons.get(b).setDisabled(disabled);
-			} else {
-				if (workspace.isAllowed(_rightPrefix + b.name())) {
+			// check if the button is declared
+			if (buttons.get(b) != null) {
+
+				if (disabled) {
 					buttons.get(b).setDisabled(disabled);
+				} else {
+					if (isSecurityActive()) {
+						if (workspace.isAllowed(_rightPrefix + b.name())) {
+							buttons.get(b).setDisabled(disabled);
+						}
+					} else
+						buttons.get(b).setDisabled(disabled);
 				}
 			}
 		}
@@ -380,6 +401,20 @@ public class ButtonStatusCtrl implements Serializable {
 	 */
 	public boolean isActive() {
 		return active;
+	}
+
+	public void setSecurityActive(boolean securityActive) {
+		this.securityActive = securityActive;
+	}
+
+	/**
+	 * Is this ButtonController security active? <br>
+	 * Means does it checks for rights? <br>
+	 * 
+	 * @return
+	 */
+	public boolean isSecurityActive() {
+		return securityActive;
 	}
 
 }

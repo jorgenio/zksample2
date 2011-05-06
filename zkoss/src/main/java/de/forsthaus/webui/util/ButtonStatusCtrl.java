@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.opentruuls.base.webui.util.ButtonStatusCtrl.ButtonEnum;
 import org.zkoss.zul.Button;
 
 import de.forsthaus.UserWorkspace;

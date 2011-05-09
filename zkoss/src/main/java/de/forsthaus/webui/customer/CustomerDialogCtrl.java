@@ -25,6 +25,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.eclipse.jdt.core.search.FieldDeclarationMatch;
 import org.springframework.dao.DataAccessException;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
@@ -777,6 +778,13 @@ public class CustomerDialogCtrl extends GFCBaseCtrl implements Serializable {
 	private void doDelete() throws InterruptedException {
 
 		final Customer aCustomer = getCustomer();
+
+		// for the guys who delete all times our two demo customers with order
+		// and orderPositions, we stop this.
+		if (aCustomer.getId() == new Long(20) || aCustomer.getId() == new Long(21)) {
+			ZksampleMessageUtils.doShowNotAllowedForDemoRecords();
+			return;
+		}
 
 		// Show a confirm box
 		String msg = Labels.getLabel("message.Question.Are_you_sure_to_delete_this_record") + "\n\n --> " + aCustomer.getKunName1() + " " + aCustomer.getKunName2() + " ," + aCustomer.getKunOrt();

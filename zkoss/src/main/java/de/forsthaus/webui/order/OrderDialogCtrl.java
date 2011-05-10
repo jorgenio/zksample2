@@ -848,7 +848,7 @@ public class OrderDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		if (item != null) {
 			// CAST AND STORE THE SELECTED OBJECT
-			Orderposition anOrderposition = (Orderposition) item.getAttribute("data");
+			Orderposition anOrderposition = (Orderposition) item.getValue();
 
 			/*
 			 * We can call our Dialog zul-file with parameters. So we can call

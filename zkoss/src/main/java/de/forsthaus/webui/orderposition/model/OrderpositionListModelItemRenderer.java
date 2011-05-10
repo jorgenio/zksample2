@@ -65,9 +65,10 @@ public class OrderpositionListModelItemRenderer implements ListitemRenderer, Ser
 		// lc.appendChild(img);
 		// lc.setParent(item);
 
-		item.setAttribute("data", data);
+		item.setValue(data);
 		// ComponentsCtrl.applyForward(img, "onClick=onImageClicked");
-		ComponentsCtrl.applyForward(item, "onClick=onClickedOrderPositionItem");
+		// ComponentsCtrl.applyForward(item,
+		// "onClick=onClickedOrderPositionItem");
 		ComponentsCtrl.applyForward(item, "onDoubleClick=onDoubleClickedOrderPositionItem");
 
 	}

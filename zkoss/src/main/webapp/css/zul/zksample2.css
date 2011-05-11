@@ -102,8 +102,8 @@ tr.z-row td.z-row-inner {
 	border-right: 0px #CCC;
 }
 
-/* Make Plain Grid+smaller comps Padding */
-	/* "overflow:hidden ;" not working in Chrome/Safari */
+/* Make Plain Grid+smaller comps Padding + white background */
+/* "overflow:hidden ;" not working in Chrome/Safari */
 .GridLayoutNoBorder tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body div.z-cell,div.z-grid
 	{
 	border: none;

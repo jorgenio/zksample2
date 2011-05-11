@@ -30,12 +30,14 @@ import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.event.MouseEvent;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.FieldComparator;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listheader;
@@ -365,7 +367,13 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		// logger.debug(event.toString());
-
+		
+//		ListModelList lml = (ListModelList) listBoxCustomer.getModel();
+//		if (lml.getSize() > 0) {
+//			listBoxCustomer.setSelectedIndex(0);
+//			Clients.scrollIntoView(listBoxCustomer);
+//		}
+		
 		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 

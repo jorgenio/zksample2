@@ -2448,7 +2448,7 @@ INSERT INTO app_news (
 (   85, '2011-04-14', 'Inspired by the BusinessPortalLayout we spend a new DashboardModule for BBCNews. ',  0),
 (   86, '2011-04-17', 'Added a new DashboardModule for the applications history of changes. Therefore added new model/dao/service stuff. ',  0),
 (   87, '2011-04-20', 'Added much more music (vids). Give ''Bullmeister'' a change. Ne-Yo''s original song ''Beautiful Monster'' is not available in my country. So there are re-mixes. Seems we must implement a search for interprets or titles.  Feedback in the Guestbook please :-). ',  0),
-(   88, '2011-04-28', 'Added a JavaScript function for let the MessageWindow(Chat window) from the MessageBar scroll to the last entry. Thanks to dagarwal82. http://www.zkoss.org/forum/listComment/16011 ',  0);
+(   88, '2011-04-28', 'Added a JavaScript function for let the MessageWindow(Chat window) from the MessageBar scroll automatically to the last entry for every new incoming message. Thanks to dagarwal82. http://www.zkoss.org/forum/listComment/16011 ',  0);
 
 
 

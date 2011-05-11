@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.access.annotation.Secured;
+import org.zkoss.zk.au.AuRequest;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
@@ -367,13 +368,14 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
 		// logger.debug(event.toString());
-		
-//		ListModelList lml = (ListModelList) listBoxCustomer.getModel();
-//		if (lml.getSize() > 0) {
-//			listBoxCustomer.setSelectedIndex(0);
-//			Clients.scrollIntoView(listBoxCustomer);
-//		}
-		
+
+		// ListModelList lml = (ListModelList) listBoxCustomer.getModel();
+		// if (lml.getSize() > 0) {
+		// listBoxCustomer.setSelectedIndex(0);
+		// // Clients.scrollIntoView(listBoxCustomer);
+		// listBoxCustomer.getTop();
+		// }
+
 		ZksampleMessageUtils.doShowNotImplementedMessage();
 	}
 

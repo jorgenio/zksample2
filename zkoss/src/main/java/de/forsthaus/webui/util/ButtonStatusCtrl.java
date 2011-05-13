@@ -51,7 +51,10 @@ import de.forsthaus.UserWorkspace;
  *          02/22/2011 sge Extended for disable(true/false) all buttons.<br>
  *          added a second constructor for working with/without CloseButton.<br>
  *          which is used in ModalWindows.<br>
- *          04/26/2011 sge Extended for let a button be null.<br>
+ *          04/26/2011 sge Extended for let a button be null. UseCase is to
+ *          working with a base record that exists only ONE time. i.e. for
+ *          holding special parameters. So you need only the 'edit', 'save' and
+ *          'cancel' button <br>
  * 
  * @author bbruhns
  * @author Stephan Gerth

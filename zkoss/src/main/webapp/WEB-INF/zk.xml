@@ -114,6 +114,7 @@
 
 	<!-- ====================================================== -->
 	<!--   Displays the wait indicator on every user action     -->
+	<!--                  and sets the position                 -->
 	<!-- ====================================================== -->
 	<library-property>
 		<name>org.zkoss.zul.progressbox.position</name>

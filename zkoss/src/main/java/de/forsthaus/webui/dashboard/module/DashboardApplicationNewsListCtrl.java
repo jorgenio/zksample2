@@ -41,7 +41,6 @@ import org.zkoss.zul.Listhead;
 import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
-import org.zkoss.zul.Paging;
 import org.zkoss.zul.Timer;
 import org.zkoss.zul.Toolbar;
 import org.zkoss.zul.Window;

@@ -192,6 +192,12 @@
 		parent="basisCtrl" scope="prototype">
 		<property name="userService" ref="userService" />
 	</bean>
+	<bean id="myUserSettingsCtrl"
+		class="de.forsthaus.webui.security.user.MyUserSettingsCtrl"
+		parent="basisCtrl" scope="prototype">
+		<property name="userService" ref="userService" />
+	</bean>
+
 
 	<!-- Login-Logs -->
 	<bean id="secLoginlogMainCtrl" class="de.forsthaus.webui.logging.loginlog.SecLoginlogMainCtrl"

@@ -2263,7 +2263,8 @@ INSERT INTO app_news (
 (   86, '2011-04-17', 'Added a new DashboardModule for the applications history of changes. Therefore added new model/dao/service stuff. ',  0),
 (   87, '2011-04-20', 'Added much more music (vids). Give ''Bullmeister'' a change. Ne-Yo''s original song ''Beautiful Monster'' is not available in my country. So there are re-mixes. Seems we must implement a search for interprets or titles.  Feedback in the Guestbook please :-). ',  0),
 (   88, '2011-04-28', 'Added a JavaScript function for let the MessageWindow(Chat window) from the MessageBar scroll automatically to the last entry for every new incoming message. Thanks to dagarwal82. http://www.zkoss.org/forum/listComment/16011 ',  0),
-(   89, '2011-05-06', 'Modifications in the CRUD Button Controller. Now it accepts ''Null'' for special Buttons. UseCase is handling an ONE record base entry for special app or firm parameters that needs only the ''edit, save, cancel'' buttons. ',  0);
+(   89, '2011-05-06', 'Modifications in the CRUD Button Controller. Now it accepts ''Null'' for special Buttons. UseCase is handling an ONE record base entry for special app or firm parameters that needs only the ''edit, save, cancel'' buttons. ',  0),
+(   90, '2011-05-18', 'Added the missing ''mySettings'' module for changing the allowed data of the logged in user.',  0);
 
 
 

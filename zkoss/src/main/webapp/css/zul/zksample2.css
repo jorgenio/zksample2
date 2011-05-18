@@ -8,6 +8,28 @@ taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 	/* 0 padding on top and bottom and 0 padding on right and left */
 }
 
+/* Make Plain Grid + smaller comps + Padding */
+	/* "overflow:hidden ;" not working in Chrome/Safari */
+.GridPlain tr.z-row td.z-row-inner,.GridPlain tr.z-row .z-cell,div.z-grid.GridPlain,.GridPlain tr.z-grid-odd td.z-row-inner,.GridPlain tr.z-grid-odd .z-cell,.GridPlain tr.z-grid-odd,.GridPlain tr.z-row-over>td.z-row-inner
+	{
+	border: none;
+	overflow: hidden;
+	zoom: 1;
+	background: white none repeat scroll 0 0;
+	border-top: none;
+	border-top-style: none;
+	border-top-width: 0px;
+	padding-top: 1px;
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-bottom: 1px;
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
+	border-bottom-style: none;
+	border-bottom-width: 0px;
+}
+
 /************************** G R I D ************************/
 /* Make Plain Grid + smaller comps + Padding */
 	/* "overflow:hidden ;" not working in Chrome/Safari */

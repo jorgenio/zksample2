@@ -44,6 +44,7 @@ import org.zkoss.zul.Tabpanel;
 import org.zkoss.zul.Tabpanels;
 import org.zkoss.zul.Tabs;
 import org.zkoss.zul.West;
+import org.zkoss.zul.Window;
 
 import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.service.OfficeService;
@@ -112,10 +113,10 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 		 * month - the month (1 to 12).<br>
 		 * year - the year (1900 <= year <= 9999).<br>
 		 */
-		final Date date = new Day(6, 5, 2011).getStart();
+		final Date date = new Day(18, 5, 2011).getStart();
 
 		final String zkVersion = doGetZkVersion();
-		final String appVersion = this.appName + " v5.0.620 / " + ZksampleDateFormat.getDateFormater().format(date);
+		final String appVersion = this.appName + " v5.0.621 / " + ZksampleDateFormat.getDateFormater().format(date);
 
 		final String userName = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
 		final String version = zkVersion + " | " + appVersion;
@@ -240,7 +241,17 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnIndexMySettings() throws IOException, InterruptedException {
-		ZksampleMessageUtils.doShowNotImplementedMessage();
+		Window win = null;
+		Window parentWin = (Window) Path.getComponent("/outerIndexWindow");
+
+		try {
+			win = (Window) Executions.createComponents("/WEB-INF/pages/sec_user/mySettings.zul", parentWin, null);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			ZksampleMessageUtils.showErrorMessage(e.getLocalizedMessage());
+			win.detach();
+		}
 	}
 
 	/**

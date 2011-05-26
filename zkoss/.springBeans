@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[2.2.6.200908051215-RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[2.3.2.201003220227-RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
 		<config>src/main/resources/applicationContext-db.xml</config>
-		<config>src/main/resources/applicationContext-guiservices.xml</config>
-		<config>src/main/resources/applicationContext-zkoss.xml</config>
-		<config>src/main/resources/applicationContext.xml</config>
 		<config>src/main/resources/springSecurityContext.xml</config>
 		<config>src/main/resources/customize-applicationContext.xml</config>
+		<config>src/main/resources/applicationContext-guiControllers.xml</config>
+		<config>src/main/resources/applicationContext-guiSServices.xml</config>
 	</configs>
 	<configSets>
 		<configSet>
@@ -21,12 +20,11 @@
 			<incomplete>false</incomplete>
 			<configs>
 				<config>/spring-hibernate-backend/src/main/resources/applicationContext-hibernate.xml</config>
-				<config>src/main/resources/applicationContext.xml</config>
 				<config>src/main/resources/applicationContext-db.xml</config>
-				<config>src/main/resources/applicationContext-guiservices.xml</config>
-				<config>src/main/resources/applicationContext-zkoss.xml</config>
 				<config>src/main/resources/springSecurityContext.xml</config>
 				<config>src/main/resources/customize-applicationContext.xml</config>
+				<config>src/main/resources/applicationContext-guiControllers.xml</config>
+				<config>src/main/resources/applicationContext-guiSServices.xml</config>
 			</configs>
 		</configSet>
 	</configSets>

@@ -294,6 +294,6 @@
 		<zkosslibs>${basedir}/src/main/webapp/WEB-INF/lib/</zkosslibs>
 		<spring.version>3.0.2.RELEASE</spring.version>
 		<springsecurity.version>3.0.2.RELEASE</springsecurity.version>
-		<zkoss.version>5.0.6</zkoss.version>
+		<zkoss.version>5.0.7.1</zkoss.version>
 	</properties>
 </project>

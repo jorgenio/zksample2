@@ -14,10 +14,10 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:applicationContext-zkoss.xml, 
+
 			classpath:applicationContext-db.xml,
-			classpath:applicationContext.xml,
 			classpath:applicationContext-hibernate.xml,
+			classpath:applicationContext-guiControllers.xml, 
  			classpath:applicationContext-guiservices.xml
  			classpath:customize-applicationContext.xml,
  			classpath:springSecurityContext.xml

@@ -14,11 +14,10 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-
 			classpath:applicationContext-db.xml,
 			classpath:applicationContext-hibernate.xml,
 			classpath:applicationContext-guiControllers.xml, 
- 			classpath:applicationContext-guiservices.xml
+ 			classpath:applicationContext-guiServices.xml
  			classpath:customize-applicationContext.xml,
  			classpath:springSecurityContext.xml
 			classpath:performance-db-logging.xml

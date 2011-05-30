@@ -11,7 +11,7 @@
 		<config>src/main/resources/springSecurityContext.xml</config>
 		<config>src/main/resources/customize-applicationContext.xml</config>
 		<config>src/main/resources/applicationContext-guiControllers.xml</config>
-		<config>src/main/resources/applicationContext-guiServices.xml</config>
+		<config>src/main/resources/applicationContext-guiSServices.xml</config>
 	</configs>
 	<configSets>
 		<configSet>
@@ -24,7 +24,7 @@
 				<config>src/main/resources/springSecurityContext.xml</config>
 				<config>src/main/resources/customize-applicationContext.xml</config>
 				<config>src/main/resources/applicationContext-guiControllers.xml</config>
-				<config>src/main/resources/applicationContext-guiServices.xml</config>
+				<config>src/main/resources/applicationContext-guiSServices.xml</config>
 			</configs>
 		</configSet>
 	</configSets>

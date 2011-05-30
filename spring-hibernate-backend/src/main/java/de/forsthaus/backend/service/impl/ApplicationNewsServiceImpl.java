@@ -20,13 +20,9 @@ package de.forsthaus.backend.service.impl;
 
 import java.util.List;
 
-import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.dao.ApplicationNewsDAO;
-import de.forsthaus.backend.dao.YoutubeLinkDAO;
 import de.forsthaus.backend.model.ApplicationNews;
-import de.forsthaus.backend.model.YoutubeLink;
 import de.forsthaus.backend.service.ApplicationNewsService;
-import de.forsthaus.backend.service.YoutubeLinkService;
 
 /**
  * EN: Service implementation for methods that depends on

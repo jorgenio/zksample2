@@ -19,19 +19,14 @@
 package de.forsthaus.backend.dao.impl;
 
 import java.util.List;
-import java.util.Random;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 
-import de.forsthaus.backend.bean.ResultObject;
 import de.forsthaus.backend.dao.ApplicationNewsDAO;
-import de.forsthaus.backend.dao.YoutubeLinkDAO;
 import de.forsthaus.backend.model.ApplicationNews;
-import de.forsthaus.backend.model.YoutubeLink;
 
 /**
  * EN: DAO methods implementation for the <b>Application News</b> model class.<br>

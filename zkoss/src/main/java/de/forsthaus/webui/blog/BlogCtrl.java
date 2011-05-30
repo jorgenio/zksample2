@@ -137,7 +137,7 @@ public class BlogCtrl extends GFCBaseCtrl implements Serializable {
 		// normally 0 ! Or we have a i.e. a toolBar on top of the listBox.
 		final int specialSize = 26;
 		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		final int maxListBoxHeight = height - specialSize - 78;
+		final int maxListBoxHeight = height - specialSize - 88;
 		this.borderLayout_blog.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		borderLayout_blog.invalidate();

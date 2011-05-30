@@ -282,7 +282,7 @@ public class BranchListCtrl extends GFCBaseListCtrl<Branche> implements Serializ
 		// normally 0 ! Or we have a i.e. a toolBar on top of the listBox.
 		final int specialSize = 5;
 		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		final int maxListBoxHeight = height - specialSize - 138;
+		final int maxListBoxHeight = height - specialSize - 148;
 		setCountRows((int) Math.round(maxListBoxHeight / 17.7));
 		borderLayout_branchList.setHeight(String.valueOf(maxListBoxHeight) + "px");
 

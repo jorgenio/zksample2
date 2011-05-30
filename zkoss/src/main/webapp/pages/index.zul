@@ -16,9 +16,19 @@
 	<script type="text/javascript">
 		<!-- Function for scrolling the text -->
 		<!-- thanks to dagarwal82; http://www.zkoss.org/forum/listComment/16011 -->
+
+
+
+
+		
 		<![CDATA[ function scrollTextbox(txtBox) { var txtEle =
 		document.getElementById(txtBox); txtEle.scrollTop =
 		txtEle.scrollHeight; } ]]>
+		
+		
+		
+		
+		
 	</script>
 
 	<window id="outerIndexWindow" apply="${indexCtrl}" border="none"
@@ -137,7 +147,31 @@
 						closable="false" sclass="myGroupBoxContentArea">
 						<caption
 							style="color: #000000; font-weight: bold;"
-							label="${c:l('workplace')}" />
+							label="${c:l('workplace')}">
+							<div sclass="z-toolbar" style="padding:0">
+								<hbox pack="stretch"
+									sclass="hboxRemoveWhiteStrips" width="100%">
+
+									<toolbar align="start"
+										style="float:left; border-style: none;">
+									</toolbar>
+
+									<toolbar align="center"
+										style="float:left; border-style: none;">
+									</toolbar>
+
+									<toolbar align="end"
+										style="float:right; border-style: none;">
+										<button id="btnCloseAllTabs"
+											image="/images/icons/stop.gif" height="20px"
+											tooltiptext="${c:l('btnCloseAllTabs.tooltiptext')}" />
+									</toolbar>
+								</hbox>
+							</div>
+						</caption>
+
+
+
 						<tabbox id="tabBoxIndexCenter" width="100%"
 							style="padding: 0px">
 							<tabs id="tabsIndexCenter"></tabs>

@@ -83,15 +83,14 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		height = height + panelHeight;
 
-		final int maxListBoxHeight = height - 220;
+		final int maxListBoxHeight = height - 230;
 		setCountRows((int) Math.round(maxListBoxHeight / 19.2));
 
 		this.paging_HibernateStatisticList.setPageSize(getCountRows());
 		this.paging_HibernateStatisticList.setDetailed(true);
 
 		// ++ create the searchObject and init sorting ++ //
-		final HibernateSearchObject<HibernateStatistics> searchObj = new HibernateSearchObject<HibernateStatistics>(
-				HibernateStatistics.class, getCountRows());
+		final HibernateSearchObject<HibernateStatistics> searchObj = new HibernateSearchObject<HibernateStatistics>(HibernateStatistics.class, getCountRows());
 		searchObj.addSort("id", true);
 
 		// Set the ListModel for the HibernateStatistics.
@@ -130,8 +129,7 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 
 				// Get the opened 'Detail' and append the Detail Content.
 				final Detail detail = row.getDetailChild();
-				detail.appendChild(Executions.createComponents("/WEB-INF/pages/debug/HibernateStatisticsDetail.zul",
-						detail, map));
+				detail.appendChild(Executions.createComponents("/WEB-INF/pages/debug/HibernateStatisticsDetail.zul", detail, map));
 			}
 		}
 	}

@@ -144,7 +144,7 @@ public class BranchDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doFitSize(Event event) {
 		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		final int maxListBoxHeight = height - 138;
+		final int maxListBoxHeight = height - 148;
 		this.borderLayout_branchDetail.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		this.windowBranchDetail.invalidate();

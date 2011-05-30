@@ -39,17 +39,15 @@
 							label="${c:l('checkbox_OfficeList_ShowAll.label')}" />
 						<space />
 
-						<label
-							value="${c:l('label_OfficeList_No.value')}"
+						<label value="${c:l('common.No')}"
 							style="padding-right: 3px" />
-						<textbox id="txtb_Office_No" width="100px" />
+						<textbox id="txtb_Office_No" width="60px" />
 						<button id="button_OfficeList_SearchNo"
 							height="24px" image="/images/icons/search.gif"
 							tooltiptext="${c:l('button_OfficeList_SearchNo.tooltiptext')}" />
 						<space width="20px" />
 
-						<label
-							value="${c:l('label_OfficeList_Name.value')}"
+						<label value="${c:l('common.Name1')}"
 							style="padding-right: 3px" />
 						<textbox id="txtb_Office_Name" width="100px" />
 						<button id="button_OfficeList_SearchName"
@@ -57,8 +55,7 @@
 							tooltiptext="${c:l('button_OfficeList_SearchName.tooltiptext')}" />
 						<space width="20px" />
 
-						<label
-							value="${c:l('label_OfficeList_City.value')}"
+						<label value="${c:l('common.City')}"
 							style="padding-right: 3px" />
 						<textbox id="txtb_Office_City" width="100px" />
 						<button id="button_OfficeList_SearchCity"

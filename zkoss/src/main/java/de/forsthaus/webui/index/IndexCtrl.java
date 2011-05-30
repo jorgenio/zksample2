@@ -22,10 +22,13 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jfree.data.time.Day;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.zkoss.zk.ui.AbstractComponent;
 import org.zkoss.zk.ui.ComponentNotFoundException;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
@@ -83,6 +86,8 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	protected Intbox currentDesktopHeight; // autowired
 	protected Intbox currentDesktopWidth; // autowired
 	protected Checkbox CBtreeMenu; // autowired
+
+	protected Tabs tabsIndexCenter; // autowired
 
 	private transient OfficeService officeService;
 
@@ -182,6 +187,40 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void onClick$btnLogout() throws IOException {
 		getUserWorkspace().doLogout(); // logout.
+	}
+
+	/**
+	 * When the 'close all tabs' button is clicked.<br>
+	 * 1. Get a list of all open 'Tab'.<br>
+	 * 2. Iterate through it and close the Tab if it's not the Dashboard.<br>
+	 * 3. The Dashboard itself is modified after creating to not closable.<br>
+	 * 
+	 * @throws IOException
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnCloseAllTabs() throws IOException, InterruptedException {
+
+		List<AbstractComponent> list = tabsIndexCenter.getChildren();
+
+		try {
+			while (!list.isEmpty()) {
+
+				// get the sum of all Tab
+				int i = list.size();
+
+				// close all tabs, beginning with the last
+				// because Dashboard is all times the first
+				if (list.get(i - 1) instanceof Tab) {
+					if (StringUtils.equals(((Tab) list.get(i - 1)).getId(), "tab_menu_Item_Home")) {
+						break;
+					} else {
+						((Tab) list.get(i - 1)).onClose();
+					}
+				}
+			}
+		} catch (Exception e) {
+			ZksampleMessageUtils.showErrorMessage(e.toString());
+		}
 	}
 
 	/**

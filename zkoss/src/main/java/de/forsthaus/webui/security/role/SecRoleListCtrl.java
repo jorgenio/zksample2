@@ -120,7 +120,7 @@ public class SecRoleListCtrl extends GFCBaseListCtrl<SecRole> implements Seriali
 
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		height = height + panelHeight;
-		final int maxListBoxHeight = height - 165;
+		final int maxListBoxHeight = height - 175;
 		setCountRows(Math.round(maxListBoxHeight / 22));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());

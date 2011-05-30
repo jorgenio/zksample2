@@ -147,7 +147,7 @@ public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, Select
 	 */
 	public void onCreate$secUserroleWindow(Event event) throws Exception {
 		/* ++++ calculate the heights +++++ */
-		final int topHeader = 30;
+		final int topHeader = 40;
 		final int btnTopArea = 45;
 		final int winTitle = 30;
 

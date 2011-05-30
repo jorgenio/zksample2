@@ -142,7 +142,7 @@ public class SecRolegroupCtrl extends GFCBaseCtrl implements Serializable, Selec
 	 */
 	public void onCreate$secRolegroupWindow(Event event) throws Exception {
 		/* ++++ calculate the heights +++++ */
-		final int topHeader = 30;
+		final int topHeader = 40;
 		final int btnTopArea = 42;
 		final int winTitle = 30;
 

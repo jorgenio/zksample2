@@ -24,14 +24,18 @@ import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Tab;
 import org.zkoss.zul.Window;
 
+import de.forsthaus.common.menu.tree.ZkossTreeMenuFactory;
+import de.forsthaus.util.ZkossComponentTreeUtil;
 import de.forsthaus.webui.dashboard.module.DashboardApplicationNewsListCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardBBCNewsCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardCalendarCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardTableRecordsCounterCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardYoutubeVideoCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
+import de.forsthaus.webui.util.ZksampleMessageUtils;
 
 /**
  * EN: Controller for the Dashboard .<br>
@@ -76,6 +80,16 @@ public class DashboardMainCtrl extends GFCBaseCtrl implements Serializable {
 		 * overridden and can ends in curious error messages.
 		 */
 		self.setAttribute("controller", this, false);
+
+		// Set the Dashboard unClosable
+		try {
+			Component cmp = (Component) windowDashboard.getParent().getParent().getParent();
+			Tab menuTab = (Tab) cmp.getFellowIfAny("tab_menu_Item_Home", false);
+			menuTab.setClosable(false);
+		} catch (Exception e) {
+			ZksampleMessageUtils.showErrorMessage(e.toString());
+			e.printStackTrace();
+		}
 
 	}
 

@@ -154,7 +154,7 @@ public class CustomerListCtrl extends GFCBaseListCtrl<Customer> implements Seria
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		height = height + panelHeight;
 
-		final int maxListBoxHeight = height - 135;
+		final int maxListBoxHeight = height - 145;
 		setCountRows(Math.round(maxListBoxHeight / 24));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());

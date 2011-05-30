@@ -129,7 +129,7 @@ public class SecRightListCtrl extends GFCBaseListCtrl<SecRight> implements Seria
 
 		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
 		height = height + panelHeight;
-		final int maxListBoxHeight = height - 138;
+		final int maxListBoxHeight = height - 148;
 		setCountRows(Math.round(maxListBoxHeight / 17));
 		// System.out.println("MaxListBoxHeight : " + maxListBoxHeight);
 		// System.out.println("==========> : " + getCountRows());

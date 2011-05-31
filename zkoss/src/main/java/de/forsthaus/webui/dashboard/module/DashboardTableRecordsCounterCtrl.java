@@ -61,7 +61,7 @@ import de.forsthaus.backend.service.CommonService;
  * call: Div div = DashboardTableRecordsCounterCtrl.show(200, true, 30000);
  * </pre>
  * 
- * @author sGerth
+ * @author Stephan Gerth
  */
 public class DashboardTableRecordsCounterCtrl extends Div implements Serializable {
 

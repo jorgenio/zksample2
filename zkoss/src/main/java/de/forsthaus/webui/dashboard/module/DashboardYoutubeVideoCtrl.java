@@ -63,7 +63,7 @@ import de.forsthaus.backend.service.YoutubeLinkService;
  * call: Div div = DashboardYoutubeVideoCtrl.show(200);
  * </pre>
  * 
- * @author sGerth
+ * @author Stephan Gerth
  */
 public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 

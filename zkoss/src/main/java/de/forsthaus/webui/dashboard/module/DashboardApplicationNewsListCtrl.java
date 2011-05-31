@@ -61,7 +61,7 @@ import de.forsthaus.webui.util.ZksampleDateFormat;
  * call: Div div = DashboardApplicationNewsListCtrl.show(200);
  * </pre>
  * 
- * @author sGerth
+ * @author Stephan Gerth
  */
 public class DashboardApplicationNewsListCtrl extends Div implements Serializable {
 

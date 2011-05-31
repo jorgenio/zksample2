@@ -49,6 +49,7 @@ import de.forsthaus.backend.model.ApplicationNews;
 import de.forsthaus.backend.service.ApplicationNewsService;
 import de.forsthaus.webui.util.ZksampleDateFormat;
 
+
 /**
  * EN: <b>History of changes </b> controller for the dashboard.<br>
  * Shows the the history of the changes of this application.

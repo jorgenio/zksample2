@@ -31,7 +31,7 @@
 			<caption label="Login to Zksample2"
 				image="/images/earth2.gif" style="font-weight: bold;">
 
-				<button id="button_ZKLoginDialog_Close"
+				<toolbarbutton id="button_ZKLoginDialog_Close"
 					image="/images/icons/stop.gif"
 					tooltiptext="${c:l('button_ZKLoginDialog_Close.tooltiptext')}" />
 			</caption>

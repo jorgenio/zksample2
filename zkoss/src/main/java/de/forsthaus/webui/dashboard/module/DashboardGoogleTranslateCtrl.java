@@ -131,6 +131,7 @@ public class DashboardGoogleTranslateCtrl extends Div implements Serializable {
 		ct.setParent(bl);
 
 		Div container = new Div();
+		container.setStyle("padding: 4px;");
 		ct.appendChild(container);
 
 		Script init = new Script();

@@ -31,13 +31,25 @@ import org.zkoss.zul.Script;
 import org.zkoss.zul.Window;
 
 /**
- * EN: <b>Google Translate</b> controller for the dashboard.<br>
+ * EN: <b>Google Translate starter</b> controller for the dashboard.<br>
  * <hr>
  * DE: <b>Google Uebersetzer</b> Controller fuer die SystemUebersicht. <br>
  * 
  * <pre>
  * call: Div div = DashboardGoogleTranslateCtrl.show(80);
  * </pre>
+ * 
+ * <!-- Google Translate Element --><br>
+ * <h:div id="google_translate_element" style="display:block"></h:div><br>
+ * <h:script> <br>
+ * function googleTranslateElementInit() { new <br>
+ * google.translate.TranslateElement({pageLanguage: "af"},<br>
+ * "google_translate_element"); }; <br>
+ * </h:script> <br>
+ * <h:script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+ * ><br>
+ * </h:script> <br>
+ * 
  * 
  * @author Stephan Gerth
  * @thanks to 'gekkio' from zk forum.

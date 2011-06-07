@@ -114,14 +114,14 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 		 * period.
 		 * 
 		 * Parameters:<br>
-		 * day - the day-of-the-month.<br>
+		 * day - the day-of-the-month (1 - 31).<br>
 		 * month - the month (1 to 12).<br>
 		 * year - the year (1900 <= year <= 9999).<br>
 		 */
-		final Date date = new Day(30, 5, 2011).getStart();
+		final Date date = new Day(7, 6, 2011).getStart();
 
 		final String zkVersion = doGetZkVersion();
-		final String appVersion = this.appName + " v5_0_711 / " + ZksampleDateFormat.getDateFormater().format(date);
+		final String appVersion = this.appName + " v5_0_712 / " + ZksampleDateFormat.getDateFormater().format(date);
 
 		final String userName = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
 		final String version = zkVersion + " | " + appVersion;

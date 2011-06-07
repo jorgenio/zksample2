@@ -30,6 +30,7 @@ import org.zkoss.zul.Window;
 import de.forsthaus.webui.dashboard.module.DashboardApplicationNewsListCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardBBCNewsCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardCalendarCtrl;
+import de.forsthaus.webui.dashboard.module.DashboardGoogleTranslateCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardTableRecordsCounterCtrl;
 import de.forsthaus.webui.dashboard.module.DashboardYoutubeVideoCtrl;
 import de.forsthaus.webui.util.GFCBaseCtrl;
@@ -113,6 +114,7 @@ public class DashboardMainCtrl extends GFCBaseCtrl implements Serializable {
 		 * EAST area
 		 */
 		divDashboardEast.appendChild(DashboardCalendarCtrl.show(146));
+		divDashboardEast.appendChild(DashboardGoogleTranslateCtrl.show(65));
 		divDashboardEast.appendChild(DashboardYoutubeVideoCtrl.show(198));
 		divDashboardEast.appendChild(DashboardBBCNewsCtrl.show(480, "no"));
 

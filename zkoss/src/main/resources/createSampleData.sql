@@ -2266,7 +2266,8 @@ INSERT INTO app_news (
 (   89, '2011-05-06', 'Modifications in the CRUD Button Controller. Now it accepts ''Null'' for special Buttons. UseCase is handling an ONE record base entry for special app or firm parameters that needs only the ''edit, save, cancel'' buttons. ',  0),
 (   90, '2011-05-18', 'Added the missing ''mySettings'' module for changing the allowed data of the logged in user. The validation of the re-typed password works with an internal created bean for holding the retyped string and is validated at serverside.',  0),
 (   91, '2011-05-26', 'Update the zk framework to 5.0.7.1 ',  0),
-(   92, '2011-05-30', 'Added a button/method for closing all open tabs except the home/dashboard tab.',  0);
+(   92, '2011-05-30', 'Added a button/method for closing all open tabs except the home/dashboard tab.',  0),
+(   93, '2011-06-07', 'Added a new Dashboard module for starting the google translator. Thanks to ''gekkio'' for helping with the correct script components.',  0);
 
 
 

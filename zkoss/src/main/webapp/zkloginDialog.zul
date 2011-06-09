@@ -48,7 +48,7 @@
 			<groupbox>
 				<caption label="Login" />
 
-				<div align="right" style="padding: 5px">
+				<div align="right" style="padding:5px">
 					<hbox pack="stretch" width="100%">
 						<div align="left">
 							<label id="lbl_ServerTime" />

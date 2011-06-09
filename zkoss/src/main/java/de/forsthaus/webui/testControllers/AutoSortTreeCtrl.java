@@ -5,16 +5,12 @@ import java.util.List;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zkplus.acegi.ZkTokenBasedRememberMeServices;
 import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Tree;
-import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Treecol;
 import org.zkoss.zul.Treeitem;
 import org.zkoss.zul.TreeitemRenderer;
-
-import de.forsthaus.util.ZkossComponentTreeUtil;
 
 public class AutoSortTreeCtrl extends GenericForwardComposer {
 

@@ -118,10 +118,10 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 		 * month - the month (1 to 12).<br>
 		 * year - the year (1900 <= year <= 9999).<br>
 		 */
-		final Date date = new Day(7, 6, 2011).getStart();
+		final Date date = new Day(9, 6, 2011).getStart();
 
 		final String zkVersion = doGetZkVersion();
-		final String appVersion = this.appName + " v5_0_712 / " + ZksampleDateFormat.getDateFormater().format(date);
+		final String appVersion = this.appName + " v5_0_713 / " + ZksampleDateFormat.getDateFormater().format(date);
 
 		final String userName = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
 		final String version = zkVersion + " | " + appVersion;
@@ -279,7 +279,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	public void onClick$btnIndexMySettings() throws IOException, InterruptedException {
+	public void onClick$btnUserSettings() throws IOException, InterruptedException {
 		Window win = null;
 		Window parentWin = (Window) Path.getComponent("/outerIndexWindow");
 
@@ -299,7 +299,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	public void onClick$btnAboutZksample2() throws IOException, InterruptedException {
+	public void onClick$btnAbout() throws IOException, InterruptedException {
 
 		/* get an instance of the borderlayout defined in the zul-file */
 		Borderlayout bl = (Borderlayout) Path.getComponent("/outerIndexWindow/borderlayoutMain");

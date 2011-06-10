@@ -47,7 +47,7 @@ import org.zkoss.zul.Textbox;
  */
 public class NoEmptyAndEqualStringsConstraint implements Constraint, java.io.Serializable {
 
-	private static final long serialVersionUID = 4052163775381888061L;
+	private static final long serialVersionUID = 1L;
 	private final Component compareComponent;
 
 	public NoEmptyAndEqualStringsConstraint(Component compareComponent) {

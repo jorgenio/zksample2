@@ -16,21 +16,9 @@
 	<script type="text/javascript">
 		<!-- Function for scrolling the text -->
 		<!-- thanks to dagarwal82; http://www.zkoss.org/forum/listComment/16011 -->
-
-
-
-
-
-		
 		<![CDATA[ function scrollTextbox(txtBox) { var txtEle =
 		document.getElementById(txtBox); txtEle.scrollTop =
 		txtEle.scrollHeight; } ]]>
-		
-		
-		
-		
-		
-			
 	</script>
 
 	<window id="outerIndexWindow" apply="${indexCtrl}" border="none"

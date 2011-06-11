@@ -7,12 +7,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
-
 	<window id="orderDialogWindow"
 		title="${c:l('orderDialogWindow.title')}" border="none" sizable="true"
 		apply="${orderDialogCtrl}" closable="true" width="700px"
 		height="500px">
-
 
 		<div sclass="z-toolbar" style="padding:0">
 			<hbox pack="stretch" sclass="hboxRemoveWhiteStrips"

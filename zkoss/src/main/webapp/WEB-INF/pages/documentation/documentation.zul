@@ -8,7 +8,6 @@
 	xmlns:ca="http://www.zkoss.org/2005/zk/client/attribute"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
-
 	<window id="windowDocumentation" apply="${documentationCtrl}"
 		border="none" width="100%">
 

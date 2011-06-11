@@ -8,15 +8,12 @@
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul
 	http://www.zkoss.org/2005/zul/zul.xsd">
 
-
 	<window id="orderListWindow" apply="${orderListCtrl}" border="none"
 		width="100%">
-
 
 		<panel id="panelOrderList"
 			title="${c:l('panelOrderList.title')}" border="none">
 			<panelchildren>
-
 
 				<div sclass="z-toolbar" style="padding:0">
 					<hbox pack="stretch" sclass="hboxRemoveWhiteStrips"

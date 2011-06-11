@@ -8,7 +8,6 @@
 	xmlns:a="http://www.zkoss.org/2005/zk/annotation"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
-
 	<window id="window_GuestBookDialog"
 		title="${c:l('window_GuestBookDialog.title')}" border="none"
 		apply="${guestBookDialogCtrl}" closable="true" width="650px"

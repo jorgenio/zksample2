@@ -8,7 +8,7 @@
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<!-- DataBinding Initiator.                              -->
+	<!-- Namespace dependent DataBinding Initiator.          -->
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./windowBranchList" ?>
 

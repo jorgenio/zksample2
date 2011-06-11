@@ -2141,9 +2141,16 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 72, 'Bullmeister',                              'Girls Beautiful',                 'http://www.youtube.com/embed/zKiQba5iTtk',   0),
 ( 73, 'Lady Gaga vs. Ne-Yo (Preliminary Mix) Mashup 2010',  'Beautiful Monster',     'http://www.youtube.com/embed/zSjclviKmK0',   0),
 ( 74, 'Ne-yo ft Lady Gaga (Craig Vanity FIXED Mash 2.0)',   'Beautiful Monster',     'http://www.youtube.com/embed/rzQj3NSGXT0',   0),
-( 75, 'Andy Timmons)',                            'Cry for you',                     'http://www.youtube.com/embed/WMJD_c-WxPg',   0),
-( 76, 'Old stars)',                               'While my guitar gently weeps',    'http://www.youtube.com/embed/ifp_SVrlurY',   0);
-
+( 75, 'Andy Timmons',                             'Cry for you',                     'http://www.youtube.com/embed/WMJD_c-WxPg',   0),
+( 76, 'Old stars',                                'While my guitar gently weeps',    'http://www.youtube.com/embed/ifp_SVrlurY',   0),
+( 77, 'Peter gabriel & Kate Bush',                'Don''t give up',                  'http://www.youtube.com/embed/uiCRZLr9oRw',   0),
+( 78, 'Genesis',                                  'Super''s ready Part I',           'http://www.youtube.com/embed/xtHClRu1DrE',   0),
+( 79, 'Genesis',                                  'Super''s ready Part II',          'http://www.youtube.com/embed/mTQBr9bIzJU',   0),
+( 80, 'Genesis',                                  'Super''s ready Part III',         'http://www.youtube.com/embed/upi6wpANBh4',   0),
+( 81, 'Billy Idol (Live)',                        'Rebel Yell',                      'http://www.youtube.com/embed/fv0_BoXt3kU',   0),
+( 82, 'Billy Idol',                               'Eyes Without A Face',             'http://www.youtube.com/embed/BKmldYSDJaM',   0),
+( 83, 'Billy Idol',                               'White wedding',                   'http://www.youtube.com/embed/tgFh4RHgn0A',   0),
+( 84, 'Billy Idol (Live 1981)',                   'Dancing with myself',             'http://www.youtube.com/embed/pOpnyv6JqWc',   0);
 
 
 

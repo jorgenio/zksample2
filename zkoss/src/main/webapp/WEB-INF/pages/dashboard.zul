@@ -81,7 +81,7 @@
 							<textbox rows="3" multiline="true"
 								width="98%" readonly="true"
 								style="font-family: verdana; border: none; background-color: white;"
-								value="You can hire us worldwide! Please contact us under zk(at)forsthaus(dot)de&#13;&#13;Sources are available on SourceForge.net as Eclipse Projects. Read this thread: http://zkoss.org/forum/listComment/10986  ">
+								value="If you need commercial help on your zk projects please contact us under zk(at)forsthaus(dot)de&#13;&#13;All Zksample2 sources are available on SourceForge.net as Eclipse Projects. Read this thread: http://zkoss.org/forum/listComment/10986  ">
 							</textbox>
 							<separator />
 

@@ -122,8 +122,7 @@ public class MyUserSettingsCtrl extends GFCBaseCtrl implements Serializable {
 		 * managing more than one zul-file in one page. Otherwise it would be
 		 * overridden and can ends in curious error messages.
 		 */
-		if (self != null)
-			self.setAttribute("controller", this, false);
+		self.setAttribute("controller", this, false);
 
 		// create the Button Controller. Disable not used buttons during working
 		btnNew.detach();

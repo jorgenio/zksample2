@@ -13,6 +13,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.EventQueues;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zkplus.databind.BindingListModelList;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
@@ -26,6 +27,7 @@ import org.zkoss.zul.Window;
 import com.trg.search.Filter;
 
 import de.forsthaus.UserWorkspace;
+import de.forsthaus.backend.model.Article;
 import de.forsthaus.backend.model.Office;
 import de.forsthaus.backend.service.OfficeService;
 import de.forsthaus.backend.util.HibernateSearchObject;
@@ -87,9 +89,6 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	protected Textbox txtb_Office_City; // aurowired
 	protected Button button_OfficeList_SearchCity; // aurowired
 
-	// checkRights
-	protected Button button_OfficeList_PrintList;
-
 	// Button controller for the CRUD buttons
 	private final String btnCtroller_ClassPrefix = "button_OfficeMain_";
 	private ButtonStatusCtrl btnCtrlOffice;
@@ -98,6 +97,13 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	protected Button btnDelete; // autowired
 	protected Button btnSave; // autowired
 	protected Button btnCancel; // autowired
+
+	protected Button btnFirst; // autowire
+	protected Button btnPrevious; // autowire
+	protected Button btnNext; // autowire
+	protected Button btnLast; // autowire
+
+	protected Button btnPrint; // autowire
 
 	protected Button btnHelp;
 
@@ -150,7 +156,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		windowOfficeMain.setContentStyle("padding:0px;");
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrlOffice = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel);
+		btnCtrlOffice = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, null, btnPrint, btnFirst, btnPrevious, btnNext, btnLast, btnNew, btnEdit, btnDelete, btnSave, btnCancel, null);
 
 		doCheckRights();
 
@@ -222,7 +228,7 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 * @param event
 	 * @throws InterruptedException
 	 */
-	public void onClick$button_OfficeList_PrintList(Event event) throws InterruptedException {
+	public void onClick$btnPrint(Event event) throws InterruptedException {
 		final Window win = (Window) Path.getComponent("/outerIndexWindow");
 		new OfficeSimpleDJReport(win);
 	}
@@ -437,6 +443,46 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
 		doResizeSelectedTab(event);
+	}
+
+	/**
+	 * when the "go first record" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnFirst(Event event) throws InterruptedException {
+		doScroll(event);
+	}
+
+	/**
+	 * when the "go previous record" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnPrevious(Event event) throws InterruptedException {
+		doScroll(event);
+	}
+
+	/**
+	 * when the "go next record" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnNext(Event event) throws InterruptedException {
+		doScroll(event);
+	}
+
+	/**
+	 * when the "go last record" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnLast(Event event) throws InterruptedException {
+		doScroll(event);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -698,6 +744,56 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 
 	}
 
+	/**
+	 * Scroll/Leaf through the models data according the navigation buttons and
+	 * selected the accroding row in the listbox.
+	 * 
+	 * @param event
+	 */
+	private void doScroll(Event event) {
+
+		// get the model and the current selected record
+		BindingListModelList blml = (BindingListModelList) getOfficeListCtrl().getListBoxOffice().getModel();
+		int index = blml.indexOf(getSelectedOffice());
+
+		// check, if all tabs with databinded components are created
+		// if we work with spring beanCreation than we must check a
+		// little bit deeper, because the Controller are preCreated ?
+		if (getOfficeDetailCtrl().getBinder() == null) {
+			Events.sendEvent(new Event(Events.ON_SELECT, tabOfficeDetail, null));
+		}
+
+		// Check which button is clicked and calculate the rowIndex
+		if (((ForwardEvent) event).getOrigin().getTarget() == btnNext) {
+			if (index < (blml.size() - 1)) {
+				index = index + 1;
+			}
+		} else if (((ForwardEvent) event).getOrigin().getTarget() == btnPrevious) {
+			if (index > 0) {
+				index = index - 1;
+			}
+		} else if (((ForwardEvent) event).getOrigin().getTarget() == btnFirst) {
+			if (index != 0) {
+				index = 0;
+			}
+		} else if (((ForwardEvent) event).getOrigin().getTarget() == btnLast) {
+			if (index != blml.size()) {
+				index = (blml.size() - 1);
+			}
+		}
+
+		getOfficeListCtrl().getListBoxOffice().setSelectedIndex(index);
+		setSelectedOffice((Office) blml.get(index));
+
+		// call onSelect() for showing the objects data in the statusBar
+		Events.sendEvent(new Event(Events.ON_SELECT, getOfficeListCtrl().getListBoxOffice(), getSelectedOffice()));
+		getOfficeDetailCtrl().getBinder().loadAll();
+
+		// EXTRA: we have a longtext field under the listbox, so we must refresh
+		// this binded component too
+		// getArticleListCtrl().getBinder().loadComponent(getArticleListCtrl().longBoxArt_LangBeschreibung);
+	}
+
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 	// ++++++++++++++++++++ Helpers ++++++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -799,17 +895,9 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 
 		final UserWorkspace workspace = getUserWorkspace();
 
-		// window_OfficeList.setVisible(workspace.isAllowed("window_OfficeList"));
-		button_OfficeList_PrintList.setVisible(workspace.isAllowed("button_OfficeList_PrintList"));
 		button_OfficeList_SearchNo.setVisible(workspace.isAllowed("button_OfficeList_SearchNo"));
 		button_OfficeList_SearchName.setVisible(workspace.isAllowed("button_OfficeList_SearchName"));
 		button_OfficeList_SearchCity.setVisible(workspace.isAllowed("button_OfficeList_SearchCity"));
-
-		btnHelp.setVisible(workspace.isAllowed("button_OfficeMain_btnHelp"));
-		btnNew.setVisible(workspace.isAllowed("button_OfficeMain_btnNew"));
-		btnEdit.setVisible(workspace.isAllowed("button_OfficeMain_btnEdit"));
-		btnDelete.setVisible(workspace.isAllowed("button_OfficeMain_btnDelete"));
-		btnSave.setVisible(workspace.isAllowed("button_OfficeMain_btnSave"));
 
 	}
 

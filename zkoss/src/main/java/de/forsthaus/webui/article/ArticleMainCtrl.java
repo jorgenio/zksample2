@@ -13,6 +13,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.EventQueues;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zkplus.databind.BindingListModelList;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
@@ -104,6 +105,13 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	protected Button btnSave; // autowired
 	protected Button btnCancel; // autowired
 
+	protected Button btnFirst; // autowire
+	protected Button btnPrevious; // autowire
+	protected Button btnNext; // autowire
+	protected Button btnLast; // autowire
+
+	protected Button btnPrint; // autowire
+
 	protected Button btnHelp;
 
 	// Tab-Controllers for getting access to their components/dataBinders
@@ -156,7 +164,8 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	public void onCreate$windowArticleMain(Event event) throws Exception {
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrlArticle = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel);
+		btnCtrlArticle = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, null, btnPrint, btnFirst, btnPrevious, btnNext, btnLast, btnNew, btnEdit, btnDelete, btnSave, btnCancel,
+				null);
 
 		doCheckRights();
 
@@ -217,17 +226,6 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		if (this.tabPanelArticleDetail != null) {
 			ZksampleCommonUtils.createTabPanelContent(this.tabPanelArticleDetail, this, "ModuleMainController", "/WEB-INF/pages/article/articleDetail.zul");
 		}
-	}
-
-	/**
-	 * when the "print articles list" button is clicked.
-	 * 
-	 * @param event
-	 * @throws InterruptedException
-	 */
-	public void onClick$button_ArticleList_PrintList(Event event) throws InterruptedException {
-		final Window win = (Window) Path.getComponent("/outerIndexWindow");
-		new ArticleSimpleDJReport(win);
 	}
 
 	/**
@@ -328,6 +326,57 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
 		doResizeSelectedTab(event);
+	}
+
+	/**
+	 * When the "print" button is clicked.<br>
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnPrint(Event event) throws InterruptedException {
+		final Window win = (Window) Path.getComponent("/outerIndexWindow");
+		new ArticleSimpleDJReport(win);
+	}
+
+	/**
+	 * when the "go first record" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnFirst(Event event) throws InterruptedException {
+		doScroll(event);
+	}
+
+	/**
+	 * when the "go previous record" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnPrevious(Event event) throws InterruptedException {
+		doScroll(event);
+	}
+
+	/**
+	 * when the "go next record" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnNext(Event event) throws InterruptedException {
+		doScroll(event);
+	}
+
+	/**
+	 * when the "go last record" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnLast(Event event) throws InterruptedException {
+		doScroll(event);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -443,20 +492,20 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 	private void doCancel(Event event) throws InterruptedException {
 		// logger.debug(event.toString());
 
-		// reset to the original object
-		doResetToInitValues();
-
 		// check first, if the tabs are created
 		if (getArticleDetailCtrl().getBinder() != null) {
+
+			// reset to the original object
+			doResetToInitValues();
 
 			// refresh all dataBinder related controllers/components
 			getArticleDetailCtrl().getBinder().loadAll();
 
 			// set editable Mode
 			getArticleDetailCtrl().doReadOnlyMode(true);
-
-			btnCtrlArticle.setInitEdit();
 		}
+
+		btnCtrlArticle.setInitEdit();
 	}
 
 	/**
@@ -660,7 +709,56 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 		tabArticleDetail.setSelected(true);
 		// set focus
 		getArticleDetailCtrl().txtb_artNr.focus();
+	}
 
+	/**
+	 * Scroll/Leaf through the models data according the navigation buttons and
+	 * selected the accroding row in the listbox.
+	 * 
+	 * @param event
+	 */
+	private void doScroll(Event event) {
+
+		// get the model and the current selected record
+		BindingListModelList blml = (BindingListModelList) getArticleListCtrl().getListBoxArticle().getModel();
+		int index = blml.indexOf(getSelectedArticle());
+
+		// check, if all tabs with databinded components are created
+		// if we work with spring beanCreation than we must check a
+		// little bit deeper, because the Controller are preCreated ?
+		if (getArticleDetailCtrl().getBinder() == null) {
+			Events.sendEvent(new Event(Events.ON_SELECT, tabArticleDetail, null));
+		}
+
+		// Check which button is clicked and calculate the rowIndex
+		if (((ForwardEvent) event).getOrigin().getTarget() == btnNext) {
+			if (index < (blml.size() - 1)) {
+				index = index + 1;
+			}
+		} else if (((ForwardEvent) event).getOrigin().getTarget() == btnPrevious) {
+			if (index > 0) {
+				index = index - 1;
+			}
+		} else if (((ForwardEvent) event).getOrigin().getTarget() == btnFirst) {
+			if (index != 0) {
+				index = 0;
+			}
+		} else if (((ForwardEvent) event).getOrigin().getTarget() == btnLast) {
+			if (index != blml.size()) {
+				index = (blml.size() - 1);
+			}
+		}
+
+		getArticleListCtrl().getListBoxArticle().setSelectedIndex(index);
+		setSelectedArticle((Article) blml.get(index));
+
+		// call onSelect() for showing the objects data in the statusBar
+		Events.sendEvent(new Event(Events.ON_SELECT, getArticleListCtrl().getListBoxArticle(), getSelectedArticle()));
+		getArticleDetailCtrl().getBinder().loadAll();
+
+		// EXTRA: we have a longtext field under the listbox, so we must refresh
+		// this binded component too
+		getArticleListCtrl().getBinder().loadComponent(getArticleListCtrl().longBoxArt_LangBeschreibung);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -764,7 +862,7 @@ public class ArticleMainCtrl extends GFCBaseCtrl implements Serializable {
 
 		final UserWorkspace workspace = getUserWorkspace();
 
-		button_ArticleList_PrintList.setVisible(workspace.isAllowed("button_BranchMain_PrintBranches"));
+		// btnPrint.setVisible(workspace.isAllowed("button_BranchMain_PrintBranches"));
 		button_ArticleList_SearchArticleID.setVisible(workspace.isAllowed("button_ArticleList_SearchArticleID"));
 		button_ArticleList_SearchName.setVisible(workspace.isAllowed("button_ArticleList_SearchName"));
 

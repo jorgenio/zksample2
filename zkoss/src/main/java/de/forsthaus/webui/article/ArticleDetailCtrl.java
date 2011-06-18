@@ -142,7 +142,7 @@ public class ArticleDetailCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void doFitSize(Event event) {
 		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		final int maxListBoxHeight = height - 148;
+		final int maxListBoxHeight = height - 152;
 		borderLayout_articleDetail.setHeight(String.valueOf(maxListBoxHeight) + "px");
 
 		windowArticleDetail.invalidate();

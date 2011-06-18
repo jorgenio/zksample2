@@ -11,7 +11,6 @@ DELETE  FROM auftrag;
 DELETE  FROM auftragposition;
 DELETE  FROM branche;
 
-
 DELETE  FROM sec_userrole;
 DELETE  FROM sec_user;
 DELETE  FROM sec_rolegroup;
@@ -48,12 +47,12 @@ DELETE  FROM  hibernate_statistics cascade;
 
 
 /******************** Filiale Daten ********************/
-INSERT INTO filiale (FIL_ID, FIL_NR, FIL_BEZEICHNUNG,FIL_NAME1,FIL_NAME2,FIL_ORT,VERSION) values
+INSERT INTO FILIALE (FIL_ID, FIL_NR, FIL_BEZEICHNUNG,FIL_NAME1,FIL_NAME2,FIL_ORT,VERSION) values
 (1,'0001','Filiale Muenchen','Hoermann Gmbh','Personaldienstleistungen','Muenchen',0),
-(2,'0002','Filiale Berlin',  'Hoermann Gmbh','Personaldienstleistungen','Berlin',0);
+(2,'0002','Filiale Berlin',  'Hoermann Gmbh','Personaldienstleistungen','Berlin',  0);
 
 /******************** Security: USERS ********************/  
-INSERT INTO sec_user (USR_ID, USR_LOGINNAME, USR_PASSWORD, USR_LASTNAME, USR_FIRSTNAME, USR_EMAIL, USR_LOCALE, USR_ENABLED, USR_ACCOUNTNONEXPIRED, USR_CREDENTIALSNONEXPIRED, USR_ACCOUNTNONLOCKED, USR_TOKEN,  VERSION) values 
+INSERT INTO SEC_USER (USR_ID, USR_LOGINNAME, USR_PASSWORD, USR_LASTNAME, USR_FIRSTNAME, USR_EMAIL, USR_LOCALE, USR_ENABLED, USR_ACCOUNTNONEXPIRED, USR_CREDENTIALSNONEXPIRED, USR_ACCOUNTNONLOCKED, USR_TOKEN,  VERSION) values 
 (10, 'guest', 'guest', 'guestFirstname', 'guestlastname', 'guest@web.de', NULL, true, true, true, true, null, 0),
 (11, 'admin', 'admin', 'Visor', 'Super', 'admin@web.de', NULL, true, true, true, true, null, 0),
 (12, 'user1', 'user1', 'Kingsley', 'Ben', 'B.Kingsley@web.de', NULL, true, true, true, true, null, 0),
@@ -61,7 +60,7 @@ INSERT INTO sec_user (USR_ID, USR_LOGINNAME, USR_PASSWORD, USR_LASTNAME, USR_FIR
 (14, 'user2', 'user2', 'Kingdom', 'Marta', 'M.Kingdom@web.de', NULL, true, true, true, true, null, 0);
 
 /******************** Security: ROLES ********************/  
-INSERT INTO sec_role (ROL_ID, ROL_SHORTDESCRIPTION, ROL_LONGDESCRIPTION, VERSION) values
+INSERT INTO SEC_ROLE (ROL_ID, ROL_SHORTDESCRIPTION, ROL_LONGDESCRIPTION, VERSION) values
 (10000,'ROLE_ADMIN','Administrator Role', 0),
 (10002,'ROLE_OFFICE_ALL_RIGHTS','Office User role with all rights granted.', 0),
 (10003,'ROLE_GUEST','Guest Role', 0),
@@ -71,7 +70,7 @@ INSERT INTO sec_role (ROL_ID, ROL_SHORTDESCRIPTION, ROL_LONGDESCRIPTION, VERSION
 
 /******************** Security: USER-ROLES ********************/  
 /* Guest account authorities */
-INSERT INTO sec_userrole (URR_ID, USR_ID, ROL_ID, VERSION) values
+INSERT INTO SEC_USERROLE (URR_ID, USR_ID, ROL_ID, VERSION) values
 (11000, 10, 10003, 0),
 /* User1 Usr-Id: 12 */
 (11001, 12, 10002, 0),
@@ -79,7 +78,7 @@ INSERT INTO sec_userrole (URR_ID, USR_ID, ROL_ID, VERSION) values
 (11010, 13, 10005, 0);
 
 /* Admin Usr-ID: 11 */
-INSERT INTO sec_userrole (URR_ID, USR_ID, ROL_ID, VERSION) values
+INSERT INTO SEC_USERROLE (URR_ID, USR_ID, ROL_ID, VERSION) values
 (11003, 11, 10000, 0),
 (11005, 11, 10002, 0),
 (11006, 11, 10003, 0),
@@ -89,56 +88,56 @@ INSERT INTO sec_userrole (URR_ID, USR_ID, ROL_ID, VERSION) values
 (11007, 14, 10004, 0);
 
 /******************** Security: SEC_GROUPS ********************/  
-INSERT INTO sec_group (GRP_ID, GRP_SHORTDESCRIPTION, GRP_LONGDESCRIPTION, VERSION) values
+INSERT INTO SEC_GROUP (GRP_ID, GRP_SHORTDESCRIPTION, GRP_LONGDESCRIPTION, VERSION) values
 (13001, 'Headoffice Supervisor Group', 'kjhf ff hgfd', 0),
 (13002, 'Admin Group - user accounts', 'create/modify user accounts', 0),
 (13003, 'Guest Group', 'Minimal Rights for the guests', 0),
 (13004, 'Admin Group - user rights', 'edit/modify user rights', 0),
 /* Customers */
-(13000, 'Customers_View', 'Allow to  view customers data', 0),
-(13008, 'Customers_New', 'Allow create new customers', 0),
-(13006, 'Customers_Edit', 'Allow editing of customers', 0),
-(13007, 'Customers_Delete', 'Allow deleting of customers', 0),
+(13000, 'Customers_View',      'Allow to  view customers data', 0),
+(13008, 'Customers_New',       'Allow create new customers', 0),
+(13006, 'Customers_Edit',      'Allow editing of customers', 0),
+(13007, 'Customers_Delete',    'Allow deleting of customers', 0),
 /* Orders */
-(13010, 'Orders_View', 'Allow to view orders data', 0),
-(13011, 'Orders_New', 'Allow create new orders', 0),
-(13012, 'Orders_Edit', 'Allow editing of orders', 0),
-(13013, 'Orders_Delete', 'Allow deleting of orders', 0),
+(13010, 'Orders_View',         'Allow to view orders data', 0),
+(13011, 'Orders_New',          'Allow create new orders', 0),
+(13012, 'Orders_Edit',         'Allow editing of orders', 0),
+(13013, 'Orders_Delete',       'Allow deleting of orders', 0),
 /* Branches */
-(13020, 'Branch_View', 'Allow to view branches data', 0),
-(13021, 'Branch_New', 'Allow create new branches', 0),
-(13022, 'Branch_Edit', 'Allow editing of branches', 0),
-(13023, 'Branch_Delete', 'Allow deleting of branches', 0),
+(13020, 'Branch_View',         'Allow to view branches data', 0),
+(13021, 'Branch_New',          'Allow create new branches', 0),
+(13022, 'Branch_Edit',         'Allow editing of branches', 0),
+(13023, 'Branch_Delete',       'Allow deleting of branches', 0),
 /* Articles */
-(13030, 'Articles_View', 'Allow to view articles data', 0),
-(13031, 'Articles_New', 'Allow create new articles', 0),
-(13032, 'Articles_Edit', 'Allow editing of articles', 0),
-(13033, 'Articles_Delete', 'Allow deleting of articles', 0),
+(13030, 'Articles_View',       'Allow to view articles data', 0),
+(13031, 'Articles_New',        'Allow create new articles', 0),
+(13032, 'Articles_Edit',       'Allow editing of articles', 0),
+(13033, 'Articles_Delete',     'Allow deleting of articles', 0),
 /* Offices */
-(13040, 'Offices_View', 'Allow to view offices data', 0),
-(13041, 'Offices_New', 'Allow create new offices', 0),
-(13042, 'Offices_Edit', 'Allow editing of offices', 0),
-(13043, 'Offices_Delete', 'Allow deleting of offices', 0),
+(13040, 'Offices_View',        'Allow to view offices data', 0),
+(13041, 'Offices_New',         'Allow create new offices', 0),
+(13042, 'Offices_Edit',        'Allow editing of offices', 0),
+(13043, 'Offices_Delete',      'Allow deleting of offices', 0),
 /* Users */
 (13060, 'User_View_UsersOnly', 'Allow to view own user data.', 0),
 (13061, 'User_Edit_UsersOnly', 'Allow to edit own user data.', 0),
-(13062, 'Users_View', 'Allow to view all users data.', 0),
-(13063, 'Users_New', 'Allow create new users', 0),
-(13064, 'Users_Edit', 'Allow editing of users', 0),
-(13065, 'Users_Delete', 'Allow deleting of users', 0),
-(13066, 'Users_Search', 'Allow searching of users', 0),
+(13062, 'Users_View',          'Allow to view all users data.', 0),
+(13063, 'Users_New',           'Allow create new users', 0),
+(13064, 'Users_Edit',          'Allow editing of users', 0),
+(13065, 'Users_Delete',        'Allow deleting of users', 0),
+(13066, 'Users_Search',        'Allow searching of users', 0),
 /* secGroup */
-(13070, 'Security_Groups', 'Allow to view the securityGroups Dialog', 0),
+(13070, 'Security_Groups',     'Allow to view the securityGroups Dialog', 0),
 /* secRole */
-(13071, 'Security_Roles', 'Allow to view the securityRoles Dialog', 0),
+(13071, 'Security_Roles',      'Allow to view the securityRoles Dialog', 0),
 /* secRight */
-(13072, 'Security_Rights', 'Allow to view the securityRights Dialog', 0);
+(13072, 'Security_Rights',     'Allow to view the securityRights Dialog', 0);
 
 
 /******************** Security: SEC_ROLE-GROUPS ********************/  
 /* ROLE_OFFICE_ALL_RIGHTS */
 /* Group: Customers_View */
-INSERT INTO sec_rolegroup (RLG_ID, GRP_ID, ROL_ID, VERSION) values 
+INSERT INTO SEC_ROLEGROUP (RLG_ID, GRP_ID, ROL_ID, VERSION) values 
 (12000, 13000, 10002, 0),
 /* Group: Customers_New */
 (12001, 13008, 10002, 0),
@@ -243,7 +242,7 @@ INSERT INTO sec_rolegroup (RLG_ID, GRP_ID, ROL_ID, VERSION) values
 
 
 /******************** Security: SEC_RIGHTS ********************/  
-INSERT INTO sec_right (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
+INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15000, 1, 'menuCat_OfficeData', 0),
 (15001, 2, 'menuItem_OfficeData_Customers', 0),
 (15002, 2, 'menuItem_OfficeData_Orders', 0),
@@ -322,6 +321,7 @@ INSERT INTO sec_right (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15308, 6, 'button_CustomerDialog_btnDelete', 0),
 (15309, 6, 'button_CustomerDialog_btnSave', 0),
 (15310, 6, 'button_CustomerDialog_btnClose', 0),
+(15311, 6, 'button_CustomerDialog_btnCancel', 0),
 /* --> OrderList BUTTON */
 (15400, 6, 'button_OrderList_btnHelp', 0),
 (15401, 6, 'button_OrderList_NewOrder', 0),
@@ -375,7 +375,7 @@ INSERT INTO sec_right (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 /* BRANCHES */
 /* branchListWindow Buttons*/
 /* --> button_BranchList_btnHelp */
-(15502, 0, 'button_BranchMain_PrintBranches', 0),
+(15502, 0, 'button_BranchMain_btnPrint', 0),
 (15503, 0, 'button_BranchMain_Search_BranchName', 0),
 /* branchDialogWindow BUTTONS */
 (15510, 6, 'button_BranchMain_btnHelp', 0),
@@ -384,24 +384,38 @@ INSERT INTO sec_right (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15513, 6, 'button_BranchMain_btnDelete', 0),
 (15514, 6, 'button_BranchMain_btnSave', 0),
 (15515, 6, 'button_BranchMain_btnClose', 0),
+/* new: sge:07/18/2011  navigation buttons */
+(15516, 6, 'button_BranchMain_btnCancel', 0),
+(15517, 6, 'button_BranchMain_btnFirst', 0),
+(15518, 6, 'button_BranchMain_btnPrevious', 0),
+(15519, 6, 'button_BranchMain_btnNext', 0),
+(15520, 6, 'button_BranchMain_btnLast', 0),
 /* ARTICLES */
 /* window_ArticlesList Buttons*/
 (15530, 6, 'button_ArticlesList_btnHelp', 0),
 (15531, 6, 'button_ArticleList_NewArticle', 0),
-(15532, 6, 'button_ArticleList_PrintList', 0),
 (15533, 6, 'button_ArticleList_SearchArticleID', 0),
 (15534, 6, 'button_ArticleList_SearchName', 0),
 /* window_ArticlesDialog Buttons*/
+/* (15532, 6, 'button_ArticleList_PrintList', 0), */
+(15532, 6, 'button_ArticlesDialog_btnPrint', 0),
 (15540, 6, 'button_ArticlesDialog_btnHelp', 0),
 (15541, 6, 'button_ArticlesDialog_btnNew', 0),
 (15542, 6, 'button_ArticlesDialog_btnEdit', 0),
 (15543, 6, 'button_ArticlesDialog_btnDelete', 0),
 (15544, 6, 'button_ArticlesDialog_btnSave', 0),
 (15545, 6, 'button_ArticlesDialog_btnClose', 0),
+/* new: sge:07/18/2011  navigation buttons */
+(15546, 6, 'button_ArticlesDialog_btnFirst', 0),
+(15547, 6, 'button_ArticlesDialog_btnPrevious', 0),
+(15548, 6, 'button_ArticlesDialog_btnNext', 0),
+(15549, 6, 'button_ArticlesDialog_btnLast', 0),
+(15550, 6, 'button_ArticlesDialog_btnCancel', 0),
+
 /* OFFICES */
 /* window_OfficeList Buttons*/
 /* --> button_BranchList_btnHelp */
-(15602, 6, 'button_OfficeList_PrintList', 0),
+(15602, 6, 'button_OfficeMain_btnPrint', 0),
 (15603, 6, 'button_OfficeList_SearchNo', 0),
 (15604, 6, 'button_OfficeList_SearchName', 0),
 (15605, 6, 'button_OfficeList_SearchCity', 0),
@@ -412,6 +426,12 @@ INSERT INTO sec_right (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15614, 6, 'button_OfficeMain_btnDelete', 0),
 (15615, 6, 'button_OfficeMain_btnSave', 0),
 (15616, 6, 'button_OfficeMain_btnClose', 0),
+/* new: sge:07/18/2011  navigation buttons */
+(15617, 6, 'button_OfficeMain_btnCancel', 0),
+(15618, 6, 'button_OfficeMain_btnFirst', 0),
+(15619, 6, 'button_OfficeMain_btnPrevious', 0),
+(15620, 6, 'button_OfficeMain_btnNext', 0),
+(15621, 6, 'button_OfficeMain_btnLast', 0),
 
 /* Method/Event = Type(3) */
 /* --> CustomerList BUTTON */
@@ -446,7 +466,7 @@ INSERT INTO sec_right (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 
 /******************** Security: SEC_GROUP-RIGHTS ********************/  
 /* Headoffice Supervisor Group*/
-INSERT INTO sec_groupright (GRI_ID, GRP_ID, RIG_ID, VERSION) values 
+INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values 
 (14003, 13001, 15003, 0),
 (14004, 13001, 15004, 0),
 (14005, 13001, 15005, 0),
@@ -512,11 +532,12 @@ INSERT INTO sec_groupright (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14235, 13008, 15307, 0),
 /* Right: button_CustomerDialog_btnSave */
 (14236, 13008, 15309, 0),
+/* Right: button_CustomerDialog_btnCancel */
+(14237, 13008, 15311, 0),
 
 /* Group: Customers_Edit */
 /* Right: customerListWindow */
 (14240, 13006, 15100, 0),
-
 /* Right: customerDialogWindow */
 (14241, 13006, 15101, 0),
 /* Right: button_CustomerDialog_btnClose */
@@ -525,6 +546,8 @@ INSERT INTO sec_groupright (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14243, 13006, 15307, 0),
 /* Right: button_CustomerDialog_btnSave */
 (14244, 13006, 15309, 0),
+/* Right: button_CustomerDialog_btnCancel */
+(14245, 13006, 15311, 0),
 
 /* Group: Customers_Delete */
 /* Right: customerListWindow */
@@ -707,7 +730,7 @@ INSERT INTO sec_groupright (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14501, 13020, 15005, 0),
 /* Right: page_BranchesList */
 (14502, 13020, 15106, 0),
-/* Right: button_BranchList_PrintBranches */
+/* Right: button_BranchMain_btnPrint */
 (14504, 13020, 15502, 0),
 /* Right: button_BranchList_Search_BranchName */
 (14505, 13020, 15503, 0),
@@ -715,20 +738,39 @@ INSERT INTO sec_groupright (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14507, 13020, 15107, 0),
 /* Right: button_BranchDialog_btnHelp */
 (14508, 13020, 15510, 0),
-/* Right: button_BranchDialog_btnClose */
+/* Right: button_BranchMain_btnClose */
 (14509, 13020, 15515, 0),
+/* Right: button_BranchMain_btnCancel */
+(14510, 13020, 15516, 0),
+/* new: sge:07/18/2011  navigation buttons */
+/* Right: button_BranchMain_btnFirst */
+(14496, 13020, 15517, 0),
+/* Right: button_BranchMain_btnPrevious */
+(14497, 13020, 15518, 0),
+/* Right: button_BranchMain_btnNext */
+(14498, 13020, 15519, 0),
+/* Right: button_BranchMain_btnLast */
+(14499, 13020, 15520, 0),
 
 /* Group: Branch_New */
 /* Right: button_BranchDialog_btnNew */
 (14511, 13021, 15511, 0),
 /* Right: button_BranchDialog_btnSave */
 (14512, 13021, 15514, 0),
+/* Right: button_BranchMain_btnClose */
+(14513, 13021, 15515, 0),
+/* Right: button_BranchMain_btnCancel */
+(14514, 13021, 15516, 0),
 
 /* Group: Branch_Edit */
 /* Right: button_BranchDialog_btnEdit */
 (14520, 13022, 15512, 0),
 /* Right: button_BranchDialog_btnSave */
 (14521, 13022, 15514, 0),
+/* Right: button_BranchMain_btnClose */
+(14522, 13022, 15515, 0),
+/* Right: button_BranchMain_btnCancel */
+(14523, 13022, 15516, 0),
 
 /* Group: Branch_Delete */
 /* Right: button_BranchDialog_btnDelete */
@@ -744,7 +786,7 @@ INSERT INTO sec_groupright (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14542, 13030, 15104, 0),
 /* Right: button_ArticlesList_btnHelp */
 (14543, 13030, 15530, 0),
-/* Right: button_ArticleList_PrintList */
+/* Right: button_ArticlesDialog_btnPrint */
 (14544, 13030, 15532, 0),
 /* Right: window_ArticlesDialog */
 (14545, 13030, 15105, 0),
@@ -756,8 +798,17 @@ INSERT INTO sec_groupright (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14548, 13030, 15533, 0),
 /* Right: button_ArticleList_SearchName */
 (14549, 13030, 15534, 0),
-
-
+/* new: sge:07/18/2011  navigation buttons */
+/* Right: button_ArticlesDialog_btnCancel */
+(14535, 13030, 15550, 0),
+/* Right: button_ArticlesDialog_btnFirst */
+(14536, 13030, 15546, 0),
+/* Right: button_ArticlesDialog_btnPrevious */
+(14537, 13030, 15547, 0),
+/* Right: button_ArticlesDialog_btnNext */
+(14538, 13030, 15548, 0),
+/* Right: button_ArticlesDialog_btnLast */
+(14539, 13030, 15549, 0),
 
 /* Group: Articles_New */
 /* Right: button_ArticleList_NewArticle */
@@ -766,12 +817,20 @@ INSERT INTO sec_groupright (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14551, 13031, 15541, 0),
 /* Right: button_ArticlesDialog_btnSave */
 (14552, 13031, 15544, 0),
+/* Right: button_ArticlesDialog_btnCancel */
+(14553, 13031, 15550, 0),
+/* Right: button_ArticlesDialog_btnClose */
+(14554, 13031, 15545, 0),
 
 /* Group: Articles_Edit */
 /* Right: button_ArticlesDialog_btnEdit */
 (14555, 13032, 15542, 0),
 /* Right: button_ArticlesDialog_btnSave */
 (14556, 13032, 15544, 0),
+/* Right: button_ArticlesDialog_btnCancel */
+(14557, 13032, 15550, 0),
+/* Right: button_ArticlesDialog_btnClose */
+(14558, 13032, 15545, 0),
 
 /* Group: Articles_Delete */
 /* Right: button_ArticlesDialog_btnDelete */
@@ -785,7 +844,7 @@ INSERT INTO sec_groupright (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14571, 13040, 15006, 0),
 /* Right: window_OfficesList */
 (14572, 13040, 15108, 0),
-/* Right: button_OfficeList_PrintList */
+/* Right: button_OfficeMain_btnPrint */
 (14574, 13040, 15602, 0),
 /* Right: button_OfficeList_SearchNo */
 (14575, 13040, 15603, 0),
@@ -799,18 +858,37 @@ INSERT INTO sec_groupright (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14579, 13040, 15611, 0),
 /* Right: button_OfficeDialog_btnClose */
 (14580, 13040, 15616, 0),
+/* Right: button_OfficeMain_btnCancel */
+(14581, 13040, 15617, 0),
+/* new: sge:07/18/2011  navigation buttons */
+/* Right: button_BranchMain_btnFirst */
+(14582, 13040, 15618, 0),
+/* Right: button_BranchMain_btnPrevious */
+(14583, 13040, 15619, 0),
+/* Right: button_BranchMain_btnNext */
+(14584, 13040, 15620, 0),
+/* Right: button_BranchMain_btnLast */
+(14585, 13040, 15621, 0),
 
 /* Group: Offices_New */
 /* Right: button_OfficeDialog_btnNew */
 (14586, 13041, 15612, 0),
 /* Right: button_OfficeDialog_btnSave */
 (14587, 13041, 15615, 0),
+/* Right: button_OfficeDialog_btnClose */
+(14588, 13041, 15616, 0),
+/* Right: button_OfficeMain_btnCancel */
+(14589, 13041, 15617, 0),
 
 /* Group: Offices_Edit */
 /* Right: button_OfficeDialog_btnEdit */
 (14590, 13042, 15613, 0),
 /* Right: button_OfficeDialog_btnSave */
 (14591, 13042, 15615, 0),
+/* Right: button_OfficeDialog_btnClose */
+(14592, 13042, 15616, 0),
+/* Right: button_OfficeMain_btnCancel */
+(14593, 13042, 15617, 0),
 
 /* Group: Offices_Delete */
 /* Right: button_OfficeDialog_btnDelete */
@@ -864,6 +942,7 @@ INSERT INTO sec_groupright (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 
 /* Right: button_SecRightDialog_btnClose */
 (14626, 13072, 15776, 0);
+
 
 /******************** Branche Daten ********************/
 INSERT INTO branche (BRA_ID,BRA_BEZEICHNUNG, VERSION) VALUES
@@ -1067,11 +1146,19 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 69, 'Frou Frou live (is 100% better on CD)',    'Breate in',                       'http://www.youtube.com/embed/F4vTjoPFGbA',   0),
 ( 70, 'Frou Frou live (is 100% better on CD)',    'It''s good to be in love',        'http://www.youtube.com/embed/xRwwlsevNLs',   0),
 ( 71, 'Frou Frou Cover  (please hear the original CD)', 'Hear me out',               'http://v.youku.com/v_show/id_XMjMxMzUzNzI4.html',   0),
-( 72, 'Bullmeister',                              'Girls Beautiful',                 'http://www.youtube.com/embed/7JNSeDKQPQQ',   0),
+( 72, 'Bullmeister',                              'Girls Beautiful',                 'http://www.youtube.com/embed/zKiQba5iTtk',   0),
 ( 73, 'Lady Gaga vs. Ne-Yo (Preliminary Mix) Mashup 2010',  'Beautiful Monster',     'http://www.youtube.com/embed/zSjclviKmK0',   0),
 ( 74, 'Ne-yo ft Lady Gaga (Craig Vanity FIXED Mash 2.0)',   'Beautiful Monster',     'http://www.youtube.com/embed/rzQj3NSGXT0',   0),
-( 75, 'Andy Timmons)',                            'Cry for you',                     'http://www.youtube.com/embed/WMJD_c-WxPg',   0),
-( 76, 'Old stars)',                               'While my guitar gently weeps',    'http://www.youtube.com/embed/ifp_SVrlurY',   0);
+( 75, 'Andy Timmons',                             'Cry for you',                     'http://www.youtube.com/embed/WMJD_c-WxPg',   0),
+( 76, 'Old stars',                                'While my guitar gently weeps',    'http://www.youtube.com/embed/ifp_SVrlurY',   0),
+( 77, 'Peter gabriel & Kate Bush',                'Don''t give up',                  'http://www.youtube.com/embed/uiCRZLr9oRw',   0),
+( 78, 'Genesis',                                  'Super''s ready Part I',           'http://www.youtube.com/embed/xtHClRu1DrE',   0),
+( 79, 'Genesis',                                  'Super''s ready Part II',          'http://www.youtube.com/embed/mTQBr9bIzJU',   0),
+( 80, 'Genesis',                                  'Super''s ready Part III',         'http://www.youtube.com/embed/upi6wpANBh4',   0),
+( 81, 'Billy Idol (Live)',                        'Rebel Yell',                      'http://www.youtube.com/embed/fv0_BoXt3kU',   0),
+( 82, 'Billy Idol',                               'Eyes Without A Face',             'http://www.youtube.com/embed/BKmldYSDJaM',   0),
+( 83, 'Billy Idol',                               'White wedding',                   'http://www.youtube.com/embed/tgFh4RHgn0A',   0),
+( 84, 'Billy Idol (Live 1981)',                   'Dancing with myself',             'http://www.youtube.com/embed/pOpnyv6JqWc',   0);
 
 
 

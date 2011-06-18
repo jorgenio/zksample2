@@ -13,6 +13,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.EventQueues;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zkplus.databind.BindingListModelList;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
@@ -26,6 +27,7 @@ import org.zkoss.zul.Window;
 import com.trg.search.Filter;
 
 import de.forsthaus.UserWorkspace;
+import de.forsthaus.backend.model.Article;
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.service.BrancheService;
 import de.forsthaus.backend.util.HibernateSearchObject;
@@ -87,7 +89,6 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	protected Textbox tb_Branch_Name; // aurowired
 
 	// checkRights
-	protected Button button_BranchMain_PrintBranches;
 	protected Button button_BranchMain_Search_BranchName;
 
 	// Button controller for the CRUD buttons
@@ -98,6 +99,13 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	protected Button btnDelete; // autowired
 	protected Button btnSave; // autowired
 	protected Button btnCancel; // autowired
+
+	protected Button btnFirst; // autowire
+	protected Button btnPrevious; // autowire
+	protected Button btnNext; // autowire
+	protected Button btnLast; // autowire
+
+	protected Button btnPrint; // autowire
 
 	protected Button btnHelp;
 
@@ -150,7 +158,8 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// create the Button Controller. Disable not used buttons during working
-		this.btnCtrlBranch = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel);
+		this.btnCtrlBranch = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, null, btnPrint, btnFirst, btnPrevious, btnNext, btnLast, btnNew, btnEdit, btnDelete, btnSave, btnCancel,
+				null);
 
 		doCheckRights();
 
@@ -220,17 +229,6 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void onCheck$checkbox_Branch_ShowAll(Event event) {
 		doBranchListShowAll(event);
-	}
-
-	/**
-	 * when the "print branches list" button is clicked.
-	 * 
-	 * @param event
-	 * @throws InterruptedException
-	 */
-	public void onClick$button_BranchMain_PrintBranches(Event event) throws InterruptedException {
-		final Window win = (Window) Path.getComponent("/outerIndexWindow");
-		new BranchSimpleDJReport(win);
 	}
 
 	/**
@@ -313,6 +311,57 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
 		doResizeSelectedTab(event);
+	}
+
+	/**
+	 * when the "print branches list" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnPrint(Event event) throws InterruptedException {
+		final Window win = (Window) Path.getComponent("/outerIndexWindow");
+		new BranchSimpleDJReport(win);
+	}
+
+	/**
+	 * when the "go first record" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnFirst(Event event) throws InterruptedException {
+		doScroll(event);
+	}
+
+	/**
+	 * when the "go previous record" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnPrevious(Event event) throws InterruptedException {
+		doScroll(event);
+	}
+
+	/**
+	 * when the "go next record" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnNext(Event event) throws InterruptedException {
+		doScroll(event);
+	}
+
+	/**
+	 * when the "go last record" button is clicked.
+	 * 
+	 * @param event
+	 * @throws InterruptedException
+	 */
+	public void onClick$btnLast(Event event) throws InterruptedException {
+		doScroll(event);
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -612,6 +661,56 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 
 	}
 
+	/**
+	 * Scroll/Leaf through the models data according the navigation buttons and
+	 * selected the accroding row in the listbox.
+	 * 
+	 * @param event
+	 */
+	private void doScroll(Event event) {
+
+		// get the model and the current selected record
+		BindingListModelList blml = (BindingListModelList) getBranchListCtrl().getListBoxBranch().getModel();
+		int index = blml.indexOf(getSelectedBranche());
+
+		// check, if all tabs with databinded components are created
+		// if we work with spring beanCreation than we must check a
+		// little bit deeper, because the Controller are preCreated ?
+		if (getBranchDetailCtrl().getBinder() == null) {
+			Events.sendEvent(new Event(Events.ON_SELECT, tabBranchDetail, null));
+		}
+
+		// Check which button is clicked and calculate the rowIndex
+		if (((ForwardEvent) event).getOrigin().getTarget() == btnNext) {
+			if (index < (blml.size() - 1)) {
+				index = index + 1;
+			}
+		} else if (((ForwardEvent) event).getOrigin().getTarget() == btnPrevious) {
+			if (index > 0) {
+				index = index - 1;
+			}
+		} else if (((ForwardEvent) event).getOrigin().getTarget() == btnFirst) {
+			if (index != 0) {
+				index = 0;
+			}
+		} else if (((ForwardEvent) event).getOrigin().getTarget() == btnLast) {
+			if (index != blml.size()) {
+				index = (blml.size() - 1);
+			}
+		}
+
+		getBranchListCtrl().getListBoxBranch().setSelectedIndex(index);
+		setSelectedBranche((Branche) blml.get(index));
+
+		// call onSelect() for showing the objects data in the statusBar
+		Events.sendEvent(new Event(Events.ON_SELECT, getBranchListCtrl().getListBoxBranch(), getSelectedBranche()));
+		getBranchDetailCtrl().getBinder().loadAll();
+
+		// EXTRA: we have a longtext field under the listbox, so we must refresh
+		// this binded component too
+		// getBranchListCtrl().getBinder().loadComponent(getBranchListCtrl().txtb_Art_LangBeschreibung);
+	}
+
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
 	// ++++++++++++++++++++ Helpers ++++++++++++++++++++ //
 	// +++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -720,13 +819,6 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 
 		final UserWorkspace workspace = getUserWorkspace();
 
-		this.btnHelp.setVisible(workspace.isAllowed("button_BranchMain_btnHelp"));
-		this.btnNew.setVisible(workspace.isAllowed("button_BranchMain_btnNew"));
-		this.btnEdit.setVisible(workspace.isAllowed("button_BranchMain_btnEdit"));
-		this.btnDelete.setVisible(workspace.isAllowed("button_BranchMain_btnDelete"));
-		this.btnSave.setVisible(workspace.isAllowed("button_BranchMain_btnSave"));
-
-		this.button_BranchMain_PrintBranches.setVisible(workspace.isAllowed("button_BranchMain_PrintBranches"));
 		this.button_BranchMain_Search_BranchName.setVisible(workspace.isAllowed("button_BranchMain_Search_BranchName"));
 
 	}

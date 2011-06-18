@@ -55,19 +55,22 @@ import de.forsthaus.UserWorkspace;
  *          working with a base record that exists only ONE time. i.e. for
  *          holding special parameters. So you need only the 'edit', 'save' and
  *          'cancel' button <br>
- * 
+ *          05/22/2011 sge Extended for 'First', 'Previous', 'Next', 'Last'
+ *          navigation buttons.<br>
+ *          06/10/2011 sge Extended for 'print' and 'search' button.<br>
+ *          06/17/2011 sge clearing the code from not used stuff.<br>
  * @author bbruhns
  * @author Stephan Gerth
  */
 public class ButtonStatusCtrl implements Serializable {
 
-	private static final long serialVersionUID = -4907914938602465474L;
+	private static final long serialVersionUID = 1L;
 
 	private static enum ButtonEnum {
-		New, Edit, Delete, Save, Cancel, Close;
+		Search, Print, First, Previous, Next, Last, New, Edit, Delete, Save, Cancel, Close;
 	}
 
-	private final Map<ButtonEnum, Button> buttons = new HashMap<ButtonEnum, Button>(5);
+	private final Map<ButtonEnum, Button> buttons = new HashMap<ButtonEnum, Button>(12);
 
 	final private UserWorkspace workspace;
 
@@ -81,9 +84,6 @@ public class ButtonStatusCtrl implements Serializable {
 	 */
 	private final boolean buttonsModeDisable = false;
 
-	/** with close button */
-	private boolean closeButton = true;
-
 	/** is the BtnController active ? */
 	private boolean active = true;
 
@@ -91,8 +91,20 @@ public class ButtonStatusCtrl implements Serializable {
 	private boolean securityActive = true;
 
 	/**
-	 * Constructor without CLOSE button.
+	 * Constructor with all possible buttons.
 	 * 
+	 * @param btnSearch
+	 *            (open search dialog Button)
+	 * @param btnPrint
+	 *            (open print Button)
+	 * @param btnFirst
+	 *            (Go first record Button)
+	 * @param btnPrevious
+	 *            (Go previous record Button)
+	 * @param btnNext
+	 *            (Go next record Button)
+	 * @param btnLast
+	 *            (Go last record Button)
 	 * @param btnNew
 	 *            (New Button)
 	 * @param btnEdit
@@ -103,18 +115,30 @@ public class ButtonStatusCtrl implements Serializable {
 	 *            (Save Button)
 	 * @param btnCancel
 	 *            (Cancel Button)
+	 * @param btnClose
+	 *            (Close Button)
 	 */
-	public ButtonStatusCtrl(UserWorkspace userWorkspace, String rightPrefix, Button btnNew, Button btnEdit, Button btnDelete, Button btnSave, Button btnCancel) {
+	public ButtonStatusCtrl(UserWorkspace userWorkspace, String rightPrefix, Button btnSearch, Button btnPrint, Button btnFirst, Button btnPrevious, Button btnNext, Button btnLast, Button btnNew,
+			Button btnEdit, Button btnDelete, Button btnSave, Button btnCancel, Button btnClose) {
 		super();
 		this.workspace = userWorkspace;
 		this._rightPrefix = rightPrefix + "btn";
-		this.closeButton = false;
 
+		// tools
+		buttons.put(ButtonEnum.Search, btnSearch);
+		buttons.put(ButtonEnum.Print, btnPrint);
+		// navigation
+		buttons.put(ButtonEnum.First, btnFirst);
+		buttons.put(ButtonEnum.Previous, btnPrevious);
+		buttons.put(ButtonEnum.Next, btnNext);
+		buttons.put(ButtonEnum.Last, btnLast);
+		// crud
 		buttons.put(ButtonEnum.New, btnNew);
 		buttons.put(ButtonEnum.Edit, btnEdit);
 		buttons.put(ButtonEnum.Delete, btnDelete);
 		buttons.put(ButtonEnum.Save, btnSave);
 		buttons.put(ButtonEnum.Cancel, btnCancel);
+		buttons.put(ButtonEnum.Close, btnClose);
 
 		setBtnImages();
 	}
@@ -139,7 +163,6 @@ public class ButtonStatusCtrl implements Serializable {
 		super();
 		this.workspace = userWorkspace;
 		this._rightPrefix = rightPrefix + "btn";
-		this.closeButton = true;
 
 		buttons.put(ButtonEnum.New, btnNew);
 		buttons.put(ButtonEnum.Edit, btnEdit);
@@ -157,66 +180,143 @@ public class ButtonStatusCtrl implements Serializable {
 	private void setBtnImages() {
 		String imagePath = "/images/icons/";
 
-		setImage(ButtonEnum.New, imagePath + "btn_new2_16x16.gif");
-		setImage(ButtonEnum.Edit, imagePath + "btn_edit2_16x16.gif");
-		setImage(ButtonEnum.Delete, imagePath + "btn_delete2_16x16.gif");
-		setImage(ButtonEnum.Save, imagePath + "btn_save2_16x16.gif");
-		setImage(ButtonEnum.Cancel, imagePath + "btn_cancel2_16x16.gif");
-
-		if (closeButton) {
+		if (ButtonEnum.Search != null)
+			setImage(ButtonEnum.Search, imagePath + "btn_search2_16x16.gif");
+		if (ButtonEnum.Print != null)
+			setImage(ButtonEnum.Print, imagePath + "btn_print2_16x16.gif");
+		if (ButtonEnum.First != null)
+			setImage(ButtonEnum.First, imagePath + "btn_first_16x16.png");
+		if (ButtonEnum.Previous != null)
+			setImage(ButtonEnum.Previous, imagePath + "btn_previous_16x16.png");
+		if (ButtonEnum.Next != null)
+			setImage(ButtonEnum.Next, imagePath + "btn_next_16x16.png");
+		if (ButtonEnum.Last != null)
+			setImage(ButtonEnum.Last, imagePath + "btn_last_16x16.png");
+		if (ButtonEnum.New != null)
+			setImage(ButtonEnum.New, imagePath + "btn_new2_16x16.gif");
+		if (ButtonEnum.Edit != null)
+			setImage(ButtonEnum.Edit, imagePath + "btn_edit2_16x16.gif");
+		if (ButtonEnum.Delete != null)
+			setImage(ButtonEnum.Delete, imagePath + "btn_delete2_16x16.gif");
+		if (ButtonEnum.Save != null)
+			setImage(ButtonEnum.Save, imagePath + "btn_save2_16x16.gif");
+		if (ButtonEnum.Cancel != null)
+			setImage(ButtonEnum.Cancel, imagePath + "btn_cancel2_16x16.gif");
+		if (ButtonEnum.Close != null)
 			setImage(ButtonEnum.Close, imagePath + "btn_exitdoor2_16x16.gif");
-		}
-
 	}
 
 	/**
-	 * Set all Buttons for the Mode NEW is pressed. <br>
+	 * Set all Buttons for the Mode if 'NEW' is pressed. <br>
 	 */
 	public void setBtnStatus_New() {
 		if (buttonsModeDisable) {
-			setDisabled(ButtonEnum.New, true);
-			setDisabled(ButtonEnum.Edit, true);
-			setDisabled(ButtonEnum.Delete, true);
-			setDisabled(ButtonEnum.Save, false);
-			setDisabled(ButtonEnum.Cancel, false);
-			if (closeButton) {
+			if (ButtonEnum.Search != null)
+				setDisabled(ButtonEnum.Search, true);
+			if (ButtonEnum.Print != null)
+				setDisabled(ButtonEnum.Print, true);
+			if (ButtonEnum.First != null)
+				setDisabled(ButtonEnum.First, true);
+			if (ButtonEnum.Previous != null)
+				setDisabled(ButtonEnum.Previous, true);
+			if (ButtonEnum.Next != null)
+				setDisabled(ButtonEnum.Next, true);
+			if (ButtonEnum.Last != null)
+				setDisabled(ButtonEnum.Last, true);
+			if (ButtonEnum.New != null)
+				setDisabled(ButtonEnum.New, true);
+			if (ButtonEnum.Edit != null)
+				setDisabled(ButtonEnum.Edit, true);
+			if (ButtonEnum.Delete != null)
+				setDisabled(ButtonEnum.Delete, true);
+			if (ButtonEnum.Save != null)
+				setDisabled(ButtonEnum.Save, false);
+			if (ButtonEnum.Cancel != null)
+				setDisabled(ButtonEnum.Cancel, false);
+			if (ButtonEnum.Close != null)
 				setDisabled(ButtonEnum.Close, false);
-			}
-
 		} else {
-			setVisible(ButtonEnum.New, false);
-			setVisible(ButtonEnum.Edit, false);
-			setVisible(ButtonEnum.Delete, false);
-			setVisible(ButtonEnum.Save, true);
-			setVisible(ButtonEnum.Cancel, true);
-			if (closeButton) {
+			if (ButtonEnum.Search != null)
+				setVisible(ButtonEnum.Search, false);
+			if (ButtonEnum.Print != null)
+				setVisible(ButtonEnum.Print, false);
+			if (ButtonEnum.First != null)
+				setVisible(ButtonEnum.First, false);
+			if (ButtonEnum.Previous != null)
+				setVisible(ButtonEnum.Previous, false);
+			if (ButtonEnum.Next != null)
+				setVisible(ButtonEnum.Next, false);
+			if (ButtonEnum.Last != null)
+				setVisible(ButtonEnum.Last, false);
+			if (ButtonEnum.New != null)
+				setVisible(ButtonEnum.New, false);
+			if (ButtonEnum.Edit != null)
+				setVisible(ButtonEnum.Edit, false);
+			if (ButtonEnum.Delete != null)
+				setVisible(ButtonEnum.Delete, false);
+			if (ButtonEnum.Save != null)
+				setVisible(ButtonEnum.Save, true);
+			if (ButtonEnum.Cancel != null)
+				setVisible(ButtonEnum.Cancel, true);
+			if (ButtonEnum.Close != null)
 				setVisible(ButtonEnum.Close, true);
-			}
 		}
 	}
 
 	/**
-	 * Set all Buttons for the Mode EDIT is pressed. <br>
+	 * Set all Buttons for the Mode if 'EDIT' is pressed. <br>
 	 */
 	public void setBtnStatus_Edit() {
 		if (buttonsModeDisable) {
-			setDisabled(ButtonEnum.New, true);
-			setDisabled(ButtonEnum.Edit, true);
-			setDisabled(ButtonEnum.Delete, true);
-			setDisabled(ButtonEnum.Save, false);
-			setDisabled(ButtonEnum.Cancel, false);
-			if (closeButton) {
+			if (ButtonEnum.Search != null)
+				setDisabled(ButtonEnum.Search, true);
+			if (ButtonEnum.Print != null)
+				setDisabled(ButtonEnum.Print, true);
+			if (ButtonEnum.First != null)
+				setDisabled(ButtonEnum.First, true);
+			if (ButtonEnum.Previous != null)
+				setDisabled(ButtonEnum.Previous, true);
+			if (ButtonEnum.Next != null)
+				setDisabled(ButtonEnum.Next, true);
+			if (ButtonEnum.Last != null)
+				setDisabled(ButtonEnum.Last, true);
+			if (ButtonEnum.New != null)
+				setDisabled(ButtonEnum.New, true);
+			if (ButtonEnum.Edit != null)
+				setDisabled(ButtonEnum.Edit, true);
+			if (ButtonEnum.Delete != null)
+				setDisabled(ButtonEnum.Delete, true);
+			if (ButtonEnum.Save != null)
+				setDisabled(ButtonEnum.Save, false);
+			if (ButtonEnum.Cancel != null)
+				setDisabled(ButtonEnum.Cancel, false);
+			if (ButtonEnum.Close != null)
 				setDisabled(ButtonEnum.Close, false);
-			}
 		} else {
-			setVisible(ButtonEnum.New, false);
-			setVisible(ButtonEnum.Edit, false);
-			setVisible(ButtonEnum.Delete, false);
-			setVisible(ButtonEnum.Save, true);
-			setVisible(ButtonEnum.Cancel, true);
-			if (closeButton) {
+			if (ButtonEnum.Search != null)
+				setVisible(ButtonEnum.Search, false);
+			if (ButtonEnum.Print != null)
+				setVisible(ButtonEnum.Print, false);
+			if (ButtonEnum.First != null)
+				setVisible(ButtonEnum.First, false);
+			if (ButtonEnum.Previous != null)
+				setVisible(ButtonEnum.Previous, false);
+			if (ButtonEnum.Next != null)
+				setVisible(ButtonEnum.Next, false);
+			if (ButtonEnum.Last != null)
+				setVisible(ButtonEnum.Last, false);
+			if (ButtonEnum.New != null)
+				setVisible(ButtonEnum.New, false);
+			if (ButtonEnum.Edit != null)
+				setVisible(ButtonEnum.Edit, false);
+			if (ButtonEnum.Delete != null)
+				setVisible(ButtonEnum.Delete, false);
+			if (ButtonEnum.Save != null)
+				setVisible(ButtonEnum.Save, true);
+			if (ButtonEnum.Cancel != null)
+				setVisible(ButtonEnum.Cancel, true);
+			if (ButtonEnum.Close != null)
 				setVisible(ButtonEnum.Close, true);
-			}
 		}
 	}
 
@@ -241,23 +341,55 @@ public class ButtonStatusCtrl implements Serializable {
 	 */
 	public void setInitEdit() {
 		if (buttonsModeDisable) {
-			setDisabled(ButtonEnum.New, false);
-			setDisabled(ButtonEnum.Edit, false);
-			setDisabled(ButtonEnum.Delete, false);
-			setDisabled(ButtonEnum.Save, true);
-			setDisabled(ButtonEnum.Cancel, false);
-			if (closeButton) {
+			if (ButtonEnum.Search != null)
+				setDisabled(ButtonEnum.Search, false);
+			if (ButtonEnum.Print != null)
+				setDisabled(ButtonEnum.Print, false);
+			if (ButtonEnum.First != null)
+				setDisabled(ButtonEnum.First, false);
+			if (ButtonEnum.Previous != null)
+				setDisabled(ButtonEnum.Previous, false);
+			if (ButtonEnum.Next != null)
+				setDisabled(ButtonEnum.Next, false);
+			if (ButtonEnum.Last != null)
+				setDisabled(ButtonEnum.Last, false);
+			if (ButtonEnum.New != null)
+				setDisabled(ButtonEnum.New, false);
+			if (ButtonEnum.Edit != null)
+				setDisabled(ButtonEnum.Edit, false);
+			if (ButtonEnum.Delete != null)
+				setDisabled(ButtonEnum.Delete, false);
+			if (ButtonEnum.Save != null)
+				setDisabled(ButtonEnum.Save, true);
+			if (ButtonEnum.Cancel != null)
+				setDisabled(ButtonEnum.Cancel, true);
+			if (ButtonEnum.Close != null)
 				setDisabled(ButtonEnum.Close, false);
-			}
 		} else {
-			setVisible(ButtonEnum.New, true);
-			setVisible(ButtonEnum.Edit, true);
-			setVisible(ButtonEnum.Delete, true);
-			setVisible(ButtonEnum.Save, false);
-			setVisible(ButtonEnum.Cancel, true);
-			if (closeButton) {
+			if (ButtonEnum.Search != null)
+				setVisible(ButtonEnum.Search, true);
+			if (ButtonEnum.Print != null)
+				setVisible(ButtonEnum.Print, true);
+			if (ButtonEnum.First != null)
+				setVisible(ButtonEnum.First, true);
+			if (ButtonEnum.Previous != null)
+				setVisible(ButtonEnum.Previous, true);
+			if (ButtonEnum.Next != null)
+				setVisible(ButtonEnum.Next, true);
+			if (ButtonEnum.Last != null)
+				setVisible(ButtonEnum.Last, true);
+			if (ButtonEnum.New != null)
+				setVisible(ButtonEnum.New, true);
+			if (ButtonEnum.Edit != null)
+				setVisible(ButtonEnum.Edit, true);
+			if (ButtonEnum.Delete != null)
+				setVisible(ButtonEnum.Delete, true);
+			if (ButtonEnum.Save != null)
+				setVisible(ButtonEnum.Save, false);
+			if (ButtonEnum.Cancel != null)
+				setVisible(ButtonEnum.Cancel, false);
+			if (ButtonEnum.Close != null)
 				setVisible(ButtonEnum.Close, true);
-			}
 		}
 	}
 
@@ -268,23 +400,55 @@ public class ButtonStatusCtrl implements Serializable {
 	 */
 	public void setInitNew() {
 		if (buttonsModeDisable) {
-			setDisabled(ButtonEnum.New, true);
-			setDisabled(ButtonEnum.Edit, true);
-			setDisabled(ButtonEnum.Delete, true);
-			setDisabled(ButtonEnum.Save, false);
-			setDisabled(ButtonEnum.Cancel, false);
-			if (closeButton) {
+			if (ButtonEnum.Search != null)
+				setDisabled(ButtonEnum.Search, true);
+			if (ButtonEnum.Print != null)
+				setDisabled(ButtonEnum.Print, true);
+			if (ButtonEnum.First != null)
+				setDisabled(ButtonEnum.First, true);
+			if (ButtonEnum.Previous != null)
+				setDisabled(ButtonEnum.Previous, true);
+			if (ButtonEnum.Next != null)
+				setDisabled(ButtonEnum.Next, true);
+			if (ButtonEnum.Last != null)
+				setDisabled(ButtonEnum.Last, true);
+			if (ButtonEnum.New != null)
+				setDisabled(ButtonEnum.New, true);
+			if (ButtonEnum.Edit != null)
+				setDisabled(ButtonEnum.Edit, true);
+			if (ButtonEnum.Delete != null)
+				setDisabled(ButtonEnum.Delete, true);
+			if (ButtonEnum.Save != null)
+				setDisabled(ButtonEnum.Save, false);
+			if (ButtonEnum.Cancel != null)
+				setDisabled(ButtonEnum.Cancel, false);
+			if (ButtonEnum.Close != null)
 				setDisabled(ButtonEnum.Close, false);
-			}
 		} else {
-			setVisible(ButtonEnum.New, false);
-			setVisible(ButtonEnum.Edit, false);
-			setVisible(ButtonEnum.Delete, false);
-			setVisible(ButtonEnum.Save, true);
-			setVisible(ButtonEnum.Cancel, true);
-			if (closeButton) {
+			if (ButtonEnum.Search != null)
+				setVisible(ButtonEnum.Search, false);
+			if (ButtonEnum.Print != null)
+				setVisible(ButtonEnum.Print, false);
+			if (ButtonEnum.First != null)
+				setVisible(ButtonEnum.First, false);
+			if (ButtonEnum.Previous != null)
+				setVisible(ButtonEnum.Previous, false);
+			if (ButtonEnum.Next != null)
+				setVisible(ButtonEnum.Next, false);
+			if (ButtonEnum.Last != null)
+				setVisible(ButtonEnum.Last, false);
+			if (ButtonEnum.New != null)
+				setVisible(ButtonEnum.New, false);
+			if (ButtonEnum.Edit != null)
+				setVisible(ButtonEnum.Edit, false);
+			if (ButtonEnum.Delete != null)
+				setVisible(ButtonEnum.Delete, false);
+			if (ButtonEnum.Save != null)
+				setVisible(ButtonEnum.Save, true);
+			if (ButtonEnum.Cancel != null)
+				setVisible(ButtonEnum.Cancel, true);
+			if (ButtonEnum.Close != null)
 				setVisible(ButtonEnum.Close, true);
-			}
 		}
 	}
 
@@ -382,7 +546,6 @@ public class ButtonStatusCtrl implements Serializable {
 		}
 
 		setActive(activate);
-
 	}
 
 	/**
@@ -418,5 +581,4 @@ public class ButtonStatusCtrl implements Serializable {
 	public boolean isSecurityActive() {
 		return securityActive;
 	}
-
 }

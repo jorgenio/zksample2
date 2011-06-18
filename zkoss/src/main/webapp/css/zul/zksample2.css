@@ -145,6 +145,31 @@ tr.z-row td.z-row-inner {
 	font-weight: bold;
 }
 
+/* -------------------- Button ------------------- */
+	/* padding left and right next the icon */
+.oT_ButtonWithIcon {
+	width: 32px;
+	height: 24px;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+.oT_ButtonWithText {
+	height: 24px;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+.oT_ButtonForPanelWithIcon {
+	width: 22px;
+	height: 20px;
+	padding-top: 1px;
+	padding-left: 1px;
+	padding-bottom: 1px;
+	padding-right: 1px;
+}
+
+
 /* --------------------- TABS ---------------------- */ /* no border */
 .z-tabs-scroll {
 	border: 0px;

@@ -7,12 +7,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
-
 	<window id="userDialogWindow"
 		title="${c:l('userDialogWindow.title')}" border="none"
 		apply="${userDialogCtrl}" closable="true" width="800px" height="520px"
 		sizable="true" sclass="pageWindowTitle">
-
 
 		<borderlayout id="borderlayoutUser">
 

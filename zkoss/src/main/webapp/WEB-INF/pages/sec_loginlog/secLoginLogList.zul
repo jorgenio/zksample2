@@ -150,10 +150,6 @@
 			</hbox>
 		</div>
 
-
-
-
-
 		<borderlayout id="borderLayout_SecUserlogList">
 
 			<north border="none" height="26px">

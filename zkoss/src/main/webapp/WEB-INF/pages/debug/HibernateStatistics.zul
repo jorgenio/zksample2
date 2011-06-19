@@ -21,7 +21,6 @@
 			<separator orient="vertical" />
 		</toolbar>
 
-
 		<paging id="paging_HibernateStatisticList" />
 		<grid id="gridHibernateStatisticList" fixedLayout="true">
 			<columns>

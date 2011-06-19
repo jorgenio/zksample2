@@ -29,7 +29,7 @@
 			<north border="none" margins="0,0,0,0">
 				<div id="divNorthAddGrouprightDialog">
 					<toolbar>
-						<button id="btnHelp"
+						<toolbarbutton id="btnHelp"
 							image="/images/icons/light_16x16.gif"
 							tooltiptext="${c:l('btnHelp.tooltiptext')}" />
 					</toolbar>
@@ -100,11 +100,12 @@
 																		width="99%" />
 																	<button
 																		id="button_bbox_AddGroupRightDialog_Search"
+																		sclass="oT_ButtonWithIcon"
 																		image="/images/icons/search.gif"
-																		label="${c:l('button_bbox_AddGroupRightDialog_Search.label')}"
 																		tooltiptext="${c:l('button_bbox_AddGroupRightDialog_Search.tooltiptext')}" />
 																	<button
 																		id="button_bbox_AddGroupRightDialog_Close"
+																		sclass="oT_ButtonWithIcon"
 																		image="/images/icons/stop.gif"
 																		tooltiptext="${c:l('button_bbox_AddGroupRightDialog_Close.tooltiptext')}" />
 																</row>
@@ -255,23 +256,19 @@
 				<div id="divSouth" align="right">
 					<hbox spacing="3px" style="padding:3px"
 						align="end">
-						<button id="btnNew" height="20"
-							label="${c:l('btnNew.label')}"
+						<button id="btnNew" sclass="oT_ButtonWithIcon"
 							tooltiptext="${c:l('btnNew.tooltiptext')}" />
-						<button id="btnEdit" height="20"
-							label="${c:l('btnEdit.label')}"
+						<button id="btnEdit" sclass="oT_ButtonWithIcon"
 							tooltiptext="${c:l('btnEdit.tooltiptext')}" />
-						<button id="btnDelete" height="20"
-							label="${c:l('btnDelete.label')}"
+						<button id="btnDelete"
+							sclass="oT_ButtonWithIcon"
 							tooltiptext="${c:l('btnDelete.tooltiptext')}" />
-						<button id="btnSave" height="20"
-							label="${c:l('btnSave.label')}"
+						<button id="btnSave" sclass="oT_ButtonWithIcon"
 							tooltiptext="${c:l('btnSave.tooltiptext')}" />
-						<button id="btnCancel" height="20"
-							label="${c:l('btnCancel.label')}"
+						<button id="btnCancel"
+							sclass="oT_ButtonWithIcon"
 							tooltiptext="${c:l('btnCancel.tooltiptext')}" />
-						<button id="btnClose" height="20"
-							label="${c:l('btnClose.label')}"
+						<button id="btnClose" sclass="oT_ButtonWithIcon"
 							tooltiptext="${c:l('btnClose.tooltiptext')}" />
 					</hbox>
 				</div>

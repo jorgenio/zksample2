@@ -16,9 +16,13 @@
 	<script type="text/javascript">
 		<!-- Function for scrolling the text -->
 		<!-- thanks to dagarwal82; http://www.zkoss.org/forum/listComment/16011 -->
+
+		
 		<![CDATA[ function scrollTextbox(txtBox) { var txtEle =
 		document.getElementById(txtBox); txtEle.scrollTop =
 		txtEle.scrollHeight; } ]]>
+		
+		
 	</script>
 
 	<window id="outerIndexWindow" apply="${indexCtrl}" border="none"
@@ -161,8 +165,8 @@
 
 									<toolbar align="end"
 										style="float:right; border-style: none;">
-										<button id="btnCloseAllTabs"
-											image="/images/icons/stop.gif" height="20px"
+										<toolbarbutton
+											id="btnCloseAllTabs" image="/images/icons/stop.gif"
 											tooltiptext="${c:l('btnCloseAllTabs.tooltiptext')}" />
 									</toolbar>
 								</hbox>

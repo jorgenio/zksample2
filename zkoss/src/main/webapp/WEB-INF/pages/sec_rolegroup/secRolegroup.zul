@@ -24,10 +24,10 @@
 						<!-- COMMON BUTTONS -->
 						<toolbar align="start"
 							style="float:left; border-style: none;">
-							<button id="btnHelp" height="24px"
+							<toolbarbutton id="btnHelp"
 								image="/images/icons/light_16x16.gif"
 								tooltiptext="${c:l('btnHelp.tooltiptext')}" />
-							<button id="btnRefresh" height="24px"
+							<toolbarbutton id="btnRefresh"
 								image="/images/icons/refresh2_yellow_16x16.gif"
 								tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
 							<separator orient="vertical" />
@@ -44,7 +44,8 @@
 						<!-- CRUD BUTTONS -->
 						<toolbar align="end"
 							style="float:right; border-style: none;">
-							<button id="btnSave" height="24px"
+							<button id="btnSave"
+								sclass="oT_ButtonWithIcon"
 								image="/images/icons/btn_save2_16x16.gif"
 								tooltiptext="${c:l('btnSave.tooltiptext')}" />
 						</toolbar>

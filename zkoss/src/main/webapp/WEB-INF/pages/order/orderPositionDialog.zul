@@ -22,8 +22,8 @@
 
 						<!-- COMMON BUTTONS -->
 						<toolbar align="start"
-							style="float:left; border-style: none;" height="28px">
-							<button id="btnHelp" height="24px"
+							style="float:left; border-style: none;">
+							<toolbarbutton id="btnHelp"
 								image="/images/icons/light_16x16.gif"
 								tooltiptext="${c:l('btnHelp.tooltiptext')}" />
 						</toolbar>
@@ -38,18 +38,24 @@
 						<!-- CRUD BUTTONS -->
 						<toolbar align="end"
 							style="float:right; border-style: none;" height="28px">
-							<button id="btnNew" height="24px"
+							<button id="btnNew"
+								sclass="oT_ButtonWithIcon"
 								tooltiptext="${c:l('btnNew.tooltiptext')}" />
 							<!-- label="${c:l('btnNew.label')}"	 -->
-							<button id="btnEdit" height="24px"
+							<button id="btnEdit"
+								sclass="oT_ButtonWithIcon"
 								tooltiptext="${c:l('btnEdit.tooltiptext')}" />
-							<button id="btnDelete" height="24px"
+							<button id="btnDelete"
+								sclass="oT_ButtonWithIcon"
 								tooltiptext="${c:l('btnDelete.tooltiptext')}" />
-							<button id="btnSave" height="24px"
+							<button id="btnSave"
+								sclass="oT_ButtonWithIcon"
 								tooltiptext="${c:l('btnSave.tooltiptext')}" />
-							<button id="btnCancel" height="24px"
+							<button id="btnCancel"
+								sclass="oT_ButtonWithIcon"
 								tooltiptext="${c:l('btnCancel.tooltiptext')}" />
-							<button id="btnClose" height="24px"
+							<button id="btnClose"
+								sclass="oT_ButtonWithIcon"
 								tooltiptext="${c:l('btnClose.tooltiptext')}" />
 						</toolbar>
 					</hbox>

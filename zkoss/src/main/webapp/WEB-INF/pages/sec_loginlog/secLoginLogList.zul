@@ -17,17 +17,12 @@
 				<!-- COMMON BUTTONS -->
 				<toolbar align="start"
 					style="float:left; border-style: none;">
-					<button id="btnHelp" height="24px"
+					<toolbarbutton id="btnHelp"
 						image="/images/icons/light_16x16.gif"
 						tooltiptext="${c:l('btnHelp.tooltiptext')}" />
-					<button id="btnRefresh" height="24px"
+					<toolbarbutton id="btnRefresh"
 						image="/images/icons/refresh2_yellow_16x16.gif"
 						tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
-					<separator orient="vertical" />
-					<button id="button_SecLoginlogList_PrintLoginList"
-						height="24px" image="/images/icons/btn_print2_16x16.gif"
-						hoverImage="/images/icons/print.gif"
-						tooltiptext="${c:l('button_SecLoginlogList_PrintLoginList.tooltiptext')}" />
 				</toolbar>
 
 				<!-- SEARCH AREA -->
@@ -81,12 +76,13 @@
 															id="dbox_LoginLog_DateFrom" width="100%" />
 													</hbox>
 													<button
-														id="button_SecLoginlogList_bb_SearchDate" height="24px"
+														id="button_SecLoginlogList_bb_SearchDate"
+														sclass="oT_ButtonWithIcon"
 														image="/images/icons/search.gif"
 														tooltiptext="${c:l('button_SecLoginlogList_bb_SearchDate.tooltiptext')}" />
 													<button
-														id="button_SecLoginlogList_bb_SearchClose" height="24px"
-														image="/images/icons/stop.gif"
+														id="button_SecLoginlogList_bb_SearchClose"
+														sclass="oT_ButtonWithIcon" image="/images/icons/stop.gif"
 														tooltiptext="${c:l('button_SecLoginlogList_bb_SearchClose.tooltiptext')}" />
 												</row>
 												<row>
@@ -120,9 +116,8 @@
 						<textbox id="tb_SecUserlog_LoginName"
 							width="100px" />
 						<button
-							id="button_SecLoginlogList_SearchLoginName" height="24px"
-							image="/images/icons/search.gif"
-							label="${c:l('button_SecLoginlogList_SearchLoginName.label')}"
+							id="button_SecLoginlogList_SearchLoginName"
+							sclass="oT_ButtonWithIcon" image="/images/icons/search.gif"
 							tooltiptext="${c:l('button_SecLoginlogList_SearchLoginName.tooltiptext')}" />
 						<separator bar="true" orient="vertical" />
 						<checkbox
@@ -135,15 +130,21 @@
 				<!-- CRUD BUTTONS -->
 				<toolbar align="end"
 					style="float:right; border-style: none;">
+					<button id="button_SecLoginlogList_PrintLoginList"
+						sclass="oT_ButtonWithIcon"
+						image="/images/icons/btn_print2_16x16.gif"
+						hoverImage="/images/icons/print.gif"
+						tooltiptext="${c:l('button_SecLoginlogList_PrintLoginList.tooltiptext')}" />
+					<separator bar="true" orient="vertical" />
 					<button id="button_SecLoginlogList_DeleteLocalIPs"
-						height="24px" image="/images/icons/method_16x16.gif"
+						sclass="oT_ButtonWithIcon" image="/images/icons/method_16x16.gif"
 						tooltiptext="${c:l('button_SecLoginlogList_DeleteLocalIPs.tooltiptext')}" />
 					<button
-						id="button_SecLoginlogList_ImportIPToCountryCSV" height="24px"
-						image="/images/icons/import_16x16.gif"
+						id="button_SecLoginlogList_ImportIPToCountryCSV"
+						sclass="oT_ButtonWithIcon" image="/images/icons/import_16x16.gif"
 						tooltiptext="${c:l('button_SecLoginlogList_ImportIPToCountryCSV.tooltiptext')}" />
 					<button id="button_SecLoginlogList_UpdateGeoData"
-						height="24px" image="/images/icons/debug_16x16.gif"
+						sclass="oT_ButtonWithIcon" image="/images/icons/debug_16x16.gif"
 						tooltiptext="${c:l('button_SecLoginlogList_UpdateGeoData.tooltiptext')}" />
 				</toolbar>
 			</hbox>

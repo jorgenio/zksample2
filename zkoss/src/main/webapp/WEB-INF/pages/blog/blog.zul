@@ -17,7 +17,7 @@
 				<!-- COMMON BUTTONS -->
 				<toolbar align="start"
 					style="float:left; border-style: none;">
-					<button id="btnRefresh" height="24px"
+					<toolbarbutton id="btnRefresh"
 						image="/images/icons/refresh2_yellow_16x16.gif"
 						tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
 				</toolbar>

@@ -20,10 +20,10 @@
 				<!-- COMMON BUTTONS -->
 				<toolbar align="start"
 					style="float:left; border-style: none;">
-					<button id="btnHelp" height="24px"
+					<toolbarbutton id="btnHelp"
 						image="/images/icons/light_16x16.gif"
 						tooltiptext="${c:l('btnHelp.tooltiptext')}" />
-					<button id="btnRefresh" height="24px"
+					<toolbarbutton id="btnRefresh"
 						image="/images/icons/refresh2_yellow_16x16.gif"
 						tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
 					<separator orient="vertical" />
@@ -32,22 +32,24 @@
 				<!-- SEARCH AREA -->
 				<toolbar align="center"
 					style="float:left; border-style: none;">
-					<hbox align="center" style="padding: 2px">
-						<button
-							id="button_CustomerList_CustomerFindDialog" height="24px"
-							image="/images/icons/btn_search2_16x16.gif"
-							tooltiptext="${c:l('button_CustomerList_CustomerFindDialog.tooltiptext')}" />
-						<button id="button_CustomerList_PrintList"
-							height="24px" image="/images/icons/btn_print2_16x16.gif"
-							tooltiptext="${c:l('button_CustomerList_PrintList.tooltiptext')}" />
-					</hbox>
+					<hbox align="center" style="padding: 2px"></hbox>
 				</toolbar>
 
 				<!-- CRUD BUTTONS -->
 				<toolbar align="end"
 					style="float:right; border-style: none;">
+					<button id="button_CustomerList_CustomerFindDialog"
+						sclass="oT_ButtonWithIcon"
+						image="/images/icons/btn_search2_16x16.gif"
+						tooltiptext="${c:l('button_CustomerList_CustomerFindDialog.tooltiptext')}" />
+					<button id="button_CustomerList_PrintList"
+						sclass="oT_ButtonWithIcon"
+						image="/images/icons/btn_print2_16x16.gif"
+						tooltiptext="${c:l('button_CustomerList_PrintList.tooltiptext')}" />
+					<separator bar="true" orient="vertical" />
 					<button id="button_CustomerList_NewCustomer"
-						height="24px" image="/images/icons/btn_new2_16x16.gif"
+						sclass="oT_ButtonWithIcon"
+						image="/images/icons/btn_new2_16x16.gif"
 						tooltiptext="${c:l('button_CustomerList_NewCustomer.tooltiptext')}" />
 				</toolbar>
 			</hbox>

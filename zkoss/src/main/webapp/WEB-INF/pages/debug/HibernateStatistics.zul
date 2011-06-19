@@ -11,7 +11,6 @@
 	<window id="window_HibernateStatisticList"
 		apply="${hibernateStatisticsCtrl}" border="none" width="100%">
 
-
 		<toolbar>
 			<toolbarbutton id="btnHelp"
 				image="/images/icons/light_16x16.gif"

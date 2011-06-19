@@ -20,10 +20,10 @@
 				<!-- COMMON BUTTONS -->
 				<toolbar align="start"
 					style="float:left; border-style: none;">
-					<toolbarbutton id="btnHelp" height="24px"
+					<toolbarbutton id="btnHelp"
 						image="/images/icons/light_16x16.gif"
 						tooltiptext="${c:l('btnHelp.tooltiptext')}" />
-					<toolbarbutton id="btnRefresh" height="24px"
+					<toolbarbutton id="btnRefresh"
 						image="/images/icons/refresh2_yellow_16x16.gif"
 						tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
 				</toolbar>
@@ -41,7 +41,7 @@
 						<space width="5px" />
 						<textbox id="tb_Branch_Name" width="120px" />
 						<button id="button_BranchMain_Search_BranchName"
-							height="24px" image="/images/icons/search.gif"
+							sclass="oT_ButtonWithIcon" image="/images/icons/search.gif"
 							tooltiptext="${c:l('button_BranchList_Search_BranchName.tooltiptext')}" />
 					</hbox>
 				</toolbar>

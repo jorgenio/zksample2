@@ -42,8 +42,7 @@
 						<textbox id="tb_Article_ArticleID"
 							width="120px" />
 						<button id="button_ArticleList_SearchArticleID"
-							height="24px" image="/images/icons/search.gif"
-							label="${c:l('button_ArticleList_SearchArticleID.label')}"
+							sclass="oT_ButtonWithIcon" image="/images/icons/search.gif"
 							tooltiptext="${c:l('button_ArticleList_SearchArticleID.tooltiptext')}" />
 						<space width="20px" />
 
@@ -52,8 +51,7 @@
 							style="padding-right: 3px" />
 						<textbox id="tb_Article_Name" width="120px" />
 						<button id="button_ArticleList_SearchName"
-							height="24px" image="/images/icons/search.gif"
-							label="${c:l('button_ArticleList_SearchName.label')}"
+							sclass="oT_ButtonWithIcon" image="/images/icons/search.gif"
 							tooltiptext="${c:l('button_ArticleList_SearchName.tooltiptext')}" />
 						<space width="20px" />
 

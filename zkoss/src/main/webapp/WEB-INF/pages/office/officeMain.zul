@@ -18,10 +18,10 @@
 				<!-- COMMON BUTTONS -->
 				<toolbar align="start"
 					style="float:left; border-style: none;">
-					<toolbarbutton id="btnHelp" height="24px"
+					<toolbarbutton id="btnHelp"
 						image="/images/icons/light_16x16.gif"
 						tooltiptext="${c:l('btnHelp.tooltiptext')}" />
-					<toolbarbutton id="btnRefresh" height="24px"
+					<toolbarbutton id="btnRefresh"
 						image="/images/icons/refresh2_yellow_16x16.gif"
 						tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
 				</toolbar>
@@ -40,7 +40,7 @@
 							style="padding-right: 3px" />
 						<textbox id="txtb_Office_No" width="60px" />
 						<button id="button_OfficeList_SearchNo"
-							height="24px" image="/images/icons/search.gif"
+							sclass="oT_ButtonWithIcon" image="/images/icons/search.gif"
 							tooltiptext="${c:l('button_OfficeList_SearchNo.tooltiptext')}" />
 						<space width="20px" />
 
@@ -48,7 +48,7 @@
 							style="padding-right: 3px" />
 						<textbox id="txtb_Office_Name" width="100px" />
 						<button id="button_OfficeList_SearchName"
-							height="24px" image="/images/icons/search.gif"
+							sclass="oT_ButtonWithIcon" image="/images/icons/search.gif"
 							tooltiptext="${c:l('button_OfficeList_SearchName.tooltiptext')}" />
 						<space width="20px" />
 
@@ -56,7 +56,7 @@
 							style="padding-right: 3px" />
 						<textbox id="txtb_Office_City" width="100px" />
 						<button id="button_OfficeList_SearchCity"
-							height="24px" image="/images/icons/search.gif"
+							sclass="oT_ButtonWithIcon" image="/images/icons/search.gif"
 							tooltiptext="${c:l('button_OfficeList_SearchCity.tooltiptext')}" />
 
 					</hbox>

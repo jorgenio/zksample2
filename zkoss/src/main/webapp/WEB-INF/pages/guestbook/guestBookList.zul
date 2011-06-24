@@ -81,7 +81,6 @@
 
 			</center>
 
-
 			<south border="none">
 
 				<grid fixedLayout="true" style="border:0px">
@@ -94,7 +93,7 @@
 							<label id="label_GuestBook_gubText"
 								value="${c:l('label_GuestBook_gubText.value')}" />
 							<textbox id="textbox_GuestBook_gubText"
-								multiline="true" rows="9" width="99%" />
+								multiline="true" rows="9" readonly="true" width="99%" />
 						</row>
 					</rows>
 				</grid>

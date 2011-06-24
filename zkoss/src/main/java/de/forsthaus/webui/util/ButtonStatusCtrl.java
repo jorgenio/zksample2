@@ -82,7 +82,7 @@ public class ButtonStatusCtrl implements Serializable {
 	 * true = disable the button <br>
 	 * false = make the button unvisible<br>
 	 */
-	private final boolean buttonsModeDisable = false;
+	private final boolean buttonsModeDisable = true;
 
 	/** is the BtnController active ? */
 	private boolean active = true;

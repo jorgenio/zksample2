@@ -53,9 +53,6 @@
 							<button id="btnSave"
 								sclass="oT_ButtonWithIcon"
 								tooltiptext="${c:l('btnSave.tooltiptext')}" />
-							<button id="btnCancel"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnCancel.tooltiptext')}" />
 							<button id="btnClose"
 								sclass="oT_ButtonWithIcon"
 								tooltiptext="${c:l('btnClose.tooltiptext')}" />

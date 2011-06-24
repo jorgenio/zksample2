@@ -90,7 +90,7 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 	protected Button btnEdit; // autowire
 	protected Button btnDelete; // autowire
 	protected Button btnSave; // autowire
-	protected Button btnCancel; // autowire
+	// protected Button btnCancel; // autowire
 	protected Button btnClose; // autowire
 
 	protected Button btnHelp; // autowire
@@ -121,7 +121,7 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void onCreate$window_GuestBookDialog(Event event) throws Exception {
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, null, btnClose);
 
 		/* set components visible dependent of the users rights */
 		doCheckRights();
@@ -305,7 +305,8 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doResetInitValues();
 
 		// manually settings
-		// btnCtrl.setInitEdit();
+		btnSave.setVisible(false);
+		btnClose.setVisible(true);
 
 	}
 
@@ -340,7 +341,7 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 			doEdit();
 		} else {
 			// manually settings
-			// btnCtrl.setInitEdit();
+			btnSave.setVisible(false);
 			doReadOnly();
 		}
 
@@ -406,12 +407,15 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// I'm tired. In the guestbook we set manually the rights
 		window_GuestBookDialog.setVisible(true);
+		btnCtrl.setSecurityActive(false);
+		btnCtrl.setActive(false);
 
-		btnHelp.setVisible(true);
-		btnNew.setVisible(true);
+		btnHelp.setVisible(false);
+		btnNew.setVisible(false);
 		btnEdit.setVisible(false);
 		btnDelete.setVisible(false);
 		btnSave.setVisible(true);
+		// btnCancel.setVisible(true);
 		btnClose.setVisible(true);
 
 	}
@@ -636,6 +640,10 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 			doReadOnly();
 			// manually settings
 			// btnCtrl.setBtnStatus_Save();
+			btnSave.setVisible(false);
+			// btnCancel.setVisible(false);
+			btnClose.setVisible(true);
+
 			return;
 		}
 
@@ -657,6 +665,10 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// init the old values vars new
 		doStoreInitValues();
+
+		btnSave.setVisible(false);
+		// btnCancel.setVisible(false);
+		btnClose.setVisible(true);
 	}
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//

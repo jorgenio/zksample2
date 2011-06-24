@@ -143,7 +143,7 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 	/**
 	 * Gets the current desktop height and width and <br>
-	 * stores it in the UserWorkspace properties. <br>
+	 * stores it in two hidden intboxes components. <br>
 	 * We use these values for calculating the count of rows in the listboxes. <br>
 	 * 
 	 * @param event
@@ -156,7 +156,6 @@ public class IndexCtrl extends GFCBaseCtrl implements Serializable {
 
 		setCurrentDesktopHeight(event.getDesktopHeight() - this.centerAreaHeightOffset);
 		setCurrentDesktopWidth(event.getDesktopWidth());
-
 	}
 
 	/**

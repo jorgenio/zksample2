@@ -2231,7 +2231,8 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 81, 'Billy Idol (Live)',                        'Rebel Yell',                      'http://www.youtube.com/embed/fv0_BoXt3kU',   0),
 ( 82, 'Billy Idol',                               'Eyes Without A Face',             'http://www.youtube.com/embed/BKmldYSDJaM',   0),
 ( 83, 'Billy Idol',                               'White wedding',                   'http://www.youtube.com/embed/tgFh4RHgn0A',   0),
-( 84, 'Billy Idol (Live 1981)',                   'Dancing with myself',             'http://www.youtube.com/embed/pOpnyv6JqWc',   0);
+( 84, 'Billy Idol (Live 1981)',                   'Dancing with myself',             'http://www.youtube.com/embed/pOpnyv6JqWc',   0),
+( 85, 'Carlos Santana feat. Everlast (Live 2008))', 'Put my lights on',              'http://www.youtube.com/embed/9eJgTUUw4Pw',   0);
 
 
 

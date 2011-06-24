@@ -45,26 +45,27 @@ public class My_H2_SampleDataFiller implements InitializingBean {
 
 	private DataSource dataSource;
 
+	@Override
 	public void afterPropertiesSet() throws Exception {
-		Logger logger = Logger.getLogger(getClass());
-		Map<Integer, String> allSql = new HashMap<Integer, String>();
-		Connection conn = dataSource.getConnection();
+		final Logger logger = Logger.getLogger(getClass());
+		final Map<Integer, String> allSql = new HashMap<Integer, String>();
+		final Connection conn = this.dataSource.getConnection();
 		try {
 			// reads the sql-file from the classpath
-			InputStream inputStream = getClass().getResourceAsStream("/createSampleData.sql");
+			final InputStream inputStream = getClass().getResourceAsStream("/createSampleData.sql");
 			try {
 
-				Statement stat = conn.createStatement();
+				final Statement stat = conn.createStatement();
 
-				BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
-				String str = "";
+				final BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+				String str;
 				StringBuilder sb = new StringBuilder();
 				int count = 0;
 				while ((str = in.readLine()) != null) {
 					sb.append(str);
 					// make a linefeed at each readed line
 					if (StringUtils.endsWith(str.trim(), ";")) {
-						String sql = sb.toString();
+						final String sql = sb.toString();
 						stat.addBatch(sql);
 						sb = new StringBuilder();
 						allSql.put(Integer.valueOf(count++), sql);
@@ -73,8 +74,8 @@ public class My_H2_SampleDataFiller implements InitializingBean {
 					}
 				}
 
-				int[] ar = stat.executeBatch();
-				int i = ar.length;
+				final int[] ar = stat.executeBatch();
+				final int i = ar.length;
 
 				logger.info("Create DemoData");
 				logger.info("count batch updates : " + i);
@@ -82,16 +83,16 @@ public class My_H2_SampleDataFiller implements InitializingBean {
 			} finally {
 				try {
 					inputStream.close();
-				} catch (IOException e) {
+				} catch (final IOException e) {
 					logger.warn("", e);
 				}
 			}
-		} catch (BatchUpdateException e) {
-			BatchUpdateException be = e;
-			int[] updateCounts = be.getUpdateCounts();
+		} catch (final BatchUpdateException e) {
+			final BatchUpdateException be = e;
+			final int[] updateCounts = be.getUpdateCounts();
 			if (updateCounts != null) {
 				for (int i = 0; i < updateCounts.length; i++) {
-					int j = updateCounts[i];
+					final int j = updateCounts[i];
 					if (j < 0) {
 						logger.error("SQL errorcode: " + j + " -> in SQL\n" + allSql.get(Integer.valueOf(i)));
 					}
@@ -101,14 +102,14 @@ public class My_H2_SampleDataFiller implements InitializingBean {
 		} finally {
 			try {
 				conn.close();
-			} catch (SQLException e) {
+			} catch (final SQLException e) {
 				logger.warn("", e);
 			}
 		}
 	}
 
 	public DataSource getDataSource() {
-		return dataSource;
+		return this.dataSource;
 	}
 
 	public void setDataSource(DataSource dataSource) {

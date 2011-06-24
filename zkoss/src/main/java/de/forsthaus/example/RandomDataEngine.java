@@ -18,13 +18,16 @@
  */
 package de.forsthaus.example;
 
-import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Engine for creating random data from text files.<br>
@@ -50,198 +53,81 @@ public final class RandomDataEngine implements Serializable {
 	final private String[] FEMALEFIRSTNAME;
 
 	public String getRandomBlob() {
-		return BLOB[RANDOM.nextInt(BLOB.length)];
+		return this.BLOB[this.RANDOM.nextInt(this.BLOB.length)];
 	}
 
 	public String getRandomEmail() {
-		return EMAIL[RANDOM.nextInt(EMAIL.length)];
+		return this.EMAIL[this.RANDOM.nextInt(this.EMAIL.length)];
 	}
 
 	public String getRandomHomepage() {
-		return HOMEPAGE[RANDOM.nextInt(HOMEPAGE.length)];
+		return this.HOMEPAGE[this.RANDOM.nextInt(this.HOMEPAGE.length)];
 	}
 
 	public String getRandomManFirstname() {
-		return MANFIRSTNAME[RANDOM.nextInt(MANFIRSTNAME.length)];
+		return this.MANFIRSTNAME[this.RANDOM.nextInt(this.MANFIRSTNAME.length)];
 	}
 
 	public String getRandomLastname() {
-		return LASTNAME[RANDOM.nextInt(LASTNAME.length)];
+		return this.LASTNAME[this.RANDOM.nextInt(this.LASTNAME.length)];
 	}
 
 	public String getRandomCity() {
-		return CITY[RANDOM.nextInt(CITY.length)];
+		return this.CITY[this.RANDOM.nextInt(this.CITY.length)];
 	}
 
 	public String getRandomZip() {
-		return ZIP[RANDOM.nextInt(ZIP.length)];
+		return this.ZIP[this.RANDOM.nextInt(this.ZIP.length)];
 	}
 
 	public String getRandomStreet() {
-		return STREET[RANDOM.nextInt(STREET.length)];
+		return this.STREET[this.RANDOM.nextInt(this.STREET.length)];
 	}
 
 	public String getRandomPhoneNumber() {
-		return PHONENUMBER[RANDOM.nextInt(PHONENUMBER.length)];
+		return this.PHONENUMBER[this.RANDOM.nextInt(this.PHONENUMBER.length)];
 	}
 
 	public String getRandomFemaleFirstname() {
-		return FEMALEFIRSTNAME[RANDOM.nextInt(FEMALEFIRSTNAME.length)];
+		return this.FEMALEFIRSTNAME[this.RANDOM.nextInt(this.FEMALEFIRSTNAME.length)];
 	}
 
 	private static String[] createStringArray(String name) {
 		try {
-			return new MyReader(name).result;
-		} catch (IOException e) {
+			final InputStream inputStream = RandomDataEngine.class.getResourceAsStream("/example/" + name);
+			try {
+				final BufferedReader lr = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+
+				final List<String> r = new ArrayList<String>();
+				String str;
+				while ((str = lr.readLine()) != null) {
+					if (StringUtils.isBlank(str)) {
+						continue;
+					}
+					r.add(str);
+				}
+				return r.toArray(new String[r.size()]);
+			} finally {
+				if (inputStream != null) {
+					inputStream.close();
+				}
+			}
+		} catch (final IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	final static class LineReader {
-		public LineReader(InputStream inStream) {
-			this.inStream = inStream;
-		}
-
-		byte[] inBuf = new byte[8192];
-
-		char[] lineBuf = new char[1024];
-
-		int inLimit = 0;
-
-		int inOff = 0;
-
-		InputStream inStream;
-
-		int readLine() throws IOException {
-			int len = 0;
-			char c = 0;
-
-			boolean skipWhiteSpace = true;
-			boolean isNewLine = true;
-			boolean appendedLineBegin = false;
-			boolean precedingBackslash = false;
-			boolean skipLF = false;
-
-			while (true) {
-				if (inOff >= inLimit) {
-					inLimit = inStream.read(inBuf);
-					inOff = 0;
-					if (inLimit <= 0) {
-						if (len == 0) {
-							return -1;
-						}
-						return len;
-					}
-				}
-				// The line below is equivalent to calling a
-				// ISO8859-1 decoder.
-				c = (char) (0xff & inBuf[inOff++]);
-				if (skipLF) {
-					skipLF = false;
-					if (c == '\n') {
-						continue;
-					}
-				}
-				if (skipWhiteSpace) {
-					if (c == ' ' || c == '\t' || c == '\f') {
-						continue;
-					}
-					if (!appendedLineBegin && (c == '\r' || c == '\n')) {
-						continue;
-					}
-					skipWhiteSpace = false;
-					appendedLineBegin = false;
-				}
-				if (isNewLine) {
-					isNewLine = false;
-					if (c == '#' || c == '!') {
-						continue;
-					}
-				}
-
-				if (c != '\n' && c != '\r') {
-					lineBuf[len++] = c;
-					if (len == lineBuf.length) {
-						int newLength = lineBuf.length * 2;
-						if (newLength < 0) {
-							newLength = Integer.MAX_VALUE;
-						}
-						char[] buf = new char[newLength];
-						System.arraycopy(lineBuf, 0, buf, 0, lineBuf.length);
-						lineBuf = buf;
-					}
-					// flip the preceding backslash flag
-					if (c == '\\') {
-						precedingBackslash = !precedingBackslash;
-					} else {
-						precedingBackslash = false;
-					}
-				} else {
-					// reached EOL
-					if (len == 0) {
-						isNewLine = true;
-						skipWhiteSpace = true;
-						len = 0;
-						continue;
-					}
-					if (inOff >= inLimit) {
-						inLimit = inStream.read(inBuf);
-						inOff = 0;
-						if (inLimit <= 0) {
-							return len;
-						}
-					}
-					if (precedingBackslash) {
-						len -= 1;
-						// skip the leading whitespace characters in following
-						// line
-						skipWhiteSpace = true;
-						appendedLineBegin = true;
-						precedingBackslash = false;
-						if (c == '\r') {
-							skipLF = true;
-						}
-					} else {
-						return len;
-					}
-				}
-			}
-		}
-	}
-
-	private final static class MyReader {
-		final String[] result;
-
-		MyReader(String name) throws IOException {
-			super();
-			InputStream inputStream = new BufferedInputStream(RandomDataEngine.class.getResourceAsStream("/example/" + name));
-			LineReader lr = new LineReader(inputStream);
-
-			int limit;
-
-			List<String> r = new ArrayList<String>();
-
-			while ((limit = lr.readLine()) >= 0) {
-				String value = new String(lr.lineBuf, 0, limit);
-				r.add(value);
-			}
-
-			result = r.toArray(new String[r.size()]);
-			inputStream.close();
-		}
-	}
-
 	public RandomDataEngine() {
-		RANDOM = new Random(((long) Math.random()) + System.currentTimeMillis());
-		BLOB = createStringArray("blob.txt");
-		EMAIL = createStringArray("email.txt");
-		HOMEPAGE = createStringArray("homepage.txt");
-		MANFIRSTNAME = createStringArray("manfirstname.txt");
-		LASTNAME = createStringArray("lastname.txt");
-		CITY = createStringArray("city.txt");
-		ZIP = createStringArray("zip.txt");
-		STREET = createStringArray("street.txt");
-		PHONENUMBER = createStringArray("phonenumber.txt");
-		FEMALEFIRSTNAME = createStringArray("femalefirstname.txt");
+		this.RANDOM = new Random((long) Math.random() + System.currentTimeMillis());
+		this.BLOB = createStringArray("blob.txt");
+		this.EMAIL = createStringArray("email.txt");
+		this.HOMEPAGE = createStringArray("homepage.txt");
+		this.MANFIRSTNAME = createStringArray("manfirstname.txt");
+		this.LASTNAME = createStringArray("lastname.txt");
+		this.CITY = createStringArray("city.txt");
+		this.ZIP = createStringArray("zip.txt");
+		this.STREET = createStringArray("street.txt");
+		this.PHONENUMBER = createStringArray("phonenumber.txt");
+		this.FEMALEFIRSTNAME = createStringArray("femalefirstname.txt");
 	}
 }

@@ -10,7 +10,7 @@
 	<window id="window_customerDialog"
 		title="${c:l('window_customerDialog.title')}" border="none"
 		apply="${customerDialogCtrl}" closable="true" width="800px"
-		height="600px" sizable="true">
+		height="580px" sizable="true">
 
 
 		<div sclass="z-toolbar" style="padding:0">
@@ -36,18 +36,12 @@
 				<!-- CRUD BUTTONS -->
 				<toolbar align="end"
 					style="float:right; border-style: none;">
-					<button id="btnNew" sclass="oT_ButtonWithIcon"
-						tooltiptext="${c:l('btnNew.tooltiptext')}" />
-					<button id="btnEdit" sclass="oT_ButtonWithIcon"
-						tooltiptext="${c:l('btnEdit.tooltiptext')}" />
-					<button id="btnDelete" sclass="oT_ButtonWithIcon"
-						tooltiptext="${c:l('btnDelete.tooltiptext')}" />
-					<button id="btnSave" sclass="oT_ButtonWithIcon"
-						tooltiptext="${c:l('btnSave.tooltiptext')}" />
-					<button id="btnCancel" sclass="oT_ButtonWithIcon"
-						tooltiptext="${c:l('btnCancel.tooltiptext')}" />
-					<button id="btnClose" sclass="oT_ButtonWithIcon"
-						tooltiptext="${c:l('btnClose.tooltiptext')}" />
+					<button id="btnNew" sclass="oT_ButtonWithIcon" />
+					<button id="btnEdit" sclass="oT_ButtonWithIcon" />
+					<button id="btnDelete" sclass="oT_ButtonWithIcon" />
+					<button id="btnSave" sclass="oT_ButtonWithIcon" />
+					<button id="btnCancel" sclass="oT_ButtonWithIcon" />
+					<button id="btnClose" sclass="oT_ButtonWithIcon" />
 				</toolbar>
 			</hbox>
 		</div>
@@ -89,18 +83,22 @@
 														label="${c:l('panel_CustomerDialog_Address.title')}" />
 
 													<grid
-														sclass="GridLayoutNoBorder" fixedLayout="true"
-														style="border:0px">
+														sclass="GridPlain">
 														<columns>
 															<column
 																align="right" width="150px" />
-															<column />
+															<column
+																width="100%" />
 														</columns>
 														<rows>
 															<row>
-																<label
-																	id="label_CustomerDialog_kunNr"
-																	value="${c:l('label_CustomerDialog_kunNr.value')}" />
+																<hbox>
+																	<label
+																		value="${c:l('label_CustomerDialog_kunNr.value')}" />
+																	<label
+																		value="*" style="color:red;font-size:10px" />
+																</hbox>
+
 																<textbox
 																	id="kunNr" hflex="1" />
 															</row>
@@ -113,9 +111,13 @@
 																</separator>
 															</row>
 															<row>
-																<label
-																	id="label_CustomerDialog_kunMatchcode"
-																	value="${c:l('label_CustomerDialog_kunMatchcode.value')}" />
+																<hbox>
+																	<label
+																		value="${c:l('label_CustomerDialog_kunMatchcode.value')}" />
+																	<label
+																		value="*" style="color:red;font-size:10px" />
+																</hbox>
+
 																<textbox
 																	id="kunMatchcode" hflex="1" />
 															</row>
@@ -128,9 +130,13 @@
 																</separator>
 															</row>
 															<row>
-																<label
-																	id="label_CustomerDialog_kunName1"
-																	value="${c:l('label_CustomerDialog_kunName1.value')}" />
+																<hbox>
+																	<label
+																		value="${c:l('label_CustomerDialog_kunName1.value')}" />
+																	<label
+																		value="*" style="color:red;font-size:10px" />
+																</hbox>
+
 																<textbox
 																	id="kunName1" hflex="1" />
 															</row>
@@ -142,36 +148,65 @@
 																	id="kunName2" hflex="1" />
 															</row>
 															<row>
-																<label
-																	id="label_CustomerDialog_kunOrt"
-																	value="${c:l('label_CustomerDialog_kunOrt.value')}" />
+																<hbox>
+																	<label
+																		value="${c:l('label_CustomerDialog_kunOrt.value')}" />
+																	<label
+																		value="*" style="color:red;font-size:10px" />
+																</hbox>
+
 																<textbox
 																	id="kunOrt" hflex="1" />
 															</row>
+
 															<row>
 																<label
-																	id="label_CustomerDialog_kunBranche"
 																	value="${c:l('label_CustomerDialog_kunBranche.value')}" />
-																<hbox
-																	pack="stretch" width="100%">
-																	<textbox
-																		id="kunBranche" width="100%" />
-																	<button
-																		id="btnSearchBranchSimple" disabled="true"
-																		width="28px"
-																		image="/images/icons/btn_search2_16x16.gif"
-																		tooltiptext="${c:l('btnSimpleSearchListBoxBranch.tooltiptext')}" />
-																	<button
-																		id="btnSearchBranchAdvanced" disabled="true"
-																		width="28px"
-																		image="/images/icons/btn_search2_16x16.gif"
-																		tooltiptext="${c:l('btnAdvancedSearchListBoxBranch.tooltiptext')}" />
-																	<button
-																		id="btnSearchBranchExtended" disabled="true"
-																		width="28px"
-																		image="/images/icons/btn_search2_16x16.gif"
-																		tooltiptext="${c:l('btnExtendedSearchListBoxBranch.tooltiptext')}" />
-																</hbox>
+
+																<grid
+																	sclass="GridPlainOneTextboxAndButtonRow">
+																	<columns>
+																		<column
+																			width="100%" />
+																		<column
+																			align="right" width="100px" />
+																	</columns>
+																	<rows>
+
+																		<row>
+																			<textbox
+																				id="kunBranche" hflex="1" />
+
+																			<hbox>
+																				<space
+																					width="5px" />
+																				<button
+																					id="btnSearchBranchSimple" disabled="true"
+																					width="28px"
+																					image="/images/icons/btn_search2_16x16.gif"
+																					tooltiptext="${c:l('btnSimpleSearchListBoxBranch.tooltiptext')}" />
+																				<button
+																					id="btnSearchBranchAdvanced" disabled="true"
+																					width="28px"
+																					image="/images/icons/btn_search2_16x16.gif"
+																					tooltiptext="${c:l('btnAdvancedSearchListBoxBranch.tooltiptext')}" />
+																				<button
+																					id="btnSearchBranchExtended" disabled="true"
+																					width="28px"
+																					image="/images/icons/btn_search2_16x16.gif"
+																					tooltiptext="${c:l('btnExtendedSearchListBoxBranch.tooltiptext')}" />
+
+																			</hbox>
+																		</row>
+
+																	</rows>
+																</grid>
+
+
+
+
+
+
 															</row>
 														</rows>
 													</grid>
@@ -189,12 +224,12 @@
 														label="${c:l('panel_CustomerDialog_Addition.title')}" />
 
 													<grid
-														sclass="GridLayoutNoBorder" fixedLayout="true"
-														style="border:0px">
+														sclass="GridPlain">
 														<columns>
 															<column
 																align="right" width="150px" />
-															<column />
+															<column
+																width="100%" />
 														</columns>
 														<rows>
 															<row>
@@ -220,8 +255,7 @@
 														label="${c:l('panel_CustomerDialog_Phone.title')}" />
 
 													<grid
-														sclass="GridLayoutNoBorder" fixedLayout="true"
-														style="border:0px">
+														sclass="GridPlain">
 														<columns>
 															<column
 																align="right" width="150px" />
@@ -284,8 +318,7 @@
 														label="${c:l('panel_CustomerDialog_PayConditions.title')}" />
 
 													<grid
-														sclass="GridLayoutNoBorder" fixedLayout="true"
-														style="border:0px">
+														sclass="GridPlain">
 														<columns>
 															<column
 																align="right" width="150px" />
@@ -352,8 +385,7 @@
 														label="${c:l('panel_CustomerDialog_Addition2.title')}" />
 
 													<grid
-														sclass="GridLayoutNoBorder" fixedLayout="true"
-														style="border:0px">
+														sclass="GridPlain">
 														<columns>
 															<column
 																align="right" width="150px" />

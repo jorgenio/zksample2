@@ -156,7 +156,8 @@ public class OfficeMainCtrl extends GFCBaseCtrl implements Serializable {
 		windowOfficeMain.setContentStyle("padding:0px;");
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrlOffice = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, null, btnPrint, btnFirst, btnPrevious, btnNext, btnLast, btnNew, btnEdit, btnDelete, btnSave, btnCancel, null);
+		btnCtrlOffice = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, null, btnPrint, btnFirst, btnPrevious, btnNext, btnLast, btnNew, btnEdit, btnDelete, btnSave,
+				btnCancel, null);
 
 		doCheckRights();
 

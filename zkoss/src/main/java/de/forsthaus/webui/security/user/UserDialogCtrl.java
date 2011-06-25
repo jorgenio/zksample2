@@ -24,6 +24,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.access.annotation.Secured;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -164,7 +165,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		doCheckRights();
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);
@@ -643,6 +644,7 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 		usrToken.setReadonly(false);
 
 		btnCtrl.setBtnStatus_Edit();
+		usrLoginname.focus();
 
 		// remember the old vars
 		doStoreInitValues();
@@ -796,7 +798,9 @@ public class UserDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 
 	 * @throws InterruptedException
 	 */
+	@Secured( { btnCtroller_ClassPrefix + "btnSave" })
 	public void doSave() throws InterruptedException {
+		System.out.println("doSave");
 
 		final SecUser anUser = getUser();
 

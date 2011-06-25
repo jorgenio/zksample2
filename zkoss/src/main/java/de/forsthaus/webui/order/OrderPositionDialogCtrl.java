@@ -177,7 +177,7 @@ public class OrderPositionDialogCtrl extends GFCBaseCtrl implements Serializable
 		doCheckRights();
 
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_RightPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_RightPrefix, true, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
 		// get the params map that are overhanded by creation.
 		Map<String, Object> args = getCreationArgsMap(event);

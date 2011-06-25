@@ -127,7 +127,7 @@ public class MyUserSettingsCtrl extends GFCBaseCtrl implements Serializable {
 		// create the Button Controller. Disable not used buttons during working
 		btnNew.detach();
 		btnDelete.detach();
-		btnCtrlMyUserSettings = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, null, btnEdit, null, btnSave, btnCancel, btnClose);
+		btnCtrlMyUserSettings = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, null, btnEdit, null, btnSave, btnCancel, btnClose);
 		btnCtrlMyUserSettings.setSecurityActive(false);
 
 		// init the buttons on editMode

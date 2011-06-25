@@ -85,7 +85,7 @@ public class ButtonStatusCtrl implements Serializable {
 	 * true = disable the button <br>
 	 * false = make the button unvisible<br>
 	 */
-	private final boolean buttonsModeDisable = true;
+	private boolean buttonsModeDisable = false;
 
 	/** is the BtnController active ? */
 	private boolean active = true;
@@ -96,6 +96,8 @@ public class ButtonStatusCtrl implements Serializable {
 	/**
 	 * Constructor with all possible buttons.
 	 * 
+	 * @param buttonsModeDisable
+	 *            (true = Disable-mode; false = Visible-mode)
 	 * @param btnSearch
 	 *            (open search dialog Button)
 	 * @param btnPrint
@@ -121,11 +123,12 @@ public class ButtonStatusCtrl implements Serializable {
 	 * @param btnClose
 	 *            (Close Button)
 	 */
-	public ButtonStatusCtrl(UserWorkspace userWorkspace, String rightPrefix, Button btnSearch, Button btnPrint, Button btnFirst, Button btnPrevious, Button btnNext, Button btnLast, Button btnNew,
-			Button btnEdit, Button btnDelete, Button btnSave, Button btnCancel, Button btnClose) {
+	public ButtonStatusCtrl(UserWorkspace userWorkspace, String rightPrefix, boolean buttonsModeDisable, Button btnSearch, Button btnPrint, Button btnFirst, Button btnPrevious, Button btnNext,
+			Button btnLast, Button btnNew, Button btnEdit, Button btnDelete, Button btnSave, Button btnCancel, Button btnClose) {
 		super();
 		this.workspace = userWorkspace;
 		this._rightPrefix = rightPrefix + "btn";
+		this.buttonsModeDisable = buttonsModeDisable;
 
 		// tools
 		buttons.put(ButtonEnum.Search, btnSearch);
@@ -150,6 +153,8 @@ public class ButtonStatusCtrl implements Serializable {
 	/**
 	 * Constructor with CLOSE button.
 	 * 
+	 * @param buttonsModeDisable
+	 *            (true = Disable-mode; false = Visible-mode)
 	 * @param btnNew
 	 *            (New Button)
 	 * @param btnEdit
@@ -163,10 +168,12 @@ public class ButtonStatusCtrl implements Serializable {
 	 * @param btnClose
 	 *            (Close Button)
 	 */
-	public ButtonStatusCtrl(UserWorkspace userWorkspace, String rightPrefix, Button btnNew, Button btnEdit, Button btnDelete, Button btnSave, Button btnCancel, Button btnClose) {
+	public ButtonStatusCtrl(UserWorkspace userWorkspace, String rightPrefix, boolean buttonsModeDisable, Button btnNew, Button btnEdit, Button btnDelete, Button btnSave, Button btnCancel,
+			Button btnClose) {
 		super();
 		this.workspace = userWorkspace;
 		this._rightPrefix = rightPrefix + "btn";
+		this.buttonsModeDisable = buttonsModeDisable;
 
 		buttons.put(ButtonEnum.New, btnNew);
 		buttons.put(ButtonEnum.Edit, btnEdit);

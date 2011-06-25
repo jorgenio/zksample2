@@ -836,6 +836,7 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15484, 6, 'button_UserDialog_btnDelete', 0),
 (15485, 6, 'button_UserDialog_btnSave', 0),
 (15486, 6, 'button_UserDialog_btnClose', 0),
+(15492, 6, 'button_UserDialog_btnCancel', 0),
 /* --> userDialogWindow Special Admin Panels */
 (15487, 6, 'panel_UserDialog_Status', 0),
 (15488, 6, 'panel_UserDialog_SecurityToken', 0),
@@ -844,6 +845,7 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 /* Tab Details */
 (15490, 6, 'tab_UserDialog_Details', 0),
 (15491, 3, 'data_SeeAllUserData', 0),
+
 /* BRANCHES */
 /* branchListWindow Buttons*/
 /* --> button_BranchList_btnHelp */
@@ -1137,6 +1139,8 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14367, 13060, 15481, 0),
 /* Right: button_Dialog_btnClose */
 (14368, 13060, 15486, 0),
+/* Right: button_Dialog_btnCancel */
+(14369, 13060, 15492, 0),
 
 /* Group: User_Edit_UsersOnly */
 /* Right: button_UserDialog_btnEdit */
@@ -1171,6 +1175,8 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14391, 13062, 15488, 0),
 /* Right: data_SeeAllUserData */
 (14392, 13062, 15491, 0),
+/* Right: button_UserDialog_btnCancel */
+(14393, 13062, 15492, 0),
 
 /* Group: Users_New */
 /* Right: button_UserList_NewUser */
@@ -1187,6 +1193,10 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14400, 13064, 15483, 0),
 /* Right: button_UserDialog_btnSave */
 (14401, 13064, 15485, 0),
+/* Right: button_UserDialog_btnCancel */
+(14402, 13064, 15492, 0),
+/* Right: button_UserDialog_btnClose */
+(14403, 13064, 15486, 0),
 
 /* Group: Users_Delete */
 /* Right: button_UserDialog_btnDelete */

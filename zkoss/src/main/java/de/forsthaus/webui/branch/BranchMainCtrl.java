@@ -158,8 +158,8 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 		// logger.debug(event.toString());
 
 		// create the Button Controller. Disable not used buttons during working
-		this.btnCtrlBranch = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, null, btnPrint, btnFirst, btnPrevious, btnNext, btnLast, btnNew, btnEdit, btnDelete, btnSave, btnCancel,
-				null);
+		this.btnCtrlBranch = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, null, btnPrint, btnFirst, btnPrevious, btnNext, btnLast, btnNew, btnEdit, btnDelete, btnSave,
+				btnCancel, null);
 
 		doCheckRights();
 

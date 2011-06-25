@@ -9,7 +9,7 @@
 
 	<window id="userDialogWindow"
 		title="${c:l('userDialogWindow.title')}" border="none"
-		apply="${userDialogCtrl}" closable="true" width="800px" height="520px"
+		apply="${userDialogCtrl}" closable="true" width="800px" height="505px"
 		sizable="true" sclass="pageWindowTitle">
 
 		<borderlayout id="borderlayoutUser">
@@ -90,8 +90,7 @@
 														label="${c:l('panel_UserDialog_AccountDetails.title')}" />
 
 													<grid
-														sclass="GridLayoutNoBorder" fixedLayout="true"
-														style="border:0px; padding-left:5px; padding-right:5px;">
+														sclass="GridPlain">
 														<columns>
 															<column
 																align="right" width="150px" />
@@ -100,9 +99,13 @@
 														</columns>
 														<rows>
 															<row>
-																<label
-																	id="label_UserDialog_usrLoginname"
-																	value="${c:l('label_UserDialog_usrLoginname.value')}" />
+																<hbox>
+																	<label
+																		value="${c:l('label_UserDialog_usrLoginname.value')}" />
+																	<label
+																		value="*" style="color:red;font-size:10px" />
+																</hbox>
+
 																<textbox
 																	id="usrLoginname" maxlength="50" hflex="1" />
 															</row>
@@ -115,17 +118,25 @@
 																</separator>
 															</row>
 															<row>
-																<label
-																	id="label_UserDialog_usrPassword"
-																	value="${c:l('label_UserDialog_usrPassword.value')}" />
+																<hbox>
+																	<label
+																		value="${c:l('label_UserDialog_usrPassword.value')}" />
+																	<label
+																		value="*" style="color:red;font-size:10px" />
+																</hbox>
+
 																<textbox
 																	id="usrPassword" type="password" maxlength="50"
 																	hflex="1" />
 															</row>
 															<row>
-																<label
-																	id="label_UserDialog_usrPasswordRetype"
-																	value="${c:l('label_UserDialog_usrPasswordRetype.value')}" />
+																<hbox>
+																	<label
+																		value="${c:l('label_UserDialog_usrPasswordRetype.value')}" />
+																	<label
+																		value="*" style="color:red;font-size:10px" />
+																</hbox>
+
 																<textbox
 																	id="usrPasswordRetype" type="password" maxlength="50"
 																	hflex="1" />
@@ -139,16 +150,24 @@
 																</separator>
 															</row>
 															<row>
-																<label
-																	id="label_UserDialog_usrFirstname"
-																	value="${c:l('label_UserDialog_usrFirstname.value')}" />
+																<hbox>
+																	<label
+																		value="${c:l('label_UserDialog_usrFirstname.value')}" />
+																	<label
+																		value="*" style="color:red;font-size:10px" />
+																</hbox>
+
 																<textbox
 																	id="usrFirstname" maxlength="50" hflex="1" />
 															</row>
 															<row>
-																<label
-																	id="label_UserDialog_usrLastname"
-																	value="${c:l('label_UserDialog_usrLastname.value')}" />
+																<hbox>
+																	<label
+																		value="${c:l('label_UserDialog_usrLastname.value')}" />
+																	<label
+																		value="*" style="color:red;font-size:10px" />
+																</hbox>
+
 																<textbox
 																	id="usrLastname" maxlength="50" hflex="1" />
 															</row>
@@ -184,9 +203,7 @@
 														image="/images/icons/view.gif" label="Status" />
 
 													<grid
-														sclass="GridLayoutNoBorder" fixedLayout="true"
-														style="border:0px; padding-left:5px; padding-right:5px;">
-
+														sclass="GridPlain">
 														<columns>
 															<column
 																align="right" width="150px" />
@@ -195,30 +212,46 @@
 														</columns>
 														<rows>
 															<row>
-																<label
-																	id="label_UserDialog_usrEnabled"
-																	value="${c:l('label_UserDialog_usrEnabled.value')}" />
+																<hbox>
+																	<label
+																		value="${c:l('label_UserDialog_usrEnabled.value')}" />
+																	<label
+																		value="*" style="color:red;font-size:10px" />
+																</hbox>
+
 																<checkbox
 																	id="usrEnabled" />
 															</row>
 															<row>
-																<label
-																	id="label_UserDialog_usrAccountnonexpired"
-																	value="${c:l('label_UserDialog_usrAccountnonexpired.value')}" />
+																<hbox>
+																	<label
+																		value="${c:l('label_UserDialog_usrAccountnonexpired.value')}" />
+																	<label
+																		value="*" style="color:red;font-size:10px" />
+																</hbox>
+
 																<checkbox
 																	id="usrAccountnonexpired" />
 															</row>
 															<row>
-																<label
-																	id="label_UserDialog_usrCredentialsnonexpired"
-																	value="${c:l('label_UserDialog_usrCredentialsnonexpired.value')}" />
+																<hbox>
+																	<label
+																		value="${c:l('label_UserDialog_usrCredentialsnonexpired.value')}" />
+																	<label
+																		value="*" style="color:red;font-size:10px" />
+																</hbox>
+
 																<checkbox
 																	id="usrCredentialsnonexpired" />
 															</row>
 															<row>
-																<label
-																	id="label_UserDialog_usrAccountnonlocked"
-																	value="${c:l('label_UserDialog_usrAccountnonlocked.value')}" />
+																<hbox>
+																	<label
+																		value="${c:l('label_UserDialog_usrAccountnonlocked.value')}" />
+																	<label
+																		value="*" style="color:red;font-size:10px" />
+																</hbox>
+
 																<checkbox
 																	id="usrAccountnonlocked" />
 															</row>
@@ -243,8 +276,7 @@
 														label="${c:l('panel_UserDialog_SecurityToken.title')}" />
 
 													<grid
-														sclass="GridLayoutNoBorder" fixedLayout="true"
-														style="border:0px; padding-left:5px; padding-right:5px;">
+														sclass="GridPlain">
 
 														<columns>
 															<column

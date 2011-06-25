@@ -24,6 +24,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.access.annotation.Secured;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -121,7 +122,7 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 */
 	public void onCreate$window_GuestBookDialog(Event event) throws Exception {
 		// create the Button Controller. Disable not used buttons during working
-		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, null, btnClose);
+		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, true, btnNew, btnEdit, btnDelete, btnSave, null, btnClose);
 
 		/* set components visible dependent of the users rights */
 		doCheckRights();
@@ -614,7 +615,9 @@ public class GuestBookDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * 
 	 * @throws InterruptedException
 	 */
+	@Secured( { btnCtroller_ClassPrefix + "btnSave" })
 	public void doSave() throws InterruptedException {
+		System.out.println("doSave");
 
 		GuestBook aGuestBook = getGuestBook();
 

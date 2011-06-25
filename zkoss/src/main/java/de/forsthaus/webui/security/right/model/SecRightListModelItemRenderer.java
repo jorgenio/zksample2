@@ -64,16 +64,17 @@ public class SecRightListModelItemRenderer implements ListitemRenderer, Serializ
 		Listcell lc;
 
 		lc = new Listcell(right.getRigName());
+		lc.setStyle("padding-left: 5px");
 		lc.setParent(item);
 
 		final SecTyp typ = getSecurityService().getTypById(right.getRigType().intValue());
 
 		lc = new Listcell(String.valueOf(typ.getStpTypname()));
+		lc.setStyle("padding-left: 5px");
 		lc.setParent(item);
 
 		item.setAttribute("data", data);
 		ComponentsCtrl.applyForward(item, "onDoubleClick=onDoubleClickedRightItem");
 
 	}
-
 }

@@ -10,8 +10,7 @@
 	<window id="secRightDialogWindow"
 		title="${c:l('secRightDialogWindow.title')}" border="none"
 		apply="${secRightDialogCtrl}" closable="true" width="470px"
-		height="175px" sizable="true">
-
+		height="155px">
 
 		<borderlayout id="borderlayoutSecRight">
 
@@ -60,23 +59,24 @@
 
 			<center border="none" margins="0,0,0,0">
 				<div id="divCenterSecRight">
+					<vlayout>
 
-					<groupbox mold="3d" closable="false">
-						<caption image="/images/icons/view.gif"
-							label="${c:l('panel_SecRightDialog.title')}" />
+						<space height="3px" />
 
-						<grid sclass="GridLayoutNoBorder"
-							fixedLayout="true"
-							style="border:0px; padding-left:5px; padding-right:5px;">
+						<grid sclass="GridPlain">
 							<columns>
 								<column align="right" width="130px" />
 								<column width="100%" />
 							</columns>
 							<rows>
 								<row>
-									<label
-										id="label_SecRightDialog_rigName"
-										value="${c:l('label_SecRightDialog_rigName.value')}" />
+									<hbox>
+										<label
+											value="${c:l('label_SecRightDialog_rigName.value')}" />
+										<label value="*"
+											style="color:red;font-size:10px" />
+									</hbox>
+
 									<textbox id="rigName" hflex="1" />
 								</row>
 								<row>
@@ -85,7 +85,6 @@
 								</row>
 								<row>
 									<label
-										id="label_SecRightDialog_rigType"
 										value="${c:l('label_SecRightDialog_rigType.value')}" />
 									<listbox id="rigType" mold="select"
 										rows="1" hflex="1" />
@@ -94,8 +93,7 @@
 							</rows>
 						</grid>
 
-					</groupbox>
-
+					</vlayout>
 				</div>
 			</center>
 

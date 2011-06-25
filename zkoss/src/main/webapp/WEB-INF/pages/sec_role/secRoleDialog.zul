@@ -10,8 +10,7 @@
 	<window id="secRoleDialogWindow"
 		title="${c:l('secRoleDialogWindow.title')}" border="none"
 		apply="${secRoleDialogCtrl}" closable="true" width="500px"
-		height="220px" sizable="true">
-
+		height="195px">
 
 		<borderlayout id="borderlayoutSecRole">
 
@@ -41,24 +40,17 @@
 						<toolbar align="end"
 							style="float:right; border-style: none;">
 							<button id="btnNew"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnNew.tooltiptext')}" />
-							<!-- label="${c:l('btnNew.label')}"	 -->
+								sclass="oT_ButtonWithIcon" />
 							<button id="btnEdit"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnEdit.tooltiptext')}" />
+								sclass="oT_ButtonWithIcon" />
 							<button id="btnDelete"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnDelete.tooltiptext')}" />
+								sclass="oT_ButtonWithIcon" />
 							<button id="btnSave"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnSave.tooltiptext')}" />
+								sclass="oT_ButtonWithIcon" />
 							<button id="btnCancel"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnCancel.tooltiptext')}" />
+								sclass="oT_ButtonWithIcon" />
 							<button id="btnClose"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnClose.tooltiptext')}" />
+								sclass="oT_ButtonWithIcon" />
 						</toolbar>
 					</hbox>
 				</div>
@@ -67,23 +59,25 @@
 			<center border="none" margins="0,0,0,0">
 				<div id="divCenterSecRole">
 
-					<groupbox mold="3d" closable="false">
-						<caption image="/images/icons/view.gif"
-							label="${c:l('panel_SecRoleDialog.title')}" />
+					<vlayout>
 
-						<grid sclass="GridLayoutNoBorder"
-							fixedLayout="true"
-							style="border:0px; padding-left:5px; padding-right:5px;">
+						<space height="3px" />
+
+						<grid sclass="GridPlain">
 
 							<columns>
-								<column width="150px" />
+								<column align="right" width="150px" />
 								<column width="100%" />
 							</columns>
 							<rows>
 								<row>
-									<label
-										id="label_SecRoleDialog_rolShortdescription"
-										value="${c:l('label_SecRoleDialog_rolShortdescription.value')}" />
+									<hbox>
+										<label
+											value="${c:l('label_SecRoleDialog_rolShortdescription.value')}" />
+										<label value="*"
+											style="color:red;font-size:10px" />
+									</hbox>
+
 									<textbox id="rolShortdescription"
 										hflex="1" />
 								</row>
@@ -93,7 +87,6 @@
 								</row>
 								<row>
 									<label
-										id="label_SecRoleDialog_rolLongdescription"
 										value="${c:l('label_SecRoleDialog_rolLongdescription.value')}" />
 									<textbox id="rolLongdescription"
 										multiline="true" rows="5" vflex="1" hflex="1" />
@@ -101,8 +94,8 @@
 
 							</rows>
 						</grid>
-					</groupbox>
 
+					</vlayout>
 
 				</div>
 			</center>

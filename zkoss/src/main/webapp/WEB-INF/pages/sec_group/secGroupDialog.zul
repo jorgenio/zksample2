@@ -10,7 +10,7 @@
 	<window id="secGroupDialogWindow"
 		title="${c:l('secGroupDialogWindow.title')}" border="none"
 		apply="${secGroupDialogCtrl}" closable="true" width="500px"
-		height="225px" sizable="true">
+		height="195px">
 
 		<borderlayout id="borderlayoutSecGroup">
 
@@ -40,24 +40,17 @@
 						<toolbar align="end"
 							style="float:right; border-style: none;">
 							<button id="btnNew"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnNew.tooltiptext')}" />
-							<!-- label="${c:l('btnNew.label')}"	 -->
+								sclass="oT_ButtonWithIcon" />
 							<button id="btnEdit"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnEdit.tooltiptext')}" />
+								sclass="oT_ButtonWithIcon" />
 							<button id="btnDelete"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnDelete.tooltiptext')}" />
+								sclass="oT_ButtonWithIcon" />
 							<button id="btnSave"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnSave.tooltiptext')}" />
+								sclass="oT_ButtonWithIcon" />
 							<button id="btnCancel"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnCancel.tooltiptext')}" />
+								sclass="oT_ButtonWithIcon" />
 							<button id="btnClose"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnClose.tooltiptext')}" />
+								sclass="oT_ButtonWithIcon" />
 						</toolbar>
 					</hbox>
 				</div>
@@ -66,22 +59,24 @@
 			<center border="none" margins="0,0,0,0">
 				<div id="divCenterSecGroup">
 
-					<groupbox mold="3d" closable="false">
-						<caption image="/images/icons/view.gif"
-							label="${c:l('panel_SecGroupDialog.title')}" />
+					<vlayout>
 
-						<grid sclass="GridLayoutNoBorder"
-							fixedLayout="true"
-							style="border:0px; padding-left:5px; padding-right:5px;">
+						<space height="3px" />
+
+						<grid sclass="GridPlain">
 							<columns>
-								<column width="150px" />
+								<column align="right" width="150px" />
 								<column width="100%" />
 							</columns>
 							<rows>
 								<row>
-									<label
-										id="label_SecGroupDialog_grpShortdescription"
-										value="${c:l('label_SecGroupDialog_grpShortdescription.value')}" />
+									<hbox>
+										<label
+											value="${c:l('label_SecGroupDialog_grpShortdescription.value')}" />
+										<label value="*"
+											style="color:red;font-size:10px" />
+									</hbox>
+
 									<textbox id="grpShortdescription"
 										hflex="1" />
 								</row>
@@ -91,8 +86,7 @@
 								</row>
 								<row>
 									<label
-										id="label_SecGroupDialog_grpLongdescription"
-										value="${c:l('label_SecGroupDialog_grpLongdescription.value')}" />
+																				value="${c:l('label_SecGroupDialog_grpLongdescription.value')}" />
 									<textbox id="grpLongdescription"
 										multiline="true" rows="5" hflex="1" />
 								</row>
@@ -100,8 +94,7 @@
 							</rows>
 						</grid>
 
-					</groupbox>
-
+					</vlayout>
 				</div>
 			</center>
 

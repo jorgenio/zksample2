@@ -48,9 +48,11 @@ public class SecGroupListModelItemRenderer implements ListitemRenderer, Serializ
 		Listcell lc;
 
 		lc = new Listcell(group.getGrpShortdescription());
+		lc.setStyle("padding-left: 5px");
 		lc.setParent(item);
 
 		lc = new Listcell(group.getGrpLongdescription());
+		lc.setStyle("padding-left: 5px");
 		lc.setParent(item);
 
 		item.setAttribute("data", data);

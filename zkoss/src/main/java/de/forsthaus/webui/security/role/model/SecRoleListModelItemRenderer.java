@@ -47,9 +47,11 @@ public class SecRoleListModelItemRenderer implements ListitemRenderer, Serializa
 		Listcell lc;
 
 		lc = new Listcell(role.getRolShortdescription());
+		lc.setStyle("padding-left: 5px");
 		lc.setParent(item);
 
 		lc = new Listcell(role.getRolLongdescription());
+		lc.setStyle("padding-left: 5px");
 		lc.setParent(item);
 
 		item.setAttribute("data", data);

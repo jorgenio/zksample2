@@ -27,7 +27,6 @@ import org.zkoss.zul.Window;
 import com.trg.search.Filter;
 
 import de.forsthaus.UserWorkspace;
-import de.forsthaus.backend.model.Article;
 import de.forsthaus.backend.model.Branche;
 import de.forsthaus.backend.service.BrancheService;
 import de.forsthaus.backend.util.HibernateSearchObject;

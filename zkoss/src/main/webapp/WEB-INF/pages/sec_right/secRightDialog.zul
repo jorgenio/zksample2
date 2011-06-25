@@ -41,24 +41,17 @@
 						<toolbar align="end"
 							style="float:right; border-style: none;">
 							<button id="btnNew"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnNew.tooltiptext')}" />
-							<!-- label="${c:l('btnNew.label')}"	 -->
+								sclass="oT_ButtonWithIcon" />
 							<button id="btnEdit"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnEdit.tooltiptext')}" />
+								sclass="oT_ButtonWithIcon" />
 							<button id="btnDelete"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnDelete.tooltiptext')}" />
+								sclass="oT_ButtonWithIcon" />
 							<button id="btnSave"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnSave.tooltiptext')}" />
+								sclass="oT_ButtonWithIcon" />
 							<button id="btnCancel"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnCancel.tooltiptext')}" />
+								sclass="oT_ButtonWithIcon" />
 							<button id="btnClose"
-								sclass="oT_ButtonWithIcon"
-								tooltiptext="${c:l('btnClose.tooltiptext')}" />
+								sclass="oT_ButtonWithIcon" />
 						</toolbar>
 					</hbox>
 				</div>
@@ -76,7 +69,7 @@
 							fixedLayout="true"
 							style="border:0px; padding-left:5px; padding-right:5px;">
 							<columns>
-								<column width="130px" />
+								<column align="right" width="130px" />
 								<column width="100%" />
 							</columns>
 							<rows>
@@ -84,7 +77,7 @@
 									<label
 										id="label_SecRightDialog_rigName"
 										value="${c:l('label_SecRightDialog_rigName.value')}" />
-									<textbox id="rigName" width="99%" />
+									<textbox id="rigName" hflex="1" />
 								</row>
 								<row>
 									<separator bar="true"></separator>
@@ -94,8 +87,8 @@
 									<label
 										id="label_SecRightDialog_rigType"
 										value="${c:l('label_SecRightDialog_rigType.value')}" />
-									<listbox id="rigType" width="100%"
-										mold="select" rows="1" />
+									<listbox id="rigType" mold="select"
+										rows="1" hflex="1" />
 								</row>
 
 							</rows>
@@ -105,10 +98,6 @@
 
 				</div>
 			</center>
-
-			<east border="none"></east>
-			<west border="none"></west>
-			<south border="none"></south>
 
 		</borderlayout>
 

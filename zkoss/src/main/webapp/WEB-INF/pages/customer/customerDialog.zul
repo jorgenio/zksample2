@@ -93,7 +93,7 @@
 														style="border:0px">
 														<columns>
 															<column
-																width="150px" />
+																align="right" width="150px" />
 															<column />
 														</columns>
 														<rows>
@@ -102,7 +102,7 @@
 																	id="label_CustomerDialog_kunNr"
 																	value="${c:l('label_CustomerDialog_kunNr.value')}" />
 																<textbox
-																	id="kunNr" width="150px" />
+																	id="kunNr" hflex="1" />
 															</row>
 															<row>
 																<separator
@@ -117,7 +117,7 @@
 																	id="label_CustomerDialog_kunMatchcode"
 																	value="${c:l('label_CustomerDialog_kunMatchcode.value')}" />
 																<textbox
-																	id="kunMatchcode" width="150px" />
+																	id="kunMatchcode" hflex="1" />
 															</row>
 															<row>
 																<separator
@@ -132,21 +132,21 @@
 																	id="label_CustomerDialog_kunName1"
 																	value="${c:l('label_CustomerDialog_kunName1.value')}" />
 																<textbox
-																	id="kunName1" width="99%" />
+																	id="kunName1" hflex="1" />
 															</row>
 															<row>
 																<label
 																	id="label_CustomerDialog_kunName2"
 																	value="${c:l('label_CustomerDialog_kunName2.value')}" />
 																<textbox
-																	id="kunName2" width="99%" />
+																	id="kunName2" hflex="1" />
 															</row>
 															<row>
 																<label
 																	id="label_CustomerDialog_kunOrt"
 																	value="${c:l('label_CustomerDialog_kunOrt.value')}" />
 																<textbox
-																	id="kunOrt" width="99%" />
+																	id="kunOrt" hflex="1" />
 															</row>
 															<row>
 																<label
@@ -193,7 +193,7 @@
 														style="border:0px">
 														<columns>
 															<column
-																width="150px" />
+																align="right" width="150px" />
 															<column />
 														</columns>
 														<rows>
@@ -224,7 +224,7 @@
 														style="border:0px">
 														<columns>
 															<column
-																width="150px" />
+																align="right" width="150px" />
 															<column
 																width="100%" />
 														</columns>
@@ -234,35 +234,35 @@
 																	id="label_CustomerDialog_kunPhone1"
 																	value="${c:l('label_CustomerDialog_kunPhone1.value')}" />
 																<textbox
-																	value="not used in example" width="99%" />
+																	value="not used in example" hflex="1" />
 															</row>
 															<row>
 																<label
 																	id="label_CustomerDialog_kunPhone2"
 																	value="${c:l('label_CustomerDialog_kunPhone2.value')}" />
 																<textbox
-																	value="not used in example" width="99%" />
+																	value="not used in example" hflex="1" />
 															</row>
 															<row>
 																<label
 																	id="label_CustomerDialog_kunMobile"
 																	value="${c:l('label_CustomerDialog_kunMobile.value')}" />
 																<textbox
-																	value="not used in example" width="99%" />
+																	value="not used in example" hflex="1" />
 															</row>
 															<row>
 																<label
 																	id="label_CustomerDialog_kunFax1"
 																	value="${c:l('label_CustomerDialog_kunFax1.value')}" />
 																<textbox
-																	value="not used in example" width="99%" />
+																	value="not used in example" hflex="1" />
 															</row>
 															<row>
 																<label
 																	id="label_CustomerDialog_kunFax2"
 																	value="${c:l('label_CustomerDialog_kunFax2.value')}" />
 																<textbox
-																	value="not used in example" width="99%" />
+																	value="not used in example" hflex="1" />
 															</row>
 														</rows>
 													</grid>
@@ -288,7 +288,7 @@
 														style="border:0px">
 														<columns>
 															<column
-																width="150px" />
+																align="right" width="150px" />
 															<column
 																width="100%" />
 														</columns>
@@ -298,42 +298,42 @@
 																	id="label_CustomerDialog_kunPayCondition"
 																	value="${c:l('label_CustomerDialog_kunPayCondition.value')}" />
 																<listbox
-																	mold="select" rows="1" width="100%" />
+																	mold="select" rows="1" hflex="1" />
 															</row>
 															<row>
 																<label
 																	id="label_CustomerDialog_kunBonitaet"
 																	value="${c:l('label_CustomerDialog_kunBonitaet.value')}" />
 																<intbox
-																	id="intbox_CustomerDialog_kunBonitaet" width="40px" />
+																	id="intbox_CustomerDialog_kunBonitaet" width="50px" />
 															</row>
 															<row>
 																<label
 																	id="label_CustomerDialog_AmountLastYear"
 																	value="${c:l('label_CustomerDialog_AmountLastYear.value')}" />
 																<textbox
-																	value="not used in example" width="99%" />
+																	value="not used at time" hflex="1" />
 															</row>
 															<row>
 																<label
 																	id="label_CustomerDialog_AmountCurrentYear"
 																	value="${c:l('label_CustomerDialog_AmountCurrentYear.value')}" />
 																<textbox
-																	value="not used in example" width="99%" />
+																	value="not used at time" hflex="1" />
 															</row>
 															<row>
 																<label
 																	id="label_CustomerDialog_AmountCurrentMonth"
 																	value="${c:l('label_CustomerDialog_AmountCurrentMonth.value')}" />
 																<textbox
-																	value="not used in example" width="99%" />
+																	value="not used at time" hflex="1" />
 															</row>
 															<row>
 																<label
 																	id="label_CustomerDialog_AmountLastInvoice"
 																	value="${c:l('label_CustomerDialog_AmountLastInvoice.value')}" />
 																<textbox
-																	value="not used in example" width="99%" />
+																	value="not used at time" hflex="1" />
 															</row>
 														</rows>
 													</grid>
@@ -356,7 +356,7 @@
 														style="border:0px">
 														<columns>
 															<column
-																width="150px" />
+																align="right" width="150px" />
 															<column
 																width="100%" />
 														</columns>
@@ -366,35 +366,35 @@
 																	id="label_CustomerDialog_Addition1"
 																	value="${c:l('label_CustomerDialog_Addition1.value')}" />
 																<textbox
-																	value="not used in example" width="99%" />
+																	value="not used at time" hflex="1" />
 															</row>
 															<row>
 																<label
 																	id="label_CustomerDialog_Addition2"
 																	value="${c:l('label_CustomerDialog_Addition2.value')}" />
 																<textbox
-																	value="not used in example" width="99%" />
+																	value="not used at time" hflex="1" />
 															</row>
 															<row>
 																<label
 																	id="label_CustomerDialog_Addition3"
 																	value="${c:l('label_CustomerDialog_Addition3.value')}" />
 																<textbox
-																	value="not used in example" width="99%" />
+																	value="not used at time" hflex="1" />
 															</row>
 															<row>
 																<label
 																	id="label_CustomerDialog_Addition4"
 																	value="${c:l('label_CustomerDialog_Addition4.value')}" />
 																<textbox
-																	value="not used in example" width="99%" />
+																	value="not used at time" hflex="1" />
 															</row>
 															<row>
 																<label
 																	id="label_CustomerDialog_Addition5"
 																	value="${c:l('label_CustomerDialog_Addition5.value')}" />
 																<textbox
-																	value="not used in example" width="99%" />
+																	value="not used at time" hflex="1" />
 															</row>
 														</rows>
 													</grid>

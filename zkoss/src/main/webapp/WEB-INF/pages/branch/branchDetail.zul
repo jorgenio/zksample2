@@ -47,7 +47,7 @@
 													id="txtb_BranchText"
 													value="@{controller.branche.braBezeichnung}"
 													readonly="true" constraint="no empty" maxlength="30"
-													width="200px" />
+													hflex="1" />
 											</row>
 										</rows>
 									</grid>

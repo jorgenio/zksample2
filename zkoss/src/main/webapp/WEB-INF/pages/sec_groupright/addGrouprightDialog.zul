@@ -46,8 +46,8 @@
 									id="label_AddGroupRightDialog_GroupName"
 									value="${c:l('label_AddGroupRightDialog_GroupName.value')}" />
 								<textbox
-									id="textbox_AddGroupRightDialog_GroupName" width="99%"
-									readonly="true" />
+									id="textbox_AddGroupRightDialog_GroupName" readonly="true"
+									hflex="1" />
 							</row>
 							<row>
 								<separator bar="true"></separator>
@@ -232,8 +232,8 @@
 
 									<vbox width="100%" align="center">
 										<textbox
-											id="textbox_AddGroupRightDialog_RightName" width="99%"
-											readonly="true" />
+											id="textbox_AddGroupRightDialog_RightName" readonly="true"
+											hflex="1" />
 									</vbox>
 
 								</hbox>

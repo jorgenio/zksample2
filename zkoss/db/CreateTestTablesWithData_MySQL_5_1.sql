@@ -517,6 +517,7 @@ alter table sec_loginlog add constraint ref_lgl_to_i2c foreign key (i2c_id)
       
 /******************** TEST DATA ********************/
 
+      
 /******************** Filiale Daten ********************/
 INSERT INTO FILIALE (FIL_ID, FIL_NR, FIL_BEZEICHNUNG,FIL_NAME1,FIL_NAME2,FIL_ORT,VERSION) values
 (1,'0001','Filiale Muenchen','Hoermann Gmbh','Personaldienstleistungen','Muenchen',0),
@@ -916,6 +917,7 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15754, 6, 'button_SecRoleDialog_btnDelete', 0),
 (15755, 6, 'button_SecRoleDialog_btnSave', 0),
 (15756, 6, 'button_SecRoleDialog_btnClose', 0),
+(15757, 6, 'button_SecRoleDialog_btnCancel', 0),
 /* --> secGroupDialogWindow */
 (15760, 0, 'secGroupDialogWindow', 0),
 /* --> secGroupDialogWindow BUTTONS*/
@@ -925,6 +927,7 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15764, 6, 'button_SecGroupDialog_btnDelete', 0),
 (15765, 6, 'button_SecGroupDialog_btnSave', 0),
 (15766, 6, 'button_SecGroupDialog_btnClose', 0),
+(15767, 6, 'button_SecGroupDialog_btnCancel', 0),
 /* --> secRightDialogWindow */
 (15770, 0, 'secRightDialogWindow', 0),
 /* --> secRightDialogWindow BUTTONS*/
@@ -933,8 +936,8 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15773, 6, 'button_SecRightDialog_btnEdit', 0),
 (15774, 6, 'button_SecRightDialog_btnDelete', 0),
 (15775, 6, 'button_SecRightDialog_btnSave', 0),
-(15776, 6, 'button_SecRightDialog_btnClose', 0);
-
+(15776, 6, 'button_SecRightDialog_btnClose', 0),
+(15777, 6, 'button_SecRightDialog_btnCancel', 0);
 /******************** Security: SEC_GROUP-RIGHTS ********************/  
 /* Headoffice Supervisor Group*/
 INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values 
@@ -1380,6 +1383,8 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14605, 13070, 15765, 0),
 /* Right: button_SecGroupDialog_btnClose */
 (14606, 13070, 15766, 0),
+/* Right: button_SecGroupDialog_btnCancel */
+(14607, 13070, 15767, 0),
 
 /* Group: Security_Roles */
 /* Right: secRoleDialogWindow */
@@ -1396,6 +1401,8 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14615, 13071, 15755, 0),
 /* Right: button_SecRoleDialog_btnClose */
 (14616, 13071, 15756, 0),
+/* Right: button_SecRoleDialog_btnCancel */
+(14617, 13071, 15757, 0),
 
 /* Group: Security_Rights */
 /* Right: secRightDialogWindow */
@@ -1410,50 +1417,51 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14624, 13072, 15774, 0),
 /* Right: button_SecRightDialog_btnSave */
 (14625, 13072, 15775, 0),
-
 /* Right: button_SecRightDialog_btnClose */
-(14626, 13072, 15776, 0);
+(14626, 13072, 15776, 0),
+/* Right: button_SecRightDialog_btnCancel */
+(14627, 13072, 15777, 0);
 
 
 /******************** Branche Daten ********************/
-INSERT INTO BRANCHE (BRA_ID, BRA_NR, BRA_BEZEICHNUNG, VERSION) VALUES
-(1000, '100', 'Elektro',0),
-(1001, '101', 'Maler',0),
-(1002, '102', 'Holzverabeitung',0),
-(1003, '103', 'Kaufmaennisch',0),
-(1004, '104', 'Versicherung',0),
-(1005, '105', 'Mess- und Regeltechnik',0),
-(1006, '106', 'Industriemontagen',0),
-(1007, '107', 'KFZ',0),
-(1008, '108', 'Banken',0),
-(1009, '109', 'Grosshandel',0),
-(1010, '110', 'Einzelhandel',0),
-(1011, '111', 'Werbung',0),
-(1012, '112', 'Gastronomie',0),
-(1014, '114', 'Pflegedienste',0),
-(1015, '115', 'Transportwesen',0),
-(1016, '116', 'Metallverarbeitung',0),
-(1017, '117', 'Schlosserei',0),
-(1018, '118', 'Sanitaer',0),
-(1019, '119', 'Heizungsbau',0),
-(1020, '120', 'Wasserwirtschaft',0),
-(1021, '121', 'Schiffsbau',0),
-(1022, '122', 'Laermschutz',0),
-(1023, '123', 'Geruestbau',0),
-(1024, '124', 'Fassadenbau',0),
-(1025, '125', 'Farbherstellung',0),
-(1026, '126', 'Kieswerk',0),
-(1027, '127', 'Blechnerei',0),
-(1028, '128', 'Geruestverleih',0),
-(1029, '129', 'Pflasterarbeiten',0),
-(1030, '130', 'Trockenbau',0),
-(1031, '131', 'Trockenbau- und Sanierung',0),
-(1032, '132', 'Huehnerfarm',0),
-(1033, '000', '',0),
-(1034, '134', 'Transportwesen allgemein',0),
-(1035, '135', 'Schwertransport',0),
-(1036, '136', 'Gefahrgut Transport',0),
-(1037, '137', 'Spedition',0);
+INSERT INTO BRANCHE (BRA_ID,BRA_BEZEICHNUNG, VERSION) VALUES
+(1000,  'Elektro',0),
+(1001,  'Maler',0),
+(1002,  'Holzverabeitung',0),
+(1003,  'Kaufmaennisch',0),
+(1004,  'Versicherung',0),
+(1005,  'Mess- und Regeltechnik',0),
+(1006,  'Industriemontagen',0),
+(1007,  'KFZ',0),
+(1008,  'Banken',0),
+(1009,  'Grosshandel',0),
+(1010,  'Einzelhandel',0),
+(1011,  'Werbung',0),
+(1012,  'Gastronomie',0),
+(1014,  'Pflegedienste',0),
+(1015,  'Transportwesen',0),
+(1016,  'Metallverarbeitung',0),
+(1017,  'Schlosserei',0),
+(1018,  'Sanitaer',0),
+(1019,  'Heizungsbau',0),
+(1020,  'Wasserwirtschaft',0),
+(1021,  'Schiffsbau',0),
+(1022,  'Laermschutz',0),
+(1023,  'Geruestbau',0),
+(1024,  'Fassadenbau',0),
+(1025,  'Farbherstellung',0),
+(1026,  'Kieswerk',0),
+(1027,  'Blechnerei',0),
+(1028,  'Geruestverleih',0),
+(1029,  'Pflasterarbeiten',0),
+(1030,  'Trockenbau',0),
+(1031,  'Trockenbau- und Sanierung',0),
+(1032,  'Huehnerfarm',0),
+(1033,  '.',0),
+(1034,  'Transportwesen allgemein',0),
+(1035,  'Schwertransport',0),
+(1036,  'Gefahrgut Transport',0),
+(1037,  'Spedition',0);
 
 /******************** Kunden Daten ********************/
 INSERT INTO KUNDE (KUN_ID,KUN_FIL_ID,KUN_BRA_ID, KUN_NR, KUN_MATCHCODE,KUN_NAME1,KUN_NAME2,KUN_ORT,KUN_MAHNSPERRE,VERSION) VALUES 
@@ -1886,7 +1894,8 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 85, 'Carlos Santana feat. Everlast (Live 2008))', 'Put my lights on',              'http://www.youtube.com/embed/9eJgTUUw4Pw',   0);
 
 
- /* fill sample logins */
+
+/* fill sample logins */
 INSERT INTO sec_loginlog(lgl_id, i2c_id, lgl_loginname,lgl_logtime, lgl_ip, lgl_status_id,lgl_sessionid, VERSION) VALUES 
 ( 1, NULL, 'admin', '2009-01-01 13:52:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
 ( 2, NULL, 'user1', '2009-01-01 10:12:33', '203.237.141.216', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
@@ -2007,4 +2016,3 @@ INSERT INTO app_news (
 (   92, '2011-05-30', 'Added a button/method for closing all open tabs except the home/dashboard tab.',  0),
 (   93, '2011-06-07', 'Added a new Dashboard module for starting the google translator. Thanks to ''gekkio'' for helping with the correct script components.',  0),
 (   94, '2011-06-18', 'Refactoring of the CRUD button-controller. Cleaned up from old stuff and added navigation buttons. See them working in the ''branch'', ''article'' and ''office'' modules.',  0);
-

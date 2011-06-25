@@ -85,7 +85,7 @@
 											<label
 												value="${c:l('label_GuestBook_gubUsrName.value')}" />
 											<textbox
-												id="textbox_gubUsrName" width="200px" />
+												id="textbox_gubUsrName" hflex="1" />
 										</row>
 										<row>
 											<separator bar="true" />
@@ -95,14 +95,15 @@
 											<label
 												value="${c:l('label_GuestBook_gubSubject.value')}" />
 											<textbox
-												id="textbox_gubSubject" width="99%" />
+												id="textbox_gubSubject" hflex="1" />
 										</row>
 										<row>
 											<label
 												value="${c:l('label_GuestBook_gubText.value')}" />
 
 											<textbox
-												id="textbox_gubText" multiline="true" width="98%" rows="16" />
+												id="textbox_gubText" multiline="true" rows="16" vflex="1"
+												hflex="1" />
 
 										</row>
 									</rows>

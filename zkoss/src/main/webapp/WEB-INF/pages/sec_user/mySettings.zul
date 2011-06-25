@@ -21,7 +21,7 @@
 
 				<toolbar align="start"
 					style="float:left; border-style: none;">
-					<toolbarbutton id="btnHelp" 
+					<toolbarbutton id="btnHelp"
 						image="/images/icons/light_16x16.gif"
 						tooltiptext="${c:l('btnHelp.tooltiptext')}" />
 				</toolbar>
@@ -54,7 +54,7 @@
 			<cell width="50%">
 				<grid sclass="GridPlain" fixedLayout="true">
 					<columns>
-						<column width="150px" />
+						<column align="right" width="150px" />
 						<column />
 					</columns>
 					<rows>
@@ -68,7 +68,7 @@
 							</hbox>
 							<textbox id="txtb_User_Loginname"
 								value="@{controller.user.usrLoginname}" constraint="no empty"
-								readonly="true" maxlength="50" width="98%" />
+								readonly="true" maxlength="50" hflex="1" />
 						</row>
 
 						<row>
@@ -86,7 +86,7 @@
 							</hbox>
 							<textbox id="txtb_User_Password"
 								value="@{controller.user.usrPassword}" constraint="no empty"
-								type="password" readonly="true" maxlength="50" width="98%" />
+								type="password" readonly="true" maxlength="50" hflex="1" />
 						</row>
 
 						<!-- Password re-Typed / Passwort Wiederholung -->
@@ -99,7 +99,7 @@
 							</hbox>
 							<textbox id="txtb_User_Password_Retype"
 								value="@{controller.pwd.retypePassword}" constraint="no empty"
-								type="password" readonly="true" maxlength="50" width="98%" />
+								type="password" readonly="true" maxlength="50" hflex="1" />
 						</row>
 
 						<row>
@@ -113,7 +113,7 @@
 
 							<textbox id="txtb_User_Lastname"
 								value="@{controller.user.usrLastname}" readonly="true"
-								maxlength="50" width="98%" />
+								maxlength="50" hflex="1" />
 						</row>
 
 						<!-- First name / Vorname -->
@@ -122,7 +122,7 @@
 
 							<textbox id="txtb_User_Firstname"
 								value="@{controller.user.usrFirstname}" readonly="true"
-								maxlength="50" width="98%" />
+								maxlength="50" hflex="1" />
 						</row>
 
 					</rows>
@@ -132,7 +132,7 @@
 			<cell width="50%">
 				<grid sclass="GridPlain" fixedLayout="true">
 					<columns>
-						<column width="150px" />
+						<column align="right" width="150px" />
 						<column />
 					</columns>
 					<rows>
@@ -146,7 +146,7 @@
 
 							<textbox id="txtb_User_Email"
 								value="@{controller.user.usrEmail}" constraint="no empty"
-								readonly="true" maxlength="200" width="98%" />
+								readonly="true" maxlength="200" hflex="1" />
 						</row>
 
 					</rows>
@@ -154,9 +154,6 @@
 
 			</cell>
 		</hbox>
-
-		<div></div>
-
 
 	</window>
 </zk>

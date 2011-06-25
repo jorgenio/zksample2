@@ -361,8 +361,8 @@ public class SecRightDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// set Readonly mode accordingly if the object is new or not.
 		if (aRight.isNew()) {
-			btnCtrl.setInitNew();
 			doEdit();
+			btnCtrl.setInitNew();
 		} else {
 			btnCtrl.setInitEdit();
 			doReadOnly();

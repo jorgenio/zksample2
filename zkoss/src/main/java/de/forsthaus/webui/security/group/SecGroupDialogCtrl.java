@@ -343,8 +343,8 @@ public class SecGroupDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// set Readonly mode accordingly if the object is new or not.
 		if (aGroup.isNew()) {
-			btnCtrl.setInitNew();
 			doEdit();
+			btnCtrl.setInitNew();
 		} else {
 			btnCtrl.setInitEdit();
 			doReadOnly();

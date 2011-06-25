@@ -110,6 +110,7 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 	 * @throws Exception
 	 */
 	public void onCreate$secRoleDialogWindow(Event event) throws Exception {
+
 		// create the Button Controller. Disable not used buttons during working
 		btnCtrl = new ButtonStatusCtrl(getUserWorkspace(), btnCtroller_ClassPrefix, btnNew, btnEdit, btnDelete, btnSave, btnCancel, btnClose);
 
@@ -347,8 +348,8 @@ public class SecRoleDialogCtrl extends GFCBaseCtrl implements Serializable {
 
 		// set Readonly mode accordingly if the object is new or not.
 		if (aRole.isNew()) {
-			btnCtrl.setInitNew();
 			doEdit();
+			btnCtrl.setInitNew();
 		} else {
 			btnCtrl.setInitEdit();
 			doReadOnly();

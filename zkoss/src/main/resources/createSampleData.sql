@@ -866,6 +866,7 @@ alter table sec_userrole
 /******************** TEST DATA ********************/
 
 
+
 /******************** Filiale Daten ********************/
 INSERT INTO FILIALE (FIL_ID, FIL_NR, FIL_BEZEICHNUNG,FIL_NAME1,FIL_NAME2,FIL_ORT,VERSION) values
 (1,'0001','Filiale Muenchen','Hoermann Gmbh','Personaldienstleistungen','Muenchen',0),
@@ -1265,6 +1266,7 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15754, 6, 'button_SecRoleDialog_btnDelete', 0),
 (15755, 6, 'button_SecRoleDialog_btnSave', 0),
 (15756, 6, 'button_SecRoleDialog_btnClose', 0),
+(15757, 6, 'button_SecRoleDialog_btnCancel', 0),
 /* --> secGroupDialogWindow */
 (15760, 0, 'secGroupDialogWindow', 0),
 /* --> secGroupDialogWindow BUTTONS*/
@@ -1274,6 +1276,7 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15764, 6, 'button_SecGroupDialog_btnDelete', 0),
 (15765, 6, 'button_SecGroupDialog_btnSave', 0),
 (15766, 6, 'button_SecGroupDialog_btnClose', 0),
+(15767, 6, 'button_SecGroupDialog_btnCancel', 0),
 /* --> secRightDialogWindow */
 (15770, 0, 'secRightDialogWindow', 0),
 /* --> secRightDialogWindow BUTTONS*/
@@ -1282,8 +1285,8 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15773, 6, 'button_SecRightDialog_btnEdit', 0),
 (15774, 6, 'button_SecRightDialog_btnDelete', 0),
 (15775, 6, 'button_SecRightDialog_btnSave', 0),
-(15776, 6, 'button_SecRightDialog_btnClose', 0);
-
+(15776, 6, 'button_SecRightDialog_btnClose', 0),
+(15777, 6, 'button_SecRightDialog_btnCancel', 0);
 /******************** Security: SEC_GROUP-RIGHTS ********************/  
 /* Headoffice Supervisor Group*/
 INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values 
@@ -1729,6 +1732,8 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14605, 13070, 15765, 0),
 /* Right: button_SecGroupDialog_btnClose */
 (14606, 13070, 15766, 0),
+/* Right: button_SecGroupDialog_btnCancel */
+(14607, 13070, 15767, 0),
 
 /* Group: Security_Roles */
 /* Right: secRoleDialogWindow */
@@ -1745,6 +1750,8 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14615, 13071, 15755, 0),
 /* Right: button_SecRoleDialog_btnClose */
 (14616, 13071, 15756, 0),
+/* Right: button_SecRoleDialog_btnCancel */
+(14617, 13071, 15757, 0),
 
 /* Group: Security_Rights */
 /* Right: secRightDialogWindow */
@@ -1759,68 +1766,70 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14624, 13072, 15774, 0),
 /* Right: button_SecRightDialog_btnSave */
 (14625, 13072, 15775, 0),
-
 /* Right: button_SecRightDialog_btnClose */
-(14626, 13072, 15776, 0);
+(14626, 13072, 15776, 0),
+/* Right: button_SecRightDialog_btnCancel */
+(14627, 13072, 15777, 0);
+
 
 /******************** Branche Daten ********************/
-INSERT INTO BRANCHE (BRA_ID, BRA_NR, BRA_BEZEICHNUNG, VERSION) VALUES
-(1000, '100', 'Elektro',0),
-(1001, '101', 'Maler',0),
-(1002, '102', 'Holzverabeitung',0),
-(1003, '103', 'Kaufmaennisch',0),
-(1004, '104', 'Versicherung',0),
-(1005, '105', 'Mess- und Regeltechnik',0),
-(1006, '106', 'Industriemontagen',0),
-(1007, '107', 'KFZ',0),
-(1008, '108', 'Banken',0),
-(1009, '109', 'Grosshandel',0),
-(1010, '110', 'Einzelhandel',0),
-(1011, '111', 'Werbung',0),
-(1012, '112', 'Gastronomie',0),
-(1014, '114', 'Pflegedienste',0),
-(1015, '115', 'Transportwesen',0),
-(1016, '116', 'Metallverarbeitung',0),
-(1017, '117', 'Schlosserei',0),
-(1018, '118', 'Sanitaer',0),
-(1019, '119', 'Heizungsbau',0),
-(1020, '120', 'Wasserwirtschaft',0),
-(1021, '121', 'Schiffsbau',0),
-(1022, '122', 'Laermschutz',0),
-(1023, '123', 'Geruestbau',0),
-(1024, '124', 'Fassadenbau',0),
-(1025, '125', 'Farbherstellung',0),
-(1026, '126', 'Kieswerk',0),
-(1027, '127', 'Blechnerei',0),
-(1028, '128', 'Geruestverleih',0),
-(1029, '129', 'Pflasterarbeiten',0),
-(1030, '130', 'Trockenbau',0),
-(1031, '131', 'Trockenbau- und Sanierung',0),
-(1032, '132', 'Huehnerfarm',0),
-(1033, '000', '.',0),
-(1034, '134', 'Transportwesen allgemein',0),
-(1035, '135', 'Schwertransport',0),
-(1036, '136', 'Gefahrgut Transport',0),
-(1037, '137', 'Spedition',0);
+INSERT INTO BRANCHE (BRA_ID,BRA_BEZEICHNUNG, VERSION) VALUES
+(1000,  'Elektro',0),
+(1001,  'Maler',0),
+(1002,  'Holzverabeitung',0),
+(1003,  'Kaufmaennisch',0),
+(1004,  'Versicherung',0),
+(1005,  'Mess- und Regeltechnik',0),
+(1006,  'Industriemontagen',0),
+(1007,  'KFZ',0),
+(1008,  'Banken',0),
+(1009,  'Grosshandel',0),
+(1010,  'Einzelhandel',0),
+(1011,  'Werbung',0),
+(1012,  'Gastronomie',0),
+(1014,  'Pflegedienste',0),
+(1015,  'Transportwesen',0),
+(1016,  'Metallverarbeitung',0),
+(1017,  'Schlosserei',0),
+(1018,  'Sanitaer',0),
+(1019,  'Heizungsbau',0),
+(1020,  'Wasserwirtschaft',0),
+(1021,  'Schiffsbau',0),
+(1022,  'Laermschutz',0),
+(1023,  'Geruestbau',0),
+(1024,  'Fassadenbau',0),
+(1025,  'Farbherstellung',0),
+(1026,  'Kieswerk',0),
+(1027,  'Blechnerei',0),
+(1028,  'Geruestverleih',0),
+(1029,  'Pflasterarbeiten',0),
+(1030,  'Trockenbau',0),
+(1031,  'Trockenbau- und Sanierung',0),
+(1032,  'Huehnerfarm',0),
+(1033,  '.',0),
+(1034,  'Transportwesen allgemein',0),
+(1035,  'Schwertransport',0),
+(1036,  'Gefahrgut Transport',0),
+(1037,  'Spedition',0);
 
 /******************** Kunden Daten ********************/
 INSERT INTO KUNDE (KUN_ID,KUN_FIL_ID,KUN_BRA_ID, KUN_NR, KUN_MATCHCODE,KUN_NAME1,KUN_NAME2,KUN_ORT,KUN_MAHNSPERRE,VERSION) VALUES 
-(  20,1,1000, '20', 'MUELLER','--> Mueller','Elektroinstallationen','Freiburg',true,0),
-(  21,1,1000, '21', 'HUBER','--> Huber','Elektroinstallationen','Oberursel',true,0),
-(  22,1,1000, '22', 'SIEMENS','Siemens AG','Elektroinstallationen','Braunschweig',false,0),
-(  23,1,1000, '23', 'AEG','AEG','Elektroinstallationen','Stuttgart',false,0),
-(  24,1,1019, '24', 'BUDERUS','Buderus Heizungsbau GmbH','Elektroinstallationen','Rastatt',true,0),
-(  25,1,1000, '25', 'MEILER','Elektro Meiler','Inhaber W. Erler','Karlsruhe',true,0),
-(  26,1,1000, '26', 'BADER','Bader GmbH','Elektroinstallationen','Berlin',false,0),
-(  27,1,1000, '27', 'HESKENS','Heskens GmbH','Elektroinstallationen','Badenweiler',false,0),
-(  28,1,1000, '28', 'MAIER','Maier GmbH','Elektroinstallationen','Friedberg',false,0),
-(  29,1,1000, '29', 'SCHULZE','Schulze GmbH','Elektroinstallationen','Freiburg',true,0),
-(  30,1,1004, '30', 'SCHMIERFINK','Schmierfink AG','Versicherungen','Freiburg',true,0),
-(  31,1,1005, '31', 'SCHULZE','Schulze Ltd.','Anlagenbau','Buxtehude',true,0),
-(  32,1,1005, '32', 'SCHREINER','Schreiner','SPS-Steuerungsbau','Hamburg',true,0),
-(  33,1,1004, '33', 'GUTE RUHE','Gute Ruhe AG','Versicherungen','Berlin',true,0),
-(  34,1,1003, '34', 'FREIBERGER','Freiberger GmbH','In- und Export','Aachen',true,0),
-(  35,1,1002, '35', 'BERGMANN','Saegewerk Bergmann','Holzverarbeitung','Neustadt',true,0),
+(20,1,1000, '20', 'MUELLER','--> MUEller','Elektroinstallationen','Freiburg',true,0),
+(21,1,1000, '21', 'HUBER','--> Huber','Elektroinstallationen','Oberursel',true,0),
+(22,1,1000, '22', 'SIEMENS','Siemens AG','Elektroinstallationen','Braunschweig',false,0),
+(23,1,1000, '23', 'AEG','AEG','Elektroinstallationen','Stuttgart',false,0),
+(24,1,1019, '24', 'BUDERUS','Buderus Heizungsbau GmbH','Elektroinstallationen','Rastatt',true,0),
+(25,1,1000, '25', 'MEILER','Elektro Meiler','Inhaber W. Erler','Karlsruhe',true,0),
+(26,1,1000, '26', 'BADER','Bader GmbH','Elektroinstallationen','Berlin',false,0),
+(27,1,1000, '27', 'HESKENS','Heskens GmbH','Elektroinstallationen','Badenweiler',false,0),
+(28,1,1000, '28', 'MAIER','Maier GmbH','Elektroinstallationen','Friedberg',false,0),
+(29,1,1000, '29', 'SCHULZE','Schulze GmbH','Elektroinstallationen','Freiburg',true,0),
+(30,1,1004, '30', 'SCHMIERFINK','Schmierfink AG','Versicherungen','Freiburg',true,0),
+(31,1,1005, '31', 'SCHULZE','Schulze Ltd.','Anlagenbau','Buxtehude',true,0),
+(32,1,1005, '32', 'SCHREINER','Schreiner','SPS-Steuerungsbau','Hamburg',true,0),
+(33,1,1004, '33', 'GUTE RUHE','Gute Ruhe AG','Versicherungen','Berlin',true,0),
+(34,1,1003, '34', 'FREIBERGER','Freiberger GmbH','In- und Export','Aachen',true,0),
+(35,1,1002, '35', 'BERGMANN','Saegewerk Bergmann','Holzverarbeitung','Neustadt',true,0),
 (2000,1,1002, '2000', 'SEILER','Saegewerk Seiler','Holzverarbeitung','Freiburg',true,0),
 (2001,1,1002, '2001', 'BAUER','Hermann Bauer','Sgerwerk','Titisee-Neustadt',true,0),
 (2002,1,1000, '2002', 'BEINHARD','Gebrueder Beinhard GbR','Elektroinstallationen','Muenchen',true,0),
@@ -2145,7 +2154,6 @@ INSERT INTO sys_countrycode(CCD_ID, CCD_NAME, CCD_CODE2, VERSION) VALUES
 (249,'EAST TIMOR','TP', 0),
 (250,'MONTENEGRO','ME', 0);
 
-
 /******************** YouTube Music Links ********************/
 INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VALUES 
 (  1, 'Loquat',                                   'Swing Set Chain',                 'http://www.youtube.com/embed/51G24IVfcaI',   0),
@@ -2236,27 +2244,26 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 
 
 
- /* fill sample logins */
+/* fill sample logins */
 INSERT INTO sec_loginlog(lgl_id, i2c_id, lgl_loginname,lgl_logtime, lgl_ip, lgl_status_id,lgl_sessionid, VERSION) VALUES 
-( 1, NULL, 'admin',      '2010-08-12 13:52:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-( 2, NULL, 'user1',      '2010-08-12 10:12:33', '203.237.141.216', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-( 3, NULL, 'admin',      '2010-12-08 11:12:33', '202.96.188.101', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-( 4, NULL, 'aaaa',       '2010-12-08 12:22:33', '84.234.27.179', 0, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-( 5, NULL, 'admin',      '2010-12-08 12:32:33', '84.139.11.102', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-( 6, NULL, 'user2',      '2010-01-08 13:52:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-( 7, NULL, 'admin',      '2010-01-08 14:45:33', '212.227.148.189', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-( 8, NULL, 'admin',      '2010-01-08 15:33:33', '84.185.153.21', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-( 9, NULL, 'admin',      '2010-01-08 17:22:33', '212.156.5.254', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-(10, NULL, 'user1',      '2010-01-08 17:22:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-(11, NULL, 'admin',      '2010-01-08 17:22:33', '121.242.65.131', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-(12, NULL, 'admin',      '2010-01-08 17:22:33', '202.96.188.101', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-(13, NULL, 'headoffice', '2010-01-08 17:22:33', '118.68.97.90', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-(14, NULL, 'test',       '2010-01-08 17:22:33', '125.160.32.182', 0, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-(15, NULL, 'headoffice', '2010-01-08 17:22:33', '70.171.254.160', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-(16, NULL, 'headoffice', '2010-01-08 17:22:33', '89.218.26.20', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-(17, NULL, 'headoffice', '2010-01-08 17:22:33', '118.68.97.45', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
-(18, NULL, 'admin',      '2010-01-08 17:22:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0);
-
+( 1, NULL, 'admin', '2009-01-01 13:52:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+( 2, NULL, 'user1', '2009-01-01 10:12:33', '203.237.141.216', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+( 3, NULL, 'admin', '2009-01-01 11:12:33', '202.96.188.101', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+( 4, NULL, 'aaaa', '2009-01-01 12:22:33', '84.234.27.179', 0, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+( 5, NULL, 'admin', '2009-01-01 12:32:33', '84.139.11.102', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+( 6, NULL, 'user2', '2009-01-01 13:52:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+( 7, NULL, 'admin', '2009-01-01 14:45:33', '212.227.148.189', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+( 8, NULL, 'admin', '2009-01-01 15:33:33', '84.185.153.21', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+( 9, NULL, 'admin', '2009-01-01 17:22:33', '212.156.5.254', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(10, NULL, 'user1', '2009-01-01 17:22:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(11, NULL, 'admin', '2009-01-01 17:22:33', '121.242.65.131', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(12, NULL, 'admin', '2009-01-01 17:22:33', '202.96.188.101', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(13, NULL, 'headoffice', '2009-01-01 17:22:33', '118.68.97.90', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(14, NULL, 'test', '2009-01-01 17:22:33', '125.160.32.182', 0, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(15, NULL, 'headoffice', '2009-01-01 17:22:33', '70.171.254.160', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(16, NULL, 'headoffice', '2009-01-01 17:22:33', '89.218.26.20', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(17, NULL, 'headoffice', '2009-01-01 17:22:33', '118.68.97.45', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0),
+(18, NULL, 'admin', '2009-01-01 17:22:33', '87.118.90.17', 1, 'hjfjgfdfggzgzufuzfuzdfgfgfdvfv', 0);
 
 /* fill application history for changes */
 INSERT INTO app_news (
@@ -2358,7 +2365,6 @@ INSERT INTO app_news (
 (   92, '2011-05-30', 'Added a button/method for closing all open tabs except the home/dashboard tab.',  0),
 (   93, '2011-06-07', 'Added a new Dashboard module for starting the google translator. Thanks to ''gekkio'' for helping with the correct script components.',  0),
 (   94, '2011-06-18', 'Refactoring of the CRUD button-controller. Cleaned up from old stuff and added navigation buttons. See them working in the ''branch'', ''article'' and ''office'' modules.',  0);
-
 
 
 /* create the sequences */

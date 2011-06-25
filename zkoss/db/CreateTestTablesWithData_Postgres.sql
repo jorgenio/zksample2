@@ -1448,6 +1448,7 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15754, 6, 'button_SecRoleDialog_btnDelete', 0),
 (15755, 6, 'button_SecRoleDialog_btnSave', 0),
 (15756, 6, 'button_SecRoleDialog_btnClose', 0),
+(15757, 6, 'button_SecRoleDialog_btnCancel', 0),
 /* --> secGroupDialogWindow */
 (15760, 0, 'secGroupDialogWindow', 0),
 /* --> secGroupDialogWindow BUTTONS*/
@@ -1457,6 +1458,7 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15764, 6, 'button_SecGroupDialog_btnDelete', 0),
 (15765, 6, 'button_SecGroupDialog_btnSave', 0),
 (15766, 6, 'button_SecGroupDialog_btnClose', 0),
+(15767, 6, 'button_SecGroupDialog_btnCancel', 0),
 /* --> secRightDialogWindow */
 (15770, 0, 'secRightDialogWindow', 0),
 /* --> secRightDialogWindow BUTTONS*/
@@ -1465,8 +1467,8 @@ INSERT INTO SEC_RIGHT (RIG_ID, RIG_TYPE, RIG_NAME, VERSION) values
 (15773, 6, 'button_SecRightDialog_btnEdit', 0),
 (15774, 6, 'button_SecRightDialog_btnDelete', 0),
 (15775, 6, 'button_SecRightDialog_btnSave', 0),
-(15776, 6, 'button_SecRightDialog_btnClose', 0);
-
+(15776, 6, 'button_SecRightDialog_btnClose', 0),
+(15777, 6, 'button_SecRightDialog_btnCancel', 0);
 /******************** Security: SEC_GROUP-RIGHTS ********************/  
 /* Headoffice Supervisor Group*/
 INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values 
@@ -1912,6 +1914,8 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14605, 13070, 15765, 0),
 /* Right: button_SecGroupDialog_btnClose */
 (14606, 13070, 15766, 0),
+/* Right: button_SecGroupDialog_btnCancel */
+(14607, 13070, 15767, 0),
 
 /* Group: Security_Roles */
 /* Right: secRoleDialogWindow */
@@ -1928,6 +1932,8 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14615, 13071, 15755, 0),
 /* Right: button_SecRoleDialog_btnClose */
 (14616, 13071, 15756, 0),
+/* Right: button_SecRoleDialog_btnCancel */
+(14617, 13071, 15757, 0),
 
 /* Group: Security_Rights */
 /* Right: secRightDialogWindow */
@@ -1942,9 +1948,11 @@ INSERT INTO SEC_GROUPRIGHT (GRI_ID, GRP_ID, RIG_ID, VERSION) values
 (14624, 13072, 15774, 0),
 /* Right: button_SecRightDialog_btnSave */
 (14625, 13072, 15775, 0),
-
 /* Right: button_SecRightDialog_btnClose */
-(14626, 13072, 15776, 0);
+(14626, 13072, 15776, 0),
+/* Right: button_SecRightDialog_btnCancel */
+(14627, 13072, 15777, 0);
+
 
 /******************** Branche Daten ********************/
 INSERT INTO BRANCHE (BRA_ID,BRA_BEZEICHNUNG, VERSION) VALUES

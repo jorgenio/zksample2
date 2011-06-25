@@ -85,7 +85,7 @@
 										id="label_SecRoleDialog_rolShortdescription"
 										value="${c:l('label_SecRoleDialog_rolShortdescription.value')}" />
 									<textbox id="rolShortdescription"
-										width="99%" />
+										hflex="1" />
 								</row>
 								<row>
 									<separator bar="true"></separator>
@@ -96,7 +96,7 @@
 										id="label_SecRoleDialog_rolLongdescription"
 										value="${c:l('label_SecRoleDialog_rolLongdescription.value')}" />
 									<textbox id="rolLongdescription"
-										width="98%" multiline="true" rows="5" />
+										multiline="true" rows="5" vflex="1" hflex="1" />
 								</row>
 
 							</rows>
@@ -107,12 +107,7 @@
 				</div>
 			</center>
 
-			<east border="none"></east>
-			<west border="none"></west>
-			<south border="none"></south>
-
 		</borderlayout>
-
 
 	</window>
 </zk>

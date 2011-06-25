@@ -83,7 +83,7 @@
 										id="label_SecGroupDialog_grpShortdescription"
 										value="${c:l('label_SecGroupDialog_grpShortdescription.value')}" />
 									<textbox id="grpShortdescription"
-										width="99%" />
+										hflex="1" />
 								</row>
 								<row>
 									<separator bar="true"></separator>
@@ -94,7 +94,7 @@
 										id="label_SecGroupDialog_grpLongdescription"
 										value="${c:l('label_SecGroupDialog_grpLongdescription.value')}" />
 									<textbox id="grpLongdescription"
-										width="98%" multiline="true" rows="5" />
+										multiline="true" rows="5" hflex="1" />
 								</row>
 
 							</rows>
@@ -105,12 +105,7 @@
 				</div>
 			</center>
 
-			<east border="none"></east>
-			<west border="none"></west>
-			<south border="none"></south>
-
 		</borderlayout>
-
 
 	</window>
 </zk>

@@ -61,28 +61,28 @@
 												<textbox
 													id="txtb_filBezeichnung"
 													value="@{controller.office.filBezeichnung}" readonly="true"
-													constraint="no empty" maxlength="50" width="99%" />
+													constraint="no empty" maxlength="50" hflex="1" />
 											</row>
 											<row>
 												<label
 													value="${c:l('label_OfficeDialog_filName1.value')}" />
 												<textbox
 													id="txtb_filName1" value="@{controller.office.filName1}"
-													readonly="true" maxlength="50" width="99%" />
+													readonly="true" maxlength="50" hflex="1" />
 											</row>
 											<row>
 												<label
 													value="${c:l('label_OfficeDialog_filName2.value')}" />
 												<textbox
 													id="txtb_filName2" value="@{controller.office.filName2}"
-													readonly="true" maxlength="50" width="99%" />
+													readonly="true" maxlength="50" hflex="1" />
 											</row>
 											<row>
 												<label
 													value="${c:l('label_OfficeDialog_filOrt.value')}" />
 												<textbox
 													id="txtb_filOrt" value="@{controller.office.filOrt}"
-													readonly="true" maxlength="50" width="99%" />
+													readonly="true" maxlength="50" hflex="1" />
 											</row>
 										</rows>
 									</grid>

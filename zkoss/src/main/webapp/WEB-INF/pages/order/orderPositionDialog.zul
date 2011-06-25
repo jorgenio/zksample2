@@ -205,7 +205,7 @@
 												id="label_OrderPositionDialog_artKurzbezeichnung"
 												value="${c:l('label_OrderPositionDialog_artKurzbezeichnung.value')}" />
 											<textbox
-												id="artKurzbezeichnung" readonly="true" width="99%" />
+												id="artKurzbezeichnung" readonly="true" hflex="1" />
 
 										</row>
 										<row>

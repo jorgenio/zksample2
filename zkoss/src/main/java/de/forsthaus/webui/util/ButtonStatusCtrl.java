@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Button;
 
 import de.forsthaus.UserWorkspace;
@@ -59,6 +60,8 @@ import de.forsthaus.UserWorkspace;
  *          navigation buttons.<br>
  *          06/10/2011 sge Extended for 'print' and 'search' button.<br>
  *          06/17/2011 sge clearing the code from not used stuff.<br>
+ *          06/24/2011 sge Add the tooltiptext localization here in the
+ *          controller.<br>
  * @author bbruhns
  * @author Stephan Gerth
  */
@@ -141,6 +144,7 @@ public class ButtonStatusCtrl implements Serializable {
 		buttons.put(ButtonEnum.Close, btnClose);
 
 		setBtnImages();
+		setBtnToolTiptext();
 	}
 
 	/**
@@ -172,6 +176,7 @@ public class ButtonStatusCtrl implements Serializable {
 		buttons.put(ButtonEnum.Close, btnClose);
 
 		setBtnImages();
+		setBtnToolTiptext();
 	}
 
 	/**
@@ -204,6 +209,37 @@ public class ButtonStatusCtrl implements Serializable {
 			setImage(ButtonEnum.Cancel, imagePath + "btn_cancel2_16x16.gif");
 		if (ButtonEnum.Close != null)
 			setImage(ButtonEnum.Close, imagePath + "btn_exitdoor2_16x16.gif");
+	}
+
+	/**
+	 * Set the ToolTip text for the buttons.<br>
+	 */
+	private void setBtnToolTiptext() {
+
+		if (ButtonEnum.Search != null)
+			setTooltipText(ButtonEnum.Search, Labels.getLabel("btnSearch.tooltiptext"));
+		if (ButtonEnum.Print != null)
+			setTooltipText(ButtonEnum.Print, Labels.getLabel("btnPrint.tooltiptext"));
+		if (ButtonEnum.First != null)
+			setTooltipText(ButtonEnum.First, Labels.getLabel("btnFirst.tooltiptext"));
+		if (ButtonEnum.Previous != null)
+			setTooltipText(ButtonEnum.Previous, Labels.getLabel("btnPrevious.tooltiptext"));
+		if (ButtonEnum.Next != null)
+			setTooltipText(ButtonEnum.Next, Labels.getLabel("btnNext.tooltiptext"));
+		if (ButtonEnum.Last != null)
+			setTooltipText(ButtonEnum.Last, Labels.getLabel("btnLast.tooltiptext"));
+		if (ButtonEnum.New != null)
+			setTooltipText(ButtonEnum.New, Labels.getLabel("btnNew.tooltiptext"));
+		if (ButtonEnum.Edit != null)
+			setTooltipText(ButtonEnum.Edit, Labels.getLabel("btnEdit.tooltiptext"));
+		if (ButtonEnum.Delete != null)
+			setTooltipText(ButtonEnum.Delete, Labels.getLabel("btnDelete.tooltiptext"));
+		if (ButtonEnum.Save != null)
+			setTooltipText(ButtonEnum.Save, Labels.getLabel("btnSave.tooltiptext"));
+		if (ButtonEnum.Cancel != null)
+			setTooltipText(ButtonEnum.Cancel, Labels.getLabel("btnCancel.tooltiptext"));
+		if (ButtonEnum.Close != null)
+			setTooltipText(ButtonEnum.Close, Labels.getLabel("btnClose.tooltiptext"));
 	}
 
 	/**
@@ -421,7 +457,7 @@ public class ButtonStatusCtrl implements Serializable {
 			if (ButtonEnum.Save != null)
 				setDisabled(ButtonEnum.Save, false);
 			if (ButtonEnum.Cancel != null)
-				setDisabled(ButtonEnum.Cancel, false);
+				setDisabled(ButtonEnum.Cancel, true);
 			if (ButtonEnum.Close != null)
 				setDisabled(ButtonEnum.Close, false);
 		} else {
@@ -446,7 +482,7 @@ public class ButtonStatusCtrl implements Serializable {
 			if (ButtonEnum.Save != null)
 				setVisible(ButtonEnum.Save, true);
 			if (ButtonEnum.Cancel != null)
-				setVisible(ButtonEnum.Cancel, true);
+				setVisible(ButtonEnum.Cancel, false);
 			if (ButtonEnum.Close != null)
 				setVisible(ButtonEnum.Close, true);
 		}
@@ -462,6 +498,19 @@ public class ButtonStatusCtrl implements Serializable {
 	private void setImage(ButtonEnum b, String imagePath) {
 		if (buttons.get(b) != null) {
 			buttons.get(b).setImage(imagePath);
+		}
+	}
+
+	/**
+	 * Sets the image of a button.<br>
+	 * 
+	 * @param b
+	 * @param imagePath
+	 *            path and image name
+	 */
+	private void setTooltipText(ButtonEnum b, String tooltip) {
+		if (buttons.get(b) != null) {
+			buttons.get(b).setTooltiptext(tooltip);
 		}
 	}
 

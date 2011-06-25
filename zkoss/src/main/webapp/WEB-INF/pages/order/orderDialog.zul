@@ -200,7 +200,7 @@
 											id="label_OrderDialog_kunName1"
 											value="${c:l('label_OrderDialog_kunName.value')}" />
 										<textbox id="kunName1"
-											width="99%" />
+											hflex="1" />
 									</row>
 									<row>
 										<separator bar="true"></separator>
@@ -218,7 +218,7 @@
 											id="label_OrderDialog_aufBezeichnung"
 											value="${c:l('label_OrderDialog_aufBezeichnung.value')}" />
 										<textbox id="aufBezeichnung"
-											width="99%" />
+											hflex="1" />
 									</row>
 								</rows>
 							</grid>
@@ -303,22 +303,10 @@
 						</center>
 					</borderlayout>
 
-
 				</div>
 			</center>
-
 		</borderlayout>
 
 	</window>
 </zk>
 
-
-<!-- set the Button of the bandbox, missing in grayTheme -->
-<!-- 
-	<style dynamic="true">
-	.mybandbox .z-bandbox-img { background: transparent
-	url(${c:encodeURL('~./zul/img/button/bandbtn.gif')})
-	no-repeat 0 0; border: 1px solid #C0C0C0 ; vertical-align:
-	top: cursor: pointer: width: 19px; height: 19px ;}
-	</style>
--->

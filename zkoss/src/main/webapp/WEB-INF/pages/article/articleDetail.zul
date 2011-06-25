@@ -46,7 +46,7 @@
 												</hbox>
 												<textbox id="txtb_artNr"
 													value="@{controller.article.artNr}" readonly="true"
-													constraint="no empty" maxlength="20" width="150px" />
+													constraint="no empty" maxlength="20" hflex="1" />
 											</row>
 											<row>
 												<separator bar="true"></separator>
@@ -63,7 +63,7 @@
 													id="txtb_artKurzbezeichnung"
 													value="@{controller.article.artKurzbezeichnung}"
 													readonly="true" constraint="no empty" maxlength="50"
-													width="99%" />
+													hflex="1" />
 											</row>
 											<row>
 												<label
@@ -71,7 +71,8 @@
 												<textbox
 													id="txtb_artLangbezeichnung"
 													value="@{controller.article.artLangbezeichnung}"
-													readonly="true" multiline="true" rows="10" width="98%" />
+													readonly="true" multiline="true" rows="10" vflex="1"
+													hflex="1" />
 											</row>
 											<row>
 												<hbox>
@@ -104,11 +105,3 @@
 </zk>
 
 
-<!-- 
-	<label id="label" value=" Please click me "
-	w:onClick="jq(this.$f('label'))
-	.animate({'':''}, 500, function() {$(this).css({color: '#ff0000'})
-	.animate({'':''}, 500, function() {$(this).css({color: '#00ff00'})
-	.animate({'':''}, 500, function() {$(this).css({color: '#000000'})
-	})})});" />
--->

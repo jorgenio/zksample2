@@ -464,7 +464,7 @@ public class ButtonStatusCtrl implements Serializable {
 			if (ButtonEnum.Save != null)
 				setDisabled(ButtonEnum.Save, false);
 			if (ButtonEnum.Cancel != null)
-				setDisabled(ButtonEnum.Cancel, true);
+				setDisabled(ButtonEnum.Cancel, false);
 			if (ButtonEnum.Close != null)
 				setDisabled(ButtonEnum.Close, false);
 		} else {
@@ -489,7 +489,7 @@ public class ButtonStatusCtrl implements Serializable {
 			if (ButtonEnum.Save != null)
 				setVisible(ButtonEnum.Save, true);
 			if (ButtonEnum.Cancel != null)
-				setVisible(ButtonEnum.Cancel, false);
+				setVisible(ButtonEnum.Cancel, true);
 			if (ButtonEnum.Close != null)
 				setVisible(ButtonEnum.Close, true);
 		}

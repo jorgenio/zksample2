@@ -2375,7 +2375,8 @@ INSERT INTO app_news (
 (   91, '2011-05-26', 'Update the zk framework to 5.0.7.1 ',  0),
 (   92, '2011-05-30', 'Added a button/method for closing all open tabs except the home/dashboard tab.',  0),
 (   93, '2011-06-07', 'Added a new Dashboard module for starting the google translator. Thanks to ''gekkio'' for helping with the correct script components.',  0),
-(   94, '2011-06-18', 'Refactoring of the CRUD button-controller. Cleaned up from old stuff and added navigation buttons. See them working in the ''branch'', ''article'' and ''office'' modules.',  0);
+(   94, '2011-06-18', 'Refactoring of the CRUD button-controller. Cleaned up from old stuff and added navigation buttons. See them working in the ''branch'', ''article'' and ''office'' modules.',  0),
+(   95, '2011-06-25', 'Lot of design changes for look more equal in chrome and IE.',  0);
 
 
 /* create the sequences */

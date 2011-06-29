@@ -83,7 +83,7 @@ import de.forsthaus.webui.util.pagging.PagedListWrapper;
  *          with the refresh button.<br>
  * 
  * @author bbruhns
- * @author sgerth
+ * @author Stephan Gerth
  */
 public class SecUserroleCtrl extends GFCBaseCtrl implements Serializable, SelectionCtrl<SecUser> {
 

@@ -75,9 +75,11 @@
 							<tabpanel
 								style="border: 0px; padding: 0px">
 
-								<columnlayout>
-									<columnchildren width="30%"
-										style="padding: 2px">
+								<hbox align="stretch" pack="stretch"
+									width="100%">
+
+									<cell width="30%">
+
 										<panel
 											id="panel_SecUserRole_User"
 											title="${c:l('panel_SecUserRole_User.title')}"
@@ -93,8 +95,8 @@
 															<paging
 																id="paging_ListBoxSecUser" />
 															<listbox
-																id="listBoxSecUser" vflex="true" width="100%"
-																height="100%" multiple="false">
+																id="listBoxSecUser" multiple="false" hflex="1"
+																vflex="1">
 																<listhead
 																	sizable="true">
 																	<listheader
@@ -111,12 +113,9 @@
 
 											</panelchildren>
 										</panel>
-									</columnchildren>
+									</cell>
 
-
-
-									<columnchildren width="70%"
-										style="padding: 2px">
+									<cell width="70%">
 										<panel
 											id="panel_SecUserRole_GrantedRoles"
 											title="${c:l('panel_SecUserRole_GrantedRoles.title')}"
@@ -132,8 +131,8 @@
 															<paging
 																id="paging_ListBoxSecRoles" />
 															<listbox
-																vflex="true" id="listBoxSecRoles" width="99.5%"
-																height="100%" multiple="false">
+																id="listBoxSecRoles" multiple="false" hflex="1"
+																vflex="1">
 																<listhead
 																	sizable="true">
 																	<listheader
@@ -156,8 +155,8 @@
 
 											</panelchildren>
 										</panel>
-									</columnchildren>
-								</columnlayout>
+									</cell>
+								</hbox>
 
 							</tabpanel>
 						</tabpanels>

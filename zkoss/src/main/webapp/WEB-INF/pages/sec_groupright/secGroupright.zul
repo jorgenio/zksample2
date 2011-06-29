@@ -56,9 +56,10 @@
 
 			<center border="none">
 
-				<columnlayout>
-					<columnchildren width="30%" height="100%"
-						style="padding: 2px; border:0px">
+				<hbox align="stretch" pack="stretch" width="100%">
+
+					<cell width="30%">
+
 						<panel id="panel_SecGroupRight_Groups"
 							title="${c:l('panel_SecGroupRight_Groups.title')}"
 							style="margin-bottom:5px" border="none">
@@ -72,9 +73,8 @@
 
 											<paging
 												id="paging_ListBoxSecGroup" />
-											<listbox vflex="true"
-												id="listBoxSecGroup" width="99.5%" height="100%"
-												multiple="false">
+											<listbox
+												id="listBoxSecGroup" multiple="false" hflex="1" vflex="1">
 												<listhead
 													sizable="true">
 													<listheader
@@ -91,13 +91,9 @@
 
 							</panelchildren>
 						</panel>
-					</columnchildren>
+					</cell>
 
-
-
-					<columnchildren width="70%" height="100%"
-						style="padding: 2px">
-
+					<cell width="70%">
 
 						<panel id="panel_SecGroupRight_GrantedRights"
 							style="margin-bottom:5px" border="none">
@@ -171,9 +167,6 @@
 												</hbox>
 											</div>
 
-
-
-
 											<borderlayout
 												id="borderLayout_Rights">
 												<center
@@ -182,8 +175,8 @@
 														<paging
 															id="paging_ListBoxSecGroupRight" pageSize="15" />
 														<listbox
-															vflex="true" id="listBoxSecGroupRight" width="99.5%"
-															height="100%" multiple="false">
+															id="listBoxSecGroupRight" multiple="false" hflex="1"
+															vflex="1">
 															<listhead
 																sizable="true">
 																<listheader
@@ -232,8 +225,8 @@
 														<paging
 															id="paging_ListBoxSecGroupRight_Details" pageSize="15" />
 														<listbox
-															vflex="true" id="listBoxSecGroupRight_Details"
-															width="99.5%" height="100%" multiple="false">
+															id="listBoxSecGroupRight_Details" multiple="false"
+															hflex="1" vflex="1">
 															<listhead
 																sizable="true">
 																<listheader
@@ -269,8 +262,8 @@
 							</panelchildren>
 						</panel>
 
-					</columnchildren>
-				</columnlayout>
+					</cell>
+				</hbox>
 
 			</center>
 

@@ -33,9 +33,9 @@ public class AutoSortTreeCtrl extends GenericForwardComposer {
 	 * Ads some dummy data to the tree
 	 */
 	private void initData() {
-		Person steve = new Person("Steve", "Jobs");
-		Person mark = new Person("Mark", "Zuckerberg");
-		Person barack = new Person("Barack", "Obama");
+		Person steve = new Person(0, "Steve", "Jobs", "Chicago", "street", "phone number", "fax number");
+		Person mark = new Person(1, "Mark", "Zuckerberg", "Dallas", "street", "phone number", "fax number");
+		Person barack = new Person(2, "Barack", "Obama", "Chicago", "street", "phone number", "fax number");
 
 		List<Person> persons = new ArrayList<Person>();
 		persons.add(steve);

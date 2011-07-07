@@ -26,7 +26,7 @@ public class TestLoginService extends BasisHibernateTest {
 
 		List<DummyBean> transfer2Bean = secLoginlogDAO.getTotalCountByCountries();
 
-		System.err.println(transfer2Bean);
+		System.err.println("result count : " + transfer2Bean);
 
 	}
 

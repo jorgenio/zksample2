@@ -594,10 +594,12 @@ public class ButtonStatusCtrl implements Serializable {
 			Map.Entry pairs = (Map.Entry) it.next();
 			// System.out.println(pairs.getKey() + " = " + pairs.getValue());
 
-			if (buttonsModeDisable == true)
-				((Button) pairs.getValue()).setDisabled(activate);
-			else if (buttonsModeDisable == false)
-				((Button) pairs.getValue()).setVisible(activate);
+			if ((Button) pairs.getValue() != null) {
+				if (buttonsModeDisable == true)
+					((Button) pairs.getValue()).setDisabled(!activate);
+				else if (buttonsModeDisable == false)
+					((Button) pairs.getValue()).setVisible(activate);
+			}
 
 		}
 

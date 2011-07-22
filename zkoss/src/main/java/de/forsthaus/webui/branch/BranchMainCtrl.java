@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
@@ -117,6 +118,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	private BindingListModelList branches;
 
 	// ServiceDAOs / Domain Classes
+	@Autowired
 	private BrancheService brancheService;
 
 	// always a copy from the bean before modifying. Used for reseting
@@ -125,6 +127,7 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	/**
 	 * default constructor.<br>
 	 */
+	@Autowired
 	public BranchMainCtrl() {
 		super();
 	}

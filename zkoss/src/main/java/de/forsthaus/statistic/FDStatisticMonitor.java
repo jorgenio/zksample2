@@ -19,8 +19,13 @@
 package de.forsthaus.statistic;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.servlet.http.HttpSession;
 
 import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.Session;
@@ -34,27 +39,31 @@ public final class FDStatisticMonitor implements Monitor, Serializable {
 	private static final long serialVersionUID = -4973184924311461356L;
 
 	public static FDStatistic getStatistic() {
-		return new FDStatistic(START_TIME, ACTIVE_DESKTOPCOUNT.get(), TOTAL_SESSIONCOUNT.get(),
-				ACTIVE_SESSIONCOUNT.get(), TOTAL_DESKTOPCOUNT.get(), TOTAL_UPDATECOUNT.get(), ACTIVE_UPDATECOUNT.get());
+		return new FDStatistic(START_TIME, ACTIVE_DESKTOPCOUNT.get(), TOTAL_SESSIONCOUNT.get(), ACTIVE_SESSIONS.size(), TOTAL_DESKTOPCOUNT.get(), TOTAL_UPDATECOUNT.get(), ACTIVE_UPDATECOUNT.get());
 	}
 
 	private final static long START_TIME = System.currentTimeMillis();
 	private final static AtomicInteger TOTAL_DESKTOPCOUNT = new AtomicInteger(0);
 	private final static AtomicInteger TOTAL_SESSIONCOUNT = new AtomicInteger(0);
 	private final static AtomicInteger TOTAL_UPDATECOUNT = new AtomicInteger(0);
-	private final static AtomicInteger ACTIVE_SESSIONCOUNT = new AtomicInteger(0);
 	private final static AtomicInteger ACTIVE_DESKTOPCOUNT = new AtomicInteger(0);
 	private final static AtomicInteger ACTIVE_UPDATECOUNT = new AtomicInteger(0);
 
+	private final static Set<String> ACTIVE_SESSIONS = Collections.synchronizedSet(new HashSet<String>());
+
 	@Override
 	public void sessionCreated(Session sess) {
-		ACTIVE_SESSIONCOUNT.incrementAndGet();
+		ACTIVE_SESSIONS.add(getSessinId(sess));
 		TOTAL_SESSIONCOUNT.incrementAndGet();
+	}
+
+	private String getSessinId(Session sess) {
+		return ((HttpSession) sess.getNativeSession()).getId();
 	}
 
 	@Override
 	public void sessionDestroyed(Session sess) {
-		ACTIVE_SESSIONCOUNT.decrementAndGet();
+		ACTIVE_SESSIONS.remove(getSessinId(sess));
 	}
 
 	@Override

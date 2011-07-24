@@ -25,8 +25,9 @@
 	<menuItem id="menu_Item_Calendar" zulNavigation="/WEB-INF/pages/calendar/calendar.zul"
 		iconName="/images/icons/calendar1_16x16.gif" />
 	<!-- Spreadsheet -->
-	<!-- closed, until the spreadsheet jar's are in the maven repo
-		<menuItem id="menu_Item_SpreadSheet"
+	<!--
+		closed, until the spreadsheet jar's are in the maven repo <menuItem
+		id="menu_Item_SpreadSheet"
 		zulNavigation="/WEB-INF/pages/spreadsheet/spreadsheet.zul"
 		iconName="/images/icons/spreadsheet_16x16.png" />
 	-->
@@ -61,7 +62,7 @@
 
 	<!-- Administration MenuTree -->
 	<menu id="menu_Category_Administration" rightName="menuCat_Administration">
-		<menuItem id="menu_Item_Users" iconName="/images/icons/male_16x16.gif"
+		<menuItem id="menu_Item_Users" iconName="/images/icons/user_group_16x16.png"
 			zulNavigation="/WEB-INF/pages/sec_user/userList.zul" rightName="menuItem_Administration_Users" />
 		<menu id="menu_Category_UserRights" rightName="menuCat_UserRights">
 			<menuItem id="menu_Item_UserRoles" zulNavigation="/WEB-INF/pages/sec_userrole/secUserrole.zul"

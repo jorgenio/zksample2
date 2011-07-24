@@ -151,7 +151,7 @@ public class DashboardYoutubeVideoCtrl extends Div implements Serializable {
 		Button btnRefresh = new Button();
 		btnRefresh.setId("btnSelectYoutubeSong");
 		btnRefresh.setHeight("22px");
-		btnRefresh.setLabel("!");
+		btnRefresh.setImage("/images/icons/play-music_16x16.png");
 		btnRefresh.setTooltiptext(Labels.getLabel("btnSelectYoutubeSong.tooltiptext"));
 		btnRefresh.addEventListener("onClick", new BtnClickListener());
 		btnRefresh.setParent(hboxBtn);

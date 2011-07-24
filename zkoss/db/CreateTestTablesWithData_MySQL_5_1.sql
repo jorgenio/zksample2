@@ -1904,7 +1904,8 @@ INSERT INTO youtube_link(ytb_id, ytb_interpret, ytb_title, ytb_url, version) VAL
 ( 85, 'Carlos Santana feat. Everlast (Live 2008))', 'Put my lights on',              'http://www.youtube.com/embed/9eJgTUUw4Pw',   0),
 ( 86, 'David Bowie (Live 2000)',                  'This is not America',             'http://www.youtube.com/embed/3osvs63aPUs',   0),
 ( 87, 'David Bowie - Gail Ann Dorsey (Live 1995)', 'Under Pressure',                 'http://www.youtube.com/embed/XXaAabOib9E',   0),
-( 88, 'Gwen Stefanie',                            'Early Winter',                    'http://www.youtube.com/embed/iZR8oxifrpc',   0);
+( 88, 'Gwen Stefanie',                            'Early Winter',                    'http://www.youtube.com/embed/iZR8oxifrpc',   0),
+( 89, 'Lovers Electric',                          'Beating like a drum',             'http://www.youtube.com/embed/qze5OUwwkPI',   0);
 
 
 

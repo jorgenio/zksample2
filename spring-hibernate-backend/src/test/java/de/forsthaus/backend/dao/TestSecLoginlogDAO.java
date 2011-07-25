@@ -5,7 +5,9 @@ package de.forsthaus.backend.dao;
 
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,6 +29,15 @@ public class TestSecLoginlogDAO extends BasisHibernateTest {
 
 	public void setSecLoginlogDAO(SecLoginlogDAO secLoginlogDAO) {
 		this.secLoginlogDAO = secLoginlogDAO;
+	}
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@After
+	public void tearDown() throws Exception {
+
 	}
 
 	@Test

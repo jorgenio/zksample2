@@ -9,5 +9,5 @@ package org.zkoss.spring;
  *
  */
 public class DelegatingVariableResolver {
-	public static String RESOLVER_CLASS = "org.zkoss.spring.VariableResolver.class";
+	public static String RESOLVER_CLASS = "???";
 }

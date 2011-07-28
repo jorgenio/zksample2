@@ -41,7 +41,7 @@ import de.forsthaus.webui.util.ZksampleDateFormat;
  * 
  * THIS CLASS IS IN WORK !!!
  * 
- * @author sge
+ * @author Stephan Gerth
  * 
  */
 public class CalendarDateFormatter extends SimpleDateFormatter implements DateFormatter, Serializable {

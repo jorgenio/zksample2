@@ -2,14 +2,12 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./window_HibernateStatisticList" ?>
-
 <zk xmlns="http://www.zkoss.org/2005/zul"
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
-
 	<window id="window_HibernateStatisticList"
-		apply="${hibernateStatisticsCtrl}" border="none" width="100%">
+		apply="${hibernateStatisticsCtrl}" border="none">
 
 		<toolbar>
 			<toolbarbutton id="btnHelp"
@@ -20,22 +18,30 @@
 				tooltiptext="${c:l('btnRefresh.tooltiptext')}" />
 			<separator orient="vertical" />
 		</toolbar>
-
-		<paging id="paging_HibernateStatisticList" />
-		<grid id="gridHibernateStatisticList" fixedLayout="true">
-			<columns>
-				<column width="30px" />
-				<column width="50%"
-					label="${c:l('gridHibernateStatistic.column.label.methodname')}" />
-				<column
-					label="${c:l('gridHibernateStatistic.column.label.javaDurationTime')}"
-					width="20%" />
-				<column
-					label="${c:l('gridHibernateStatistic.column.label.dateTime')}"
-					width="30%" />
-			</columns>
-			<rows></rows>
-		</grid>
+		<vbox>
+			<paging id="gridPaging" pageSize="30" detailed="true" />
+			<grid hflex="1" id="grid" >
+				<columns>
+					<column width="30px" />
+					<column width="400px"
+						label="${c:l('gridHibernateStatistic.column.label.methodname')}" />
+					<column
+						label="${c:l('gridHibernateStatistic.column.label.javaDurationTime')}"
+						width="20%" />
+					<column
+						label="${c:l('gridHibernateStatistic.column.label.dateTime')}"
+						width="30%" />
+				</columns>
+				<rows>
+					<row id="row" self="@{each='hs'}" value="@{hs}">
+						<label value="@{hs.callMethod}" />
+						<label value="@{hs.javaFinishMs}" />
+						<label value="@{hs.finishTime}" />
+						<detail open="false"
+							fulfill="onOpen=/WEB-INF/pages/debug/HibernateStatisticsDetail.zul" />
+					</row>
+				</rows>
+			</grid>
+		</vbox>
 	</window>
-
 </zk>

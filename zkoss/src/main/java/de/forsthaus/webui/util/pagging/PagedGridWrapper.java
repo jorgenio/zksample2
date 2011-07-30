@@ -20,7 +20,6 @@ package de.forsthaus.webui.util.pagging;
 
 import java.io.Serializable;
 
-import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Grid;
@@ -54,7 +53,7 @@ import de.forsthaus.backend.util.HibernateSearchObject;
 public class PagedGridWrapper<E> extends ListModelList implements Serializable {
 
 	private static final long serialVersionUID = -7399727307122148637L;
-	static final Logger logger = Logger.getLogger(PagedGridWrapper.class);
+	//	static final private Logger logger = Logger.getLogger(PagedGridWrapper.class);
 
 	// Service that calls the DAO methods
 	private PagedListService pagedListService;
@@ -109,6 +108,13 @@ public class PagedGridWrapper<E> extends ListModelList implements Serializable {
 		getSearchObject().setFirstResult(start);
 		getSearchObject().setMaxResults(getPageSize());
 
+		// clear old data
+		clear();
+
+		addAll(getPagedListService().getBySearchObject(getSearchObject()));
+	}
+
+	public void refreshModel() {
 		// clear old data
 		clear();
 

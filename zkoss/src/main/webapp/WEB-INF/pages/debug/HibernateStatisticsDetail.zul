@@ -6,9 +6,8 @@
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
-
-	<groupbox apply="${hibernateStatisticsDetailCtrl}"
-		closable="false">
+	<groupbox closable="false"
+		apply="${hibernateStatisticsDetailCtrl}">
 		<vbox>
 			<hbox>
 				<grid>
@@ -64,8 +63,8 @@
 							width="60px" />
 					</columns>
 					<rows>
-						<row >
-							<label 
+						<row>
+							<label
 								value="${c:l('gridHibernateStatisticDetail2.row.label.load')}" />
 							<label value="${hs.entityLoadCount}" />
 							<label value="${hs.collectionLoadCount}" />
@@ -106,15 +105,28 @@
 						value="${hs.queryExecutionMaxTimeQueryString}" />
 				</groupbox>
 			</hbox>
+			<grid width="100%">
+				<columns>
+					<column width="40%" label="Entity" />
+					<column width="10%" label="load" />
+					<column width="10%" label="update" />
+					<column width="10%" label="insert" />
+					<column width="10%" label="delete" />
+					<column width="10%" label="fetch" />
+					<column width="10%" label="optimisticFailure" />
+				</columns>
+				<rows>
+					<row forEach="${hs.hibernateEntityStatisticsSet}">
+						<label value="${each.entityName}" />
+						<label value="${each.loadCount}" />
+						<label value="${each.updateCount}" />
+						<label value="${each.insertCount}" />
+						<label value="${each.deleteCount}" />
+						<label value="${each.fetchCount}" />
+						<label value="${each.optimisticFailureCount}" />
+					</row>
+				</rows>
+			</grid>
 		</vbox>
 	</groupbox>
-
-
 </zk>
-
-<!-- 
-	
-	<window id="window_HibernateStatisticDetail"
-	apply="${hibernateStatisticsDetailCtrl}" border="none" width="100%">
-	
--->

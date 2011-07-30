@@ -18,120 +18,54 @@
  */
 package de.forsthaus.webui.debug;
 
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.zkoss.util.resource.Labels;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zul.Button;
-import org.zkoss.zul.Detail;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Paging;
-import org.zkoss.zul.Row;
-import org.zkoss.zul.Rows;
-import org.zkoss.zul.Window;
 
 import de.forsthaus.backend.model.HibernateStatistics;
 import de.forsthaus.backend.util.HibernateSearchObject;
 import de.forsthaus.gui.service.GuiHibernateStatisticsService;
-import de.forsthaus.webui.debug.model.HibernateStatisticListRowRenderer;
 import de.forsthaus.webui.util.GFCBaseCtrl;
 import de.forsthaus.webui.util.MultiLineMessageBox;
 import de.forsthaus.webui.util.pagging.PagedGridWrapper;
 
 /**
- * Controller for the HibernateStatistic Main-Grid. <br>
- * Zul: /WEB-INF/pages/debug/HibernateStatistics.zul <br>
- * 
  * @author bbruhns
- * @author sgerth
  * 
  */
 public class HibernateStatisticsCtrl extends GFCBaseCtrl {
-
-	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(HibernateStatisticsCtrl.class);
-
-	protected Window window_HibernateStatisticList; // autowired
-	protected Grid gridHibernateStatisticList; // autowired
-	protected Paging paging_HibernateStatisticList; // autowired
-	protected Button btnHelp; // autowired
-	protected Button btnRefresh; // autowired
-
-	// count of rows in the grid
-	private int countRows;
-
-	// ServiceDAOs / Domain Classes
-	private transient GuiHibernateStatisticsService guiHibernateStatisticsService;
+	private GuiHibernateStatisticsService guiHibernateStatisticsService;
 	private PagedGridWrapper<HibernateStatistics> gridPagedListWrapper;
+
+	protected Grid grid;
+
+	protected Paging gridPaging;
+
+	public GuiHibernateStatisticsService getGuiHibernateStatisticsService() {
+		return this.guiHibernateStatisticsService;
+	}
+
+	public void setGuiHibernateStatisticsService(GuiHibernateStatisticsService guiHibernateStatisticsService) {
+		this.guiHibernateStatisticsService = guiHibernateStatisticsService;
+	}
 
 	public void onCreate$window_HibernateStatisticList(Event event) throws Exception {
 
-		/**
-		 * Calculate how many rows have been place in the listbox. Get the
-		 * currentDesktopHeight from a hidden Intbox from the index.zul that are
-		 * filled by onClientInfo() in the indexCtroller
-		 */
-
-		final int panelHeight = 5;
-
-		int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		height = height + panelHeight;
-
-		final int maxListBoxHeight = height - 230;
-		setCountRows((int) Math.round(maxListBoxHeight / 19.2));
-
-		this.paging_HibernateStatisticList.setPageSize(getCountRows());
-		this.paging_HibernateStatisticList.setDetailed(true);
-
-		// ++ create the searchObject and init sorting ++ //
-		final HibernateSearchObject<HibernateStatistics> searchObj = new HibernateSearchObject<HibernateStatistics>(HibernateStatistics.class, getCountRows());
+		final HibernateSearchObject<HibernateStatistics> searchObj = new HibernateSearchObject<HibernateStatistics>(HibernateStatistics.class);
 		searchObj.addSort("id", true);
+		this.gridPagedListWrapper.init(searchObj, this.grid, this.gridPaging);
 
-		// Set the ListModel for the HibernateStatistics.
-		this.gridPagedListWrapper.init(searchObj, this.gridHibernateStatisticList, this.paging_HibernateStatisticList);
-		// set the itemRenderer
-		this.gridHibernateStatisticList.setRowRenderer(new HibernateStatisticListRowRenderer());
-
-		// System.out.println(ZkossComponentTreeUtil.getZulTree(grid.getRoot()));
 	}
 
-	@SuppressWarnings("unchecked")
-	public void onOpenDetail(Event event) throws Exception {
+	public PagedGridWrapper<HibernateStatistics> getGridPagedListWrapper() {
+		return this.gridPagedListWrapper;
+	}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		// System.out.println(ZkossComponentTreeUtil.getZulTree(self));
-
-		final Rows rows = this.gridHibernateStatisticList.getRows();
-		final List<Row> list = rows.getChildren();
-
-		for (final Row row : list) {
-			if (row.getDetailChild().isOpen()) {
-
-				// First, Clear old stuff, if exists
-				row.getDetailChild().getChildren().clear();
-
-				// Get and CAST the object from the selected row
-				final HibernateStatistics hs = (HibernateStatistics) row.getAttribute("data");
-
-				// create a map and store the Object for overhanding to new
-				// Detail zul-file
-				final HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("hibernateStatistics", hs);
-
-				// Get the opened 'Detail' and append the Detail Content.
-				final Detail detail = row.getDetailChild();
-				detail.appendChild(Executions.createComponents("/WEB-INF/pages/debug/HibernateStatisticsDetail.zul", detail, map));
-			}
-		}
+	public void setGridPagedListWrapper(PagedGridWrapper<HibernateStatistics> gridPagedListWrapper) {
+		this.gridPagedListWrapper = gridPagedListWrapper;
 	}
 
 	/**
@@ -141,11 +75,6 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnHelp(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
 		final String message = Labels.getLabel("message.Not_Implemented_Yet");
 		final String title = Labels.getLabel("message.Information");
 		MultiLineMessageBox.doSetTemplate();
@@ -161,40 +90,19 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 	 * @throws InterruptedException
 	 */
 	public void onClick$btnRefresh(Event event) throws InterruptedException {
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("--> " + event.toString());
-		}
-
-		Events.postEvent("onCreate", this.window_HibernateStatisticList, event);
-		this.window_HibernateStatisticList.invalidate();
+		//		Events.postEvent("onCreate", this.self, event);
+		this.gridPagedListWrapper.refreshModel();
+		this.self.invalidate();
 	}
 
-	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
-	// ++++++++++++++++++ getter / setter +++++++++++++++++++//
-	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+	public void onCreate$grid(Event event) throws Exception {
 
-	public GuiHibernateStatisticsService getGuiHibernateStatisticsService() {
-		return this.guiHibernateStatisticsService;
+		// normally 0 ! Or we have a i.e. a toolBar on top of the listBox.
+		final int specialSize = 26;
+		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
+		final int maxListBoxHeight = height - specialSize - 88;
+		this.grid.setHeight(String.valueOf(maxListBoxHeight) + "px");
+
 	}
 
-	public void setGuiHibernateStatisticsService(GuiHibernateStatisticsService guiHibernateStatisticsService) {
-		this.guiHibernateStatisticsService = guiHibernateStatisticsService;
-	}
-
-	public PagedGridWrapper<HibernateStatistics> getGridPagedListWrapper() {
-		return this.gridPagedListWrapper;
-	}
-
-	public void setGridPagedListWrapper(PagedGridWrapper<HibernateStatistics> gridPagedListWrapper) {
-		this.gridPagedListWrapper = gridPagedListWrapper;
-	}
-
-	public void setCountRows(int countRows) {
-		this.countRows = countRows;
-	}
-
-	public int getCountRows() {
-		return this.countRows;
-	}
 }

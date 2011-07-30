@@ -118,7 +118,6 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	private BindingListModelList branches;
 
 	// ServiceDAOs / Domain Classes
-	@Autowired
 	private BrancheService brancheService;
 
 	// always a copy from the bean before modifying. Used for reseting
@@ -127,7 +126,6 @@ public class BranchMainCtrl extends GFCBaseCtrl implements Serializable {
 	/**
 	 * default constructor.<br>
 	 */
-	@Autowired
 	public BranchMainCtrl() {
 		super();
 	}

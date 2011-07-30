@@ -19,10 +19,8 @@
 package de.forsthaus.webui.debug;
 
 import org.zkoss.util.resource.Labels;
-import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.Grid;
-import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Paging;
 
 import de.forsthaus.backend.model.HibernateStatistics;
@@ -94,15 +92,4 @@ public class HibernateStatisticsCtrl extends GFCBaseCtrl {
 		this.gridPagedListWrapper.refreshModel();
 		this.self.invalidate();
 	}
-
-	public void onCreate$grid(Event event) throws Exception {
-
-		// normally 0 ! Or we have a i.e. a toolBar on top of the listBox.
-		final int specialSize = 26;
-		final int height = ((Intbox) Path.getComponent("/outerIndexWindow/currentDesktopHeight")).getValue().intValue();
-		final int maxListBoxHeight = height - specialSize - 88;
-		this.grid.setHeight(String.valueOf(maxListBoxHeight) + "px");
-
-	}
-
 }
